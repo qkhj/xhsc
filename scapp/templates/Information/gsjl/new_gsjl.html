@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="../../../static/css/bootstrap.css" rel="stylesheet">
+	<link href="../../../static/css/main.css" rel="stylesheet">
+	<link href="../../../static/css/datepicker.css" rel="stylesheet">
+	<link href="../../../static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+	
+	<!-- ************************验证样式************************-->
+	<script src="../../../static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="../../../static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+    	.tbblur1{width:100px;height:20px;}
+    </style>
+	<script type="text/javascript">
+		
+	</script>
+</head>
+
+<body onload="datepicker();$('#start').timepicker();$('#end').timepicker();setTimeOut();">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">客户经理管理</a>/<a href="#">工时记录</a>
+		</div>			
+		<div class="row-fluid">			
+			<i class="icon-bookmark"></i><span class="titletip">工时记录</span>
+            {%- with messages = get_flashed_messages(with_categories=true) %}
+			  	{%- if messages %}
+		    	{%- for category, message in messages %}
+		    	<div class="alert alert-{{category}}" style="width:245px;margin:-10px auto 10px;">
+		      		{{message}}
+		      	</div>
+		    	{%- endfor %}
+			  	{%- endif %}
+			{%- endwith %}
+			<form class="content" method="post" action="/Cust_mgr/add">
+				<div style="border:1px solid #94c1dc;">
+					<table class="table-list">
+						<tr>
+							<td class="table-label">工作日期<font class="red">*</font></td>
+							<td colspan="3">
+								<input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/>
+							</td>							
+						</tr>
+						<tr>
+							<td class="table-label">工作类型<font class="red">*</font></td>
+							<td style="width:35%">
+								<select name="work_type" id="gzlx" onchange="setGzmc()">
+									<option value="市场营销" >市场营销</option>
+									<option value="业务咨询">业务咨询</option>
+									<option value="调查前准备">调查前准备</option>
+									<option value="协助调查分析">协助调查分析</option>
+									<option value="调查分析">调查分析</option>
+									<option value="上会前准备">上会前准备</option>
+									<option value="审贷会">审贷会</option>
+									<option value="协助客户">协助客户</option>
+									<option value="贷后监控">贷后监控</option>
+									<option value="理论培训">理论培训</option>
+									<option value="考核评价">考核评价</option>
+									<option value="沟通">沟通</option>
+									<option value="会议">会议</option>
+									<option value="休息">休息</option>
+									<option value="15">其他</option>	
+								</select>
+							</td>
+							<td class="table-label">工作名称<font class="red">*</font></td>
+							<td>
+								<select name="work_type_detail" id="gzmc" style="width:300px">
+									<option value="准备宣传资料">准备宣传资料</option>
+									<option value="个人外出营销">个人外出营销</option>
+									<option value="电话营销">电话营销</option>
+									<option value="团队集体营销">团队集体营销</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td class="table-label">工作时段<font class="red">*</font></td>
+							<td>
+								开始时间：
+								<span id="startTime">
+									<input type="text" name="beg_date" id="start" style="width:80px;" onblur="setHS()">
+									<span class="textfieldRequiredMsg">不能为空</span>
+								</span><br/>
+								结束时间：
+								<span id="endTime">
+									<input type="text" name="end_date" id="end" style="width:80px;" onblur="setHS()"/>
+									<span class="textfieldRequiredMsg">不能为空</span>
+								</span>
+							</td>
+							<td class="table-label">耗时<font class="red">*</font></td>
+							<td>
+								<span id="Time">
+									<input type="text" name="time_consume" id="time" style="width:50px;" readonly/>小时
+									<span class="textfieldRequiredMsg">不能为空</span>
+								<span>
+							</td>
+						</tr>
+						<tr>
+							<td class="table-label">备注</td>
+							<td colspan="3">
+								<textarea name="remark" style="width:80%"></textarea>
+							</td>
+						</tr>						
+					</table>								
+				</div>	
+				<input type="submit" class="btn btn-info" value="确定"/>
+			</form>
+		</div><!--/row-fluid -->
+	</div><!--/content -->
+	
+	<script src="../../../static/js/jquery-1.7.2.min.js"></script>
+	<script src="../../../static/js/bootstrap.min.js"></script>
+	<script src="../../../static/js/bootstrap-datepicker.js"></script>
+	<script src="../../../static/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<script src="../../../static/js/timepicker.js"></script>
+	<script src="../../../static/js/script.js"></script>	
+    <script src="../../../static/js/Loan_Calculator.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("startTime", "none", {validateOn:["blur"]});
+		var sprytextfield2 = new Spry.Widget.ValidationTextField("endTime", "none", {validateOn:["blur"]});
+		//var sprytextfield3 = new Spry.Widget.ValidationTextField("loan_period", "none", {validateOn:["blur"]});
+		var sprytextfield4 = new Spry.Widget.ValidationTextField("Time", "none", {validateOn:["blur"]});
+		function setHS(){
+			var startTime=$("#start").val();
+			var endTime=$("#end").val();
+			if(startTime!=""&&endTime!=""){
+				var startHourse=parseFloat(startTime.split(":")[0])
+				var startMinute=parseFloat(startTime.split(":")[1])
+				var engHourse=parseFloat(endTime.split(":")[0])
+				var engMinute=parseFloat(endTime.split(":")[1])
+				var hours=engHourse-startHourse
+				var minute=(engMinute-startMinute)/60
+				minute=Math.round(minute*100)
+				if(minute<0){
+					minute=minute+100
+					hours--;
+				}
+				if(hours<0){
+					$("#time").val()
+					alert("开始时间小于结束时间，请重新设置")
+				}
+				else
+					$("#time").val(hours+"."+minute)
+			}
+		}
+		function setGzmc(){
+			var value=$("#gzlx option:selected").val();
+			if(value=='市场营销'){
+				$("#gzmc").html("<option value='准备宣传资料'>准备宣传资料</option>"+
+								"<option value='个人外出营销'>个人外出营销</option>"+
+								"<option value='电话营销'>电话营销</option>"+
+								"<option value='团队集体营销'>团队集体营销</option>"
+							)
+			}
+			if(value=='业务咨询'){
+				$("#gzmc").html("<option value='接听电话咨询'>接听电话咨询</option>"+
+								"<option value='接待来访咨询'>接待来访咨询</option>"+
+								"<option value='填写贷款申请'>填写贷款申请</option>"
+							)
+			}
+			if(value=='调查前准备'){
+				$("#gzmc").html("<option value='翻看同类型档案'>翻看同类型档案</option>"+
+								"<option value='申请表、征信记录、工商信息报告的阅读'>申请表、征信记录、工商信息报告的阅读</option>"+
+								"<option value='与其他客户经理交流调查注意事项'>与其他客户经理交流调查注意事项</option>"+
+								"<option value='调查纲要的准备'>调查纲要的准备</option>"
+							)
+			}
+			if(value=='协助调查分析'){
+				$("#gzmc").html("<option value='跟随分析客户经营场所'>跟随分析客户经营场所</option>"+
+								"<option value='跟随分析点存货'>跟随分析点存货</option>"+
+								"<option value='跟随分析客户家庭住址'>跟随分析客户家庭住址</option>"+
+								"<option value='跟随分析见担保人'>跟随分析见担保人</option>"+
+								"<option value='跟随分析实地落实抵质押品'>跟随分析实地落实抵质押品</option>"
+							)
+			}
+			if(value=='调查分析'){
+				$("#gzmc").html("<option value='客户经营场所分析调查'>客户经营场所分析调查</option>"+
+								"<option value='点存货'>点存货</option>"+
+								"<option value='客户家庭场所调查'>客户家庭场所调查</option>"+
+								"<option value='见担保人'>见担保人</option>"+
+								"<option value='实地落实抵质押品'>实地落实抵质押品</option>"
+							)
+			}
+			if(value=='上会前准备'){
+				$("#gzmc").html("<option value='计算表格'>计算表格</option>"+
+								"<option value='等客户提供资料'>等客户提供资料</option>"+
+								"<option value='再次核实经营信息'>再次核实经营信息</option>"+
+								"<option value='上会前资料准备'>上会前资料准备</option>"+
+								"<option value='整理案例顺序'>整理案例顺序</option>"
+							)
+			}
+			if(value=='审贷会'){
+				$("#gzmc").html("<option value='审贷会陈述'>审贷会陈述</option>"+
+								"<option value='贷款条件落实'>贷款条件落实</option>"+
+								"<option value='旁听审贷会'>旁听审贷会</option>"
+							)
+			}
+			if(value=='协助客户'){
+				$("#gzmc").html("<option value='开立账户'>开立账户</option>"+
+								"<option value='办理抵押'>办理抵押</option>"+
+								"<option value='签署合同'>签署合同</option>"
+							)
+			}
+			if(value=='贷后监控'){
+				$("#gzmc").html("<option value='电话沟通'>电话沟通</option>"+
+								"<option value='客户上门'>客户上门</option>"+
+								"<option value='实地回访'>实地回访</option>"
+							)
+			}
+			if(value=='理论培训'){
+				$("#gzmc").html("<option value='答疑'>答疑</option>"+
+								"<option value='接受培训'>接受培训</option>"+
+								"<option value='自学'>自学</option>"
+							)
+			}
+			if(value=='考核评价'){
+				$("#gzmc").html("<option value='考试'>考试</option>"+
+								"<option value='正式评估'>正式评估</option>"+
+								"<option value='非正式评估'>非正式评估</option>"
+							)
+			}
+			if(value=='沟通'){
+				$("#gzmc").html("<option value='与客户沟通'>与客户沟通</option>"+
+								"<option value='与同事沟通'>与同事沟通</option>"+
+								"<option value='与主管沟通'>与主管沟通</option>"+
+								"<option value='与总行沟通'>与总行沟通</option>"
+							)
+			}
+			if(value=='会议'){
+				$("#gzmc").html("<option value='团队会议'>团队会议</option>"+
+								"<option value='小组会议'>小组会议</option>"
+							)
+			}
+			if(value=='休息'){
+				$("#gzmc").html("<option value='午休'>午休</option>"+
+								"<option value='整理办公环境'>整理办公环境</option>"+
+								"<option value='休息'>休息</option>"
+							)
+			}
+			if(value=='其他'){
+				$("#gzmc").html("<option value='其他'>其他</option>")
+			}
+		}
+		
+	</script>
+</body>
+</html>
