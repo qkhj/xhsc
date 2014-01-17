@@ -79,6 +79,14 @@ def xtgl():
     print role.role_level
     return render_template("index.html",menu = 'xtgl',role=role)
 
+#客户经理绩效管理
+@app.route('/jxgl', methods=['GET'])
+@login_required
+def jxgl():
+    # privileges = SC_UserRole.query.filter_by(user_id=current_user.id).first().role.privileges
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    return render_template("index.html",menu = 'jxgl',role=role)
+
 # 统计报表
 @app.route('/tjbb', methods=['GET'])
 @login_required
