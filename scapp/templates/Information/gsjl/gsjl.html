@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="../../../static/css/bootstrap.css" rel="stylesheet">
+	<link href="../../../static/css/main.css" rel="stylesheet">
+	<link href="../../../static/css/datepicker.css" rel="stylesheet">
+	<!-- ************************验证样式************************-->
+	<script src="../../../static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="../../../static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+    	.tbblur1{width:100px;height:20px;}
+    </style>
+	<script type="text/javascript">
+		
+	</script>
+</head>
+
+<body onload="datepicker();sum()">	
+	<div class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">客户经理管理</a>/<a href="#">工时记录</a>
+		</div>			
+		<div class="row-fluid">			
+			<i class="icon-bookmark"></i><span class="titletip">工时记录</span>
+            <form method="POST" action="/Cust_mgr/search_result/1">
+			<div style="margin-bottom:5px;">
+				<a type="button" class="btn btn-info" href="#" onclick="iframe('Cust_mgr/add')">新增</a>
+			</div>
+		    <div class="divBorder" id="tableFrame">
+				<table class="table-list">
+					<thead id="tableFrameTitle">
+						<tr>
+							<th>日期</th>
+							<th>姓名</th>
+							<th>工作类型</th>
+							<th>工作名称</th>
+							<th>工作开始时间</th>
+                            <th>工作结束时间</th>
+							<th>耗时</th>
+							<th>备注</th>
+						</tr>
+					</thead>
+					<tbody class="center" id="table_result">
+                    {%- for obj in data.items %}
+						<tr>							
+							<td>{{obj.create_date}}</td>
+							<td>{{obj.receiver_for_sdw.real_name}}</td>
+							<td>{{obj.work_type}}</td>
+							<td>{{obj.work_type_detail}}</td>
+							<td>{{obj.beg_date}}</td>
+                            <td>{{obj.end_date}}</td>
+                            <td>{{obj.time_consume}}</td>
+                            <td>{{obj.remark}}</td>
+						</tr>
+						{%- endfor %}
+					</tbody>
+				</table>
+                <input type="hidden" name="beg_date" value="{{beg_date}}" />
+                <input type="hidden" name="end_date" value="{{end_date}}" />
+                <input type="hidden" name="yunying_loan_officer" value="{{user_id}}" />
+			</div>	
+			<div class="page-div">
+				{%- if data.has_prev %}
+					<span style="CURSOR: pointer" onclick="iframe('Cust_mgr/search_result/{{data.prev_num}}')">&lt;&lt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&lt;&lt;</span>
+				{%- endif %}
+				&#160;第&#160;<font color="#0088cc">{{data.page}}</font>&#160;页&#160;
+				&#160;共&#160;<font color="#0088cc">{{data.pages}}</font>&#160;页&#160;
+				{%- if data.has_next %}
+					<span style="CURSOR: pointer" onclick="iframe('Cust_mgr/search_result/{{data.next_num}}')">&gt;&gt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&gt;&gt;</span>
+				{%- endif %}
+			</div>
+                <input type="submit" class="btn btn-info" value="导出excel"/>
+            </form>
+		</div><!--/row-fluid -->
+	</div><!--/content -->
+	
+	<script src="../../../static/js/jquery-1.7.2.min.js"></script>
+	<script src="../../../static/js/bootstrap.min.js"></script>
+	<script src="../../../static/js/bootstrap-datepicker.js"></script>
+	<script src="../../../static/js/script.js"></script>	
+    <script src="../../../static/js/Loan_Calculator.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("loan_account", "none", {validateOn:["blur"]});
+		var sprytextfield2 = new Spry.Widget.ValidationTextField("loan_contract_number", "none", {validateOn:["blur"]});
+		//var sprytextfield3 = new Spry.Widget.ValidationTextField("loan_period", "none", {validateOn:["blur"]});
+		var sprytextfield4 = new Spry.Widget.ValidationTextField("annual_interest_rate", "none", {validateOn:["blur"]});
+		function sum(){
+			var sum=0;
+			var value;
+			$(".hs").each(function(){
+				if(this.innerHTML=="")
+					value=0;
+				else
+					value=parseFloat(this.innerHTML);
+				
+				sum+=value;
+			})			
+			$("#sum").text(sum);
+		}
+		
+	</script>
+</body>
+</html>
