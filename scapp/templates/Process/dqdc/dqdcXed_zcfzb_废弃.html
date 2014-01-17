@@ -1,0 +1,1078 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<style type="text/css">		
+		input.btn-mini{width:20px;}
+		textarea{width:80%;}
+	</style>
+</head>
+
+<body onload="datepicker()">	
+	<form class="content">
+		<div class="tabbable"> <!-- Only required for left/right tabs -->
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#tab1" data-toggle="tab" onclick="$('#tab1').show();$('#tab2').hide();doubleIframe('dqdcXed_zcfzb');">总资产</a></li>
+				<li><a href="#tab2" data-toggle="tab" onclick="$('#tab2').show();$('#tab1').hide();doubleIframe('dqdcXed_zcfzb');">总负债</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane active" id="tab1">
+					<!--*****************************************现金及银行存款**************************************************-->
+					<i class="icon-bookmark"></i><span class="titletip">总资产</span>
+					<span class="pull-right grayText" name="current_assets">1,000,000</span><br/>
+					<i class="icon-bookmark"></i><span class="titletip">现金及银行存款</span>
+					<span class="pull-right grayText" name="bank_deposits">600,000</span>
+					<div class="divBorder">
+						<table class="table-list" id="yfzk">
+							<tr>
+								<td class="center">现金金额(包括持有的现金支票) </td>
+								<td colspan="4">
+									<label><input type="radio" name="see_cash" value="1"/>看到</label>
+									<label><input type="radio" name="see_cash" value="0"/>未看到</label>
+								</td>												
+							</tr>		
+							<tr class="center">
+								<td>
+									存款(包括持有的转账支票，账户)<br/>
+									<input type="button" value="+" onclick="addTd('ck','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+									<input type="button" value="-" onclick="removeTd('ck','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+								</td>
+								<td>						
+									<table class="table-list" id="ck">
+										<tr>											
+											<td>开户行</td>
+											<td>帐号类型</td>
+											<td>账号</td>
+											<td>余额(元)</td>								
+										</tr>	
+										<tr class="center">											
+											<td>												
+												<span>
+													<input type="text" name="bank" onchange="spryMaxLength(this,64)"/><br/>
+													<span>&nbsp;</span>
+													<span class="errorInfo">字符数不得大于64</span>
+												</span>
+											</td>
+											<td>
+												<span>
+													<input type="text" name="account_type" onchange="spryMaxLength(this,16)"/><br/>
+													<span>&nbsp;</span>
+													<span class="errorInfo">字符数不得大于16</span>
+												</span>
+											</td>
+											<td>
+												<span>
+													<input type="text" name="account_no" onkeyup="value=value.replace(/[^0-9a-zA-Z]/g,'')" onchange="spryMaxLength(this,22)"/><br/>
+													<span>&nbsp;</span>
+													<span class="errorInfo">字符数不得大于22</span>
+												</span>
+											</td>
+											<td>
+												<span>	
+													<input type="text" name="account_balance" onkeyup="setJe(this)" maxlength="18"/><br/>
+													<span class="je">￥</span>	
+													<span class="errorInfo"></span>							
+												</span>
+											</td>							
+										</tr>
+									</table>
+								</td>								
+							</tr>
+							<tr>
+								<td class="center">
+									未到期的银行程税汇票<br/>
+									<input type="button" value="+" onclick="addTd('yhcshp','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+									<input type="button" value="-" onclick="removeTd('yhcshp','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+								</td>
+								<td colspan="4">
+									<table class="table-list" id="yhcshp">
+										<tr class="center">											
+											<td>出票行 </td>
+											<td>到期日 </td>
+											<td>余额(元) </td>							
+										</tr>	
+										<tr class="center">											
+											<td>
+												<span>
+													<input type="text" name="bank" onchange="spryMaxLength(this,64)"/><br/>
+													<span>&nbsp;</span>
+													<span class="errorInfo">字符数不得大于64</span>
+												</span>
+											</td>
+											<td>
+												<input type="text" name="account_expiry_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>
+												<span>&nbsp;</span>
+											</td>
+											<td>
+												<span>	
+													<input type="text" name="account_balance" onkeyup="setJe(this)" maxlength="18"/><br/>
+													<span class="je">￥</span>	
+													<span class="errorInfo"></span>							
+												</span>	
+											</td>	
+										</tr>
+									</table>
+								</td>												
+							</tr>															
+						</table>
+					</div>	
+					<!--*****************************************应收账款**************************************************-->
+					<i class="icon-bookmark"></i><span class="titletip">应收账款</span>
+					<input type="button" value="+" onclick="addTd('Yszk','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('Yszk','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="accounts_receivable">48,000</span><br/>
+					<div class="divBorder">
+						<table class="table-list" id="Yszk">
+							<tr class="center">        
+								<td>应收客户名称</td>
+								<td>描述（详见“应收账款清单”）</td>
+								<td>比例(%)</td>
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">
+								<td>
+									<span>
+										<input type="text" name="customer_name" onchange="spryMaxLength(this,64)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于64</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="describe" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" style="width:40px" name="proportion" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%<br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">请输入0-100的数</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>	
+								</td>									
+							</tr>													
+						</table>
+					</div>
+					<!--*****************************************预付账款**************************************************-->
+					<i class="icon-bookmark"></i><span class="titletip">预付账款</span>
+					<input type="button" value="+" onclick="addTd('Yfzk1','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('Yfzk1','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="prepayments">0.00</span><br/>
+					<div class="divBorder">
+						<table class="table-list" id="Yfzk1">
+							<tr class="center">      
+								<td>客户名称</td>
+								<td>描述（详见“应收账款清单”）</td>
+								<td>比例(%)</td>
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">
+								<td>
+									<span>
+										<input type="text" name="customer_name" onchange="spryMaxLength(this,64)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于64</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="describe" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" style="width:40px" name="proportion" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%<br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">请输入0-100的数</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>	
+								</td>							
+							</tr>													
+						</table>
+					</div>	
+				<!--*****************************************存货(元)**************************************************-->
+					<i class="icon-bookmark"></i><span class="titletip">存货(元)</span>
+					<input type="button" value="+" onclick="addTd('Ch','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('Ch','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="stock">0.00</span><br/>
+					<div class="divBorder">
+						<table class="table-list" id="Ch">
+							<tr class="center">      
+								<td>存货分类</td>
+								<td>存货外观质量评价</td>
+								<td>存货的流动性</td>
+								<td>比例(%)</td>
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">
+								<td>
+									<span>
+										<input type="text" name="stock_type" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="stock_evaluate" onchange="spryMaxLength(this,64)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于64</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="stock_mobility" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" style="width:40px" name="proportion" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%<br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">请输入0-100的数</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>									
+							</tr>													
+						</table>
+					</div>
+				<!--*****************************************固定资产**************************************************-->
+					<i class="icon-bookmark"></i><span class="titletip">固定资产</span>	
+					<span class="pull-right grayText" name="fixed_assets">0.00</span><br/>
+					<div class="divBorder">
+						<table class="table-list" id="fdc">
+							<tr class="center">      
+								<td>
+									房地产
+									<input type="button" value="+" onclick="addTd('fdc','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('fdc','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+								</td>
+								<td>户主</td>
+								<td>描述(详见“固定资产清单”)</td>
+								<td>购置或建造时间</td>
+								<td>购置价或造价(元)</td>
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">								
+								<td>
+									<span>
+										<input type="text" name="assets_name" onchange="spryMaxLength(this,128)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于128</span>
+									</span>
+								</td>	
+								<td>
+									<span>
+										<input type="text" name="assets_ah" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="describe" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<input type="text" name="assets_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>
+									<span>&nbsp;</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="price" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>									
+							</tr>													
+						</table>
+						<table class="table-list" id="sb">
+							<tr class="center">      
+								<td>
+									设备
+									<input type="button" value="+" onclick="addTd('sb','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('sb','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+								</td>
+								<td>数量</td>
+								<td>描述(详见“固定资产清单”)</td>
+								<td>购置时间</td>
+								<td>购置价格(元)</td>
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">
+								<td>
+									<span>
+										<input type="text" name="assets_name" onchange="spryMaxLength(this,128)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于128</span>
+									</span>
+								</td>	
+								<td>
+									<span>
+										<input type="text" name="assets_ah" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="describe" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<input type="text" name="assets_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>
+									<span>&nbsp;</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="price" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>							
+							</tr>													
+						</table>
+						<table class="table-list" id="cl">
+							<tr class="center">      
+								<td>
+									车辆
+									<input type="button" value="+" onclick="addTd('cl','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('cl','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+								</td>
+								<td>户主</td>
+								<td>描述(详见“固定资产清单”)</td>
+								<td>购置时间</td>
+								<td>购置价格(元)</td>
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">
+								<td>
+									<span>
+										<input type="text" name="assets_name" onchange="spryMaxLength(this,128)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于128</span>
+									</span>
+								</td>	
+								<td>
+									<span>
+										<input type="text" name="assets_ah" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="describe" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<input type="text" name="assets_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>
+									<span>&nbsp;</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="price" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>								
+							</tr>													
+						</table>
+					</div>
+				<!--*****************************************其它经营资产(元)**************************************************-->
+					<i class="icon-bookmark"></i><span class="titletip">其它经营资产(元)</span>
+					<input type="button" value="+" onclick="addTd('Qtjyzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('Qtjyzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="other_operating_assets">0.00</span><br/>
+					<div class="divBorder">
+						<table class="table-list" id="Qtjyzc">
+							<tr class="center">      
+								<td>项目</td>
+								<td>描述</td>					
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">
+								<td>
+									<span>
+										<input type="text" name="project" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="describe" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>												
+							</tr>													
+						</table>
+					</div>
+				<!--*****************************************其它非经营资产或表外资产**************************************************-->
+					<i class="icon-bookmark"></i><span class="titletip">其它非经营资产或表外资产</span>
+					<input type="button" value="+" onclick="addTd('bwzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('bwzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="other_non_sheet_assets">0.00</span><br/>
+					<div class="divBorder">
+						<table class="table-list" id="bwzc">
+							<tr class="center">      
+								<td>名称</td>
+								<td>所有权人</td>
+								<td>描述</td>					
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">
+								<td>
+									<span>
+										<input type="text" name="project" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="project_owner" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="describe" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>												
+							</tr>													
+						</table>
+					</div>				
+				</div><!--/tab1-->
+				<div class="tab-pane" id="tab2">
+					<!--*****************************************总负债 **************************************************-->
+					<i class="icon-bookmark"></i><span class="titletip">总负债</span>
+					<span class="pull-right grayText">0.00</span><br/>
+					<i class="icon-bookmark"></i><span class="titletip">应付供货商账款</span>
+					<input type="button" value="+" onclick="addTd('yfgyszk','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('yfgyszk','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="accounts_payable">0.00</span>
+					<div class="divBorder">
+						<table class="table-list" id="yfgyszk">
+							<tr class="center">      
+								<td>供货商</td>
+								<td>描述（包括尚未承付的承税汇票，详见“应收账款清单”）</td>
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">				
+								<td>
+									<span>
+										<input type="text" name="customer_name" onchange="spryMaxLength(this,64)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于64</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="describe" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>											
+							</tr>													
+						</table>
+					</div>
+					<!--*****************************************其他应付帐款 **************************************************-->		
+					<i class="icon-bookmark"></i><span class="titletip">其他应付帐款</span>
+					<input type="button" value="+" onclick="addTd('qtyfzk','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('qtyfzk','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="">0.00</span>
+					<div class="divBorder">
+						<table class="table-list" id="qtyfzk">
+							<tr class="center">      
+								<td>应付对象</td>
+								<td>描述</td>
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">				
+								<td>
+									<span>
+										<input type="text" name="customer_name" onchange="spryMaxLength(this,64)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于64</span>
+									</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="describe" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>												
+							</tr>													
+						</table>
+					</div>
+					<!--*****************************************预收账款(元) **************************************************-->		
+					<i class="icon-bookmark"></i><span class="titletip">预收账款(元)</span>
+					<input type="button" value="+" onclick="addTd('yszky','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('yszky','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="receipts_in_advance">0.00</span>
+					<div class="divBorder">
+						<table class="table-list" id="yszky">
+							<tr class="center">      
+								<td>预收来源</td>
+								<td>发生日期</td>
+								<td>描述</td>
+								<td>金额(元)</td>								
+							</tr>		
+							<tr class="center">				
+								<td>
+									<span>
+										<input type="text" name="source" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>
+									<span>&nbsp;</span>
+								</td>
+								<td>
+									<span>
+										<input type="text" name="describe" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>		
+								<td>
+									<span>	
+										<input type="text" name="amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>											
+							</tr>													
+						</table>
+					</div>
+					<!--*****************************************短期银行借款 **************************************************-->		
+					<i class="icon-bookmark"></i><span class="titletip">短期银行借款</span>
+					<input type="button" value="+" onclick="addTd('dqyhjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('dqyhjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="short_term_borrowings">0.00</span>
+					<div class="divBorder">
+						<table class="table-list" id="dqyhjk">
+							<tr class="center">      
+								<td>贷款机构</td>
+								<td>贷款金额(元)</td>
+								<td>放款日期</td>
+								<td>期限(月)</td>	
+								<td>担保方式</td>
+								<td>贷款余额(元)</td>							
+							</tr>		
+							<tr class="center">				
+								<td>
+									<span>
+										<input type="text" name="loan_org" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="loan_amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>
+								<td>
+									<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>
+									<span>&nbsp;</span>
+								</td>		
+								<td>
+									<!-- <input type="text" name="loan_deadline" onKeyUp="value=value.replace(/\D/g,'')" maxlength="4"/>-->
+									<select name="loan_deadline" style="width:60px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+									</select><br/>&nbsp;
+								</td>	
+								<td>
+									<span>
+										<input type="text" name="guarantee" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>		
+								<td>
+									<span>	
+										<input type="text" name="banlance" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>											
+							</tr>													
+						</table>
+					</div>
+					<!--*****************************************短期社会集资 **************************************************-->		
+					<i class="icon-bookmark"></i><span class="titletip">短期社会集资</span>
+					<input type="button" value="+" onclick="addTd('dqshjz','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('dqshjz','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="">0.00</span>
+					<div class="divBorder">
+						<table class="table-list" id="dqshjz">
+							<tr class="center">      
+								<td>贷款机构</td>
+								<td>贷款金额(元)</td>
+								<td>放款日期</td>
+								<td>期限(月)</td>	
+								<td>与借款人关系</td>
+								<td>金额(元)</td>							
+							</tr>		
+							<tr class="center">				
+								<td>
+									<span>
+										<input type="text" name="loan_org" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="loan_amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>
+								<td>
+									<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>
+									<span>&nbsp;</span>
+								</td>		
+								<td>
+									<!-- <input type="text" name="loan_deadline" onKeyUp="value=value.replace(/\D/g,'')" maxlength="4"/><br/>
+									<span>&nbsp;</span> -->
+									<select name="loan_deadline" style="width:60px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+									</select><br/>&nbsp;
+								</td>	
+								<td>
+									<span>
+										<input type="text" name="guarantee" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>		
+								<td>
+									<span>	
+										<input type="text" name="banlance" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>												
+							</tr>													
+						</table>
+					</div>
+					<!--*****************************************长期银行借款 **************************************************-->		
+					<i class="icon-bookmark"></i><span class="titletip">长期银行借款</span>
+					<input type="button" value="+" onclick="addTd('cqyhjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('cqyhjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="long_term_borrowings">0.00</span>
+					<div class="divBorder">
+						<table class="table-list" id="cqyhjk">
+							<tr class="center">      
+								<td>贷款机构</td>
+								<td>贷款金额(元)</td>
+								<td>放款日期</td>
+								<td>期限(月)</td>	
+								<td>担保方式</td>
+								<td>贷款余额(元)</td>							
+							</tr>		
+							<tr class="center">				
+								<td>
+									<span>
+										<input type="text" name="loan_org" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="loan_amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>
+								<td>
+									<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>
+									<span>&nbsp;</span>
+								</td>		
+								<td>
+									<!-- <input type="text" name="loan_deadline" onKeyUp="value=value.replace(/\D/g,'')" maxlength="4"/><br/>
+									<span>&nbsp;</span> -->
+									<select name="loan_deadline" style="width:60px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+									</select><br/>&nbsp;
+								</td>	
+								<td>
+									<span>
+										<input type="text" name="guarantee" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>		
+								<td>
+									<span>	
+										<input type="text" name="banlance" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>													
+							</tr>													
+						</table>
+					</div>
+					<!--*****************************************长期社会集资 **************************************************-->		
+					<i class="icon-bookmark"></i><span class="titletip">长期社会集资</span>
+					<input type="button" value="+" onclick="addTd('cqshjz','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('cqshjz','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="">0.00</span>
+					<div class="divBorder">
+						<table class="table-list" id="cqshjz">
+							<tr class="center">      
+								<td>贷款机构</td>
+								<td>贷款金额(元)</td>
+								<td>放款日期</td>
+								<td>期限(月)</td>	
+								<td>与借款人关系</td>
+								<td>余额(元)</td>							
+							</tr>		
+							<tr class="center">				
+								<td>
+									<span>
+										<input type="text" name="loan_org" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="loan_amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>
+								<td>
+									<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>
+									<span>&nbsp;</span>
+								</td>		
+								<td>
+									<!-- <input type="text" name="loan_deadline" onKeyUp="value=value.replace(/\D/g,'')" maxlength="4"/><br/>
+									<span>&nbsp;</span> -->
+									<select name="loan_deadline" style="width:60px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+									</select><br/>&nbsp;
+								</td>	
+								<td>
+									<span>
+										<input type="text" name="guarantee" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>		
+								<td>
+									<span>	
+										<input type="text" name="banlance" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>												
+							</tr>													
+						</table>
+					</div>
+					<div class="divBorder">
+						<table class="table-list" id="cqshjz">
+							<tr class="center">      
+								<td>所有者权益 </td>
+								<td style="text-align:right"><input type="text" name="equity"/></td>							
+							</tr>												
+						</table>
+					</div>
+					<!--*****************************************其他表外负债 **************************************************-->		
+					<i class="icon-bookmark"></i><span class="titletip">其他表外负债</span>
+					<input type="button" value="+" onclick="addTd('qtbwfz','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<input type="button" value="-" onclick="removeTd('qtbwfz','dqdcXed_zcfzb')" class="btn btn-info btn-mini" style="margin-top:0px;"/>
+					<span class="pull-right grayText" name="other_non_sheet_liabilities">0.00</span>
+					<div class="divBorder">
+						<table class="table-list" id="qtbwfz">
+							<tr class="center">      
+								<td>贷款机构</td>
+								<td>贷款金额(元)</td>
+								<td>放款日期</td>
+								<td>期限(月)</td>	
+								<td>担保方式</td>
+								<td>贷款余额(元)</td>							
+							</tr>		
+							<tr class="center">				
+								<td>
+									<span>
+										<input type="text" name="loan_org" onchange="spryMaxLength(this,32)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于32</span>
+									</span>
+								</td>
+								<td>
+									<span>	
+										<input type="text" name="loan_amount" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>
+								<td>
+									<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>
+									<span>&nbsp;</span>
+								</td>		
+								<td>
+									<!-- <input type="text" name="loan_deadline" onKeyUp="value=value.replace(/\D/g,'')" maxlength="4"/><br/>
+									<span>&nbsp;</span> -->
+									<select name="loan_deadline" style="width:60px">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+										<option value="13">13</option>
+										<option value="14">14</option>
+										<option value="15">15</option>
+										<option value="16">16</option>
+										<option value="17">17</option>
+										<option value="18">18</option>
+										<option value="19">19</option>
+										<option value="20">20</option>
+										<option value="21">21</option>
+										<option value="22">22</option>
+										<option value="23">23</option>
+										<option value="24">24</option>
+									</select><br/>&nbsp;
+								</td>	
+								<td>
+									<span>
+										<input type="text" name="guarantee" onchange="spryMaxLength(this,16)"/><br/>
+										<span>&nbsp;</span>
+										<span class="errorInfo">字符数不得大于16</span>
+									</span>
+								</td>		
+								<td>
+									<span>	
+										<input type="text" name="banlance" onkeyup="setJe(this)" maxlength="18"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>
+								</td>												
+							</tr>													
+						</table>
+					</div>
+				</div><!--/tab2-->
+			</div><!--/tabcontent-->
+		</div>
+	
+	
+		
+		<input type="submit" value="保存" class="btn btn-info"/>
+		<input type="button" value="打印" class="btn btn-info"/>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idcard=0;
+		var phone=0;
+	</script>
+</body>
+</html>

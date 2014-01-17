@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<!-- ************************验证样式************************-->
+	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
+	<!--<script src="/static/SpryAssets/SpryValidationSelect.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationSelect.css" rel="stylesheet" type="text/css" />-->
+	<style type="text/css">
+		.table-list .table-label{width:140px;}
+		input.long{width:70%;}
+		input.btn-mini{width:20px;margin-top:0px;}
+	</style>
+</head>
+
+<body onload="datepicker();$('input[type=text]').click();">
+	<div class="content">			
+		<!--**********************基本信息**********************-->
+		<i class="icon-bookmark"></i><span class="titletip">基本信息</span>
+		<div class="divBorder">		
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">客户名称<font class="red">*</font></td>
+					<td>
+						<input type="text" value="" disabled/>
+					</td>	
+					<td class="table-label">审议事项<font class="red">*</font></td>
+					<td colspan="3">
+						<select name="">
+							<option value="1">新贷款</option>
+							<option value="2">重复贷款</option>
+							<option value="3">并行贷款</option>
+							<option value="4">变更贷款条件</option>
+							<option value="5">其他</option>
+						</select>
+					</td>	
+				</tr>
+				<tr>
+					<td class="table-label">建议贷款金额<font class="red">*</font></td>
+					<td>
+						<input type="text" value="{{riskanalysis_and_findings.amount}}" onclick="setJe(this);" disabled/>
+						<span class="je">￥</span>	
+						<span class="errorInfo"></span>			
+					</td>	
+					<td class="table-label">建议期限<font class="red">*</font></td>
+					<td>
+						<select name="" style="width:60px" disabled>
+							<option value="{{riskanalysis_and_findings.deadline}}">{{riskanalysis_and_findings.deadline}}</option>
+						</select>月
+					</td>
+					<td class="table-label">建议利率(月%)<font class="red">*</font></td>
+					<td>
+						<input type="text" value="{{riskanalysis_and_findings.rates}}" disabled/>
+					</td>		
+				</tr>
+				<tr>
+					<td class="table-label">每月还款额<font class="red">*</font></td>
+					<td colspan="3">
+						<input type="text" value="{{riskanalysis_and_findings.monthly_repayment}}" onclick="setJe(this);" disabled/>	
+						<span class="je">￥</span>	
+						<span class="errorInfo"></span>				
+					</td>	
+				</tr>	
+			</table>	
+		</div>
+		<!--**********************建议共同贷款人**********************-->
+		<i class="icon-bookmark"></i><span class="titletip">建议共同贷款人</span>
+		<div class="divBorder">	
+			<table class="table-list" id="jygtdkr">
+				<tr>
+					<th>姓名</th>
+					<th>与客户关系</th>
+					<th>身份证号码</th>							
+					<th>家庭电话</th>
+					<th>主营业务或职务（如受雇与别人）</th>
+					<th>经营地址或工作单位地址</th>		
+					<th>主要资产</th>
+					<th>月收入</th>								
+				</tr>
+				{%- for obj in co_borrower %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" disabled/><br/>&nbsp;</td>
+					<td><input type="text" name="relationship" class="tbInput" value="{{obj.relationship}}" disabled/><br/>&nbsp;</td>
+					<td><input type="text" name="id_number" class="tbInput" value="{{obj.id_number}}" disabled/><br/>&nbsp;</td>
+					<td><input type="text" name="phone" class="tbInput" value="{{obj.phone}}" disabled/><br/>&nbsp;</td>
+					<td><input type="text" name="main_business" class="tbInput" value="{{obj.main_business}}" disabled/><br/>&nbsp;</td>	
+					<td><input type="text" name="address" class="tbInput" value="{{obj.address}}" disabled/><br/>&nbsp;</td>	
+					<td><input type="text" name="major_assets" class="tbInput" value="{{obj.major_assets}}" disabled/><br/>&nbsp;</td>
+					<td>
+						<input type="text" name="monthly_income" class="tbInput" value="{{obj.monthly_income}}" onclick="setJe(this);" disabled/>
+						<span class="je">￥</span>	
+						<span class="errorInfo"></span>	
+					</td>								
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>	
+		<!--**********************建议担保方式**********************-->
+		<i class="icon-bookmark"></i><span class="titletip">建议担保方式</span><br/>
+		&nbsp;&nbsp;&nbsp;<span class="titletip">抵押担保</span>
+		<div class="divBorder">		
+			<table class="table-list" id="jydydb">
+				<tr class="center">
+					<td class="table-label">物品名称</td>
+					<td class="table-label">所有者、地址</td>
+					<td class="table-label">描述</td>
+					<td class="table-label">权证或单据号码</td>
+					<td class="table-label">市场估价</td>
+					<td class="table-label">抵押价值</td>
+				</tr>	
+				{%- for obj in guaranty %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="obj_name" class="tbInput" value="{{obj.obj_name}}" disabled/><br/>&nbsp;</td>			
+					<td><input type="text" name="owner_address" class="tbInput" value="{{obj.owner_address}}" disabled/><br/>&nbsp;</td>
+					<td><input type="text" name="description" class="tbInput" value="{{obj.description}}" disabled/><br/>&nbsp;</td>	
+					<td><input type="text" name="registration_number" class="tbInput" value="{{obj.registration_number}}" disabled/><br/>&nbsp;</td>
+					<td>
+						<input type="text" name="appraisal" class="tbInput" value="{{obj.appraisal}}" onclick="setJe(this);" disabled/>
+						<span class="je">￥</span>	
+						<span class="errorInfo"></span>
+					</td>
+					<td>
+						<input type="text" name="mortgage" class="tbInput" value="{{obj.mortgage}}" onclick="setJe(this);" disabled/>
+						<span class="je">￥</span>	
+						<span class="errorInfo"></span>
+					</td>					
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+		<!--&nbsp;&nbsp;&nbsp;<span class="titletip">质押担保</span>
+		<input type="button" value="+" onclick="addTd('jyzydb','edit_sdhjyd')" class="btn btn-info btn-mini"/>
+		<input type="button" value="-" onclick="removeTd('jyzydb','edit_sdhjyd')" class="btn btn-info btn-mini"/>	
+		<div class="divBorder">		
+			<table class="table-list" id="jyzydb">
+				<tr class="center">
+					<td class="table-label">抵押人</td>
+					<td class="table-label">抵押物名称</td>
+					<td class="table-label">数量</td>
+					<td class="table-label">权证或单据号码</td>
+					<td class="table-label">市场估价</td>
+					<td class="table-label">抵押价值</td>
+				</tr>	
+				<tr class="center">
+					<td>
+						<input type="text" name=""/>	
+					</td>
+					<td>
+						<input type="text" name=""/>	
+					</td>
+					<td>
+						<input type="text" name=""/>	
+					</td>
+					<td>
+						<input type="text" name=""/>	
+					</td>
+					<td>
+						<input type="text" name=""/>	
+					</td>
+					<td>
+						<input type="text" name=""/>	
+					</td>
+				</tr>
+			</table>
+		</div>-->
+		&nbsp;&nbsp;&nbsp;<span class="titletip">保证担保</span>
+		<div class="divBorder">		
+			<table class="table-list" id="jybzdb">
+				<tr>
+					<th>姓名</th>
+					<th>地址</th>
+					<th>身份证号码</th>							
+					<th>工作单位</th>
+					<th>电话</th>		
+					<th>与申请人关系</th>								
+				</tr>	
+				{%- for obj in guarantees %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="name_db" class="tbInput" value="{{obj.name}}" disabled/></td>
+					<td><input type="text" name="address_db" class="tbInput" value="{{obj.address}}" disabled/></td>							
+					<td><input type="text" name="id_number_db" class="tbInput" value="{{obj.id_number}}" disabled/></td>	
+					<td><input type="text" name="workunit_db" class="tbInput" value="{{obj.workunit}}" disabled/></td>
+					<td><input type="text" name="phone_db" class="tbInput" value="{{obj.phone}}" disabled/></td>	
+					<td><input type="text" name="relationship_db" class="tbInput" value="{{obj.relationship}}" disabled/></td>										
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+		<form method="POST" action="/Process/fksh/edit_fksh/{{loan_apply_id}}" target="_parent">
+		<!--**********************其他信息**********************-->
+		<i class="icon-bookmark"></i><span class="titletip">其他信息</span>
+		<div class="divBorder">		
+			<table class="table-list">
+				<tr>
+					<td class="table-label">需要审议的其他内容</td>
+					<td colspan="2">
+						<span>
+							<textarea name="other_deliberations" style="width:80%" onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>						
+					</td>
+				</tr>	
+				<tr>					
+					<td class="table-label" rowspan="2">正反因素分析</td>
+					<td class="table-label">正</td>
+					<td>
+						<span>
+							<textarea name="positive" style="width:80%"onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>	
+					</td>
+				</tr>
+				<tr>
+					<td class="table-label">反</td>
+					<td>
+						<span>
+							<textarea name="opposite" style="width:80%"onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>	
+					</td>
+				</tr>
+			</table>
+		</div>
+		<!--**********************贷款决议情况**********************-->
+		<i class="icon-bookmark"></i><span class="titletip">贷款决议情况</span><br/>
+		<label>
+			<input type="radio" name="bool_grant" value="1" checked onclick="$('#success').show();$('#refuse').hide();"/>同意
+		</label>
+		<label>
+			<input type="radio" name="bool_grant" value="0" onclick="$('#refuse').show();$('#success').hide();"/>拒绝
+		</label>
+		<div class="divBorder" id="success">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label" rowspan="3" style="width:60px;">决议结论</td>
+					<td class="table-label" style="width:80px;">金额(元)<font class="red">*</font></td>
+					<td>
+						<span id="amount">
+							<input type="text" name="amount" style="width:100px;" maxlength="11" onkeyup="setJe(this)" onclick="setJe(this)"/>
+							<span class="textfieldRequiredMsg">不能为空</span><br/>
+							<span class="je">￥</span>							
+							<span class="errorInfo"></span>
+						</span>
+					</td>	
+					<td class="table-label" style="width:50px;">期限(月)<font class="red">*</font></td>
+					<td>
+						<select name="deadline" style="width:60px">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+							<option value="13">13</option>
+							<option value="14">14</option>
+							<option value="15">15</option>
+							<option value="16">16</option>
+							<option value="17">17</option>
+							<option value="18">18</option>
+							<option value="19">19</option>
+							<option value="20">20</option>
+							<option value="21">21</option>
+							<option value="22">22</option>
+							<option value="23">23</option>
+							<option value="24">24</option>
+						</select>
+					</td>	
+					<td class="table-label" style="width:50px;">利率<font class="red">*</font></td>
+					<td>
+						<!-- <input type="text" style="width:40px" name="rates" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/>% -->
+						<span id="rates">
+							<input type="text" style="width:40px" name="rates" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%<br/>
+							<span class="textfieldRequiredMsg">不能为空</span><br/>	
+							<span class="errorInfo">请输入0-100的数</span>
+						</span>
+					</td>
+							
+				</tr>
+				<tr>
+					<td class="table-label" style="width:110px;">还款方式<font class="red">*</font></td>
+					<td>
+						<select name="repayment_type">
+							<option value="1">等额本金</option>
+							<option value="2">等额本息</option>
+						</select>
+					</td>	
+					<td class="table-label" style="width:110px;">每期还款金额<font class="red">*</font></td>
+					<td colspan="3">
+						<span id="monthly_repayment">
+							<input type="text" name="monthly_repayment" maxlength="11" onkeyup="setJe(this)" onclick="setJe(this)"/>
+							<span class="textfieldRequiredMsg">不能为空</span>		<br/>
+							<span class="je">￥</span>
+							<span class="errorInfo"></span>
+						</span>
+					</td>													
+				</tr>
+				<tr>
+					<td class="table-label" style="width:110px;">借款人姓名<font class="red">*</font></td>
+					<td>
+						<input type="text" value="" disabled/>
+					</td>	
+					<td class="table-label" style="width:120px;">借款人身份证号码<font class="red">*</font></td>
+					<td colspan="3">
+						<input type="text" value="" maxlength="11" disabled/>
+					</td>													
+				</tr>
+				<tr>
+					<td class="table-label" style="width:110px;">共同借款人<font class="red">*</font></td>
+					<td colspan="2">
+						<label>
+							<input type="radio" name="bool_co_borrower" value="1" checked/>同意
+						</label>
+						<label>
+							<input type="radio" name="bool_co_borrower" value="0" />拒绝
+						</label>
+					</td>	
+					<td class="table-label" style="width:110px;">抵质押<font class="red">*</font></td>
+					<td>
+						<label>
+							<input type="radio" name="bool_guaranty" value="1" checked/>同意
+						</label>
+						<label>
+							<input type="radio" name="bool_guaranty" value="0" />拒绝
+						</label>
+					</td>
+					<td class="table-label" style="width:110px;">保证<font class="red">*</font></td>
+					<td>
+						<label>
+							<input type="radio" name="bool_guarantees" value="1" checked/>同意
+						</label>
+						<label>
+							<input type="radio" name="bool_guarantees" value="0" />拒绝
+						</label>
+					</td>													
+				</tr>
+				<tr>
+					<td class="table-label" style="width:110px;">其他决议内容</td>
+					<td colspan="6">
+						<span>
+							<textarea name="other_resolution" style="width:80%"onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>	
+					</td>																
+				</tr>
+			</table>
+		</div>
+		<div class="divBorder" id="refuse" style="display:none">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">主要拒绝原因</td>					
+					<td>
+						<span>
+							<textarea name="refuse_reason" style="width:80%"onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>																
+				</tr>
+			</table>
+		</div>
+		<span class="point">*为必填字段</span><br/>
+		<input type="submit" class="btn btn-info" value="提交"/>
+		<input type="button" class="btn btn-info" value="打印" onclick="window.open('/Process/fksh/dy_sdhjyd')"/>	
+		</form>
+	</div>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("amount", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("rates", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("monthly_repayment", "none");
+
+	</script>
+</body>
+</html>

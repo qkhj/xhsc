@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<!-- ************************验证样式************************-->
+	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		
+	</style>
+</head>
+
+<body onload="datepicker();">	
+	<form id="FDC" class="content" method="POST" action="/Process/dqdc/new_car/{{loan_apply_id}}" target="_parent">
+		<!--*****************************************车辆信息**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">车辆信息</span>		
+		<div style="border:1px solid #94c1dc;">	
+			<table class="table-list" id="">	
+				<tr>
+					<td class="table-label">车辆名称<font class="red">*</font></td>
+					<td style="width:35%">
+						<span id="name">	
+							<input type="text" name="name" onchange="spryMaxLength(this,32)"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>
+					<td class="table-label">持有人<font class="red">*</font></td>
+					<td>
+						<span id="owner">	
+							<input type="text" name="owner" onchange="spryMaxLength(this,32)"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="table-label">型号或品牌<font class="red">*</font></td>
+					<td>
+						<span id="type_brand">	
+							<input type="text" name="type_brand" onchange="spryMaxLength(this,32)"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>
+					<td class="table-label">购置时间<font class="red">*</font></td>
+					<td>
+						<input type="text" name="purchase_date" class="datepicker" data-date-format="yyyy-mm-dd" onblur="hiddenInput('yzsj',this)" readonly/>
+						<span id="yzgzsj">
+							<input type="hidden" id="yzsj"/>
+   							<span class="textfieldRequiredMsg">不能为空</span>
+   						</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="table-label">购置价格<font class="red">*</font></td>
+					<td>
+						<span id="purchase_price">	
+							<input type="text" name="purchase_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
+							<span class="textfieldRequiredMsg">不能为空</span><br/>
+							<span class="je">￥</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>
+					<td class="table-label">生产时间<font class="red">*</font></td>	
+					<td>
+						<input type="text" name="production_date" class="datepicker" data-date-format="yyyy-mm-dd" onblur="hiddenInput('yzdate',this)" readonly/>
+						<span id="yzscrq">
+							<input type="hidden" id="yzdate"/>
+   							<span class="textfieldRequiredMsg">不能为空</span>
+   						</span>
+					</td>						
+				</tr>				
+				<tr>
+					<td class="table-label">总价<font class="red">*</font></td>
+					<td colspan="3">
+						<span id="total_price">	
+							<input type="text" name="total_price" onkeyup="setJe(this)" maxlength="18"/>
+							<span class="textfieldRequiredMsg">不能为空</span><br/>
+							<span class="je">￥</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="table-label">外观评价<font class="red">*</font></td>
+					<td colspan="3">
+						<span id="outward">	
+							<input type="text" name="outward" onchange="spryMaxLength(this,64)" style="width:80%"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<span class="errorInfo">字符数不得大于64</span>
+						</span>
+					</td>
+				</tr>					
+				<tr>	
+					<td class="table-label">备注</td>		
+					<td colspan="3">
+						<span>	
+							<input type="text" name="remark" onchange="spryMaxLength(this,64)" style="width:80%"/>
+							<span class="errorInfo">字符数不得大于64</span>
+						</span>
+					</td>					
+				</tr>
+			</table>
+		</div>
+		<span class="point">*为必填字段</span><br/>
+		<input type="submit" value="提交" class="btn btn-info"/>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("name", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("owner", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("type_brand", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("yzgzsj", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("purchase_price", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("yzscrq", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("total_price", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("outward", "none");
+	</script>
+</body>
+</html>

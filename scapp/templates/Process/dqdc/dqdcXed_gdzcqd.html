@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+	<style type="text/css">
+		
+	</style>
+</head>
+
+<body onload="datepicker();sub()">	
+	<div class="content">
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#tab1" id="fdcxd" data-toggle="tab" onclick="$('#dqdcXed_gdzcqd',window.parent.document).height(500);$('#content_frame',window.parent.parent.document).height(800);">房地产详单</a></li>
+				<li><a href="#tab2" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');">设备及器材详单</a></li>
+				<li><a href="#tab3" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');">车辆详单</a></li>
+			</ul>						
+			<div class="tab-content">
+				<!--房地产详单-->
+				<div class="tab-pane active" id="tab1">
+					<!--*****************************************房地产详单**************************************************-->
+					<div id="FDC">
+						<i class="icon-bookmark"></i><span class="titletip">房地产详单</span>
+						<div style="margin-bottom:5px;">
+							<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dqdc/new_fdc/{{id}}');doubleIframe('dqdcXed_gdzcqd');">新增</a><!--*滚动条问题*-->
+						</div>
+						<div style="border:1px solid #94c1dc;">	
+							<table class="table-list" cellspacing="10" id="uesr-list">				
+								<tr>
+									<th>房地产</th>         
+									<th>座落</th>
+									<th>建筑面积</th>
+									<th>土地面积</th>							
+									<th>使用年限</th>
+									<th>土地性质</th>
+									<th>购置价或造价(元)</th>							
+									<th>总价(元)</th>
+									<th>备注</th>
+									<th>操作</th>
+								</tr>
+								{%- for obj in fixed_assets_estate %}
+								<tr class="tbData center" onclick="changeColor(this)">
+									<td><a href="#" onclick="iframe('Process/dqdc/edit_fdc/{{obj.id}}')">{{obj.name}}</a></td>
+									<td>{{obj.address}}</td>
+									<td>{{obj.gfa}}</td>
+									<td>{{obj.land_area}}</td>
+									<td>{{obj.life}}</td>
+									<td>{{obj.land_type}}</td>
+									<td class="subData2">{{obj.purchase_price}}</td>
+									<td class="subData3">{{obj.price}}</td>
+									<td>{{obj.remark}}</td>
+									<td>
+										<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+									</td>
+								</tr>
+								{%- endfor %}		
+								<tr>
+									<th colspan="2">合计</th> 
+									<th></th>        
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th id="sub2"></th>
+									<th id="sub3"></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div><!--/房地产详单-->
+
+				<!--设备及器材详单-->
+				<div class="tab-pane" id="tab2">								
+					<!--*****************************************设备及器材详单**************************************************-->
+					<div id="SBXD">
+						<i class="icon-bookmark"></i><span class="titletip">设备及器材详单</span>
+						<div style="margin-bottom:5px;">
+							<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dqdc/new_equipment/{{id}}');doubleIframe('dqdcXed_gdzcqd');">新增</a>					
+						</div>
+						<div style="border:1px solid #94c1dc;">	
+							<table class="table-list" cellspacing="10" id="uesr-list">
+								<tr>
+									<th>设备及器材</th>
+									<th>数量</th>
+									<th>型号或品牌</th>
+									<th>购置时间</th>							
+									<th>生产年月</th>
+									<th>外观现状评价</th>							
+									<th>总价(元)</th>
+									<th>备注</th>
+									<th>操作</th>
+								</tr>
+								{%- for obj in fixed_assets_equipment %}
+								<tr class="center" onclick="changeColor(this)">
+									<td><a href="#" onclick="iframe('Process/dqdc/edit_equipment/{{obj.id}}')">{{obj.name}}</a></td>
+									<td>{{obj.amount}}</td>        
+									<td>{{obj.type_brand}}</td>
+									<td>{{obj.purchase_date}}</td>
+									<td>{{obj.production_date}}</td>
+									<td>{{obj.outward}}</td>
+									<td class="subData4">{{obj.total_price}}</td>
+									<td>{{obj.remark}}</td>
+									<td>
+										<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+									</td>
+								</tr>
+								{%- endfor %}		
+								<tr>
+									<th colspan="2">合计</th> 
+									<th></th>        
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th id="sub4"></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div><!--设备及器材详单-->		
+
+				<!--车辆详单-->
+				<div class="tab-pane" id="tab3">								
+					<!--*****************************************车辆详单**************************************************-->
+					<div id="CLXD"> 
+						<i class="icon-bookmark"></i><span class="titletip">车辆详单</span>
+						<div style="margin-bottom:5px;">
+							<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dqdc/new_car/{{id}}');$('#dqdcXed_gdzcqd',window.parent.document).height(500);$('#content_frame',window.parent.parent.document).height(600);">新增</a>					
+						</div>
+						<div style="border:1px solid #94c1dc;">	
+							<table class="table-list" cellspacing="10" id="uesr-list">
+								<tr>
+									<th>车辆</th> 
+									<th>户主</th>
+									<th>型号或品牌</th>
+									<th>购置时间</th>							
+									<th>购置价格(元)</th>
+									<th>生产年月</th>
+									<th>外观现状评价</th>							
+									<th>总价(元)</th>
+									<th>备注</th>
+									<th>操作</th>
+								</tr>
+								{%- for obj in fixed_assets_car %}
+								<tr class="center" onclick="changeColor(this)">
+									<td><a href="#" onclick="iframe('Process/dqdc/edit_car/{{obj.id}}')">{{obj.name}}</a></td>
+									<td>{{obj.owner}}</td>        
+									<td>{{obj.type_brand}}</td>
+									<td>{{obj.purchase_date}}</td>
+									<td>{{obj.purchase_price}}</td>
+									<td>{{obj.production_date}}</td>
+									<td>{{obj.outward}}</td>
+									<td class="subData5">{{obj.total_price}}</td>
+									<td>{{obj.remark}}</td>
+									<td>
+										<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+									</td>
+								</tr>
+								{%- endfor %}	
+								<tr>
+									<th colspan="2">合计</th> 
+									<th></th>        
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th id="sub5"></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div><!--车辆详单-->						
+			</div><!-- tabContent -->
+		</div>
+	
+		
+		<input type="button" value="打印" class="btn btn-info"/>
+	</div>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">		
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		function sub(){
+			var num=$(".tbData").length;			
+			$("#sub1").text("总笔数："+num);
+			for(i=2;i<6;i++){
+				var sum=0;						
+				$.each($(".subData"+i),function(key,val){ 
+					if(val.innerHTML=="")
+						sum=sum;
+					else
+						sum += parseInt(val.innerHTML);
+					$("#sub"+i).html(sum+"<br/><span class='je'>"+hjje($("#sub"+i),sum)+"</span>"); 	
+				}); 
+			}
+		}
+	</script>
+</body>
+</html>

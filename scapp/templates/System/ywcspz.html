@@ -1,0 +1,474 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	
+</head>
+
+<body>	
+	<div class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">系统管理</a>/<a href="#">业务参数配置</a>
+		</div>		
+		<div class="row-fluid">
+			<!-- 一级tab -->
+			<ul id="tags" class="tags">
+				<li class="selectTag"> 
+					<a onclick="selectTag('tagContent0',this);" href="javascript:void(0)">产品设置</a> 
+				</li>
+				<li >
+					<a onclick="selectTag('tagContent1',this)" href="javascript:void(0)">利率设置</a> 
+				</li>
+				<li>
+					<a onClick="selectTag('tagContent2',this)" href="javascript:void(0)">系统参数设置</a>
+				</li>
+				<li>
+					<a onClick="selectTag('tagContent3',this)" href="javascript:void(0)">分行设置</a>
+				</li>
+				<li>
+					<a onClick="selectTag('tagContent4',this)" href="javascript:void(0)">假日设置</a>
+				</li>		
+				<li>
+					<a onClick="selectTag('tagContent5',this)" href="javascript:void(0)">资产质量分类</a>
+				</li>		
+			</ul>
+
+			<!-- 一级content -->
+			<div id="tagContent" class="Content">
+<!-- ******************************************第一个标签的内容**************************************** -->
+				<div class="tagContent selectTag" id="tagContent0">
+					<!-- *************产品列表************* -->
+					<div id="content0">
+						<i class="icon-bookmark"></i><span class="titletip">产品列表</span>
+						<div style="border:1px solid #94c1dc;">				
+							<table class="table-list" cellspacing="10" id="uesr-list">
+								<thead>
+									<tr>
+										<th>产品名称</th>
+										<th>最长期限（月）</th>
+										<th>起始金额（元）</th>
+										<th>终止金额（元）</th>	
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="center">
+									<tr onclick="changeColor(this)">
+										<td><a href="#" onclick="changeDiv('content1','content0')">微贷款</a></td>
+										<td>24</td>
+										<td>2000</td>
+										<td>10000</td>
+										<td>
+											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+										</td>
+									</tr>
+									<tr onclick="changeColor(this)">
+										<td><a href="#">小额贷款</a></td>							
+										<td>24</td>
+										<td>10000</td>
+										<td>100000</td>
+										<td>
+											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+										</td>
+									</tr>						
+								</tbody>
+							</table>
+						</div>
+					</div><!-- /产品列表 -->
+					<!-- *************产品信息************* -->
+					<div id="content1" style="display:none;">
+						<i class="icon-bookmark"></i><span class="titletip">产品信息</span>
+						<form>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<tr>
+										<td class="table-label">产品名称<font class="red">*</font></td>
+										<td><input type="text" value="微贷款"/></td>
+										<td class="table-label">最长期限（月）<font class="red">*</font></td>
+										<td><input type="text" value="24"/></td>
+									</tr>
+									<tr>
+										<td class="table-label">起始金额（元）<font class="red">*</font></td>
+										<td><input type="text" value="2000"/></td>
+										<td class="table-label">终止金额（元）<font class="red">*</font></td>
+										<td><input type="text" value="10000"/></td>
+									</tr>
+									<tr>
+										<td class="table-label">产品说明</td>
+										<td colspan="3">
+											<textarea style="width:95%;">专为解决个人临时性的消费资金困难而发放的期限为半年期和一年期两个档次、金额在5万元（含）以下的人民币短期消费用途贷款申请人须是单位正式干部职工，年龄不超过50岁；月工资额在2000元以上，并以其工资收入作为第一还款来源；贷款起点为2千元，贷款金额不超过贷款申请人月均工资的6倍，且最高不超过5万元。</textarea>
+										</td>
+									</tr>													
+								</table>
+							</div>
+							<span class="point">*为必填字段</span><br/>
+							<input type="submit" class="btn btn-info" value="保存"/>
+							<input type="button" class="btn btn-info" value="返回" onclick="changeDiv('content0','content1')"/>						
+						</form>
+					</div><!-- /产品信息 -->
+				</div>
+					
+<!-- ******************************************第二个标签的内容**************************************** -->
+				<div class="tagContent" id="tagContent1">
+					<!-- *************利率列表************* -->
+					<div id="content10">
+						<i class="icon-bookmark"></i><span class="titletip">利率列表</span>
+						<div style="margin-bottom:5px;">
+							<a type="button" class="btn btn-info" href="#" onclick="changeDiv('content11','content10')">新增</a>	
+						</div>
+						<div style="border:1px solid #94c1dc;">				
+							<table class="table-list" cellspacing="10" id="uesr-list">
+								<thead>
+									<tr>
+										<th>名称</th>
+										<th>年利率</th>									
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="center">
+									<tr onclick="changeColor(this)">
+										<td><a href="#" onclick="changeDiv('content11','content10')">优惠利率</a></td>
+										<td>18.00%</td>									
+										<td>
+											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+										</td>
+									</tr>
+									<tr onclick="changeColor(this)">
+										<td><a href="#">正常利率</a></td>							
+										<td>22.00%</td>									
+										<td>
+											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+										</td>
+									</tr>						
+								</tbody>
+							</table>
+						</div>
+					</div><!-- /利率列表 -->
+					<!-- *************利率信息************* -->
+					<div id="content11" style="display:none;">
+						<i class="icon-bookmark"></i><span class="titletip">利率信息</span>
+						<form>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<tr>
+										<td class="table-label">名称<font class="red">*</font></td>
+										<td><input type="text"/></td>
+										<td class="table-label">年利率<font class="red">*</font></td>
+										<td><input type="text"/>%</td>
+									</tr>													
+								</table>
+							</div>
+							<span class="point">*为必填字段</span><br/>
+							<input type="submit" class="btn btn-info" value="保存"/>	
+							<input type="button" class="btn btn-info" value="返回" onclick="changeDiv('content10','content11')"/>					
+						</form>
+					</div><!-- /利率信息 -->					
+				</div>
+
+<!-- ******************************************第三个标签的内容**************************************** -->
+				<div class="tagContent" id="tagContent2">
+					<i class="icon-bookmark"></i><span class="titletip">系统参数信息</span>
+					<form>
+						<div style="border:1px solid #94c1dc;">
+							<table class="table-list">
+								<tr>
+									<td class="table-label" style="width:20%;">每日罚息利率（%）<font class="red">*</font></td>
+									<td><input type="text" value="5"/></td>
+								</tr>
+								<tr>
+									<td class="table-label">还款预期天数</td>
+									<td><input type="text" value="7"/></td>
+								</tr>
+								<tr>
+									<td class="table-label">管理费费率（%）</td>
+									<td><input type="text" value="1"/></td>
+								</tr>
+								<tr>
+									<td class="table-label">代理费费率（%）</td>
+									<td><input type="text" value="1"/></td>
+								</tr>	
+								<tr>
+									<td class="table-label">征信文档产生路径</td>
+									<td><input type="text" value="d:/packet"/></td>
+								</tr>						
+							</table>
+						</div>
+						<span class="point">*为必填字段</span><br/>
+						<input type="submit" class="btn btn-info" value="保存"/>						
+					</form>
+				</div>
+
+<!-- ******************************************第四个标签的内容**************************************** -->
+				<div class="tagContent" id="tagContent3">
+					<!-- *************分行列表************* -->
+					<div id="content30">
+						<i class="icon-bookmark"></i><span class="titletip">分行列表</span>
+						<div style="margin-bottom:5px;">
+							<a type="button" class="btn btn-info" href="#" onclick="changeDiv('content31','content30')">新增</a>	
+						</div>
+						<div style="border:1px solid #94c1dc;">				
+							<table class="table-list" cellspacing="10" id="uesr-list">
+								<thead>
+									<tr>
+										<th>分行名称</th>
+										<th>分行代码</th>	
+										<th>成立时间</th>
+										<th>地区</th>
+										<th>分行电话</th>
+										<th>分行类型</th>								
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="center">
+									<tr onclick="changeColor(this)">
+										<td><a href="#" onclick="changeDiv('content31','content30')">西藏南路支行</a></td>
+										<td>0001245</td>	
+										<td>2013-08-27</td>
+										<td>上海</td>
+										<td>021-12345678</td>
+										<td>支行</td>								
+										<td>
+											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+										</td>
+									</tr>
+									<tr onclick="changeColor(this)">										
+										<td><a href="#">豫园支行 </a></td>						
+										<td>0001232</td>	
+										<td>2013-08-27</td>
+										<td>上海</td>
+										<td>021-12345678</td>
+										<td>支行</td>								
+										<td>
+											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+										</td>
+									</tr>														
+								</tbody>
+							</table>
+						</div>
+					</div><!-- /分行列表 -->
+					<!-- *************分行信息************* -->
+					<div id="content31" style="display:none;">
+						<i class="icon-bookmark"></i><span class="titletip">分行信息</span>
+						<form>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<tr>
+										<td class="table-label">分行名称<font class="red">*</font></td>
+										<td><input type="text"/></td>
+										<td class="table-label">分行代码<font class="red">*</font></td>
+										<td><input type="text"/></td>
+									</tr>	
+									<tr>
+										<td class="table-label">成立时间<font class="red">*</font></td>
+										<td><input type="text"/></td>
+										<td class="table-label">微贷业务开办时间<font class="red">*</font></td>
+										<td><input type="text"/></td>
+									</tr>
+									<tr>
+										<td class="table-label">地区<font class="red">*</font></td>
+										<td><input type="text"/></td>
+										<td class="table-label">分行电话<font class="red">*</font></td>
+										<td><input type="text"/></td>
+									</tr>	
+									<tr>
+										<td class="table-label">分行传真<font class="red">*</font></td>
+										<td><input type="text"/></td>
+										<td class="table-label">电子信箱<font class="red">*</font></td>
+										<td><input type="text"/></td>
+									</tr>
+									<tr>
+										<td class="table-label">分行地址<font class="red">*</font></td>
+										<td colspan="3"><input type="text" style="width:80%;"/></td>
+									</tr>
+									<tr>
+										<td class="table-label">分行邮编<font class="red">*</font></td>
+										<td colspan="3"><input type="text"/></td>
+									</tr>
+									<tr>
+										<td class="table-label">主管名称<font class="red">*</font></td>
+										<td><input type="text"/></td>
+										<td class="table-label">主管联系电话<font class="red">*</font></td>
+										<td><input type="text"/></td>
+									</tr>	
+									<tr>
+										<td class="table-label">分行类型<font class="red">*</font></td>
+										<td>
+											<select>
+												<option>---请选择---</option>
+												<option>支行</option>	
+												<option>区域总行</option>
+												<option>总行</option>
+											</select>
+										</td>
+										<td class="table-label">区域总行<font class="red">*</font></td>
+										<td>
+											<select>
+												<option>---请选择---</option>
+												<option>商业银行总行</option>						
+											</select>
+										</td>
+									</tr>											
+								</table>
+							</div>
+							<span class="point">*为必填字段</span><br/>
+							<input type="submit" class="btn btn-info" value="保存"/>	
+							<input type="button" class="btn btn-info" value="返回" onclick="changeDiv('content30','content31')"/>					
+						</form>
+					</div><!-- /分行信息 -->
+				</div>
+
+<!-- ******************************************第五个标签的内容**************************************** -->
+				<div class="tagContent" id="tagContent4">
+					<!-- *************假日列表************* -->
+					<div id="content40">
+						<i class="icon-bookmark"></i><span class="titletip">假日列表</span>
+						<div style="margin-bottom:5px;">
+							<a type="button" class="btn btn-info" href="#" onclick="changeDiv('content41','content40')">新增</a>	
+						</div>
+						<div style="border:1px solid #94c1dc;">				
+							<table class="table-list" cellspacing="10" id="uesr-list">
+								<thead>
+									<tr>
+										<th>日期</th>
+										<th>日期类型</th>	
+										<th>日期说明</th>																	
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody class="center">
+									<tr onclick="changeColor(this)">
+										<td><a href="#"	onclick="changeDiv('content41','content40')">2013-05-01</a></td>						
+										<td>假日</td>	
+										<td>五一劳动节3天假日第一天</td>
+										<td>
+											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+										</td>
+									</tr>
+									<tr onclick="changeColor(this)">
+										<td><a href="#"	>2013-05-02</a></td>						
+										<td>假日</td>	
+										<td>五一劳动节3天假日第二天</td>
+										<td>
+											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+										</td>
+									</tr>
+									<tr onclick="changeColor(this)">
+										<td><a href="#"	>2013-05-03</a></td>						
+										<td>假日</td>	
+										<td>五一劳动节3天假日第三天</td>
+										<td>
+											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+										</td>
+									</tr>	
+									<tr onclick="changeColor(this)">
+										<td><a href="#"	>2013-05-04</a></td>						
+										<td>工作日</td>	
+										<td>与五一劳动节3天假日对调</td>
+										<td>
+											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+										</td>
+									</tr>					
+								</tbody>
+							</table>
+						</div>
+					</div><!-- /假日列表 -->
+					<!-- *************假日信息************* -->
+					<div id="content41" style="display:none;">
+						<i class="icon-bookmark"></i><span class="titletip">假日信息</span>
+						<form>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<tr>
+										<td class="table-label">日期<font class="red">*</font></td>
+										<td><input type="text"/></td>
+										<td class="table-label">日期类型<font class="red">*</font></td>
+										<td>
+											<select>
+												<option>---请选择---</option>
+												<option>工作日</option>
+												<option>假日</option>							
+											</select>
+										</td>
+									</tr>										
+									<tr>
+										<td class="table-label">日期说明</td>
+										<td colspan="3"><input type="text" style="width:80%;"/></td>
+									</tr>																		
+								</table>
+							</div>
+							<span class="point">*为必填字段</span><br/>
+							<input type="submit" class="btn btn-info" value="保存"/>	
+							<input type="button" class="btn btn-info" value="返回" onclick="changeDiv('content40','content41')"/>					
+						</form>
+					</div><!-- /假日信息 -->
+				</div>
+				
+<!-- ******************************************第六个标签的内容**************************************** -->
+				<div class="tagContent" id="tagContent5">
+					<i class="icon-bookmark"></i><span class="titletip">资产质量分类列表</span>					
+					<div style="border:1px solid #94c1dc;">				
+						<table class="table-list" cellspacing="10" id="uesr-list">
+							<thead>
+								<tr>
+									<th></th>
+									<th>1-30天</th>
+									<th>31-90天</th>	
+									<th>91-180天</th>																	
+									<th>181-360天</th>
+									<th>361天以上</th>
+								</tr>
+							</thead>
+							<tbody class="center">
+								<tr onclick="changeColor(this)">
+									<td>信用</td>
+									<td>关注</td>						
+									<td>次级</td>	
+									<td>可疑</td>
+									<td>可疑</td>
+									<td>损失</td>
+								</tr>
+								<tr onclick="changeColor(this)">
+									<td>保证</td>
+									<td>正常</td>						
+									<td>关注</td>	
+									<td>次级</td>
+									<td>可疑</td>
+									<td>损失</td>
+								</tr>
+								<tr onclick="changeColor(this)">
+									<td>抵押</td>
+									<td>正常</td>						
+									<td>关注</td>	
+									<td>关注</td>
+									<td>次级</td>
+									<td>可疑</td>
+								</tr>	
+								<tr onclick="changeColor(this)">
+									<td>质押</td>
+									<td>正常</td>						
+									<td>正常</td>	
+									<td>关注</td>
+									<td>次级</td>
+									<td>可疑</td>
+								</tr>					
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div><!--/tagContent -->
+		</div><!--/row-fluid -->
+	</div><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	
+</body>
+</html>

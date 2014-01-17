@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	
+</head>
+
+<body onload="setTimeOut();">	
+	<div class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">信息管理</a>/<a href="#">客户信息管理</a>
+		</div>		
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+		  	{%- if messages %}
+	    	{%- for category, message in messages %}
+	    	<div class="alert alert-{{category}}">
+	      		{{message}}
+	      	</div>
+	    	{%- endfor %}
+		  	{%- endif %}
+		{%- endwith %}
+		<div class="row-fluid">			
+			<i class="icon-bookmark"></i><span class="titletip">客户搜索</span>
+			<form method="POST" action="/Information/khxxgl_search/1">
+				<div style="border:1px solid #94c1dc;">
+					<table class="table-list">
+						<tr>
+							<td class="table-label">所属支行</td>
+							<td>
+								<select name="belong_org">
+									<option value="-1">---全部---</option>
+									{%- for obj in org %}
+									<option value={{obj.id}}>{{obj.name}}</option>
+									{%- endfor %}	
+								</select>
+							</td>
+							<td class="table-label">客户类型</td>
+							<td>
+								<select name="customer_type">
+									<option value="Company">公司类</option>
+									<option value="Individual">个人类</option>
+								</select>
+							</td>
+							<td class="table-label">客户经理</td>
+							<td><input type="text" name="manager_name"/></td>
+						</tr>
+						<tr>
+							<td class="table-label">客户编号</td>
+							<td><input type="text" name="customer_no"/></td>
+							<td class="table-label">客户名称</td>
+							<td><input type="text" name="customer_name"/></td>
+							<td class="table-label">证件号码</td>
+							<td><input type="text" name="credentials_no"/></td>
+						</tr>							
+					</table>
+				</div>
+				<input type="submit" class="btn btn-info" value="搜索"/>
+				<input type="reset" class="btn btn-info" value="新增" onclick="iframe('Information/new_customer/0')" />											
+			</form>
+		</div><!--/row-fluid -->
+	</div><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	
+</body>
+</html>

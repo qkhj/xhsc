@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<script type="text/javascript">
+		function readOnly(){			
+			$("input[type=text],select").each(function(){
+      			this.disabled=true;
+  			});//文本框不可编辑 
+  			$('#hkjh').contents().find("input[type=text]").each(function(){
+      			this.disabled=true;
+  			});//文本框不可编辑  
+  			$('#dksp_info').contents().find("input[type=radio]").each(function(){
+      			this.disabled=true;
+  			});//文本框不可编辑  
+		}
+		function setje(){
+			$('input[name=management_coats]').click();
+			$('input[name=agency_coats]').click();			
+			$('input[name=loan_amount]').click();		
+			$("input[type=submit]").removeAttr("disabled");
+		}
+	</script>
+</head>
+
+<body onload="readOnly();setje()">	
+	<form class="content" method="POST" action="/Process/fksh/edit_fksh/{{belong_customer_type}}/{{belong_customer_value}}/{{id}}">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">放款审核</a>
+		</div>		
+		<div class="row-fluid">
+			<!--**********************************************放款信息**********************************************-->
+			<div style="margin-top:-20px">
+				<i class="icon-bookmark"></i><span class="titletip">放款信息</span>
+				<div class="divBorder">
+					<table class="table-list">		
+						<tr>
+							<td class="table-label">贷款编号</td>
+							<td><span id="">{{loan_apply.id}}</span></td>
+							<td class="table-label">客户编号</td>
+							<td><span id="">{{loan_apply.belong_customer_value}}</span></td>					
+						</tr>			
+						<tr>
+							<td class="table-label">管理费(元)</td>
+							<td>
+								<span>	
+									<input type="text" name="management_coats" value="{{loan_information.management_coats}}" onclick="setJe(this)" onkeyup="setJe(this);" maxlength="11" />管理费率1%<br/>
+									<span class="je">￥</span>	
+									<span class="errorInfo"></span>							
+								</span>
+							</td>
+							<td class="table-label">代理费(元)</td>
+							<td>
+								<span>	
+									<input type="text" name="agency_coats" value="{{loan_information.agency_coats}}" onclick="setJe(this)" onkeyup="setJe(this);" maxlength="11" />管理费率1%<br/>
+									<span class="je">￥</span>	
+									<span class="errorInfo"></span>							
+								</span>	
+							</td>					
+						</tr>		
+						<tr>
+							<td class="table-label">合同签订日期<font class="red">*</font></td>
+							<td><input type="text" value="{{loan_information.contract_date}}" class="datepicker" disabled/></td>
+							<td class="table-label">放款帐号<font class="red">*</font></td>
+							<td><input type="text" value="{{loan_information.loan_account}}" disabled/></td>					
+						</tr>	
+						<tr>
+							<td class="table-label">贷款合同编号<font class="red">*</font></td>
+							<td><input type="text" value="{{loan_information.loan_contract_number}}" disabled/></td>
+							<td class="table-label">担保合同编号</td>
+							<td><input type="text" value="{{loan_information.guarantee_contract_number}}" disabled/></td>					
+						</tr>
+						<tr>
+							<td class="table-label">抵押品合同编号</td>
+							<td colspan="3"><input type="text" value="{{loan_information.collateral_contract_number}}" disabled/></td>			
+						</tr>
+					</table>
+				</div>
+			</div>
+			
+			<div class="divBorder">
+				<table class="table-list">		
+					<tr>
+						<td class="table-label">还款方式</td>
+						<td>
+							<select id="">
+								<option value="1">等额本金</option>
+								<option value="2">等额本息</option>
+							</select>
+						</td>
+						<td class="table-label">还贷期数<font class="red">*</font></td>
+						<td><!-- <input type="text" value="{{loan_information.loan_period}}"/> -->
+							<select name="loan_period" style="width:60px" >
+								{%- if loan_information.loan_period == '1' %}
+									<option value="1" selected>1</option>
+								{%- else %}
+									<option value="1">1</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '2' %}
+									<option value="2" selected>2</option>
+								{%- else %}
+									<option value="2">2</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '3' %}
+									<option value="3" selected>3</option>
+								{%- else %}
+									<option value="3">3</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '4' %}
+									<option value="4" selected>4</option>
+								{%- else %}
+									<option value="4">4</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '5' %}
+									<option value="5" selected>5</option>
+								{%- else %}
+									<option value="5">5</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '6' %}
+									<option value="6" selected>6</option>
+								{%- else %}
+									<option value="6">6</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '7' %}
+									<option value="7" selected>7</option>
+								{%- else %}
+									<option value="7">7</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '8' %}
+									<option value="8" selected>8</option>
+								{%- else %}
+									<option value="8">8</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '9' %}
+									<option value="9" selected>9</option>
+								{%- else %}
+									<option value="9">9</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '10' %}
+									<option value="10" selected>10</option>
+								{%- else %}
+									<option value="10">10</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '11' %}
+									<option value="11" selected>11</option>
+								{%- else %}
+									<option value="11">11</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '12' %}
+									<option value="12" selected>12</option>
+								{%- else %}
+									<option value="12">12</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '13' %}
+									<option value="13" selected>13</option>
+								{%- else %}
+									<option value="13">13</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '14' %}
+									<option value="14" selected>14</option>
+								{%- else %}
+									<option value="14">14</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '15' %}
+									<option value="15" selected>15</option>
+								{%- else %}
+									<option value="15">15</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '16' %}
+									<option value="16" selected>16</option>
+								{%- else %}
+									<option value="16">16</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '17' %}
+									<option value="17" selected>17</option>
+								{%- else %}
+									<option value="17">17</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '18' %}
+									<option value="18" selected>18</option>
+								{%- else %}
+									<option value="18">18</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '19' %}
+									<option value="19" selected>19</option>
+								{%- else %}
+									<option value="19">19</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '20' %}
+									<option value="20" selected>20</option>
+								{%- else %}
+									<option value="20">20</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '21' %}
+									<option value="21" selected>21</option>
+								{%- else %}
+									<option value="21">21</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '22' %}
+									<option value="22" selected>22</option>
+								{%- else %}
+									<option value="22">22</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '23' %}
+									<option value="23" selected>23</option>
+								{%- else %}
+									<option value="23">23</option>
+								{%- endif %}
+								{%- if loan_information.loan_period == '24' %}
+									<option value="24" selected>24</option>
+								{%- else %}
+									<option value="24">24</option>
+								{%- endif %}
+							</select>月				
+						</td>					
+					</tr>			
+					<tr>
+						<td class="table-label">贷款金额(元)</td>
+						<td>
+							<span>	
+								<input type="text" name="loan_amount" value="{{loan_information.loan_amount}}" onclick="setJe(this)" onkeyup="setJe(this);" maxlength="11" /><br/>
+								<span class="je">￥</span>	
+								<span class="errorInfo"></span>							
+							</span>
+						</td>
+						<td class="table-label">年利率%<font class="red">*</font></td>
+						<td><input type="text" value="{{loan_information.annual_interest_rate}}"/></td>					
+					</tr>		
+					<tr>
+						<td class="table-label">放款日期<font class="red">*</font></td>
+						<td><input type="text" value="{{loan_information.loan_date}}"/></td>
+						<td class="table-label">第一次还贷日期</td>
+						<td><input type="text" value="{{loan_information.first_repayment_date}}"/></td>					
+					</tr>
+					<tr>
+						<td colspan="4"><input type="button" class="btn btn-info" value="计算" disabled/></td>			
+					</tr>	
+				</table>
+			</div>
+			<!--**********************************************还款计划**********************************************-->
+			<iframe frameborder="0" width="100%;" id="hkjh" src="/Process/dkfk/hkjh" height="560px"></iframe>
+			<!--**********************************************按钮组**********************************************-->
+			<div style="margin-top:-70px;">
+				<input type="submit" value="核准" class="btn btn-info"/>
+				<input type="button" value="拒绝" class="btn btn-info"/>
+				<input type="button" value="退回" class="btn btn-info"/>
+			<div>
+		</div><!--/row-fluid -->
+	</form><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+	</script>
+</body>
+</html>

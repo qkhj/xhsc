@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<!-- ************************验证样式************************-->
+	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
+		
+</head>
+
+<body>	
+	<div class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">客户登记</a>
+		</div>		
+		<div class="row-fluid">
+			<form class="content" method="POST" action="/Information/lfdj/new_lfdj">	
+				<div style="border:1px solid #94c1dc;margin-bottom:5px;">
+					<table class="table-list">
+						<tr>							
+							<td class="table-label">接待方式<font class="red">*</font></td>
+							<td>
+								<select name="reception_type" onchange="show_table(this.value)">
+									<option value="1">咨询</option>
+									<option value="2">扫街</option>
+								</select>
+							</td>		
+						</tr>	
+					</table>
+				</div>
+				<i class="icon-bookmark"></i><span class="titletip">基本状态</span>
+				<div style="border:1px solid #94c1dc;">
+					<table class="table-list">				
+						<tr>
+							<td class="table-label">营销状态</td>
+							<td>
+								<label><input type="radio" name="yingxiao_status" value="1" onclick="set(this.value)"/>已营销</label>
+								<label><input type="radio" name="yingxiao_status" value="0" onclick="set(this.value)" checked />未营销</label>
+							</td>
+							<td class="table-label">客户状态</td>
+							<td>
+								<select name="client_status">
+									<option value="1">现在有需求</option>
+									<option value="2">态度良好无需求拒绝</option>
+									<option value="3">态度恶劣拒绝</option>
+									<option value="4">以后会有需求并填回执</option>
+									<option value="5">以后有需求未填回执</option>
+								</select>
+							</td>	
+						</tr>		
+						<tr>
+							<td class="table-label">是否向小微支行填写申请表？</td>
+							<td>
+								<label><input type="radio" name="is_apply_form" value="1" onclick="set(this.value)"/>已申请</label>
+								<label><input type="radio" name="is_apply_form" value="0" onclick="set(this.value)" checked />未申请</label>
+							</td>
+							<td class="table-label">是否在其他兴化农商行有管户？</td>
+							<td>
+								<label><input type="radio" name="is_have_account" value="1" onclick="set(this.value)"/>已有管户</label>
+								<label><input type="radio" name="is_have_account" value="0" onclick="set(this.value)" checked />未有管户</label>
+							</td>						
+						</tr>
+					</table>
+				</div>
+				<i class="icon-bookmark"></i><span class="titletip">基本信息</span>
+				<div style="border:1px solid #94c1dc;">
+					<table class="table-list">										
+						<tr>	
+							<td class="table-label">客户名称<font class="red">*</font></td>
+							<td style="width:35%">
+								<span id="customer_name">
+									<input type="text" name="customer_name" onchange="spryMaxLength(this,16)"/>
+									<span class="textfieldRequiredMsg">不能为空</span>
+									<span class="errorInfo">字符数不得大于16</span>
+								</span>
+							</td>	
+							<td class="table-label">电话/手机<font class="red">*</font></td>
+							<td>
+								<span id="mobile">
+		    						<input type="text" name="mobile" onKeyUp="value=value.replace(/\D/g,'')" maxlength="12"/>
+		    						<span class="textfieldRequiredMsg">不能为空</span>
+		  							<span class="textfieldInvalidFormatMsg">格式无效</span>
+		  							<span class="textfieldMinCharsMsg">格式无效</span>
+		  							<span class="textfieldMaxCharsMsg">格式无效</span>
+		  						</span>	
+							</td>
+						</tr>					
+						<tr>				
+							<td class="table-label">性别<font class="red">*</font></td>
+							<td>
+								<label><input type="radio" name="sex" value="1" checked/>男</label>
+								<label><input type="radio" name="sex" value="0" />女</label>
+							</td>
+							<td class="table-label">年龄<font class="red">*</font></td>
+							<td>
+								<span id="age">
+									<input type="text" style="width:30px;" name="age" onKeyUp="value=value.replace(/\D/g,'')" onchange="check(this,1,100)" maxlength="3"/>岁
+									<span class="textfieldRequiredMsg">不能为空</span>
+									<span class="errorInfo">请输入1-100的数</span>
+								</span>
+							</td>													
+						</tr>
+						<tr>
+							<td class="table-label">地址</td>
+							<td colspan="3">
+								<span id="address">	
+									<input type="text" name="address" onchange="spryMaxLength(this,128)" class="long"/>
+									<span class="errorInfo">字符数不得大于128</span>
+								</span>
+							</td>							
+						</tr>		
+						<tr>
+							<td class="table-label">所属行业</td>
+							<td>
+								<select name="industry">
+									{%- for obj in industry %}
+									<option value={{obj.id}}>{{obj.type_name}}</option>
+									{%- endfor %}								
+								</select>
+							</td>	
+							<td class="table-label">经营内容</td>
+							<td>
+								<span id="business_content">	
+									<input type="text" name="business_content" onchange="spryMaxLength(this,256)" class="long"/>
+									<span class="errorInfo">字符数不得大于256</span>
+								</span>
+							</td>						
+						</tr>	
+					</table>
+				</div>
+				<div style="display:none;" id="dpxx">
+					<i class="icon-bookmark"></i><span class="titletip">店铺信息</span>
+					<div style="border:1px solid #94c1dc;">
+						<table class="table-list">		
+							<tr>
+								<td class="table-label">店铺名称</td>
+								<td style="width:35%">
+									<span>	
+										<input type="text" name="shop_name" onchange="spryMaxLength(this,256)" class="long"/>
+										<span class="errorInfo">字符数不得大于256</span>
+									</span>
+								</td>
+								<td class="table-label">经营期限</td>
+								<td>
+									<span id="period">
+										<input type="text" style="width:30px;" name="period" onKeyUp="value=value.replace(/\D/g,'')" onchange="check(this,1,100)" maxlength="3"/>年
+										<span class="errorInfo">请输入1-100的数</span>
+									</span>
+								</td>			
+							</tr>		
+							<tr>
+								<td class="table-label">资产规模</td>
+								<td>
+									<span>	
+										<input type="text" name="property_scope" onkeyup="setJe(this)" maxlength="11"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>	
+								</td>
+								<td class="table-label">月销售额</td>
+								<td>
+									<span>	
+										<input type="text" name="monthly_sales" onkeyup="setJe(this)" maxlength="11"/><br/>
+										<span class="je">￥</span>	
+										<span class="errorInfo"></span>							
+									</span>	
+								</td>
+							</tr>		
+							<tr>
+								<td class="table-label">雇员数量</td>
+								<td>
+									<input type="text" name="employees" onKeyUp="value=value.replace(/\D/g,'')" maxlength="5"/>	
+								</td>
+								<td class="table-label">企业类别</td>
+								<td>
+									<select name="regisiter_type">
+										{%- for obj in business_type %}
+											<option value={{obj.id}}>{{obj.type_name}}</option>
+										{%- endfor %}
+									</select>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<i class="icon-bookmark"></i><span class="titletip">贷款信息</span>
+				<div style="border:1px solid #94c1dc;">
+					<table class="table-list">				
+						<tr>
+							<td class="table-label">是否有贷款需求</td>
+							<td style="width:35%">
+								<label><input type="radio" name="is_need_loan" value="1" onclick="set(this.value)" checked />是</label>
+								<label><input type="radio" name="is_need_loan" value="0" onclick="set(this.value)"/>否</label>
+							</td>
+							<td class="table-label">贷款用途</td>
+							<td>
+								<select name="loan_purpose">
+									{%- for obj in loan_purpose %}
+									<option value={{obj.id}}>{{obj.type_name}}</option>
+									{%- endfor %}
+								</select>
+							</td>	
+						</tr>		
+						<tr>
+							<td class="table-label">贷款金额（元）</td>
+							<td>
+								<span id="loan_amount">	
+									<input type="text" name="loan_amount" onkeyup="setJe(this);" maxlength="11"/><br/>
+									<span id="loan_amount_hj" class="je">￥</span>	
+									<span class="errorInfo"></span>							
+								</span>	
+							</td>
+							<td class="table-label">希望的还款方式</td>
+							<td>
+								<span>	
+									<input type="text" name="repayment_type" onchange="spryMaxLength(this,64)" class="long"/>
+									<span class="errorInfo">字符数不得大于64</span>
+								</span>
+							</td>						
+						</tr>
+						<tr>
+							<td class="table-label">能提供的担保方式</td>
+							<td>
+								<span>	
+									<input type="text" name="guarantee_type" onchange="spryMaxLength(this,64)" class="long"/>
+									<span class="errorInfo">字符数不得大于64</span>
+								</span>
+							</td>
+							<td class="table-label">房产产权情况</td>
+							<td>
+								<span>	
+									<input type="text" name="house_property" onchange="spryMaxLength(this,64)" class="long"/>
+									<span class="errorInfo">字符数不得大于64</span>
+								</span>
+							</td>						
+						</tr>
+						<tr>
+							<td class="table-label">贷款关注程度</td>
+							<td>
+								<select name="loan_attention">
+									<option value="十分关注">十分关注</option>
+									<option value="关注">关注</option>
+									<option value="一般了解">一般了解</option>
+								</select>
+							</td>
+							<td class="table-label">是否在银行贷过款</td>
+							<td>
+								<label><input type="radio" name="is_have_loan" value="1" />是</label>
+								<label><input type="radio" name="is_have_loan" value="0" checked/>否</label>
+							</td>						
+						</tr>
+						<tr>
+							<td class="table-label">知道兴化农商行吗？</td>
+							<td>
+								<label><input type="radio" name="is_known_xhnsh" value="1" onclick="setXH(this.value)" checked/>知道</label>
+								<label><input type="radio" name="is_known_xhnsh" value="0" onclick="setXH(this.value)" />不知道</label>
+							</td>
+							<td class="table-label">您在兴化农村商业银行办理过什么业务？</td>
+							<td>
+								<span>	
+									<input type="text" name="business_with_xhnsh" onchange="spryMaxLength(this,256)" class="long"/>
+									<span class="errorInfo">字符数不得大于256</span>
+								</span>
+							</td>						
+						</tr>
+						<tr>
+							<td class="table-label">您是否需要办理以下银行产品</td>
+							<td colspan="3">
+								<select name="is_need_service">
+									<option value="1">手机银行</option>
+									<option value="2">转账电话</option>
+									<option value="3">pos机</option>
+									<option value="4">网上银行</option>
+									<option value="5">借记卡</option>
+									<option value="6">贷记卡</option>
+									<option value="7">无需求</option>
+								</select>
+							</td>					
+						</tr>
+					</table>
+				</div>
+				<span class="point">*为必填字段</span><br/>
+				<input type="submit" class="btn btn-info" value="提交"/>
+				<input type="reset" class="btn btn-info" value="重置"/>											
+			</form>			
+		</div><!--/row-fluid -->
+	</div><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("customer_name", "none", {validateOn:["blur"]});
+		var sprytextfield2 = new Spry.Widget.ValidationTextField("manager_name_spay1", "none", {validateOn:["blur"]});
+		var sprytextfield3 = new Spry.Widget.ValidationTextField("manager_name_spay2", "none", {validateOn:["blur"]});
+		var sprytextfield4 = new Spry.Widget.ValidationTextField("manager_name_spay3", "none", {validateOn:["blur"]});
+		var sprytextfield5 = new Spry.Widget.ValidationTextField("mobile", "integer", {validateOn:["blur"], minChars:11, maxChars:12});
+		var sprytextfield6 = new Spry.Widget.ValidationTextField("age", "none", {validateOn:["blur"]});
+		function show_table(value){
+			if(value=="1"){
+		        $("#dpxx").hide();		       
+		    }
+		    if(value=="2"){
+		        $("#dpxx").show();		        
+		    }
+		    Frame();
+		}
+		function set(value){
+			if(value=="0"){
+				$("select[name=loan_purpose],input[name=loan_amount],input[name=repayment_type],input[name=guarantee_type],input[name=house_property],select[name=loan_attention],input[name=is_have_loan],input[name=is_known_xhnsh],input[name=business_with_xhnsh],input[type=checkbox]").each(function(){
+	      			this.disabled=true;
+	  			});//文本框不可编辑 
+			}
+			if(value=="1"){
+				$("select[name=loan_purpose],input[name=loan_amount],input[name=repayment_type],input[name=guarantee_type],input[name=house_property],select[name=loan_attention],input[name=is_have_loan],input[name=is_known_xhnsh],input[name=business_with_xhnsh],input[type=checkbox]").each(function(){
+	      			$(this).removeAttr("disabled");
+	  			});//文本框可编辑 
+			}
+		}
+		function setXH(value){
+			if(value=="0"){
+				$("input[name=business_with_xhnsh]").attr("disabled","true");//文本框不可编辑 
+			}
+			if(value=="1"){
+				$("input[name=business_with_xhnsh]").removeAttr("disabled");//文本框可编辑 
+			}
+		}
+	</script>
+</body>
+</html>

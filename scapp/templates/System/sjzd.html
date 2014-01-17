@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>	
+        <meta charset="utf-8">
+        <title>小微贷款业务管理系统</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+        <meta name="author" content="Muhammad Usman">
+
+        <!-- The styles -->
+        <link href="/static/css/bootstrap.css" rel="stylesheet">
+        <link href="/static/css/main.css" rel="stylesheet">
+        <style type="text/css">
+            .table-list td{padding:5px;}		
+        </style>
+
+    </head>
+
+    <body onload="setTimeOut();">	
+        <div class="content">
+            <div class="well place">			
+                <i class="icon-home"></i><a href="#">系统管理</a>/<a href="#">数据字典</a>
+            </div>		
+            {%- with messages = get_flashed_messages(with_categories=true) %}
+            {%- if messages %}
+            {%- for category, message in messages %}
+            <div class="alert alert-{{category}}">
+                {{message}}
+            </div>
+            {%- endfor %}
+            {%- endif %}
+            {%- endwith %}
+            <div class="row-fluid" id="sjzdList">
+                <i class="icon-bookmark"></i><span class="titletip">数据字典列表</span>
+                <div style="border:1px solid #94c1dc;">				
+                    <table class="table-list" cellspacing="10" id="uesr-list">
+                        <tr>
+                            <td><a href="#" onclick="$('.row-fluid').hide(); $('#zjlx').show(); Frame();">1. 证件类型 </a></td>
+                            <td><a href="#" onclick="$('.row-fluid').hide(); $('#sshy').show(); Frame();">2. 所属行业</a></td>
+                            <td><a href="#" onclick="$('.row-fluid').hide(); $('#gxlx').show(); Frame();">3. 关系类型</a></td>
+                            <td><a href="#" onclick="$('.row-fluid').hide(); $('#zclx').show(); Frame();">4. 注册类型</a></td>			
+                        </tr>
+                        <tr>		
+                            <td><a href="#" onclick="$('.row-fluid').hide(); $('#jyxz').show(); Frame();">5. 经营性质</a></td>			
+                            <td><a href="#" onclick="$('.row-fluid').hide(); $('#zchlx').show(); Frame();">6. 资产类型</a></td>
+                            <td><a href="#" onclick="$('.row-fluid').hide(); $('#dkyt').show(); Frame();">7. 贷款用途 </a></td>
+                            <td></td>
+                        </tr>				
+                    </table>
+                </div>			
+            </div><!--/row-fluid -->
+            <!--********************证件类型***********************-->
+            <div class="row-fluid" id="zjlx" style="display:none;">
+                <i class="icon-bookmark"></i><span class="titletip">证件类型</span>
+                <div id="allzjlx">
+                    <div style="margin-bottom:5px;">
+                        <a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_sjzd/SC_Credentials_Type')">新增</a>	
+                        <a type="button" class="btn btn-info pull-right" href="#" onclick="$('.row-fluid').hide(); $('#sjzdList').show();">返回</a>
+                    </div>
+                    <div style="border:1px solid #94c1dc;">				
+                        <table class="table-list" cellspacing="10">
+                            <thead>
+                                <tr>
+                                    <th width="20%">编号</th>
+                                    <th width="40%">类型名称</th>							
+                                    <th width="40%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="center">
+                                {%- for obj in credentials_type %}
+                                <tr class="num">
+                                    <td>{{obj.id}}</td>
+                                    <td>
+                                        <a href="#" onclick="iframe('System/edit_sjzd/SC_Credentials_Type/{{obj.id}}')">{{obj.type_name}}</a>
+                                    </td>
+                                    <td>
+                                        <input type="button" onclick="iframe('System/edit_sjzd/SC_Credentials_Type/{{obj.id}}')" class="btn btn-danger btn-mini" value="编辑"/>	
+                                    </td>							
+                                </tr>	
+                                {%- endfor %}										
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!--/证件类型-->
+            <!--********************所属行业***********************-->
+            <div class="row-fluid" id="sshy" style="display:none;">
+                <i class="icon-bookmark"></i><span class="titletip">所属行业</span>
+                <div id="allsshy">
+                    <div style="margin-bottom:5px;">
+                        <a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_sjzd/SC_Industry')">新增</a>		
+                        <a type="button" class="btn btn-info pull-right" href="#" onclick="$('.row-fluid').hide(); $('#sjzdList').show();">返回</a>
+                    </div>
+                    <div style="border:1px solid #94c1dc;">				
+                        <table class="table-list" cellspacing="10">
+                            <thead>
+                                <tr>
+                                    <th width="20%">编号</th>
+                                    <th width="40%">行业名称</th>							
+                                    <th width="40%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="center">
+                                {%- for obj in industry %}
+                                <tr class="num">
+                                    <td>{{obj.id}}</td>
+                                    <td>
+                                        <a href="#" onclick="iframe('System/edit_sjzd/SC_Industry/{{obj.id}}')">{{obj.type_name}}</a>
+                                    </td>							
+                                    <td>
+                                        <input type="button" onclick="iframe('System/edit_sjzd/SC_Industry/{{obj.id}}')" class="btn btn-danger btn-mini" value="编辑"/>	
+                                    </td>						
+                                </tr>	
+                                {%- endfor %}											
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!--/所属行业-->
+            <!--********************关系类型***********************-->
+            <div class="row-fluid" id="gxlx" style="display:none;">
+                <i class="icon-bookmark"></i><span class="titletip">关系类型</span>
+                <div id="allgxlx">
+                    <div style="margin-bottom:5px;">
+                        <a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_sjzd/SC_Relation_Type')">新增</a>		
+                        <a type="button" class="btn btn-info pull-right" href="#" onclick="$('.row-fluid').hide(); $('#sjzdList').show();">返回</a>
+                    </div>
+                    <div style="border:1px solid #94c1dc;">				
+                        <table class="table-list" cellspacing="10">
+                            <thead>
+                                <tr>
+                                    <th width="20%">编号</th>
+                                    <th width="40%">关系名称</th>							
+                                    <th width="40%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="center">
+                                {%- for obj in relation_Type %}
+                                <tr class="num">
+                                    <td>{{obj.id}}</td>
+                                    <td>
+                                        <a href="#" onclick="iframe('System/edit_sjzd/SC_Relation_Type/{{obj.id}}')">{{obj.type_name}}</a>
+                                    </td>						
+                                    <td>
+                                        <input type="button" onclick="iframe('System/edit_sjzd/SC_Relation_Type/{{obj.id}}')" class="btn btn-danger btn-mini" value="编辑"/>	
+                                    </td>							
+                                </tr>	
+                                {%- endfor %}	
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!--/关系类型-->
+            <!--********************注册类型***********************-->
+            <div class="row-fluid" id="zclx" style="display:none;">
+                <i class="icon-bookmark"></i><span class="titletip">注册类型</span>
+                <div id="allzclx">
+                    <div style="margin-bottom:5px;">
+                        <a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_sjzd/SC_Regisiter_Type')">新增</a>		
+                        <a type="button" class="btn btn-info pull-right" href="#" onclick="$('.row-fluid').hide(); $('#sjzdList').show();">返回</a>
+                    </div>
+                    <div style="border:1px solid #94c1dc;">				
+                        <table class="table-list" cellspacing="10">
+                            <thead>
+                                <tr>
+                                    <th width="20%">编号</th>
+                                    <th width="40%">注册类型</th>							
+                                    <th width="40%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="center">
+                                {%- for obj in regisiter_type %}
+                                <tr class="num">
+                                    <td>{{obj.id}}</td>
+                                    <td>
+                                        <a href="#" onclick="iframe('System/edit_sjzd/SC_Regisiter_Type/{{obj.id}}')">{{obj.type_name}}</a>
+                                    </td>			
+                                    <td>
+                                        <input type="button" onclick="iframe('System/edit_sjzd/SC_Regisiter_Type/{{obj.id}}')" class="btn btn-danger btn-mini" value="编辑"/>	
+                                    </td>						
+                                </tr>
+                                {%- endfor %}	
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!--/注册类型-->
+            <!--********************经营性质***********************-->
+            <div class="row-fluid" id="jyxz" style="display:none;">
+                <i class="icon-bookmark"></i><span class="titletip">经营性质</span>
+                <div id="alljyxz">
+                    <div style="margin-bottom:5px;">
+                        <a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_sjzd/SC_Business_Type')">新增</a>		
+                        <a type="button" class="btn btn-info pull-right" href="#" onclick="$('.row-fluid').hide(); $('#sjzdList').show();">返回</a>
+                    </div>
+                    <div style="border:1px solid #94c1dc;">				
+                        <table class="table-list" cellspacing="10">
+                            <thead>
+                                <tr>
+                                    <th width="20%">编号</th>
+                                    <th width="40%">经营性质</th>							
+                                    <th width="40%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="center">
+                                {%- for obj in business_type %}
+                                <tr class="num">
+                                    <td>{{obj.id}}</td>
+                                    <td>
+                                        <a href="#" onclick="iframe('System/edit_sjzd/SC_Business_Type/{{obj.id}}')">{{obj.type_name}}</a>
+                                    </td>				
+                                    <td>
+                                        <input type="button" onclick="iframe('System/edit_sjzd/SC_Business_Type/{{obj.id}}')" class="btn btn-danger btn-mini" value="编辑"/>	
+                                    </td>							
+                                </tr>
+                                {%- endfor %}														
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!--/经营性质-->
+            <!--********************资产类型***********************-->
+            <div class="row-fluid" id="zchlx" style="display:none;">
+                <i class="icon-bookmark"></i><span class="titletip">资产类型</span>
+                <div id="allzchlx">
+                    <div style="margin-bottom:5px;">
+                        <a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_sjzd/SC_Asset_Type')">新增</a>	
+                        <a type="button" class="btn btn-info pull-right" href="#" onclick="$('.row-fluid').hide(); $('#sjzdList').show();">返回</a>
+                    </div>
+                    <div style="border:1px solid #94c1dc;">				
+                        <table class="table-list" cellspacing="10">
+                            <thead>
+                                <tr>
+                                    <th width="20%">编号</th>
+                                    <th width="40%">资产类型</th>							
+                                    <th width="40%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="center">
+                                {%- for obj in asset_type %}
+                                <tr class="num">
+                                    <td>{{obj.id}}</td>
+                                    <td>
+                                        <a href="#" onclick="iframe('System/edit_sjzd/SC_Asset_Type/{{obj.id}}')">{{obj.type_name}}</a>
+                                    </td>				
+                                    <td>
+                                        <input type="button" onclick="iframe('System/edit_sjzd/SC_Asset_Type/{{obj.id}}')" class="btn btn-danger btn-mini" value="编辑"/>	
+                                    </td>							
+                                </tr>
+                                {%- endfor %}														
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!--/资产类型-->
+            <!--********************贷款用途***********************-->
+            <div class="row-fluid" id="dkyt" style="display:none;">
+                <i class="icon-bookmark"></i><span class="titletip">贷款用途</span>
+                <div id="allzchlx">
+                    <div style="margin-bottom:5px;">
+                        <a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_sjzd/SC_Loan_Purpose')">新增</a>	
+                        <a type="button" class="btn btn-info pull-right" href="#" onclick="$('.row-fluid').hide(); $('#sjzdList').show();">返回</a>
+                    </div>
+                    <div style="border:1px solid #94c1dc;">				
+                        <table class="table-list" cellspacing="10">
+                            <thead>
+                                <tr>
+                                    <th width="20%">编号</th>
+                                    <th width="40%">贷款用途</th>							
+                                    <th width="40%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="center">
+                                {%- for obj in loan_purpose %}
+                                <tr class="num">
+                                    <td>{{obj.id}}</td>
+                                    <td>
+                                        <a href="#" onclick="iframe('System/edit_sjzd/SC_Loan_Purpose/{{obj.id}}')">{{obj.type_name}}</a>
+                                    </td>				
+                                    <td>
+                                        <input type="button" onclick="iframe('System/edit_sjzd/SC_Loan_Purpose/{{obj.id}}')" class="btn btn-danger btn-mini" value="编辑"/>	
+                                    </td>							
+                                </tr>
+                                {%- endfor %}														
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!--/贷款用途-->
+        </div><!--/content -->
+
+        <script src="/static/js/jquery-1.7.2.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
+        <script src="/static/js/script.js"></script>
+        <script src="/static/js/system.js"></script>
+
+    </body>
+</html>
