@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<style type="text/css">		
+		textarea{width:80%;}		
+	</style>
+</head>
+
+<body>	
+	<form class="content">
+	<!--*****************************************存货**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">存货清单</span>
+		<div id="KCQD">
+			<div style="margin-bottom:5px;">
+				<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dqdc/new_kc/{{id}}')">新增</a><!--*滚动条问题*-->
+			</div>
+			<div style="border:1px solid #94c1dc;">	
+				<table class="table-list" cellspacing="10" id="uesr-list">				
+					<tr>
+						<th>货物名称</th>
+						<th>数量</th>
+						<th>买进单价(单位生产成本)(元)</th>
+						<th>买进总价值(元)</th>							
+						<th>卖出单价(元)</th>
+						<th>卖出总价值(元)</th>						
+						<th>单位毛利率</th>
+						<th>操作</th>
+					</tr>   
+					{%- for obj in stock %}
+					<tr class="center" onclick="changeColor(this)">
+						<td><a href="#" onclick="iframe('Process/dqdc/edit_kc/{{obj.id}}')">{{obj.name}}</a></td>
+						<td>{{obj.amount}}</td>
+						<td>{{obj.purchase_price}}</td>
+						<td>{{obj.purchase_total_price}}</td>
+						<td>{{obj.sell_price}}</td>
+						<td>{{obj.sell_total_price}}</td>
+						<td>{{obj.pre_rate}}</td>
+						<td>
+							<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+						</td>
+					</tr>		
+					{%- endfor %}				
+				</table>
+			</div>
+		</div>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript"></script>
+</body>
+</html>

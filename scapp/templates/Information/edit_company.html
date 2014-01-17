@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+	<style type="text/css">	
+		.table-list .table-label{width:140px;}
+	</style>
+	
+</head>
+
+<body onload="datepicker()">	
+	<div class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">信息管理</a>/<a href="#">客户信息管理</a>
+		</div>	
+		
+		<div class="row-fluid">
+			<form>
+				<div style="border:1px solid #94c1dc;">
+					<table class="table-list">
+						<tr>
+							<td class="table-label">客户编号</td>
+							<td style="width:20%">{{customer.customer_no}}</td>
+							<td class="table-label">客户名称</td>							
+							<td style="width:20%">{{customer.customer_name}}</td>
+							<td  style="text-align:center;">
+								<a type="button" class="btn btn-info" href="#" onclick="iframe('Information/khxxgl')">返回</a>
+							</td>
+						</tr>										
+					</table>
+				</div>														
+			</form>
+			<!-- 一级tab -->
+			<ul id="tags" class="tags">
+				<li class="selectTag"> 
+					<a onclick="$('#jcxx').click();selectTag('tagContent0',this);" href="javascript:void(0)">基础信息</a> 
+				</li>
+				<li >
+					<a onclick="selectTag('tagContent1',this);resizeFrame('gxrxx');" href="javascript:void(0)">关系人信息</a> 
+				</li>
+				<li>
+					<a onClick="selectTag('tagContent2',this);resizeFrame('jyxx');" href="javascript:void(0)">经营信息</a>
+				</li>
+				<li>
+					<a onClick="selectTag('tagContent3',this);resizeFrame('zcxx');" href="javascript:void(0)">资产信息</a>
+				</li>
+				<li>
+					<a onClick="selectTag('tagContent4',this);resizeFrame('cwxx');" href="javascript:void(0)">财务信息</a>
+				</li>
+				<li>
+					<a onClick="selectTag('tagContent5',this);resizeFrame('fjxx');" href="javascript:void(0)">其他信息及附加</a>
+				</li>				
+			</ul>
+			<!-- 一级content -->
+			<div id="tagContent" class="Content">
+<!-- *************************************************第一个标签的内容************************************************** -->
+				<div class="tagContent selectTag" id="tagContent0">
+					<!-- 二级tab -->
+					<div class="tabbable">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tab1" id="jcxx" data-toggle="tab" onclick="$('#tab2').hide();$('#content_frame',window.parent.document).height($('#person_info').height()+300);">基础信息</a></li>
+							<li><a href="#tab2" data-toggle="tab" onclick="$('#tab2').show();resizeFrame('ywwl');$('#content_frame',window.parent.document).height($('#ywwl').height()+300);">我行业务来往</a></li>
+						</ul>						
+						<div class="tab-content">
+							<!--基础信息-->
+							<div class="tab-pane active" id="tab1">
+								<i class="icon-bookmark"></i><span class="titletip">客户信息</span>
+								<iframe frameborder="0" width="100%;" id="person_info" marginheight="0" marginwidth="0" height="100%" onload="resizeFrame('person_info')" 
+								src="/Information/edit_company_customer/{{customer.id}}" ></iframe>	
+							</div><!--/基础信息-->
+							<!--我行业务往来信息列表-->
+							<div class="tab-pane" id="tab2">								
+								<iframe frameborder="0" width="100%;" id="ywwl" marginheight="0" marginwidth="0" height="100%" src="/Information/sc_dealings/Company/{{customer.id}}" ></iframe>
+							</div><!--我行业务往来信息列表-->							
+						</div><!-- 二级tabContent -->
+					</div><!-- /二级tab -->	
+				</div><!-- /第一个标签的内容 -->
+<!-- ****************************************************第二个标签的内容************************************************* -->
+				<div class="tagContent" id="tagContent1">
+					<!-- 关系人信息列表 -->
+					<iframe frameborder="0" width="100%;" id="gxrxx" marginheight="0" marginwidth="0" height="100%" src="/Information/sc_relations/Company/{{customer.id}}" ></iframe>
+				</div><!-- /第二个标签的内容 -->
+<!-- *****************************************************第三个标签的内容********************************************** -->
+				<div class="tagContent" id="tagContent2">
+					<!-- 经营信息列表 -->
+					<iframe frameborder="0" width="100%;" id="jyxx" marginheight="0" marginwidth="0" height="100%" src="/Information/sc_manage_info/Company/{{customer.id}}" ></iframe>
+				</div><!-- /第三个标签的内容 -->
+<!-- *********************************************************第四个标签的内容******************************************** -->
+				<div class="tagContent" id="tagContent3">
+					<!-- 资产信息列表 -->
+					<iframe frameborder="0" width="100%;" id="zcxx" marginheight="0" marginwidth="0" height="100%" src="
+					/Information/sc_asset_info/Company/{{customer.id}}" ></iframe>
+				</div><!-- /第四个标签的内容 -->
+<!-- ****************************************************第五个标签的内容******************************************** -->
+				<div class="tagContent" id="tagContent4">
+					<!-- 财务信息 -->
+					<iframe frameborder="0" width="100%;" id="cwxx" marginheight="0" marginwidth="0" height="480px" src="
+					/Information/sc_financial_affairs/Company/{{customer.id}}" ></iframe>
+				</div><!-- /第五个标签的内容 -->
+<!-- ****************************************************第六个标签的内容******************************************** -->
+				<div class="tagContent" id="tagContent5">
+					<!-- 附加信息列表 -->
+					<iframe frameborder="0" width="100%;" id="fjxx" marginheight="0" marginwidth="0" height="100%" src="
+					/Information/sc_other_info/Company/{{customer.id}}" ></iframe>
+				</div><!-- /第六个标签的内容 -->
+			</div><!-- /tagContent -->	
+		</div><!--/row-fluid -->
+	</div><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>

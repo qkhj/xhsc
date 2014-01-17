@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<link href="/static/css/bootstrap.css" rel="stylesheet">	
+	<style type="text/css">
+		form{margin-top:21.5em;margin-left:auto;margin-right:auto;width:510px;} 
+		label{color:#555555;font-size:14px;font-weight:bold;}	
+		button{margin-left:3em;}		
+	</style>		
+</head>
+
+<body>				
+	<form class="form-horizontal" method="POST" action="testCRM">
+		<div class="control-group">
+			<label class="control-label">客户姓名&nbsp;&nbsp;&nbsp;&nbsp;<font color="red" style="font-size:18px;">*</font></label>
+			<div class="controls">
+				<span id="spry_password">
+					<input type="text" name="customer_name">
+					<!--<span class="textfieldRequiredMsg">需要提供一个值。</span>-->
+				</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">证件类型&nbsp;&nbsp;&nbsp;&nbsp;<font color="red" style="font-size:18px;">*</font></label>
+			<div class="controls">
+				<select name="zjlx">
+					<option value="100">居民身份证</option>
+					<option value="112">军官证</option>
+					<option value="113">文职干部证</option>
+					<option value="122">警官证</option>
+					<option value="111">士兵证</option>
+					<option value="161">港澳居民往来内地通行证</option>
+					<option value="162">台湾居民往来大陆通行证</option>
+					<option value="142">外国护照</option>
+					<option value="141">中国护照</option>
+					<option value="123">武警文职干部证</option>
+					<option value="121">武警士兵证</option>
+					<option value="130">户口簿</option>
+					<option value="199">其它证件（个人）</option>
+					<option value="210">组织机构代码证</option>
+					<option value="726">预先核准通知书</option>
+					<option value="200">营业执照</option>
+					<option value="725">社会团体证</option>
+					<option value="724">贷款卡号</option>
+					<option value="124">居民身份证（移植待规范）</option>
+					<option value="299">其它证件（公司）</option>
+				</select>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<label class="control-label">证件号&nbsp;&nbsp;&nbsp;&nbsp;<font color="red" style="font-size:18px;">*</font></label>
+			<div class="controls">
+				<span id="spry_password">
+					<input type="text" name="card_num">
+					<!--<span class="textfieldRequiredMsg">需要提供一个值。</span>-->
+				</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">      
+				<button type="submit" class="btn btn-info">获&nbsp;取</button>
+			</div>
+		</div>
+	</form>
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+</body>
+</html>

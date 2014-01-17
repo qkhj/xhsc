@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+	<style type="text/css">		
+		textarea{width:80%;}		
+	</style>
+</head>
+
+<body onload="datepicker()">	
+	<form class="content">
+	<!--*****************************************账款清单**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">帐款详单</span>
+		<div id="ZKXD">
+			<div style="margin-bottom:5px;">
+				<a type="button" class="btn btn-info" href="#" onclick="$('#dqdcXed_zkqd',window.parent.document).height(500);$('#content_frame',window.parent.parent.document).height(600);iframe('Process/dqdc/new_zkqd/{{id}}');">新增</a><!--*滚动条问题*-->
+			</div>
+			<div style="border:1px solid #94c1dc;">	
+				<table class="table-list" cellspacing="10" id="uesr-list">				
+					<tr>
+						<th>对象名称</th>        
+						<th>原始金额(元)</th>
+						<th>发生日期</th>
+						<th>约定到期日</th>							
+						<th>现值(元)</th>
+						<th>平均账期</th>						
+						<th>交易频率</th>
+						<th>分析期内的交易额(元)</th>						
+						<th>支付方式</th>
+						<th>操作</th>
+					</tr>   
+					{%- for obj in accounts_list %}
+					<tr class="center" onclick="changeColor(this)">
+						<td><a href="#" onclick="iframe('Process/dqdc/edit_zkqd/{{obj.id}}')">{{obj.name}}</a></td>
+						<td>{{obj.original_price}}</td>
+						<td>{{obj.occur_date}}</td>
+						<td>{{obj.deadline}}</td>
+						<td>{{obj.present_price}}</td>
+						<td>{{obj.average_period}}</td>
+						<td>{{obj.trading_frequency}}</td>
+						<td>{{obj.turnover}}</td>
+						<td>{{obj.pay_type}}</td>
+						<td>
+							<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+						</td>
+					</tr>	
+					{%- endfor %}				
+				</table>
+			</div>
+		</div>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript"></script>
+</body>
+</html>

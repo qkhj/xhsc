@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">	
+	<!-- ************************验证样式************************-->
+	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
+	<style type="text/css">		
+		textarea{width:80%;}		
+	</style>
+	<script type="text/javascript">
+		function setInput(){
+			$('input[type=text]').click();
+		}
+	</script>
+</head>
+
+<body onload="setInput()">	
+	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_jcjy/{{id}}" target="_parent">
+	<!--*****************************************交叉检验**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">交叉检验</span>
+		<div class="divBorder">
+			<table class="table-list">
+				<tr>
+					<td rowspan="3" class="table-label">权益检验</td>
+					<td>初始权益<font class="red">*</font></td>					
+					<td>
+						<span id="initial_equity">	
+							<input type="text" name="initial_equity" value="{{cross_examination.initial_equity}}" onchange="spryMaxLength(this,32)"/><br/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>
+					<td>期间利润(元)<font class="red">*</font></td>					
+					<td>
+						<span id="profit_period">	
+							<input type="text" name="profit_period" value="{{cross_examination.profit_period}}" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/><br/>
+							<span class="je">￥</span>
+							<br/><span class="textfieldRequiredMsg">不能为空</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>
+					<td>期间注资(元)<font class="red">*</font></td>					
+					<td>
+						<span id="injection_period">	
+							<input type="text" name="injection_period" value="{{cross_examination.injection_period}}" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/><br/>
+							<span class="je">￥</span>
+							<br/><span class="textfieldRequiredMsg">不能为空</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>				
+				</tr>	
+				<tr> 
+					<td>期内提取的资金(元)<font class="red">*</font></td>					
+					<td>
+						<span id="pick_period">	
+							<input type="text" name="pick_period" value="{{cross_examination.pick_period}}" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/><br/>
+							<span class="je">￥</span>
+							<br/><span class="textfieldRequiredMsg">不能为空</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>
+					<td>-折旧<font class="red">*</font></td>					
+					<td>
+						<span id="depreciation">	
+							<input type="text" name="depreciation" value="{{cross_examination.depreciation}}" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/><br/>
+							<span class="je">￥</span>
+							<br/><span class="textfieldRequiredMsg">不能为空</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>
+					<td>+升值<font class="red">*</font></td>					
+					<td>
+						<span id="appreciation">	
+							<input type="text" name="appreciation" value="{{cross_examination.appreciation}}" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/><br/>
+							<span class="je">￥</span>
+							<br/><span class="textfieldRequiredMsg">不能为空</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>				
+				</tr>
+				<tr>
+					<td>应有权益</td>					
+					<td>
+						<span>	
+							<input type="text" name="due_rights" value="{{cross_examination.due_rights}}" onchange="spryMaxLength(this,32)"/>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>
+					<td>实际权益</td>					
+					<td>
+						<span>	
+							<input type="text" name="fact_rights" value="{{cross_examination.fact_rights}}" onchange="spryMaxLength(this,32)"/>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>
+					<td>差异率%</td>					
+					<td>
+						<span>
+							<input type="text" style="width:40px" name="dif_rate" value="{{cross_examination.dif_rate}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
+							<span class="errorInfo">请输入0-100的数</span>
+						</span>
+					</td>				
+				</tr>	
+				<tr>
+					<td class="table-label">权益交叉检验说明</td>
+					<td colspan="6">
+						<span>	
+							<textarea name="right_explanation" onchange="spryMaxLength(this,64)">{{cross_examination.right_explanation}}</textarea>
+							<span class="errorInfo">字符数不得大于64</span>
+						</span>
+					</td>	
+				</tr>	
+				<tr>
+					<td class="table-label">营业额交叉检验</td>
+					<td colspan="6">
+						<span>
+							<textarea name="business_cross" onchange="spryMaxLength(this,64)">{{cross_examination.business_cross}}</textarea>
+							<span class="errorInfo">字符数不得大于64</span>
+						</span>
+					</td>	
+				</tr>		
+				<tr>
+					<td class="table-label">成本结构分析</td>
+					<td colspan="6">
+						<span>
+							<textarea name="cost_structure" onchange="spryMaxLength(this,64)">{{cross_examination.cost_structure}}</textarea>
+							<span class="errorInfo">字符数不得大于64</span>
+						</span>
+					</td>	
+				</tr>		
+				<tr>
+					<td class="table-label">风险分析对客户优势及对还款能力有威胁的潜在因素的分析</td>
+					<td colspan="6">
+						<span>
+							<textarea name="risk_analysis" onchange="spryMaxLength(this,64)">{{cross_examination.risk_analysis}}</textarea>
+							<span class="errorInfo">字符数不得大于64</span>
+						</span>
+					</td>	
+				</tr>				
+			</table>
+		</div>	
+	
+		<input type="submit" value="保存" class="btn btn-info"/>
+		<input type="button" value="打印" class="btn btn-info"/>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("initial_equity", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("profit_period", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("injection_period", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("pick_period", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("depreciation", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("appreciation", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("price", "none");
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<style type="text/css">	
+		.table-list .table-label{width:140px;}
+	</style>
+	<script type="text/javascript">
+		function setje(){
+			$('input[name=total_assets]').click();//总资产（元）
+			$('input[name=stock]').click();//存货（元）
+			$('input[name=accounts]').click();//应收财款（元）
+			$('input[name=fixed_assets]').click();//固定资产（元）
+			$('input[name=total_liabilities]').click();//总负债（元）
+			$('input[name=bank_borrowings]').click();//银行借款（元）
+			$('input[name=private_borrowers]').click();//私人借款（元）
+			$('input[name=monthly_sales]').click();//月销售额（元）
+			$('input[name=other_monthly_income]').click();//其他月收入（元）
+		}	
+	</script>
+
+</head>
+
+<body onload="setje()">	
+	<div class="content">
+		<div id="tab1">
+			<i class="icon-bookmark"></i><span class="titletip">财务信息</span>
+			<form method="POST" action="/Information/sc_financial_affairs/{{customer.customer_type}}/{{customer.id}}" target="_top">	
+				<div style="border:1px solid #94c1dc;">				
+					<table class="table-list">
+						<tr>
+							<td class="table-label">主要供应商</td>
+							<td style="width:35%">
+								<span id="main_supplier">	
+									<input type="text" name="main_supplier" value="{{financial_affairs.main_supplier}}" onchange="spryMaxLength(this,128)"/>
+									<span class="errorInfo">字符数不得大于128</span>
+								</span>
+							</td>	
+							<td class="table-label">主要客户</td>
+							<td>
+								<span id="main_client">	
+									<input type="text" name="main_client" value="{{financial_affairs.main_client}}" onchange="spryMaxLength(this,128)"/>
+									<span class="errorInfo">字符数不得大于128</span>
+								</span>
+							</td>
+						</tr>	
+						<tr>	
+							<td class="table-label">总资产（元）</td>
+							<td>
+								<span id="total_assets">	
+									<input type="text" name="total_assets" value="{{financial_affairs.total_assets}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11"/><br/>
+									<span id="total_assets_hj" class="je">￥</span>
+									<span class="errorInfo"></span>								
+								</span>	
+							</td>
+							<td class="table-label">存货（元）</td>
+							<td>
+								<span id="stock">	
+									<input type="text" name="stock" value="{{financial_affairs.stock}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11"/><br/>
+									<span id="stock_hj" class="je">￥</span>
+									<span class="errorInfo"></span>								
+								</span>	
+							</td>
+						</tr>	
+						<tr>	
+							<td class="table-label">应收财款（元）</td>
+							<td>
+								<span id="accounts">	
+									<input type="text" name="accounts" value="{{financial_affairs.accounts}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11"/><br/>
+									<span id="accounts_hj" class="je">￥</span>	
+									<span class="errorInfo"></span>							
+								</span>
+							</td>	
+							<td class="table-label">固定资产（元）</td>
+							<td>
+								<span id="fixed_assets">	
+									<input type="text" name="fixed_assets" value="{{financial_affairs.fixed_assets}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11"/><br/>
+									<span id="fixed_assets_hj" class="je">￥</span>
+									<span class="errorInfo"></span>								
+								</span>
+							</td>							
+						</tr>
+						<tr>
+							<td class="table-label">总负债（元）</td>
+							<td>
+								<span id="total_liabilities">	
+									<input type="text" name="total_liabilities" value="{{financial_affairs.total_liabilities}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11"/><br/>
+									<span id="total_liabilities_hj" class="je">￥</span>
+									<span class="errorInfo"></span>								
+								</span>
+							</td>	
+							<td class="table-label">银行借款（元）</td>
+							<td>
+								<span id="bank_borrowings">	
+									<input type="text" name="bank_borrowings" value="{{financial_affairs.bank_borrowings}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11"/><br/>
+									<span id="bank_borrowings_hj" class="je">￥</span>	
+									<span class="errorInfo"></span>							
+								</span>
+							</td>	
+						</tr>	
+						<tr>
+							<td class="table-label">私人借款（元）</td>
+							<td>
+								<span id="private_borrowers">	
+									<input type="text" name="private_borrowers" value="{{financial_affairs.private_borrowers}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11"/><br/>
+									<span id="private_borrowers_hj" class="je">￥</span>
+									<span class="errorInfo"></span>								
+								</span>
+							</td>					
+							<td class="table-label">月销售额（元）</td>
+							<td>
+								<span id="monthly_sales">	
+									<input type="text" name="monthly_sales" value="{{financial_affairs.monthly_sales}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11"/><br/>
+									<span id="monthly_sales_hj" class="je">￥</span>
+									<span class="errorInfo"></span>								
+								</span>
+							</td>	
+						</tr>	
+						<tr>
+							<td class="table-label">利润（%）</td>
+							<td>
+								<span id="profit">
+									<input type="text" style="width:40px;" name="profit" value="{{financial_affairs.profit}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
+									<span class="errorInfo">请输入0-100的数</span>
+								</span>
+							</td>	
+							<td class="table-label">其他月收入（元）</td>
+							<td>
+								<span id="other_monthly_income">	
+									<input type="text" name="other_monthly_income" value="{{financial_affairs.other_monthly_income}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11"/><br/>
+									<span id="other_monthly_income_hj" class="je">￥</span>
+									<span class="errorInfo"></span>								
+								</span>
+							</td>											
+						</tr>
+					</table>
+				</div>
+				<span class="point">*为必填字段</span><br/>
+				<input type="submit" value="提交" class="btn btn-info"/>
+				<input type="button" value="返回" class="btn btn-info" onclick="$('#tab2').hide();$('#tab1').show();doubleIframe('cwxx');"/>
+			</form>
+		</div><!-- /新增附加信息列表 -->
+	</div><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+	</script>
+</body>
+</html>

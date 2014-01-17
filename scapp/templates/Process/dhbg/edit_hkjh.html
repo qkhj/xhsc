@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<style type="text/css">	
+		input[type=text]{padding:0;}			
+	</style>
+</head>
+
+<body>	
+	<form class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">贷后变更</a>
+		</div>		
+		<div class="row-fluid">
+		<!--**********************************************客户信息**********************************************-->
+			<div style="border:1px solid #94c1dc;">
+				<table class="table-list">
+					<tr>
+						<td class="table-label">贷款编号</td>
+						<td width="120px">1</td>
+						<td class="table-label">客户名称</td>
+						<td>王军忠</td>
+						<td class="table-label">贷款类型</td>
+						<td>微贷款</td>
+						<td width="190px">
+							<input type="button" class="btn btn-info" value="返回" onclick="iframe('Process/dhbg/edit_dhbg')"/>	
+						</td>
+					</tr>														
+				</table>
+			</div><br/>	
+			<div style="border:1px solid #94c1dc;">
+				<table class="table-list">
+					<tr>
+						<td class="table-label">变更原因</td>
+						<td>
+							<select id="">
+								<option>---请选择---</option>
+								<option>提前还款</option>
+								<option>贷款展望</option>
+								<option>计划变更</option>
+							</select>
+						</td>
+						<td class="table-label">变更描述</td>
+						<td><input type="text" id="" class="long" /></td>
+					</tr>														
+				</table>
+			</div>
+		<!--**********************************************贷款信息**********************************************-->
+			<br/><i class="icon-bookmark"></i><span class="titletip">贷款信息</span>
+			<div style="border:1px solid #94c1dc;">
+				<table class="table-list">
+					<tr>
+						<td class="table-label">还款方式</td>
+						<td>
+							<select id="" disabled>
+								<option>本额等息</option>
+							</select>
+						</td>
+						<td class="table-label">还贷数<font class="red">*</font></td>
+						<td><input type="text" id="" disabled/></td>
+					</tr>
+					<tr>
+						<td class="table-label">贷款金额(元)</td>
+						<td><input type="text" id="" disabled/></td>
+						<td class="table-label">年利率%<font class="red">*</font></td>
+						<td><input type="text" id="" disabled/></td>							
+					</tr>	
+					<tr>
+						<td class="table-label">放款日期<font class="red">*</font></td>
+						<td><input type="text" id="" disabled/></td>
+						<td class="table-label">第一次还贷日期</td>
+						<td><input type="text" id="" disabled/></td>							
+					</tr>	
+					<tr>
+						<td class="table-label">已还期数</td>
+						<td colspan="3"><input type="text" id="" disabled/></td>						
+					</tr>							
+				</table>
+			</div>
+		<!--**********************************************还款计划**********************************************-->
+			<br/><i class="icon-bookmark"></i><span class="titletip">还款计划</span>			
+			<div style="border:1px solid #94c1dc;">				
+				<table class="table-list" cellspacing="10" id="uesr-list">
+					<thead>
+						<tr>
+							<th>还贷期数</th> 
+							<th>还款方式</th>
+							<th>第一次还贷日期</th>							
+							<th>放款日期</th>
+							<th>年利率%</th>
+							<th>贷款金额(元)</th>
+						</tr>
+					</thead>
+					<tbody class="center">
+						<tr>					
+							<td>12</td>
+							<td>等额本息</td>
+							<td>2009-06-20</td>
+							<td>2009-05-20</td>
+							<td>3.0000</td>	
+							<td>300,000.00</td>										
+						</tr>										
+					</tbody>
+				</table>
+			</div>
+			<div class="divBorder">				
+				<table class="table-list" cellspacing="10" id="uesr-list">
+					<thead>
+						<tr>
+							<th>还贷期数</th>
+							<th>还贷日期</th>
+							<th>天数</th>							
+							<th>每月本金</th>
+							<th>利息</th>
+							<th>合计</th>
+							<th>贷款金额(元)</th>
+						</tr>
+					</thead>
+					<tbody class="center">
+						<tr class="warning">					
+							<td>1</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>750.00</td>	
+							<td><input type="text" id="" /></td>
+							<td>275341.89</td>										
+						</tr>
+						<tr class="errer">					
+							<td>2</td>
+							<td><input type="text" id="" /></td>
+							<td>30</td>
+							<td><input type="text" id="" /></td>
+							<td>688.33</td>	
+							<td><input type="text" id="" /></td>
+							<td>250622.14</td>										
+						</tr>	
+						<tr>					
+							<td>3</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>626.56</td>	
+							<td><input type="text" id="" /></td>
+							<td>225840.58</td>										
+						</tr>
+						<tr>					
+							<td>4</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>626.56</td>	
+							<td><input type="text" id="" /></td>
+							<td>225840.58</td>										
+						</tr>	
+						<tr>					
+							<td>5</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>626.56</td>	
+							<td><input type="text" id="" /></td>
+							<td>225840.58</td>										
+						</tr>
+						<tr>					
+							<td>6</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>626.56</td>	
+							<td><input type="text" id="" /></td>
+							<td>225840.58</td>										
+						</tr>
+						<tr>					
+							<td>7</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>626.56</td>	
+							<td><input type="text" id="" /></td>
+							<td>225840.58</td>										
+						</tr>
+						<tr>					
+							<td>8</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>626.56</td>	
+							<td><input type="text" id="" /></td>
+							<td>225840.58</td>										
+						</tr>
+						<tr>					
+							<td>9</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>626.56</td>	
+							<td><input type="text" id="" /></td>
+							<td>225840.58</td>										
+						</tr>
+						<tr>					
+							<td>10</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>626.56</td>	
+							<td><input type="text" id="" /></td>
+							<td>225840.58</td>										
+						</tr>
+						<tr>					
+							<td>11</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>626.56</td>	
+							<td><input type="text" id="" /></td>
+							<td>225840.58</td>										
+						</tr>
+						<tr>					
+							<td>12</td>
+							<td><input type="text" id="" /></td>
+							<td>31</td>
+							<td><input type="text" id="" /></td>
+							<td>626.56</td>	
+							<td><input type="text" id="" /></td>
+							<td>225840.58</td>										
+						</tr>										
+					</tbody>
+				</table>
+			</div>
+			<span class="point">*红色是逾期，黄色是已还但未还清</span><br/>
+			<input type="submit" value="提交" class="btn btn-info"/>
+		</div><!--/row-fluid -->
+	</form><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	
+</body>
+</html>

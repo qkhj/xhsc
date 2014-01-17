@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+		
+</head>
+
+<body>	
+	<div class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">贷款申请</a>			
+		</div>			
+		<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dksq/dksq')" style="float:right;margin-top:-5px;">返回</a><br/>
+		<div class="row-fluid" id="search">
+			<i class="icon-bookmark"></i><span class="titletip">客户搜索</span>
+			<form >
+				<div style="border:1px solid #94c1dc;">
+					<table class="table-list">						
+						<tr>							
+							<td class="table-label">客户编号</td>
+							<td><input type="text"/></td>
+							<td class="table-label">客户名称</td>
+							<td><input type="text"/></td>							
+						</tr>									
+					</table>
+				</div>
+				<input type="reset" class="btn btn-info pull-right" value="重置" style="margin-left:5px;"/>
+				<input type="submit" class="btn btn-info pull-right" value="搜索"/>	<br/><br/>			
+				<i class="icon-bookmark"></i><span class="titletip">客户列表</span>	
+				<div style="border:1px solid #94c1dc;">
+					<table class="table-list">
+						<thead>
+							<tr>
+								<th>选择</th>	
+								<th>客户编号</th>												
+								<th>客户名称</th>												
+							</tr>
+						</thead>
+						<tbody class="center">
+							{%- for obj in customer.items %}	
+							<tr>
+								<td><input type="radio" name="xdy" onclick="getCustomer('{{belong_customer_type}}','{{obj.id}}');"/></td>	
+								<td>{{obj.customer_no}}</td>												
+								<td>{{obj.customer_name}}</td>											
+							</tr>	
+							{%- endfor %}																
+						</tbody>
+					</table>
+				</div>
+				<div class="page-div">
+					{%- if customer.has_prev %}
+						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/new_dksq/{{belong_customer_type}}/{{customer.prev_num}}')">&lt;&lt;</span>
+					{%- else %}
+						<span style="CURSOR: pointer">&lt;&lt;</span>
+					{%- endif %}
+						&#160;第&#160;<font color="#0088cc">{{customer.page}}</font>&#160;页&#160;
+						&#160;共&#160;<font color="#0088cc">{{customer.pages}}</font>&#160;页&#160;
+					{%- if customer.has_prev %}
+						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/new_dksq/{{belong_customer_type}}/{{customer.next_num}}')">&gt;&gt;</span>
+					{%- else %}
+						<span style="CURSOR: pointer">&gt;&gt;</span>
+					{%- endif %}
+				</div>										
+			</form><!--/搜索-->			
+		</div><!--/row-fluid -->
+	<!--**********************贷款申请信息**********************-->
+		<iframe frameborder="0" width="100%" id="dksq_info" marginheight="0" marginwidth="0" height="1880px" style="display:none;"></iframe>	
+	</div><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+</body>
+</html>

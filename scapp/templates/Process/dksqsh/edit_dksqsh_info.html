@@ -1,0 +1,1083 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">	
+	<!-- ************************验证样式************************-->
+	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		.tbInput{width:83%;}		
+		.divBorder{border:1px solid #94c1dc;margin:5px 0;}	
+	</style>
+	<script type="text/javascript">		
+		function setje(){
+			$('input[name=gszczj]').click();
+			$('input[name=total_assets]').click();
+			$('input[name=stock]').click();
+			$('input[name=accounts]').click();
+			$('input[name=fixed_assets]').click();
+			$('input[name=total_liabilities]').click();
+			$('input[name=bank_borrowings]').click();
+			$('input[name=private_borrowers]').click();
+			$('input[name=monthly_sales]').click();
+			$('input[name=other_monthly_income]').click();
+			$('input[name=loan_amount_num]').click();
+			$('input[name=month_repayment]').click();
+			$('input[name=loan_amount]').click();
+			$('input[name=overage]').click();
+			$('input[name=monthly_income]').click();
+			$('input[name=guarantee_amount]').click();
+			$('input[name=appraisal]').click();
+			$('input[name=mortgage]').click();
+			$('input[type=submit]').removeAttr("disabled");
+		}
+	</script>
+</head>
+
+<body onload="setje();">
+	<form class="content" method="POST" action="/Process/dksqsh/edit_dksqsh/{{loan_apply.id}}" target="_parent">
+	<!--**************************贷款类型*********************************-->
+		<div class="divBorder">
+			<table class="table-list">
+				<tr>				
+					<td class="table-label">贷款类型</td>
+					<td>
+						<select name="loan_type">
+							{%- if loan_apply.loan_type == '1' %}
+								<option value="1" selected>微贷</option>
+								<option value="2">小额贷</option>
+							{%- else %}
+								<option value="1">微贷</option>
+								<option value="2" selected>小额贷</option>
+							{%- endif %}								
+						</select>
+					</td>
+				</tr>												
+			</table>
+		</div>
+		{%- if belong_customer_type == 'Individual' %}
+	<!--**************************个人信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">个人信息&nbsp;&nbsp;&nbsp;客户编号：<span id="customer_no">
+			{{customer.customer_no}}
+		</span></span>
+		<div class="divBorder">
+			<table class="table-list">
+				<tr>
+					<td class="table-label">姓名</td>
+					<td>
+						<span>{{customer.customer_name}}</span>
+						<input type="hidden" name="customer_name" value="{{customer.customer_name}}"/>
+					</td>	
+					<td class="table-label">性别</td>
+					<td>
+						{%- if customer.sex == '1' %}
+							<span>男</span>
+						{%- else %}
+							<span>女</span>
+						{%- endif %}
+					</td>
+					<td class="table-label">手机</td>
+					<td><span id="">{{customer.mobile}}</span></td>
+					<td class="table-label">固定电话</td>
+					<td><span id="">{{customer.telephone}}</span></td>			
+				</tr>					
+				<tr>							
+					<td class="table-label">证件类型</td>
+					<td colspan="3"><span id="">{{customer.credentials_name.type_name}}</span></td>	
+					<td class="table-label">证件号码</td>
+					<td colspan="3"><span id="">{{customer.credentials_no}}</span></td>											
+				</tr>
+				<tr>
+					<td class="table-label">家庭地址</td>
+					<td colspan="7"><span id="">{{customer.residence_address}}</span></td>							
+				</tr>	
+				<tr>
+					<td class="table-label">家庭情况表述</td>
+					<td colspan="7"><span id="">{{customer.family}}</span></td>							
+				</tr>	
+				<tr>
+					<td class="table-label">婚姻状况</td>
+					<td>
+						{%- if customer.marriage == '1' %}
+							<span>已婚</span>
+						{%- else %}
+							<span>未婚</span>
+						{%- endif %}
+					</td>
+					<td class="table-label">居住条件</td>
+					<td><span id="">{{customer.living_conditions}}</span></td>	
+					<td class="table-label">教育程度</td>
+					<td colspan="3"><span id="">{{customer.education}}</span></td>				
+				</tr>					
+			</table>
+		</div>
+		{%- else %}
+	<!--**************************公司信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">公司信息&nbsp;&nbsp;&nbsp;客户编号：<span id="customer_no">
+			{{customer.customer_no}}
+		</span></span>
+		<div class="divBorder">
+			<table class="table-list">
+				<tr>
+					<td class="table-label" style="width:120px;">公司名称</td>
+					<td>
+						<span>{{customer.customer_name}}</span>
+						<input type="hidden" name="customer_name" value="{{customer.customer_name}}"/>
+					</td>
+					<td class="table-label">法人代表</td>
+					<td><span id="">{{customer.frdb}}</span></td>
+				</tr>					
+				<tr>
+					<td class="table-label">营业执照号码</td>
+					<td><span id="">{{customer.yyzz}}</span></td>
+					<td class="table-label">税务登记证号码</td>
+					<td><span id="">{{customer.swdjz}}</span></td>			
+				</tr>					
+				<tr>							
+					<td class="table-label">公司注册资金(元)</td>
+					<td>
+						<input type="text" name="gszczj" onclick="setJe(this)" value="{{customer.gszczj}}" disabled/>
+						<span class="je"></span>						
+					</td>	
+					<td class="table-label">公司营业范围</td>
+					<td><span id="">{{customer.gsyyfw}}</span></td>
+				</tr>					
+				<tr>
+					<td class="table-label">公司成立日期</td>
+					<td><span id="">{{customer.gsclrq}}</span></td>	
+					<td class="table-label">公司注册类型</td>
+					<td><span id="">{{customer.regisiter_type.type_name}}</span></td>							
+				</tr>	
+				<tr>
+					<td class="table-label">基本户帐号</td>
+					<td><span id="">{{customer.jbhzh}}</span></td>
+					<td class="table-label">公司注册地址</td>
+					<td><span id="">{{customer.zcdz}}</span></td>				
+				</tr>		
+			</table>
+		</div>
+		{%- endif %}
+	<!--**************************经营信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">经营信息</span>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">企业名称</td>
+					<td><input type="text" id="" value="{{manager_info.business_name}}" disabled/></td>	
+					<td class="table-label">经营范围</td>
+					{%- if manager_info %}
+					<td><input type="text" id="" value="{{manager_info.industry_type_name.type_name}}" disabled/></td>	
+					{%- else %}
+					<td><input type="text" id="" value="" disabled/></td>	
+					{%- endif %}						
+				</tr>	
+				<tr>
+					<td class="table-label">经营性质</td>
+					{%- if manager_info %}
+					<td><input type="text" id="" value="{{manager_info.business_type_name.type_name}}" disabled/></td>
+					{%- else %}
+					<td><input type="text" id="" value="" disabled/></td>	
+					{%- endif %}
+					<td class="table-label">法人代表</td>
+					<td><input type="text" id="" value="{{manager_info.manager_name}}" disabled/></td>						
+				</tr>
+				<tr>
+					<td class="table-label">经营地址</td>
+					<td><input type="text" id="" class="long" value="{{manager_info.business_address}}" disabled/></td>	
+					<td class="table-label">开业时间</td>
+					<td><input type="text" id="" class="datepicker" value="{{manager_info.establish_date}}" disabled/></td>						
+				</tr>			
+				<tr>
+					<td class="table-label">雇佣人数</td>
+					<td><input type="text" id="" value="{{manager_info.employees}}" disabled/></td>
+					<td></td>
+					<td></td>					
+				</tr>
+			</table>
+		</div>
+	<!--**************************财务信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">财务信息</span>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">主要供应商</td>
+					<td><input type="text" id="" value="{{financial_affairs.main_supplier}}" disabled/></td>	
+					<td class="table-label">主要客户</td>
+					<td><input type="text" id="" value="{{financial_affairs.main_client}}" disabled/></td>	
+					<td class="table-label">总资产（元）</td>
+					<td>
+						<input type="text" name="total_assets" onclick="setJe(this)" value="{{financial_affairs.total_assets}}" disabled/><br/>
+						<span class="je"></span>
+					</td>						
+				</tr>	
+				<tr>
+					<td class="table-label">存货（元）</td>
+					<td>
+						<input type="text" name="stock" onclick="setJe(this)" value="{{financial_affairs.stock}}" disabled/><br/>
+						<span class="je"></span>
+					</td>	
+					<td class="table-label">应收财款（元）</td>
+					<td>
+						<input type="text" name="accounts" onclick="setJe(this)" value="{{financial_affairs.accounts}}" disabled/><br/>
+						<span class="je"></span>
+					</td>	
+					<td class="table-label">固定资产（元）</td>
+					<td>
+						<input type="text" name="fixed_assets" onclick="setJe(this)" value="{{financial_affairs.fixed_assets}}" disabled/><br/>
+						<span class="je"></span>
+					</td>									
+				</tr>
+				<tr>
+					<td class="table-label">总负债（元）</td>
+					<td>
+						<input type="text" name="total_liabilities" onclick="setJe(this)" value="{{financial_affairs.total_liabilities}}" disabled/><br/>
+						<span class="je"></span>
+					</td>	
+					<td class="table-label">银行借款（元）</td>
+					<td>
+						<input type="text" name="bank_borrowings" onclick="setJe(this)" value="{{financial_affairs.bank_borrowings}}" disabled/><br/>
+						<span class="je"></span>
+					</td>	
+					<td class="table-label">私人借款（元）</td>
+					<td>
+						<input type="text" name="private_borrowers" onclick="setJe(this)" value="{{financial_affairs.private_borrowers}}" disabled/><br/>
+						<span class="je"></span>
+					</td>											
+				</tr>	
+				<tr>
+					<td class="table-label">月销售额（元）</td>
+					<td>
+						<input type="text" name="monthly_sales" onclick="setJe(this)" value="{{financial_affairs.monthly_sales}}" disabled/><br/>
+						<span class="je"></span>
+					</td>	
+					<td class="table-label">利润（%）</td>
+					<td>
+						<input type="text" name="profit" onclick="setJe(this)" value="{{financial_affairs.profit}}" disabled/><br/>
+						<span class="je"></span>
+					</td>	
+					<td class="table-label">其他月收入（元）</td>
+					<td>
+						<input type="text" name="other_monthly_income" onclick="setJe(this)" value="{{financial_affairs.other_monthly_income}}" disabled/><br/>
+						<span class="je"></span>
+					</td>											
+				</tr>
+			</table>
+		</div>
+	<!--**************************申请信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">申请信息</span>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">贷款金额（元）<font class="red">*</font></td>
+					<td>
+						<input type="text" name="loan_amount_num" onclick="setJe(this)" value="{{apply_info.loan_amount_num}}" disabled/><br/>
+						<span class="je"></span>
+					</td>	
+					<td class="table-label">贷款期限（月）<font class="red">*</font></td>
+					<td><!-- <input type="text" name="loan_deadline" value="{{apply_info.loan_deadline}}" disabled/>月 -->
+						<select name="loan_deadline" style="width:60px" disabled>
+							{%- if apply_info.loan_deadline == '1' %}
+								<option value="1" selected>1</option>
+							{%- else %}
+								<option value="1">1</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '2' %}
+								<option value="2" selected>2</option>
+							{%- else %}
+								<option value="2">2</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '3' %}
+								<option value="3" selected>3</option>
+							{%- else %}
+								<option value="3">3</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '4' %}
+								<option value="4" selected>4</option>
+							{%- else %}
+								<option value="4">4</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '5' %}
+								<option value="5" selected>5</option>
+							{%- else %}
+								<option value="5">5</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '6' %}
+								<option value="6" selected>6</option>
+							{%- else %}
+								<option value="6">6</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '7' %}
+								<option value="7" selected>7</option>
+							{%- else %}
+								<option value="7">7</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '8' %}
+								<option value="8" selected>8</option>
+							{%- else %}
+								<option value="8">8</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '9' %}
+								<option value="9" selected>9</option>
+							{%- else %}
+								<option value="9">9</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '10' %}
+								<option value="10" selected>10</option>
+							{%- else %}
+								<option value="10">10</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '11' %}
+								<option value="11" selected>11</option>
+							{%- else %}
+								<option value="11">11</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '12' %}
+								<option value="12" selected>12</option>
+							{%- else %}
+								<option value="12">12</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '13' %}
+								<option value="13" selected>13</option>
+							{%- else %}
+								<option value="13">13</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '14' %}
+								<option value="14" selected>14</option>
+							{%- else %}
+								<option value="14">14</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '15' %}
+								<option value="15" selected>15</option>
+							{%- else %}
+								<option value="15">15</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '16' %}
+								<option value="16" selected>16</option>
+							{%- else %}
+								<option value="16">16</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '17' %}
+								<option value="17" selected>17</option>
+							{%- else %}
+								<option value="17">17</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '18' %}
+								<option value="18" selected>18</option>
+							{%- else %}
+								<option value="18">18</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '19' %}
+								<option value="19" selected>19</option>
+							{%- else %}
+								<option value="19">19</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '20' %}
+								<option value="20" selected>20</option>
+							{%- else %}
+								<option value="20">20</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '21' %}
+								<option value="21" selected>21</option>
+							{%- else %}
+								<option value="21">21</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '22' %}
+								<option value="22" selected>22</option>
+							{%- else %}
+								<option value="22">22</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '23' %}
+								<option value="23" selected>23</option>
+							{%- else %}
+								<option value="23">23</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '24' %}
+								<option value="24" selected>24</option>
+							{%- else %}
+								<option value="24">24</option>
+							{%- endif %}
+						</select>月
+					</td>	
+					<td class="table-label">月还款能力（元）<font class="red">*</font></td>
+					<td>
+						<input type="text" name="month_repayment" onclick="setJe(this)" value="{{apply_info.month_repayment}}" disabled/><br/>
+						<span class="je"></span>
+					</td>						
+				</tr>	
+				<tr>
+					<td class="table-label">贷款用途<font class="red">*</font></td>
+					<td>
+						<select name="loan_purpose" disabled>
+							{%- for obj in loan_purpose %}
+								{%- if apply_info.loan_purpose == obj.id %}
+								<option value={{obj.id}} selected>{{obj.type_name}}</option>
+								{%- else %}
+								<option value={{obj.id}} >{{obj.type_name}}</option>
+								{%- endif %}
+							{%- endfor %}
+						</select>
+					</td>	
+					<td class="table-label">详细说明</td>
+					<td colspan="3"><input type="text" name="details" value="{{apply_info.details}}" class="long" disabled/></td>						
+				</tr>
+				<tr>
+					<td class="table-label">还款来源</td>
+					<td colspan="5"><input type="text" name="repayment_source" value="{{apply_info.repayment_source}}" class="long" disabled/></td>									
+				</tr>	
+			</table>
+		</div>
+	<!--*****************************************信贷历史**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">信贷历史</span>
+		<div class="divBorder">
+			<table id="xdls" class="table-list">
+				<tr>
+					<th>融资来源</th>
+					<th>贷款金额(元)</th>
+					<th>期限(月)</th>							
+					<th>用途</th>
+					<th>发放日期</th>
+					<th>余额(元)</th>		
+					<th>担保</th>
+					<th>逾期信息</th>									
+				</tr>
+				{%- for obj in credit_history %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td>
+						<span>	
+							<input type="text" name="financing_sources" value="{{obj.financing_sources}}" onchange="spryMaxLength(this,3)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>
+					<td>
+						<span>	
+							<input type="text" name="loan_amount" value="{{obj.loan_amount}}" onkeyup="setJe(this);value=value.replace(/[^\d\.]/g,'')" maxlength="11" class="tbInput" onclick="setJe(this)" disabled/><br/>
+							<span class="je">￥</span>	
+							<span class="errorInfo"></span>						
+						</span>
+					</td>							
+					<td>
+						<select name="deadline" style="width:60px" disabled>
+							{%- if obj.deadline == '1' %}
+								<option value="1" selected>1</option>
+							{%- else %}
+								<option value="1">1</option>
+							{%- endif %}
+							{%- if obj.deadline == '2' %}
+								<option value="2" selected>2</option>
+							{%- else %}
+								<option value="2">2</option>
+							{%- endif %}
+							{%- if obj.deadline == '3' %}
+								<option value="3" selected>3</option>
+							{%- else %}
+								<option value="3">3</option>
+							{%- endif %}
+							{%- if obj.deadline == '4' %}
+								<option value="4" selected>4</option>
+							{%- else %}
+								<option value="4">4</option>
+							{%- endif %}
+							{%- if obj.deadline == '5' %}
+								<option value="5" selected>5</option>
+							{%- else %}
+								<option value="5">5</option>
+							{%- endif %}
+							{%- if obj.deadline == '6' %}
+								<option value="6" selected>6</option>
+							{%- else %}
+								<option value="6">6</option>
+							{%- endif %}
+							{%- if obj.deadline == '7' %}
+								<option value="7" selected>7</option>
+							{%- else %}
+								<option value="7">7</option>
+							{%- endif %}
+							{%- if obj.deadline == '8' %}
+								<option value="8" selected>8</option>
+							{%- else %}
+								<option value="8">8</option>
+							{%- endif %}
+							{%- if obj.deadline == '9' %}
+								<option value="9" selected>9</option>
+							{%- else %}
+								<option value="9">9</option>
+							{%- endif %}
+							{%- if obj.deadline == '10' %}
+								<option value="10" selected>10</option>
+							{%- else %}
+								<option value="10">10</option>
+							{%- endif %}
+							{%- if obj.deadline == '11' %}
+								<option value="11" selected>11</option>
+							{%- else %}
+								<option value="11">11</option>
+							{%- endif %}
+							{%- if obj.deadline == '12' %}
+								<option value="12" selected>12</option>
+							{%- else %}
+								<option value="12">12</option>
+							{%- endif %}
+							{%- if obj.deadline == '13' %}
+								<option value="13" selected>13</option>
+							{%- else %}
+								<option value="13">13</option>
+							{%- endif %}
+							{%- if obj.deadline == '14' %}
+								<option value="14" selected>14</option>
+							{%- else %}
+								<option value="14">14</option>
+							{%- endif %}
+							{%- if obj.deadline == '15' %}
+								<option value="15" selected>15</option>
+							{%- else %}
+								<option value="15">15</option>
+							{%- endif %}
+							{%- if obj.deadline == '16' %}
+								<option value="16" selected>16</option>
+							{%- else %}
+								<option value="16">16</option>
+							{%- endif %}
+							{%- if obj.deadline == '17' %}
+								<option value="17" selected>17</option>
+							{%- else %}
+								<option value="17">17</option>
+							{%- endif %}
+							{%- if obj.deadline == '18' %}
+								<option value="18" selected>18</option>
+							{%- else %}
+								<option value="18">18</option>
+							{%- endif %}
+							{%- if obj.deadline == '19' %}
+								<option value="19" selected>19</option>
+							{%- else %}
+								<option value="19">19</option>
+							{%- endif %}
+							{%- if obj.deadline == '20' %}
+								<option value="20" selected>20</option>
+							{%- else %}
+								<option value="20">20</option>
+							{%- endif %}
+							{%- if obj.deadline == '21' %}
+								<option value="21" selected>21</option>
+							{%- else %}
+								<option value="21">21</option>
+							{%- endif %}
+							{%- if obj.deadline == '22' %}
+								<option value="22" selected>22</option>
+							{%- else %}
+								<option value="22">22</option>
+							{%- endif %}
+							{%- if obj.deadline == '23' %}
+								<option value="23" selected>23</option>
+							{%- else %}
+								<option value="23">23</option>
+							{%- endif %}
+							{%- if obj.deadline == '24' %}
+								<option value="24" selected>24</option>
+							{%- else %}
+								<option value="24">24</option>
+							{%- endif %}
+						</select><br/>&nbsp;
+						<!-- <input type="text" name="deadline" value="{{obj.deadline}}" onkeyup="value=value.replace(/[^\d\.]/g,'')" maxlength="5" class="tbInput" disabled/><br/>
+						<span>&nbsp;</span> -->
+					</td>	
+					<td>
+						<span>	
+							<input type="text" name="use" value="{{obj.use}}" onchange="spryMaxLength(this,3)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>
+					<td>
+						<span>
+						    <input type="text" name="release_date" value="{{obj.release_date}}" class="tbInput datepicker" data-date-format="yyyy-mm-dd" disabled/><br/>
+							<span>&nbsp;</span>
+							<!-- <span class="textfieldInvalidFormatMsg">格式无效</span> -->
+						</span>						
+					</td>	
+					<td>
+						<span>	
+							<input type="text" name="overage" value="{{obj.overage}}" onkeyup="setJe(this);value=value.replace(/[^\d\.]/g,'')" maxlength="11" class="tbInput" onclick="setJe(this)" disabled/> <br/>
+							<span class="je">￥</span>
+							<span class="errorInfo"></span>						
+						</span>
+					</td>	
+					<td>
+						<span >	
+							<input type="text" name="guarantee" value="{{obj.guarantee}}" onchange="spryMaxLength(this,32)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>
+					<td>
+						<span >	
+							<input type="text" name="late_information" value="{{obj.late_information}}" onchange="spryMaxLength(this,256)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>	
+					<!-- <td><input type="text" name="financing_sources" class="tbInput" value="{{obj.financing_sources}}" disabled/></td>
+					<td><input type="text" name="loan_amount" class="tbInput" value="{{obj.loan_amount}}" disabled/></td>							
+					<td><input type="text" name="deadline" class="tbInput" value="{{obj.deadline}}" disabled/></td>	
+					<td><input type="text" name="use" class="tbInput" value="{{obj.use}}" disabled/></td>
+					<td><input type="text" name="release_date" value="{{obj.release_date}}" class="tbInput datapicker" disabled/></td>	
+					<td><input type="text" name="overage" value="{{obj.overage}}" class="tbInput" disabled/></td>	
+					<td><input type="text" name="guarantee" value="{{obj.guarantee}}" class="tbInput" disabled/></td>
+					<td><input type="text" name="late_information" value="{{obj.late_information}}" class="tbInput" disabled/></td>	 -->					
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+	<!--*****************************************共同借款人**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">共同借款人</span>
+		<div class="divBorder">
+			<table id="gtjkr" class="table-list">
+				<tr class="font-small">
+					<th>姓名</th>
+					<th>与客户关系</th>
+					<th>身份证号码</th>							
+					<th>家庭电话</th>
+					<th>主营业务或职务（如受雇与别人）</th>
+					<th>经营地址或工作单位地址</th>		
+					<th>主要资产</th>
+					<th>月收入</th>									
+				</tr>
+				{%- for obj in co_borrower %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" disabled/></td>
+					<td><input type="text" name="relationship" class="tbInput" value="{{obj.relationship}}" disabled/></td>							
+					<td><input type="text" name="id_number" class="tbInput" value="{{obj.id_number}}" disabled/></td>
+					<td><input type="text" name="phone" class="tbInput" value="{{obj.phone}}" disabled/></td>
+					<td><input type="text" name="main_business" class="tbInput" value="{{obj.main_business}}" disabled/></td>	
+					<td><input type="text" name="address" class="tbInput" value="{{obj.address}}" disabled/></td>	
+					<td><input type="text" name="major_assets" class="tbInput" value="{{obj.major_assets}}" disabled/></td>
+					<td><input type="text" name="monthly_income" class="tbInput" value="{{obj.monthly_income}}" disabled/></td>								
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+	<!--*****************************************是否为他人担保**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">是否为他人担保</span>
+		<div class="divBorder">
+			<table id="sfwtrdb" class="table-list">
+				<tr class="font-small">
+					<th>银行</th>
+					<th>被担保人</th>
+					<th>担保金额</th>								
+				</tr>
+				{%- for obj in guarantees_for_others %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="bank" value="{{obj.bank}}" disabled/></td>	
+					<td><input type="text" name="guarantor" value="{{obj.guarantor}}" disabled/></td>	
+					<td><input type="text" name="guarantee_amount" value="{{obj.guarantee_amount}}" disabled/></td>						
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+	<!--*****************************************有无抵押物**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">有无抵押物</span>
+		<div class="divBorder">
+			<table id="ywdyw" class="table-list">
+				<tr>
+					<th>物品名称</th>
+					<th>所有者、地址</th>
+					<th>描述</th>							
+					<th>登记号</th>
+					<th>估价(元)</th>
+					<th>抵押(元)</th>									
+				</tr>
+				{%- for obj in guaranty %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="obj_name" class="tbInput" value="{{obj.obj_name}}" disabled/></td>			
+					<td><input type="text" name="owner_address" class="tbInput" value="{{obj.owner_address}}" disabled/></td>				
+					<td><input type="text" name="description" class="tbInput" value="{{obj.description}}" disabled/></td>	
+					<td><input type="text" name="registration_number" class="tbInput" value="{{obj.registration_number}}" disabled/></td>	
+					<td><input type="text" name="appraisal" class="tbInput" value="{{obj.appraisal}}" disabled/></td>
+					<td><input type="text" name="mortgage" class="tbInput" value="{{obj.mortgage}}" disabled/></td>					
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+		
+	<!--**************************担保信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">担保信息</span>
+		<div class="divBorder">
+			<table id="dbInformation" class="table-list">
+				<tr>
+					<th>姓名</th>
+					<th>地址</th>
+					<th>身份证号码</th>							
+					<th>工作单位</th>
+					<th>电话</th>		
+					<th>与申请人关系</th>								
+				</tr>
+				{%- for obj in guarantees %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="name_db" class="tbInput" value="{{obj.name}}" disabled/></td>
+					<td><input type="text" name="address_db" class="tbInput" value="{{obj.address}}" disabled/></td>							
+					<td><input type="text" name="id_number_db" class="tbInput" value="{{obj.id_number}}" disabled/></td>	
+					<td><input type="text" name="workunit_db" class="tbInput" value="{{obj.workunit}}" disabled/></td>
+					<td><input type="text" name="phone_db" class="tbInput" value="{{obj.phone}}" disabled/></td>	
+					<td><input type="text" name="relationship_db" class="tbInput" value="{{obj.relationship}}" disabled/></td>										
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+	
+	<!--**************************评价*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">评价（第一印象，特殊观察，附加信息等）</span>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<textarea style="width:85%;height:80px;" name="evaluation" disabled>{{loan_apply.evaluation}}</textarea>
+				</tr>
+			</table>
+		</div>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">营销客户经理</td>
+					<td style="width:32%"><input type="text" value="{{loan_apply.marketing_loan_officer_name.login_name}}" disabled/></td>
+					<td class="table-label">A岗<font class="red">*</font></td>
+					<td>
+						<input type="hidden" id="A_manager" name="A_loan_officer" value="{{loan_apply.A_loan_officer}}"/>
+						<input type="text" id="A_manager_name" value="{{loan_apply.A_loan_officer_name.login_name}}" readonly/>
+						<input type="button" value="搜索" class="btn" onclick="$('#A_xdyss').show();"/>
+						<span id="A_manager_name_spay">
+							<input type="hidden" id="yzA" value="{{loan_apply.A_loan_officer_name.login_name}}"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+						</span>							
+						<div class="display-div" id="A_xdyss" style="margin-top:-300px"><!--onmouseleave="setTimeout(function(){$('.display-div').hide();},3000)"-->
+							<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<tr>
+										<td class="table-label">客户经理编号</td>
+										<td><input type="text"/></td>	
+										<td class="table-label">客户经理名称</td>
+										<td><input type="text"/></td>	
+									</tr>
+								</table>
+							</div>																		
+							<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+							<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+							<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<thead>
+										<tr>
+											<th>选择</th>	
+											<th>客户经理编号</th>												
+											<th>客户经理名称</th>												
+										</tr>
+									</thead>
+									<tbody class="center">
+										{%- for obj in user %}
+										<tr>
+											<td><input type="radio" name="xdy" onclick="get_name(this,'A_manager_name','A_manager');" onblur="hiddenInput('yzA',this)"/></td>	
+											<td>{{obj.id}}</td>												
+											<td>{{obj.login_name}}</td>												
+										</tr>		
+										{%- endfor %}									
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">B岗<font class="red">*</font></td>
+					<td style="width:32%">
+						<input type="hidden" id="B_manager" name="B_loan_officer" value="{{loan_apply.B_loan_officer}}"/>
+						<input type="text" id="B_manager_name" value="{{loan_apply.B_loan_officer_name.login_name}}" readonly/>
+						<input type="button" value="搜索" class="btn" onclick="$('#B_xdyss').show();"/>
+						<span id="B_manager_name_spay">
+							<input type="hidden" id="yzB" value="{{loan_apply.B_loan_officer_name.login_name}}"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+						</span>							
+						<div class="display-div" id="B_xdyss" style="margin-top:-300px"><!--onmouseleave="setTimeout(function(){$('.display-div').hide();},3000)"-->
+							<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<tr>
+										<td class="table-label">客户经理编号</td>
+										<td><input type="text"/></td>	
+										<td class="table-label">客户经理名称</td>
+										<td><input type="text"/></td>	
+									</tr>
+								</table>
+							</div>																		
+							<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+							<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+							<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<thead>
+										<tr>
+											<th>选择</th>	
+											<th>客户经理编号</th>												
+											<th>客户经理名称</th>												
+										</tr>
+									</thead>
+									<tbody class="center">
+										{%- for obj in user %}
+										<tr>
+											<td><input type="radio" name="xdy" onclick="get_name(this,'B_manager_name','B_manager');" onblur="hiddenInput('yzB',this)"/></td>	
+											<td>{{obj.id}}</td>												
+											<td>{{obj.login_name}}</td>												
+										</tr>		
+										{%- endfor %}									
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</td>
+					<td class="table-label">运营岗<font class="red">*</font></td>
+					<td>
+						<input type="hidden" id="yunying_manager" name="yunying_loan_officer" value="{{loan_apply.yunying_loan_officer}}"/>
+						<input type="text" id="yunying_manager_name" value="{{loan_apply.yunying_loan_officer_name.login_name}}" readonly/>
+						<input type="button" value="搜索" class="btn" onclick="$('#yunying_xdyss').show();"/>
+						<span id="yunying_manager_name_spay">
+							<input type="hidden" id="yz_yunying" value="{{loan_apply.yunying_loan_officer_name.login_name}}"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+						</span>							
+						<div class="display-div" id="yunying_xdyss" style="margin-top:-300px"><!--onmouseleave="setTimeout(function(){$('.display-div').hide();},3000)"-->
+							<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<tr>
+										<td class="table-label">客户经理编号</td>
+										<td><input type="text"/></td>	
+										<td class="table-label">客户经理名称</td>
+										<td><input type="text"/></td>	
+									</tr>
+								</table>
+							</div>																		
+							<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+							<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+							<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<thead>
+										<tr>
+											<th>选择</th>	
+											<th>客户经理编号</th>												
+											<th>客户经理名称</th>												
+										</tr>
+									</thead>
+									<tbody class="center">
+										{%- for obj in user %}
+										<tr>
+											<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name','yunying_manager');" onblur="hiddenInput('yz_yunying',this)"/></td>	
+											<td>{{obj.id}}</td>												
+											<td>{{obj.login_name}}</td>												
+										</tr>		
+										{%- endfor %}									
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<span class="point">*为必填字段</span><br/>
+		<input type="submit" class="btn btn-info" value="核准"/><br/>
+	</form>	
+		<!--**************************否决*********************************
+	<form class="content" method="POST" action="/Process/dksqsh/dksqsh_refuse/{{loan_apply.id}}" target="_parent">
+		<i class="icon-bookmark"></i><span class="titletip">否决</span>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<textarea style="width:85%;height:80px;" name="refuse_reason"></textarea>
+				</tr>
+			</table>
+		</div>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">审察人<font class="red">*</font></td>
+					<td>
+						<input type="hidden" id="examiner_1" name="examiner_1" value="{{loan_apply.examiner_1}}"/>
+						<input type="text" id="examiner_1_name" value="{{loan_apply.examiner_1_name.login_name}}" readonly/>
+						<input type="button" value="搜索" class="btn" onclick="$('#examiner_1_xdyss').show();"/>
+						<span id="examiner_1_name_spay">
+							<input type="hidden" id="yz_examiner_1" value="{{loan_apply.examiner_1_name.login_name}}"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+						</span>							
+						<div class="display-div" id="examiner_1_xdyss" style="margin-top:-300px">
+							<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<tr>
+										<td class="table-label">客户经理编号</td>
+										<td><input type="text"/></td>	
+										<td class="table-label">客户经理名称</td>
+										<td><input type="text"/></td>	
+									</tr>
+								</table>
+							</div>																		
+							<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+							<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+							<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<thead>
+										<tr>
+											<th>选择</th>	
+											<th>客户经理编号</th>												
+											<th>客户经理名称</th>												
+										</tr>
+									</thead>
+									<tbody class="center">
+										{%- for obj in user %}
+										<tr>
+											<td><input type="radio" name="xdy" onclick="get_name(this,'examiner_1_name','examiner_1');" onblur="hiddenInput('yz_examiner_1',this)"/></td>	
+											<td>{{obj.id}}</td>												
+											<td>{{obj.login_name}}</td>												
+										</tr>		
+										{%- endfor %}									
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</td>
+					<td class="table-label">审察人<font class="red">*</font></td>
+					<td style="width:32%">
+						<input type="hidden" id="examiner_2" name="examiner_2" value="{{loan_apply.examiner_2}}"/>
+						<input type="text" id="examiner_2_name" value="{{loan_apply.examiner_2_name.login_name}}" readonly/>
+						<input type="button" value="搜索" class="btn" onclick="$('#examiner_2_xdyss').show();"/>
+						<span id="examiner_2_name_spay">
+							<input type="hidden" id="yz_examiner_2" value="{{loan_apply.examiner_2_name.login_name}}"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+						</span>							
+						<div class="display-div" id="examiner_2_xdyss" style="margin-top:-300px">
+							<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<tr>
+										<td class="table-label">客户经理编号</td>
+										<td><input type="text"/></td>	
+										<td class="table-label">客户经理名称</td>
+										<td><input type="text"/></td>	
+									</tr>
+								</table>
+							</div>																		
+							<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+							<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+							<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<thead>
+										<tr>
+											<th>选择</th>	
+											<th>客户经理编号</th>												
+											<th>客户经理名称</th>												
+										</tr>
+									</thead>
+									<tbody class="center">
+										{%- for obj in user %}
+										<tr>
+											<td><input type="radio" name="xdy" onclick="get_name(this,'examiner_2_name','examiner_2');" onblur="hiddenInput('yz_examiner_2',this)"/></td>	
+											<td>{{obj.id}}</td>												
+											<td>{{obj.login_name}}</td>												
+										</tr>		
+										{%- endfor %}									
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">审批人<font class="red">*</font></td>
+					<td conspan="3">
+						<input type="hidden" id="approver" name="approver" value="{{loan_apply.approver}}"/>
+						<input type="text" id="approver_name" value="{{loan_apply.approver_name.login_name}}" readonly/>
+						<input type="button" value="搜索" class="btn" onclick="$('#approver_xdyss').show();"/>
+						<span id="approver_name_spay">
+							<input type="hidden" id="yz_approver" value="{{loan_apply.approver_name.login_name}}"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+						</span>							
+						<div class="display-div" id="approver_xdyss" style="margin-top:-300px">
+							<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<tr>
+										<td class="table-label">客户经理编号</td>
+										<td><input type="text"/></td>	
+										<td class="table-label">客户经理名称</td>
+										<td><input type="text"/></td>	
+									</tr>
+								</table>
+							</div>																		
+							<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+							<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+							<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+							<div style="border:1px solid #94c1dc;">
+								<table class="table-list">
+									<thead>
+										<tr>
+											<th>选择</th>	
+											<th>客户经理编号</th>												
+											<th>客户经理名称</th>												
+										</tr>
+									</thead>
+									<tbody class="center">
+										{%- for obj in user %}
+										<tr>
+											<td><input type="radio" name="xdy" onclick="get_name(this,'approver_name','approver');" onblur="hiddenInput('yz_approver',this)"/></td>	
+											<td>{{obj.id}}</td>												
+											<td>{{obj.login_name}}</td>												
+										</tr>		
+										{%- endfor %}									
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<input type="submit" class="btn btn-info" value="否决"/>								
+	</form>		-->
+		
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("A_manager_name_spay", "none");
+		var sprytextfield2 = new Spry.Widget.ValidationTextField("B_manager_name_spay", "none");
+		var sprytextfield3 = new Spry.Widget.ValidationTextField("yunying_manager_name_spay", "none");
+		var sprytextfield4 = new Spry.Widget.ValidationTextField("examiner_1_name_spay", "none");
+		var sprytextfield5 = new Spry.Widget.ValidationTextField("examiner_2_name_spay", "none");
+		var sprytextfield6 = new Spry.Widget.ValidationTextField("approver_name_spay", "none");
+	</script>
+</body>
+</html>

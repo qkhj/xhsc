@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
+	<style type="text/css">	
+		textarea{width:80%;}
+	</style>	
+</head>
+
+<body onload="datepicker()">	
+	<form class="content">			
+		<div class="row-fluid">
+			<div class="well place">			
+				<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">贷后管理</a>
+			</div>	
+			<i class="icon-bookmark"></i><span class="titletip">非标监控说明</span>
+			<div class="divBorder">				
+				<table class="table-list">					
+					<tr>
+						<td class="table-label" style="width:170px;">时间<font class="red">*</font></td>
+						<td><input type="text" id="" class="datepicker"/></td>
+						<td class="table-label">地点<font class="red">*</font></td>	
+						<td><input type="text" id=""/></td>						
+					</tr>	
+					<tr>
+						<td class="table-label">相关人员<font class="red">*</font></td>
+						<td colspan="3"><input type="text" id="" class="long"/></td>				
+					</tr>
+					<tr>
+						<td class="table-label">采取非标准监控的原因<font class="red">*</font></td>
+						<td colspan="3"><input type="text" id="" class="long"/></td>				
+					</tr>
+					<tr>
+						<td class="table-label">非标监控的基本判断<font class="red">*</font></td>
+						<td colspan="3"><input type="text" id="" class="long"/></td>				
+					</tr>
+					<tr>
+						<td class="table-label">后续重点工作<font class="red">*</font></td>
+						<td colspan="3"><input type="text" id="" class="long"/></td>				
+					</tr>
+				</table>
+			</div>
+			<span class="point">*为必填字段</span><br/>
+			<input type="submit" class="btn btn-info" value="提交"/>
+			<input type="button" class="btn btn-info" value="返回" onclick="iframe('Process/dhgl/edit_dhgl')"/>
+		</div><!--/row-fluid -->
+	</form><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<script src="/static/js/script.js"></script>
+</body>
+</html>

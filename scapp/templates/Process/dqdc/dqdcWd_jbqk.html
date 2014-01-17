@@ -1,0 +1,1001 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<style type="text/css">
+		label{font-size: 12px;}	
+		textarea{width:80%;}
+	</style>
+	<script type="text/javascript">
+		function setje(){
+			$('input[name=gszczj]').click();
+			$('input[name=loan_amount_num]').click();
+			$('input[name=month_repayment]').click();
+			$('input[name=loan_amount]').click();
+			$('input[name=overage]').click();
+			$('input[name=monthly_income]').click();
+			$('input[name=appraisal]').click();
+			$('input[name=mortgage]').click();
+			$('input[name=amount_recommended]').click();
+			$('input[name=monthly_repayment_amount]').click();
+			$('input[name=amount]').click();
+			$('input[name=monthly_repayment]').click();
+		}
+	</script>
+</head>
+
+<body onload="datepicker();setje()">	
+	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcWd_jbqk/{{id}}" target="_parent">
+	{%- if belong_customer_type == 'Individual' %}
+	<!--**************************个人信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">个人信息&nbsp;&nbsp;&nbsp;客户编号：<span id="customer_no">
+			{{customer.customer_no}}
+		</span></span>
+		<div class="divBorder">
+			<table class="table-list">
+				<tr>
+					<td class="table-label">姓名</td>
+					<td>
+						<span>{{customer.customer_name}}</span>
+						<input type="hidden" name="customer_name" value="{{customer.customer_name}}"/>
+					</td>	
+					<td class="table-label">性别</td>
+					<td>
+						{%- if customer.sex == '1' %}
+							<span>男</span>
+						{%- else %}
+							<span>女</span>
+						{%- endif %}
+					</td>
+					<td class="table-label">手机</td>
+					<td><span id="">{{customer.mobile}}</span></td>
+					<td class="table-label">固定电话</td>
+					<td><span id="">{{customer.telephone}}</span></td>			
+				</tr>					
+				<tr>							
+					<td class="table-label">证件类型</td>
+					<td colspan="3"><span id="">{{customer.credentials_name.type_name}}</span></td>	
+					<td class="table-label">证件号码</td>
+					<td colspan="3"><span id="">{{customer.credentials_no}}</span></td>											
+				</tr>
+				<tr>
+					<td class="table-label">家庭地址</td>
+					<td colspan="7"><span id="">{{customer.residence_address}}</span></td>							
+				</tr>	
+				<tr>
+					<td class="table-label">家庭情况表述</td>
+					<td colspan="7"><span id="">{{customer.family}}</span></td>							
+				</tr>	
+				<tr>
+					<td class="table-label">婚姻状况</td>
+					<td>
+						{%- if customer.marriage == '1' %}
+							<span>已婚</span>
+						{%- else %}
+							<span>未婚</span>
+						{%- endif %}
+					</td>
+					<td class="table-label">居住条件</td>
+					<td><span id="">{{customer.living_conditions}}</span></td>	
+					<td class="table-label">教育程度</td>
+					<td colspan="3"><span id="">{{customer.education}}</span></td>				
+				</tr>					
+			</table>
+		</div>
+		{%- else %}
+	<!--**************************公司信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">公司信息&nbsp;&nbsp;&nbsp;客户编号：<span id="customer_no">
+			{{customer.customer_no}}
+		</span></span>
+		<div class="divBorder">
+			<table class="table-list">
+				<tr>
+					<td class="table-label" style="width:120px;">公司名称</td>
+					<td>
+						<span>{{customer.customer_name}}</span>
+						<input type="hidden" name="customer_name" value="{{customer.customer_name}}"/>
+					</td>
+					<td class="table-label">法人代表</td>
+					<td><span id="">{{customer.frdb}}</span></td>
+				</tr>					
+				<tr>
+					<td class="table-label">营业执照号码</td>
+					<td><span id="">{{customer.yyzz}}</span></td>
+					<td class="table-label">税务登记证号码</td>
+					<td><span id="">{{customer.swdjz}}</span></td>			
+				</tr>					
+				<tr>							
+					<td class="table-label">公司注册资金(元)</td>
+					<td>
+						<input type="text" name="gszczj" onclick="setJe(this);" value="{{customer.gszczj}}" disabled/>
+						<span class="je"></span>
+					</td>	
+					<td class="table-label">公司营业范围</td>
+					<td><span id="">{{customer.gsyyfw}}</span></td>
+				</tr>					
+				<tr>
+					<td class="table-label">公司成立日期</td>
+					<td><span id="">{{customer.gsclrq}}</span></td>	
+					<td class="table-label">公司注册类型</td>
+					<td><span id="">{{customer.regisiter_type.type_name}}</span></td>							
+				</tr>	
+				<tr>
+					<td class="table-label">基本户帐号</td>
+					<td><span id="">{{customer.jbhzh}}</span></td>
+					<td class="table-label">公司注册地址</td>
+					<td><span id="">{{customer.zcdz}}</span></td>				
+				</tr>		
+			</table>
+		</div>
+		{%- endif %}
+	<!--**************************申请信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">申请信息</span>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">贷款金额（元）<font class="red">*</font></td>
+					<td>
+						<span id="loan_amount_num">	
+							<input type="text" name="loan_amount_num" value="{{apply_info.loan_amount_num}}" onclick="setJe(this)" maxlength="11" disabled/><br/>
+							<span class="je">￥</span>	
+							<span class="errorInfo"></span>							
+						</span>	
+					</td>	
+					<td class="table-label">贷款期限（月）<font class="red">*</font></td>
+					<td><!-- <input type="text" name="loan_deadline" value="{{apply_info.loan_deadline}}" disabled/>月 -->
+						<select name="loan_deadline" style="width:60px" disabled>
+							{%- if apply_info.loan_deadline == '1' %}
+								<option value="1" selected>1</option>
+							{%- else %}
+								<option value="1">1</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '2' %}
+								<option value="2" selected>2</option>
+							{%- else %}
+								<option value="2">2</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '3' %}
+								<option value="3" selected>3</option>
+							{%- else %}
+								<option value="3">3</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '4' %}
+								<option value="4" selected>4</option>
+							{%- else %}
+								<option value="4">4</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '5' %}
+								<option value="5" selected>5</option>
+							{%- else %}
+								<option value="5">5</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '6' %}
+								<option value="6" selected>6</option>
+							{%- else %}
+								<option value="6">6</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '7' %}
+								<option value="7" selected>7</option>
+							{%- else %}
+								<option value="7">7</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '8' %}
+								<option value="8" selected>8</option>
+							{%- else %}
+								<option value="8">8</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '9' %}
+								<option value="9" selected>9</option>
+							{%- else %}
+								<option value="9">9</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '10' %}
+								<option value="10" selected>10</option>
+							{%- else %}
+								<option value="10">10</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '11' %}
+								<option value="11" selected>11</option>
+							{%- else %}
+								<option value="11">11</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '12' %}
+								<option value="12" selected>12</option>
+							{%- else %}
+								<option value="12">12</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '13' %}
+								<option value="13" selected>13</option>
+							{%- else %}
+								<option value="13">13</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '14' %}
+								<option value="14" selected>14</option>
+							{%- else %}
+								<option value="14">14</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '15' %}
+								<option value="15" selected>15</option>
+							{%- else %}
+								<option value="15">15</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '16' %}
+								<option value="16" selected>16</option>
+							{%- else %}
+								<option value="16">16</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '17' %}
+								<option value="17" selected>17</option>
+							{%- else %}
+								<option value="17">17</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '18' %}
+								<option value="18" selected>18</option>
+							{%- else %}
+								<option value="18">18</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '19' %}
+								<option value="19" selected>19</option>
+							{%- else %}
+								<option value="19">19</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '20' %}
+								<option value="20" selected>20</option>
+							{%- else %}
+								<option value="20">20</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '21' %}
+								<option value="21" selected>21</option>
+							{%- else %}
+								<option value="21">21</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '22' %}
+								<option value="22" selected>22</option>
+							{%- else %}
+								<option value="22">22</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '23' %}
+								<option value="23" selected>23</option>
+							{%- else %}
+								<option value="23">23</option>
+							{%- endif %}
+							{%- if apply_info.loan_deadline == '24' %}
+								<option value="24" selected>24</option>
+							{%- else %}
+								<option value="24">24</option>
+							{%- endif %}
+						</select>月
+					</td>	
+					<td class="table-label">月还款能力（元）<font class="red">*</font></td>
+					<td>
+						<span id="month_repayment">	
+							<input type="text" name="month_repayment" value="{{apply_info.month_repayment}}" onclick="setJe(this)" maxlength="11" disabled/><br/>
+							<span class="je">￥</span>	
+							<span class="errorInfo"></span>							
+						</span>	
+					</td>						
+				</tr>	
+				<tr>
+					<td class="table-label">贷款用途<font class="red">*</font></td>
+					<td>
+						<select name="loan_purpose" disabled>
+							{%- for obj in loan_purpose %}
+								{%- if apply_info.loan_purpose == obj.id %}
+								<option value={{obj.id}} selected>{{obj.type_name}}</option>
+								{%- else %}
+								<option value={{obj.id}} >{{obj.type_name}}</option>
+								{%- endif %}
+							{%- endfor %}
+						</select>
+					</td>	
+					<td class="table-label">详细说明</td>
+					<td colspan="3"><input type="text" name="details" value="{{apply_info.details}}" class="long" disabled/></td>						
+				</tr>
+				<tr>
+					<td class="table-label">还款来源</td>
+					<td colspan="5"><input type="text" name="repayment_source" value="{{apply_info.repayment_source}}" class="long" disabled/></td>									
+				</tr>	
+			</table>
+		</div>	
+	<!--*****************************************信贷历史**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">信贷历史</span>
+		<div class="divBorder">
+			<table id="xdls" class="table-list">
+				<tr>
+					<th>融资来源</th>
+					<th>贷款金额(元)</th>
+					<th>期限(月)</th>							
+					<th>用途</th>
+					<th>发放日期</th>
+					<th>余额(元)</th>		
+					<th>担保</th>
+					<th>逾期信息</th>									
+				</tr>
+				{%- for obj in credit_history %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td>
+						<span>	
+							<input type="text" name="financing_sources" value="{{obj.financing_sources}}" onchange="spryMaxLength(this,3)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>
+					<td>
+						<span>	
+							<input type="text" name="loan_amount" value="{{obj.loan_amount}}" onkeyup="setJe(this);" maxlength="11" class="tbInput" onclick="setJe(this)" disabled/><br/>
+							<span class="je">￥</span>	
+							<span class="errorInfo"></span>						
+						</span>
+					</td>							
+					<td>
+						<select name="deadline" style="width:60px" disabled>
+							{%- if obj.deadline == '1' %}
+								<option value="1" selected>1</option>
+							{%- else %}
+								<option value="1">1</option>
+							{%- endif %}
+							{%- if obj.deadline == '2' %}
+								<option value="2" selected>2</option>
+							{%- else %}
+								<option value="2">2</option>
+							{%- endif %}
+							{%- if obj.deadline == '3' %}
+								<option value="3" selected>3</option>
+							{%- else %}
+								<option value="3">3</option>
+							{%- endif %}
+							{%- if obj.deadline == '4' %}
+								<option value="4" selected>4</option>
+							{%- else %}
+								<option value="4">4</option>
+							{%- endif %}
+							{%- if obj.deadline == '5' %}
+								<option value="5" selected>5</option>
+							{%- else %}
+								<option value="5">5</option>
+							{%- endif %}
+							{%- if obj.deadline == '6' %}
+								<option value="6" selected>6</option>
+							{%- else %}
+								<option value="6">6</option>
+							{%- endif %}
+							{%- if obj.deadline == '7' %}
+								<option value="7" selected>7</option>
+							{%- else %}
+								<option value="7">7</option>
+							{%- endif %}
+							{%- if obj.deadline == '8' %}
+								<option value="8" selected>8</option>
+							{%- else %}
+								<option value="8">8</option>
+							{%- endif %}
+							{%- if obj.deadline == '9' %}
+								<option value="9" selected>9</option>
+							{%- else %}
+								<option value="9">9</option>
+							{%- endif %}
+							{%- if obj.deadline == '10' %}
+								<option value="10" selected>10</option>
+							{%- else %}
+								<option value="10">10</option>
+							{%- endif %}
+							{%- if obj.deadline == '11' %}
+								<option value="11" selected>11</option>
+							{%- else %}
+								<option value="11">11</option>
+							{%- endif %}
+							{%- if obj.deadline == '12' %}
+								<option value="12" selected>12</option>
+							{%- else %}
+								<option value="12">12</option>
+							{%- endif %}
+							{%- if obj.deadline == '13' %}
+								<option value="13" selected>13</option>
+							{%- else %}
+								<option value="13">13</option>
+							{%- endif %}
+							{%- if obj.deadline == '14' %}
+								<option value="14" selected>14</option>
+							{%- else %}
+								<option value="14">14</option>
+							{%- endif %}
+							{%- if obj.deadline == '15' %}
+								<option value="15" selected>15</option>
+							{%- else %}
+								<option value="15">15</option>
+							{%- endif %}
+							{%- if obj.deadline == '16' %}
+								<option value="16" selected>16</option>
+							{%- else %}
+								<option value="16">16</option>
+							{%- endif %}
+							{%- if obj.deadline == '17' %}
+								<option value="17" selected>17</option>
+							{%- else %}
+								<option value="17">17</option>
+							{%- endif %}
+							{%- if obj.deadline == '18' %}
+								<option value="18" selected>18</option>
+							{%- else %}
+								<option value="18">18</option>
+							{%- endif %}
+							{%- if obj.deadline == '19' %}
+								<option value="19" selected>19</option>
+							{%- else %}
+								<option value="19">19</option>
+							{%- endif %}
+							{%- if obj.deadline == '20' %}
+								<option value="20" selected>20</option>
+							{%- else %}
+								<option value="20">20</option>
+							{%- endif %}
+							{%- if obj.deadline == '21' %}
+								<option value="21" selected>21</option>
+							{%- else %}
+								<option value="21">21</option>
+							{%- endif %}
+							{%- if obj.deadline == '22' %}
+								<option value="22" selected>22</option>
+							{%- else %}
+								<option value="22">22</option>
+							{%- endif %}
+							{%- if obj.deadline == '23' %}
+								<option value="23" selected>23</option>
+							{%- else %}
+								<option value="23">23</option>
+							{%- endif %}
+							{%- if obj.deadline == '24' %}
+								<option value="24" selected>24</option>
+							{%- else %}
+								<option value="24">24</option>
+							{%- endif %}
+						</select><br/>&nbsp;
+						<!-- <input type="text" name="deadline" value="{{obj.deadline}}" onkeyup="value=value.replace(/[^\d\.]/g,'')" maxlength="5" class="tbInput" disabled/><br/>
+						<span>&nbsp;</span> -->
+					</td>	
+					<td>
+						<span>	
+							<input type="text" name="use" value="{{obj.use}}" onchange="spryMaxLength(this,3)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>
+					<td>
+						<span>
+						    <input type="text" name="release_date" value="{{obj.release_date}}" class="tbInput datepicker" data-date-format="yyyy-mm-dd" disabled/><br/>
+							<span>&nbsp;</span>
+							<!-- <span class="textfieldInvalidFormatMsg">格式无效</span> -->
+						</span>						
+					</td>	
+					<td>
+						<span>	
+							<input type="text" name="overage" value="{{obj.overage}}" onkeyup="setJe(this);" maxlength="11" class="tbInput" onclick="setJe(this)" disabled/> <br/>
+							<span class="je">￥</span>
+							<span class="errorInfo"></span>						
+						</span>
+					</td>	
+					<td>
+						<span >	
+							<input type="text" name="guarantee" value="{{obj.guarantee}}" onchange="spryMaxLength(this,32)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>
+					<td>
+						<span >	
+							<input type="text" name="late_information" value="{{obj.late_information}}" onchange="spryMaxLength(this,256)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>			
+					<!-- <td><input type="text" name="financing_sources" class="tbInput" value="{{obj.financing_sources}}" disabled/></td>
+					<td><input type="text" name="loan_amount" class="tbInput" value="{{obj.loan_amount}}" disabled/></td>							
+					<td><input type="text" name="deadline" class="tbInput" value="{{obj.deadline}}" disabled/></td>	
+					<td><input type="text" name="use" class="tbInput" value="{{obj.use}}" disabled/></td>
+					<td><input type="text" name="release_date" value="{{obj.release_date}}" class="tbInput" disabled/></td>	
+					<td><input type="text" name="overage" value="{{obj.overage}}" class="tbInput" disabled/></td>	
+					<td><input type="text" name="guarantee" value="{{obj.guarantee}}" class="tbInput" disabled/></td>
+					<td><input type="text" name="late_information" value="{{obj.late_information}}" class="tbInput" disabled/></td>	 -->					
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+	<!--*****************************************共同借款人**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">共同借款人</span>
+		<div class="divBorder">
+			<table id="gtjkr" class="table-list">
+				<tr class="font-small">
+					<th>姓名</th>
+					<th>与客户关系</th>
+					<th>身份证号码</th>							
+					<th>家庭电话</th>
+					<th>主营业务或职务（如受雇与别人）</th>
+					<th>经营地址或工作单位地址</th>		
+					<th>主要资产</th>
+					<th>月收入</th>									
+				</tr>
+				{%- for obj in co_borrower %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td>
+						<span>	
+							<input type="text" name="name" value="{{obj.name}}" onchange="spryMaxLength(this,32)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>
+					<td>
+						<span>	
+							<input type="text" name="relationship" value="{{obj.relationship}}" onchange="spryMaxLength(this,32)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>							
+					<td>
+						<span>	
+							<input type="text" name="id_number" value="{{obj.id_number}}" onchange="checkIdcard(this)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">证件号码有误</span>
+						</span>
+					</td>
+					<td>
+						<input type="text" name="phone" class="tbInput" value="{{obj.phone}}" onKeyUp="value=value.replace(/\D/g,'')" maxlength="12" disabled/><br/>
+						<span>&nbsp;</span>
+					</td>
+					<td>
+						<span>	
+							<input type="text" name="main_business" value="{{obj.main_business}}" onchange="spryMaxLength(this,128)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于128</span>
+						</span>
+					</td>	
+					<td>
+						<span>	
+							<input type="text" name="address" value="{{obj.address}}" onchange="spryMaxLength(this,256)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>	
+					<td>
+						<span>	
+							<input type="text" name="major_assets" value="{{obj.major_assets}}"onchange="spryMaxLength(this,256)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>
+					<td>
+						<span>	
+							<input type="text" name="monthly_income" value="{{obj.monthly_income}}" onkeyup="setJe(this);" maxlength="11" class="tbInput" onclick="setJe(this);" disabled/><br/>
+							<span class="je">￥</span>
+							<span class="errorInfo">格式错误</span>						
+						</span>
+					</td>											
+				</tr>
+					<!-- <td><input type="text" name="name" class="tbInput" value="{{obj.name}}" disabled/></td>
+					<td><input type="text" name="relationship" class="tbInput" value="{{obj.relationship}}" disabled/></td>							
+					<td><input type="text" name="id_number" class="tbInput" value="{{obj.id_number}}" disabled/></td>
+					<td><input type="text" name="phone" class="tbInput" value="{{obj.phone}}" disabled/></td>
+					<td><input type="text" name="main_business" class="tbInput" value="{{obj.main_business}}" disabled/></td>	
+					<td><input type="text" name="address" class="tbInput" value="{{obj.address}}" disabled/></td>	
+					<td><input type="text" name="major_assets" class="tbInput" value="{{obj.major_assets}}" disabled/></td>
+					<td><input type="text" name="monthly_income" class="tbInput" value="{{obj.monthly_income}}" disabled/></td>		 -->			
+				{%- endfor %}
+			</table>
+		</div>
+		
+	<!--**************************担保信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">担保信息</span>
+		<div class="divBorder">
+			<table id="dbInformation" class="table-list">
+				<tr>
+					<th>姓名</th>
+					<th>地址</th>
+					<th>身份证号码</th>							
+					<th>工作单位</th>
+					<th>电话</th>		
+					<th>与申请人关系</th>								
+				</tr>
+				{%- for obj in guarantees %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="name_db" class="tbInput" value="{{obj.name}}" disabled/></td>
+					<td><input type="text" name="address_db" class="tbInput" value="{{obj.address}}" disabled/></td>							
+					<td><input type="text" name="id_number_db" class="tbInput" value="{{obj.id_number}}" disabled/></td>	
+					<td><input type="text" name="workunit_db" class="tbInput" value="{{obj.workunit}}" disabled/></td>
+					<td><input type="text" name="phone_db" class="tbInput" value="{{obj.phone}}" disabled/></td>	
+					<td><input type="text" name="relationship_db" class="tbInput" value="{{obj.relationship}}" disabled/></td>										
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+	
+	<!--*****************************************建议抵押物**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">建议抵押物</span>
+		<div class="divBorder">
+			<table id="ywdyw" class="table-list">
+				<tr>
+					<th>物品名称</th>
+					<th>所有者、地址</th>
+					<th>描述</th>							
+					<th>登记号</th>
+					<th>估价(元)</th>
+					<th>抵押(元)</th>		
+					<th width="30px">质押</th>							
+				</tr>
+				{%- for obj in guaranty %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td>
+						<span>	
+							<input type="text" name="obj_name" value="{{obj.obj_name}}" onchange="spryMaxLength(this,32)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>			
+					<td>
+						<span>	
+							<input type="text" name="owner_address" value="{{obj.owner_address}}" onchange="spryMaxLength(this,128)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于128</span>
+						</span>
+					</td>				
+					<td>
+						<span>	
+							<input type="text" name="description" value="{{obj.description}}" onchange="spryMaxLength(this,256)" class="tbInput" disabled/><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>	
+					<td>
+						<input type="text" name="registration_number" value="{{obj.registration_number}}" onkeyup="value=value.replace(/\D/g,'')" maxlength="11" class="tbInput" disabled/><br/>
+						<span>&nbsp;</span>
+					</td>	
+					<td>
+						<span>	
+							<input type="text" name="appraisal" value="{{obj.appraisal}}" onkeyup="setJe(this);" maxlength="11" class="tbInput" onclick="setJe(this)" disabled/><br/>
+							<span class="je">￥</span>
+							<span class="errorInfo"></span>						
+						</span>
+					</td>
+					<td>
+						<span>	
+							<input type="text" name="mortgage" value="{{obj.mortgage}}" onkeyup="setJe(this);" maxlength="11" class="tbInput" onclick="setJe(this)" disabled/><br/>
+							<span class="je">￥</span>
+							<span class="errorInfo"></span>						
+						</span>
+					</td>				
+					<!-- <td><input type="text" name="obj_name" class="tbInput" value="{{obj.obj_name}}" disabled/></td>			
+					<td><input type="text" name="owner_address" class="tbInput" value="{{obj.owner_address}}" disabled/></td>				
+					<td><input type="text" name="description" class="tbInput" value="{{obj.description}}" disabled/></td>	
+					<td><input type="text" name="registration_number" class="tbInput" value="{{obj.registration_number}}" disabled/></td>	
+					<td><input type="text" name="appraisal" class="tbInput" value="{{obj.appraisal}}" disabled/></td>
+					<td><input type="text" name="mortgage" class="tbInput" value="{{obj.mortgage}}" disabled/></td> -->
+					{%- if obj.bool_mortgage == 1 %}
+					<td><input type="checkbox" name="bool_mortgage" checked/></td>	
+					{%- else %}
+					<td><input type="checkbox" name="bool_mortgage" /></td>
+					{%- endif %}				
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>	
+		
+		<!--*****************************************风险分析以及调查结论**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">风险分析以及调查结论</span>
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">分析结论</td>
+					<td colspan="7">
+						<span>
+							<textarea name="analysis_conclusion" onchange="spryMaxLength(this,256)">{{riskanalysis_and_findings.analysis_conclusion}}</textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						<span>
+					</td>								
+				</tr>
+				<tr>
+					<td class="table-label"> 建议金额(元)</td>
+					<td>
+						<span>	
+							<input type="text" name="amount_recommended" value="{{riskanalysis_and_findings.amount_recommended}}" onkeyup="setJe(this);" maxlength="11" class="tbInput" onclick="setJe(this)"/><br/>
+							<span class="je">￥</span>
+							<span class="errorInfo"></span>						
+						</span>
+					</td>
+					<td class="table-label"> 建议期限</td>	
+					<td>
+						<input type="text" name="recommended_deadline" class="tbInput datepicker" value="{{riskanalysis_and_findings.recommended_deadline}}" data-date-format="yyyy-mm-dd" readonly/>
+					</td>	
+					<td class="table-label"> 建议利率</td>	
+					<td>
+						<span>
+							<input type="text" style="width:40px" name="recommended_rates" value="{{riskanalysis_and_findings.recommended_rates}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
+							<span class="errorInfo">请输入0-100的数</span>
+						</span>
+					</td>		
+					<td class="table-label"> 每月还款额(元)</td>	
+					<td>
+						<span>	
+							<input type="text" name="monthly_repayment_amount" value="{{riskanalysis_and_findings.monthly_repayment_amount}}" onkeyup="setJe(this);" maxlength="11" class="tbInput" onclick="setJe(this)"/><br/>
+							<span class="je">￥</span>
+							<span class="errorInfo"></span>						
+						</span>
+					</td>												
+				</tr>
+				<tr>
+					<td class="table-label"> 建议担保方式</td>
+					<td colspan="3" >
+						<span>
+							<input type="text" style="width:70%" name="recommended_way_of_security" onchange="spryMaxLength(this,32)" value="{{riskanalysis_and_findings.recommended_way_of_security}}"/>
+							<span class="errorInfo">字符数不得大于32</span>
+						<span>
+					</td>
+					<td colspan="2" class="table-label"> 月付款占可支配收入比重</td>	
+					<td colspan="2">
+						<span>
+							<input type="text" style="width:40px" name="income_ratio" value="{{riskanalysis_and_findings.income_ratio}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%<br/>
+							<span class="errorInfo">请输入0-100的数</span>
+						</span>
+					</td>	
+				</tr>
+				<tr>
+					<td class="table-label"> 调查人签字</td>
+					<td colspan="3">
+						<span>
+							<input type="text" style="width:70%" name="survey_signature" onchange="spryMaxLength(this,32)" value="{{riskanalysis_and_findings.survey_signature}}"/>
+							<span class="errorInfo">字符数不得大于32</span>
+						<span>
+					</td>
+					<td colspan="2" class="table-label"> 日期</td>	
+					<td colspan="2"><input type="text" name="survey_date" class="datepicker" value="{{riskanalysis_and_findings.survey_date}}" data-date-format="yyyy-mm-dd" readonly/></td>	
+				</tr>
+			</table>
+		</div>
+	<!--*****************************************调查结论**************************************************-->
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label" style="font-size:12px;">客户信息收集与核实</td>
+					<td class="font-small">
+						<label><input type="checkbox" name="verification" value="1"/>营业执照</label>
+						<label><input type="checkbox" name="verification" value="2"/>房产证</label>
+						<label><input type="checkbox" name="verification" value="4"/>租赁合同</label>
+						<label><input type="checkbox" name="verification" value="8"/>供销即采购合同</label>
+						<label><input type="checkbox" name="verification" value="16"/>账单</label>
+						<label><input type="checkbox" name="verification" value="32"/>存货清单</label>
+						<label><input type="checkbox" name="verification" value="64"/>银行存款账户</label>
+						<label><input type="checkbox" name="verification" value="128"/>现金</label>
+						<label><input type="checkbox" name="verification" value="256"/>其他<input type="text" name="others" style="width:80px;" value="{{riskanalysis_and_findings.others}}"/></label>
+					</td>											
+				</tr>
+			</table>
+		</div>
+	<!--*****************************************是否同意发放**************************************************-->
+		{%- if riskanalysis_and_findings == None or riskanalysis_and_findings.bool_grant == '1' %}
+		<label onclick="$('#jyff').show();$('#jyfj').hide();doubleIframe('dqdcWd_jbqk');">
+			<input type="radio" name="bool_grant" value="1" checked />建议发放
+		</label>
+		<label onclick="$('#jyfj').show();$('#jyff').hide();doubleIframe('dqdcWd_jbqk');">
+			<input type="radio" name="bool_grant" value="0" />建议否决
+		</label><br/>	
+		{%- else %}
+		<label onclick="$('#jyff').show();$('#jyfj').hide();doubleIframe('dqdcWd_jbqk');">
+			<input type="radio" name="bool_grant" value="1" />建议发放
+		</label>
+		<label onclick="$('#jyfj').show();$('#jyff').hide();doubleIframe('dqdcWd_jbqk');">
+			<input type="radio" name="bool_grant" value="0" checked/>建议否决
+		</label><br/>
+		{%- endif %}
+	<!--*****************************************调查结论**************************************************-->
+		{%- if riskanalysis_and_findings == None or riskanalysis_and_findings.bool_grant == '1' %}
+		<div class="divBorder" id="jyff">
+		{%- else %}
+		<div class="divBorder" id="jyff" style="display:none;">
+		{%- endif %}
+			<table class="table-list">				
+				<tr>
+					<td class="table-label" rowspan="3" style="width:60px;">调查结论</td>
+					<td class="table-label" style="width:80px;">金额（元）<font class="red">*</font></td>
+					<td>
+						<span>	
+							<input type="text" name="amount" style="width:100px;" value="{{riskanalysis_and_findings.amount}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/><br/>
+							<span class="je">￥</span>
+							<span class="errorInfo"></span>						
+						</span>
+					</td>	
+					<td class="table-label" style="width:50px;">期限(月)<font class="red">*</font></td>
+					<td>
+						<select name="deadline" style="width:60px">
+							{%- if riskanalysis_and_findings.deadline == '1' %}
+								<option value="1" selected>1</option>
+							{%- else %}
+								<option value="1">1</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '2' %}
+								<option value="2" selected>2</option>
+							{%- else %}
+								<option value="2">2</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '3' %}
+								<option value="3" selected>3</option>
+							{%- else %}
+								<option value="3">3</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '4' %}
+								<option value="4" selected>4</option>
+							{%- else %}
+								<option value="4">4</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '5' %}
+								<option value="5" selected>5</option>
+							{%- else %}
+								<option value="5">5</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '6' %}
+								<option value="6" selected>6</option>
+							{%- else %}
+								<option value="6">6</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '7' %}
+								<option value="7" selected>7</option>
+							{%- else %}
+								<option value="7">7</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '8' %}
+								<option value="8" selected>8</option>
+							{%- else %}
+								<option value="8">8</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '9' %}
+								<option value="9" selected>9</option>
+							{%- else %}
+								<option value="9">9</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '10' %}
+								<option value="10" selected>10</option>
+							{%- else %}
+								<option value="10">10</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '11' %}
+								<option value="11" selected>11</option>
+							{%- else %}
+								<option value="11">11</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '12' %}
+								<option value="12" selected>12</option>
+							{%- else %}
+								<option value="12">12</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '13' %}
+								<option value="13" selected>13</option>
+							{%- else %}
+								<option value="13">13</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '14' %}
+								<option value="14" selected>14</option>
+							{%- else %}
+								<option value="14">14</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '15' %}
+								<option value="15" selected>15</option>
+							{%- else %}
+								<option value="15">15</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '16' %}
+								<option value="16" selected>16</option>
+							{%- else %}
+								<option value="16">16</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '17' %}
+								<option value="17" selected>17</option>
+							{%- else %}
+								<option value="17">17</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '18' %}
+								<option value="18" selected>18</option>
+							{%- else %}
+								<option value="18">18</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '19' %}
+								<option value="19" selected>19</option>
+							{%- else %}
+								<option value="19">19</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '20' %}
+								<option value="20" selected>20</option>
+							{%- else %}
+								<option value="20">20</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '21' %}
+								<option value="21" selected>21</option>
+							{%- else %}
+								<option value="21">21</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '22' %}
+								<option value="22" selected>22</option>
+							{%- else %}
+								<option value="22">22</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '23' %}
+								<option value="23" selected>23</option>
+							{%- else %}
+								<option value="23">23</option>
+							{%- endif %}
+							{%- if riskanalysis_and_findings.deadline == '24' %}
+								<option value="24" selected>24</option>
+							{%- else %}
+								<option value="24">24</option>
+							{%- endif %}
+						</select>
+						<!-- <input type="text" name="deadline" style="width:40px;" value="{{riskanalysis_and_findings.deadline}}" onKeyUp="value=value.replace(/\D/g,'')" maxlength="4"/>月 -->
+					</td>	
+					<td class="table-label" style="width:50px;">利率<font class="red">*</font></td>
+					<td>
+						<span>
+							<input type="text" style="width:40px" name="rates" value="{{riskanalysis_and_findings.rates}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%<br/>
+							<span class="errorInfo">请输入0-100的数</span>
+						</span>
+					</td>
+					<td class="table-label" style="width:110px;">月还款额（元）<font class="red">*</font></td>
+					<td>
+						<span>	
+							<input type="text" name="monthly_repayment" value="{{riskanalysis_and_findings.monthly_repayment}}" onkeyup="setJe(this);" maxlength="11" class="tbInput" onclick="setJe(this)"/><br/>
+							<span class="je">￥</span>
+							<span class="errorInfo"></span>						
+						</span>
+					</td>										
+				</tr>
+				<tr>
+					<td class="table-label" style="width:80px;">建议理由/发放条件</td>
+					<td colspan="7">
+						<span>	
+							<textarea name="approve_reason" onchange="spryMaxLength(this,256)">{{riskanalysis_and_findings.approve_reason}}</textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>															
+				</tr>
+			</table>
+		</div>
+	<!--*****************************************调查结论**************************************************-->
+		{%- if riskanalysis_and_findings.bool_grant == '0' %}
+		<div class="divBorder" id="jyfj">
+		{%- else %}
+		<div class="divBorder" id="jyfj" style="display:none;">
+		{%- endif %}
+			<table class="table-list">				
+				<tr>
+					<td class="table-label" rowspan="3" style="width:60px;">调查结论</td>					
+					<td class="table-label" style="width:80px;">否决原因</td>
+					<td colspan="7">
+						<span>	
+							<textarea name="refuse_reason" onchange="spryMaxLength(this,256)">{{riskanalysis_and_findings.refuse_reason}}</textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>															
+				</tr>
+			</table>
+		</div>
+		<input type="submit" value="保存" class="btn btn-info"/>
+		<input type="button" value="打印" class="btn btn-info"/>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+	</script>
+</body>
+</html>

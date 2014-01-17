@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">	
+</head>
+
+<body onload="datepicker();setTimeOut();">	
+	<div class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">客户登记</a>
+		</div>		
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+		  	{%- if messages %}
+	    	{%- for category, message in messages %}
+	    	<div class="alert alert-{{category}}">
+	      		{{message}}
+	      	</div>
+	    	{%- endfor %}
+		  	{%- endif %}
+		{%- endwith %}
+		<div class="row-fluid">
+			<i class="icon-bookmark"></i><span class="titletip">客户登记列表</span>
+			<div style="border:1px solid #94c1dc;">				
+				<table class="table-list" cellspacing="10" id="uesr-list">
+					<thead>
+						<tr>											
+							<th>客户名称</th>
+							<th>登记方式</th>
+							<th>接待人员</th>
+							<th>年龄</th>							
+							<th>性别</th>
+							<th>电话/手机</th>
+							<th>登记时间</th>
+							<th>贷款需求</th>
+							<th>分配客户经理</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody class="center">
+						{%- for obj in target_customer.items %}
+						<tr onclick="changeColor(this)">							
+							<td>{{obj.customer_name}}</td>
+							{%- if obj.reception_type == '1' %}
+							<td>咨询</td>
+							{%- else %}
+							<td>扫街</td>
+							{%- endif %}
+							<td>{{obj.receiver_for_tc.login_name}}</td>
+							<td>{{obj.age}}</td>
+							{%- if obj.sex == '1' %}
+							<td>男</td>
+							{%- else %}
+							<td>女</td>
+							{%- endif %}
+							<td>{{obj.mobile}}</td>	
+							<td>{{obj.create_date}}</td>	
+							{%- if obj.is_need_loan == '1' %}
+							<td>有</td>		
+							{%- else %}
+							<td>无</td>
+							{%- endif %}
+
+							<td>
+								{%- if role.role_level == 0 or role.role_level == 1 %}
+								<select onchange="iframe('Information/khfp/edit_khfp/{{obj.id}}/'+this.value)">
+								{%- else %}
+								<select onchange="iframe('Information/khfp/edit_khfp/{{obj.id}}/'+this.value)" disabled>
+								{%- endif %}
+									<option value="0">未分配</option>
+								{%- for user in users %}
+									{%- if obj.loan_officer == user.id%}
+									<option value="{{user.id}}" selected>{{user.login_name}}</option>
+									{%- else %}
+									<option value="{{user.id}}">{{user.login_name}}</option>
+									{%- endif %}	
+								{%- endfor %}	
+								</select>
+							</td>
+							<td>
+								{%- if obj.loan_officer and obj.loan_officer == current_user.id %}
+								<input type="button" class="btn btn-info btn-mini" value="信息管理" style="margin:0;" onclick="iframe('Information/new_customer/{{obj.id}}')"/>
+								{%- else %}
+								<input type="button" class="btn btn-info btn-mini" value="信息管理" style="margin:0;" onclick="" disabled />
+								{%- endif %}
+							</td>					
+						</tr>	
+						{%- endfor %}										
+					</tbody>
+				</table>
+			</div>
+			<div class="page-div">
+			{%- if target_customer.has_prev %}
+					<span style="CURSOR: pointer" onclick="iframe('Information/khfp/khfp_search/{{target_customer.prev_num}}')">&lt;&lt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&lt;&lt;</span>
+				{%- endif %}
+				&#160;第&#160;<font color="#0088cc">{{target_customer.page}}</font>&#160;页&#160;
+				&#160;共&#160;<font color="#0088cc">{{target_customer.pages}}</font>&#160;页&#160;
+				{%- if target_customer.has_next %}
+					<span style="CURSOR: pointer" onclick="iframe('Information/khfp/khfp_search/{{target_customer.next_num}}')">&gt;&gt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&gt;&gt;</span>
+				{%- endif %}
+			</div>
+		</div><!--/row-fluid -->
+	</div><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+</body>
+</html>
