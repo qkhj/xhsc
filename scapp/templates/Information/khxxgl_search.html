@@ -10,6 +10,9 @@
 	<!-- The styles -->
 	<link href="/static/css/bootstrap.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
+	<!-- ************************验证样式************************-->
+	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
 	
 </head>
 
@@ -33,7 +36,7 @@
 				<div style="border:1px solid #94c1dc;">
 					<table class="table-list">
 						<tr>
-							<td class="table-label">所属支行</td>
+							<!--<td class="table-label">所属支行</td>
 							<td>
 								<select name="belong_org">
 									<option value="-1">---全部---</option>
@@ -41,7 +44,7 @@
 									<option value={{obj.id}}>{{obj.name}}</option>
 									{%- endfor %}	
 								</select>
-							</td>
+							</td>-->
 							<td class="table-label">客户类型</td>
 							<td>
 								<select name="customer_type">
@@ -50,11 +53,57 @@
 								</select>
 							</td>
 							<td class="table-label">客户经理</td>
-							<td><input type="text" name="manager_name"/></td>
+							<td>
+								<input type="text" id="manager_name" name="manager_name" value="{{current_user.real_name}}" readonly/>
+								{%- if role.role_level == 0 or role.role_level == 1 %}
+								<input type="button" value="搜索" class="btn" onclick="$('.display-div').show();" />
+								{%- else %}
+								<input type="button" value="搜索" class="btn" onclick="$('.display-div').show();" disabled/>
+								{%- endif %}
+								<span id="manager_name_spay">
+									<input type="hidden" id="manager" name="manager" value="{{current_user.id}}"/>
+									<span class="textfieldRequiredMsg">不能为空</span>
+								</span>
+								
+								<div class="display-div" id="xdyss"><!--onmouseleave="setTimeout(function(){$('.display-div').hide();},3000)"-->
+									<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+									<div style="border:1px solid #94c1dc;">
+										<table class="table-list">
+											<tr>
+												<td class="table-label">客户经理编号</td>
+												<td><input type="text"/></td>	
+												<td class="table-label">客户经理名称</td>
+												<td><input type="text"/></td>	
+											</tr>
+										</table>
+									</div>																		
+									<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+									<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+									<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+									<div style="border:1px solid #94c1dc;">
+										<table class="table-list">
+											<thead>
+												<tr>
+													<th>选择</th>	
+													<th>客户经理编号</th>										
+													<th>客户经理名称</th>												
+												</tr>
+											</thead>
+											<tbody class="center">
+												{%- for obj in user %}
+												<tr>
+													<td><input type="radio" name="xdy" onclick="get_name(this,'manager_name','manager');"/></td>		
+													<td>{{obj.id}}</td>												
+													<td>{{obj.real_name}}</td>												
+												</tr>		
+												{%- endfor %}											
+											</tbody>
+										</table>
+									</div>
+								</div><!--/display-div-->
+							</td>	
 						</tr>
 						<tr>
-							<td class="table-label">客户编号</td>
-							<td><input type="text" name="customer_no"/></td>
 							<td class="table-label">客户名称</td>
 							<td><input type="text" name="customer_name"/></td>
 							<td class="table-label">证件号码</td>
