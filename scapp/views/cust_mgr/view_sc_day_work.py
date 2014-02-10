@@ -61,17 +61,16 @@ def show_cust_mgr_search():
 def cust_mgr_search_result(page):
 
     if request.method=='GET':
-        user_id=request.args['yunying_loan_officer']
-        s_beg_date=str(request.args['beg_date'])
-        s_end_date=str(request.args['end_date'])
-        beg_date=datetime.datetime.strptime(s_beg_date,'%Y-%m-%d')
-        end_date=datetime.datetime.strptime(s_end_date,'%Y-%m-%d')
-        end_date=end_date.replace(hour=23,minute=59,second=59)
+		user_id=request.args.get('yunying_loan_officer',None)
+		s_beg_date=str(request.args.get('beg_date','1999-01-01'))
+		s_end_date=str(request.args.get('end_date','2999-01-01'))
+		beg_date=datetime.datetime.strptime(s_beg_date,'%Y-%m-%d')
+		end_date=datetime.datetime.strptime(s_end_date,'%Y-%m-%d')
+		end_date=end_date.replace(hour=23,minute=59,second=59)
 
-        data=query_data(page,beg_date,end_date,user_id,'PAGE')
+		data=query_data(page,beg_date,end_date,user_id,'PAGE')
 
-
-        return render_template('/Information/gsjl/gsjl.html',data=data,beg_date=beg_date,end_date=end_date,user_id=user_id)
+		return render_template('/Information/gsjl/gsjl.html',data=data,beg_date=beg_date,end_date=end_date,user_id=user_id)
     elif request.method=='POST':
         user_id=request.form['yunying_loan_officer']
         s_beg_date=str(request.form['beg_date'])
