@@ -4,6 +4,7 @@ import os
 
 from flask import Module, session, request, render_template, redirect, url_for,flash
 from flask.ext.login import current_user
+from sqlalchemy.sql import or_ 
 import datetime
 
 from scapp import db
@@ -26,8 +27,19 @@ def Information_lfdj():
 # 来访登记
 @app.route('/Information/lfdj/lfdj_search/<int:page>', methods=['GET','POST'])
 def lfdj_search(page):
-    target_customer = SC_Target_Customer.query.order_by("id").paginate(page, per_page = PER_PAGE)
-    return render_template("Information/lfdj/lfdj.html",target_customer=target_customer)
+    # 模糊查询
+    customer_name = request.form['customer_name']
+    beg_date = request.form['beg_date'] + " 00:00:00"
+    end_date = request.form['end_date'] + " 23:59:59"
+
+    sql = "create_date between '"+beg_date+"' and '"+end_date + "' "
+    if customer_name:
+        sql += " and (customer_name like '%"+customer_name+"%' or shop_name like '%"+customer_name+"%') "
+
+    target_customer = SC_Target_Customer.query.filter(sql).order_by("id").paginate(page, per_page = PER_PAGE)
+
+    return render_template("Information/lfdj/lfdj.html",target_customer=target_customer,customer_name=customer_name,
+        beg_date=request.form['beg_date'],end_date=request.form['end_date'])
 
 # 新增来访登记
 @app.route('/Information/lfdj/new_lfdj', methods=['GET','POST'])

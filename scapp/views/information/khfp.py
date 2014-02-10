@@ -4,6 +4,7 @@ import os
 
 from flask import Module, session, request, render_template, redirect, url_for,flash
 from flask.ext.login import current_user
+from sqlalchemy.sql import or_ 
 import datetime
 
 from scapp import db
@@ -27,10 +28,21 @@ def Information_khfp():
 # 客户分配
 @app.route('/Information/khfp/khfp_search/<int:page>', methods=['GET','POST'])
 def khfp_search(page):
+    # 模糊查询
+    customer_name = request.form['customer_name']
+    beg_date = request.form['beg_date'] + " 00:00:00"
+    end_date = request.form['end_date'] + " 23:59:59"
+
+    sql = "create_date between '"+beg_date+"' and '"+end_date + "' "
+    if customer_name:
+        sql += " and customer_name like '%"+customer_name+"%' or shop_name like '%"+customer_name+"%' "
+
+    target_customer = SC_Target_Customer.query.filter(sql).order_by("id").paginate(page, per_page = PER_PAGE)
+
     users = SC_User.query.order_by("id").all()
-    target_customer = SC_Target_Customer.query.order_by("id").paginate(page, per_page = PER_PAGE)
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
-    return render_template("Information/khfp/khfp.html",users=users,role=role,target_customer=target_customer)
+    return render_template("Information/khfp/khfp.html",users=users,role=role,target_customer=target_customer,
+        customer_name=customer_name,beg_date=request.form['beg_date'],end_date=request.form['end_date'])
 
 # 编辑客户分配
 @app.route('/Information/khfp/edit_khfp/<int:target_customer_id>/<int:user_id>', methods=['GET'])

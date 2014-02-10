@@ -50,7 +50,7 @@
                         <tbody class="center">
                             {%- for obj in users.items %}
                             <tr>
-                                <td><a href="#" onclick="iframe('System/edit_user/{{obj.id}}')">{{obj.login_name}}</a></td>							
+                                <td><a href="#" onclick="iframe('System/edit_user/{{obj.id}}')">{{obj.real_name}}</a></td>							
                                 <td>{{obj.real_name}}</td>
                                 {%- if obj.sex == '1' %}
                                 <td>男</td>
