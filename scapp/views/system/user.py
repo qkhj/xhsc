@@ -27,12 +27,22 @@ def new_user():
 	if request.method == 'GET':
 		roles = SC_Role.query.order_by("id").all()
 		orgs = SC_Org.query.order_by("id").all()
-		return render_template("System/new_user.html",roles=roles,orgs=orgs)
+		leaders = SC_User.query.filter_by(is_leader='1').order_by("id").all()
+		return render_template("System/new_user.html",roles=roles,orgs=orgs,leaders=leaders)
 	else:
 		try:
+			if request.form['is_leader'] == '1':
+				belong_leader = None
+			else:
+				if request.form['belong_leader']:
+					belong_leader = request.form['belong_leader']
+				else:
+					belong_leader = None
+
 			user = SC_User(request.form['login_name'],request.form['login_password'],
 				request.form['real_name'],request.form['sex'],request.form['mobile'],
-				request.form['department'],request.form['level'],request.form['active'])
+				request.form['department'],request.form['level'],request.form['active'],
+				request.form['is_leader'],belong_leader)
 			user.add()
 
 			#清理缓存
@@ -61,18 +71,30 @@ def edit_user(id):
 		roles = SC_Role.query.order_by("id").all()
 		role = SC_UserRole.query.filter_by(user_id=id).first().role
 		orgs = SC_Org.query.order_by("id").all()
-		return render_template("System/edit_user.html",user=user,roles=roles,role=role,orgs=orgs)
+		leaders = SC_User.query.filter_by(is_leader='1').order_by("id").all()
+		leader = SC_User.query.filter_by(id=user.belong_leader).first()
+		return render_template("System/edit_user.html",user=user,roles=roles,role=role,orgs=orgs,
+			leaders=leaders,leader=leader)
 	else:
 		try:
 			user = SC_User.query.filter_by(id=id).first()
 			user.login_name = request.form['login_name']
-			user.login_password = request.form['login_password']
+			#user.login_password = request.form['login_password']
 			user.real_name = request.form['real_name']
 			user.sex = request.form['sex']
 			user.mobile = request.form['mobile']
 			user.department = request.form['department']
 			user.level = request.form['level']
 			user.active = request.form['active']
+			user.is_leader = request.form['is_leader']
+			if request.form['is_leader'] == '1':
+				user.belong_leader = None
+			else:
+				if request.form['belong_leader']:
+					user.belong_leader = request.form['belong_leader']
+				else:
+					user.belong_leader = None
+			
 			user.modify_user = current_user.id
 			user.modify_date = datetime.datetime.now()
 

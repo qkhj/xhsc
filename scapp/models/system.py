@@ -44,6 +44,8 @@ class SC_User(db.Model):
     department = db.Column(db.Integer, db.ForeignKey('sc_org.id'))
     level = db.Column(db.Integer) # 审批级别(数字标识)
     active = db.Column(db.String(1))
+    is_leader = db.Column(db.String(1)) # 是否是组长
+    belong_leader = db.Column(db.Integer) # 所属组长
     create_user = db.Column(db.Integer)
     create_date = db.Column(db.DateTime)
     modify_user = db.Column(db.Integer)
@@ -52,7 +54,7 @@ class SC_User(db.Model):
     #外键
     org = db.relationship('SC_Org', backref='org')
 
-    def __init__(self,login_name,login_password,real_name,sex,mobile,department,level,active):
+    def __init__(self,login_name,login_password,real_name,sex,mobile,department,level,active,is_leader,belong_leader):
         self.login_name = login_name
         self.login_password = login_password
         self.real_name = real_name
@@ -61,6 +63,8 @@ class SC_User(db.Model):
         self.department = department
         self.level = level
         self.active = active
+        self.is_leader = is_leader
+        self.belong_leader = belong_leader
         self.create_user = current_user.id
         self.create_date = datetime.datetime.now()
         self.modify_user = current_user.id
