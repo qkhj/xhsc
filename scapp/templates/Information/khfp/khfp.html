@@ -84,9 +84,9 @@
 
 							<td>
 								{%- if role.role_level == 0 or role.role_level == 1 %}
-								<select onchange="iframe('Information/khfp/edit_khfp/{{obj.id}}/'+this.value)">
+								<select onchange="submitForm('content','/Information/khfp/edit_khfp/{{target_customer.page}}/{{obj.id}}/'+this.value)">
 								{%- else %}
-								<select onchange="iframe('Information/khfp/edit_khfp/{{obj.id}}/'+this.value)" disabled>
+								<select onchange="submitForm('content','/Information/khfp/edit_khfp/{{target_customer.page}}/{{obj.id}}/'+this.value)" disabled>
 								{%- endif %}
 									<option value="0">未分配</option>
 								{%- for user in users %}

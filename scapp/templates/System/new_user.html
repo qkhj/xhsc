@@ -100,8 +100,47 @@
 									<option value="200">200万</option>
 								</select>
 							</td>	
-							<td></td>
-							<td></td>												
+							<td class="table-label">是否组长</td>
+							<td>
+								<label><input type="radio" name="is_leader" value="1" onclick="getRadio('1')" />是</label>
+								<label><input type="radio" name="is_leader" value="0" onclick="getRadio('0')" checked/>否</label>
+								<label id="leader_label" style="display:">&nbsp;&nbsp;&nbsp;所属组长:
+									<input type="text" id="belong_leader_name" readonly/>
+									<input type="button" value="选择" class="btn" onclick="$('.display-div').show();" />
+									<span id="belong_leader_name_spay">
+										<input type="hidden" id="belong_leader" name="belong_leader"/>
+										<span class="textfieldRequiredMsg">不能为空</span>
+									</span>
+									
+									<div class="display-div" id="xdyss"><!--onmouseleave="setTimeout(function(){$('.display-div').hide();},3000)"-->
+																									
+										<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+										<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+										<i class="icon-bookmark"></i><span class="titletip">组长列表</span>
+										<div style="border:1px solid #94c1dc;">
+											<table class="table-list">
+												<thead>
+													<tr>
+														<th>选择</th>	
+														<th>组长编号</th>										
+														<th>组长名称</th>												
+													</tr>
+												</thead>
+												<tbody class="center">
+													{%- for obj in leaders %}
+													<tr>
+														<td><input type="radio" name="xdy" onclick="get_name(this,'belong_leader_name','belong_leader');"/></td>		
+														<td>{{obj.id}}</td>												
+														<td>{{obj.real_name}}</td>												
+													</tr>		
+													{%- endfor %}											
+												</tbody>
+											</table>
+										</div>
+									</div><!--/display-div-->
+								</label>
+							</td>	
+																		
 						</tr>					
 					</table>
 				</div>			 
@@ -190,7 +229,19 @@
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytextfield1", "none", {validateOn:["blur"]});
 		var sprypassword1 = new Spry.Widget.ValidationPassword("sprypassword1", {validateOn:["blur"], minChars:4, maxChars:8});
 		var spryconfirm1 = new Spry.Widget.ValidationConfirm("spryconfirm1", "login_password", {validateOn:["blur"]});
-		var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytextfield2", "none", {validateOn:["blur"]});		
+		var sprytextfield2 = new Spry.Widget.ValidationTextField("sprytextfield2", "none", {validateOn:["blur"]});
+
+		function getRadio(type)
+		{
+		     if(type=="1")
+		     {
+		     	document.getElementById('leader_label').style.display = "none";
+		     }
+		     else if(type=="0")
+		     {
+		        document.getElementById('leader_label').style.display = "";
+		     }
+		}		
 	</script>
 </body>
 </html>
