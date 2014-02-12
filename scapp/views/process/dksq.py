@@ -51,10 +51,18 @@ def dksq_search(page):
     # 打印sql: print db.session.query(SC_Loan_Apply,SC_Apply_Info).join(SC_Apply_Info)
     # loan_apply = db.session.query(SC_Loan_Apply,SC_Apply_Info).join(SC_Apply_Info)
     # loan_apply = SC_Loan_Apply.query.order_by("id").paginate(page, per_page = PER_PAGE)
-    loan_apply = View_Query_Loan.query.filter('marketing_loan_officer=:marketing_loan_officer',
-        'process_status=:process_status').params(marketing_loan_officer=current_user.id,
-        process_status=PROCESS_STATUS_DKSQ).paginate(page, per_page = PER_PAGE)
-    return render_template("Process/dksq/dksq.html",loan_apply=loan_apply)
+    customer_name = request.form['customer_name']
+    loan_type = request.form['loan_type']
+    sql = ""
+    if loan_type != '0':
+        sql = "loan_type='"+loan_type+"' and "
+    sql += " marketing_loan_officer="+str(current_user.id)+" and process_status='"+PROCESS_STATUS_DKSQ+"'"
+
+    if customer_name:
+        sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
+
+    loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    return render_template("Process/dksq/dksq.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
 
 # 跳转到新增贷款申请
 @app.route('/Process/dksq/goto_new_dksq/<belong_customer_type>/<int:page>', methods=['GET'])

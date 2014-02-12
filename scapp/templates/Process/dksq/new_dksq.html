@@ -63,7 +63,7 @@
 					{%- endif %}
 						&#160;第&#160;<font color="#0088cc">{{customer.page}}</font>&#160;页&#160;
 						&#160;共&#160;<font color="#0088cc">{{customer.pages}}</font>&#160;页&#160;
-					{%- if customer.has_prev %}
+					{%- if customer.has_next %}
 						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/new_dksq/{{belong_customer_type}}/{{customer.next_num}}')">&gt;&gt;</span>
 					{%- else %}
 						<span style="CURSOR: pointer">&gt;&gt;</span>

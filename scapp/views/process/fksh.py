@@ -39,11 +39,19 @@ def fksh_search(page):
     # 打印sql: print db.session.query(SC_Loan_Apply,SC_Apply_Info).join(SC_Apply_Info)
     # loan_apply = db.session.query(SC_Loan_Apply,SC_Apply_Info).join(SC_Apply_Info)
     # loan_apply = SC_Loan_Apply.query.order_by("id").paginate(page, per_page = PER_PAGE)
-    loan_apply = View_Query_Loan.query.filter('process_status=:process_status',
-        or_('examiner_1=:examiner_1','examiner_2=:examiner_2','approver=:approver')).params(
-        process_status=PROCESS_STATUS_DKFKJH,examiner_1=current_user.id,examiner_2=current_user.id,
-        approver=current_user.id).paginate(page, per_page = PER_PAGE)
-    return render_template("Process/fksh/fksh.html",loan_apply=loan_apply)
+    customer_name = request.form['customer_name']
+    loan_type = request.form['loan_type']
+    sql = ""
+    if loan_type != '0':
+        sql = "loan_type='"+loan_type+"' and "
+    sql += " process_status='"+PROCESS_STATUS_DKFKJH+"'"
+    sql += " and (examiner_1="+str(current_user.id)+" or examiner_2="+str(current_user.id)+" or approver="+str(current_user.id)+")"
+
+    if customer_name:
+        sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
+
+    loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    return render_template("Process/fksh/fksh.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
 
 # 放款审核——跳转到放款审核(放款信息)
 @app.route('/Process/fksh/goto_edit_fksh/<int:id>', methods=['GET'])

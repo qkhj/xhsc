@@ -53,8 +53,18 @@ def dksqsh_search(page):
     # 打印sql: print db.session.query(SC_Loan_Apply,SC_Apply_Info).join(SC_Apply_Info)
     # loan_apply = db.session.query(SC_Loan_Apply,SC_Apply_Info).join(SC_Apply_Info)
     # loan_apply = SC_Loan_Apply.query.order_by("id").paginate(page, per_page = PER_PAGE)
-    loan_apply = View_Query_Loan.query.filter('process_status=:process_status').params(process_status=PROCESS_STATUS_DKSQ).paginate(page, per_page = PER_PAGE)
-    return render_template("Process/dksqsh/dksqsh.html",loan_apply=loan_apply)
+    customer_name = request.form['customer_name']
+    loan_type = request.form['loan_type']
+    sql = ""
+    if loan_type != '0':
+        sql = "loan_type='"+loan_type+"' and "
+    sql += " process_status='"+PROCESS_STATUS_DKSQ+"'"
+
+    if customer_name:
+        sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
+
+    loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    return render_template("Process/dksqsh/dksqsh.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
 
 # 跳转到编辑贷款申请审核信息
 @app.route('/Process/dksqsh/goto_edit_dksqsh/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])
