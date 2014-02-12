@@ -14,7 +14,7 @@
 </head>
 
 <body>
-	<form id="content" class="content">
+	<form id="content" method="POST" class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">信息管理</a>/<a href="#">客户信息管理</a>
 			<input type="hidden" name="manager" value="{{manager}}">
@@ -65,7 +65,7 @@
 				{%- endif %}
 				&#160;第&#160;<font color="#0088cc">{{customer.page}}</font>&#160;页&#160;
 				&#160;共&#160;<font color="#0088cc">{{customer.pages}}</font>&#160;页&#160;
-				{%- if customer.has_prev %}
+				{%- if customer.has_next %}
 					<span style="CURSOR: pointer" onclick="submitForm('content','/Information/khxxgl_search/{{customer.next_num}}')">&gt;&gt;</span>
 				{%- else %}
 					<span style="CURSOR: pointer">&gt;&gt;</span>

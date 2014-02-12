@@ -48,48 +48,10 @@
 					<td class="table-label">负责管理客户经理<font class="red">*</font></td>
 					<td>
 						<input type="text" id="manager_name" value="{{customer.user_for_company.login_name}}" readonly/>
-						<input type="button" value="搜索" class="btn" onclick="$('.display-div').show();" />
 						<span id="manager_name_spay">
 							<input type="hidden" id="manager" name="manager" value="{{customer.manager}}"/>
 							<span class="textfieldRequiredMsg">不能为空</span>
 						</span>
-						
-						<div class="display-div" id="xdyss"><!--onmouseleave="setTimeout(function(){$('.display-div').hide();},3000)"-->
-							<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
-							<div style="border:1px solid #94c1dc;">
-								<table class="table-list">
-									<tr>
-										<td class="table-label">客户经理编号</td>
-										<td><input type="text"/></td>	
-										<td class="table-label">客户经理名称</td>
-										<td><input type="text"/></td>	
-									</tr>
-								</table>
-							</div>																		
-							<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
-							<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
-							<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
-							<div style="border:1px solid #94c1dc;">
-								<table class="table-list">
-									<thead>
-										<tr>
-											<th>选择</th>	
-											<th>客户经理编号</th>										
-											<th>客户经理名称</th>												
-										</tr>
-									</thead>
-									<tbody class="center">
-										{%- for obj in user %}
-										<tr>
-											<td><input type="radio" name="xdy" onclick="get_name(this,'manager_name','manager');"/></td>		
-											<td>{{obj.id}}</td>												
-											<td>{{obj.real_name}}</td>												
-										</tr>		
-										{%- endfor %}											
-									</tbody>
-								</table>
-							</div>
-						</div><!--/display-div-->
 					</td>	
 				</tr>
 				<tr>							
