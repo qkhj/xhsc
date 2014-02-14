@@ -8,8 +8,8 @@
 	<meta name="author" content="Muhammad Usman">
 
 	<!-- The styles -->
-	<link href="/static/css/bootstrap.css" rel="stylesheet">
-	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="../../../static/css/bootstrap.css" rel="stylesheet">
+	<link href="../../../static/css/main.css" rel="stylesheet">
 	<style type="text/css">	
 		input[type=text]{width:40px;padding:0;}	
 		input.btn-mini{width:20px;}
@@ -19,7 +19,7 @@
 	</style>
 	<script type="text/javascript">
 		function set(){
-			$("input[name]").change();			
+			$("input[name]").blur();			
 		}
 	</script>
 </head>
@@ -28,7 +28,7 @@
 	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_xjlfx/{{id}}" target="_parent">
 	<!--*****************************************现金流分析**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">现金流分析</span>
-		<select name="" onchange="xjlfx(this)" disabled>			
+		<select name="" onchange="xjlfx(this)" disabled style="display:none"> 			
 			<option value="1">业务展望</option>
 			<option value="0">业务历史</option>
 		</select>
@@ -52,23 +52,24 @@
 					<td class="table-label" rowspan="2">合计</td>		
 				</tr>	
 				<tr class="center" id="ywzw">
-					<td class="table-label" style="width:230px">以人民币为计价单位</td>								
-					<td class="table-label" name="month">0</td>
-					<td class="table-label" name="month">1</td>
-					<td class="table-label" name="month">2</td>
-					<td class="table-label" name="month">3</td>
-					<td class="table-label" name="month">4</td>
-					<td class="table-label" name="month">5</td>
-					<td class="table-label" name="month">6</td>
-					<td class="table-label" name="month">7</td>
-					<td class="table-label" name="month">8</td>
-					<td class="table-label" name="month">9</td>
-					<td class="table-label" name="month">10</td>
-					<td class="table-label" name="month">11</td>
-					<td class="table-label" name="month">12</td>
-					<td class="table-label" rowspan="2">合计</td>		
+					<td class="table-label" style="width:230px">月份</td>								
+					<td class="table-label" name="month" style="display:none;">0</td>
+					<td class="table-label" name="month">1月</td>
+					<td class="table-label" name="month">2月</td>
+					<td class="table-label" name="month">3月</td>
+					<td class="table-label" name="month">4月</td>
+					<td class="table-label" name="month">5月</td>
+					<td class="table-label" name="month">6月</td>
+					<td class="table-label" name="month">7月</td>
+					<td class="table-label" name="month">8月</td>
+					<td class="table-label" name="month">9月</td>
+					<td class="table-label" name="month">10月</td>
+					<td class="table-label" name="month">11月</td>
+					<td class="table-label" name="month">12月</td>
+					<td class="table-label" name="month">月均</td>
+					<td class="table-label">合计</td>		
 				</tr>	
-				<tr class="center">
+				<!-- <tr class="center">
 					<td class="table-label"></td>								
 					<td class="table-label">调查前</td>
 					<td class="table-label">调查后</td>
@@ -83,295 +84,312 @@
 					<td class="table-label"></td>
 					<td class="table-label"></td>
 					<td class="table-label"></td>	
-				</tr>
+				</tr> -->
 				<tr class="center">
 					<td class="table-label">月初现金(10)</td>								
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[0].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[1].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',1)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[2].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',2)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[3].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',3)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[4].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',4)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[5].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',5)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[6].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',6)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[7].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',7)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[8].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',8)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[9].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',9)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[10].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',10)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[11].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',11)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[12].early_cash}}" onchange="sum(this,'early_cash');add('early_cash','ljxj','qmxj',12)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label" style="display:none;"><input type="text" name="early_cash" value="0" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',0)" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[1].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',1)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[2].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',2)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[3].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',3)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[4].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',4)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[5].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',5)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[6].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',6)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[7].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',7)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[8].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',8)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[9].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[10].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[11].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[12].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="sum">0</span></td>					
 				</tr>	
 				<tr class="center">
 					<td class="table-label">现金销售额(元)</td>								
-					<td><input type="text" name="sale_amount" value="{{cash_flow[0].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[1].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[2].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[3].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[4].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[5].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[6].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[7].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[8].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[9].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[10].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[11].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[12].sale_amount}}" onchange="sum(this,'sale_amount')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td style="display:none;"><input type="text" name="sale_amount" value="0" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[1].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[2].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[3].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[4].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[5].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[6].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[7].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[8].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[9].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[10].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[11].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="sale_amount" value="{{cash_flow[12].sale_amount}}" onblur="sum(this,'sale_amount')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>				
 				</tr>
 				<tr class="center">
 					<td class="table-label">应收账款回收(元)</td>								
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[0].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[1].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[2].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[3].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[4].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[5].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[6].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[7].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[8].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[9].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[10].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[11].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[12].accounts_receivable}}" onchange="sum(this,'accounts_receivable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td style="display:none;"><input type="text" name="accounts_receivable" value="0" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[1].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[2].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[3].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[4].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[5].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[6].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[7].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[8].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[9].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[10].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[11].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_receivable" value="{{cash_flow[12].accounts_receivable}}" onblur="sum(this,'accounts_receivable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>				
 				</tr>
 				<tr class="center">
 					<td class="table-label">客户预付款(元)</td>								
-					<td><input type="text" name="prepaments" value="{{cash_flow[0].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[1].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[2].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[3].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[4].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[5].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[6].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[7].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[8].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[9].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[10].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[11].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[12].prepaments}}" onchange="sum(this,'prepaments')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td style="display:none;"><input type="text" name="prepaments" value="0" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[1].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[2].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[3].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[4].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[5].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[6].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[7].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[8].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[9].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[10].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[11].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="prepaments" value="{{cash_flow[12].prepaments}}" onblur="sum(this,'prepaments')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>				
 				</tr>
 				<tr class="center">
 					<td class="table-label">经营现金流入总额(1)</td>								
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[0].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',0);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[1].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',1);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onkeyup="value=value.replace(/[^0-9]/g,'')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[2].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',2);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[3].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',3);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[4].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',4);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[5].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',5);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[6].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',6);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[7].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',7);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[8].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',8);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[9].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[10].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[11].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[12].total_cash_flow}}" onchange="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label" style="display:none;"><input type="text" name="total_cash_flow" value="0" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',0);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[1].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',1);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[2].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',2);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[3].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',3);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[4].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',4);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[5].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',5);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[6].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',6);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[7].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',7);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[8].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',8);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[9].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[10].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[11].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_flow" value="{{cash_flow[12].total_cash_flow}}" onblur="sum(this,'total_cash_flow');cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="sum">0</span></td>					
 				</tr>	
 				<tr class="center">
 					<td class="table-label">现金购买原材料，服务，货物(元)</td>								
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[0].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[1].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[2].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[3].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[4].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[5].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[6].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[7].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[8].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[9].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[10].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[11].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[12].cash_purchase}}" onchange="sum(this,'cash_purchase')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td style="display:none;"><input type="text" name="cash_purchase" value="0" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[1].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[2].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[3].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[4].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[5].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[6].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[7].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[8].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[9].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[10].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[11].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="cash_purchase" value="{{cash_flow[12].cash_purchase}}" onblur="sum(this,'cash_purchase')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>			
 				</tr>
 				
 				<tr class="center">
 					<td class="table-label">应付账款的支付(元)</td>					
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[0].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[1].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[2].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[3].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[4].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[5].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[6].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[7].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[8].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[9].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[10].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[11].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[12].accounts_payable}}" onchange="sum(this,'accounts_payable')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="accounts_payable" value="0" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[1].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[2].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[3].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[4].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[5].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[6].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[7].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[8].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[9].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[10].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[11].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" value="{{cash_flow[12].accounts_payable}}" onblur="sum(this,'accounts_payable')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>							
 				</tr>	
 				<tr class="center">
 					<td class="table-label">购货的预付款项(原材料，服务费)</td>					
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[0].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[1].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[2].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[3].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[4].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[5].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[6].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[7].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[8].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[9].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[10].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[11].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[12].advance_purchases}}" onchange="sum(this,'advance_purchases')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="advance_purchases" value="0" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[1].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[2].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[3].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[4].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[5].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[6].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[7].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[8].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[9].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[10].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[11].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" value="{{cash_flow[12].advance_purchases}}" onblur="sum(this,'advance_purchases')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>
 				<tr class="center">
 					<td class="table-label">经营现金流出总额(2)</td>								
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[0].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',0);cut('total_cash_flow','fkze','yyhdxj',0);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[1].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',1);cut('total_cash_flow','fkze','yyhdxj',1);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[2].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',2);cut('total_cash_flow','fkze','yyhdxj',2);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[3].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',3);cut('total_cash_flow','fkze','yyhdxj',3);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[4].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',4);cut('total_cash_flow','fkze','yyhdxj',4);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[5].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',5);cut('total_cash_flow','fkze','yyhdxj',5);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[6].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',6);cut('total_cash_flow','fkze','yyhdxj',6);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[7].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',7);cut('total_cash_flow','fkze','yyhdxj',7);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[8].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',8);cut('total_cash_flow','fkze','yyhdxj',8);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[9].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',9);cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[10].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',10);cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[11].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',11);cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[12].total_cash_outflow}}" onchange="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label" style="display:none;"><input type="text" name="total_cash_outflow" value="0" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',0);cut('total_cash_flow','fkze','yyhdxj',0);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[1].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',1);cut('total_cash_flow','fkze','yyhdxj',1);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[2].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',2);cut('total_cash_flow','fkze','yyhdxj',2);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[3].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',3);cut('total_cash_flow','fkze','yyhdxj',3);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[4].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',4);cut('total_cash_flow','fkze','yyhdxj',4);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[5].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',5);cut('total_cash_flow','fkze','yyhdxj',5);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[6].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',6);cut('total_cash_flow','fkze','yyhdxj',6);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[7].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',7);cut('total_cash_flow','fkze','yyhdxj',7);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[8].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',8);cut('total_cash_flow','fkze','yyhdxj',8);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[9].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',9);cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[10].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',10);cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[11].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',11);cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[12].total_cash_outflow}}" onblur="sum(this,'total_cash_outflow');add('total_cash_outflow','fixed_costs','fkze',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="sum">0</span></td>					
 				</tr>
 				<tr class="center">
 					<td class="table-label">工资及劳保(元)</td>					
-					<td><input type="text" name="wage_labor" value="{{cash_flow[0].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[1].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[2].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[3].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[4].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[5].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[6].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[7].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[8].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[9].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[10].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[11].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[12].wage_labor}}" onchange="sum(this,'wage_labor')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="wage_labor" value="0" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[1].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[2].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[3].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[4].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[5].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[6].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[7].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[8].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[9].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[10].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[11].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" value="{{cash_flow[12].wage_labor}}" onblur="sum(this,'wage_labor')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>	
 				<tr class="center">
 					<td class="table-label">税收(元)</td>					
-					<td><input type="text" name="tax" value="{{cash_flow[0].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[1].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[2].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[3].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[4].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[5].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[6].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[7].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[8].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[9].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[10].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[11].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[12].tax}}" onchange="sum(this,'tax')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="tax" value="0" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[1].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[2].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[3].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[4].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[5].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[6].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[7].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[8].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[9].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[10].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[11].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" value="{{cash_flow[12].tax}}" onblur="sum(this,'tax')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>	
 				<tr class="center">
 					<td class="table-label">交通费用(元)</td>					
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[0].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[1].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[2].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[3].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[4].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[5].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[6].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[7].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[8].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[9].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[10].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[11].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[12].transportation_costs}}" onchange="sum(this,'transportation_costs')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="transportation_costs" value="0" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[1].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[2].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[3].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[4].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[5].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[6].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[7].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[8].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[9].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[10].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[11].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" value="{{cash_flow[12].transportation_costs}}" onblur="sum(this,'transportation_costs')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>						
 				</tr>	
 				<tr class="center">
 					<td class="table-label">租金(元)</td>					
-					<td><input type="text" name="rent" value="{{cash_flow[0].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[1].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[2].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[3].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[4].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[5].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[6].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[7].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[8].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[9].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[10].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[11].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[12].rent}}" onchange="sum(this,'rent')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="rent" value="0" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[1].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[2].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[3].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[4].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[5].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[6].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[7].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[8].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[9].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[10].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[11].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" value="{{cash_flow[12].rent}}" onblur="sum(this,'rent')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>						
 				</tr>	
 				<tr class="center">
 					<td class="table-label">维护费(元)</td>					
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[0].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[1].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[2].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[3].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[4].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[5].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[6].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[7].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[8].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[9].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[10].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[11].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[12].maintenance_fees}}" onchange="sum(this,'maintenance_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="maintenance_fees" value="0" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[1].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[2].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[3].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[4].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[5].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[6].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[7].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[8].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[9].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[10].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[11].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" value="{{cash_flow[12].maintenance_fees}}" onblur="sum(this,'maintenance_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>						
 				</tr>
 				<tr class="center">
 					<td class="table-label">水电费(元)</td>					
-					<td><input type="text" name="utility_bills" value="{{cash_flow[0].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[1].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[2].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[3].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[4].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[5].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[6].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[7].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[8].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[9].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[10].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[11].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[12].utility_bills}}" onchange="sum(this,'utility_bills')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="utility_bills" value="0" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[1].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[2].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[3].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[4].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[5].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[6].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[7].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[8].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[9].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[10].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[11].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" value="{{cash_flow[12].utility_bills}}" onblur="sum(this,'utility_bills')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>						
 				</tr>
 				<tr class="center">
 					<td class="table-label">广告费(元)</td>					
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[0].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[1].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[2].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[3].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[4].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[5].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[6].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[7].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[8].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[9].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[10].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[11].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[12].advertising_fees}}" onchange="sum(this,'advertising_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="advertising_fees" value="0" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[1].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[2].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[3].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[4].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[5].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[6].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[7].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[8].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[9].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[10].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[11].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" value="{{cash_flow[12].advertising_fees}}" onblur="sum(this,'advertising_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>						
 				</tr>
 				<tr class="center">
 					<td class="table-label">交际费(元)</td>					
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[0].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[1].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[2].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[3].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[4].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[5].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[6].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[7].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[8].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[9].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[10].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[11].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[12].social_intercourse_fees}}" onchange="sum(this,'social_intercourse_fees')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="social_intercourse_fees" value="0" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[1].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[2].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[3].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[4].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[5].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[6].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[7].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[8].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[9].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[10].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[11].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[12].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>
 				<tr>
@@ -388,19 +406,20 @@
 										{%- for obj in cash_flow_assist_0 %}
 										<tr class="insideTb">
 											<td style="width:225px"><input type="text" name="name_cash_flow_assist_0" value="{{obj.name}}" style="width:80%"/></td>
-											<td><input type="text" name="month_0" value="{{obj.month_0}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_1" value="{{obj.month_1}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_2" value="{{obj.month_2}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_3" value="{{obj.month_3}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_4" value="{{obj.month_4}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_5" value="{{obj.month_5}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_6" value="{{obj.month_6}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_7" value="{{obj.month_7}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_8" value="{{obj.month_8}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_9" value="{{obj.month_9}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_10" value="{{obj.month_10}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_11" value="{{obj.month_11}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_12" value="{{obj.month_12}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td style="display:none;"><input type="text" name="month_0" value="0" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+											<td><input type="text" name="month_1" value="{{obj.month_1}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_2" value="{{obj.month_2}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_3" value="{{obj.month_3}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_4" value="{{obj.month_4}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_5" value="{{obj.month_5}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_6" value="{{obj.month_6}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_7" value="{{obj.month_7}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_8" value="{{obj.month_8}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_9" value="{{obj.month_9}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_10" value="{{obj.month_10}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_11" value="{{obj.month_11}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_12" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td style="width:80px"><span name="ave">0</span></td>	
 											<td style="width:80px"><span name="sum">0</span></td>	
 										</tr>
 										{%- endfor %}
@@ -412,24 +431,25 @@
 				</tr>
 				<tr class="center">
 					<td class="table-label">总固定成本(3)</td>								
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[0].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',0);cut('total_cash_flow','fkze','yyhdxj',0);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)"  onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[1].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',1);cut('total_cash_flow','fkze','yyhdxj',1);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[2].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',2);cut('total_cash_flow','fkze','yyhdxj',2);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[3].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',3);cut('total_cash_flow','fkze','yyhdxj',3);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[4].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',4);cut('total_cash_flow','fkze','yyhdxj',4);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[5].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',5);cut('total_cash_flow','fkze','yyhdxj',5);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[6].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',6);cut('total_cash_flow','fkze','yyhdxj',6);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[7].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',7);cut('total_cash_flow','fkze','yyhdxj',7);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[8].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',8);cut('total_cash_flow','fkze','yyhdxj',8);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[9].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',9);cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[10].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',10);cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[11].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',11);cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[12].fixed_costs}}" onchange="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label" style="display:none;"><input type="text" name="fixed_costs" value="0" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',0);cut('total_cash_flow','fkze','yyhdxj',0);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)"  onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[1].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',1);cut('total_cash_flow','fkze','yyhdxj',1);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[2].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',2);cut('total_cash_flow','fkze','yyhdxj',2);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[3].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',3);cut('total_cash_flow','fkze','yyhdxj',3);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[4].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',4);cut('total_cash_flow','fkze','yyhdxj',4);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[5].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',5);cut('total_cash_flow','fkze','yyhdxj',5);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[6].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',6);cut('total_cash_flow','fkze','yyhdxj',6);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[7].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',7);cut('total_cash_flow','fkze','yyhdxj',7);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[8].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',8);cut('total_cash_flow','fkze','yyhdxj',8);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[9].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',9);cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[10].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',10);cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[11].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',11);cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[12].fixed_costs}}" onblur="sum(this,'fixed_costs');add('total_cash_outflow','fixed_costs','fkze',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="sum">0</span></td>					
 				</tr>
 				<tr class="center">
 					<td class="table-label">付款总额(4)=(2)+(3)</td>								
-					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[0].fkze}}" readonly/></td>
+					<td class="table-label" style="display:none;"><input type="text" name="fkze" value="0" readonly/></td>
 					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[1].fkze}}" readonly/></td>
 					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[2].fkze}}" readonly/></td>
 					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[3].fkze}}" readonly/></td>
@@ -442,11 +462,12 @@
 					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[10].fkze}}" readonly/></td>
 					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[11].fkze}}" readonly/></td>
 					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[12].fkze}}" readonly/></td>		
+					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="fkze">0</span></td>					
 				</tr>
 				<tr class="center">
 					<td class="table-label">营业活动现金净流量(5)=(1)-(4)</td>								
-					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[0].yyhdxj}}" readonly/></td>
+					<td class="table-label" style="display:none;"><input type="text" name="yyhdxj" value="0" readonly/></td>
 					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[1].yyhdxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[2].yyhdxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[3].yyhdxj}}" readonly/></td>
@@ -459,74 +480,79 @@
 					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[10].yyhdxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[11].yyhdxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[12].yyhdxj}}" readonly/></td>		
+					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="yyhdxj">0</span></td>					
 				</tr>
 				<tr class="center">
 					<td class="table-label">固定资产投资(元)</td>					
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[0].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[1].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[2].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[3].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[4].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[5].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[6].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[7].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[8].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[9].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[10].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[11].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[12].fixed_asset_investment}}" onchange="sum(this,'fixed_asset_investment')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="fixed_asset_investment" value="0" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[1].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[2].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[3].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[4].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[5].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[6].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[7].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[8].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[9].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[10].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[11].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[12].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>				
 				</tr>	
 				<tr class="center">
 					<td class="table-label">固定资产出售(元)</td>					
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[0].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[1].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[2].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[3].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[4].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[5].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[6].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[7].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[8].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[9].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[10].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[11].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[12].disposal_of_fixed_assets}}" onchange="sum(this,'disposal_of_fixed_assets')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="disposal_of_fixed_assets" value="0" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[1].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[2].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[3].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[4].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[5].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[6].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[7].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[8].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[9].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[10].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[11].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[12].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>				
 				</tr>
 				<tr class="center">
 					<td class="table-label">投资活动总现金流(6)</td>								
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[0].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[1].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[2].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[3].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[4].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[5].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[6].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[7].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[8].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[9].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[10].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[11].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[12].investment_cash_flow}}" onchange="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label" style="display:none;"><input type="text" name="investment_cash_flow" value="0" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[1].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[2].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[3].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[4].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[5].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[6].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[7].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[8].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[9].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[10].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[11].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[12].investment_cash_flow}}" onblur="sum(this,'investment_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="sum">0</span></td>					
 				</tr>
 				<tr class="center">
 					<td class="table-label">银行贷款(元)</td>					
-					<td><input type="text" name="bank_loans" value="{{cash_flow[0].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[1].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[2].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[3].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[4].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[5].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[6].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[7].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[8].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[9].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[10].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[11].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[12].bank_loans}}" onchange="sum(this,'bank_loans')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="bank_loans" value="0" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[1].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[2].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[3].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[4].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[5].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[6].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[7].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[8].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[9].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[10].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[11].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" value="{{cash_flow[12].bank_loans}}" onblur="sum(this,'bank_loans')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>
 				<tr>
@@ -543,19 +569,20 @@
 										{%- for obj in cash_flow_assist_1 %}
 										<tr class="insideTb">
 											<td style="width:225px"><input type="text" name="name_cash_flow_assist_1" value="{{obj.name}}" style="width:80%"/></td>
-											<td><input type="text" name="month_0" value="{{obj.month_0}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_1" value="{{obj.month_1}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_2" value="{{obj.month_2}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_3" value="{{obj.month_3}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_4" value="{{obj.month_4}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_5" value="{{obj.month_5}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_6" value="{{obj.month_6}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_7" value="{{obj.month_7}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_8" value="{{obj.month_8}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_9" value="{{obj.month_9}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_10" value="{{obj.month_10}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_11" value="{{obj.month_11}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_12" value="{{obj.month_12}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td style="display:none;"><input type="text" name="month_0" value="0" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+											<td><input type="text" name="month_1" value="{{obj.month_1}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_2" value="{{obj.month_2}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_3" value="{{obj.month_3}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_4" value="{{obj.month_4}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_5" value="{{obj.month_5}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_6" value="{{obj.month_6}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_7" value="{{obj.month_7}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_8" value="{{obj.month_8}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_9" value="{{obj.month_9}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_10" value="{{obj.month_10}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_11" value="{{obj.month_11}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_12" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td style="width:80px"><span name="ave">0</span></td>	
 											<td style="width:80px"><span name="sum">0</span></td>	
 										</tr>
 										{%- endfor %}
@@ -567,19 +594,20 @@
 				</tr>
 				<tr class="center">
 					<td class="table-label">偿还银行贷款本金及利息</td>					
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[0].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[1].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[2].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[3].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[4].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[5].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[6].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[7].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[8].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[9].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[10].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[11].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[12].repayments_bank}}" onchange="sum(this,'repayments_bank')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="repayments_bank" value="0" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[1].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[2].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[3].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[4].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[5].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[6].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[7].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[8].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[9].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[10].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[11].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" value="{{cash_flow[12].repayments_bank}}" onblur="sum(this,'repayments_bank')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>
 				<tr>
@@ -596,19 +624,20 @@
 										{%- for obj in cash_flow_assist_2 %}
 										<tr class="insideTb">
 											<td style="width:225px"><input type="text" name="name_cash_flow_assist_2" value="{{obj.name}}" style="width:80%"/></td>
-											<td><input type="text" name="month_0" value="{{obj.month_0}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_1" value="{{obj.month_1}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_2" value="{{obj.month_2}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_3" value="{{obj.month_3}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_4" value="{{obj.month_4}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_5" value="{{obj.month_5}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_6" value="{{obj.month_6}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_7" value="{{obj.month_7}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_8" value="{{obj.month_8}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_9" value="{{obj.month_9}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_10" value="{{obj.month_10}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_11" value="{{obj.month_11}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_12" value="{{obj.month_12}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td style="display:none;"><input type="text" name="month_0" value="0" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+											<td><input type="text" name="month_1" value="{{obj.month_1}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_2" value="{{obj.month_2}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_3" value="{{obj.month_3}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_4" value="{{obj.month_4}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_5" value="{{obj.month_5}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_6" value="{{obj.month_6}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_7" value="{{obj.month_7}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_8" value="{{obj.month_8}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_9" value="{{obj.month_9}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_10" value="{{obj.month_10}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_11" value="{{obj.month_11}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_12" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td style="width:80px"><span name="ave">0</span></td>	
 											<td style="width:80px"><span name="sum">0</span></td>	
 										</tr>
 										{%- endfor %}
@@ -620,19 +649,20 @@
 				</tr>
 				<tr class="center">
 					<td class="table-label">融资活动总现金流(7)</td>					
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[0].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[1].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[2].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[3].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[4].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[5].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[6].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[7].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[8].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[9].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[10].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[11].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[12].financing_cash_flow}}" onchange="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="financing_cash_flow" value="0" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[1].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[2].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[3].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[4].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[5].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[6].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[7].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[8].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[9].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[10].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[11].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[12].financing_cash_flow}}" onblur="sum(this,'financing_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>
 				<tr>
@@ -649,19 +679,20 @@
 										{%- for obj in cash_flow_assist_3 %}
 										<tr class="insideTb">
 											<td style="width:225px"><input type="text" name="name_cash_flow_assist_3" value="{{obj.name}}" style="width:80%"/></td>
-											<td><input type="text" name="month_0" value="{{obj.month_0}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_1" value="{{obj.month_1}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_2" value="{{obj.month_2}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_3" value="{{obj.month_3}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_4" value="{{obj.month_4}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_5" value="{{obj.month_5}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_6" value="{{obj.month_6}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_7" value="{{obj.month_7}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_8" value="{{obj.month_8}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_9" value="{{obj.month_9}}" onchange="sumqt(this,'month_',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_10" value="{{obj.month_10}}" onchange="sumqt(this,'month_',0)"/></td>
-											<td><input type="text" name="month_11" value="{{obj.month_11}}" onchange="sumqt(this,'month_',0)"/></td>
-											<td><input type="text" name="month_12" value="{{obj.month_12}}" onchange="sumqt(this,'month_',0)"/></td>
+											<td style="display:none;"><input type="text" name="month_0" value="0" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+											<td><input type="text" name="month_1" value="{{obj.month_1}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_2" value="{{obj.month_2}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_3" value="{{obj.month_3}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_4" value="{{obj.month_4}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_5" value="{{obj.month_5}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_6" value="{{obj.month_6}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_7" value="{{obj.month_7}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_8" value="{{obj.month_8}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_9" value="{{obj.month_9}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_10" value="{{obj.month_10}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_11" value="{{obj.month_11}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_12" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td style="width:80px"><span name="ave">0</span></td>	
 											<td style="width:80px"><span name="sum">0</span></td>	
 										</tr>
 										{%- endfor %}
@@ -673,58 +704,61 @@
 				</tr>
 				<tr class="center">
 					<td class="table-label">家庭开支(元)</td>					
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[0].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[1].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[2].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[3].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[4].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[5].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[6].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[7].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[8].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[9].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[10].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[11].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[12].household_expenditure}}" onchange="sum(this,'household_expenditure')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="household_expenditure" value="0" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[1].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[2].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[3].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[4].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[5].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[6].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[7].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[8].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[9].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[10].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[11].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" value="{{cash_flow[12].household_expenditure}}" onblur="sum(this,'household_expenditure')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>	
 				<tr class="center">
 					<td class="table-label">私人使用资金(元)</td>					
-					<td><input type="text" name="private_use" value="{{cash_flow[0].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[1].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[2].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[3].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[4].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[5].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[6].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[7].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[8].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[9].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[10].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[11].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[12].private_use}}" onchange="sum(this,'private_use')" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td style="display:none;"><input type="text" name="private_use" value="0" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[1].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[2].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[3].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[4].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[5].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[6].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[7].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[8].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[9].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[10].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[11].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" value="{{cash_flow[12].private_use}}" onblur="sum(this,'private_use')" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>	
 				<tr class="center">
 					<td class="table-label">私人现金流总额(8)</td>								
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[0].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[1].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[2].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[3].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[4].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[5].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[6].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[7].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[8].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[9].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[10].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[11].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[12].private_cash_flow}}" onchange="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onkeyup="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label" style="display:none;"><input type="text" name="private_cash_flow" value="0" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',0);add('early_cash','ljxj','qmxj',0)" onchange="value=value.replace(/[^0-9]/g,'')" readonly/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[1].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',1);add('early_cash','ljxj','qmxj',1)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[2].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',2);add('early_cash','ljxj','qmxj',2)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[3].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',3);add('early_cash','ljxj','qmxj',3)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[4].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',4);add('early_cash','ljxj','qmxj',4)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[5].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',5);add('early_cash','ljxj','qmxj',5)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[6].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',6);add('early_cash','ljxj','qmxj',6)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[7].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',7);add('early_cash','ljxj','qmxj',7)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[8].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',8);add('early_cash','ljxj','qmxj',8)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[9].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[10].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[11].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[12].private_cash_flow}}" onblur="sum(this,'private_cash_flow');add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="sum">0</span></td>					
 				</tr>
 				<tr class="center">
 					<td class="table-label">累积现金(9)=(5)+(6)+(7)+(8)</td>								
-					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[0].ljxj}}" readonly/></td>
+					<td class="table-label" style="display:none;"><input type="text" name="ljxj" value="0" readonly/></td>
 					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[1].ljxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[2].ljxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[3].ljxj}}" readonly/></td>
@@ -737,11 +771,12 @@
 					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[10].ljxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[11].ljxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[12].ljxj}}" readonly/></td>		
+					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="ljxj">0</span></td>					
 				</tr>
 				<tr class="center">
 					<td class="table-label">期末现金(11)=(10)+(9)</td>								
-					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[0].qmxj}}" readonly/></td>
+					<td class="table-label" style="display:none;"><input type="text" name="qmxj" value="0" readonly/></td>
 					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[1].qmxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[2].qmxj}}"readonly/></td>
 					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[3].qmxj}}" readonly/></td>
@@ -754,6 +789,7 @@
 					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[10].qmxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[11].qmxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[12].qmxj}}" readonly/></td>		
+					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="qmxj">0</span></td>					
 				</tr>
 			</table>
@@ -763,18 +799,12 @@
 		<div class="divBorder">
 			<table class="table-list">
 				<tr>
-					<td class="table-label" style="width:180px">0-12期 现金流出 / 现金流入</td>		
-					<td class="table-label" style="width:80px" rowspan="4">现金流说明</td>	
-					<td rowspan="4"><textarea name=""></textarea></td>
+					<td class="table-label" style="width:180px">现金流分析及说明</td>	
+					<td><textarea name=""></textarea></td>
 				</tr>	
-				<tr>					
-					<td style="text-align:right">%</td>
-				</tr>	
-				<tr class="table-label">					
-					<td>销售成本率</td>
-				</tr>
-				<tr>					
-					<td style="text-align:right">%</td>
+				<tr>
+					<td class="table-label" style="width:180px">0-12期 现金流出 / 现金流入</td>
+					<td><textarea name=""></textarea></td>
 				</tr>					
 			</table>
 		</div>		
@@ -782,10 +812,10 @@
 		<input type="button" value="打印" class="btn btn-info"/>
 	</form>
 
-	<script src="/static/js/jquery-1.7.2.min.js"></script>
-	<script src="/static/js/bootstrap.min.js"></script>
-	<script src="/static/js/script.js"></script>
-	<script src="/static/js/process.js"></script>
+	<script src="../../../static/js/jquery-1.7.2.min.js"></script>
+	<script src="../../../static/js/bootstrap.min.js"></script>
+	<script src="../../../static/js/script.js"></script>
+	<script src="../../../static/js/process.js"></script>
 	<script type="text/javascript">
 		function sum(obj,name){
 			var sum=0;
@@ -801,6 +831,10 @@
 
 			);
 			$(obj).parent().parent().find("span[name=sum]").html(sum)
+			//求月均
+			var ave=parseInt(sum)/12
+			ave=Math.round(ave*100)/100
+			$(obj).parent().parent().find("span[name=ave]").html(ave);
 		}
 		function sumqt(obj,name,num){
 			var sum=0;
@@ -815,6 +849,10 @@
 				}
 			//alert(sum);
 			$(obj).parent().parent().find("span[name=sum]").html(sum);
+			//求月均
+			var ave=parseInt(sum)/12
+			ave=Math.round(ave*100)/100
+			$(obj).parent().parent().find("span[name=ave]").html(ave);
 		}
 		function add(name1,name2,sumname,num){
 			var sum=0;
