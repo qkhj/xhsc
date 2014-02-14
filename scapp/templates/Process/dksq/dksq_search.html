@@ -33,23 +33,17 @@
 				<div style="border:1px solid #94c1dc;">
 					<table class="table-list">
 						<tr>
-							<td class="table-label">贷款编号</td>
-							<td><input type="text"/></td>
+							<td class="table-label">客户/店铺名称</td>
+							<td><input type="text" name="customer_name"/></td>
 							<td class="table-label">贷款类型</td>
 							<td>
-								<select>
-									<option>---全部---</option>
-									<option>微贷</option>
-									<option>小额贷</option>									
+								<select name="loan_type">
+									<option value="0">---全部---</option>
+									<option value="1">微贷</option>
+									<option value="2">小额贷</option>									
 								</select>
 							</td>
-						</tr>
-						<tr>
-							<td class="table-label">客户名称</td>
-							<td><input type="text"/></td>
-							<td class="table-label">客户编号</td>
-							<td><input type="text"/></td>							
-						</tr>									
+						</tr>								
 					</table>
 				</div>
 				<input type="submit" class="btn btn-info" value="搜索"/>

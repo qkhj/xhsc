@@ -24,6 +24,7 @@ from scapp.models import SC_Other_Info
 from scapp.models import SC_Financial_Affairs
 from scapp.models import SC_User
 from scapp.models import SC_Org
+from scapp.models import SC_UserRole
 
 from scapp.models import SC_Credentials_Type
 from scapp.models import SC_Regisiter_Type
@@ -38,19 +39,39 @@ from scapp import app
 @app.route('/Information/khxxgl', methods=['GET'])
 def Information_khxxgl():
     org = SC_Org.query.order_by("id").all()
-    return render_template("Information/khxxgl_search.html",org=org)
+    user = SC_User.query.order_by("id").all()
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    return render_template("Information/khxxgl_search.html",org=org,user=user,role=role)
 	
 # 客户信息搜索
 @app.route('/Information/khxxgl_search/<int:page>', methods=['GET','POST'])
 def khxxgl_search(page):
+	#模糊查询
+	manager = request.form['manager']
+	manager_name = request.form['manager_name']
+	customer_name = request.form['customer_name']
+	credentials_no = request.form['credentials_no']
+
+	sql = "manager="+manager
+	if credentials_no:
+		# 个人
+		if request.form['customer_type'] == 'Individual':
+			sql += " and credentials_no='"+credentials_no+"'"#证件号码
+		else:
+			sql += " and yyzz='"+credentials_no+"'"#营业执照
+	if customer_name:
+		sql += " and customer_name like '%"+customer_name+"%'"
+
 	# 个人
 	if request.form['customer_type'] == 'Individual':
-		individual_customer = SC_Individual_Customer.query.order_by("id").paginate(page, per_page = PER_PAGE)
-		return render_template("Information/khxxgl.html",customer=individual_customer)
+		individual_customer = SC_Individual_Customer.query.filter(sql).order_by("id").paginate(page, per_page = PER_PAGE)
+		return render_template("Information/khxxgl.html",customer=individual_customer,
+			manager=manager,customer_name=customer_name,credentials_no=credentials_no,manager_name=manager_name)
 	# 公司
 	else:
-		company_customer = SC_Company_Customer.query.order_by("id").paginate(page, per_page = PER_PAGE)
-		return render_template("Information/khxxgl.html",customer=company_customer)
+		company_customer = SC_Company_Customer.query.filter(sql).order_by("id").paginate(page, per_page = PER_PAGE)
+		return render_template("Information/khxxgl.html",customer=company_customer,
+			manager=manager,customer_name=customer_name,credentials_no=credentials_no,manager_name=manager_name)
 
 # 跳转到新增客户页面
 @app.route('/Information/new_customer/<int:target_customer_id>', methods=['GET','POST'])

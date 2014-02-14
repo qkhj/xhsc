@@ -58,11 +58,19 @@ def dqdc_search(page):
     # 打印sql: print db.session.query(SC_Loan_Apply,SC_Apply_Info).join(SC_Apply_Info)
     # loan_apply = db.session.query(SC_Loan_Apply,SC_Apply_Info).join(SC_Apply_Info)
     # loan_apply = SC_Loan_Apply.query.order_by("id").paginate(page, per_page = PER_PAGE)
-    loan_apply = View_Query_Loan.query.filter('process_status=:process_status',
-        or_('A_loan_officer=:A_loan_officer','B_loan_officer=:B_loan_officer','yunying_loan_officer=:yunying_loan_officer')).params(
-        process_status=PROCESS_STATUS_DKSQSH,A_loan_officer=current_user.id,B_loan_officer=current_user.id,
-        yunying_loan_officer=current_user.id,).paginate(page, per_page = PER_PAGE)
-    return render_template("Process/dqdc/dqdc.html",loan_apply=loan_apply)
+    customer_name = request.form['customer_name']
+    loan_type = request.form['loan_type']
+    sql = ""
+    if loan_type != '0':
+        sql = "loan_type='"+loan_type+"' and "
+    sql += " process_status='"+PROCESS_STATUS_DKSQSH+"'"
+    sql += " and (A_loan_officer="+str(current_user.id)+" or B_loan_officer="+str(current_user.id)+" or yunying_loan_officer="+str(current_user.id)+")"
+
+    if customer_name:
+        sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
+
+    loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    return render_template("Process/dqdc/dqdc.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
 
 # 贷款调查——微贷信息
 @app.route('/Process/dqdc/dqdc_wd/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])

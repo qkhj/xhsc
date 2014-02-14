@@ -14,9 +14,16 @@
 </head>
 
 <body onload="datepicker();setTimeOut();">	
-	<div class="content">
+	<form id="content" method="POST" class="content">
 		<div class="well place">			
-			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">客户登记</a>
+			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">客户分配</a>
+			{%- if customer_name %}
+				<input type="hidden" name="customer_name" value="{{customer_name}}">
+			{%- else %}
+				<input type="hidden" name="customer_name">
+			{%- endif %}
+			<input type="hidden" name="beg_date" value="{{beg_date}}">
+			<input type="hidden" name="end_date" value="{{end_date}}">
 		</div>		
 		{%- with messages = get_flashed_messages(with_categories=true) %}
 		  	{%- if messages %}
@@ -47,8 +54,14 @@
 					</thead>
 					<tbody class="center">
 						{%- for obj in target_customer.items %}
-						<tr onclick="changeColor(this)">							
-							<td>{{obj.customer_name}}</td>
+						<tr onclick="changeColor(this)">
+							{%- if obj.customer_name %}							
+								<td>{{obj.customer_name}}</td>
+							{%- elif obj.shop_name %}
+								<td>{{obj.shop_name}}</td>
+							{%- elif obj.id %}
+								<td>{{obj.id}}</td>
+							{%- endif %}
 							{%- if obj.reception_type == '1' %}
 							<td>咨询</td>
 							{%- else %}
@@ -71,9 +84,9 @@
 
 							<td>
 								{%- if role.role_level == 0 or role.role_level == 1 %}
-								<select onchange="iframe('Information/khfp/edit_khfp/{{obj.id}}/'+this.value)">
+								<select onchange="submitForm('content','/Information/khfp/edit_khfp/{{target_customer.page}}/{{obj.id}}/'+this.value)">
 								{%- else %}
-								<select onchange="iframe('Information/khfp/edit_khfp/{{obj.id}}/'+this.value)" disabled>
+								<select onchange="submitForm('content','/Information/khfp/edit_khfp/{{target_customer.page}}/{{obj.id}}/'+this.value)" disabled>
 								{%- endif %}
 									<option value="0">未分配</option>
 								{%- for user in users %}
@@ -99,20 +112,20 @@
 			</div>
 			<div class="page-div">
 			{%- if target_customer.has_prev %}
-					<span style="CURSOR: pointer" onclick="iframe('Information/khfp/khfp_search/{{target_customer.prev_num}}')">&lt;&lt;</span>
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Information/khfp/khfp_search/{{target_customer.prev_num}}')">&lt;&lt;</span>
 				{%- else %}
 					<span style="CURSOR: pointer">&lt;&lt;</span>
 				{%- endif %}
 				&#160;第&#160;<font color="#0088cc">{{target_customer.page}}</font>&#160;页&#160;
 				&#160;共&#160;<font color="#0088cc">{{target_customer.pages}}</font>&#160;页&#160;
 				{%- if target_customer.has_next %}
-					<span style="CURSOR: pointer" onclick="iframe('Information/khfp/khfp_search/{{target_customer.next_num}}')">&gt;&gt;</span>
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Information/khfp/khfp_search/{{target_customer.next_num}}')">&gt;&gt;</span>
 				{%- else %}
 					<span style="CURSOR: pointer">&gt;&gt;</span>
 				{%- endif %}
 			</div>
 		</div><!--/row-fluid -->
-	</div><!--/content -->
+	</form><!--/content -->
 	
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/jquery-ui-1.8.21.custom.min.js"></script>

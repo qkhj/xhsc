@@ -76,7 +76,6 @@ def xtgj():
 def xtgl():
     # privileges = SC_UserRole.query.filter_by(user_id=current_user.id).first().role.privileges
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
-    print role.role_level
     return render_template("index.html",menu = 'xtgl',role=role)
 
 #客户经理绩效管理

@@ -20,7 +20,7 @@
 	
 </head>
 
-<body onload="datepicker()">
+<body onload="datepicker();otherJob($('input[name=is_otherjob]:checked').val())">
 	<form class="content" method="POST" action="/Information/edit_individual_customer/{{customer.id}}" target="_top">	
 			
 		<div style="border:1px solid #94c1dc;">		
@@ -94,17 +94,17 @@
 							{%- else %}	
 							<option value="博士">博士</option>	
 							{%- endif %}
-							{%- if customer.degree == '博士' %}	
+							{%- if customer.degree == '硕士' %}	
 							<option value="硕士" slected>硕士</option>	
 							{%- else %}	
 							<option value="硕士">硕士</option>	
 							{%- endif %}
-							{%- if customer.degree == '博士' %}	
+							{%- if customer.degree == '学士' %}	
 							<option value="学士" slected>学士</option>	
 							{%- else %}	
 							<option value="学士">学士</option>	
 							{%- endif %}
-							{%- if customer.degree == '博士' %}	
+							{%- if customer.degree == '其他' %}	
 							<option value="其他" slected>其他</option>	
 							{%- else %}	
 							<option value="其他">其他</option>
@@ -542,6 +542,19 @@
 		var sprytextfield13 = new Spry.Widget.ValidationTextField("mobile", "phone_number", {validateOn:["blur"], format:"phone_custom", pattern:"10000000000", isRequired:false});
 		var sprytextfield16 = new Spry.Widget.ValidationTextField("contact_phone", "integer", {isRequired:false, validateOn:["blur"], minChars:11, maxChars:12});
 		var sprytextfield14 = new Spry.Widget.ValidationTextField("email", "email", {validateOn:["blur"], isRequired:false});
+		
+		function otherJob(value){
+			if(value=="1"){
+				$("#zy").removeAttr("disabled");
+				$("#zw").removeAttr("disabled");
+				$("#zc").removeAttr("disabled");
+			}
+			else{
+				$("#zy").attr("disabled","disabled");
+				$("#zw").attr("disabled","disabled");
+				$("#zc").attr("disabled","disabled");
+			}
+		}
 	</script>
 </body>
 </html>

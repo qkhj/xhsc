@@ -26,7 +26,7 @@
 					<ul class="nav pull-right">
 						<li class="dropdown">
 							<a href="javascript:void(0);" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="icon-user icon-white"></i>&nbsp;{{current_user.login_name}}<b class="caret"></b>
+								<i class="icon-user icon-white"></i>&nbsp;{{current_user.real_name}}<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu" role="menu" aria-labelledby="drop3">
 								<li><a href="javascript:void(0);" onclick="$('#content').hide();$('#content_frame').show();">修改密码</a></li>
@@ -63,9 +63,9 @@
 						<li>
 							<span>用户名：{{current_user.login_name}}</span>
 						</li>
-						<li>
+						<!--<li>
 							<span>所属支行：钟楼支行</span>
-						</li>  
+						</li>  -->
 						<li>
 							<span>用户权限：管理员</span>
 						</li>              

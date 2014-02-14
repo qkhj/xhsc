@@ -166,6 +166,7 @@ class SC_Individual_Customer(db.Model):
     spouse_phone=db.Column(db.String(32))
     spouse_mobile=db.Column(db.String(32))
     is_active = db.Column(db.String(1))
+    is_have_export = db.Column(db.String(1))
     create_user = db.Column(db.Integer)
     create_date = db.Column(db.DateTime)
     modify_user = db.Column(db.Integer)
@@ -226,6 +227,7 @@ class SC_Individual_Customer(db.Model):
         self.spouse_phone=spouse_phone
         self.spouse_mobile=spouse_mobile
         self.is_active = '1'
+        self.is_have_export = '0'
         self.create_user = current_user.id
         self.create_date = datetime.datetime.now()
         self.modify_user = current_user.id
