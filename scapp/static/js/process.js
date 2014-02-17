@@ -53,7 +53,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='guarantee_amount' onkeyup='setJe(this);' maxlength='11' /><br/>"+
-										"<span class='je'>￥</span>"+
+										"<span class='je'>人民币</span>"+
 										"<span class='errorInfo'></span>"+				
 									"</span>"+
 								"</td>"	+
@@ -92,14 +92,14 @@ function addTd(table,frameid){
 								"<td>" +
 									"<span>	" +
 										"<input type='text' name='appraisal' onkeyup='setJe(this);' maxlength='11' class='tbInput'/><br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
 								"<td>" +
 									"<span>	" +
 										"<input type='text' name='mortgage' onkeyup='setJe(this);' maxlength='11' class='tbInput'/><br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -175,7 +175,7 @@ function addTd(table,frameid){
 								"<td>" +
 									"<span>	" +
 										"<input type='text' name='loan_amount' onkeyup='setJe(this);' maxlength='11' class='tbInput'/><br/>" +
-										"<span class='je'>￥</span>	" +
+										"<span class='je'>人民币</span>	" +
 										"<span class='errorInfo'></span>" +					
 									"</span>" +
 								"</td>" +	
@@ -225,7 +225,7 @@ function addTd(table,frameid){
 								"<td>" +
 									"<span>	" +
 										"<input type='text' name='overage' onkeyup='setJe(this);' maxlength='11' class='tbInput'/><br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>	" +
@@ -310,7 +310,7 @@ function addTd(table,frameid){
 								"<td>" +
 									"<span>	" +
 										"<input type='text' name='monthly_income' onkeyup='setJe(this);' maxlength='11' class='tbInput'/><br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>		" +				
 									"</span>" +
 								"</td>" +
@@ -376,7 +376,7 @@ function addTd(table,frameid){
 								"<td>" +
 									"<span>	" +
 										"<input type='text' name='monthly_income' value='' onkeyup='setJe(this);' maxlength='11' class='tbInput' onclick='setJe(this);'/><br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -420,14 +420,14 @@ function addTd(table,frameid){
 								"<td>" +
 									"<span>	" +
 										"<input type='text' name='appraisal' value='' onkeyup='setJe(this);' maxlength='11' class='tbInput' onclick='setJe(this)'/><br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>		" +				
 									"</span>" +
 								"</td>" +
 								"<td>" +
 									"<span>	" +
 										"<input type='text' name='mortgage' value='' onkeyup='setJe(this);' maxlength='11' class='tbInput' onclick='setJe(this)'/><br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>		" +		
@@ -450,7 +450,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_0' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -460,7 +460,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_1' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -478,7 +478,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_2' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -488,7 +488,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_3' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -506,7 +506,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_4' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -516,7 +516,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_5' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -534,7 +534,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_6' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -544,7 +544,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_7' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -562,7 +562,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_10' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -572,7 +572,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_11' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -590,7 +590,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_12' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -600,7 +600,7 @@ function addTd(table,frameid){
 									"<span>	" +
 										"<input type='text' name='value_13' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
-										"<span class='je'>￥</span>" +
+										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
@@ -670,28 +670,28 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='' onkeyup='setJe(this);' onclick='setJe(this)' maxlength='11'/><br/>"+
-										"<span  class='je'>￥</span>"+
+										"<span  class='je'>人民币</span>"+
 										"<span class='errorInfo'></span>		"+						
 									"</span>"+
 								"</td>"+
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='' onkeyup='setJe(this);' onclick='setJe(this)' maxlength='11'/><br/>"+
-										"<span  class='je'>￥</span>"+
+										"<span  class='je'>人民币</span>"+
 										"<span class='errorInfo'></span>	"+							
 									"</span>"+
 								"</td>"+
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='' onkeyup='setJe(this);' onclick='setJe(this)' maxlength='11'/><br/>"+
-										"<span  class='je'>￥</span>"+
+										"<span  class='je'>人民币</span>"+
 										"<span class='errorInfo'></span>"+								
 									"</span>"+
 								"</td>	"+
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='' onkeyup='setJe(this);' onclick='setJe(this)' maxlength='11'/><br/>"+
-										"<span  class='je'>￥</span>"+
+										"<span  class='je'>人民币</span>"+
 										"<span class='errorInfo'></span>"+								
 									"</span>"+
 								"</td>		"+ */
@@ -916,21 +916,21 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='' onkeyup='setJe(this);' onclick='setJe(this)' style='width:100px;' maxlength='11'/><br/>"+
-										"<span  class='je'>￥</span>"+
+										"<span  class='je'>人民币</span>"+
 										"<span class='errorInfo'></span>		"+						
 									"</span>"+
 								"</td>"+
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='' onkeyup='setJe(this);' onclick='setJe(this)' style='width:100px;' maxlength='11'/><br/>"+
-										"<span  class='je'>￥</span>"+
+										"<span  class='je'>人民币</span>"+
 										"<span class='errorInfo'></span>"+								
 									"</span>"+
 								"</td>"+
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='' onkeyup='setJe(this);' onclick='setJe(this)' style='width:100px;' maxlength='11'/><br/>"+
-										"<span  class='je'>￥</span>"+
+										"<span  class='je'>人民币</span>"+
 										"<span class='errorInfo'></span>		"+						
 									"</span>"+
 								"</td>"+
@@ -982,7 +982,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='account_balance' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+	
 									"</span>"+
 								"</td>"+
@@ -1004,7 +1004,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='account_balance' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>	"+
 								"</td>		"+
@@ -1037,7 +1037,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+	
 								"</td>"+
@@ -1069,7 +1069,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+	
 								"</td>"+
@@ -1108,7 +1108,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>		"+					
 									"</span>"+
 								"</td>		"+	
@@ -1144,14 +1144,14 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='price' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+
 								"</td>"+
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+
 								"</td>	"+
@@ -1188,14 +1188,14 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='price' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+
 								"</td>"+
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+
 								"</td>	"+
@@ -1232,14 +1232,14 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='price' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+
 								"</td>"+
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+
 								"</td>	"+
@@ -1265,7 +1265,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+
 								"</td>	"+		
@@ -1297,7 +1297,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+					
 									"</span>"+
 								"</td>	"+	
@@ -1322,7 +1322,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+
 								"</td>	"+
@@ -1347,7 +1347,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>	"+	
@@ -1376,7 +1376,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>"+							
 									"</span>"+
 								"</td>	"+
@@ -1395,7 +1395,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='loan_amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>"+
@@ -1443,7 +1443,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='banlance' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>	"+	
@@ -1462,7 +1462,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='loan_amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>"+
@@ -1510,7 +1510,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='banlance' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>	"+	
@@ -1529,7 +1529,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='loan_amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>"+
@@ -1577,7 +1577,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='banlance' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>	"+	
@@ -1596,7 +1596,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='loan_amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>"+
@@ -1644,7 +1644,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='banlance' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>	"+	
@@ -1663,7 +1663,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='loan_amount' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>"+
@@ -1711,7 +1711,7 @@ function addTd(table,frameid){
 								"<td>"+
 									"<span>	"+
 										"<input type='text' name='banlance' onkeyup='setJe(this)' maxlength='18'/><br/>"+
-										"<span class='je'>￥</span>	"+
+										"<span class='je'>人民币</span>	"+
 										"<span class='errorInfo'></span>	"+						
 									"</span>"+
 								"</td>	"+	
