@@ -322,7 +322,7 @@ function hjje(obj,value){
     var CN_THOUSAND = "仟";
     var CN_TEN_THOUSAND = "万";
     var CN_HUNDRED_MILLION = "亿";
-    var CN_SYMBOL = "￥";
+    var CN_SYMBOL = "人民币";
     var CN_DOLLAR = "元";
     var CN_TEN_CENT = "角";
     var CN_CENT = "分";
@@ -378,7 +378,7 @@ function hjje(obj,value){
                 $(obj).parent().find(".errorInfo").hide(); 
             } 
             checkInput();
-            return "￥";
+            return "人民币";
         }
         else{
 
