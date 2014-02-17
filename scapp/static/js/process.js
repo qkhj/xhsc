@@ -1738,76 +1738,80 @@ function addTd(table,frameid){
     if(table=="qtfyx"){//其他费用息
         $("#"+table).append("<tr class='insideTb'>"+
 								"<td style='width:225px'><input type='text' name='name_cash_flow_assist_0' value='' style='width:80%'/></td>"+
-								"<td><input type='text' name='month_0' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_1' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_2' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_3' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_4' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_5' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_6' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_7' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_8' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_9' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_10' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_11' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_12' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td style='display:none;'><input type='text' name='month_0' value='' readonly/></td>"+
+								"<td><input type='text' name='month_1' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(1)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_2' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(2)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_3' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(3)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_4' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(4)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_5' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(5)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_6' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(6)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_7' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(7)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_8' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(8)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_9' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(9)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_10' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(10)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_11' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(11)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_12' value='' onblur='sumqt(this,\"month_\",0);zgdcb3(12)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td style='width:80px'><span name='ave'>0</span></td>	"+
 								"<td style='width:80px'><span name='sum'>0</span></td>	"+
 							"</tr>");
     } 
     if(table=="qtjk"){//其他借款
         $("#"+table).append("<tr class='insideTb'>"+
 								"<td style='width:225px'><input type='text' name='name_cash_flow_assist_1' value='' style='width:80%'/></td>"+
-								"<td><input type='text' name='month_0' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_1' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_2' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_3' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_4' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_5' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_6' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_7' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_8' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/ ></td>"+
-								"<td><input type='text' name='month_9' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_10' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_11' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_12' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td style='display:none;' style='display:none;'><input type='text' name='month_0' value='' readonly/></td>"+
+								"<td><input type='text' name='month_1' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(1)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_2' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(2)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_3' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(3)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_4' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(4)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_5' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(5)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_6' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(6)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_7' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(7)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_8' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(8)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/ ></td>"+
+								"<td><input type='text' name='month_9' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(9)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_10' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(10)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_11' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(11)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_12' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(12)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td style='width:80px'><span name='ave'>0</span></td>	"+
 								"<td style='width:80px'><span name='sum'>0</span></td>"+	
 							"</tr>");
     } 
     if(table=="chqtjk"){//偿还其他借款
         $("#"+table).append("<tr class='insideTb'>"+
 								"<td style='width:225px'><input type='text' name='name_cash_flow_assist_2' value='' style='width:80%'/></td>"+
-								"<td><input type='text' name='month_0' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_1' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_2' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_3' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_4' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_5' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_6' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_7' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_8' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_9' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_10' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_11' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_12' value='' onchange='sumqt(this,\"month_\",0)'/></td>"+
+								"<td style='display:none;'><input type='text' name='month_0' value='' readonly/></td>"+
+								"<td><input type='text' name='month_1' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(1)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_2' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(2)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_3' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(3)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_4' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(4)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_5' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(5)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_6' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(6)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_7' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(7)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_8' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(8)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_9' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(9)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_10' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(10)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_11' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(11)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_12' value='' onblur='sumqt(this,\"month_\",0);rzhdzxjl7(12)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td style='width:80px'><span name='ave'>0</span></td>	"+
 								"<td style='width:80px'><span name='sum'>0</span></td>	"+
 							"</tr>");
     }
     if(table=="qtjkxjly"){//其他借款现金来源
         $("#"+table).append("<tr class='insideTb'>"+
 								"<td style='width:225px'><input type='text' name='name_cash_flow_assist_3' value='' style='width:80%'/></td>"+
-								"<td><input type='text' name='month_0' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_1' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_2' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_3' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_4' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_5' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_6' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_7' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_8' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_9' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_10' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_11' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
-								"<td><input type='text' name='month_12' value='' onchange='sumqt(this,\"month_\",0)' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td style='display:none;'><input type='text' name='month_0' value='' readonly/></td>"+
+								"<td><input type='text' name='month_1' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(1)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_2' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(2)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_3' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(3)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_4' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(4)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_5' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(5)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_6' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(6)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_7' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(7)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_8' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(8)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_9' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(9)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_10' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(10)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_11' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(11)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td><input type='text' name='month_12' value='' onblur='sumqt(this,\"month_\",0);srxjlze8(12)' onchange='value=value.replace(/[^0-9]/g,&apos;&apos;)'/></td>"+
+								"<td style='width:80px'><span name='ave'>0</span></td>	"+
 								"<td style='width:80px'><span name='sum'>0</span></td>	"+
 							"</tr>");
     }
