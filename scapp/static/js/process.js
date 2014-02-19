@@ -444,21 +444,21 @@ function addTd(table,frameid){
 	//----------------------贷前调查——资产负债表--------------------------
     if(table=="yfzk"){//现金及银行存款&应付账款
         $("#"+table).append("<tr class='add'>" +
-								"<td><input type='text' name='name_0'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_0'/>"+
 								"<input type='hidden' name='type_0' value='0'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_0' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_0' onkeyup='setJe(this);' onblur='hj(0);sum4(0,2,4,6,8);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
-								"<td><input type='text' name='name_1'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_1'/>"+
 								"<input type='hidden' name='type_1' value='1'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_1' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_1' onkeyup='setJe(this);' onblur='hj(1);sum4(1,3,5,7,9);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
@@ -472,21 +472,21 @@ function addTd(table,frameid){
     }
     if(table=="yszk"){//应收账款&预收账款
         $("#"+table).append("<tr class='add'>" +
-								"<td><input type='text' name='name_2'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_2'/>"+
 								"<input type='hidden' name='type_2' value='2'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_2' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_2' onkeyup='setJe(this);' onblur='hj(2);sum4(0,2,4,6,8);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
-								"<td><input type='text' name='name_3'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_3'/>"+
 								"<input type='hidden' name='type_3' value='3'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_3' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_3' onkeyup='setJe(this);' onblur='hj(3);sum4(1,3,5,7,9);;sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
@@ -500,21 +500,21 @@ function addTd(table,frameid){
     }
     if(table=="yfkx"){//预付款项&短期借款
         $("#"+table).append("<tr class='add'>" +
-								"<td><input type='text' name='name_4'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_4'/>"+
 								"<input type='hidden' name='type_4' value='4'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_4' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_4' onkeyup='setJe(this);' onblur='hj(4);sum4(0,2,4,6,8);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
-								"<td><input type='text' name='name_5'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_5'/>"+
 								"<input type='hidden' name='type_5' value='5'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_5' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_5' onkeyup='setJe(this);' onblur='hj(5);sum4(1,3,5,7,9);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
@@ -528,21 +528,21 @@ function addTd(table,frameid){
     }
     if(table=="ch"){//存货&社会集资
         $("#"+table).append("<tr class='add'>" +
-								"<td><input type='text' name='name_6'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_6'/>"+
 								"<input type='hidden' name='type_6' value='6'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_6' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_6' onkeyup='setJe(this);' onblur='hj(6);sum4(0,2,4,6,8);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
-								"<td><input type='text' name='name_7'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_7'/>"+
 								"<input type='hidden' name='type_7' value='7'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_7' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_7' onkeyup='setJe(this);' onblur='hj(7);sum4(1,3,5,7,9);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
@@ -556,21 +556,21 @@ function addTd(table,frameid){
     }
     if(table=="gdzc"){//固定资产&长期借款
         $("#"+table).append("<tr class='add'>" +
-								"<td><input type='text' name='name_10'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_10'/>"+
 								"<input type='hidden' name='type_10' value='10'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_10' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_10' onkeyup='setJe(this);' onblur='hj(10);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
-										"<span class='errorInfo'></span>	" +					
+										"<span class='errorInfo'></span>" +					
 									"</span>" +
 								"</td>" +
-								"<td><input type='text' name='name_11'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_11'/>"+
 								"<input type='hidden' name='type_11' value='11'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_11' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_11' onkeyup='setJe(this);' onblur='hj(11);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
@@ -584,21 +584,21 @@ function addTd(table,frameid){
     }
     if(table=="qt"){//其他经营资产&其他
         $("#"+table).append("<tr class='add'>" +
-								"<td><input type='text' name='name_12'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_12'/>"+
 								"<input type='hidden' name='type_12' value='12'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_12' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_12' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>" +
-								"<td><input type='text' name='name_13'/>"+
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='name_13'/>"+
 								"<input type='hidden' name='type_13' value='13'></td>" +
 								"<td>" +
 									"<span>	" +
-										"<input type='text' name='value_13' onkeyup='setJe(this);' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_13' onkeyup='setJe(this);' onblur='hj(13);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					

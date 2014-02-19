@@ -15,6 +15,7 @@
 		input.btn-mini{width:20px;}
 		textarea{width:80%;}
 		.table-list .table-label{width:180px;}
+		input[type=text]{width:120px;}
 	</style>
 </head>
 
@@ -25,35 +26,84 @@
 		{%- if balance_sheets %}
 		<div class="divBorder">
 			<table class="table-list" id="yfzk">
-				{%- for obj in balance_sheets %}
-					{%- if obj.loan_type == 0 %}
 					<tr>
-						<td class="table-label">{{obj.items_name}} 
-						<input type="hidden" name="type_0" value="0">
-						<input type="hidden" name="name_0" value="{{obj.items_name}}">
+						<td class="table-label" colspan="2"><b>资产</b></td>
+						<td class="table-label" colspan="2"><b>负债</b></td>
+					</tr>
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 8 %}
+					<tr>
+						<td class="table-label"><b>{{obj.items_name}}</b>
+						<input type="hidden" name="type_8" value="8">
+						<input type="hidden" name="name_8" value="{{obj.items_name}}">
 						</td>
 						<td style="width:340px">
 							<span>	
-								<input type="text" name="value_0" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<input type="text" name="value_8" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+								<br/><span class="je">人民币</span>
+								<span class="errorInfo"></span>						
+							</span>	
+						</td>	
+						{%- endif %}
+
+						{%- if obj.loan_type == 9 %}
+						<td class="table-label"><b>{{obj.items_name}}</b>
+						<input type="hidden" name="type_9" value="9">
+						<input type="hidden" name="name_9" value="{{obj.items_name}}">
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_9" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+								<br/><span class="je">人民币</span>
+								<span class="errorInfo"></span>						
+							</span>	
+						</td>								
+					</tr>	
+					{%- endif %}
+				{%- endfor %}		
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 0 %}
+					<tr>
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}</b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+							{%- endif %}	
+							<input type="hidden" name="type_0" value="0">
+							<input type="hidden" name="name_0" value="{{obj.items_name}}">
+						</td>
+						<td style="width:340px">
+							<span>									
 								{%- if obj.index == 0 %}
+								<input type="text" name="value_0" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('yfzk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('yfzk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('yfzk','dqdcWd_zcfzb');hj(0);hj(1);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_0" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(0);sum4(0,2,4,6,8);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
 							</span>							
 						</td>
 
-						<td class="table-label">{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} 
-						<input type="hidden" name="type_1" value="1">
-						<input type="hidden" name="name_1" value="{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} </b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} 
+							{%- endif %}							
+							<input type="hidden" name="type_1" value="1">
+							<input type="hidden" name="name_1" value="{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}}">
 						</td>
 						<td>
-							<span>	
-								<input type="text" name="value_1" value="{{balance_sheets[balance_sheets.index(obj)+count_0].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<span>									
 								{%- if balance_sheets[balance_sheets.index(obj)+count_0].index == 0 %}
+								<input type="text" name="value_1" value="{{balance_sheets[balance_sheets.index(obj)+count_0].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('yfzk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('yfzk','dqdcWd_zcfzb')" class="btn btn-info btn-mini"/>
+								<input type="button" value="-" onclick="removeTd('yfzk','dqdcWd_zcfzb');hj(0);hj(1);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini"/>
+								{%- else %}
+								<input type="text" name="value_1" value="{{balance_sheets[balance_sheets.index(obj)+count_0].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(1);sum4(1,3,5,7,9);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
@@ -69,32 +119,45 @@
 				{%- for obj in balance_sheets %}
 					{%- if obj.loan_type == 2 %}
 					<tr>
-						<td class="table-label">{{obj.items_name}}
-						<input type="hidden" name="type_2" value="2">
-						<input type="hidden" name="name_2" value="{{obj.items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}} </b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+							{%- endif %}								
+							<input type="hidden" name="type_2" value="2">
+							<input type="hidden" name="name_2" value="{{obj.items_name}}">
 						</td>
 						<td style="width:340px">
-							<span>	
-								<input type="text" name="value_2" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<span>								
 								{%- if obj.index == 0 %}
+								<input type="text" name="value_2" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('yszk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('yszk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('yszk','dqdcWd_zcfzb');hj(2);hj(3);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_2" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(2);sum4(0,2,4,6,8);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
 							</span>						
 						</td>	
-
-						<td class="table-label">{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}}
-						<input type="hidden" name="type_3" value="3">
-						<input type="hidden" name="name_3" value="{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}}</b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}} 
+							{%- endif %}							
+							<input type="hidden" name="type_3" value="3">
+							<input type="hidden" name="name_3" value="{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}}">
 						</td>
 						<td>
-							<span>	
-								<input type="text" name="value_3" value="{{balance_sheets[balance_sheets.index(obj)+count_2].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<span>								
 								{%- if balance_sheets[balance_sheets.index(obj)+count_2].index == 0 %}
+								<input type="text" name="value_3" value="{{balance_sheets[balance_sheets.index(obj)+count_2].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('yszk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('yszk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('yszk','dqdcWd_zcfzb');hj(2);hj(3);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_3" value="{{balance_sheets[balance_sheets.index(obj)+count_2].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(3);sum4(1,3,5,7,9);;sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
@@ -110,32 +173,46 @@
 				{%- for obj in balance_sheets %}
 					{%- if obj.loan_type == 4 %}
 					<tr>
-						<td class="table-label">{{obj.items_name}}
-						<input type="hidden" name="type_4" value="4">
-						<input type="hidden" name="name_4" value="{{obj.items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}</b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+							{%- endif %}
+							<input type="hidden" name="type_4" value="4">
+							<input type="hidden" name="name_4" value="{{obj.items_name}}">
 						</td>
 						<td style="width:340px">
 							<span>	
-								<input type="text" name="value_4" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
 								{%- if obj.index == 0 %}
+								<input type="text" name="value_4" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('yfkx','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('yfkx','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('yfkx','dqdcWd_zcfzb');hj(4);hj(5);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_4" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(4);sum4(0,2,4,6,8);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
 							</span>						
 						</td>	
 
-						<td class="table-label">{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}}
-						<input type="hidden" name="type_5" value="5">
-						<input type="hidden" name="name_5" value="{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}}</b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}}
+							{%- endif %}							
+							<input type="hidden" name="type_5" value="5">
+							<input type="hidden" name="name_5" value="{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}}">
 						</td>
 						<td>
 							<span>	
-								<input type="text" name="value_5" value="{{balance_sheets[balance_sheets.index(obj)+count_4].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
 								{%- if balance_sheets[balance_sheets.index(obj)+count_4].index == 0 %}
+								<input type="text" name="value_5" value="{{balance_sheets[balance_sheets.index(obj)+count_4].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('yfkx','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('yfkx','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('yfkx','dqdcWd_zcfzb');hj(4);hj(5);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_5" value="{{balance_sheets[balance_sheets.index(obj)+count_4].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(5);sum4(1,3,5,7,9);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
@@ -151,32 +228,46 @@
 				{%- for obj in balance_sheets %}
 					{%- if obj.loan_type == 6 %}
 					<tr>
-						<td class="table-label">{{obj.items_name}} 
-						<input type="hidden" name="type_6" value="6">
-						<input type="hidden" name="name_6" value="{{obj.items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}} </b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}} 
+							{%- endif %}
+							<input type="hidden" name="type_6" value="6">
+							<input type="hidden" name="name_6" value="{{obj.items_name}}">
 						</td>
 						<td style="width:340px">
-							<span>	
-								<input type="text" name="value_6" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<span>									
 								{%- if obj.index == 0 %}
+								<input type="text" name="value_6" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('ch','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('ch','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('ch','dqdcWd_zcfzb');hj(6);hj(7);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_6" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(6);sum4(0,2,4,6,8);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
 							</span>	
 						</td>	
 
-						<td class="table-label">{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}} 
-						<input type="hidden" name="type_7" value="7">
-						<input type="hidden" name="name_7" value="{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}} </b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}} 
+							{%- endif %}							
+							<input type="hidden" name="type_7" value="7">
+							<input type="hidden" name="name_7" value="{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}}">
 						</td>
 						<td>
-							<span>	
-								<input type="text" name="value_7" value="{{balance_sheets[balance_sheets.index(obj)+count_6].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<span>									
 								{%- if balance_sheets[balance_sheets.index(obj)+count_6].index == 0 %}
+								<input type="text" name="value_7" value="{{balance_sheets[balance_sheets.index(obj)+count_6].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('ch','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('ch','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('ch','dqdcWd_zcfzb');hj(6);hj(7);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_7" value="{{balance_sheets[balance_sheets.index(obj)+count_6].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(7);sum4(1,3,5,7,9);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
@@ -187,7 +278,7 @@
 				{%- endfor %}													
 			</table>
 		</div>	
-		<div class="divBorder">
+		<!-- <div class="divBorder">
 			<table class="table-list">
 				{%- for obj in balance_sheets %}
 					{%- if obj.loan_type == 8 %}
@@ -221,38 +312,52 @@
 					{%- endif %}
 				{%- endfor %}									
 			</table>
-		</div>
+		</div> -->
 		<div class="divBorder">
 			<table class="table-list" id="gdzc">
 				{%- for obj in balance_sheets %}
 					{%- if obj.loan_type == 10 %}
 					<tr>
-						<td class="table-label">{{obj.items_name}}
-						<input type="hidden" name="type_10" value="10">
-						<input type="hidden" name="name_10" value="{{obj.items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>{{obj.items_name}} </b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+							{%- endif %}							
+							<input type="hidden" name="type_10" value="10">
+							<input type="hidden" name="name_10" value="{{obj.items_name}}">
 						</td>
 						<td style="width:340px">
-							<span>	
-								<input type="text" name="value_10" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<span>									
 								{%- if obj.index == 0 %}
+								<input type="text" name="value_10" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('gdzc','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('gdzc','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('gdzc','dqdcWd_zcfzb');hj(10);hj(11);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_10" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(10);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
 							</span>							
 						</td>	
 
-						<td class="table-label">{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}} 
-						<input type="hidden" name="type_11" value="11">
-						<input type="hidden" name="name_11" value="{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}}  </b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}} 
+							{%- endif %}
+							<input type="hidden" name="type_11" value="11">
+							<input type="hidden" name="name_11" value="{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}}">
 						</td>
 						<td>
-							<span>	
-								<input type="text" name="value_11" value="{{balance_sheets[balance_sheets.index(obj)+count_10].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<span>									
 								{%- if balance_sheets[balance_sheets.index(obj)+count_10].index == 0 %}
+								<input type="text" name="value_11" value="{{balance_sheets[balance_sheets.index(obj)+count_10].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('gdzc','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('gdzc','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('gdzc','dqdcWd_zcfzb');hj(10);hj(11);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_11" value="{{balance_sheets[balance_sheets.index(obj)+count_10].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(11);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
@@ -268,32 +373,46 @@
 				{%- for obj in balance_sheets %}
 					{%- if obj.loan_type == 12 %}
 					<tr>
-						<td class="table-label">{{obj.items_name}}
-						<input type="hidden" name="type_12" value="12">
-						<input type="hidden" name="name_12" value="{{obj.items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>{{obj.items_name}}</b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+							{%- endif %}							
+							<input type="hidden" name="type_12" value="12">
+							<input type="hidden" name="name_12" value="{{obj.items_name}}">
 						</td>
 						<td style="width:340px">
 							<span>	
-								<input type="text" name="value_12" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
 								{%- if obj.index == 0 %}
+								<input type="text" name="value_12" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('qt','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('qt','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('qt','dqdcWd_zcfzb');hj(12);hj(13);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_12" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
 							</span>	
 						</td>	
 
-						<td class="table-label">{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}}
-						<input type="hidden" name="type_13" value="13">
-						<input type="hidden" name="name_13" value="{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}}">
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}}</b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}}
+							{%- endif %}							
+							<input type="hidden" name="type_13" value="13">
+							<input type="hidden" name="name_13" value="{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}}">
 						</td>
 						<td>
-							<span>	
-								<input type="text" name="value_13" value="{{balance_sheets[balance_sheets.index(obj)+count_12].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<span>									
 								{%- if balance_sheets[balance_sheets.index(obj)+count_12].index == 0 %}
+								<input type="text" name="value_13" value="{{balance_sheets[balance_sheets.index(obj)+count_12].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<input type="button" value="+" onclick="addTd('qt','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-								<input type="button" value="-" onclick="removeTd('qt','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+								<input type="button" value="-" onclick="removeTd('qt','dqdcWd_zcfzb');hj(12);hj(13);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)" class="btn btn-info btn-mini" />
+								{%- else %}
+								<input type="text" name="value_13" value="{{balance_sheets[balance_sheets.index(obj)+count_12].content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" onblur="hj(13);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)"/>
 								{%- endif %}
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
@@ -306,38 +425,20 @@
 		</div>	
 		<div class="divBorder">
 			<table class="table-list" id="qt">
-				<tr>
-					<td></td>
-					<td></td>
-					{%- for obj in balance_sheets %}
-						{%- if obj.loan_type == 14 %}
-						<td class="table-label">{{obj.items_name}} 
-						<input type="hidden" name="type_14" value="14">
-						<input type="hidden" name="name_14" value="{{obj.items_name}}">
-						</td>
-						<td>
-							<span>	
-								<input type="text" name="value_14" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
-								<br/><span class="je">人民币</span>
-								<span class="errorInfo"></span>						
-							</span>	
-						</td>		
-						{%- endif %}
-					{%- endfor %}
-												
-				</tr>
+				
 				<tr>
 					<td></td>
 					<td></td>
 					{%- for obj in balance_sheets %}
 						{%- if obj.loan_type == 15 %}
-						<td class="table-label">{{obj.items_name}}  
-						<input type="hidden" name="type_15" value="15">
-						<input type="hidden" name="name_15" value="{{obj.items_name}}">
+						<td class="table-label">
+							<b>{{obj.items_name}}</b>  
+							<input type="hidden" name="type_15" value="15">
+							<input type="hidden" name="name_15" value="{{obj.items_name}}">
 						</td>
 						<td>
 							<span>	
-								<input type="text" name="value_15" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<input type="text" name="value_15" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
 							</span>	
@@ -351,11 +452,18 @@
 					<td></td>
 					{%- for obj in balance_sheets %}
 						{%- if obj.loan_type == 16 %}
-						<td class="table-label">{{obj.items_name}}  
-						<input type="hidden" name="type_16" value="16">
-						<input type="hidden" name="name_16" value="{{obj.items_name}}">
+						<td class="table-label">
+							<b>{{obj.items_name}} </b> 
+							<input type="hidden" name="type_16" value="16">
+							<input type="hidden" name="name_16" value="{{obj.items_name}}">
 						</td>
-						<td><input type="text" name="value_16" value="{{obj.content}}" /></td>		
+						<td>
+							<span>	
+								<input type="text" name="value_16" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+								<br/><span class="je">人民币</span>
+								<span class="errorInfo"></span>						
+							</span>	
+						</td>		
 						{%- endif %}
 					{%- endfor %}
 												
@@ -363,13 +471,14 @@
 				<tr>
 					{%- for obj in balance_sheets %}
 						{%- if obj.loan_type == 17 %}
-						<td class="table-label">{{obj.items_name}} 
-						<input type="hidden" name="type_17" value="17">
-						<input type="hidden" name="name_17" value="{{obj.items_name}}">
+						<td class="table-label">
+							<b>{{obj.items_name}} </b>
+							<input type="hidden" name="type_17" value="17">
+							<input type="hidden" name="name_17" value="{{obj.items_name}}">
 						</td>
 						<td style="width:340px">
 							<span>	
-								<input type="text" name="value_17" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<input type="text" name="value_17" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
 							</span>	
@@ -377,11 +486,18 @@
 						{%- endif %}
 
 						{%- if obj.loan_type == 18 %}
-						<td class="table-label">{{obj.items_name}} 
-						<input type="hidden" name="type_18" value="18">
-						<input type="hidden" name="name_18" value="{{obj.items_name}}">
+						<td class="table-label">
+							<b>{{obj.items_name}}</b> 
+							<input type="hidden" name="type_18" value="18">
+							<input type="hidden" name="name_18" value="{{obj.items_name}}">
 						</td>
-						<td><input type="text" name="value_18" value="{{obj.content}}" /></td>	
+						<td>
+							<span>	
+								<input type="text" name="value_18" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+								<br/><span class="je">人民币</span>
+								<span class="errorInfo"></span>						
+							</span>	
+						</td>	
 						{%- endif %}
 					{%- endfor %}
 													
@@ -392,34 +508,41 @@
 		<div class="divBorder">
 			<table class="table-list" id="qt">
 				<tr>
+					<td></td>
+					<td></td>
 					{%- for obj in balance_sheets %}
-						{%- if obj.loan_type == 19 %}
-						<td class="table-label">{{obj.items_name}} 
-						<input type="hidden" name="type_19" value="19">
-						<input type="hidden" name="name_19" value="{{obj.items_name}}">
-						</td>
-						<td style="width:340px">
-							<span id="profit">
-								<input type="text" style="width:40px;" name="value_19" value="{{obj.content}}"  onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this)" maxlength="4"/>%
-								<span class="errorInfo">请输入0-100的数</span>
-							</span>
-						</td>	
-						{%- endif %}
-
 						{%- if obj.loan_type == 20 %}
-						<td class="table-label">{{obj.items_name}}
-						<input type="hidden" name="type_20" value="20">
-						<input type="hidden" name="name_20" value="{{obj.items_name}}">
+						<td class="table-label">
+							{{obj.items_name}}
+							<input type="hidden" name="type_20" value="20">
+							<input type="hidden" name="name_20" value="{{obj.items_name}}">
 						</td>
-						<td>
-							<span id="profit">
-								<input type="text" style="width:40px;" name="value_20" value="{{obj.content}}"  onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this)" maxlength="4"/>%
-								<span class="errorInfo">请输入0-100的数</span>
-							</span>
-						</td>		
+						<td><input type="text" style="width:60px;" name="value_20" value="{{obj.content}}" readonly/>%</td>		
 						{%- endif %}
 					{%- endfor %}
 												
+				</tr>
+				<tr>
+					{%- for obj in balance_sheets %}		
+						{%- if obj.loan_type == 19 %}
+						<td class="table-label">
+							<b>{{obj.items_name}}</b> 
+							<input type="hidden" name="type_19" value="19">
+							<input type="hidden" name="name_19" value="{{obj.items_name}}">
+						</td>
+						<td style="width:340px"><input type="text" style="width:60px;" name="value_19" value="{{obj.content}}" readonly/>%</td>	
+						{%- endif %}
+					{%- endfor %}		
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 14 %}
+						<td class="table-label" style="width:180px;">
+							{{obj.items_name}} 
+							<input type="hidden" name="type_14" value="14">
+							<input type="hidden" name="name_14" value="{{obj.items_name}}">
+						</td>
+						<td><input type="text" style="width:60px;" name="value_14" value="{{obj.content}}" readonly/>%</td>		
+						{%- endif %}
+					{%- endfor %}				
 				</tr>
 			</table>
 		</div>						
@@ -429,7 +552,7 @@
 				<tr>
 					{%- for obj in balance_sheets %}
 						{%- if obj.loan_type == 21 %}
-						<td class="table-label" style="width:162px;">{{obj.items_name}}
+						<td class="table-label" style="width:180px;">{{obj.items_name}}
 						<input type="hidden" name="type_21" value="21">
 						<input type="hidden" name="name_21" value="{{obj.items_name}}">
 						</td>
@@ -595,31 +718,61 @@
 			</table>
 		</div>	
 		{%- else %}
-		<div class="divBorder">
+		<div class="divBorder">			
 			<table class="table-list" id="yfzk">
 				<tr>
-					<td class="table-label">现金及银行存款(元) 
-					<input type="hidden" name="type_0" value="0">
-					<input type="hidden" name="name_0" value="现金及银行存款(元)">
+					<td class="table-label" colspan="2"><b>资产</b></td>
+					<td class="table-label" colspan="2"><b>负债</b></td>
+				</tr>
+				<tr>
+					<td class="table-label" style="width:162px;"><b>流动资产 </b>
+					<input type="hidden" name="type_8" value="8">
+					<input type="hidden" name="name_8" value="流动资产">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_0" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_8" maxlength="11" value="0" onclick="setJe(this)" readonly/>
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>						
+						</span>	
+					</td>
+					<td class="table-label" style="width:162px;"><b>短期负债</b>
+					<input type="hidden" name="type_9" value="9">
+					<input type="hidden" name="name_9" value="短期负债">
+					</td>
+					<td>
+						<span>	
+							<input type="text" name="value_9" maxlength="11" value="0" onclick="setJe(this)" readonly/>
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>						
+						</span>	
+					</td>		
+				</tr>
+				<tr>
+					<td class="table-label">
+						<b>&nbsp;&nbsp;&nbsp;&nbsp;现金及银行存款</b>
+						<input type="hidden" name="type_0" value="0">
+						<input type="hidden" name="name_0" value="现金及银行存款">
+					</td>
+					<td style="width:340px">
+						<span>	
+							<input type="text" name="value_0" value="0" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('yfzk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('yfzk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('yfzk','dqdcWd_zcfzb');hj(0);hj(1);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>							
 					</td>
-					<td class="table-label">应付账款(元) 
-					<input type="hidden" name="type_1" value="1">
-					<input type="hidden" name="name_1" value="现金及银行存款(元)">
+					<td class="table-label">
+						<b>&nbsp;&nbsp;&nbsp;&nbsp;应付账款</b>
+						<input type="hidden" name="type_1" value="1">
+						<input type="hidden" name="name_1" value="应付账款">
 					</td>
-					<td>
+					<td style="width:340px">
 						<span>	
-							<input type="text" name="value_1" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_1" value="0" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('yfzk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('yfzk','dqdcWd_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('yfzk','dqdcWd_zcfzb');hj(0);hj(1);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini"/>
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>	
@@ -630,28 +783,30 @@
 		<div class="divBorder">
 			<table class="table-list" id="yszk">
 				<tr>
-					<td class="table-label">应收账款(元)
-					<input type="hidden" name="type_2" value="2">
-					<input type="hidden" name="name_2" value="应收账款(元)">
+					<td class="table-label">
+						<b>&nbsp;&nbsp;&nbsp;&nbsp;应收账款</b>
+						<input type="hidden" name="type_2" value="2">
+						<input type="hidden" name="name_2" value="应收账款">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_2" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_2" value="0" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('yszk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('yszk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('yszk','dqdcWd_zcfzb');hj(2);hj(3);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>						
 					</td>
-					<td class="table-label">预收账款(元)
-					<input type="hidden" name="type_3" value="3">
-					<input type="hidden" name="name_3" value="预收账款(元)">
+					<td class="table-label">
+						<b>&nbsp;&nbsp;&nbsp;&nbsp;预收账款</b>
+						<input type="hidden" name="type_3" value="3">
+						<input type="hidden" name="name_3" value="预收账款">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_3" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_3" value="0" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('yszk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('yszk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('yszk','dqdcWd_zcfzb');hj(2);hj(3);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>	
@@ -662,29 +817,31 @@
 		<div class="divBorder">
 			<table class="table-list" id="yfkx">
 				<tr>
-					<td class="table-label">预付款项(元)
-					<input type="hidden" name="type_4" value="4">
-					<input type="hidden" name="name_4" value="预付款项(元)">
+					<td class="table-label">
+						<b>&nbsp;&nbsp;&nbsp;&nbsp;预付账款</b>
+						<input type="hidden" name="type_4" value="4">
+						<input type="hidden" name="name_4" value="预付账款">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_4" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_4" onkeyup="setJe(this);" value="0" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('yfkx','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('yfkx','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('yfkx','dqdcWd_zcfzb');hj(4);hj(5);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>						
 					</td>
-					<td class="table-label">短期借款(元) 
-					<input type="hidden" name="type_5" value="5">
-					<input type="hidden" name="name_5" value="短期借款(元) ">
+					<td class="table-label">
+						<b>&nbsp;&nbsp;&nbsp;&nbsp;短期贷款</b>
+						<input type="hidden" name="type_5" value="5">
+						<input type="hidden" name="name_5" value="短期贷款">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_5" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_5" onkeyup="setJe(this);" value="0" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('yfkx','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('yfkx','dqdcWd_zcfzb')" class="btn btn-info btn-mini" /><br/>
-							<span class="je">人民币</span>
+							<input type="button" value="-" onclick="removeTd('yfkx','dqdcWd_zcfzb');hj(4);hj(5);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
+							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>
 					</td>								
@@ -694,91 +851,66 @@
 		<div class="divBorder">
 			<table class="table-list" id="ch">
 				<tr>
-					<td class="table-label">存货(元) 
-					<input type="hidden" name="type_6" value="6">
-					<input type="hidden" name="name_6" value="存货(元)">
+					<td class="table-label">
+						<b>&nbsp;&nbsp;&nbsp;&nbsp;存货和原材料</b>
+						<input type="hidden" name="type_6" value="6">
+						<input type="hidden" name="name_6" value="存货和原材料">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_6" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_6" onkeyup="setJe(this);" value="0" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('ch','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('ch','dqdcWd_zcfzb')" class="btn btn-info btn-mini" /><br/>
-							<span class="je">人民币</span>
+							<input type="button" value="-" onclick="removeTd('ch','dqdcWd_zcfzb');hj(6);hj(7);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
+							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>	
 					</td>
-					<td class="table-label">社会集资(元) 
-					<input type="hidden" name="type_7" value="7">
-					<input type="hidden" name="name_7" value="社会集资(元)">
+					<td class="table-label">
+						<b>&nbsp;&nbsp;&nbsp;&nbsp;社会集资</b>
+						<input type="hidden" name="type_7" value="7">
+						<input type="hidden" name="name_7" value="社会集资">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_7" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_7" onkeyup="setJe(this);" value="0" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('ch','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('ch','dqdcWd_zcfzb')" class="btn btn-info btn-mini" /><br/>
-							<span class="je">人民币</span>
+							<input type="button" value="-" onclick="removeTd('ch','dqdcWd_zcfzb');hj(6);hj(7);sum4(0,2,4,6,8);sum4(1,3,5,7,9);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20);bl(8,9,19);sdbl(0,2,9,14)" class="btn btn-info btn-mini" />
+							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>	
 					</td>								
 				</tr>													
 			</table>
 		</div>	
-		<div class="divBorder">
-			<table class="table-list">
-				<tr>
-					<td class="table-label" style="width:162px;">流动资产(元) 
-					<input type="hidden" name="type_8" value="8">
-					<input type="hidden" name="name_8" value="流动资产(元)">
-					</td>
-					<td>
-						<span>	
-							<input type="text" name="value_8" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
-							<br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>	
-					</td>
-					<td class="table-label" style="width:162px;">短期负债总计(元) 
-					<input type="hidden" name="type_9" value="9">
-					<input type="hidden" name="name_9" value="短期负债总计(元)">
-					</td>
-					<td>
-						<span>	
-							<input type="text" name="value_9" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
-							<br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>	
-					</td>								
-				</tr>										
-			</table>
-		</div>
+		
 		<div class="divBorder">
 			<table class="table-list" id="gdzc">
 				<tr>
-					<td class="table-label">固定资产 
-					<input type="hidden" name="type_10" value="10">
-					<input type="hidden" name="name_10" value="固定资产">
+					<td class="table-label">
+						<b>固定资产</b> 
+						<input type="hidden" name="type_10" value="10">
+						<input type="hidden" name="name_10" value="固定资产">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_10" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_10" value="0" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('gdzc','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('gdzc','dqdcWd_zcfzb')" class="btn btn-info btn-mini" /><br/>
-							<span class="je">人民币</span>
+							<input type="button" value="-" onclick="removeTd('gdzc','dqdcWd_zcfzb');hj(10);hj(11);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)" class="btn btn-info btn-mini" />
+							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>							
 					</td>
-					<td class="table-label">长期借款(元) 
-					<input type="hidden" name="type_11" value="11">
-					<input type="hidden" name="name_11" value="长期借款(元)">
+					<td class="table-label">
+						<b>长期负债</b>
+						<input type="hidden" name="type_11" value="11">
+						<input type="hidden" name="name_11" value="长期负债">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_11" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_11" value="0" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('gdzc','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('gdzc','dqdcWd_zcfzb')" class="btn btn-info btn-mini" /><br/>
-							<span class="je">人民币</span>
+							<input type="button" value="-" onclick="removeTd('gdzc','dqdcWd_zcfzb');hj(10);hj(11);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)" class="btn btn-info btn-mini" />
+							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>	
 					</td>								
@@ -788,29 +920,31 @@
 		<div class="divBorder">
 			<table class="table-list" id="qt">
 				<tr>
-					<td class="table-label">其他经营资产
-					<input type="hidden" name="type_12" value="12">
-					<input type="hidden" name="name_12" value="其他经营资产">
+					<td class="table-label">
+						<b>其他资产</b>
+						<input type="hidden" name="type_12" value="12">
+						<input type="hidden" name="name_12" value="其他资产">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_12" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_12" value="0" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('qt','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('qt','dqdcWd_zcfzb')" class="btn btn-info btn-mini" /><br/>
-							<span class="je">人民币</span>
+							<input type="button" value="-" onclick="removeTd('qt','dqdcWd_zcfzb');hj(12);hj(13);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)" class="btn btn-info btn-mini" />
+							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>	
 					</td>
-					<td class="table-label">其他
-					<input type="hidden" name="type_13" value="13">
-					<input type="hidden" name="name_13" value="其他">
+					<td class="table-label">
+						<b>其他负债</b>
+						<input type="hidden" name="type_13" value="13">
+						<input type="hidden" name="name_13" value="其他负债">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_13" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_13" value="0" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 							<input type="button" value="+" onclick="addTd('qt','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
-							<input type="button" value="-" onclick="removeTd('qt','dqdcWd_zcfzb')" class="btn btn-info btn-mini" /><br/>
-							<span class="je">人民币</span>
+							<input type="button" value="-" onclick="removeTd('qt','dqdcWd_zcfzb');hj(12);hj(13);sum3(8,10,12,17);sum3(9,11,13,15);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)" class="btn btn-info btn-mini" />
+							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>
 					</td>								
@@ -819,7 +953,7 @@
 		</div>	
 		<div class="divBorder">
 			<table class="table-list" id="qt">
-				<tr>
+				<!-- <tr>
 					<td style="width:170px;"></td>
 					<td></td>
 					<td class="table-label" style="width:162px;">长期负债总计 
@@ -829,24 +963,24 @@
 					<td>
 						<span>	
 							<input type="text" name="value_14" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
-							<br/>
-							<span class="je">人民币</span>
+							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>	
 					</td>								
-				</tr>
+				</tr> -->
 				<tr>
-					<td></td>
-					<td></td>
-					<td class="table-label">总负债  
+					<td style="width:162px;">
+					</td>
+					<td>
+					</td>
+					<td class="table-label"><b>负债总计</b>
 					<input type="hidden" name="type_15" value="15">
-					<input type="hidden" name="name_15" value="总负债">
+					<input type="hidden" name="name_15" value="负债总计">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_15" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
-							<br/>
-							<span class="je">人民币</span>
+							<input type="text" name="value_15" value="0" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>	
 					</td>								
@@ -854,30 +988,41 @@
 				<tr>
 					<td></td>
 					<td></td>
-					<td class="table-label">权益  
+					<td class="table-label"><b>所有者权益</b>
 					<input type="hidden" name="type_16" value="16">
-					<input type="hidden" name="name_16" value="权益">
-					</td>
-					<td><input type="text" name="value_16"/></td>								
-				</tr>
-				<tr>
-					<td class="table-label">总资产 
-					<input type="hidden" name="type_17" value="17">
-					<input type="hidden" name="name_17" value="总资产">
+					<input type="hidden" name="name_16" value="所有者权益">
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_17" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
-							<br/>
-							<span class="je">人民币</span>
+							<input type="text" name="value_16" value="0" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>						
+						</span>	
+					</td>								
+				</tr>
+				<tr>
+					<td class="table-label"><b>资产总计</b>
+					<input type="hidden" name="type_17" value="17">
+					<input type="hidden" name="name_17" value="资产总计">
+					</td>
+					<td>
+						<span>	
+							<input type="text" name="value_17" onkeyup="setJe(this);" value="0" maxlength="11" onclick="setJe(this)" readonly/>
+							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>	
 					</td>
-					<td class="table-label">负债及所有者权益 
+					<td class="table-label"><b>负债及所有者权益总计</b>
 					<input type="hidden" name="type_18" value="18">
-					<input type="hidden" name="name_18" value="负债及所有者权益">
+					<input type="hidden" name="name_18" value="负债及所有者权益总计">
 					</td>
-					<td><input type="text" name="value_18"/></td>								
+					<td>
+						<span>	
+						 	<input type="text" name="value_18" onkeyup="setJe(this);" value="0" maxlength="11" onclick="setJe(this)" readonly/>
+						 	<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>						
+						</span>
+					</td>								
 				</tr>											
 
 			</table>
@@ -885,25 +1030,25 @@
 		<div class="divBorder">
 			<table class="table-list" id="qt">
 				<tr>
-					<td class="table-label" style="width:162px;">流动比率% 
-					<input type="hidden" name="type_19" value="19">
-					<input type="hidden" name="name_19" value="流动比率%">
-					</td>
-					<td style="width:357px;">
-						<span id="profit">
-							<input type="text" style="width:40px;" name="value_19" value="" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this)" maxlength="4"/>%
-							<span class="errorInfo">请输入0-100的数</span>
-						</span>
-					</td>
-					<td class="table-label" style="width:162px;">负债率% 
+					<td></td>
+					<td style="width:340px;"></td>
+					<td class="table-label" style="width:180px;">负债率% 
 					<input type="hidden" name="type_20" value="20">
 					<input type="hidden" name="name_20" value="负债率% ">
 					</td>
-					<td>
-						<span id="profit">
-							<input type="text" style="width:40px;" name="value_20" value="" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this)" maxlength="4"/>%
-							<span class="errorInfo">请输入0-100的数</span>
-						</span>
+					<td><input type="text" style="width:60px;" name="value_20" value="0" readonly/>%</td>								
+				</tr>
+				<tr>
+					<td class="table-label" style="width:180px;"><b>流动比率</b>
+					<input type="hidden" name="type_19" value="19">
+					<input type="hidden" name="name_19" value="流动比率">
+					</td>
+					<td><input type="text" style="width:60px;" name="value_19" value="0" readonly/>%</td>
+					<td class="table-label" style="width:162px;">速动比率 <!--新增-->
+					<input type="hidden" name="type_14" value="31">
+					<input type="hidden" name="name_14" value="速动比率 ">
+					</td>
+					<td><input type="text" style="width:60px;" name="value_14" value="0" readonly/>%</span>
 					</td>								
 				</tr>
 			</table>
@@ -1049,6 +1194,96 @@
 		var num=0;
 		var idCard=0;
 		var phone=0;
+		function hj(num){
+			var sum=0;
+			var length=$("input[name=value_"+num+"]").length;
+			for(i=1;i<length;i++){
+				var a=$("input[name=value_"+num+"]")[i].value;
+				if(a==""){a=0;}else{a=parseInt(a);}
+				sum+=a;
+			}
+			$("input[name=value_"+num+"]")[0].value=sum;
+			$("input[name=value_"+num+"]")[0].click();
+		}
+		function sum4(num1,num2,num3,num4,sumnum){
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			var a3=$("input[name=value_"+num3+"]")[0].value;
+			var a4=$("input[name=value_"+num4+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			if(a3==""){a3=0;}else{a3=parseInt(a3);}
+			if(a4==""){a4=0;}else{a4=parseInt(a4);}
+			sum=a1+a2+a3+a4;
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+			$("input[name=value_"+sumnum+"]")[0].click();
+		}
+		function sum3(num1,num2,num3,sumnum){
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			var a3=$("input[name=value_"+num3+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			if(a3==""){a3=0;}else{a3=parseInt(a3);}
+			sum=a1+a2+a3;
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+			$("input[name=value_"+sumnum+"]")[0].click();
+		}
+		function cut2(num1,num2,sumnum){
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			sum=a1-a2;
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+			$("input[name=value_"+sumnum+"]")[0].click();
+		}
+		function sum2(num1,num2,sumnum){
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			sum=a1+a2;
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+			$("input[name=value_"+sumnum+"]")[0].click();
+		}
+		function bl(num1,num2,sumnum){//比率
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			if(a2=="0"){
+				sum=0
+			}
+			else{
+				sum=a1/a2*100;
+				sum=Math.round(sum*100)/100
+			}
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+		}
+		function sdbl(num1,num2,num3,sumnum){//速动比率
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			var a3=$("input[name=value_"+num3+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			if(a3==""){a3=0;}else{a3=parseInt(a3);}
+			if(a3=="0"){
+				sum=0;
+			}
+			else{
+				sum=(a1+a2)/a3*100;
+				sum=Math.round(sum*100)/100
+			}
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+
+		}
 	</script>
 </body>
 </html>
