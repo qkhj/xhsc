@@ -16,7 +16,7 @@
 	</style>
 </head>
 
-<body onload="datepicker();sub()">	
+<body onload="sub()">	
 	<div class="content">
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
@@ -199,8 +199,8 @@
 		var idCard=0;
 		var phone=0;
 		function sub(){
-			var num=$(".tbData").length;			
-			$("#sub1").text("总笔数："+num);
+			//var num=$(".tbData").length;			
+			//$("#sub1").text("总笔数："+num);
 			for(i=1;i<7;i++){
 				var sum=0;						
 				$.each($(".subData"+i),function(key,val){ 
