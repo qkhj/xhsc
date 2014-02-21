@@ -21,8 +21,8 @@
 
 <body onload="datepicker();">	
 	<form id="KCQD" class="content" method="POST" action="/Process/dqdc/new_zkqd/{{loan_apply_id}}" target="_parent">
-		<!--*****************************************库存信息**************************************************-->
-		<i class="icon-bookmark"></i><span class="titletip">库存信息</span>	
+		<!--*****************************************应收账款信息**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">应收账款信息</span>	
 		<div style="border:1px solid #94c1dc;">	
 			<table class="table-list" id="">	
 				<tr>
@@ -33,8 +33,18 @@
 							<span class="textfieldRequiredMsg">不能为空</span>
 							<span class="errorInfo">字符数不得大于32</span>
 						</span>
-					</td>	
-					<td class="table-label" style="width:150px;">原始金额<font class="red">*</font></td>
+					</td>
+					<td class="table-label">欠款日期<font class="red">*</font></td>
+					<td>
+						<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/>
+					</td>					
+				</tr>
+				<tr>					
+					<td class="table-label">应还款日期<font class="red">*</font></td>
+					<td>
+						<input type="text" name="deadline" class="datepicker" data-date-format="yyyy-mm-dd" readonly/>
+					</td>
+					<td class="table-label" style="width:150px;">应收金额<font class="red">*</font></td>
 					<td>
 						<span id="original_price">	
 							<input type="text" name="original_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
@@ -45,68 +55,7 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="table-label">发生日期<font class="red">*</font></td>
-					<td>
-						<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/>
-						<!-- <span id="yzfsrq">
-							<input type="hidden" id="fsrq"/>
-   							<span class="textfieldRequiredMsg">不能为空</span>
-   						</span> -->
-					</td>
-					<td class="table-label">约定到期日<font class="red">*</font></td>
-					<td>
-						<input type="text" name="deadline" class="datepicker" data-date-format="yyyy-mm-dd" readonly/>
-						<!-- <input type="text" name="deadline" class="datepicker" data-date-format="yyyy-mm-dd" onblur="hiddenInput('yddqr',this)" readonly/>
-						<span id="yzyddqr">
-							<input type="hidden" id="yddqr"/>
-   							<span class="textfieldRequiredMsg">不能为空</span>
-   						</span> -->
-					</td>
-				</tr>
-				<tr>
-					<td class="table-label">现值(元)<font class="red">*</font></td>							
-					<td>
-						<span id="present_price">	
-							<input type="text" name="present_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
-							<span class="textfieldRequiredMsg">不能为空</span><br/>
-							<span class="je">人民币</span>	
-							<span class="errorInfo"></span>							
-						</span>
-					</td>
-					<td class="table-label">合作历史</td>
-					<td>
-						<span>	
-							<input type="text" name="cooperation_history" onchange="spryMaxLength(this,32)"/>
-							<span class="errorInfo">字符数不得大于32</span>
-						</span>
-					</td>
-				</tr>
-				<tr>
-					<td class="table-label">平均账期(月)</td>							
-					<td>
-						<input type="text" name="average_period" onKeyUp="value=value.replace(/\D/g,'')"/>
-					</td>
-					<td class="table-label">交易频率</td>
-					<td>
-						<select name="trading_frequency">
-							<option value="周">周</option>
-							<option value="月">月</option>
-							<option value="季">季</option>
-							<option value="年">年</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td class="table-label">分析期内的交易额(元)<font class="red">*</font></td>							
-					<td>
-						<span id="turnover">	
-							<input type="text" name="turnover" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
-							<span class="textfieldRequiredMsg">不能为空</span><br/>
-							<span class="je">人民币</span>	
-							<span class="errorInfo"></span>							
-						</span>
-					</td>
-					<td class="table-label">支付方式</td>
+					<td class="table-label">应收类别<font class="red">*</font></td>
 					<td>
 						<select name="pay_type">
 							<option value="现金">现金</option>
@@ -115,28 +64,79 @@
 							<option value="短期票据">短期票据</option>
 							<option value="长期票据">长期票据</option>
 						</select>
+					</td>					
+					<td class="table-label">应收对象联系方式<font class="red">*</font></td>							
+					<td>
+						<span id="present_price">
+    						<input type="text" name="present_price" onKeyUp="value=value.replace(/\D/g,'')" maxlength="12"/>
+    						<span class="textfieldRequiredMsg">不能为空</span>
+  							<span class="textfieldInvalidFormatMsg">格式无效</span>
+  							<span class="textfieldMinCharsMsg">格式无效</span>
+  							<span class="textfieldMaxCharsMsg">格式无效</span>
+  						</span>	
+					</td>					
+				</tr>
+				<tr>
+					<td class="table-label">关系/生意模式<font class="red">*</font></td>
+					<td colspan="3">
+						<span id="cooperation_history">	
+							<input type="text" name="cooperation_history" onchange="spryMaxLength(this,32)"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					<!-- </td>
+					<td class="table-label">平均账期(月)</td>							
+					<td> -->
+						<input type="hidden" name="average_period" onKeyUp="value=value.replace(/\D/g,'')"/>
+					<!-- </td>
+					<td class="table-label">交易频率</td>
+					<td> -->
+						<select name="trading_frequency" style="display:none">
+							<option value="周">周</option>
+							<option value="月">月</option>
+							<option value="季">季</option>
+							<option value="年">年</option>
+						</select>
+					<!-- </td>
+				</tr>
+				<tr>
+					<td class="table-label">分析期内的交易额(元)</td>							
+					<td>
+						<span id="turnover">	 -->
+							<input type="hidden" name="turnover" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
+							<!-- <span class="textfieldRequiredMsg">不能为空</span><br/>
+							<span class="je">人民币</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>
+					<td class="table-label">合作历史</td>
+					<td>
+						<span>	 -->
+							<input type="hidden" name="cooperation_history" onchange="spryMaxLength(this,32)"/>
+							<!-- <span class="errorInfo">字符数不得大于32</span>
+						</span>
 					</td>
 				</tr>
 				<tr>
 					<td class="table-label">信息来源</td>	
-					<td>
-						<select name="source">
+					<td> -->
+						<select name="source" style="display:none;">
 							<option value="报刊">报刊</option>
 							<option value="报刊">电视</option>
 						</select>
-					</td>						
+					<!-- </td>						
 					<td class="table-label">其它信息</td>
 					<td>
-						<span>	
-							<input type="text" name="other_info" onchange="spryMaxLength(this,64)" style="width:80%"/>
-							<span class="errorInfo">字符数不得大于64</span>
-						</span>
+						<span>	 -->
+							<input type="hidden" name="other_info" onchange="spryMaxLength(this,64)" style="width:80%"/>
+							<!-- <span class="errorInfo">字符数不得大于64</span>
+						</span> -->
 					</td>
 				</tr>
 			</table>
 		</div>
 		<span class="point">*为必填字段</span><br/>
-		<input type="submit" value="提交" class="btn btn-info"/>
+		<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/>
 	</form>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
@@ -154,10 +154,11 @@
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("original_price", "none");
 		//var sprytextfield1 = new Spry.Widget.ValidationTextField("yzfsrq", "none");
 		//var sprytextfield1 = new Spry.Widget.ValidationTextField("yzyddqr", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("present_price", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("turnover", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("total_price", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("outward", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("present_price", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("cooperation_history", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("total_price", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("outward", "none");
+		var sprytextfield15 = new Spry.Widget.ValidationTextField("present_price", "integer", {validateOn:["blur"], minChars:11, maxChars:12});
 	</script>
 </body>
 </html>
