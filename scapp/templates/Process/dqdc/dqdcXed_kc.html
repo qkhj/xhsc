@@ -15,7 +15,7 @@
 	</style>
 </head>
 
-<body>	
+<body onload="sub()">	
 	<form class="content">
 	<!--*****************************************存货**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">存货清单</span>
@@ -28,27 +28,34 @@
 					<tr>
 						<th>货物名称</th>
 						<th>数量</th>
-						<th>买进单价(单位生产成本)(元)</th>
-						<th>买进总价值(元)</th>							
-						<th>卖出单价(元)</th>
-						<th>卖出总价值(元)</th>						
-						<th>单位毛利率</th>
+						<th>买进单价</th>
+						<th>买进总价值</th>							
+						<!-- <th>卖出单价</th>
+						<th>卖出总价值</th>						
+						<th>单位毛利率</th> -->
 						<th>操作</th>
 					</tr>   
 					{%- for obj in stock %}
 					<tr class="center" onclick="changeColor(this)">
 						<td><a href="#" onclick="iframe('Process/dqdc/edit_kc/{{obj.id}}')">{{obj.name}}</a></td>
-						<td>{{obj.amount}}</td>
+						<td class="subData1">{{obj.amount}}</td>
 						<td>{{obj.purchase_price}}</td>
-						<td>{{obj.purchase_total_price}}</td>
-						<td>{{obj.sell_price}}</td>
+						<td class="subData2">{{obj.purchase_total_price}}</td>
+						<!-- <td>{{obj.sell_price}}</td>
 						<td>{{obj.sell_total_price}}</td>
-						<td>{{obj.pre_rate}}</td>
+						<td>{{obj.pre_rate}}</td> -->
 						<td>
 							<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
 						</td>
 					</tr>		
-					{%- endfor %}				
+					{%- endfor %}
+					<tr>
+						<th>合计</th> 
+						<th id="sub1"></th>
+						<th></th>
+						<th id="sub2"></th>						
+						<th></th>
+					</tr>				
 				</table>
 			</div>
 		</div>
@@ -58,6 +65,29 @@
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>
 	<script src="/static/js/process.js"></script>
-	<script type="text/javascript"></script>
+	<script type="text/javascript">	
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		function sub(){
+			//var num=$(".tbData").length;			
+			//$("#sub1").text("总笔数："+num);
+			for(i=1;i<3;i++){
+				var sum=0;						
+				$.each($(".subData"+i),function(key,val){ 
+					if(val.innerHTML=="")
+						sum=sum;
+					else
+						sum += parseInt(val.innerHTML);
+					if(i==1)
+						$("#sub"+i).html(sum); 
+					else
+						$("#sub"+i).html(sum+"<br/><span class='je'>"+hjje($("#sub"+i),sum)+"</span>"); 	
+				}); 
+			}
+		}
+	</script>
 </body>
 </html>

@@ -34,64 +34,85 @@
 							<span class="errorInfo">字符数不得大于32</span>
 						</span>
 					</td>
-					<td class="table-label">持有人<font class="red">*</font></td>
+					<td class="table-label">购置时间<font class="red">*</font></td>
 					<td>
-						<span id="owner">	
-							<input type="text" name="owner" onchange="spryMaxLength(this,32)"/>
-							<span class="textfieldRequiredMsg">不能为空</span>
-							<span class="errorInfo">字符数不得大于32</span>
-						</span>
-					</td>
+						<input type="text" name="purchase_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/>
+					</td>					
 				</tr>
 				<tr>
-					<td class="table-label">型号或品牌<font class="red">*</font></td>
+					<td class="table-label">原始单价<font class="red">*</font></td>
+					<td>
+						<span id="type_brand">	
+							<input type="text" name="type_brand" maxlength="11" onclick="setJe(this)" onkeyup="setJe(this)" onblur="zjz();zjl()"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>							
+						</span>
+					</td>
+					<!-- <td class="table-label">型号或品牌<font class="red">*</font></td>
 					<td>
 						<span id="type_brand">	
 							<input type="text" name="type_brand" onchange="spryMaxLength(this,32)"/>
 							<span class="textfieldRequiredMsg">不能为空</span>
 							<span class="errorInfo">字符数不得大于32</span>
 						</span>
-					</td>
-					<td class="table-label">购置时间<font class="red">*</font></td>
+					</td> -->
+					<td class="table-label">折旧率<font class="red">*</font></td>
 					<td>
-						<input type="text" name="purchase_date" class="datepicker" data-date-format="yyyy-mm-dd" onblur="hiddenInput('yzsj',this)" readonly/>
-						<span id="yzgzsj">
-							<input type="hidden" id="yzsj"/>
-   							<span class="textfieldRequiredMsg">不能为空</span>
-   						</span>
-					</td>
+						<span id="outward">	
+							<input type="text" name="outward" onchange="check(this,1,100)" onblur="zjl()" onkeyup="value=value.replace(/[^\d]/g,'')" style="width:40px"/>%
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<br/>&nbsp;<span class="errorInfo">请输入1-100的有效数字</span>
+						</span>
+					<!-- </td>
+					<td class="table-label">持有人<font class="red">*</font></td>
+					<td>
+						<span id="owner">	
+							<input type="hidden" name="owner" onchange="spryMaxLength(this,32)"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<span class="errorInfo">字符数不得大于32</span>
+						</span> -->
+					</td>					
 				</tr>
 				<tr>
-					<td class="table-label">购置价格<font class="red">*</font></td>
+					<td class="table-label">数量<font class="red">*</font></td>
+					<td colspan="3">
+						<span id="owner">	
+							<input type="text" name="owner" onKeyUp="value=value.replace(/\D/g,'')" maxlength="18" onblur="zjz();zjl()"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+						</span>					
+					</td>	
+				</tr>
+				<tr>
+					<td class="table-label"><b>总价值</b></td>	
+					<td>
+						<span id="total_price">	
+							<input type="text" name="total_price" onclick="setJe(this)" value="0" readonly/>
+							<span class="textfieldRequiredMsg">不能为空</span><br/>
+							<span class="je">人民币</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>
+					<td class="table-label"><b>折旧后价值</b></td>
 					<td>
 						<span id="purchase_price">	
-							<input type="text" name="purchase_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
+							<input type="text" name="purchase_price" onclick="setJe(this)" value="0" readonly/>
 							<span class="textfieldRequiredMsg">不能为空</span><br/>
 							<span class="je">人民币</span>	
 							<span class="errorInfo"></span>							
 						</span>
-					</td>
+					<!-- </td>
 					<td class="table-label">生产时间<font class="red">*</font></td>	
-					<td>
-						<input type="text" name="production_date" class="datepicker" data-date-format="yyyy-mm-dd" onblur="hiddenInput('yzdate',this)" readonly/>
-						<span id="yzscrq">
+					<td> -->
+						<input type="hidden" name="production_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/>
+					<!-- 	<span id="yzscrq">
 							<input type="hidden" id="yzdate"/>
    							<span class="textfieldRequiredMsg">不能为空</span>
-   						</span>
+   						</span> -->
 					</td>						
 				</tr>				
-				<tr>
-					<td class="table-label">总价<font class="red">*</font></td>
-					<td colspan="3">
-						<span id="total_price">	
-							<input type="text" name="total_price" onkeyup="setJe(this)" maxlength="18"/>
-							<span class="textfieldRequiredMsg">不能为空</span><br/>
-							<span class="je">人民币</span>	
-							<span class="errorInfo"></span>							
-						</span>
-					</td>
-				</tr>
-				<tr>
+				
+				<!-- <tr>
 					<td class="table-label">外观评价<font class="red">*</font></td>
 					<td colspan="3">
 						<span id="outward">	
@@ -100,7 +121,7 @@
 							<span class="errorInfo">字符数不得大于64</span>
 						</span>
 					</td>
-				</tr>					
+				</tr> -->					
 				<tr>	
 					<td class="table-label">备注</td>		
 					<td colspan="3">
@@ -130,11 +151,35 @@
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("name", "none");
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("owner", "none");
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("type_brand", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("yzgzsj", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("purchase_price", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("yzscrq", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("total_price", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("yzgzsj", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("purchase_price", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("yzscrq", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("total_price", "none");
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("outward", "none");
+		function zjz(){
+			var sum=0;
+			var a=$("input[name=type_brand]").val();
+			var b=$("input[name=owner]").val();
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b);}
+			sum=a*b;
+			$("input[name=total_price]").val(sum);
+			$("input[name=total_price]").click();
+		}
+		function zjl(){
+			var sum=0;
+			var a=$("input[name=total_price]").val();
+			var b=$("input[name=outward]").val();
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b)/100;}
+			sum=a*b;
+			$("input[name=purchase_price]").val(sum);
+			$("input[name=purchase_price]").click();
+		}
 	</script>
 </body>
 </html>

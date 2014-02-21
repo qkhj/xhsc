@@ -10,6 +10,7 @@
 	<!-- The styles -->
 	<link href="/static/css/bootstrap.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
 	<!-- ************************验证样式************************-->
 	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
 	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
@@ -23,7 +24,7 @@
 	</script>
 </head>
 
-<body onload="setInput()">	
+<body onload="setInput();datepicker();">	
 	<form id="FDC" class="content" method="POST" action="/Process/dqdc/edit_fdc/{{fixed_assets_estate.id}}" target="_parent">
 	<!--*****************************************新建房地产**************************************************-->
 		<!--*****************************************房地产信息**************************************************-->
@@ -31,7 +32,7 @@
 		<div style="border:1px solid #94c1dc;">	
 			<table class="table-list" id="">	
 				<tr>
-					<td class="table-label">房地产<font class="red">*</font></td>
+					<td class="table-label">房地产名称<font class="red">*</font></td>
 					<td style="width:35%">
 						<span id="name">	
 							<input type="text" name="name" value="{{fixed_assets_estate.name}}" onchange="spryMaxLength(this,32)"/>
@@ -39,17 +40,30 @@
 							<span class="errorInfo">字符数不得大于32</span>
 						</span>
 					</td>
-					<td class="table-label">座落<font class="red">*</font></td>
+					<td class="table-label">购置时间<font class="red">*</font></td>
 					<td>
-						<span id="address">	
-							<input type="text" name="address" value="{{fixed_assets_estate.address}}" onchange="spryMaxLength(this,64)"/>
-							<span class="textfieldRequiredMsg">不能为空</span>
-							<span class="errorInfo">字符数不得大于64</span>
-						</span>
-					</td>
+						<input type="text" name="address" value="{{fixed_assets_estate.address}}" class="datepicker" data-date-format="yyyy-mm-dd" readonly/>						
+					</td>					
 				</tr>
 				<tr>
-					<td class="table-label">建筑面积<font class="red">*</font></td>
+					<td class="table-label">原始单价<font class="red">*</font></td>
+					<td>
+						<span id="gfa">	
+							<input type="text" name="gfa" value="{{fixed_assets_estate.gfa}}" maxlength="11" onblur="zjz();zjl()" onclick="setJe(this)" onkeyup="setJe(this)"/>
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>							
+						</span>
+					</td>
+					<td class="table-label">折旧率<font class="red">*</font></td>
+					<td>
+						<span id="land_area">	
+							<input type="text" name="land_area" value="{{fixed_assets_estate.land_area}}" onblur="zjl()" onchange="check(this,1,100)" onkeyup="value=value.replace(/[^\d]/g,'')" style="width:40px"/>%
+							<span class="textfieldRequiredMsg">不能为空</span>
+							<br/>&nbsp;<span class="errorInfo">请输入1-100的有效数字</span>
+						</span>
+					</td>
+					<!-- <td class="table-label">建筑面积<font class="red">*</font></td>
 					<td>
 						<span id="gfa">	
 							<input type="text" name="gfa" value="{{fixed_assets_estate.gfa}}" onchange="spryMaxLength(this,32)" onkeyup="value=value.replace(/[^\d\.]/g,'')"/>
@@ -64,39 +78,37 @@
 							<span class="textfieldRequiredMsg">不能为空</span>
 							<span class="errorInfo">字符数不得大于32</span>
 						</span>
-					</td>
+					</td> -->
 				</tr>
 				<tr>
-					<td class="table-label">使用年限<font class="red">*</font></td>
-					<td>
+					<td class="table-label">数量<font class="red">*</font></td>
+					<td colspan="3">
 						<span id="life">
-							<input type="text" name="life" value="{{fixed_assets_estate.life}}" onKeyUp="value=value=value.replace(/\D/g,'')" onchange="check(this,0,100)" maxlength="3"/>
+							<input type="text" name="life" value="{{fixed_assets_estate.life}}" onblur="zjz();zjl()" onKeyUp="value=value=value.replace(/\D/g,'')" onchange="check(this,0,100)" maxlength="3"/>
 							<span class="textfieldRequiredMsg">不能为空</span>
 							<span class="errorInfo">请输入0-100的数</span>
 						</span>
-					</td>
-					<td class="table-label">土地性质<font class="red">*</font></td>
-					<td>
-						<select name="land_type">
+					<!-- </td>
+					<td class="table-label">土地性质</td>
+					<td> -->
+						<select name="land_type" style="display:none">
 							<option value="国有出让">国有出让</option>
 						</select>
-					</td>
+					</td>					
 				</tr>				
 				<tr>
-					<td class="table-label">购置价或造价(元)<font class="red">*</font></td>
+					<td class="table-label"><b>总价值</b></td>
 					<td>
-						<span id="purchase_price">	
-							<input type="text" name="purchase_price" value="{{fixed_assets_estate.purchase_price}}" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
-							<span class="textfieldRequiredMsg">不能为空</span><br/>
+						<span>	
+							<input type="text" name="purchase_price" value="{{fixed_assets_estate.purchase_price}}" onclick="setJe(this)" readonly/><br/>
 							<span class="je">人民币</span>	
 							<span class="errorInfo"></span>							
 						</span>
 					</td>
-					<td class="table-label">现价(元)<font class="red">*</font></td>
+					<td class="table-label"><b>折旧后价值</b></td>
 					<td>
-						<span id="price">	
-							<input type="text" name="price" value="{{fixed_assets_estate.price}}" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
-							<span class="textfieldRequiredMsg">不能为空</span><br/>
+						<span>	
+							<input type="text" name="price" value="{{fixed_assets_estate.price}}" onkeyup="setJe(this)" onclick="setJe(this)" readonly/><br/>
 							<span class="je">人民币</span>	
 							<span class="errorInfo"></span>							
 						</span>
@@ -119,6 +131,7 @@
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
 	<script src="/static/js/script.js"></script>
 	<script src="/static/js/process.js"></script>
 	<script type="text/javascript">
@@ -128,12 +141,36 @@
 		var idCard=0;
 		var phone=0;
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("name", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("address", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("address", "none");
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("gfa", "none");
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("land_area", "none");
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("life", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("purchase_price", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("price", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("purchase_price", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("price", "none");
+		function zjz(){
+			var sum=0;
+			var a=$("input[name=gfa]").val();
+			var b=$("input[name=life]").val();
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b);}
+			sum=a*b;
+			$("input[name=purchase_price]").val(sum);
+			$("input[name=purchase_price]").click();
+		}
+		function zjl(){
+			var sum=0;
+			var a=$("input[name=purchase_price]").val();
+			var b=$("input[name=land_area]").val();
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b)/100;}
+			sum=a*b;
+			$("input[name=price]").val(sum);
+			$("input[name=price]").click();
+		}
 	</script>
 </body>
 </html>
