@@ -67,7 +67,16 @@
 							<span>所属支行：钟楼支行</span>
 						</li>  -->
 						<li>
-							<span>用户权限：管理员</span>
+							<!-- 系统管理员 -->
+	                        {%- if role.role_level == 0 %}
+                            <span>用户权限：系统管理员</span>
+                            {%- elif role.role_level == 1 %}
+                            <span>用户权限：主管</span>
+                            {%- elif role.role_level == 2 %}
+                            <span>用户权限：客户经理</span>
+                            {%- elif role.role_level == 3 %}
+                            <span>用户权限：后台运营</span>
+                            {%- endif %}
 						</li>              
 					</ul>
 				</div><!--/.well -->						

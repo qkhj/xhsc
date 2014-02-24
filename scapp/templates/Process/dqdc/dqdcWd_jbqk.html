@@ -755,6 +755,34 @@
 					<td colspan="2" class="table-label"> 日期</td>	
 					<td colspan="2"><input type="text" name="survey_date" class="datepicker" value="{{riskanalysis_and_findings.survey_date}}" data-date-format="yyyy-mm-dd" readonly/></td>	
 				</tr>
+				<tr>
+					<td class="table-label">需要审议的其他内容</td>
+					<td colspan="7">
+						<span>
+							<textarea name="other_deliberations" value="{{riskanalysis_and_findings.other_deliberations}}" style="width:80%" onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>						
+					</td>
+				</tr>	
+				<tr>					
+					<td class="table-label" rowspan="2">正反因素分析</td>
+					<td class="table-label">正</td>
+					<td colspan="4">
+						<span>
+							<textarea name="positive" value="{{riskanalysis_and_findings.positive}}" style="width:80%"onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>	
+					</td>
+				</tr>
+				<tr>
+					<td class="table-label">反</td>
+					<td colspan="4">
+						<span>
+							<textarea name="opposite" value="{{riskanalysis_and_findings.opposite}}" style="width:80%"onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>	
+					</td>
+				</tr>
 			</table>
 		</div>
 	<!--*****************************************调查结论**************************************************-->

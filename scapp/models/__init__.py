@@ -42,3 +42,4 @@ from scapp.models.system import SC_Org
 
 #视图管理
 from scapp.models.views import View_Query_Loan
+from scapp.models.views import View_Get_Cus_Mgr

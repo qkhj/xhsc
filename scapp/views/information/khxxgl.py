@@ -33,13 +33,15 @@ from scapp.models import SC_Industry
 from scapp.models import SC_Business_Type
 from scapp.models import SC_Asset_Type
 
+from scapp.models import View_Get_Cus_Mgr
+
 from scapp import app
 
 # 客户信息管理
 @app.route('/Information/khxxgl', methods=['GET'])
 def Information_khxxgl():
     org = SC_Org.query.order_by("id").all()
-    user = SC_User.query.order_by("id").all()
+    user = View_Get_Cus_Mgr.query.filter("role_level>=2").order_by("id").all()#客户经理
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
     return render_template("Information/khxxgl_search.html",org=org,user=user,role=role)
 	
@@ -52,7 +54,9 @@ def khxxgl_search(page):
 	customer_name = request.form['customer_name']
 	credentials_no = request.form['credentials_no']
 
-	sql = "manager="+manager
+	sql = ""
+	if manager != '0':
+		sql += "manager="+manager
 	if credentials_no:
 		# 个人
 		if request.form['customer_type'] == 'Individual':

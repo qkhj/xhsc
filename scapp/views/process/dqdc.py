@@ -154,7 +154,8 @@ def edit_dqdcWd_jbqk(id):
                 request.form['bool_grant'],request.form['amount'],
                 request.form['deadline'],request.form['rates'],
                 request.form['monthly_repayment'],request.form['approve_reason'],
-                request.form['refuse_reason']).add()
+                request.form['refuse_reason'],request.form['other_deliberations'],
+                request.form['positive'],request.form['opposite']).add()
 
 
         loan_apply = SC_Loan_Apply.query.filter_by(id=id).first()
@@ -324,7 +325,8 @@ def edit_dqdcXed_jbqk(id):
                 request.form['bool_grant'],request.form['amount'],
                 request.form['deadline'],request.form['rates'],
                 request.form['monthly_repayment'],request.form['approve_reason'],
-                request.form['refuse_reason']).add()
+                request.form['refuse_reason'],request.form['other_deliberations'],
+                request.form['positive'],request.form['opposite']).add()
 
         loan_apply = SC_Loan_Apply.query.filter_by(id=id).first()
         loan_apply.process_status = PROCESS_STATUS_DQDC
