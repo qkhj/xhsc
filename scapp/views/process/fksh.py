@@ -15,6 +15,7 @@ from scapp.config import PROCESS_STATUS_SPJY_YTJTG #6.有条件通过
 from scapp.config import PROCESS_STATUS_SPJY_CXDC #6.重新调查
 from scapp.config import PROCESS_STATUS_SPJY_JUJUE #6.拒绝
 
+from scapp.models import SC_UserRole
 from scapp.models import SC_Company_Customer
 from scapp.models import SC_Individual_Customer
 from scapp.models import SC_Loan_Apply
@@ -49,8 +50,13 @@ def fksh_search(page):
     sql = ""
     if loan_type != '0':
         sql = "loan_type='"+loan_type+"' and "
-    sql += " process_status='"+PROCESS_STATUS_DKFKJH+"'"
-    sql += " and (examiner_1="+str(current_user.id)+" or examiner_2="+str(current_user.id)+" or approver="+str(current_user.id)+")"
+
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    if role.role_level == 3:#后台运营岗
+        sql += " process_status='"+PROCESS_STATUS_SPJY_YTJTG+"'"
+    else:
+        sql += " process_status='"+PROCESS_STATUS_DKFKJH+"'"
+        sql += " and (examiner_1="+str(current_user.id)+" or examiner_2="+str(current_user.id)+" or approver="+str(current_user.id)+")"
 
     if customer_name:
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
