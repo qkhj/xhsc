@@ -10,8 +10,13 @@ from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
 from scapp.config import PROCESS_STATUS_DKFKJH
-from scapp.config import PROCESS_STATUS_SPJY
+from scapp.config import PROCESS_STATUS_SPJY_TG #6.审批通过
+from scapp.config import PROCESS_STATUS_SPJY_YTJTG #6.有条件通过
+from scapp.config import PROCESS_STATUS_SPJY_CXDC #6.重新调查
+from scapp.config import PROCESS_STATUS_SPJY_JUJUE #6.拒绝
 
+from scapp.models import SC_Company_Customer
+from scapp.models import SC_Individual_Customer
 from scapp.models import SC_Loan_Apply
 from scapp.models import SC_Apply_Info
 from scapp.models import SC_Riskanalysis_And_Findings
@@ -62,16 +67,23 @@ def goto_edit_fksh(id):
 # 审贷会决议单
 @app.route('/Process/fksh/edit_sdhjyd/<int:loan_apply_id>', methods=['GET'])
 def edit_sdhjyd(loan_apply_id):
+    loan_apply = SC_Loan_Apply.query.filter_by(id=loan_apply_id).first()
     riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=loan_apply_id).first()
     approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=loan_apply_id).first()
     co_borrower = SC_Co_Borrower.query.filter_by(loan_apply_id=loan_apply_id).all()
     guaranty = SC_Guaranty.query.filter_by(loan_apply_id=loan_apply_id).all()
     guaranty = SC_Guaranty.query.filter_by(loan_apply_id=loan_apply_id).all()
     guarantees = SC_Guarantees.query.filter_by(loan_apply_id=loan_apply_id).all()
+
+    if loan_apply.belong_customer_type == 'Company':
+        customer = SC_Company_Customer.query.filter_by(id=loan_apply.belong_customer_value).first()
+    else :
+        customer = SC_Individual_Customer.query.filter_by(id=loan_apply.belong_customer_value).first()
+
     return render_template("Process/fksh/edit_sdhjyd.html",loan_apply_id=loan_apply_id,
-        riskanalysis_and_findings=riskanalysis_and_findings,
-        approval_decision=approval_decision,co_borrower=co_borrower,guaranty=guaranty
-        ,guarantees=guarantees)
+        riskanalysis_and_findings=riskanalysis_and_findings,customer=customer,
+        approval_decision=approval_decision,co_borrower=co_borrower,guaranty=guaranty,
+        guarantees=guarantees)
 
 # 等额本息还款计划
 @app.route('/Process/fksh/edit_debxhkjh/<int:loan_apply_id>', methods=['GET'])
@@ -83,14 +95,11 @@ def edit_debxhkjh(loan_apply_id):
         repayment_plan_detail=repayment_plan_detail)
 
 # 放款审核——编辑放款审核(放款信息)
-@app.route('/Process/fksh/edit_fksh/<int:loan_apply_id>', methods=['POST'])
-def edit_fksh(loan_apply_id):
+@app.route('/Process/fksh/edit_fksh/<int:loan_apply_id>/<type>', methods=['POST'])
+def edit_fksh(loan_apply_id,type):
     try:
         approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=loan_apply_id).first()
         if approval_decision:
-            approval_decision.other_deliberations = request.form['other_deliberations']
-            approval_decision.positive = request.form['positive']
-            approval_decision.opposite = request.form['opposite']
             approval_decision.bool_grant = request.form['bool_grant']
             approval_decision.amount = request.form['amount']
             approval_decision.deadline = request.form['deadline']
@@ -102,19 +111,19 @@ def edit_fksh(loan_apply_id):
             approval_decision.bool_guarantees = request.form['bool_guarantees']
             approval_decision.other_resolution = request.form['other_resolution']
             approval_decision.refuse_reason = request.form['refuse_reason']
+            approval_decision.conditional_pass = request.form['conditional_pass']
 
             approval_decision.modify_user = current_user.id
             approval_decision.modify_date = datetime.datetime.now()
             
         else:
-            SC_Approval_Decision(loan_apply_id,request.form['other_deliberations'],request.form['positive'],
-                request.form['opposite'],request.form['bool_grant'],request.form['amount'],request.form['deadline'],
+            SC_Approval_Decision(loan_apply_id,request.form['bool_grant'],request.form['amount'],request.form['deadline'],
                 request.form['rates'],request.form['repayment_type'],request.form['monthly_repayment'],
                 request.form['bool_co_borrower'],request.form['bool_guaranty'],request.form['bool_guarantees'],
-                request.form['other_resolution'],request.form['refuse_reason']).add()
+                request.form['other_resolution'],request.form['refuse_reason'],request.form['conditional_pass']).add()
 
         loan_apply = SC_Loan_Apply.query.filter_by(id=id).first()
-        loan_apply.process_status = PROCESS_STATUS_SPJY
+        loan_apply.process_status = type
 
         # 事务提交
         db.session.commit()

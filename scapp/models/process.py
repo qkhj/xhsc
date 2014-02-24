@@ -385,6 +385,10 @@ class SC_Riskanalysis_And_Findings(db.Model):
     approve_reason = db.Column(db.String(256)) #建议理由/发放条件
     refuse_reason = db.Column(db.String(256)) #否决原因
 
+    other_deliberations=db.Column(db.String(256))#其他审议内容
+    positive=db.Column(db.String(256))#正
+    opposite=db.Column(db.String(256))#反
+
     create_user = db.Column(db.Integer)
     create_date = db.Column(db.DateTime)
     modify_user = db.Column(db.Integer)
@@ -393,7 +397,8 @@ class SC_Riskanalysis_And_Findings(db.Model):
     def __init__(self,loan_apply_id,analysis_conclusion,amount_recommended,recommended_deadline,
         recommended_rates,monthly_repayment_amount,recommended_way_of_security,income_ratio,
         survey_signature,survey_date,verification,others,bool_grant,amount,deadline,rates,
-        monthly_repayment,approve_reason,refuse_reason):
+        monthly_repayment,approve_reason,refuse_reason,
+        other_deliberations,positive,opposite):
         self.loan_apply_id = loan_apply_id
         self.analysis_conclusion = analysis_conclusion
         self.amount_recommended = amount_recommended
@@ -413,6 +418,9 @@ class SC_Riskanalysis_And_Findings(db.Model):
         self.monthly_repayment = monthly_repayment
         self.approve_reason = approve_reason
         self.refuse_reason = refuse_reason
+        self.other_deliberations = other_deliberations
+        self.positive = positive
+        self.opposite = opposite
         self.create_user = current_user.id
         self.create_date = datetime.datetime.now()
         self.modify_user = current_user.id
@@ -426,9 +434,7 @@ class SC_Approval_Decision (db.Model):
     __tablename__ = 'sc_approval_decision' 
     id = db.Column(db.Integer, primary_key=True)
     loan_apply_id=db.Column(db.Integer)
-    other_deliberations=db.Column(db.String(256))#其他审议内容
-    positive=db.Column(db.String(256))#正
-    opposite=db.Column(db.String(256))#反
+    
     bool_grant = db.Column(db.String(1)) #是否发放(建议)
     amount = db.Column(db.String(32)) #金额(元)
     deadline = db.Column(db.String(32)) #期限
@@ -440,20 +446,17 @@ class SC_Approval_Decision (db.Model):
     bool_guarantees = db.Column(db.Integer)#保证
     other_resolution = db.Column(db.String(256)) #其他决议内容
     refuse_reason = db.Column(db.String(256)) #否决原因
+    conditional_pass = db.Column(db.String(256)) #有条件通过
 
     create_user = db.Column(db.Integer)
     create_date = db.Column(db.DateTime)
     modify_user = db.Column(db.Integer)
     modify_date = db.Column(db.DateTime)
 
-    def __init__(self,loan_apply_id,other_deliberations,positive,opposite,
-        bool_grant,amount,deadline,rates,
+    def __init__(self,loan_apply_id,bool_grant,amount,deadline,rates,
         repayment_type,monthly_repayment,bool_co_borrower,bool_guaranty,bool_guarantees,
-        other_resolution,refuse_reason):
+        other_resolution,refuse_reason,conditional_pass):
         self.loan_apply_id = loan_apply_id
-        self.other_deliberations = other_deliberations
-        self.positive = positive
-        self.opposite = opposite
         self.bool_grant = bool_grant
         self.amount = amount
         self.deadline = deadline
@@ -465,6 +468,7 @@ class SC_Approval_Decision (db.Model):
         self.bool_guarantees = bool_guarantees
         self.other_resolution = other_resolution
         self.refuse_reason = refuse_reason
+        self.conditional_pass = conditional_pass
         self.create_user = current_user.id
         self.create_date = datetime.datetime.now()
         self.modify_user = current_user.id

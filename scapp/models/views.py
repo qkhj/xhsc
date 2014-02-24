@@ -1,7 +1,7 @@
 #coding:utf-8
 from scapp import db
         
-# 贷款用途 loan
+# 获取贷款信息
 class View_Query_Loan(db.Model):
     __tablename__ = 'view_query_loan'
     loan_apply_id = db.Column(db.Integer, primary_key=True)
@@ -27,3 +27,12 @@ class View_Query_Loan(db.Model):
 
     # 外键名称
     #view_marketing_loan_officer_name = db.relationship('SC_User',backref = db.backref('view_marketing_loan_officer_name', lazy = 'dynamic'))
+
+# 获取用户及用户级别
+class View_Get_Cus_Mgr(db.Model):
+    __tablename__ = 'view_get_cus_mgr'
+    id = db.Column(db.Integer, primary_key=True)
+    role_level = db.Column(db.Integer)
+    login_name = db.Column(db.String)
+    real_name = db.Column(db.String)
+    department = db.Column(db.Integer)

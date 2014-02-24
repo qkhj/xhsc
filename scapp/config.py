@@ -31,12 +31,19 @@ PER_PAGE = 10  # 每页数量
 UPLOAD_FOLDER_REL = '/static/upload' #上传目录(相对路径)
 UPLOAD_FOLDER_ABS = os.path.join(_HERE,'static\\upload') #上传目录(绝对路径)
 
-PROCESS_STATUS_DKSQ = '1' #1.新申请
-PROCESS_STATUS_DKSQSH = '2' #2分配A、B、运营岗
-PROCESS_STATUS_DQDC = '3' #3.已分配/待调查
-PROCESS_STATUS_DKSP = '4' #4.分配审贷会成员
-PROCESS_STATUS_DKFKJH = '5' #5.设置还款计划
-PROCESS_STATUS_SPJY = '6' #6.审批
+PROCESS_STATUS_DKSQ = '101' #1.新申请
+PROCESS_STATUS_DKSQSH = '201' #2分配A、B、运营岗
+PROCESS_STATUS_DQDC = '301' #3.已分配/待调查
+PROCESS_STATUS_DKSP = '401' #4.分配审贷会成员
+PROCESS_STATUS_DKFKJH = '501' #5.设置还款计划
+PROCESS_STATUS_SPJY_TG = '601' #6.审批通过
+PROCESS_STATUS_SPJY_YTJTG = '602' #6.有条件通过
+PROCESS_STATUS_SPJY_CXDC = '603' #6.重新调查
+PROCESS_STATUS_SPJY_JUJUE = '604' #6.拒绝
+
+#XIAOWEIZHIHANG_JGH =  '321281000' # 小微支行机构号
+#YUNYINGGANG_GH_GXJ = 'L025502' # 运营岗工号 葛旭娟
+#YUNYINGGANG_GH_NWB = 'L025503' # 运营岗工号 倪文彬
 
 
 class Config(object):

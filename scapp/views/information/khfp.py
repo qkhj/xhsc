@@ -18,6 +18,8 @@ from scapp.models import SC_Regisiter_Type
 from scapp.models import SC_Loan_Purpose
 from scapp.models import SC_Target_Customer
 
+from scapp.models import View_Get_Cus_Mgr
+
 from scapp import app
 
 # 客户分配
@@ -35,11 +37,11 @@ def khfp_search(page):
 
     sql = "create_date between '"+beg_date+"' and '"+end_date + "' "
     if customer_name:
-        sql += " and customer_name like '%"+customer_name+"%' or shop_name like '%"+customer_name+"%' "
+        sql += " and (customer_name like '%"+customer_name+"%' or shop_name like '%"+customer_name+"%') "
 
     target_customer = SC_Target_Customer.query.filter(sql).order_by("id").paginate(page, per_page = PER_PAGE)
 
-    users = SC_User.query.order_by("id").all()
+    users = View_Get_Cus_Mgr.query.filter("role_level>=2").order_by("id").all()#客户经理
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
     return render_template("Information/khfp/khfp.html",users=users,role=role,target_customer=target_customer,
         customer_name=customer_name,beg_date=request.form['beg_date'],end_date=request.form['end_date'])
@@ -77,7 +79,7 @@ def edit_khfp(page,target_customer_id,user_id):
 
     sql = "create_date between '"+beg_date+"' and '"+end_date + "' "
     if customer_name:
-        sql += " and customer_name like '%"+customer_name+"%' or shop_name like '%"+customer_name+"%' "
+        sql += " and (customer_name like '%"+customer_name+"%' or shop_name like '%"+customer_name+"%') "
 
     target_customer = SC_Target_Customer.query.filter(sql).order_by("id").paginate(page, per_page = PER_PAGE)
 
