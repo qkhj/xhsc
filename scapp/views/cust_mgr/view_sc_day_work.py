@@ -140,7 +140,7 @@ def query_data(page,beg_date,end_date,user_id,type='NOPAGE'):
                                    "from sc_day_work "
                                    "inner join sc_user ON sc_day_work.create_user=sc_user.id "
                                    "where sc_day_work.create_date between '"+beg_date+"' AND '"+end_date+"' "
-                                   "AND sc_day_work.create_user="+user_id+" "
-                                   "AND sc_day_work.create_user="+current_user.id+"")
+                                   "AND sc_day_work.create_user='"+user_id+"' "
+                                   "AND sc_day_work.create_user='"+current_user.id+"'")
 
     return data
