@@ -67,6 +67,22 @@ def lcgl():
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
     return render_template("index.html",menu = 'lcgl',role=role)
 
+# 贷款申请审核
+@app.route('/dksqsh', methods=['GET'])
+@login_required
+def dksqsh():
+    # privileges = SC_UserRole.query.filter_by(user_id=current_user.id).first().role.privileges
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    return render_template("index.html",menu = 'dksqsh',role=role)
+
+# 贷前调查
+@app.route('/dqdc', methods=['GET'])
+@login_required
+def dqdc():
+    # privileges = SC_UserRole.query.filter_by(user_id=current_user.id).first().role.privileges
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    return render_template("index.html",menu = 'dqdc',role=role)
+
 # 系统工具
 @app.route('/xtgj', methods=['GET'])
 @login_required
