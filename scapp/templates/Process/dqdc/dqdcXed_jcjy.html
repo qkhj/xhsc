@@ -25,34 +25,316 @@
 </head>
 
 <body onload="setInput()">	
-	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_jcjy/{{id}}" target="_parent">
+	<form class="content" method="POST" action="/Process/dqdc/dqdcXed_jcjy/{{loan_apply_id}}" target="_parent">
 	<!--*****************************************交叉检验**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">交叉检验</span>
+		{%- if cross_examination %}
 		<div class="divBorder">
 			<table class="table-list">				
 				<tr>
-					<td class="table-label">销售额交叉检验</td>
+					{%- for obj in cross_examination %}
+						{%- if obj.loan_type == 0 %}
+						<td class="table-label">{{obj.items_name}}</td>
+						<td colspan="6">
+							<span>
+								<input type="hidden" name="type_0" value="0">
+								<input type="hidden" name="name_0" value="{{obj.items_name}}">
+								<textarea name="value_0" onchange="spryMaxLength(this,64)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于64</span>
+							</span>
+						</td>
+						{%- endif %}
+					{%- endfor %}	
+				</tr>		
+				<tr>
+					{%- for obj in cross_examination %}
+						{%- if obj.loan_type == 1 %}
+						<td class="table-label">{{obj.items_name}}</td>
+						<td colspan="6">
+							<span>
+								<input type="hidden" name="type_1" value="1">
+								<input type="hidden" name="name_1" value="{{obj.items_name}}">
+								<textarea name="value_1" onchange="spryMaxLength(this,64)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于64</span>
+							</span>
+						</td>	
+						</td>
+						{%- endif %}
+					{%- endfor %}
+				</tr>
+				<tr>
+					{%- for obj in cross_examination %}
+						{%- if obj.loan_type == 2 %}
+						<td class="table-label">{{obj.items_name}}</td>
+						<td colspan="6">
+							<span>
+								<input type="hidden" name="type_2" value="2">
+								<input type="hidden" name="name_2" value="{{obj.items_name}}">
+								<textarea name="value_2" onchange="spryMaxLength(this,64)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于64</span>
+							</span>
+						</td>	
+						{%- endif %}
+					{%- endfor %}
+				</tr>
+			</table>
+		</div>	
+		<i class="icon-bookmark"></i><span class="titletip">权益交叉检验</span>
+		<div class="divBorder">
+			<table class="table-list" id="qcqyhj">
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 3 %}
+					<tr>
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}</b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+							{%- endif %}
+							<input type="hidden" name="type_3" value="3">
+							<input type="hidden" name="name_3" value="{{obj.items_name}}">
+						</td>
+						<td style="text-align:left">
+							{%- if obj.index == 0 %}
+							<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+							{%- else %}
+							<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							{%- endif %}
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>	
+						</td>
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{cross_examination[cross_examination.index(obj)+count_3].items_name}}</b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{cross_examination[cross_examination.index(obj)+count_3].items_name}} 
+							{%- endif %}	
+							<input type="hidden" name="type_4" value="4">
+							<input type="hidden" name="name_4" value="{{cross_examination[cross_examination.index(obj)+count_3].items_name}}">
+						</td>
+						<td>
+							{%- if cross_examination[cross_examination.index(obj)+count_3].index == 0 %}
+							<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+							{%- else %}
+							<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							{%- endif %}
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>	
+						</td>
+					</tr>
+					{%- endif %}
+				{%- endfor %}																	
+			</table>
+		</div>		
+		<div class="divBorder">
+			<table class="table-list" id="dxzchj">
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 5 %}
+					<tr>
+						<td class="table-label">
+							{%- if obj.index == 0 %}
+								<b>&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}</b>
+							{%- else %}
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+							{%- endif %}
+							<input type="hidden" name="type_5" value="5">
+							<input type="hidden" name="name_5" value="{{obj.items_name}}">
+						</td>
+						<td>
+							{%- if obj.index == 0 %}
+							<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+							<input type="button" value="+" onclick="addTd('dxzchj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+							{%- else %}
+							<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							{%- endif %}
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>	
+						</td>
+					</tr>	
+					{%- endif %}
+				{%- endfor %}															
+			</table>
+		</div>
+		<div class="divBorder">
+			<table class="table-list" id="dxzchj">
+				
+					<tr>
+						{%- for obj in cross_examination %}
+							{%- if obj.loan_type == 6 %}
+							<td class="table-label">
+								<b>{{obj.items_name}} </b>
+								<input type="hidden" name="type_6" value="6">
+								<input type="hidden" name="name_6" value="{{obj.items_name}}">
+							</td>
+							<td>
+								<input type="text" name="value_6" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<br/><span class="je">人民币</span>
+								<span class="errorInfo"></span>	
+							</td>
+							{%- endif %}
+
+							{%- if obj.loan_type == 7 %}
+							<td class="table-label">
+								<b>{{obj.items_name}} </b>
+								<input type="hidden" name="type_7" value="7">
+								<input type="hidden" name="name_7" value="{{obj.items_name}}">
+							</td>
+							<td>
+								<input type="text" name="value_7" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<br/><span class="je">人民币</span>
+								<span class="errorInfo"></span>	
+							</td>
+							{%- endif %}
+						{%- endfor %}
+						</tr>
+						<tr>
+						{%- for obj in cross_examination %}
+							{%- if obj.loan_type == 8 %}
+							<td class="table-label">
+								<b>{{obj.items_name}} </b>
+								<input type="hidden" name="type_8" value="8">
+								<input type="hidden" name="name_8" value="{{obj.items_name}}">
+							</td>
+							<td>
+								<input type="text" name="value_8" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<br/><span class="je">人民币</span>
+								<span class="errorInfo"></span>	
+							</td>
+							{%- endif %}
+
+							{%- if obj.loan_type == 9 %}
+							<td class="table-label">
+								<b>{{obj.items_name}} </b>
+								<input type="hidden" name="type_9" value="9">
+								<input type="hidden" name="name_9" value="{{obj.items_name}}">
+							</td>
+							<td>
+								<input type="text" name="value_9" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<br/><span class="je">人民币</span>
+								<span class="errorInfo"></span>	
+							</td>
+							{%- endif %}
+						{%- endfor %}
+					</tr>													
+			</table>
+		</div>
+		<div class="divBorder">
+			<table class="table-list" id="dxzchj">
+				<tr>
+					{%- for obj in cross_examination %}
+						{%- if obj.loan_type == 10 %}
+						<td class="table-label">
+							<b>{{obj.items_name}} </b>
+							<input type="hidden" name="type_10" value="10">
+							<input type="hidden" name="name_10" value="{{obj.items_name}}">
+						</td>
+						<td>
+							<input type="text" name="value_10" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>	
+						</td>
+						{%- endif %}
+
+						{%- if obj.loan_type == 11 %}
+						<td class="table-label">
+							<b>{{obj.items_name}} </b>
+							<input type="hidden" name="type_11" value="11">
+							<input type="hidden" name="name_11" value="{{obj.items_name}}">
+						</td>
+						<td>
+							<input type="text" name="value_11" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>	
+						</td>
+						{%- endif %}
+					{%- endfor %}
+				</tr>
+				<tr>
+					{%- for obj in cross_examination %}
+						{%- if obj.loan_type == 12 %}
+						<td class="table-label">
+							<b>{{obj.items_name}} </b>
+							<input type="hidden" name="type_12" value="12">
+							<input type="hidden" name="name_12" value="{{obj.items_name}}">
+						</td>
+						<td>
+							<input type="text" name="value_12" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>	
+						</td>
+						{%- endif %}
+
+						{%- if obj.loan_type == 13 %}
+						<td class="table-label">
+							<b>{{obj.items_name}} </b>
+							<input type="hidden" name="type_13" value="13">
+							<input type="hidden" name="name_13" value="{{obj.items_name}}">
+						</td>
+						<td>
+							<input type="text" name="value_13" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<br/><span class="je">人民币</span>
+							<span class="errorInfo"></span>	
+						</td>
+						{%- endif %}
+					{%- endfor %}
+				</tr>		
+				<tr>
+					{%- for obj in cross_examination %}
+						{%- if obj.loan_type == 14 %}
+						<td class="table-label">
+							<b>{{obj.items_name}} </b>
+							<input type="hidden" name="type_14" value="14">
+							<input type="hidden" name="name_14" value="{{obj.items_name}}">
+						</td>
+						<td colspan="3">
+							<input type="text" name="value_14" onchange="check(this,1,100)" onkeyup="value=value.replace(/[^\d]/g,'')" style="width:40px" readonly/>%
+							<br/>&nbsp;<span class="errorInfo">请输入1-100的有效数字</span>
+						</td>
+						{%- endif %}
+					{%- endfor %}
+				</tr>																
+			</table>
+		</div>
+		{%- else %}
+		<div class="divBorder">
+			<table class="table-list">				
+				<tr>
+					<td class="table-label">销售额交叉检验
+						<input type="hidden" name="type_0" value="0">
+						<input type="hidden" name="name_0" value="销售额交叉检验">
+					</td>
 					<td colspan="6">
 						<span>
-							<textarea name="" onchange="spryMaxLength(this,64)"></textarea>
+							<textarea name="value_0" onchange="spryMaxLength(this,64)"></textarea>
 							<span class="errorInfo">字符数不得大于64</span>
 						</span>
 					</td>	
 				</tr>		
 				<tr>
-					<td class="table-label">毛利润/成本交叉检验</td>
+					<td class="table-label">毛利润/成本交叉检验
+						<input type="hidden" name="type_1" value="1">
+						<input type="hidden" name="name_1" value="毛利润/成本交叉检验">
+					</td>
 					<td colspan="6">
 						<span>
-							<textarea name="" onchange="spryMaxLength(this,64)"></textarea>
+							<textarea name="value_1" onchange="spryMaxLength(this,64)"></textarea>
 							<span class="errorInfo">字符数不得大于64</span>
 						</span>
 					</td>	
 				</tr>
 				<tr>
-					<td class="table-label">其他交叉检验</td>
+					<td class="table-label">其他交叉检验
+						<input type="hidden" name="type_2" value="2">
+						<input type="hidden" name="name_2" value="毛利润/成本交叉检验">
+					</td>
 					<td colspan="6">
 						<span>
-							<textarea name="" onchange="spryMaxLength(this,64)"></textarea>
+							<textarea name="value_2" onchange="spryMaxLength(this,64)"></textarea>
 							<span class="errorInfo">字符数不得大于64</span>
 						</span>
 					</td>	
@@ -65,9 +347,11 @@
 				<tr>
 					<td class="table-label">
 						<b>期初权益合计</b>
+						<input type="hidden" name="type_3" value="3">
+						<input type="hidden" name="name_3" value="期初权益合计">
 					</td>
 					<td style="text-align:left">
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+						<input type="text" name="value_3" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 						<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 						<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 						<br/><span class="je">人民币</span>
@@ -75,9 +359,11 @@
 					</td>
 					<td class="table-label">
 						<b>分析期间收入合计</b>
+						<input type="hidden" name="type_4" value="4">
+						<input type="hidden" name="name_4" value="分析期间收入合计">
 					</td>
 					<td>
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+						<input type="text" name="value_4" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 						<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 						<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 						<br/><span class="je">人民币</span>
@@ -91,9 +377,11 @@
 				<tr>
 					<td class="table-label">
 						<b>大项支出合计</b>
+						<input type="hidden" name="type_5" value="5">
+						<input type="hidden" name="name_5" value="大项支出合计">
 					</td>
 					<td>
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+						<input type="text" name="value_5" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 						<input type="button" value="+" onclick="addTd('dxzchj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 						<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 						<br/><span class="je">人民币</span>
@@ -107,17 +395,21 @@
 				<tr>
 					<td class="table-label">
 						<b>其他收入</b>
+						<input type="hidden" name="type_6" value="6">
+						<input type="hidden" name="name_6" value="其他收入">
 					</td>
 					<td>
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+						<input type="text" name="value_6" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
 					<td class="table-label">
 						<b>升值</b>
+						<input type="hidden" name="type_7" value="7">
+						<input type="hidden" name="name_7" value="升值">
 					</td>
 					<td>
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+						<input type="text" name="value_7" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -125,17 +417,21 @@
 				<tr>
 					<td class="table-label">
 						<b>折旧<br/>（资产负债表内折旧）</b>
+						<input type="hidden" name="type_8" value="8">
+						<input type="hidden" name="name_8" value="折旧(资产负债表内折旧)">
 					</td>
 					<td>
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+						<input type="text" name="value_8" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
 					<td class="table-label">
 						<b>表外资产</b>
+						<input type="hidden" name="type_9" value="9">
+						<input type="hidden" name="name_9" value="表外资产">
 					</td>
 					<td>
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+						<input type="text" name="value_9" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -147,17 +443,21 @@
 				<tr>
 					<td class="table-label">
 						<b>应有权益</b>
+						<input type="hidden" name="type_10" value="10">
+						<input type="hidden" name="name_10" value="应有权益">
 					</td>
 					<td>
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+						<input type="text" name="value_10" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
 					<td class="table-label">
 						<b>实际权益<br/>（资产负债表所有者权益）</b>
+						<input type="hidden" name="type_11" value="11">
+						<input type="hidden" name="name_11" value="实际权益(资产负债表所有者权益)">
 					</td>
 					<td>
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+						<input type="text" name="value_11" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -165,17 +465,21 @@
 				<tr>
 					<td class="table-label">
 						<b>权益差额<br/>（应有权益-实际权益）</b>
+						<input type="hidden" name="type_12" value="12">
+						<input type="hidden" name="name_12" value="权益差额(应有权益-实际权益)">
 					</td>
 					<td>
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+						<input type="text" name="value_12" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
 					<td class="table-label">
 						<b>分析期间累计收入</b>
+						<input type="hidden" name="type_13" value="13">
+						<input type="hidden" name="name_13" value="分析期间累计收入">
 					</td>
 					<td>
-						<input type="text" name="" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+						<input type="text" name="value_13" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -183,16 +487,18 @@
 				<tr>
 					<td class="table-label">
 						<b>权益交叉检验比率</b>
+						<input type="hidden" name="type_14" value="14">
+						<input type="hidden" name="name_14" value="权益交叉检验比率">
 					</td>
 					<td colspan="3">
-						<input type="text" name="" onchange="check(this,1,100)" onkeyup="value=value.replace(/[^\d]/g,'')" style="width:40px" readonly/>%
+						<input type="text" name="value_14" onchange="check(this,1,100)" onkeyup="value=value.replace(/[^\d]/g,'')" style="width:40px" readonly/>%
 						<br/>&nbsp;<span class="errorInfo">请输入1-100的有效数字</span>
 					</td>
 					
 				</tr>																
 			</table>
 		</div>
-	
+		{%- endif %}
 		<input type="submit" value="保存" class="btn btn-info"/>
 		<input type="button" value="打印" class="btn btn-info"/>
 	</form>
