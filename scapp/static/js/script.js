@@ -1,4 +1,15 @@
-﻿// 动态创建表单
+﻿//定义常量 与后台对应
+var PROCESS_STATUS_DKSQ = '101' //1.新申请
+var PROCESS_STATUS_DKSQSH = '201' //2分配A、B、运营岗
+var PROCESS_STATUS_DQDC = '301' //3.已分配/待调查
+var PROCESS_STATUS_DKSP = '401' //4.分配审贷会成员
+var PROCESS_STATUS_DKFKJH = '501' //5.设置还款计划
+var PROCESS_STATUS_SPJY_TG = '601' //6.审批通过
+var PROCESS_STATUS_SPJY_YTJTG = '602' //6.有条件通过
+var PROCESS_STATUS_SPJY_CXDC = '603' //6.重新调查
+var PROCESS_STATUS_SPJY_JUJUE = '604' //6.拒绝
+
+// 动态创建表单
 function createForm(action,arr){
     var tmpForm = $("<form action='"+action+"' method='POST'></form>");
     for(var key in arr) {

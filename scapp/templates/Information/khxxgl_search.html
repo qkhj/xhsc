@@ -54,14 +54,23 @@
 							</td>
 							<td class="table-label">客户经理</td>
 							<td>
-								<input type="text" id="manager_name" name="manager_name" value="{{current_user.real_name}}" readonly/>
+								{%- if role.role_level == 0 or role.role_level == 1 %}
+									<input type="text" id="manager_name" name="manager_name" value="全部客户经理" readonly/>
+								{%- else %}
+									<input type="text" id="manager_name" name="manager_name" value="{{current_user.real_name}}" readonly/>
+								{%- endif %}
+								
 								{%- if role.role_level == 0 or role.role_level == 1 %}
 								<input type="button" value="搜索" class="btn" onclick="$('.display-div').show();" />
 								{%- else %}
 								<input type="button" value="搜索" class="btn" onclick="$('.display-div').show();" disabled/>
 								{%- endif %}
 								<span id="manager_name_spay">
+									{%- if role.role_level == 0 or role.role_level == 1 %}
+									<input type="hidden" id="manager" name="manager" value="0"/>
+									{%- else %}
 									<input type="hidden" id="manager" name="manager" value="{{current_user.id}}"/>
+									{%- endif %}
 									<span class="textfieldRequiredMsg">不能为空</span>
 								</span>
 								
@@ -90,6 +99,15 @@
 												</tr>
 											</thead>
 											<tbody class="center">
+												<!--管理员或主管-->
+												{%- if role.role_level == 0 or role.role_level == 1 %}
+												<tr>
+													<td><input type="radio" name="xdy" onclick="get_name(this,'manager_name','manager');"/></td>		
+													<td>0</td>												
+													<td>全部客户经理</td>												
+												</tr>	
+												{%- endif %}
+												
 												{%- for obj in user %}
 												<tr>
 													<td><input type="radio" name="xdy" onclick="get_name(this,'manager_name','manager');"/></td>		

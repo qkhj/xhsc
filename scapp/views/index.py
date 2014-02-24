@@ -10,7 +10,7 @@ from scapp.models import SC_Privilege
 from scapp.config import logger
 from scapp import app
 from scapp import db
-
+from scapp.logic.total import Total
 # 登陆
 @app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
@@ -24,7 +24,9 @@ def login():
             else:
                 login_user(user)
                 role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
-                return render_template("welcome.html",role=role)
+                total = Total()
+                data=total.getListSum(role)
+                return render_template("welcome.html",role=role,data=data)
         else:
             flash('用户名或密码错误','error')
             return render_template("login.html")
@@ -43,8 +45,9 @@ def logout():
 @login_required
 def welcome():
     # privileges = SC_UserRole.query.filter_by(user_id=current_user.id).first().role.privileges
-    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
-    return render_template("welcome.html",role=role)
+    total = Total()
+    data=total.getListSum(role)
+    return render_template("welcome.html",data=data)
 
 # 信息管理
 @app.route('/xxgl', methods=['GET'])
@@ -52,6 +55,7 @@ def welcome():
 def xxgl():
     # privileges = SC_UserRole.query.filter_by(user_id=current_user.id).first().role.privileges
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+
     return render_template("index.html",menu = 'xxgl',role=role)
 
 # 流程管理
