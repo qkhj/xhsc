@@ -599,6 +599,111 @@
 						{%- endif %}
 					{%- endfor %}
 												
+				</tr>				
+				<tr>
+					<td class="table-label">自从上次申请后经营变化（重复贷款）</td>
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 26 %}
+						<td style="width:310px;text-align:center;">
+							生意方面<br/>
+						<input type="hidden" name="type_26" value="26">
+						<input type="hidden" name="name_26" value="{{obj.items_name}}">
+							<span>	
+								<textarea name="value_26" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<span>&nbsp;</span>
+								<span class="errorInfo">字符数不得大于256</span>
+							</span>
+						</td>		
+						{%- endif %}
+
+						{%- if obj.loan_type == 27 %}
+						<td style="width:310px;text-align:center;">
+							个人方面<br/>
+						<input type="hidden" name="type_27" value="27">
+						<input type="hidden" name="name_27" value="{{obj.items_name}}">
+							<span>	
+								<textarea name="value_27" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<span>&nbsp;</span>
+								<span class="errorInfo">字符数不得大于256</span>
+							</span>
+						</td>		
+						{%- endif %}
+					{%- endfor %}
+					
+					<td></td>						
+				</tr>
+				<tr>
+					<td class="table-label">过去12个月的投资情况</td>
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 28 %}
+						<td style="width:310px;text-align:center;">
+							生意方面<br/>
+						<input type="hidden" name="type_28" value="28">
+						<input type="hidden" name="name_28" value="{{obj.items_name}}">
+							<span>	
+								<textarea name="value_28" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<span>&nbsp;</span>
+								<span class="errorInfo">字符数不得大于256</span>
+							</span>
+						</td>		
+						{%- endif %}
+
+						{%- if obj.loan_type == 29 %}
+						<td style="width:310px;text-align:center;">
+							个人方面<br/>
+						<input type="hidden" name="type_29" value="29">
+						<input type="hidden" name="name_29" value="{{obj.items_name}}">
+							<span>	
+								<textarea name="value_29" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<span>&nbsp;</span>
+								<span class="errorInfo">字符数不得大于256</span>
+							</span>
+						</td>		
+						{%- endif %}
+					{%- endfor %}
+					
+					<td></td>						
+				</tr>
+				<tr><!--新增字段-->
+					<td class="table-label">未来12个月的投资计划</td>
+					<td style="width:310px;text-align:center;">
+						生意方面<br/>
+					<input type="hidden" name="type_31" value="31">
+					<input type="hidden" name="name_31" value="未来12个月的投资计划-生意方面">
+						<span>	
+							<textarea name="value_31" value="" onchange="spryMaxLength(this,256)" style="width:290px;"><!--新增字段--></textarea><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>	
+					<td style="width:310px;text-align:center;">
+						个人方面<br/>
+					<input type="hidden" name="type_32" value="32">
+					<input type="hidden" name="name_32" value="未来12个月的投资计划-个人方面">
+						<span>	
+							<textarea name="value_32" value="" onchange="spryMaxLength(this,256)" style="width:290px;"><!--新增字段--></textarea><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>	
+					<td></td>						
+				</tr><!--/新增字段-->
+				<tr>
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 30 %}
+						<td class="table-label">{{obj.items_name}} 
+						<input type="hidden" name="type_30" value="30">
+						<input type="hidden" name="name_30" value="{{obj.items_name}}">
+						</td>
+						<td colspan="3">
+							<span>	
+								<textarea name="value_30" onchange="spryMaxLength(this,256)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于256</span>
+							</span>
+						</td>		
+						{%- endif %}
+					{%- endfor %}
+												
 				</tr>
 				<tr>
 					{%- for obj in balance_sheets %}
@@ -631,89 +736,19 @@
 							</span>
 						</td>		
 						{%- endif %}
-					{%- endfor %}
-												
+					{%- endfor %}												
 				</tr>
-				<tr>
-					<td class="table-label">过去12个月内的投资</td>
-					{%- for obj in balance_sheets %}
-						{%- if obj.loan_type == 26 %}
-						<td style="width:310px;text-align:center;">
-							业务方面<br/>
-						<input type="hidden" name="type_26" value="26">
-						<input type="hidden" name="name_26" value="{{obj.items_name}}">
-							<span>	
-								<textarea name="value_26" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
-								<span>&nbsp;</span>
-								<span class="errorInfo">字符数不得大于256</span>
-							</span>
-						</td>		
-						{%- endif %}
-
-						{%- if obj.loan_type == 27 %}
-						<td style="width:310px;text-align:center;">
-							私人方面<br/>
-						<input type="hidden" name="type_27" value="27">
-						<input type="hidden" name="name_27" value="{{obj.items_name}}">
-							<span>	
-								<textarea name="value_27" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
-								<span>&nbsp;</span>
-								<span class="errorInfo">字符数不得大于256</span>
-							</span>
-						</td>		
-						{%- endif %}
-					{%- endfor %}
-					
-					<td></td>						
-				</tr>
-				<tr>
-					<td class="table-label">未来12个月计划的投资</td>
-					{%- for obj in balance_sheets %}
-						{%- if obj.loan_type == 28 %}
-						<td style="width:310px;text-align:center;">
-							业务方面<br/>
-						<input type="hidden" name="type_28" value="28">
-						<input type="hidden" name="name_28" value="{{obj.items_name}}">
-							<span>	
-								<textarea name="value_28" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
-								<span>&nbsp;</span>
-								<span class="errorInfo">字符数不得大于256</span>
-							</span>
-						</td>		
-						{%- endif %}
-
-						{%- if obj.loan_type == 29 %}
-						<td style="width:310px;text-align:center;">
-							私人方面<br/>
-						<input type="hidden" name="type_29" value="29">
-						<input type="hidden" name="name_29" value="{{obj.items_name}}">
-							<span>	
-								<textarea name="value_29" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
-								<span>&nbsp;</span>
-								<span class="errorInfo">字符数不得大于256</span>
-							</span>
-						</td>		
-						{%- endif %}
-					{%- endfor %}
-					
-					<td></td>						
-				</tr>
-				<tr>
-					{%- for obj in balance_sheets %}
-						{%- if obj.loan_type == 30 %}
-						<td class="table-label">{{obj.items_name}} 
-						<input type="hidden" name="type_30" value="30">
-						<input type="hidden" name="name_30" value="{{obj.items_name}}">
-						</td>
-						<td colspan="3">
-							<span>	
-								<textarea name="value_30" onchange="spryMaxLength(this,256)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于256</span>
-							</span>
-						</td>		
-						{%- endif %}
-					{%- endfor %}
-												
+				<tr><!--新增字段-->
+					<td class="table-label">其他还款来源分析
+					<input type="hidden" name="type_33" value="33">
+					<input type="hidden" name="name_33" value="其他还款来源分析">
+					</td>
+					<td colspan="3">
+						<span>	
+							<textarea name="value_33" value="" onchange="spryMaxLength(this,256)"><!--新增字段--></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>								
 				</tr>
 			</table>
 		</div>	
@@ -1045,7 +1080,7 @@
 					</td>
 					<td><input type="text" style="width:60px;" name="value_19" value="0" readonly/>%</td>
 					<td class="table-label" style="width:162px;">速动比率 <!--新增-->
-					<input type="hidden" name="type_14" value="31">
+					<input type="hidden" name="type_14" value="14">
 					<input type="hidden" name="name_14" value="速动比率 ">
 					</td>
 					<td><input type="text" style="width:60px;" name="value_14" value="0" readonly/>%</span>
@@ -1057,9 +1092,9 @@
 		<div class="divBorder">
 			<table class="table-list" id="qt">
 				<tr>
-					<td class="table-label" style="width:162px;">表外项目
+					<td class="table-label" style="width:162px;">经营历史和资本积累
 					<input type="hidden" name="type_21" value="21">
-					<input type="hidden" name="name_21" value="表外项目">
+					<input type="hidden" name="name_21" value="经营历史和资本积累">
 					</td>
 					<td colspan="3">
 						<span>	
@@ -1069,9 +1104,9 @@
 					</td>								
 				</tr>
 				<tr>
-					<td class="table-label">对资产负债表的其他评价
+					<td class="table-label">生意现状（组织架构和市场）
 					<input type="hidden" name="type_22" value="22">
-					<input type="hidden" name="name_22" value="对资产负债表的其他评价">
+					<input type="hidden" name="name_22" value="生意现状（组织架构和市场）">
 					</td>
 					<td colspan="3">
 						<span>	
@@ -1081,9 +1116,9 @@
 					</td>								
 				</tr>
 				<tr>
-					<td class="table-label">经营历史与资本积累
+					<td class="table-label">生意现状（财务）
 					<input type="hidden" name="type_23" value="23">
-					<input type="hidden" name="name_23" value="经营历史与资本积累">
+					<input type="hidden" name="name_23" value="生意现状（财务）">
 					</td>
 					<td colspan="3">
 						<span>	
@@ -1091,37 +1126,13 @@
 							<span class="errorInfo">字符数不得大于256</span>
 						</span>
 					</td>								
-				</tr>
+				</tr>				
 				<tr>
-					<td class="table-label">对现状的评价：经营组织和市场情况
-					<input type="hidden" name="type_24" value="24">
-					<input type="hidden" name="name_24" value="对现状的评价：经营组织和市场情况">
-					</td>
-					<td colspan="3">
-						<span>	
-							<textarea name="value_24" value="" onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>								
-				</tr>
-				<tr>
-					<td class="table-label">对现状的评价：财务信息
-					<input type="hidden" name="type_25" value="25">
-					<input type="hidden" name="name_25" value="对现状的评价：财务信息">
-					</td>
-					<td colspan="3">
-						<span>	
-							<textarea name="value_25" value="" onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>								
-				</tr>
-				<tr>
-					<td class="table-label">过去12个月内的投资</td>
+					<td class="table-label">自从上次申请后经营变化（重复贷款）</td>
 					<td style="width:310px;text-align:center;">
-						业务方面<br/>
+						生意方面<br/>
 					<input type="hidden" name="type_26" value="26">
-					<input type="hidden" name="name_26" value="过去12个月内的投资-业务方面">
+					<input type="hidden" name="name_26" value="自从上次申请后经营变化（重复贷款）-生意方面">
 						<span>	
 							<textarea name="value_26" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
 							<span>&nbsp;</span>
@@ -1129,9 +1140,9 @@
 						</span>
 					</td>	
 					<td style="width:310px;text-align:center;">
-						私人方面<br/>
+						个人方面<br/>
 					<input type="hidden" name="type_27" value="27">
-					<input type="hidden" name="name_27" value="过去12个月内的投资-私人方面">
+					<input type="hidden" name="name_27" value="自从上次申请后经营变化（重复贷款）-个人方面">
 						<span>	
 							<textarea name="value_27" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
 							<span>&nbsp;</span>
@@ -1141,11 +1152,11 @@
 					<td></td>						
 				</tr>
 				<tr>
-					<td class="table-label">未来12个月计划的投资</td>
+					<td class="table-label">过去12个月的投资情况</td>
 					<td style="width:310px;text-align:center;">
-						业务方面<br/>
+						生意方面<br/>
 					<input type="hidden" name="type_28" value="28">
-					<input type="hidden" name="name_28" value="未来12个月计划的投资-业务方面">
+					<input type="hidden" name="name_28" value="过去12个月的投资情况-生意方面">
 						<span>	
 							<textarea name="value_28" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
 							<span>&nbsp;</span>
@@ -1153,9 +1164,9 @@
 						</span>
 					</td>	
 					<td style="width:310px;text-align:center;">
-						私人方面<br/>
+						个人方面<br/>
 					<input type="hidden" name="type_29" value="29">
-					<input type="hidden" name="name_29" value="未来12个月计划的投资-私人方面">
+					<input type="hidden" name="name_29" value="过去12个月的投资情况-个人方面">
 						<span>	
 							<textarea name="value_29" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
 							<span>&nbsp;</span>
@@ -1164,14 +1175,74 @@
 					</td>	
 					<td></td>						
 				</tr>
+				<tr><!--新增字段-->
+					<td class="table-label">未来12个月的投资计划</td>
+					<td style="width:310px;text-align:center;">
+						生意方面<br/>
+					<input type="hidden" name="type_31" value="31">
+					<input type="hidden" name="name_31" value="未来12个月的投资计划-生意方面">
+						<span>	
+							<textarea name="value_31" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>	
+					<td style="width:310px;text-align:center;">
+						个人方面<br/>
+					<input type="hidden" name="type_32" value="32">
+					<input type="hidden" name="name_32" value="未来12个月的投资计划-个人方面">
+						<span>	
+							<textarea name="value_32" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
+							<span>&nbsp;</span>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>	
+					<td></td>						
+				</tr><!--/新增字段-->
 				<tr>
-					<td class="table-label">客户在家庭或在社会经济网中的状况 
+					<td class="table-label">贷款目的详细描述 
 					<input type="hidden" name="type_30" value="30">
-					<input type="hidden" name="name_30" value="客户在家庭或在社会经济网中的状况">
+					<input type="hidden" name="name_30" value="贷款目的详细描述">
 					</td>
 					<td colspan="3">
 						<span>	
 							<textarea name="value_30" value="" onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>								
+				</tr>
+				<tr>
+					<td class="table-label">客户/法人/实际经营人/主要股东的私人情况
+					<input type="hidden" name="type_24" value="24">
+					<input type="hidden" name="name_24" value="客户/法人/实际经营人/主要股东的私人情况">
+					</td>
+					<td colspan="3">
+						<span>	
+							<textarea name="value_24" value="" onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>								
+				</tr>
+				<tr>
+					<td class="table-label">对客户的印象
+					<input type="hidden" name="type_25" value="25">
+					<input type="hidden" name="name_25" value="对客户的印象">
+					</td>
+					<td colspan="3">
+						<span>	
+							<textarea name="value_25" value="" onchange="spryMaxLength(this,256)"></textarea>
+							<span class="errorInfo">字符数不得大于256</span>
+						</span>
+					</td>								
+				</tr>
+				<tr><!--新增字段-->
+					<td class="table-label">其他还款来源分析
+					<input type="hidden" name="type_33" value="33">
+					<input type="hidden" name="name_33" value="其他还款来源分析">
+					</td>
+					<td colspan="3">
+						<span>	
+							<textarea name="value_33" value="" onchange="spryMaxLength(this,256)"></textarea>
 							<span class="errorInfo">字符数不得大于256</span>
 						</span>
 					</td>								
