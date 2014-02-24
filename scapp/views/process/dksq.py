@@ -4,12 +4,15 @@ import os
 
 from flask import Module, session, request, render_template, redirect, url_for,flash
 from flask.ext.login import current_user
-import datetime
+import datetime,time,xlwt
+ezxf=xlwt.easyxf #样式转换
 
 from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
 from scapp.config import PROCESS_STATUS_DKSQ
+
+from scapp.tools.export_excel import export_excel
 
 from scapp.models import SC_Individual_Customer
 from scapp.models import SC_Company_Customer
@@ -330,3 +333,68 @@ def edit_dksq(id):
         flash('保存失败','error')
 
     return redirect('Process/dksq/dksq')
+
+# 导出已填写申请的客户信息
+@app.route('/Process/dksq/goto_export_customer_info/<belong_customer_type>', methods=['GET'])
+def goto_export_customer_info(belong_customer_type):
+    if belong_customer_type == 'Company':
+        print 'do nothing'
+    else :
+        sql = "select 'Ind01' as zjlx,credentials_no,'321281055' as ghjg,customer_name,'L025503' as ghrbh,"#1
+        sql += "'356' as hjbh,if(sex='1','1','2') as xb,birthday,residence_address,'1' as sfhz,"#2
+        sql += "'71' as jtjs,'2' as sfgd,'2' as sfsy,'2' as sfgxr,'01' as mz,"#3
+        sql += "'04' as zzmm,if(marriage='0','10','20') as hyzk,'001' as jkzk,'10' as zgxl,'1' as zgxw,'' as gzdw,"#4
+        sql += "'1' as zw,'1' as zc,'' as dzm,'1' as sfxyh,residence,"#5
+        sql += "'1' as sfxyx,residence_address as xzcmc,'1' as sfxyc,living_conditions,home_address,"#6
+        sql += "zip_code,telephone,mobile,'' as email,profession,"#7
+        sql += "'2' as sfzhsx,'' as zhsxyy,'' as ydtkh,'' as jszh,'' as tdmj,"#8
+        sql += "create_date,'' as wycs,'' as ckye,'' as yyck,'010' as jjms,"#9
+        sql += "'' as jygm,'' as jydz,'' as jyxm, '' as xqm,'' as fczh,"#10
+        sql += "'' as fwmj,'' as jqxydj,'' as jqpjsj,'' as bz"#11
+        sql += " from sc_individual_customer where is_have_export = '0'"
+
+        data=db.engine.execute(sql)
+
+        exl_hdngs = ['证件类型(*)','证件号码(*)','管户机构(*)','姓名(*)','管户人编号(*)', #1
+            '户籍编号（*）','性别（*）','出生日期（*）','户籍地址','是否为户主（*）',#2
+            '家庭角色','是否本行/社股东','是否本行/社员工','是否本行/社其他关系人','民族',#3
+            '政治面貌','婚姻状况','健康状况','最高学历','最高学位','工作单位名称',#4
+            '职务','职称','地址码','是否信用户','所属行政乡(镇)',#5
+            '是否信用乡（镇）','所属行政村名称','是否信用村','居住状况','居住地址',#6
+            '居住地址邮编','住宅电话','联系号码（短信提醒）','电子邮箱','职业（国标）',#7
+            '是否暂缓授信','暂缓授信原因','易贷通卡号','本行/社结算账户','承包土地面积',#8
+            '与我行首次建立信贷关系时间','违约次数','一年日均存款金额','预约存款','经营模式',#9
+            '经营规模','经营地址','主要经营项目及收入来源','房屋小区名','房产证号',#10
+            '房屋面积','即期信用等级','即期评级时间','备注']#11
+
+        type_str = 'text text text text text'#1
+        type_str += ' text text date text text'#2
+        type_str += ' text text text text text'#3
+        type_str += ' text text text text text text'#4
+        type_str += ' text text text text text'#5
+        type_str += ' text text text text text'#6
+        type_str += ' text text text text text'#7
+        type_str += ' text text text text text'#8
+        type_str += ' date text text text text'#9
+        type_str += ' text text text text text'#10
+        type_str += ' text text date text'#11
+
+        types = type_str.split()
+        exl_hdngs_xf=ezxf('font: bold on;align: wrap on,vert centre,horiz center')
+        types_to_xf_map={
+            'int':ezxf(num_format_str='#,##0'),
+            'date':ezxf(num_format_str='yyyy/mm/dd'),
+            'datetime':ezxf(num_format_str='yyyy-mm-dd HH:MM:SS'),
+            'ratio':ezxf(num_format_str='#,##0.00%'),
+            'text':ezxf(),
+            'price':ezxf(num_format_str='￥#,##0.00')
+        }
+
+        data_xfs=[types_to_xf_map[t] for t in types]
+        date=datetime.datetime.now()
+        year=date.year
+        month=date.month
+        day=date.day
+        filename=str(year)+'_'+str(month)+'_'+str(day)+'_'+'客户信息表'+'.xls'
+        exp=export_excel()
+        return exp.export_download(filename,'客户信息表',exl_hdngs,data,exl_hdngs_xf,data_xfs)

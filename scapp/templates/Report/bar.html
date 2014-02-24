@@ -4,9 +4,14 @@
 <script type="text/javascript" src="/static/ofc2/swfobject.js"></script>
 </head>
 <body>
-<h2>柱状图</h2>
-<div id="my_chart"></div>
+<h2>柱状图</h2><input type="button" onclick="OFC.jquery.imageData('my_chart');" value="导出">
+<form id="content" method="POST" action="/Report/flash/export_pic" target="targetFrame">
+  <div id="my_chart"></div>
+  <input type="hidden" id="imageData" name="imageData">
+</form>
+<iframe id="targetFrame" name="targetFrame" style="width:0;height:0;display:none"></iframe>
 </body>
+
 <script type="text/javascript">
 swfobject.embedSWF("/static/ofc2/open-flash-chart.swf", "my_chart",
   "100%", "450", "9.0.0", "expressInstall.swf",
@@ -29,8 +34,14 @@ function getDemoData(){
       "type":      "bar_3d",
       "alpha":     0.5,
       "colour":    "#9933CC",
-      "text--":      "Page views",
-      "font-size--": 10,
+      "text":      "Page views",
+      "font-size": 10,
+      "on-show":    {       /* 展现样式 */  
+          "type":"pop-up",     /* 弹出方式, pop-up */  
+       /* "type":"pop-up"   向上弹出 */  
+          "cascade":0.5,          /* 不通柱子之间的间隔时间为 1 */  
+          "delay":0.5          /* 延迟时间 */  
+      },  
       "values" :   [{"top":9,"colour":"#66b032","tip":"#top#<br>hello"},
                     {"top":6,"colour":"#d0ea2b","tip":"#top#<br>hello"},
                     {"top":8,"colour":"#fefe33","tip":"#top#<br>hello"},
@@ -51,7 +62,7 @@ function getDemoData(){
     "stroke":       1,
     "tick_height":  10,
     "labels": {
-      "labels": ["January","February","March","April","May","June","July","August","Spetember"]
+      "labels": ["1","2","3","4","5","6","7","8","9","10","11","12"]
     },
     "3d":         5
    },
@@ -59,7 +70,8 @@ function getDemoData(){
   "y_axis":{
     "stroke":      4,
     "tick_length": 3,
-    "offset":      0,
+    "steps":1,
+    "offset":      1,
     "max":         20
   },
   "bg_colour":"#ffffff"
@@ -73,4 +85,34 @@ function getDemoData(){
 }
 
 </script>
+
+<script type="text/javascript">
+  OFC = {};
+
+  OFC.jquery = {
+      name: "jQuery",
+      version: function(src) { 
+        return $('#'+ src)[0].get_version() 
+      },
+      rasterize: function (src, dst) {
+       $('#'+ dst).replaceWith(OFC.jquery.image(src)) 
+      },
+      image: function(src) { 
+        return "<img src='data:image/png;base64," + $('#'+src)[0].get_img_binary() + "' />"
+      },
+      imageData: function(src) { 
+        $("#imageData").val($('#'+src)[0].get_img_binary());
+        submitForm('content','/Report/flash/export_pic');
+      }
+  };
+
+  // Using an object as namespaces is JS Best Practice. I like the Control.XXX style.
+  //if (!Control) {var Control = {}}
+  //if (typeof(Control == "undefined")) {var Control = {}}
+  if (typeof(Control == "undefined")) {var Control = {OFC: OFC.jquery}};
+
+</script>
+  <script src="/static/js/jquery-1.7.2.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/script.js"></script>
 </html>
