@@ -45,6 +45,10 @@
 						<li 
 							{%- if menu == "lcgl"%}
 								class="active"
+							{%- elif menu == "dksqsh"%}
+								class="active"
+							{%- elif menu == "dqdc"%}
+								class="active"
 							{%- endif %}
 							onclick="iframe('lcgl')"><a href="javascript:void(0);">流程管理</a></li>
                         <li
@@ -107,20 +111,40 @@
 					</ul>
 
 					<ul class="nav nav-list 
-							{%- if menu != "lcgl"%}
+							{%- if menu == "xxgl"%}
+								hidden
+							{%- elif menu == "jxgl"%}
+								hidden
+							{%- elif menu == "tjbb"%}
+								hidden
+							{%- elif menu == "xtgj"%}
+								hidden
+							{%- elif menu == "xtgl"%}
 								hidden
 							{%- endif %}
 							" id="lcgl">
 						<li class="nav-header">流程管理</li>
-						<li onclick="leftmenu(this);changeiframe('Process/dksq/dksq')" id="dksq" class="active">
+						<li onclick="leftmenu(this);changeiframe('Process/dksq/dksq')" id="dksq" class="
+									{%- if menu == "lcgl"%}
+										active
+									{%- endif %}
+									">
 							<a href="javascript:void(0);">贷款申请</a>
 						</li>    
 						{%- if role.role_level == 0 or role.role_level == 1 %}
-						<li onclick="leftmenu(this);changeiframe('Process/dksqsh/dksqsh')" id="dksqsh" >
+						<li onclick="leftmenu(this);changeiframe('Process/dksqsh/dksqsh')" id="dksqsh"  class="
+									{%- if menu == "dksqsh"%}
+										active
+									{%- endif %}
+									">
 							<a href="javascript:void(0);">贷款申请审核</a>
 						</li>  
 						{%- endif %}
-						<li onclick="leftmenu(this);changeiframe('Process/dqdc/dqdc')" id="dqdc" >
+						<li onclick="leftmenu(this);changeiframe('Process/dqdc/dqdc')" id="dqdc" class="
+									{%- if menu == "dqdc"%}
+										active
+									{%- endif %}
+									">
 							<a href="javascript:void(0);">贷前调查</a>
 						</li>  
 						{%- if role.role_level == 0 or role.role_level == 1 %}
@@ -249,7 +273,11 @@
 					{%- if menu == "xxgl" %}
 						src="Information/lfdj/lfdj"
 					{%- elif menu == "lcgl" %}
-						src="Process/dksq/dksq"
+						src="Process/dksq/dksq"	
+					{%- elif menu == "dksqsh" %}
+						src="Process/dksqsh/dksqsh"					
+					{%- elif menu == "dqdc" %}
+						src="Process/dqdc/dqdc"
                     {%- elif menu == "jxgl" %}
 						src="Cust_mgr/search"
 					{%- elif menu == "xtgj" %}
