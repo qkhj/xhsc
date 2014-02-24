@@ -17,12 +17,13 @@ class SC_Fixed_Assets_Equipment(db.Model):
     purchase_date=db.Column(db.Date)#购置时间
     production_date=db.Column(db.Date)#生产时间
     total_price= db.Column(db.String(32))#总价
+    price= db.Column(db.String(32))#折旧后价值
     outward=db.Column(db.String(64))#外观评价
     remark=db.Column(db.String(64))#备注
 
 
     def __init__(self,loan_apply_id,name,amount,type_brand,purchase_date,production_date,total_price,
-                 outward,remark):
+                 price,outward,remark):
         self.loan_apply_id = loan_apply_id
         self.name = name
         self.amount = amount
@@ -30,6 +31,7 @@ class SC_Fixed_Assets_Equipment(db.Model):
         self.purchase_date = purchase_date
         self.production_date = production_date
         self.total_price = total_price
+        self.price=price
         self.outward = outward
         self.remark = remark
 

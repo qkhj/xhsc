@@ -85,7 +85,7 @@ def new_equipment(loan_apply_id):
 		try:
 			SC_Fixed_Assets_Equipment(loan_apply_id,request.form['name'],request.form['amount'],
 				request.form['type_brand'],request.form['purchase_date'],request.form['production_date'],
-				request.form['total_price'],request.form['outward'],request.form['remark']).add()
+				request.form['total_price'],request.form['price'],request.form['outward'],request.form['remark']).add()
 
 			# 事务提交
 			db.session.commit()
@@ -115,6 +115,7 @@ def edit_equipment(id):
 			fixed_assets_equipment.purchase_date = request.form['purchase_date']
 			fixed_assets_equipment.production_date = request.form['production_date']
 			fixed_assets_equipment.total_price = request.form['total_price']
+			fixed_assets_equipment.price = request.form['price']
 			fixed_assets_equipment.outward = request.form['outward']
 			fixed_assets_equipment.remark = request.form['remark']
 

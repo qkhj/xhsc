@@ -610,6 +610,54 @@ function addTd(table,frameid){
                                 "<td><input type='text' id=''/></td>" + */
                             "</tr>");	
     } 
+//----------------------贷前调查——交叉检验--------------------------
+if(table=="qcqyhj"){//期初权益合计&期初权益合计
+	 $("#"+table).append("<tr class='add'>"+
+								"<td>"+
+									"<span>	"+
+										"<input type='text' name='items_name_1' onchange='spryMaxLength(this,32)'/><br/>"+
+										"<span class='errorInfo'>字符数不得大于32</span>"+
+									"</span>"+
+								"</td>"+
+								"<td  style='text-align:left'>"+
+									"<span>	" +
+										"<input type='text' name='' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<br/><span class='je'>人民币</span>" +
+										"<span class='errorInfo'></span>	" +					
+									"</span>" +
+								"</td>"+
+								"<td>"+
+									"<span>	"+
+										"<input type='text' name='items_name_1' onchange='spryMaxLength(this,32)'/><br/>"+
+										"<span class='errorInfo'>字符数不得大于32</span>"+
+									"</span>"+
+								"</td>"+
+								"<td  style='text-align:left'>"+
+									"<span>	" +
+										"<input type='text' name='' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<br/><span class='je'>人民币</span>" +
+										"<span class='errorInfo'></span>	" +					
+									"</span>" +
+								"</td>"+
+							"</tr>");
+    }
+if(table=="dxzchj"){//大项支出合计
+	 $("#"+table).append("<tr class='add'>"+
+								"<td>"+
+									"<span>	"+
+										"<input type='text' name='items_name_1' onchange='spryMaxLength(this,32)'/><br/>"+
+										"<span class='errorInfo'>字符数不得大于32</span>"+
+									"</span>"+
+								"</td>"+
+								"<td  style='text-align:left'>"+
+									"<span>	" +
+										"<input type='text' name='' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<br/><span class='je'>人民币</span>" +
+										"<span class='errorInfo'></span>	" +					
+									"</span>" +
+								"</td>"+
+							"</tr>");
+    }
 //----------------------贷前调查——益损表--------------------------	
     if(table=="sr"){//收入
         $("#"+table).append("<tr class='add'>"+
