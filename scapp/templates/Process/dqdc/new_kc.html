@@ -36,25 +36,25 @@
 					<td class="table-label">数量<font class="red">*</font></td>
 					<td>
 						<span id="amount">	
-							<input type="text" name="amount" onKeyUp="value=value.replace(/\D/g,'')" maxlength="32"/>
+							<input type="text" name="amount" onKeyUp="value=value.replace(/\D/g,'')" maxlength="32" onblur="mjzjz('amount','purchase_price','purchase_total_price');mjzjz('amount','sell_price','sell_total_price')"/>
 							<span class="textfieldRequiredMsg">不能为空</span>							
 						</span>
 					</td>
 				</tr>
 				<tr>
-					<td class="table-label">买进单价(元)<font class="red">*</font></td>
+					<td class="table-label">买进单价<font class="red">*</font></td>
 					<td>
 						<span id="purchase_price">	
-							<input type="text" name="purchase_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
+							<input type="text" name="purchase_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18" onblur="mjzjz('amount','purchase_price','purchase_total_price');dwmlv()"/>
 							<span class="textfieldRequiredMsg">不能为空</span><br/>
 							<span class="je">人民币</span>	
 							<span class="errorInfo"></span>							
 						</span>
 					</td>
-					<td class="table-label">买进总价值(元)<font class="red">*</font></td>
+					<td class="table-label">买进总价值<font class="red">*</font></td>
 					<td>
 						<span id="purchase_total_price">	
-							<input type="text" name="purchase_total_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
+							<input type="text" name="purchase_total_price" onclick="setJe(this)" value="0" readonly/>
 							<span class="textfieldRequiredMsg">不能为空</span><br/>
 							<span class="je">人民币</span>	
 							<span class="errorInfo"></span>							
@@ -62,33 +62,26 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="table-label">卖出单价(元)<font class="red">*</font></td>							
+					<td class="table-label">卖出单价</td>							
 					<td>
-						<span id="sell_price">	
-							<input type="text" name="sell_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
-							<span class="textfieldRequiredMsg">不能为空</span><br/>
+						<span>	
+							<input type="text" name="sell_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18" onblur="mjzjz('amount','sell_price','sell_total_price');dwmlv()"/><br/>
 							<span class="je">人民币</span>	
 							<span class="errorInfo"></span>							
 						</span>
 					</td>
-					<td class="table-label">卖出总价值(元)<font class="red">*</font></td>
+					<td class="table-label">卖出总价值</td>
 					<td>
-						<span id="sell_total_price">	
-							<input type="text" name="sell_total_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18"/>
-							<span class="textfieldRequiredMsg">不能为空</span><br/>
+						<span>	
+							<input type="text" name="sell_total_price" onkeyup="setJe(this)" onclick="setJe(this)" value="0" readonly/><br/>
 							<span class="je">人民币</span>	
 							<span class="errorInfo"></span>							
 						</span>
 					</td>
 				</tr>
 				<tr>
-					<td class="table-label">单位毛利率(%)<font class="red">*</font></td>							
-					<td>
-						<span id="pre_rate">	
-							<input type="text" name="pre_rate" onkeyup="value=value.replace(/[^\d\.]/g,'')" maxlength="18"/>
-							<span class="textfieldRequiredMsg">不能为空</span>
-						</span>
-					</td>
+					<td class="table-label">单位毛利率(%)</td>							
+					<td><input type="text" name="pre_rate" style="width:40px" value="0" readonly/>%</td>
 				</tr>
 			</table>
 		</div>
@@ -110,9 +103,38 @@
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("amount", "none");
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("purchase_price", "none");
 		var sprytextfield1 = new Spry.Widget.ValidationTextField("purchase_total_price", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("sell_price", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("sell_total_price", "none");
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("pre_rate", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("sell_price", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("sell_total_price", "none");
+		//var sprytextfield1 = new Spry.Widget.ValidationTextField("pre_rate", "none");
+		function mjzjz(name1,name2,sumname){
+			var sum=0;
+			var a=$("input[name="+name1+"]").val();
+			var b=$("input[name="+name2+"]").val();
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b);}
+			sum=a*b;
+			$("input[name="+sumname+"]").val(sum);
+			$("input[name="+sumname+"]").click();
+		}
+		function dwmlv(){
+			var sum=0;
+			var a=$("input[name=purchase_price]").val();
+			var b=$("input[name=sell_price]").val();
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b);}
+			if(a!=0&&b!=0){
+				sum=(b-a)/a*100;
+				sum=Math.round(sum*100)/100
+				$("input[name=pre_rate]").val(sum);
+			}		
+			else{
+				$("input[name=pre_rate]").val(0);
+			}		
+		}
 	</script>
 </body>
 </html>
