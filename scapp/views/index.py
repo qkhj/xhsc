@@ -45,9 +45,10 @@ def logout():
 @login_required
 def welcome():
     # privileges = SC_UserRole.query.filter_by(user_id=current_user.id).first().role.privileges
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
     total = Total()
     data=total.getListSum(role)
-    return render_template("welcome.html",data=data)
+    return render_template("welcome.html",role=role,data=data)
 
 # 信息管理
 @app.route('/xxgl', methods=['GET'])

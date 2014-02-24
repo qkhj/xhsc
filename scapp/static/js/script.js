@@ -9,6 +9,11 @@ var PROCESS_STATUS_SPJY_YTJTG = '602' //6.有条件通过
 var PROCESS_STATUS_SPJY_CXDC = '603' //6.重新调查
 var PROCESS_STATUS_SPJY_JUJUE = '604' //6.拒绝
 
+var ROLE_LEVEL_ADMIN = 0 //admin
+var ROLE_LEVEL_ZG = 1 //主管 
+var ROLE_LEVEL_KHJL = 2 //客户经理 
+var ROLE_LEVEL_HTYY = 3 //后台运营
+
 // 动态创建表单
 function createForm(action,arr){
     var tmpForm = $("<form action='"+action+"' method='POST'></form>");
