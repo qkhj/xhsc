@@ -6,7 +6,6 @@ from scapp.pojo.waiting_work import Waiting
 from scapp.config import PROCESS_STATUS_DKSQSH
 
 class Total():
-
 	def getListSum(self, role):
 
 		role_level = role.role_level
