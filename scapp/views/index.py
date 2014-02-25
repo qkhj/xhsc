@@ -11,8 +11,10 @@ from scapp.config import logger
 from scapp import app
 from scapp import db
 from scapp.logic.total import Total
+
+
 # 登陆
-@app.route('/')
+@app.route('/', methods=['GET'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
