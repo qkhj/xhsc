@@ -21,7 +21,7 @@ def dqdcXed_jcjy(loan_apply_id):
 			SC_Cross_Examination.query.filter_by(loan_apply_id=loan_apply_id).delete()
 			db.session.flush()
 
-			for i in range(14):
+			for i in range(15):
 				for j in range(len(request.form.getlist('type_%s' % i))):
 					SC_Cross_Examination(loan_apply_id,i,request.form.getlist('name_%s' % i)[j],
 						j,request.form.getlist('value_%s' % i)[j]).add()
