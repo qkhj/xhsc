@@ -96,11 +96,11 @@
 						</td>
 						<td style="text-align:left">
 							{%- if obj.index == 0 %}
-							<input type="text" name="value_3" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+							<input type="text" name="value_3" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 							{%- else %}
-							<input type="text" name="value_3" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_3" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" />
 							{%- endif %}
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
@@ -116,11 +116,11 @@
 						</td>
 						<td>
 							{%- if cross_examination[cross_examination.index(obj)+count_3].index == 0 %}
-							<input type="text" name="value_4" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+							<input type="text" name="value_4" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 							{%- else %}
-							<input type="text" name="value_4" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_4" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" />
 							{%- endif %}
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
@@ -146,11 +146,11 @@
 						</td>
 						<td>
 							{%- if obj.index == 0 %}
-							<input type="text" name="value_5" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+							<input type="text" name="value_5" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<input type="button" value="+" onclick="addTd('dxzchj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 							<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 							{%- else %}
-							<input type="text" name="value_5" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_5" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" />
 							{%- endif %}
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
@@ -172,7 +172,7 @@
 								<input type="hidden" name="name_6" value="{{obj.items_name}}">
 							</td>
 							<td>
-								<input type="text" name="value_6" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<input type="text" name="value_6" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}"/>
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>	
 							</td>
@@ -185,7 +185,7 @@
 								<input type="hidden" name="name_7" value="{{obj.items_name}}">
 							</td>
 							<td>
-								<input type="text" name="value_7" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<input type="text" name="value_7" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}"/>
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>	
 							</td>
@@ -201,7 +201,7 @@
 								<input type="hidden" name="name_8" value="{{obj.items_name}}">
 							</td>
 							<td>
-								<input type="text" name="value_8" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<input type="text" name="value_8" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}"/>
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>	
 							</td>
@@ -214,7 +214,7 @@
 								<input type="hidden" name="name_9" value="{{obj.items_name}}">
 							</td>
 							<td>
-								<input type="text" name="value_9" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+								<input type="text" name="value_9" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}"/>
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>	
 							</td>
@@ -234,7 +234,7 @@
 							<input type="hidden" name="name_10" value="{{obj.items_name}}">
 						</td>
 						<td>
-							<input type="text" name="value_10" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_10" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
 						</td>
@@ -247,7 +247,7 @@
 							<input type="hidden" name="name_11" value="{{obj.items_name}}">
 						</td>
 						<td>
-							<input type="text" name="value_11" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_11" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
 						</td>
@@ -263,7 +263,7 @@
 							<input type="hidden" name="name_12" value="{{obj.items_name}}">
 						</td>
 						<td>
-							<input type="text" name="value_12" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_12" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
 						</td>
@@ -276,7 +276,7 @@
 							<input type="hidden" name="name_13" value="{{obj.items_name}}">
 						</td>
 						<td>
-							<input type="text" name="value_13" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)"/>
+							<input type="text" name="value_13" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
 						</td>
@@ -292,7 +292,7 @@
 							<input type="hidden" name="name_14" value="{{obj.items_name}}">
 						</td>
 						<td colspan="3">
-							<input type="text" name="value_14" onchange="check(this,1,100)" onkeyup="value=value.replace(/[^\d]/g,'')" style="width:40px" readonly/>%
+							<input type="text" name="value_14" onchange="check(this,1,100)" onkeyup="value=value.replace(/[^\d]/g,'')" style="width:40px" value="{{obj.content}}" readonly/>%
 							<br/>&nbsp;<span class="errorInfo">请输入1-100的有效数字</span>
 						</td>
 						{%- endif %}
