@@ -22,7 +22,11 @@
 	</script>
 </head>
 
-<body onload="datepicker();sum()">	
+<body onload="datepicker();sum()">
+<form id="getResult" method="GET">
+    <input type="hidden" name="beg_date" value="{{beg_date}}" />
+    <input type="hidden" name="end_date" value="{{end_date}}" />
+    <input type="hidden" name="yunying_loan_officer" value="{{user_id}}" />
 	<div class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">客户经理管理</a>/<a href="#">工时记录</a>
@@ -30,6 +34,7 @@
 		<div class="row-fluid">			
 			<i class="icon-bookmark"></i><span class="titletip">工时记录</span>
             <form method="POST" action="/Cust_mgr/search_result/1">
+
 			<div style="margin-bottom:5px;">
 				<a type="button" class="btn btn-info" href="#" onclick="iframe('Cust_mgr/add')">新增</a>
 			</div>
@@ -62,24 +67,24 @@
 						{%- endfor %}
 					</tbody>
 				</table>
-                <input type="hidden" name="beg_date" value="{{beg_date}}" />
-                <input type="hidden" name="end_date" value="{{end_date}}" />
-                <input type="hidden" name="yunying_loan_officer" value="{{user_id}}" />
-			</div>	
+
+			</div>
 			<div class="page-div">
 				{%- if data.has_prev %}
-					<span style="CURSOR: pointer" onclick="iframe('Cust_mgr/search_result/{{data.prev_num}}')">&lt;&lt;</span>
+					<span style="CURSOR: pointer" onclick="submitForm('getResult','/Cust_mgr/search_result/{{data.prev_num}}')">&lt;&lt;</span>
 				{%- else %}
 					<span style="CURSOR: pointer">&lt;&lt;</span>
 				{%- endif %}
 				&#160;第&#160;<font color="#0088cc">{{data.page}}</font>&#160;页&#160;
 				&#160;共&#160;<font color="#0088cc">{{data.pages}}</font>&#160;页&#160;
 				{%- if data.has_next %}
-					<span style="CURSOR: pointer" onclick="iframe('Cust_mgr/search_result/{{data.next_num}}')">&gt;&gt;</span>
-				{%- else %}
+					<span style="CURSOR: pointer" onclick="submitForm('getResult','/Cust_mgr/search_result/{{data.next_num}}')">&gt;&gt;</span>
+
+                {%- else %}
 					<span style="CURSOR: pointer">&gt;&gt;</span>
 				{%- endif %}
 			</div>
+            </form>
                 <input type="submit" class="btn btn-info" value="导出excel"/>
             </form>
 		</div><!--/row-fluid -->
