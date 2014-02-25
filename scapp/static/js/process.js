@@ -615,26 +615,28 @@ if(table=="qcqyhj"){//期初权益合计&期初权益合计
 	 $("#"+table).append("<tr class='add'>"+
 								"<td>"+
 									"<span>	"+
-										"<input type='text' name='items_name_1' onchange='spryMaxLength(this,32)'/><br/>"+
+										"<input type='hidden' name='type_3' value='3'>"+
+										"<input type='text' name='name_3' onchange='spryMaxLength(this,32)'/><br/>"+
 										"<span class='errorInfo'>字符数不得大于32</span>"+
 									"</span>"+
 								"</td>"+
 								"<td  style='text-align:left'>"+
 									"<span>	" +
-										"<input type='text' name='' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_3' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/><span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
 								"</td>"+
 								"<td>"+
 									"<span>	"+
-										"<input type='text' name='items_name_1' onchange='spryMaxLength(this,32)'/><br/>"+
+										"<input type='hidden' name='type_4' value='4'>"+
+										"<input type='text' name='name_4' onchange='spryMaxLength(this,32)'/><br/>"+
 										"<span class='errorInfo'>字符数不得大于32</span>"+
 									"</span>"+
 								"</td>"+
 								"<td  style='text-align:left'>"+
 									"<span>	" +
-										"<input type='text' name='' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_4' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/><span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
@@ -645,13 +647,14 @@ if(table=="dxzchj"){//大项支出合计
 	 $("#"+table).append("<tr class='add'>"+
 								"<td>"+
 									"<span>	"+
-										"<input type='text' name='items_name_1' onchange='spryMaxLength(this,32)'/><br/>"+
+										"<input type='hidden' name='type_5' value='5'>"+
+										"<input type='text' name='name_5' onchange='spryMaxLength(this,32)'/><br/>"+
 										"<span class='errorInfo'>字符数不得大于32</span>"+
 									"</span>"+
 								"</td>"+
 								"<td  style='text-align:left'>"+
 									"<span>	" +
-										"<input type='text' name='' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_5' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/><span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
