@@ -31,6 +31,7 @@ from scapp.models.process import SC_Non_Financial_Analysis
 from scapp.models.process import SC_Riskanalysis_And_Findings
 from scapp.models.process import SC_Approval_Decision
 from scapp.models.process import SC_Credit_Upload
+from scapp.models.process import SC_Monitor
 
 # 系统管理
 from scapp.models.system import SC_UserRole

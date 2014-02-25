@@ -23,7 +23,14 @@ function createForm(action,arr){
     tmpForm.appendTo(document.body).submit();
 }
 
+
 function submitForm(formId,action){
+    document.getElementById(formId).action = action;
+    document.getElementById(formId).submit();
+}
+
+function submitFormWithMethod(formId,action,method){
+    document.getElementById(formId).method = method;
     document.getElementById(formId).action = action;
     document.getElementById(formId).submit();
 }
