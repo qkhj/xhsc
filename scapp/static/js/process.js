@@ -622,7 +622,7 @@ if(table=="qcqyhj"){//期初权益合计&期初权益合计
 								"</td>"+
 								"<td  style='text-align:left'>"+
 									"<span>	" +
-										"<input type='text' name='value_3' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_3' onkeyup='setJe(this);' onblur='hj(3);yyqy();qyce();qyjcjybl()' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/><span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
@@ -636,7 +636,7 @@ if(table=="qcqyhj"){//期初权益合计&期初权益合计
 								"</td>"+
 								"<td  style='text-align:left'>"+
 									"<span>	" +
-										"<input type='text' name='value_4' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_4' onkeyup='setJe(this);' onblur='hj(4);yyqy();qyce();fxqjljsr();qyjcjybl()' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/><span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
@@ -654,7 +654,7 @@ if(table=="dxzchj"){//大项支出合计
 								"</td>"+
 								"<td  style='text-align:left'>"+
 									"<span>	" +
-										"<input type='text' name='value_5' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_5' onkeyup='setJe(this);' onblur='hj(5);yyqy();qyce();qyjcjybl()' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/><span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
@@ -1936,6 +1936,43 @@ if(table=="dxzchj"){//大项支出合计
 									"<input type='text' name=''/>"	+
 								"</td>"+
 							"</tr>");
+    }
+//----------------------贷后管理--------------------------
+if(table=="jcjl"){//标准检测——检测记录
+	number=document.getElementById(table).getElementsByTagName("tr").length
+	$("#"+table).append("<tr class='add'>"+
+								"<td>"+
+									"<span>	" +
+										number +
+									"</span>" +
+								"</td>"+
+								"<td>"+
+									"<span>	" +
+										"<input type='text' name='' class='datepicker' data-date-format='yyyy-mm-dd' readonly/>" +
+									"</span>" +
+								"</td>"+
+								"<td>"+
+									"<select name=''>"+
+										"<option>标准检测</option>"+
+									"</select>"+
+								"</td>"+
+								"<td>"+
+									"<select name=''>"+
+										"<option>贷款资金用途</option>"+
+										"<option>贷款归还情况</option>"+
+										"<option>客户经营情况</option>"+
+										"<option>客户家庭情况</option>"+
+										"<option>担保人情况</option>"+
+									"</select>"+
+								"</td>"+
+								"<td>"+
+									"<span>	" +
+										"<input type='text' name='' />" +
+														
+									"</span>" +
+								"</td>"+
+							"</tr>");
+		datepicker();
     }
     doubleIframe(frameid);
 }
