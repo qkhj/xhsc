@@ -1937,6 +1937,43 @@ if(table=="dxzchj"){//大项支出合计
 								"</td>"+
 							"</tr>");
     }
+//----------------------贷后管理--------------------------
+if(table=="jcjl"){//标准检测——检测记录
+	number=document.getElementById(table).getElementsByTagName("tr").length
+	$("#"+table).append("<tr class='add'>"+
+								"<td>"+
+									"<span>	" +
+										number +
+									"</span>" +
+								"</td>"+
+								"<td>"+
+									"<span>	" +
+										"<input type='text' name='' class='datepicker' data-date-format='yyyy-mm-dd' readonly/>" +
+									"</span>" +
+								"</td>"+
+								"<td>"+
+									"<select name=''>"+
+										"<option>标准检测</option>"+
+									"</select>"+
+								"</td>"+
+								"<td>"+
+									"<select name=''>"+
+										"<option>贷款资金用途</option>"+
+										"<option>贷款归还情况</option>"+
+										"<option>客户经营情况</option>"+
+										"<option>客户家庭情况</option>"+
+										"<option>担保人情况</option>"+
+									"</select>"+
+								"</td>"+
+								"<td>"+
+									"<span>	" +
+										"<input type='text' name='' />" +
+														
+									"</span>" +
+								"</td>"+
+							"</tr>");
+		datepicker();
+    }
     doubleIframe(frameid);
 }
 //表格删除行
