@@ -18,35 +18,35 @@
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">贷后管理</a>
 		</div>		
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+		  	{%- if messages %}
+	    	{%- for category, message in messages %}
+	    	<div class="alert alert-{{category}}">
+	      		{{message}}
+	      	</div>
+	    	{%- endfor %}
+		  	{%- endif %}
+		{%- endwith %}
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">贷款搜索</span>
-			<form>
+			<form method="POST" action="/Process/dhgl/dhgl_search/1">
 				<div style="border:1px solid #94c1dc;">
 					<table class="table-list">
 						<tr>
-							<td class="table-label">贷款编号</td>
-							<td><input type="text"/></td>
-							<td class="table-label">客户经理</td>
-							<td><input type="text"/></td>
+							<td class="table-label">客户/店铺名称</td>
+							<td><input type="text" name="customer_name"/></td>
 							<td class="table-label">贷款类型</td>
 							<td>
-								<select>
-									<option>---请选择---</option>
+								<select name="loan_type">
+									<option value="0">---全部---</option>
 									<option value="2">小额贷</option>	
 									<option value="1">微贷</option>								
 								</select>
 							</td>
-						</tr>
-						<tr>
-							<td class="table-label">客户名称</td>
-							<td><input type="text"/></td>
-							<td class="table-label">客户编号</td>
-							<td colspan="3"><input type="text"/></td>							
-						</tr>									
+						</tr>							
 					</table>
 				</div>
-				<input type="button" class="btn btn-info" value="搜索" onclick="iframe('Process/dhgl/dhgl')"/>
-				<input type="reset" class="btn btn-info" value="重置"/>											
+				<input type="submit" class="btn btn-info" value="搜索"/>										
 			</form><!--/搜索-->
 		</div><!--/row-fluid -->
 	</div><!--/content -->

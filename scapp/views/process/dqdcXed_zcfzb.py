@@ -27,7 +27,7 @@ def dqdcXed_zcfzb(loan_apply_id):
 			SC_Balance_Sheet.query.filter_by(loan_apply_id=loan_apply_id).delete()
 			db.session.flush()
 
-			for i in range(31):
+			for i in range(34):
 				for j in range(len(request.form.getlist('type_%s' % i))):
 					SC_Balance_Sheet(loan_apply_id,i,request.form.getlist('name_%s' % i)[j],
 						j,request.form.getlist('value_%s' % i)[j]).add()
