@@ -505,3 +505,46 @@ class SC_Credit_Upload(db.Model):
 
     def add(self):
         db.session.add(self)
+
+# 标准监测和非标准监测表
+class SC_Monitor(db.Model):
+    __tablename__ = 'sc_monitor'
+    id=db.Column(db.Integer, primary_key=True)
+    loan_apply_id=db.Column(db.Integer)
+    type = db.Column(db.Integer) #监控类型 1：标准 2：非标准
+    monitor_date = db.Column(db.Date) #监控日期
+
+    #标准
+    monitor_type = db.Column(db.String(32)) #监控方式
+    monitor_record = db.Column(db.String(256)) #监控记录
+    #非标准
+    address = db.Column(db.String(64)) #地点
+    related_person = db.Column(db.String(64)) #相关人员
+    monitor_reason = db.Column(db.String(256)) #采取非标准监控的原因
+    judgement = db.Column(db.String(256)) #非标监控的基本判断
+    follow_up_work = db.Column(db.String(256)) #后续重点工作
+
+    create_user = db.Column(db.Integer)
+    create_date = db.Column(db.DateTime)
+    modify_user = db.Column(db.Integer)
+    modify_date = db.Column(db.DateTime)
+
+    def __init__(self,loan_apply_id, type, monitor_date, monitor_type,monitor_record,
+        address, related_person, monitor_reason,judgement,follow_up_work):
+        self.loan_apply_id = loan_apply_id
+        self.type = type
+        self.monitor_date = monitor_date
+        self.monitor_type = monitor_type
+        self.monitor_record = monitor_record
+        self.address = address
+        self.related_person = related_person
+        self.monitor_reason = monitor_reason
+        self.judgement = judgement
+        self.follow_up_work = follow_up_work
+        self.create_user = current_user.id
+        self.create_date = datetime.datetime.now()
+        self.modify_user = current_user.id
+        self.modify_date = datetime.datetime.now()
+
+    def add(self):
+        db.session.add(self)

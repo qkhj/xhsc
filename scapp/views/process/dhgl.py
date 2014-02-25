@@ -9,22 +9,36 @@ import datetime
 from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
+from scapp.config import PROCESS_STATUS_SPJY_TG
+from scapp.models import View_Query_Loan
 
 from scapp import app
-
-# 贷后管理搜索
-@app.route('/Process/dhgl/dhgl_search', methods=['GET'])
-def dhgl_search():
-    return render_template("Process/dhgl/dhgl_search.html")
 
 # 贷后管理
 @app.route('/Process/dhgl/dhgl', methods=['GET'])
 def Process_dhgl():
-    return render_template("Process/dhgl/dhgl.html")
+    return render_template("Process/dhgl/dhgl_search.html")
+
+# 贷后管理搜索
+@app.route('/Process/dhgl/dhgl_search/<int:page>', methods=['GET','POST'])
+def dhgl_search(page):
+	customer_name = request.form['customer_name']
+	loan_type = request.form['loan_type']
+	sql = ""
+	if loan_type != '0':
+	    sql = "loan_type='"+loan_type+"' and "
+	sql += " process_status='"+PROCESS_STATUS_SPJY_TG+"'"
+	sql += " and (A_loan_officer="+str(current_user.id)+" or B_loan_officer="+str(current_user.id)+" or yunying_loan_officer="+str(current_user.id)+")"
+
+	if customer_name:
+	    sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
+
+	loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
+	return render_template("Process/dhgl/dhgl.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
 	
 # 贷后管理——贷后管理
-@app.route('/Process/dhgl/edit_dhgl', methods=['GET'])
-def edit_dhgl():
+@app.route('/Process/dhgl/edit_dhgl/<int:loan_apply_id>', methods=['GET'])
+def edit_dhgl(loan_apply_id):
     return render_template("Process/dhgl/edit_dhgl.html")
 
 # 贷后管理——新增标准

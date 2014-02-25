@@ -54,7 +54,7 @@ def khxxgl_search(page):
 	customer_name = request.form['customer_name']
 	credentials_no = request.form['credentials_no']
 
-	sql = ""
+	sql = " 1=1"
 	if manager != '0':
 		sql += "manager="+manager
 	if credentials_no:
