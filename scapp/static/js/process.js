@@ -622,7 +622,7 @@ if(table=="qcqyhj"){//期初权益合计&期初权益合计
 								"</td>"+
 								"<td  style='text-align:left'>"+
 									"<span>	" +
-										"<input type='text' name='value_3' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_3' onkeyup='setJe(this);' onblur='hj(3);yyqy();qyce();qyjcjybl()' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/><span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
@@ -636,7 +636,7 @@ if(table=="qcqyhj"){//期初权益合计&期初权益合计
 								"</td>"+
 								"<td  style='text-align:left'>"+
 									"<span>	" +
-										"<input type='text' name='value_4' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_4' onkeyup='setJe(this);' onblur='hj(4);yyqy();qyce();fxqjljsr();qyjcjybl()' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/><span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
@@ -654,7 +654,7 @@ if(table=="dxzchj"){//大项支出合计
 								"</td>"+
 								"<td  style='text-align:left'>"+
 									"<span>	" +
-										"<input type='text' name='value_5' onkeyup='setJe(this);' onblur='hj(12);sum3(8,10,12,17);cut2(17,15,16);sum2(15,16,18);bl(15,17,20)' maxlength='11' onclick='setJe(this)'/>" +
+										"<input type='text' name='value_5' onkeyup='setJe(this);' onblur='hj(5);yyqy();qyce();qyjcjybl()' maxlength='11' onclick='setJe(this)'/>" +
 										"<br/><span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>	" +					
 									"</span>" +
