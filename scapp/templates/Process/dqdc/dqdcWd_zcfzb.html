@@ -666,26 +666,33 @@
 				</tr>
 				<tr><!--新增字段-->
 					<td class="table-label">未来12个月的投资计划</td>
-					<td style="width:310px;text-align:center;">
-						生意方面<br/>
-					<input type="hidden" name="type_31" value="31">
-					<input type="hidden" name="name_31" value="未来12个月的投资计划-生意方面">
-						<span>	
-							<textarea name="value_31" value="" onchange="spryMaxLength(this,256)" style="width:290px;"><!--新增字段--></textarea><br/>
-							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>	
-					<td style="width:310px;text-align:center;">
-						个人方面<br/>
-					<input type="hidden" name="type_32" value="32">
-					<input type="hidden" name="name_32" value="未来12个月的投资计划-个人方面">
-						<span>	
-							<textarea name="value_32" value="" onchange="spryMaxLength(this,256)" style="width:290px;"><!--新增字段--></textarea><br/>
-							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>	
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 31 %}
+						<td style="width:310px;text-align:center;">
+							生意方面<br/>
+						<input type="hidden" name="type_31" value="31">
+						<input type="hidden" name="name_31" value="{{obj.items_name}}">
+							<span>	
+								<textarea name="value_31" value="" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<span>&nbsp;</span>
+								<span class="errorInfo">字符数不得大于256</span>
+							</span>
+						</td>	
+						{%- endif %}
+
+						{%- if obj.loan_type == 32 %}
+						<td style="width:310px;text-align:center;">
+							个人方面<br/>
+						<input type="hidden" name="type_32" value="32">
+						<input type="hidden" name="name_32" value="{{obj.items_name}}">
+							<span>	
+								<textarea name="value_32" value="" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<span>&nbsp;</span>
+								<span class="errorInfo">字符数不得大于256</span>
+							</span>
+						</td>	
+						{%- endif %}
+					{%- endfor %}
 					<td></td>						
 				</tr><!--/新增字段-->
 				<tr>
@@ -739,16 +746,20 @@
 					{%- endfor %}												
 				</tr>
 				<tr><!--新增字段-->
-					<td class="table-label">其他还款来源分析
-					<input type="hidden" name="type_33" value="33">
-					<input type="hidden" name="name_33" value="其他还款来源分析">
-					</td>
-					<td colspan="3">
-						<span>	
-							<textarea name="value_33" value="" onchange="spryMaxLength(this,256)"><!--新增字段--></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>								
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 33 %}
+						<td class="table-label">其他还款来源分析
+						<input type="hidden" name="type_33" value="33">
+						<input type="hidden" name="name_33" value="{{obj.items_name}}">
+						</td>
+						<td colspan="3">
+							<span>	
+								<textarea name="value_33" value="" onchange="spryMaxLength(this,256)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于256</span>
+							</span>
+						</td>	
+						{%- endif %}
+					{%- endfor %}							
 				</tr>
 			</table>
 		</div>	

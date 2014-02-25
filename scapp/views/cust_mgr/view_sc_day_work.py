@@ -7,9 +7,10 @@ from scapp.config import PER_PAGE,logger
 from scapp.models.cust_mgr.sc_day_work import SC_Day_Work
 from scapp.models import SC_UserRole
 from flask_login import current_user
-from sqlalchemy import and_
 from scapp.tools.export_excel import export_excel
-import datetime,time,xlwt
+import datetime,time,xlwt,re
+
+from scapp.logic.cust_mgr import sc_day_work
 
 ezxf=xlwt.easyxf #样式转换
 
@@ -61,16 +62,19 @@ def show_cust_mgr_search():
 def cust_mgr_search_result(page):
 
     if request.method=='GET':
-		user_id=request.args.get('yunying_loan_officer',None)
-		s_beg_date=str(request.args.get('beg_date','1999-01-01'))
-		s_end_date=str(request.args.get('end_date','2999-01-01'))
-		beg_date=datetime.datetime.strptime(s_beg_date,'%Y-%m-%d')
-		end_date=datetime.datetime.strptime(s_end_date,'%Y-%m-%d')
-		end_date=end_date.replace(hour=23,minute=59,second=59)
+        user_id=request.args.get('yunying_loan_officer',None)
+        s_beg_date=str(request.args.get('beg_date','1999-01-01'))
+        s_end_date=str(request.args.get('end_date','2999-01-01'))
+        r_beg_date = re.search('\d\d\d\d-\d\d-\d\d', s_beg_date).group()
+        r_end_date = re.search('\d\d\d\d-\d\d-\d\d', s_end_date).group()
+        beg_date=datetime.datetime.strptime(r_beg_date,'%Y-%m-%d')
+        end_date=datetime.datetime.strptime(r_end_date,'%Y-%m-%d')
+        end_date=end_date.replace(hour=23,minute=59,second=59)
 
-		data=query_data(page,beg_date,end_date,user_id,'PAGE')
+        data=sc_day_work.get_data_by_conditions(page,beg_date,end_date,user_id,current_user.id,'PAGE')
 
-		return render_template('/Information/gsjl/gsjl.html',data=data,beg_date=beg_date,end_date=end_date,user_id=user_id)
+
+        return render_template('/Information/gsjl/gsjl.html',data=data,beg_date=beg_date,end_date=end_date,user_id=user_id)
     elif request.method=='POST':
         user_id=request.form['yunying_loan_officer']
         s_beg_date=str(request.form['beg_date'])
@@ -79,7 +83,8 @@ def cust_mgr_search_result(page):
         end_date=datetime.datetime.strptime(s_end_date,'%Y-%m-%d %H:%M:%S')
         end_date=end_date.replace(hour=23,minute=59,second=59)
 
-        data=query_data(page,s_beg_date,s_end_date,user_id)
+        data=sc_day_work.get_data_by_conditions(page,s_beg_date,s_end_date,user_id,current_user.id)
+
 
         exl_hdngs=['日期','姓名','工作类型','工作名称','工作开始时间','工作结束时间','耗时','备注']
         types=     'date   text   text      text      datetime     datetime    text   text'.split()
@@ -101,46 +106,3 @@ def cust_mgr_search_result(page):
         filename=str(year)+'_'+str(month)+'_'+str(day)+'_'+'客户经理工时统计表'+'.xls'
         exp=export_excel()
         return exp.export_download(filename,'客户经理工时统计表',exl_hdngs,data,exl_hdngs_xf,data_xfs)
-
-def query_data(page,beg_date,end_date,user_id,type='NOPAGE'):
-    userrole=SC_UserRole.query.filter_by(user_id=current_user.id).first()
-    level=userrole.role.role_level
-
-    if not user_id:
-        if level<2:
-            if type=='PAGE':
-                data=SC_Day_Work.query.filter(SC_Day_Work.create_date.between(beg_date,end_date)).paginate(page, per_page = PER_PAGE)
-            else:
-                data=db.engine.execute("select sc_day_work.create_date,sc_user.real_name as create_user,sc_day_work.work_type,"
-                                   "sc_day_work.work_type_detail,sc_day_work.beg_date,sc_day_work.end_date,"
-                                   "sc_day_work.time_consume,sc_day_work.remark "
-                                   "from sc_day_work "
-                                   "inner join sc_user ON sc_day_work.create_user=sc_user.id "
-                                   "where sc_day_work.create_date between '"+beg_date+"' AND '"+end_date+"' ")
-        else:
-            if type=='PAGE':
-                data=SC_Day_Work.query.filter(and_(SC_Day_Work.create_date.between(beg_date,end_date),
-                                                   SC_Day_Work.create_user==current_user.id)).paginate(page, per_page = PER_PAGE)
-            else:
-                data=db.engine.execute("select sc_day_work.create_date,sc_user.real_name as create_user,sc_day_work.work_type,"
-                                   "sc_day_work.work_type_detail,sc_day_work.beg_date,sc_day_work.end_date,"
-                                   "sc_day_work.time_consume,sc_day_work.remark "
-                                   "from sc_day_work "
-                                   "inner join sc_user ON sc_day_work.create_user=sc_user.id "
-                                   "where sc_day_work.create_date between '"+beg_date+"' AND '"+end_date+"' "
-                                   "AND sc_day_work.create_user="+current_user.id+"")
-    else:
-        if type=='PAGE':
-            data=SC_Day_Work.query.filter(and_(SC_Day_Work.create_date.between(beg_date,end_date),
-                                          SC_Day_Work.create_user==user_id,SC_Day_Work.create_user==current_user.id)).paginate(page, per_page = PER_PAGE)
-        else:
-            data=db.engine.execute("select sc_day_work.create_date,sc_user.real_name as create_user,sc_day_work.work_type,"
-                                   "sc_day_work.work_type_detail,sc_day_work.beg_date,sc_day_work.end_date,"
-                                   "sc_day_work.time_consume,sc_day_work.remark "
-                                   "from sc_day_work "
-                                   "inner join sc_user ON sc_day_work.create_user=sc_user.id "
-                                   "where sc_day_work.create_date between '"+beg_date+"' AND '"+end_date+"' "
-                                   "AND sc_day_work.create_user="+user_id+" "
-                                   "AND sc_day_work.create_user="+current_user.id+"")
-
-    return data
