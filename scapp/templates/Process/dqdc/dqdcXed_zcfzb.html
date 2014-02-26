@@ -459,7 +459,7 @@
 						</td>
 						<td>
 							<span>	
-								<input type="text" name="value_16" value="{{obj.content}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+								<input type="text" name="value_16" value="{{obj.content}}" onclick="setJe2(this)" readonly/>
 								<br/><span class="je">人民币</span>
 								<span class="errorInfo"></span>						
 							</span>	
@@ -558,8 +558,8 @@
 						</td>
 						<td colspan="3">
 							<span>	
-								<textarea name="value_21" onchange="spryMaxLength(this,256)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于256</span>
+								<textarea name="value_21" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>		
 						{%- endif %}
@@ -575,8 +575,8 @@
 						</td>
 						<td colspan="3">
 							<span>	
-								<textarea name="value_22" onchange="spryMaxLength(this,256)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于256</span>
+								<textarea name="value_22" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>		
 						{%- endif %}
@@ -592,8 +592,8 @@
 						</td>
 						<td colspan="3">
 							<span>	
-								<textarea name="value_23" onchange="spryMaxLength(this,256)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于256</span>
+								<textarea name="value_23" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>		
 						{%- endif %}
@@ -609,9 +609,9 @@
 						<input type="hidden" name="type_26" value="26">
 						<input type="hidden" name="name_26" value="{{obj.items_name}}">
 							<span>	
-								<textarea name="value_26" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<textarea name="value_26" onchange="spryMaxLength(this,2048)" style="width:290px;">{{obj.content}}</textarea><br/>
 								<span>&nbsp;</span>
-								<span class="errorInfo">字符数不得大于256</span>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>		
 						{%- endif %}
@@ -622,9 +622,9 @@
 						<input type="hidden" name="type_27" value="27">
 						<input type="hidden" name="name_27" value="{{obj.items_name}}">
 							<span>	
-								<textarea name="value_27" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<textarea name="value_27" onchange="spryMaxLength(this,2048)" style="width:290px;">{{obj.content}}</textarea><br/>
 								<span>&nbsp;</span>
-								<span class="errorInfo">字符数不得大于256</span>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>		
 						{%- endif %}
@@ -641,9 +641,9 @@
 						<input type="hidden" name="type_28" value="28">
 						<input type="hidden" name="name_28" value="{{obj.items_name}}">
 							<span>	
-								<textarea name="value_28" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<textarea name="value_28" onchange="spryMaxLength(this,2048)" style="width:290px;">{{obj.content}}</textarea><br/>
 								<span>&nbsp;</span>
-								<span class="errorInfo">字符数不得大于256</span>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>		
 						{%- endif %}
@@ -654,9 +654,9 @@
 						<input type="hidden" name="type_29" value="29">
 						<input type="hidden" name="name_29" value="{{obj.items_name}}">
 							<span>	
-								<textarea name="value_29" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<textarea name="value_29" onchange="spryMaxLength(this,2048)" style="width:290px;">{{obj.content}}</textarea><br/>
 								<span>&nbsp;</span>
-								<span class="errorInfo">字符数不得大于256</span>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>		
 						{%- endif %}
@@ -673,9 +673,9 @@
 						<input type="hidden" name="type_31" value="31">
 						<input type="hidden" name="name_31" value="{{obj.items_name}}">
 							<span>	
-								<textarea name="value_31" value="" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<textarea name="value_31" value="" onchange="spryMaxLength(this,2048)" style="width:290px;">{{obj.content}}</textarea><br/>
 								<span>&nbsp;</span>
-								<span class="errorInfo">字符数不得大于256</span>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>	
 						{%- endif %}
@@ -686,9 +686,9 @@
 						<input type="hidden" name="type_32" value="32">
 						<input type="hidden" name="name_32" value="{{obj.items_name}}">
 							<span>	
-								<textarea name="value_32" value="" onchange="spryMaxLength(this,256)" style="width:290px;">{{obj.content}}</textarea><br/>
+								<textarea name="value_32" value="" onchange="spryMaxLength(this,2048)" style="width:290px;">{{obj.content}}</textarea><br/>
 								<span>&nbsp;</span>
-								<span class="errorInfo">字符数不得大于256</span>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>	
 						{%- endif %}
@@ -704,8 +704,8 @@
 						</td>
 						<td colspan="3">
 							<span>	
-								<textarea name="value_30" onchange="spryMaxLength(this,256)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于256</span>
+								<textarea name="value_30" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>		
 						{%- endif %}
@@ -721,8 +721,8 @@
 						</td>
 						<td colspan="3">
 							<span>	
-								<textarea name="value_24" onchange="spryMaxLength(this,256)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于256</span>
+								<textarea name="value_24" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>		
 						{%- endif %}
@@ -738,8 +738,8 @@
 						</td>
 						<td colspan="3">
 							<span>	
-								<textarea name="value_25" onchange="spryMaxLength(this,256)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于256</span>
+								<textarea name="value_25" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>		
 						{%- endif %}
@@ -754,8 +754,8 @@
 						</td>
 						<td colspan="3">
 							<span>	
-								<textarea name="value_33" value="" onchange="spryMaxLength(this,256)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于256</span>
+								<textarea name="value_33" value="" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>	
 						{%- endif %}
@@ -1040,7 +1040,7 @@
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="value_16" value="0" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" readonly/>
+							<input type="text" name="value_16" value="0" onclick="setJe2(this)" readonly/>
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>	
@@ -1109,8 +1109,8 @@
 					</td>
 					<td colspan="3">
 						<span>	
-							<textarea name="value_21" value="" onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="value_21" value="" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>								
 				</tr>
@@ -1121,8 +1121,8 @@
 					</td>
 					<td colspan="3">
 						<span>	
-							<textarea name="value_22" value="" onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="value_22" value="" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>								
 				</tr>
@@ -1133,8 +1133,8 @@
 					</td>
 					<td colspan="3">
 						<span>	
-							<textarea name="value_23" value="" onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="value_23" value="" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>								
 				</tr>				
@@ -1145,9 +1145,9 @@
 					<input type="hidden" name="type_26" value="26">
 					<input type="hidden" name="name_26" value="自从上次申请后经营变化（重复贷款）-生意方面">
 						<span>	
-							<textarea name="value_26" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
+							<textarea name="value_26" value="" onchange="spryMaxLength(this,2048)" style="width:290px;"></textarea><br/>
 							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>	
 					<td style="width:310px;text-align:center;">
@@ -1155,9 +1155,9 @@
 					<input type="hidden" name="type_27" value="27">
 					<input type="hidden" name="name_27" value="自从上次申请后经营变化（重复贷款）-个人方面">
 						<span>	
-							<textarea name="value_27" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
+							<textarea name="value_27" value="" onchange="spryMaxLength(this,2048)" style="width:290px;"></textarea><br/>
 							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>	
 					<td></td>						
@@ -1169,9 +1169,9 @@
 					<input type="hidden" name="type_28" value="28">
 					<input type="hidden" name="name_28" value="过去12个月的投资情况-生意方面">
 						<span>	
-							<textarea name="value_28" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
+							<textarea name="value_28" value="" onchange="spryMaxLength(this,2048)" style="width:290px;"></textarea><br/>
 							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>	
 					<td style="width:310px;text-align:center;">
@@ -1179,9 +1179,9 @@
 					<input type="hidden" name="type_29" value="29">
 					<input type="hidden" name="name_29" value="过去12个月的投资情况-个人方面">
 						<span>	
-							<textarea name="value_29" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
+							<textarea name="value_29" value="" onchange="spryMaxLength(this,2048)" style="width:290px;"></textarea><br/>
 							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>	
 					<td></td>						
@@ -1193,9 +1193,9 @@
 					<input type="hidden" name="type_31" value="31">
 					<input type="hidden" name="name_31" value="未来12个月的投资计划-生意方面">
 						<span>	
-							<textarea name="value_31" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
+							<textarea name="value_31" value="" onchange="spryMaxLength(this,2048)" style="width:290px;"></textarea><br/>
 							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>	
 					<td style="width:310px;text-align:center;">
@@ -1203,9 +1203,9 @@
 					<input type="hidden" name="type_32" value="32">
 					<input type="hidden" name="name_32" value="未来12个月的投资计划-个人方面">
 						<span>	
-							<textarea name="value_32" value="" onchange="spryMaxLength(this,256)" style="width:290px;"></textarea><br/>
+							<textarea name="value_32" value="" onchange="spryMaxLength(this,2048)" style="width:290px;"></textarea><br/>
 							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>	
 					<td></td>						
@@ -1217,8 +1217,8 @@
 					</td>
 					<td colspan="3">
 						<span>	
-							<textarea name="value_30" value="" onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="value_30" value="" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>								
 				</tr>
@@ -1229,8 +1229,8 @@
 					</td>
 					<td colspan="3">
 						<span>	
-							<textarea name="value_24" value="" onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="value_24" value="" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>								
 				</tr>
@@ -1241,8 +1241,8 @@
 					</td>
 					<td colspan="3">
 						<span>	
-							<textarea name="value_25" value="" onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="value_25" value="" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>								
 				</tr>
@@ -1253,8 +1253,8 @@
 					</td>
 					<td colspan="3">
 						<span>	
-							<textarea name="value_33" value="" onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="value_33" value="" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>								
 				</tr>
