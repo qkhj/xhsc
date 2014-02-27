@@ -9,7 +9,7 @@ import datetime
 from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
-from scapp.config import PROCESS_STATUS_DKSP
+from scapp.config import PROCESS_STATUS_SPJY_TG
 from scapp.config import PROCESS_STATUS_DKFKJH
 
 from scapp.models import SC_Individual_Customer
@@ -26,7 +26,7 @@ from scapp.models import SC_Business_Type
 from scapp.models import SC_Loan_Purpose
 
 from scapp.models import SC_Loan_Apply
-from scapp.models import SC_Apply_Info
+from scapp.models import SC_Approval_Decision
 from scapp.models import SC_Credit_History
 from scapp.models import SC_Co_Borrower
 from scapp.models import SC_Guarantees_For_Others
@@ -59,7 +59,7 @@ def dkfk_search(page):
     sql = ""
     if loan_type != '0':
         sql = "loan_type='"+loan_type+"' and "
-    sql += " process_status='"+PROCESS_STATUS_DKSP+"'"
+    sql += " process_status='"+PROCESS_STATUS_SPJY_TG+"'"
 
     if customer_name:
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
@@ -71,24 +71,27 @@ def dkfk_search(page):
 @app.route('/Process/dkfk/goto_edit_dkfk/<int:id>', methods=['GET'])
 def goto_edit_dkfk(id):
     loan_apply = SC_Loan_Apply.query.filter_by(id=id).first()
-    apply_info = SC_Apply_Info.query.filter_by(loan_apply_id=id).first()
+    approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=id).first()
     repayment_plan_detail = SC_Repayment_plan_detail.query.filter_by(loan_apply_id=id,change_record=1).order_by("id").all()
-    return render_template("Process/dkfk/edit_dkfk.html",id=id,loan_apply=loan_apply,apply_info=apply_info,
+    return render_template("Process/dkfk/edit_dkfk.html",id=id,loan_apply=loan_apply,approval_decision=approval_decision,
         repayment_plan_detail=repayment_plan_detail)
 
 # 贷款放款——编辑放款(放款信息)
 @app.route('/Process/dkfk/edit_dkfk/<int:id>', methods=['POST'])
 def edit_dkfk(id):
     try:
-        #保存申请信息
-        apply_info = SC_Apply_Info.query.filter_by(loan_apply_id=id).first()
-        apply_info.repayment_type = request.form['repayment_type']
-        apply_info.annual_interest_rate = request.form['annual_interest_rate']
-        apply_info.loan_date = request.form['loan_date']
-        apply_info.first_repayment_date = request.form['first_repayment_date']
-        apply_info.loan_deadline = request.form['loan_deadline']
-        apply_info.modify_user=current_user.id
-        apply_info.modify_date=datetime.datetime.now()
+        #保存SC_Approval_Decision剩余信息
+        approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=id).first()
+        approval_decision.loan_date = request.form['loan_date']
+        approval_decision.first_repayment_date = request.form['first_repayment_date']
+        #approval_decision.management_coats = request.form['management_coats']
+        #approval_decision.agency_coats = request.form['agency_coats']
+        approval_decision.contract_date = request.form['contract_date']
+        approval_decision.loan_account = request.form['loan_account']
+        #approval_decision.bank_customer_no = request.form['bank_customer_no']
+        approval_decision.loan_contract_number = request.form['loan_contract_number']
+        approval_decision.guarantee_contract_number = request.form['guarantee_contract_number']
+        approval_decision.collateral_contract_number = request.form['collateral_contract_number']
 
         #保存还款计划
         repayment_plan_id = 0
@@ -96,17 +99,17 @@ def edit_dkfk(id):
         if repayment_plan:
             repayment_plan_id = repayment_plan.id
             repayment_plan.repayment_type=request.form['repayment_type']
-            repayment_plan.amount=request.form['loan_amount_num']
+            repayment_plan.amount=request.form['amount']
             repayment_plan.lending_date=request.form['loan_date']
             repayment_plan.first_repayment_date=request.form['first_repayment_date']
-            repayment_plan.ratio=request.form['annual_interest_rate']
-            repayment_plan.installmenst=request.form['loan_deadline']
+            repayment_plan.ratio=request.form['rates']
+            repayment_plan.installmenst=request.form['deadline']
             repayment_plan.modify_user=current_user.id
             repayment_plan.modify_date=datetime.datetime.now()
         else:
-            repayment_plan_new = SC_Repayment_Plan(id,request.form['repayment_type'],request.form['loan_amount_num'],
-                request.form['first_repayment_date'],request.form['loan_date'],request.form['annual_interest_rate'],
-                request.form['loan_deadline'])
+            repayment_plan_new = SC_Repayment_Plan(id,request.form['repayment_type'],request.form['amount'],
+                request.form['loan_date'],request.form['loan_date'],request.form['rates'],
+                request.form['deadline'])
             repayment_plan_new.add()
             db.session.flush()
             repayment_plan_id = repayment_plan_new.id
@@ -114,9 +117,9 @@ def edit_dkfk(id):
         #保存还款细则
         SC_Repayment_plan_detail.query.filter_by(loan_apply_id=id,change_record=1).delete()
         db.session.flush()
-        for i in range(1,int(request.form['loan_deadline'])+1):
+        for i in range(1,int(request.form['deadline'])+1):
             print i 
-            SC_Repayment_plan_detail(repayment_plan_id,id,None,request.form['annual_interest_rate'],
+            SC_Repayment_plan_detail(repayment_plan_id,id,None,request.form['rates'],
                 request.form['mybj%d' % i],request.form['mylx%d' % i],
                 request.form['mybx%d' % i],i,request.form['myrq%d' % i],None,1).add() 
 

@@ -10,6 +10,8 @@ from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
 from scapp.config import PROCESS_STATUS_SPJY_TG
+
+from scapp.models import SC_Monitor
 from scapp.models import View_Query_Loan
 
 from scapp import app
@@ -39,7 +41,8 @@ def dhgl_search(page):
 # 贷后管理——贷后管理
 @app.route('/Process/dhgl/edit_dhgl/<int:loan_apply_id>', methods=['GET'])
 def edit_dhgl(loan_apply_id):
-    return render_template("Process/dhgl/edit_dhgl.html")
+	monotors = SC_Monitor.query.filter_by(loan_apply_id=loan_apply_id).order_by("id").paginate(page, per_page = PER_PAGE)
+	return render_template("Process/dhgl/edit_dhgl.html",monotors=monotors)
 
 # 贷后管理——新增标准
 @app.route('/Process/dhgl/new_bz', methods=['GET'])

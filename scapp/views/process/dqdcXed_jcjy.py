@@ -5,6 +5,7 @@ from scapp import db
 from scapp.config import logger
 
 from scapp.models.credit_data.sc_cross_examination import SC_Cross_Examination
+from scapp.models.credit_data.sc_balance_sheet import SC_Balance_Sheet
 
 from scapp import app
 
@@ -14,8 +15,9 @@ def dqdcXed_jcjy(loan_apply_id):
 	if request.method == 'GET':
 		cross_examination = SC_Cross_Examination.query.filter_by(loan_apply_id=loan_apply_id).order_by("id").all()
 		count_3 = SC_Cross_Examination.query.filter_by(loan_apply_id=loan_apply_id,loan_type=3).count()
+		balance_sheet = SC_Balance_Sheet.query.filter_by(loan_apply_id=loan_apply_id,loan_type=16).first()#type=16为资产负债表中的所有者权益
 		return render_template("Process/dqdc/dqdcXed_jcjy.html",loan_apply_id=loan_apply_id,
-			cross_examination=cross_examination,count_3=count_3)
+			cross_examination=cross_examination,count_3=count_3,balance_sheet=balance_sheet)
 	else:
 		try:
 			SC_Cross_Examination.query.filter_by(loan_apply_id=loan_apply_id).delete()

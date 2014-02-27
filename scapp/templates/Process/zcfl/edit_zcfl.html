@@ -14,138 +14,161 @@
 </head>
 
 <body>	
-	<form class="content">
+	<form class="content" method="POST" action="/Process/zcfl/edit_zcfl/{{view_query_loan.loan_apply_id}}">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">资产分类</a>
 		</div>		
 		<div class="row-fluid">	
-			<!--***************************************资产信息**************************************************-->
-			<div style="border:1px solid #94c1dc;">	
-				<i class="icon-bookmark"></i><span class="titletip">共同借款人</span>	
-				<div style="border:1px solid #94c1dc;margin:5px;">				
-					<table class="table-list" cellspacing="10" id="uesr-list">
-						<tr class="font-small">
-							<th>姓名</th>
-							<th>与客户关系</th>
-							<th>身份证号码</th>							
-							<th>家庭电话</th>
-							<th>主营业务或职务（如受雇与别人）</th>
-							<th>经营地址或工作单位地址</th>		
-							<th>主要资产</th>
-							<th>月收入</th>									
-						</tr>
-						<tr class="center"><!--后期Js中要增加ID字段-->
-							<td>
-								<select id="" style="width:80px;" disabled>
-									<option>吕淑珍</option>
-								</select>
-							</td>
-							<td><span id="">亲戚</span></td>							
-							<td><span id=""> 10110119700216305x </span></td>	
-							<td><span id=""> 01062221188 </span></td>
-							<td><input type="text" id="" style="width:100px;" disabled/></td>	
-							<td><input type="text" id="" style="width:130px;" disabled/></td>	
-							<td><input type="text" id="" style="width:90px;" disabled/></td>
-							<td><input type="text" id="" style="width:90px;" disabled/></td>											
-						</tr>
-					</table>
-				</div>
-
-				<i class="icon-bookmark"></i><span class="titletip">担保人</span>	
-				<div style="border:1px solid #94c1dc;margin:5px;">				
-					<table class="table-list" cellspacing="10" id="uesr-list">
-						<tr class="font-small">
-							<th>姓名</th>
-							<th>与客户关系</th>
-							<th>身份证号码</th>							
-							<th>家庭电话</th>
-							<th>主营业务或职务（如受雇与别人）</th>
-							<th>经营地址或工作单位地址</th>		
-							<th>主要资产</th>
-							<th>月收入</th>									
-						</tr>
-						<tr class="center"><!--后期Js中要增加ID字段-->
-							<td>
-								<select id="" style="width:80px;" disabled>
-									<option>金亮</option>
-								</select>
-							</td>
-							<td><span id="">朋友</span></td>							
-							<td><span id=""> 10110119700216305x </span></td>	
-							<td><span id=""> 01062221188 </span></td>
-							<td><input type="text" id="" style="width:100px;" disabled/></td>	
-							<td><input type="text" id="" style="width:130px;" disabled/></td>	
-							<td><input type="text" id="" style="width:90px;" disabled/></td>
-							<td><input type="text" id="" style="width:90px;" disabled/></td>											
-						</tr>
-					</table>
-				</div>
-
-				<i class="icon-bookmark"></i><span class="titletip">抵押品信息</span>	
-				<div style="border:1px solid #94c1dc;margin:5px;">				
-					<table class="table-list" cellspacing="10" id="uesr-list">
-						<tr>
-							<th>物品名称</th>
-							<th>所有者、地址</th>
-							<th>描述</th>							
-							<th>登记号</th>
-							<th>估价(元)</th>
-							<th>抵押(元)</th>		
-							<th width="30px">质押</th>								
-						</tr>
-						<tr class="center"><!--后期Js中要增加ID字段-->
-							<td>
-								<select id="" style="width:120px;" disabled>
-									<option>自住用房</option>
-								</select>
-							</td>		
-							<td><input type="text" id="" class="tbInput" disabled/></td>				
-							<td><input type="text" id="" class="tbInput" disabled/></td>	
-							<td><input type="text" id="" class="tbInput" disabled/></td>	
-							<td><input type="text" id="" class="tbInput" disabled/></td>
-							<td><input type="text" id="" class="tbInput" disabled/></td>
-							<td><input type="checkbox" id=""  disabled/></td>													
-						</tr>
-					</table>
-				</div>
-			</div>
+			<!--*****************************************共同借款人**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">共同借款人</span>
+		<div class="divBorder">
+			<table id="gtjkr" class="table-list">
+				<tr class="font-small">
+					<th>姓名</th>
+					<th>与客户关系</th>
+					<th>身份证号码</th>							
+					<th>家庭电话</th>
+					<th>主营业务或职务（如受雇与别人）</th>
+					<th>经营地址或工作单位地址</th>		
+					<th>主要资产</th>
+					<th>月收入</th>									
+				</tr>
+				{%- for obj in co_borrower %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" disabled/></td>
+					<td><input type="text" name="relationship" class="tbInput" value="{{obj.relationship}}" disabled/></td>							
+					<td><input type="text" name="id_number" class="tbInput" value="{{obj.id_number}}" disabled/></td>
+					<td><input type="text" name="phone" class="tbInput" value="{{obj.phone}}" disabled/></td>
+					<td><input type="text" name="main_business" class="tbInput" value="{{obj.main_business}}" disabled/></td>	
+					<td><input type="text" name="address" class="tbInput" value="{{obj.address}}" disabled/></td>	
+					<td><input type="text" name="major_assets" class="tbInput" value="{{obj.major_assets}}" disabled/></td>
+					<td><input type="text" name="monthly_income" class="tbInput" value="{{obj.monthly_income}}" disabled/></td>								
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+	<!--*****************************************有无抵押物**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">有无抵押物</span>
+		<div class="divBorder">
+			<table id="ywdyw" class="table-list">
+				<tr>
+					<th>物品名称</th>
+					<th>所有者、地址</th>
+					<th>描述</th>							
+					<th>登记号</th>
+					<th>估价(元)</th>
+					<th>抵押(元)</th>									
+				</tr>
+				{%- for obj in guaranty %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="obj_name" class="tbInput" value="{{obj.obj_name}}" disabled/></td>			
+					<td><input type="text" name="owner_address" class="tbInput" value="{{obj.owner_address}}" disabled/></td>				
+					<td><input type="text" name="description" class="tbInput" value="{{obj.description}}" disabled/></td>	
+					<td><input type="text" name="registration_number" class="tbInput" value="{{obj.registration_number}}" disabled/></td>	
+					<td><input type="text" name="appraisal" class="tbInput" value="{{obj.appraisal}}" disabled/></td>
+					<td><input type="text" name="mortgage" class="tbInput" value="{{obj.mortgage}}" disabled/></td>					
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
+		
+	<!--**************************担保信息*********************************-->
+		<i class="icon-bookmark"></i><span class="titletip">担保信息</span>
+		<div class="divBorder">
+			<table id="dbInformation" class="table-list">
+				<tr>
+					<th>姓名</th>
+					<th>地址</th>
+					<th>身份证号码</th>							
+					<th>工作单位</th>
+					<th>电话</th>		
+					<th>与申请人关系</th>								
+				</tr>
+				{%- for obj in guarantees %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td><input type="text" name="name_db" class="tbInput" value="{{obj.name}}" disabled/></td>
+					<td><input type="text" name="address_db" class="tbInput" value="{{obj.address}}" disabled/></td>							
+					<td><input type="text" name="id_number_db" class="tbInput" value="{{obj.id_number}}" disabled/></td>	
+					<td><input type="text" name="workunit_db" class="tbInput" value="{{obj.workunit}}" disabled/></td>
+					<td><input type="text" name="phone_db" class="tbInput" value="{{obj.phone}}" disabled/></td>	
+					<td><input type="text" name="relationship_db" class="tbInput" value="{{obj.relationship}}" disabled/></td>										
+				</tr>
+				{%- endfor %}
+			</table>
+		</div>
 		<!--***************************************分类信息**************************************************-->
 			<div class="divBorder">				
 				<table class="table-list" cellspacing="10" id="uesr-list">
 					<tr>
 						<td class="table-label">贷款编号</td>
-						<td style="width:35%;"><span id="">1</span></td>				
+						<td style="width:35%;"><span id="">{{view_query_loan.loan_apply_id}}</span></td>				
 						<td class="table-label">客户名称</td>
-						<td style="width:35%;"><span id="">王军忠</span></td>												
+						{%- if view_query_loan.company_customer_name %}
+						<td style="width:35%;"><span id="">{{view_query_loan.company_customer_name}}</span></td>	
+						{%- else %}
+						<td style="width:35%;"><span id="">{{view_query_loan.individual_customer_name}}</span></td>
+						{%- endif %}											
 					</tr>
 					<tr>
 						<td class="table-label">贷款类型</td>
-						<td colspan="3"><span id="">微贷</span></td>									
+						{%- if view_query_loan.loan_type == '1' %}
+							<td colspan="3"><span id="">微贷</span></td>	
+						{%- else %}
+							<td colspan="3"><span id="">小额贷</span></td>	
+						{%- endif %}								
 					</tr>
 					<tr>
 						<td class="table-label">贷款期限</td>
-						<td><span id="">12月</span></td>				
+						<td><span id="">{{view_query_loan.loan_deadline}}月</span></td>				
 						<td class="table-label">贷款余额(元)</td>
-						<td><span id="">300,000.00</span></td>												
+						<td><span id="">{{view_query_loan.loan_amount}}</span></td>												
 					</tr>
 					<tr>
 						<td class="table-label">逾期金额(元)</td>
-						<td><span id="">621.98</span></td>				
+						<td><span id="">0</span></td>				
 						<td class="table-label">逾期天数</td>
-						<td><span id="">20</span></td>												
+						<td><span id="">0</span></td>												
 					</tr>
 					<tr>
 						<td class="table-label">系统资产分类</td>
 						<td><span id="">关注</span></td>				
 						<td class="table-label">手工资产分类</td>
 						<td>
-							<select id="">
-								<option>---请选择---</option>
-								<option>正常</option>
-								<option>关注</option>	
-								<option>次级</option>
-								<option>可以</option>
-								<option>损失</option>
+						{%- if classify %}
+							<select name="classify">
+								{%- if view_query_loan.classify == 1 %}
+									<option value="1" selected>正常</option>
+								{%- else %}
+									<option value="1">正常</option>
+								{%- endif %}
+								{%- if view_query_loan.classify == 2 %}
+									<option value="2" selected>关注</option>
+								{%- else %}
+									<option value="2">关注</option>
+								{%- endif %}
+								{%- if view_query_loan.classify == 3 %}
+									<option value="3" selected>次级</option>
+								{%- else %}
+									<option value="3">次级</option>
+								{%- endif %}
+								{%- if view_query_loan.classify == 4 %}
+									<option value="4" selected>可疑</option>
+								{%- else %}
+									<option value="4">可疑</option>
+								{%- endif %}
+								{%- if view_query_loan.classify == 5 %}
+									<option value="5" selected>损失</option>
+								{%- else %}
+									<option value="5">损失</option>
+								{%- endif %}
+							</select>
+						{%- else %}
+							<select name="classify">
+								<option value="1">正常</option>
+								<option value="2">关注</option>
+								<option value="3">次级</option>
+								<option value="4">可疑</option>
+								<option value="5">损失</option>
 							</select>
 						</td>												
 					</tr>
@@ -155,7 +178,7 @@
 					</tr>
 					<tr>
 						<td class="table-label">分类认定说明</td>
-						<td colspan="3"><textarea id="" style="width:80%;"></textarea></td>									
+						<td colspan="3"><textarea name="classify_dec" style="width:80%;">{{view_query_loan.classify_dec}}</textarea></td>									
 					</tr>
 				</table>
 			</div>

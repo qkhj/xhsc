@@ -103,7 +103,7 @@ def new_dksq(belong_customer_type,belong_customer_value):
     try:
         #生成贷款申请表
         loan_apply = SC_Loan_Apply(request.form['loan_type'],belong_customer_type,belong_customer_value,request.form['customer_name'],request.form['evaluation'],
-            current_user.id,None,None,None,'',None,None,None,PROCESS_STATUS_DKSQ,0)
+            current_user.id,None,None,None,None,None,None,PROCESS_STATUS_DKSQ)
         loan_apply.add()
 
         #清理缓存

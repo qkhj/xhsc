@@ -19,7 +19,7 @@
 	</style>
 	<script type="text/javascript">
 		function set(){
-			$("input[name]").blur();			
+			$("input[id=last]").blur();			
 		}
 	</script>
 </head>
@@ -99,7 +99,7 @@
 					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[9].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[10].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[11].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td class="table-label"><input type="text" name="early_cash" value="{{cash_flow[12].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td class="table-label"><input type="text" name="early_cash" id="last" value="{{cash_flow[12].early_cash}}" onblur="sum(this,'early_cash');add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
 					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="sum">0</span></td>					
 				</tr>	
@@ -117,7 +117,7 @@
 					<td><input type="text" name="sale_amount" value="{{cash_flow[9].sale_amount}}" onblur="sum(this,'sale_amount');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',9);cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="sale_amount" value="{{cash_flow[10].sale_amount}}" onblur="sum(this,'sale_amount');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',10);cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="sale_amount" value="{{cash_flow[11].sale_amount}}" onblur="sum(this,'sale_amount');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',11);cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="sale_amount" value="{{cash_flow[12].sale_amount}}" onblur="sum(this,'sale_amount');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td><input type="text" name="sale_amount" id="last" value="{{cash_flow[12].sale_amount}}" onblur="sum(this,'sale_amount');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>				
 				</tr>
@@ -135,7 +135,7 @@
 					<td><input type="text" name="accounts_receivable" value="{{cash_flow[9].accounts_receivable}}" onblur="sum(this,'accounts_receivable');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',9);cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="accounts_receivable" value="{{cash_flow[10].accounts_receivable}}" onblur="sum(this,'accounts_receivable');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',10);cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="accounts_receivable" value="{{cash_flow[11].accounts_receivable}}" onblur="sum(this,'accounts_receivable');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',11);cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_receivable" value="{{cash_flow[12].accounts_receivable}}" onblur="sum(this,'accounts_receivable');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td><input type="text" name="accounts_receivable" id="last" value="{{cash_flow[12].accounts_receivable}}" onblur="sum(this,'accounts_receivable');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>				
 				</tr>
@@ -153,7 +153,7 @@
 					<td><input type="text" name="prepaments" value="{{cash_flow[9].prepaments}}" onblur="sum(this,'prepaments');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',9);cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="prepaments" value="{{cash_flow[10].prepaments}}" onblur="sum(this,'prepaments');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',10);cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="prepaments" value="{{cash_flow[11].prepaments}}" onblur="sum(this,'prepaments');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',11);cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="prepaments" value="{{cash_flow[12].prepaments}}" onblur="sum(this,'prepaments');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td><input type="text" name="prepaments" id="last" value="{{cash_flow[12].prepaments}}" onblur="sum(this,'prepaments');add3('sale_amount','accounts_receivable','prepaments','total_cash_flow',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>				
 				</tr>
@@ -189,7 +189,7 @@
 					<td><input type="text" name="cash_purchase" value="{{cash_flow[9].cash_purchase}}" onblur="sum(this,'cash_purchase');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',9);add('total_cash_outflow','fixed_costs','fkze',9);cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="cash_purchase" value="{{cash_flow[10].cash_purchase}}" onblur="sum(this,'cash_purchase');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',10);add('total_cash_outflow','fixed_costs','fkze',10);cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="cash_purchase" value="{{cash_flow[11].cash_purchase}}" onblur="sum(this,'cash_purchase');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',11);add('total_cash_outflow','fixed_costs','fkze',11);cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="cash_purchase" value="{{cash_flow[12].cash_purchase}}" onblur="sum(this,'cash_purchase');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',12);add('total_cash_outflow','fixed_costs','fkze',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
+					<td><input type="text" name="cash_purchase" id="last" value="{{cash_flow[12].cash_purchase}}" onblur="sum(this,'cash_purchase');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',12);add('total_cash_outflow','fixed_costs','fkze',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>		
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>			
 				</tr>
@@ -208,7 +208,7 @@
 					<td><input type="text" name="accounts_payable" value="{{cash_flow[9].accounts_payable}}" onblur="sum(this,'accounts_payable');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',9);add('total_cash_outflow','fixed_costs','fkze',9);cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="accounts_payable" value="{{cash_flow[10].accounts_payable}}" onblur="sum(this,'accounts_payable');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',10);add('total_cash_outflow','fixed_costs','fkze',10);cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="accounts_payable" value="{{cash_flow[11].accounts_payable}}" onblur="sum(this,'accounts_payable');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',11);add('total_cash_outflow','fixed_costs','fkze',11);cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="accounts_payable" value="{{cash_flow[12].accounts_payable}}" onblur="sum(this,'accounts_payable');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',12);add('total_cash_outflow','fixed_costs','fkze',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="accounts_payable" id="last" value="{{cash_flow[12].accounts_payable}}" onblur="sum(this,'accounts_payable');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',12);add('total_cash_outflow','fixed_costs','fkze',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>							
 				</tr>	
@@ -226,7 +226,7 @@
 					<td><input type="text" name="advance_purchases" value="{{cash_flow[9].advance_purchases}}" onblur="sum(this,'advance_purchases');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',9);add('total_cash_outflow','fixed_costs','fkze',9);cut('total_cash_flow','fkze','yyhdxj',9);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',9);add('early_cash','ljxj','qmxj',9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="advance_purchases" value="{{cash_flow[10].advance_purchases}}" onblur="sum(this,'advance_purchases');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',10);add('total_cash_outflow','fixed_costs','fkze',10);cut('total_cash_flow','fkze','yyhdxj',10);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',10);add('early_cash','ljxj','qmxj',10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="advance_purchases" value="{{cash_flow[11].advance_purchases}}" onblur="sum(this,'advance_purchases');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',11);add('total_cash_outflow','fixed_costs','fkze',11);cut('total_cash_flow','fkze','yyhdxj',11);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',11);add('early_cash','ljxj','qmxj',11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advance_purchases" value="{{cash_flow[12].advance_purchases}}" onblur="sum(this,'advance_purchases');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',12);add('total_cash_outflow','fixed_costs','fkze',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advance_purchases" id="last" value="{{cash_flow[12].advance_purchases}}" onblur="sum(this,'advance_purchases');add3('cash_purchase','accounts_payable','advance_purchases','total_cash_outflow',12);add('total_cash_outflow','fixed_costs','fkze',12);cut('total_cash_flow','fkze','yyhdxj',12);add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',12);add('early_cash','ljxj','qmxj',12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>
@@ -244,7 +244,7 @@
 					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[9].total_cash_outflow}}" readonly/></td>
 					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[10].total_cash_outflow}}" readonly/></td>
 					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[11].total_cash_outflow}}" readonly/></td>
-					<td class="table-label"><input type="text" name="total_cash_outflow" value="{{cash_flow[12].total_cash_outflow}}" readonly/></td>		
+					<td class="table-label"><input type="text" name="total_cash_outflow" id="last" value="{{cash_flow[12].total_cash_outflow}}" readonly/></td>		
 					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="total_cash_outflow">0</span></td>					
 				</tr>
@@ -262,7 +262,7 @@
 					<td><input type="text" name="wage_labor" value="{{cash_flow[9].wage_labor}}" onblur="sum(this,'wage_labor');zgdcb3(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="wage_labor" value="{{cash_flow[10].wage_labor}}" onblur="sum(this,'wage_labor');zgdcb3(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="wage_labor" value="{{cash_flow[11].wage_labor}}" onblur="sum(this,'wage_labor');zgdcb3(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="wage_labor" value="{{cash_flow[12].wage_labor}}" onblur="sum(this,'wage_labor');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="wage_labor" id="last" value="{{cash_flow[12].wage_labor}}" onblur="sum(this,'wage_labor');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>	
@@ -280,7 +280,7 @@
 					<td><input type="text" name="tax" value="{{cash_flow[9].tax}}" onblur="sum(this,'tax');zgdcb3(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="tax" value="{{cash_flow[10].tax}}" onblur="sum(this,'tax');zgdcb3(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="tax" value="{{cash_flow[11].tax}}" onblur="sum(this,'tax');zgdcb3(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="tax" value="{{cash_flow[12].tax}}" onblur="sum(this,'tax');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="tax" id="last" value="{{cash_flow[12].tax}}" onblur="sum(this,'tax');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>	
@@ -298,7 +298,7 @@
 					<td><input type="text" name="transportation_costs" value="{{cash_flow[9].transportation_costs}}" onblur="sum(this,'transportation_costs');zgdcb3(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="transportation_costs" value="{{cash_flow[10].transportation_costs}}" onblur="sum(this,'transportation_costs');zgdcb3(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="transportation_costs" value="{{cash_flow[11].transportation_costs}}" onblur="sum(this,'transportation_costs');zgdcb3(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="transportation_costs" value="{{cash_flow[12].transportation_costs}}" onblur="sum(this,'transportation_costs');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="transportation_costs" id="last" value="{{cash_flow[12].transportation_costs}}" onblur="sum(this,'transportation_costs');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>						
 				</tr>	
@@ -316,7 +316,7 @@
 					<td><input type="text" name="rent" value="{{cash_flow[9].rent}}" onblur="sum(this,'rent');zgdcb3(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="rent" value="{{cash_flow[10].rent}}" onblur="sum(this,'rent');zgdcb3(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="rent" value="{{cash_flow[11].rent}}" onblur="sum(this,'rent');zgdcb3(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="rent" value="{{cash_flow[12].rent}}" onblur="sum(this,'rent');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="rent" id="last" value="{{cash_flow[12].rent}}" onblur="sum(this,'rent');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>						
 				</tr>	
@@ -334,7 +334,7 @@
 					<td><input type="text" name="maintenance_fees" value="{{cash_flow[9].maintenance_fees}}" onblur="sum(this,'maintenance_fees');zgdcb3(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="maintenance_fees" value="{{cash_flow[10].maintenance_fees}}" onblur="sum(this,'maintenance_fees');zgdcb3(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="maintenance_fees" value="{{cash_flow[11].maintenance_fees}}" onblur="sum(this,'maintenance_fees');zgdcb3(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="maintenance_fees" value="{{cash_flow[12].maintenance_fees}}" onblur="sum(this,'maintenance_fees');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="maintenance_fees" id="last" value="{{cash_flow[12].maintenance_fees}}" onblur="sum(this,'maintenance_fees');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>						
 				</tr>
@@ -352,7 +352,7 @@
 					<td><input type="text" name="utility_bills" value="{{cash_flow[9].utility_bills}}" onblur="sum(this,'utility_bills');zgdcb3(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="utility_bills" value="{{cash_flow[10].utility_bills}}" onblur="sum(this,'utility_bills');zgdcb3(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="utility_bills" value="{{cash_flow[11].utility_bills}}" onblur="sum(this,'utility_bills');zgdcb3(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="utility_bills" value="{{cash_flow[12].utility_bills}}" onblur="sum(this,'utility_bills');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="utility_bills" id="last" value="{{cash_flow[12].utility_bills}}" onblur="sum(this,'utility_bills');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>						
 				</tr>
@@ -370,7 +370,7 @@
 					<td><input type="text" name="advertising_fees" value="{{cash_flow[9].advertising_fees}}" onblur="sum(this,'advertising_fees');zgdcb3(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="advertising_fees" value="{{cash_flow[10].advertising_fees}}" onblur="sum(this,'advertising_fees');zgdcb3(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="advertising_fees" value="{{cash_flow[11].advertising_fees}}" onblur="sum(this,'advertising_fees');zgdcb3(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="advertising_fees" value="{{cash_flow[12].advertising_fees}}" onblur="sum(this,'advertising_fees');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="advertising_fees" id="last" value="{{cash_flow[12].advertising_fees}}" onblur="sum(this,'advertising_fees');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>						
 				</tr>
@@ -388,7 +388,7 @@
 					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[9].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees');zgdcb3(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[10].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees');zgdcb3(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[11].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees');zgdcb3(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="social_intercourse_fees" value="{{cash_flow[12].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="social_intercourse_fees" id="last" value="{{cash_flow[12].social_intercourse_fees}}" onblur="sum(this,'social_intercourse_fees');zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>
@@ -418,7 +418,7 @@
 											<td><input type="text" name="month_9" value="{{obj.month_9}}" onblur="sumqt(this,'month_',0);zgdcb3(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td><input type="text" name="month_10" value="{{obj.month_10}}" onblur="sumqt(this,'month_',0);zgdcb3(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td><input type="text" name="month_11" value="{{obj.month_11}}" onblur="sumqt(this,'month_',0);zgdcb3(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_12" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0);zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_12" id="last" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0);zgdcb3(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td style="width:80px"><span name="ave">0</span></td>	
 											<td style="width:80px"><span name="sum">0</span></td>	
 										</tr>
@@ -443,7 +443,7 @@
 					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[9].fixed_costs}}" readonly/></td>
 					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[10].fixed_costs}}" readonly/></td>
 					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[11].fixed_costs}}" readonly/></td>
-					<td class="table-label"><input type="text" name="fixed_costs" value="{{cash_flow[12].fixed_costs}}" readonly/></td>		
+					<td class="table-label"><input type="text" name="fixed_costs" id="last" value="{{cash_flow[12].fixed_costs}}" readonly/></td>		
 					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="fixed_costs">0</span></td>					
 				</tr>
@@ -461,7 +461,7 @@
 					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[9].fkze}}" readonly/></td>
 					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[10].fkze}}" readonly/></td>
 					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[11].fkze}}" readonly/></td>
-					<td class="table-label"><input type="text" name="fkze" value="{{cash_flow[12].fkze}}" readonly/></td>		
+					<td class="table-label"><input type="text" name="fkze" id="last" value="{{cash_flow[12].fkze}}" readonly/></td>		
 					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="fkze">0</span></td>					
 				</tr>
@@ -479,7 +479,7 @@
 					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[9].yyhdxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[10].yyhdxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[11].yyhdxj}}" readonly/></td>
-					<td class="table-label"><input type="text" name="yyhdxj" value="{{cash_flow[12].yyhdxj}}" readonly/></td>		
+					<td class="table-label"><input type="text" name="yyhdxj" id="last" value="{{cash_flow[12].yyhdxj}}" readonly/></td>		
 					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="yyhdxj">0</span></td>					
 				</tr>
@@ -497,7 +497,7 @@
 					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[9].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment');tzhdzxjl6(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[10].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment');tzhdzxjl6(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[11].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment');tzhdzxjl6(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="fixed_asset_investment" value="{{cash_flow[12].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment');tzhdzxjl6(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="fixed_asset_investment" id="last" value="{{cash_flow[12].fixed_asset_investment}}" onblur="sum(this,'fixed_asset_investment');tzhdzxjl6(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>				
 				</tr>
@@ -515,7 +515,7 @@
 					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[9].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets');tzhdzxjl6(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[10].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets');tzhdzxjl6(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[11].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets');tzhdzxjl6(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="disposal_of_fixed_assets" value="{{cash_flow[12].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets');tzhdzxjl6(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="disposal_of_fixed_assets" id="last" value="{{cash_flow[12].disposal_of_fixed_assets}}" onblur="sum(this,'disposal_of_fixed_assets');tzhdzxjl6(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>				
 				</tr>
@@ -533,7 +533,7 @@
 					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[9].investment_cash_flow}}" readonly/></td>
 					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[10].investment_cash_flow}}" readonly/></td>
 					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[11].investment_cash_flow}}" readonly/></td>
-					<td class="table-label"><input type="text" name="investment_cash_flow" value="{{cash_flow[12].investment_cash_flow}}" readonly/></td>		
+					<td class="table-label"><input type="text" name="investment_cash_flow" id="last" value="{{cash_flow[12].investment_cash_flow}}" readonly/></td>		
 					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="investment_cash_flow">0</span></td>					
 				</tr>
@@ -551,7 +551,7 @@
 					<td><input type="text" name="bank_loans" value="{{cash_flow[9].bank_loans}}" onblur="sum(this,'bank_loans');rzhdzxjl7(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="bank_loans" value="{{cash_flow[10].bank_loans}}" onblur="sum(this,'bank_loans');rzhdzxjl7(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="bank_loans" value="{{cash_flow[11].bank_loans}}" onblur="sum(this,'bank_loans');rzhdzxjl7(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="bank_loans" value="{{cash_flow[12].bank_loans}}" onblur="sum(this,'bank_loans');rzhdzxjl7(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="bank_loans" id="last" value="{{cash_flow[12].bank_loans}}" onblur="sum(this,'bank_loans');rzhdzxjl7(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>
@@ -581,7 +581,7 @@
 											<td><input type="text" name="month_9" value="{{obj.month_9}}" onblur="sumqt(this,'month_',0);rzhdzxjl7(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td><input type="text" name="month_10" value="{{obj.month_10}}" onblur="sumqt(this,'month_',0);rzhdzxjl7(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td><input type="text" name="month_11" value="{{obj.month_11}}" onblur="sumqt(this,'month_',0);rzhdzxjl7(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_12" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0);rzhdzxjl7(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_12" id="last" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0);rzhdzxjl7(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td style="width:80px"><span name="ave">0</span></td>	
 											<td style="width:80px"><span name="sum">0</span></td>	
 										</tr>
@@ -606,7 +606,7 @@
 					<td><input type="text" name="repayments_bank" value="{{cash_flow[9].repayments_bank}}" onblur="sum(this,'repayments_bank');rzhdzxjl7(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="repayments_bank" value="{{cash_flow[10].repayments_bank}}" onblur="sum(this,'repayments_bank');rzhdzxjl7(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="repayments_bank" value="{{cash_flow[11].repayments_bank}}" onblur="sum(this,'repayments_bank');rzhdzxjl7(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="repayments_bank" value="{{cash_flow[12].repayments_bank}}" onblur="sum(this,'repayments_bank');rzhdzxjl7(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="repayments_bank" id="last" value="{{cash_flow[12].repayments_bank}}" onblur="sum(this,'repayments_bank');rzhdzxjl7(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>
@@ -636,7 +636,7 @@
 											<td><input type="text" name="month_9" value="{{obj.month_9}}" onblur="sumqt(this,'month_',0);rzhdzxjl7(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td><input type="text" name="month_10" value="{{obj.month_10}}" onblur="sumqt(this,'month_',0);rzhdzxjl7(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td><input type="text" name="month_11" value="{{obj.month_11}}" onblur="sumqt(this,'month_',0);rzhdzxjl7(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_12" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0);rzhdzxjl7(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_12" id="last" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0);rzhdzxjl7(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td style="width:80px"><span name="ave">0</span></td>	
 											<td style="width:80px"><span name="sum">0</span></td>	
 										</tr>
@@ -661,7 +661,7 @@
 					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[9].financing_cash_flow}}" readonly/></td>
 					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[10].financing_cash_flow}}" readonly/></td>
 					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[11].financing_cash_flow}}" readonly/></td>
-					<td><input type="text" name="financing_cash_flow" value="{{cash_flow[12].financing_cash_flow}}" readonly/></td>
+					<td><input type="text" name="financing_cash_flow" id="last" value="{{cash_flow[12].financing_cash_flow}}" readonly/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="financing_cash_flow">0</span></td>					
 				</tr>
@@ -691,7 +691,7 @@
 											<td><input type="text" name="month_9" value="{{obj.month_9}}" onblur="sumqt(this,'month_',0);srxjlze8(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td><input type="text" name="month_10" value="{{obj.month_10}}" onblur="sumqt(this,'month_',0);srxjlze8(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td><input type="text" name="month_11" value="{{obj.month_11}}" onblur="sumqt(this,'month_',0);srxjlze8(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-											<td><input type="text" name="month_12" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0);srxjlze8(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+											<td><input type="text" name="month_12" id="last" value="{{obj.month_12}}" onblur="sumqt(this,'month_',0);srxjlze8(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 											<td style="width:80px"><span name="ave">0</span></td>	
 											<td style="width:80px"><span name="sum">0</span></td>	
 										</tr>
@@ -716,7 +716,7 @@
 					<td><input type="text" name="household_expenditure" value="{{cash_flow[9].household_expenditure}}" onblur="sum(this,'household_expenditure');srxjlze8(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="household_expenditure" value="{{cash_flow[10].household_expenditure}}" onblur="sum(this,'household_expenditure');srxjlze8(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="household_expenditure" value="{{cash_flow[11].household_expenditure}}" onblur="sum(this,'household_expenditure');srxjlze8(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="household_expenditure" value="{{cash_flow[12].household_expenditure}}" onblur="sum(this,'household_expenditure');srxjlze8(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="household_expenditure" id="last" value="{{cash_flow[12].household_expenditure}}" onblur="sum(this,'household_expenditure');srxjlze8(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>	
@@ -734,7 +734,7 @@
 					<td><input type="text" name="private_use" value="{{cash_flow[9].private_use}}" onblur="sum(this,'private_use');srxjlze8(9)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="private_use" value="{{cash_flow[10].private_use}}" onblur="sum(this,'private_use');srxjlze8(10)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><input type="text" name="private_use" value="{{cash_flow[11].private_use}}" onblur="sum(this,'private_use');srxjlze8(11)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
-					<td><input type="text" name="private_use" value="{{cash_flow[12].private_use}}" onblur="sum(this,'private_use');srxjlze8(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
+					<td><input type="text" name="private_use" id="last" value="{{cash_flow[12].private_use}}" onblur="sum(this,'private_use');srxjlze8(12)" onchange="value=value.replace(/[^0-9]/g,'')"/></td>
 					<td><span name="ave">0</span></td>	
 					<td><span name="sum">0</span></td>					
 				</tr>	
@@ -752,7 +752,7 @@
 					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[9].private_cash_flow}}" readonly/></td>
 					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[10].private_cash_flow}}" readonly/></td>
 					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[11].private_cash_flow}}" readonly/></td>
-					<td class="table-label"><input type="text" name="private_cash_flow" value="{{cash_flow[12].private_cash_flow}}" readonly/></td>		
+					<td class="table-label"><input type="text" name="private_cash_flow" id="last" value="{{cash_flow[12].private_cash_flow}}" readonly/></td>		
 					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="private_cash_flow">0</span></td>					
 				</tr>
@@ -770,7 +770,7 @@
 					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[9].ljxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[10].ljxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[11].ljxj}}" readonly/></td>
-					<td class="table-label"><input type="text" name="ljxj" value="{{cash_flow[12].ljxj}}" readonly/></td>		
+					<td class="table-label"><input type="text" name="ljxj" id="last" value="{{cash_flow[12].ljxj}}" readonly/></td>		
 					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="ljxj">0</span></td>					
 				</tr>
@@ -788,7 +788,7 @@
 					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[9].qmxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[10].qmxj}}" readonly/></td>
 					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[11].qmxj}}" readonly/></td>
-					<td class="table-label"><input type="text" name="qmxj" value="{{cash_flow[12].qmxj}}" readonly/></td>		
+					<td class="table-label"><input type="text" name="qmxj" id="last" value="{{cash_flow[12].qmxj}}" readonly/></td>		
 					<td class="table-label"><span name="ave">0</span></td>	
 					<td class="table-label"><span name="qmxj">0</span></td>					
 				</tr>
@@ -800,11 +800,11 @@
 			<table class="table-list">
 				<tr>
 					<td class="table-label" style="width:180px">现金流分析及说明</td>	
-					<td><textarea name=""></textarea></td>
+					<td><textarea name="dec_1">{{cash_flow_dec.dec_1}}</textarea></td>
 				</tr>	
 				<tr>
 					<td class="table-label" style="width:180px">0-12期 现金流出 / 现金流入</td>
-					<td><textarea name=""></textarea></td>
+					<td><textarea name="dec_2">{{cash_flow_dec.dec_2}}</textarea></td>
 				</tr>					
 			</table>
 		</div>		

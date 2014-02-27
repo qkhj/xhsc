@@ -57,14 +57,14 @@
 				</div>
 				<div class="page-div">
 					{%- if customer.has_prev %}
-						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/new_dksq/{{belong_customer_type}}/{{customer.prev_num}}')">&lt;&lt;</span>
+						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/goto_new_dksq/{{belong_customer_type}}/{{customer.prev_num}}')">&lt;&lt;</span>
 					{%- else %}
 						<span style="CURSOR: pointer">&lt;&lt;</span>
 					{%- endif %}
 						&#160;第&#160;<font color="#0088cc">{{customer.page}}</font>&#160;页&#160;
 						&#160;共&#160;<font color="#0088cc">{{customer.pages}}</font>&#160;页&#160;
 					{%- if customer.has_next %}
-						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/new_dksq/{{belong_customer_type}}/{{customer.next_num}}')">&gt;&gt;</span>
+						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/goto_new_dksq/{{belong_customer_type}}/{{customer.next_num}}')">&gt;&gt;</span>
 					{%- else %}
 						<span style="CURSOR: pointer">&gt;&gt;</span>
 					{%- endif %}

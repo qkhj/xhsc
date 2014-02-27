@@ -7,6 +7,7 @@ from scapp.config import logger
 from scapp.models import SC_Co_Borrower
 from scapp.models import SC_Guaranty
 from scapp.models import SC_Guarantees
+from scapp.models.credit_data.sc_dydb_dec import SC_Dydb_Dec
 
 from scapp import app
 
@@ -16,8 +17,11 @@ def dqdcXed_dbdydcb(id):
 	co_borrower = SC_Co_Borrower.query.filter_by(loan_apply_id=id).all()
 	guaranty = SC_Guaranty.query.filter_by(loan_apply_id=id).all()
 	guarantees = SC_Guarantees.query.filter_by(loan_apply_id=id).all()
+
+	dydb_dec = SC_Dydb_Dec.query.filter_by(loan_apply_id=id).first()
+
 	return render_template("Process/dqdc/dqdcXed_dbdydcb.html",id=id,co_borrower=co_borrower,guaranty=guaranty,
-    	guarantees=guarantees)
+    	guarantees=guarantees,dydb_dec=dydb_dec)
 
 # 贷款调查——编辑小额贷款(担保抵押调查表)
 @app.route('/Process/dqdc/edit_dqdcXed_dbdydcb/<int:id>', methods=['POST'])
@@ -69,6 +73,12 @@ def edit_dqdcXed_dbdydcb(id):
 			SC_Guaranty(id,obj_name_list[i],owner_address_list[i],
 				description_list[i],registration_number_list[i],appraisal_list[i],
 				mortgage_list[i],0).add()
+
+		dydb_dec = SC_Dydb_Dec.query.filter_by(loan_apply_id=id).first()
+		if dydb_dec:
+			dydb_dec.dec = request.form['dec']
+		else:
+			SC_Dydb_Dec(id,request.form['dec']).add()
 
 		# 事务提交
 		db.session.commit()
