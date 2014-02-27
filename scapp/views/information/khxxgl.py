@@ -56,7 +56,7 @@ def khxxgl_search(page):
 
 	sql = " 1=1"
 	if manager != '0':
-		sql += "manager="+manager
+		sql += " and manager="+manager
 	if credentials_no:
 		# 个人
 		if request.form['customer_type'] == 'Individual':

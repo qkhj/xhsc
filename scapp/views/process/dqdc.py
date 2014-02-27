@@ -194,93 +194,19 @@ def dqdcXed_jbqk(belong_customer_type,belong_customer_value,id):
     loan_purpose = SC_Loan_Purpose.query.order_by("id").all()
     credit_history = SC_Credit_History.query.filter_by(loan_apply_id=id).all()
     guarantees_for_others = SC_Guarantees_For_Others.query.filter_by(loan_apply_id=id).all()
-    financial_overview = SC_Financial_Overview.query.filter_by(loan_apply_id=id).first()
-    non_financial_analysis = SC_Non_Financial_Analysis.query.filter_by(loan_apply_id=id).first()
+    #financial_overview = SC_Financial_Overview.query.filter_by(loan_apply_id=id).first()
+    #non_financial_analysis = SC_Non_Financial_Analysis.query.filter_by(loan_apply_id=id).first()
     riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
     
     return render_template("Process/dqdc/dqdcXed_jbqk.html",belong_customer_type=belong_customer_type,
         belong_customer_value=belong_customer_value,id=id,customer=customer,loan_apply=loan_apply,
         apply_info=apply_info,loan_purpose=loan_purpose,credit_history=credit_history,
-        guarantees_for_others=guarantees_for_others,riskanalysis_and_findings=riskanalysis_and_findings,
-        financial_overview=financial_overview,non_financial_analysis=non_financial_analysis)
+        guarantees_for_others=guarantees_for_others,riskanalysis_and_findings=riskanalysis_and_findings)
 
 # 编辑贷款调查——小额贷款(基本情况)
 @app.route('/Process/dqdc/edit_dqdcXed_jbqk/<int:id>', methods=['POST'])
 def edit_dqdcXed_jbqk(id):
     try:
-        financial_overview = SC_Financial_Overview.query.filter_by(loan_apply_id=id).first()
-        if financial_overview:
-            financial_overview.current_assets = request.form['current_assets']
-            financial_overview.current_liabilities = request.form['current_liabilities']
-            financial_overview.bank_deposits = request.form['bank_deposits']
-            financial_overview.accounts_payable = request.form['accounts_payable']
-            financial_overview.accounts_receivable = request.form['accounts_receivable']
-            financial_overview.receipts_in_advance = request.form['receipts_in_advance']
-            financial_overview.prepayments = request.form['prepayments']
-            financial_overview.short_term_borrowings = request.form['short_term_borrowings']
-            financial_overview.stock = request.form['stock']
-            financial_overview.long_term_borrowings = request.form['long_term_borrowings']
-            financial_overview.fixed_assets = request.form['fixed_assets']
-            financial_overview.total_liabilities = request.form['total_liabilities']
-            financial_overview.other_operating_assets = request.form['other_operating_assets']
-            financial_overview.equity = request.form['equity']
-            financial_overview.total_assets = request.form['total_assets']
-            financial_overview.liabilities_plus_equity = request.form['liabilities_plus_equity']
-            financial_overview.other_non_sheet_assets = request.form['other_non_sheet_assets']
-            financial_overview.other_non_sheet_liabilities = request.form['other_non_sheet_liabilities']
-            financial_overview.average_monthly_turnover = request.form['average_monthly_turnover']
-            financial_overview.average_net_profit = request.form['average_net_profit']
-            financial_overview.average_monthly_disposable_income = request.form['average_monthly_disposable_income']
-            financial_overview.asset_liability_ratio = request.form['asset_liability_ratio']
-            financial_overview.current_ratio = request.form['current_ratio']
-            financial_overview.quick_ratio = request.form['quick_ratio']
-            financial_overview.inventory_turnover_ratio = request.form['inventory_turnover_ratio']
-            financial_overview.accounts_receivable_turnover_ratio = request.form['accounts_receivable_turnover_ratio']
-            financial_overview.accounts_payable_turnover_ratio = request.form['accounts_payable_turnover_ratio']
-            financial_overview.returns_on_capital = request.form['returns_on_capital']
-            financial_overview.gross_margin = request.form['gross_margin']
-            financial_overview.net_profit_margin = request.form['net_profit_margin']
-        else:
-            SC_Financial_Overview(id,request.form['current_assets'],request.form['current_liabilities'],
-                request.form['bank_deposits'],request.form['accounts_payable'],
-                request.form['accounts_receivable'],request.form['receipts_in_advance'],
-                request.form['prepayments'],request.form['short_term_borrowings'],
-                request.form['stock'],request.form['long_term_borrowings'],
-                request.form['fixed_assets'],request.form['total_liabilities'],
-                request.form['other_operating_assets'],request.form['equity'],
-                request.form['total_assets'],request.form['liabilities_plus_equity'],
-                request.form['other_non_sheet_assets'],request.form['other_non_sheet_liabilities'],
-                request.form['average_monthly_turnover'],request.form['average_net_profit'],
-                request.form['average_monthly_disposable_income'],request.form['asset_liability_ratio'],
-                request.form['current_ratio'],request.form['quick_ratio'],
-                request.form['inventory_turnover_ratio'],request.form['accounts_receivable_turnover_ratio'],
-                request.form['accounts_payable_turnover_ratio'],request.form['returns_on_capital'],
-                request.form['gross_margin'],request.form['net_profit_margin']).add()
-
-        non_financial_analysis = SC_Non_Financial_Analysis.query.filter_by(loan_apply_id=id).first()
-        if non_financial_analysis:
-            non_financial_analysis.operating_history = request.form['operating_history']
-            non_financial_analysis.structure_and_market = request.form['structure_and_market']
-            non_financial_analysis.finance = request.form['finance']
-            non_financial_analysis.changes_in_operations_1 = request.form['changes_in_operations_1']
-            non_financial_analysis.changes_in_operations_2 = request.form['changes_in_operations_2']
-            non_financial_analysis.investment_1 = request.form['investment_1']
-            non_financial_analysis.investment_2 = request.form['investment_2']
-            non_financial_analysis.investment_plan_1 = request.form['investment_plan_1']
-            non_financial_analysis.investment_plan_2 = request.form['investment_plan_2']
-            non_financial_analysis.loan_purpose_detail = request.form['loan_purpose_detail']
-            non_financial_analysis.personal_circumstances = request.form['personal_circumstances']
-            non_financial_analysis.impression_of_the_customer = request.form['impression_of_the_customer']
-            non_financial_analysis.other_sources_of_repayment = request.form['other_sources_of_repayment']
-        else:
-            SC_Non_Financial_Analysis(id,request.form['operating_history'],
-                request.form['structure_and_market'],request.form['finance'],
-                request.form['changes_in_operations_1'],request.form['changes_in_operations_2'],
-                request.form['investment_1'],request.form['investment_2'],
-                request.form['investment_plan_1'],request.form['investment_plan_2'],
-                request.form['loan_purpose_detail'],request.form['personal_circumstances'],
-                request.form['impression_of_the_customer'],request.form['other_sources_of_repayment']).add()
-
         riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
         if riskanalysis_and_findings:
             riskanalysis_and_findings.analysis_conclusion = request.form['analysis_conclusion']

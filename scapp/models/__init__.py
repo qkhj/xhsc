@@ -32,6 +32,7 @@ from scapp.models.process import SC_Riskanalysis_And_Findings
 from scapp.models.process import SC_Approval_Decision
 from scapp.models.process import SC_Credit_Upload
 from scapp.models.process import SC_Monitor
+from scapp.models.process import SC_Classify
 
 # 系统管理
 from scapp.models.system import SC_UserRole

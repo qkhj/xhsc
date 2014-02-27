@@ -30,19 +30,70 @@
 			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">贷款还款</a>
 		</div>		
 
-		<div class="row-fluid">
+		<!--**********************************************放款信息**********************************************-->
+			<div>
+				<i class="icon-bookmark"></i><span class="titletip">放款信息</span>
+				<div class="divBorder">
+					<table class="table-list">		
+					<!--
+						<tr>
+							<td class="table-label">贷款编号</td>
+							<td><span id=""> </span></td>
+							<td class="table-label">客户编号</td>
+							<td><span id=""> </span></td>					
+						</tr>		
+
+						<tr>
+							<td class="table-label">管理费(元)</td>
+							<td>
+								<span>	
+									<input type="text" name="management_coats" onclick="setJe(this)" onkeyup="setJe(this);" maxlength="11" />管理费率1%<br/>
+									<span class="je">人民币</span>	
+									<span class="errorInfo"></span>							
+								</span>
+							</td>
+							<td class="table-label">代理费(元)</td>
+							<td>
+								<span>	
+									<input type="text" name="agency_coats" onclick="setJe(this)" onkeyup="setJe(this);" maxlength="11" />管理费率1%<br/>
+									<span class="je">人民币</span>	
+									<span class="errorInfo"></span>							
+								</span>	
+							</td>					
+						</tr>		
+						-->
+						<tr>
+							<td class="table-label">合同签订日期<font class="red">*</font></td>
+							<td><input type="text" name="contract_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
+							<td class="table-label">放款帐号<font class="red">*</font></td>
+							<td><input type="text" name="loan_account"/></td>					
+						</tr>	
+						<tr>
+							<td class="table-label">贷款合同编号<font class="red">*</font></td>
+							<td><input type="text" name="loan_contract_number"/></td>
+							<td class="table-label">担保合同编号</td>
+							<td><input type="text" name="guarantee_contract_number"/></td>					
+						</tr>
+						<tr>
+							<td class="table-label">抵押品合同编号</td>
+							<td colspan="3"><input type="text" name="collateral_contract_number"/></td>			
+						</tr>
+					</table>
+				</div>
+			</div>
+			<!--**********************************************还款计划**********************************************-->
 			<div class="divBorder">
 				<table class="table-list">		
 					<tr>
 						<td class="table-label">还款方式</td>
 						<td>
-							<select name="repayment_type" onchange="show_calculate();">
-								{%- if apply_info.repayment_type == '1' %}
+							<select name="repayment_type" onchange="show_calculate();" readonly>
+								{%- if approval_decision.repayment_type == '1' %}
 								<option value="1" selected>等额本金</option>
 								{%- else %}
 								<option value="1">等额本金</option>
 								{%- endif %}
-								{%- if apply_info.repayment_type == '2' %}
+								{%- if approval_decision.repayment_type == '2' %}
 								<option value="2" selected>等额本息</option>
 								{%- else %}
 								<option value="2">等额本息</option>
@@ -51,123 +102,123 @@
 						</td>
 						<td class="table-label">还贷期数<font class="red">*</font></td>
 						<td>
-							<select name="loan_deadline" style="width:60px" onchange="show_calculate();sum(1);sum(2);sum(3);">
-								{%- if apply_info.loan_deadline == '1' %}
+							<select name="deadline" style="width:60px" onchange="show_calculate();sum(1);sum(2);sum(3);" readonly>
+								{%- if approval_decision.deadline == '1' %}
 									<option value="1" selected>1</option>
 								{%- else %}
 									<option value="1">1</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '2' %}
+								{%- if approval_decision.deadline == '2' %}
 									<option value="2" selected>2</option>
 								{%- else %}
 									<option value="2">2</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '3' %}
+								{%- if approval_decision.deadline == '3' %}
 									<option value="3" selected>3</option>
 								{%- else %}
 									<option value="3">3</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '4' %}
+								{%- if approval_decision.deadline == '4' %}
 									<option value="4" selected>4</option>
 								{%- else %}
 									<option value="4">4</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '5' %}
+								{%- if approval_decision.deadline == '5' %}
 									<option value="5" selected>5</option>
 								{%- else %}
 									<option value="5">5</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '6' %}
+								{%- if approval_decision.deadline == '6' %}
 									<option value="6" selected>6</option>
 								{%- else %}
 									<option value="6">6</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '7' %}
+								{%- if approval_decision.deadline == '7' %}
 									<option value="7" selected>7</option>
 								{%- else %}
 									<option value="7">7</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '8' %}
+								{%- if approval_decision.deadline == '8' %}
 									<option value="8" selected>8</option>
 								{%- else %}
 									<option value="8">8</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '9' %}
+								{%- if approval_decision.deadline == '9' %}
 									<option value="9" selected>9</option>
 								{%- else %}
 									<option value="9">9</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '10' %}
+								{%- if approval_decision.deadline == '10' %}
 									<option value="10" selected>10</option>
 								{%- else %}
 									<option value="10">10</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '11' %}
+								{%- if approval_decision.deadline == '11' %}
 									<option value="11" selected>11</option>
 								{%- else %}
 									<option value="11">11</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '12' %}
+								{%- if approval_decision.deadline == '12' %}
 									<option value="12" selected>12</option>
 								{%- else %}
 									<option value="12">12</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '13' %}
+								{%- if approval_decision.deadline == '13' %}
 									<option value="13" selected>13</option>
 								{%- else %}
 									<option value="13">13</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '14' %}
+								{%- if approval_decision.deadline == '14' %}
 									<option value="14" selected>14</option>
 								{%- else %}
 									<option value="14">14</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '15' %}
+								{%- if approval_decision.deadline == '15' %}
 									<option value="15" selected>15</option>
 								{%- else %}
 									<option value="15">15</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '16' %}
+								{%- if approval_decision.deadline == '16' %}
 									<option value="16" selected>16</option>
 								{%- else %}
 									<option value="16">16</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '17' %}
+								{%- if approval_decision.deadline == '17' %}
 									<option value="17" selected>17</option>
 								{%- else %}
 									<option value="17">17</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '18' %}
+								{%- if approval_decision.deadline == '18' %}
 									<option value="18" selected>18</option>
 								{%- else %}
 									<option value="18">18</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '19' %}
+								{%- if approval_decision.deadline == '19' %}
 									<option value="19" selected>19</option>
 								{%- else %}
 									<option value="19">19</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '20' %}
+								{%- if approval_decision.deadline == '20' %}
 									<option value="20" selected>20</option>
 								{%- else %}
 									<option value="20">20</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '21' %}
+								{%- if approval_decision.deadline == '21' %}
 									<option value="21" selected>21</option>
 								{%- else %}
 									<option value="21">21</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '22' %}
+								{%- if approval_decision.deadline == '22' %}
 									<option value="22" selected>22</option>
 								{%- else %}
 									<option value="22">22</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '23' %}
+								{%- if approval_decision.deadline == '23' %}
 									<option value="23" selected>23</option>
 								{%- else %}
 									<option value="23">23</option>
 								{%- endif %}
-								{%- if apply_info.loan_deadline == '24' %}
+								{%- if approval_decision.deadline == '24' %}
 									<option value="24" selected>24</option>
 								{%- else %}
 									<option value="24">24</option>
@@ -179,18 +230,18 @@
 						<td class="table-label">贷款金额(元)</td>
 						<td>
 							<span>	
-								<input type="text" name="loan_amount_num" value="{{apply_info.loan_amount_num}}" onclick="setJe(this)" onkeyup="setJe(this);" maxlength="11" onchange="show_calculate();sum(1);sum(2);sum(3);" readonly/><br/>
+								<input type="text" name="amount" value="{{approval_decision.amount}}" onclick="setJe(this)" onkeyup="setJe(this);" maxlength="11" onchange="show_calculate();sum(1);sum(2);sum(3);" readonly/><br/>
 								<span class="je">人民币</span>	
 								<span class="errorInfo"></span>							
 							</span>
 						</td>
 						<td class="table-label">月利率%<font class="red">*</font></td>
 						<td>
-							<span id="annual_interest_rate">
-								{%- if apply_info.annual_interest_rate %}
-								<input type="text" style="width:40px" name="annual_interest_rate" value="{{apply_info.annual_interest_rate}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100);show_calculate()" maxlength="10"/>%
+							<span id="rates">
+								{%- if approval_decision.rates %}
+								<input type="text" style="width:40px" name="rates" value="{{approval_decision.rates}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100);show_calculate()" maxlength="10" readonly/>%
 								{%- else %}
-								<input type="text" style="width:40px" name="annual_interest_rate" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100);show_calculate();sum(1);sum(2);sum(3);" maxlength="10"/>%
+								<input type="text" style="width:40px" name="rates" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100);show_calculate();sum(1);sum(2);sum(3);" maxlength="10" readonly/>%
 								{%- endif %}
 								<span class="errorInfo">请输入0-100的数</span>
 								<span class="textfieldRequiredMsg">不能为空</span>
@@ -199,14 +250,14 @@
 					</tr>		
 					<tr>
 						<td class="table-label">放款日期<font class="red">*</font></td>
-						{%- if apply_info.loan_date %}
-						<td><input type="text" name="loan_date" value="{{apply_info.loan_date}}" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
+						{%- if approval_decision.loan_date %}
+						<td><input type="text" name="loan_date" value="{{approval_decision.loan_date}}" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
 						{%- else %}
 						<td><input type="text" name="loan_date" class="datepicker" data-date-format="yyyy-mm-dd" onblur="hkrq()"readonly/></td>
 						{%- endif %}
 						<td class="table-label">第一次还贷日期</td>
-						{%- if apply_info.first_repayment_date %}
-						<td><input type="text" name="first_repayment_date" value="{{apply_info.first_repayment_date}}" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>	
+						{%- if approval_decision.first_repayment_date %}
+						<td><input type="text" name="first_repayment_date" value="{{approval_decision.first_repayment_date}}" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>	
 						{%- else %}		
 						<td><input type="text" name="first_repayment_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>	
 						{%- endif %}		
@@ -256,7 +307,6 @@
 			<!--**********************************************按钮组**********************************************-->
 			<div style="margin-bottom:20px;">
 				<input type="submit" value="提交" class="btn btn-info"/>
-				<input type="button" value="打印" class="btn btn-info"/>
 			<div>
 		</div><!--/row-fluid -->
 	</div><!--/content -->

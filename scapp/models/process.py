@@ -17,12 +17,12 @@ class SC_Loan_Apply(db.Model):
     A_loan_officer = db.Column(db.Integer, db.ForeignKey('sc_user.id')) #A岗信贷员
     B_loan_officer = db.Column(db.Integer, db.ForeignKey('sc_user.id')) #B岗信贷员
     yunying_loan_officer = db.Column(db.Integer, db.ForeignKey('sc_user.id')) #运营岗信贷员
-    refuse_reason = db.Column(db.String(256)) #否决原因
     examiner_1 = db.Column(db.Integer, db.ForeignKey('sc_user.id')) #审查人
     examiner_2 = db.Column(db.Integer, db.ForeignKey('sc_user.id')) #审查人
     approver = db.Column(db.Integer, db.ForeignKey('sc_user.id')) #审批人
     process_status = db.Column(db.String(4)) #处理状态
-    bool_grant = db.Column(db.Integer) #是否发放
+    classify = db.Column(db.Integer) #资产分类
+    classify_dec = db.Column(db.String(256)) #资产分类说明
     create_user = db.Column(db.Integer)
     create_date = db.Column(db.DateTime)
     modify_user = db.Column(db.Integer)
@@ -46,7 +46,7 @@ class SC_Loan_Apply(db.Model):
 
     def __init__(self,loan_type,belong_customer_type,belong_customer_value,customer_name,
         evaluation,marketing_loan_officer,A_loan_officer,B_loan_officer,
-        yunying_loan_officer,refuse_reason,examiner_1,examiner_2,approver,process_status,bool_grant):
+        yunying_loan_officer,examiner_1,examiner_2,approver,process_status):
         self.loan_type = loan_type
         self.belong_customer_type = belong_customer_type
         self.belong_customer_value = belong_customer_value
@@ -56,12 +56,12 @@ class SC_Loan_Apply(db.Model):
         self.A_loan_officer = A_loan_officer
         self.B_loan_officer = B_loan_officer
         self.yunying_loan_officer = yunying_loan_officer
-        self.refuse_reason = refuse_reason
         self.examiner_1 = examiner_1
         self.examiner_2 = examiner_2
         self.approver = approver
         self.process_status = process_status
-        self.bool_grant = bool_grant
+        self.classify = 1
+        self.classify_dec = ''
         self.create_user = current_user.id
         self.create_date = datetime.datetime.now()
         self.modify_user = current_user.id
@@ -81,20 +81,9 @@ class SC_Apply_Info(db.Model):
     loan_purpose = db.Column(db.Integer, db.ForeignKey('sc_loan_purpose.id')) #贷款用途
     details = db.Column(db.String(256))#详细说明
     repayment_source = db.Column(db.String(256)) #还款来源
-    repayment_type = db.Column(db.Integer) #还款方式
-    annual_interest_rate = db.Column(db.String(16)) #月利率
-    loan_date = db.Column(db.Date) #放款日期
-    first_repayment_date = db.Column(db.Date) #第一次还贷日期
-
-    management_coats = db.Column(db.String(32)) #管理费(元)
-    agency_coats = db.Column(db.String(32)) #代理费(元)
-    contract_date = db.Column(db.Date) #合同签订日期
-    loan_account = db.Column(db.String(32)) #放款帐号
-    bank_customer_no=db.Column(db.String(32)) #银行客户号
-    loan_contract_number = db.Column(db.String(32)) #贷款合同编号
-    guarantee_contract_number = db.Column(db.String(32)) #担保合同编号
-    collateral_contract_number = db.Column(db.String(32)) #抵押品合同编号
-
+    #repayment_type = db.Column(db.Integer) #还款方式
+    #annual_interest_rate = db.Column(db.String(16)) #月利率
+    
     # 外键名称
     loan_purpose_name = db.relationship('SC_Loan_Purpose', backref = db.backref('loan_purpose_name', lazy = 'dynamic'))
 
@@ -448,6 +437,18 @@ class SC_Approval_Decision (db.Model):
     refuse_reason = db.Column(db.String(256)) #否决原因
     conditional_pass = db.Column(db.String(256)) #有条件通过
 
+    loan_date = db.Column(db.Date) #放款日期
+    first_repayment_date = db.Column(db.Date) #第一次还贷日期
+
+    management_coats = db.Column(db.String(32)) #管理费(元)
+    agency_coats = db.Column(db.String(32)) #代理费(元)
+    contract_date = db.Column(db.Date) #合同签订日期
+    loan_account = db.Column(db.String(32)) #放款帐号
+    bank_customer_no=db.Column(db.String(32)) #银行客户号
+    loan_contract_number = db.Column(db.String(32)) #贷款合同编号
+    guarantee_contract_number = db.Column(db.String(32)) #担保合同编号
+    collateral_contract_number = db.Column(db.String(32)) #抵押品合同编号
+
     create_user = db.Column(db.Integer)
     create_date = db.Column(db.DateTime)
     modify_user = db.Column(db.Integer)
@@ -513,6 +514,7 @@ class SC_Monitor(db.Model):
     loan_apply_id=db.Column(db.Integer)
     type = db.Column(db.Integer) #监控类型 1：标准 2：非标准
     monitor_date = db.Column(db.Date) #监控日期
+    monitor_officer = db.Column(db.Integer, db.ForeignKey('sc_user.id')) #监控客户经理
 
     #标准
     monitor_type = db.Column(db.String(32)) #监控方式
@@ -529,11 +531,15 @@ class SC_Monitor(db.Model):
     modify_user = db.Column(db.Integer)
     modify_date = db.Column(db.DateTime)
 
-    def __init__(self,loan_apply_id, type, monitor_date, monitor_type,monitor_record,
+    # 外键名称
+    monitor_officer_name = db.relationship('SC_User',backref = db.backref('monitor_officer_name', lazy = 'dynamic'))
+
+    def __init__(self,loan_apply_id, type, monitor_date,monitor_officer, monitor_type,monitor_record,
         address, related_person, monitor_reason,judgement,follow_up_work):
         self.loan_apply_id = loan_apply_id
         self.type = type
         self.monitor_date = monitor_date
+        self.monitor_officer = current_user.id
         self.monitor_type = monitor_type
         self.monitor_record = monitor_record
         self.address = address
@@ -545,6 +551,32 @@ class SC_Monitor(db.Model):
         self.create_date = datetime.datetime.now()
         self.modify_user = current_user.id
         self.modify_date = datetime.datetime.now()
+
+    def add(self):
+        db.session.add(self)
+
+# 资产分类表
+class SC_Classify(db.Model):
+    __tablename__ = 'sc_classify'
+    id=db.Column(db.Integer, primary_key=True)
+    loan_apply_id=db.Column(db.Integer)
+    index = db.Column(db.Integer) #递增的序号 从0开始
+    classify = db.Column(db.Integer) #等级
+    classify_dec = db.Column(db.String(256)) #等级描述
+    is_pass = db.Column(db.Integer) #是否通过
+    create_user = db.Column(db.Integer)
+    create_date = db.Column(db.DateTime)
+    confirm_user = db.Column(db.Integer)
+    confirm_date = db.Column(db.DateTime)
+
+    def __init__(self,loan_apply_id, index, classify,classify_dec, is_pass):
+        self.loan_apply_id = loan_apply_id
+        self.index = index
+        self.classify = classify
+        self.classify_dec = classify_dec
+        self.is_pass = is_pass
+        self.create_user = current_user.id
+        self.create_date = datetime.datetime.now()
 
     def add(self):
         db.session.add(self)

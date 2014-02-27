@@ -9,11 +9,11 @@ import datetime
 from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
-from scapp.config import PROCESS_STATUS_DKFKJH
-from scapp.config import PROCESS_STATUS_SPJY_TG #6.审批通过
-from scapp.config import PROCESS_STATUS_SPJY_YTJTG #6.有条件通过
-from scapp.config import PROCESS_STATUS_SPJY_CXDC #6.重新调查
-from scapp.config import PROCESS_STATUS_SPJY_JUJUE #6.拒绝
+from scapp.config import PROCESS_STATUS_DKSP
+from scapp.config import PROCESS_STATUS_SPJY_TG #501.审批通过
+from scapp.config import PROCESS_STATUS_SPJY_YTJTG #502.有条件通过
+from scapp.config import PROCESS_STATUS_SPJY_CXDC #503.重新调查
+from scapp.config import PROCESS_STATUS_SPJY_JUJUE #504.拒绝
 
 from scapp.models import SC_UserRole
 from scapp.models import SC_Company_Customer
@@ -52,11 +52,11 @@ def fksh_search(page):
         sql = "loan_type='"+loan_type+"' and "
 
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
-    if role.role_level == 3:#后台运营岗
-        sql += " process_status='"+PROCESS_STATUS_SPJY_YTJTG+"'"
-    else:
-        sql += " process_status='"+PROCESS_STATUS_DKFKJH+"'"
-        sql += " and (examiner_1="+str(current_user.id)+" or examiner_2="+str(current_user.id)+" or approver="+str(current_user.id)+")"
+    #if role.role_level == 3:#后台运营岗
+    #    sql += " process_status='"+PROCESS_STATUS_SPJY_YTJTG+"'"
+    #else:
+    sql += " process_status='"+PROCESS_STATUS_DKSP+"'"
+    sql += " and (examiner_1="+str(current_user.id)+" or examiner_2="+str(current_user.id)+" or approver="+str(current_user.id)+")"
 
     if customer_name:
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
@@ -91,44 +91,38 @@ def edit_sdhjyd(loan_apply_id):
         approval_decision=approval_decision,co_borrower=co_borrower,guaranty=guaranty,
         guarantees=guarantees)
 
-# 等额本息还款计划
-@app.route('/Process/fksh/edit_debxhkjh/<int:loan_apply_id>', methods=['GET'])
-def edit_debxhkjh(loan_apply_id):
-    loan_apply = SC_Loan_Apply.query.filter_by(id=loan_apply_id).first()
-    apply_info = SC_Apply_Info.query.filter_by(loan_apply_id=loan_apply_id).first()
-    repayment_plan_detail = SC_Repayment_plan_detail.query.filter_by(loan_apply_id=loan_apply_id,change_record=1).order_by("id").all()
-    return render_template("Process/fksh/edit_debxhkjh.html",loan_apply=loan_apply,apply_info=apply_info,
-        repayment_plan_detail=repayment_plan_detail)
-
 # 放款审核——编辑放款审核(放款信息)
 @app.route('/Process/fksh/edit_fksh/<int:loan_apply_id>/<type>', methods=['POST'])
 def edit_fksh(loan_apply_id,type):
     try:
-        approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=loan_apply_id).first()
-        if approval_decision:
-            approval_decision.bool_grant = request.form['bool_grant']
-            approval_decision.amount = request.form['amount']
-            approval_decision.deadline = request.form['deadline']
-            approval_decision.rates = request.form['rates']
-            approval_decision.repayment_type = request.form['repayment_type']
-            approval_decision.monthly_repayment = request.form['monthly_repayment']
-            approval_decision.bool_co_borrower = request.form['bool_co_borrower']
-            approval_decision.bool_guaranty = request.form['bool_guaranty']
-            approval_decision.bool_guarantees = request.form['bool_guarantees']
-            approval_decision.other_resolution = request.form['other_resolution']
-            approval_decision.refuse_reason = request.form['refuse_reason']
-            approval_decision.conditional_pass = request.form['conditional_pass']
+        if type == PROCESS_STATUS_SPJY_TG or type == PROCESS_STATUS_SPJY_YTJTG or type == PROCESS_STATUS_SPJY_JUJUE:#有条件通过:#通过
+            approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=loan_apply_id).first()
+            if approval_decision:
+                approval_decision.bool_grant = request.form['bool_grant']
+                approval_decision.amount = request.form['amount']
+                approval_decision.deadline = request.form['deadline']
+                approval_decision.rates = request.form['rates']
+                approval_decision.repayment_type = request.form['repayment_type']
+                approval_decision.monthly_repayment = request.form['monthly_repayment']
+                approval_decision.bool_co_borrower = request.form['bool_co_borrower']
+                approval_decision.bool_guaranty = request.form['bool_guaranty']
+                approval_decision.bool_guarantees = request.form['bool_guarantees']
+                approval_decision.other_resolution = request.form['other_resolution']
+                approval_decision.refuse_reason = request.form['refuse_reason']
+                approval_decision.conditional_pass = request.form['conditional_pass']
 
-            approval_decision.modify_user = current_user.id
-            approval_decision.modify_date = datetime.datetime.now()
-            
-        else:
-            SC_Approval_Decision(loan_apply_id,request.form['bool_grant'],request.form['amount'],request.form['deadline'],
-                request.form['rates'],request.form['repayment_type'],request.form['monthly_repayment'],
-                request.form['bool_co_borrower'],request.form['bool_guaranty'],request.form['bool_guarantees'],
-                request.form['other_resolution'],request.form['refuse_reason'],request.form['conditional_pass']).add()
+                approval_decision.modify_user = current_user.id
+                approval_decision.modify_date = datetime.datetime.now()
+                
+            else:
+                SC_Approval_Decision(loan_apply_id,request.form['bool_grant'],request.form['amount'],request.form['deadline'],
+                    request.form['rates'],request.form['repayment_type'],request.form['monthly_repayment'],
+                    request.form['bool_co_borrower'],request.form['bool_guaranty'],request.form['bool_guarantees'],
+                    request.form['other_resolution'],request.form['refuse_reason'],request.form['conditional_pass']).add()
+        elif type == PROCESS_STATUS_SPJY_CXDC:
+            print "do nothing"
 
-        loan_apply = SC_Loan_Apply.query.filter_by(id=id).first()
+        loan_apply = SC_Loan_Apply.query.filter_by(id=loan_apply_id).first()
         loan_apply.process_status = type
 
         # 事务提交
