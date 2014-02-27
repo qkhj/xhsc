@@ -40,9 +40,6 @@
 			<ul id="tags" class="tags">
 				<li class="selectTag"> 
 					<a onclick="selectTag('tagContent0',this);" href="javascript:void(0)">审贷会决议单</a> 
-				</li>
-				<li >
-					<a onclick="selectTag('tagContent1',this);$('#edit_debxhkjh').attr('src','/Process/fksh/edit_debxhkjh/{{id}}')" href="javascript:void(0)">还款计划</a> 
 				</li>					
 			</ul>
 			<div id="tagContent" class="Content">
@@ -50,10 +47,6 @@
 				<div class="tagContent selectTag" id="tagContent0">
 					<iframe frameborder="0" width="100%;" id="edit_sdhjyd" src="/Process/fksh/edit_sdhjyd/{{id}}" marginheight="0" marginwidth="0" onload="$('#edit_sdhjyd').height($('#edit_sdhjyd').contents().find('.content').height()+40)"></iframe>	
 				</div><!-- /审贷会决议单 -->
-<!-- ******************************************************第二个标签的内容********************************************************** -->
-				<div class="tagContent" id="tagContent1">
-					<iframe frameborder="0" width="100%;" id="edit_debxhkjh" src="" onload="$('#edit_debxhkjh').height($('#edit_debxhkjh').contents().find('.content').height()+40);Frame();" marginheight="0" marginwidth="0" height="1200px"></iframe>
-				</div><!-- /等额本息还款计划 -->
 			</div><!-- /tagContent -->
 		</div><!--/row-fluid -->
 	</form><!--/content -->

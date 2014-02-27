@@ -15,6 +15,7 @@ class View_Query_Loan(db.Model):
     individual_customer_type = db.Column(db.String)
     loan_type = db.Column(db.String)
     loan_amount = db.Column(db.String)
+    loan_deadline = db.Column(db.Integer)
     process_status = db.Column(db.String)
     create_date = db.Column(db.DateTime)
     marketing_loan_officer = db.Column(db.Integer, db.ForeignKey('sc_user.id')) #营销信贷员
@@ -24,6 +25,8 @@ class View_Query_Loan(db.Model):
     examiner_1 = db.Column(db.Integer)
     examiner_2 = db.Column(db.Integer)
     approver = db.Column(db.Integer)
+    classify = db.Column(db.Integer)
+    classify_dec = db.Column(db.String)
 
     # 外键名称
     #view_marketing_loan_officer_name = db.relationship('SC_User',backref = db.backref('view_marketing_loan_officer_name', lazy = 'dynamic'))

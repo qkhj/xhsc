@@ -34,12 +34,14 @@ UPLOAD_FOLDER_ABS = os.path.join(_HERE,'static\\upload') #上传目录(绝对路
 PROCESS_STATUS_DKSQ = '101' #1.新申请
 PROCESS_STATUS_DKSQSH = '201' #2分配A、B、运营岗
 PROCESS_STATUS_DQDC = '301' #3.已分配/待调查
-PROCESS_STATUS_DKSP = '401' #4.分配审贷会成员
-PROCESS_STATUS_DKFKJH = '501' #5.设置还款计划
-PROCESS_STATUS_SPJY_TG = '601' #6.审批通过
-PROCESS_STATUS_SPJY_YTJTG = '602' #6.有条件通过
-PROCESS_STATUS_SPJY_CXDC = '603' #6.重新调查
-PROCESS_STATUS_SPJY_JUJUE = '604' #6.拒绝
+PROCESS_STATUS_DKSP = '401' #4.已分配审贷会成员
+
+PROCESS_STATUS_SPJY_TG = '501' #5.已审批通过
+PROCESS_STATUS_SPJY_YTJTG = '502' #5.有条件通过
+PROCESS_STATUS_SPJY_CXDC = '503' #5.重新调查
+PROCESS_STATUS_SPJY_JUJUE = '504' #5.拒绝
+
+PROCESS_STATUS_DKFKJH = '601' #6.设置还款计划
 
 ROLE_LEVEL_ADMIN = 0 #admin
 ROLE_LEVEL_ZG = 1 #主管 
@@ -49,7 +51,6 @@ ROLE_LEVEL_HTYY = 3 #后台运营
 #XIAOWEIZHIHANG_JGH =  '321281000' # 小微支行机构号
 #YUNYINGGANG_GH_GXJ = 'L025502' # 运营岗工号 葛旭娟
 #YUNYINGGANG_GH_NWB = 'L025503' # 运营岗工号 倪文彬
-
 
 class Config(object):
     SECRET_KEY = '\xb5\xc8\xfb\x18\xba\xc7*\x03\xbe\x91{\xfd\xe0L\x9f\xe3\\\xb3\xb1P\xac\xab\x061'

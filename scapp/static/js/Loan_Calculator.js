@@ -6,13 +6,13 @@ result['yhqbj']=new Array()
 result['yhqbj'][0]=0
 //-----------------------等额本息--------------------------------------
 function show_calculate(){
-    var qs=parseInt($('select[name=loan_deadline] option:selected').val())//获取输入期数
-    if($('input[name=loan_amount_num]').val()!="")
-        var bj=parseFloat($('input[name=loan_amount_num]').val())//获取输入本金
+    var qs=parseInt($('select[name=deadline] option:selected').val())//获取输入期数
+    if($('input[name=amount]').val()!="")
+        var bj=parseFloat($('input[name=amount]').val())//获取输入本金
     else
         var bj=0;
-    if($('input[name=annual_interest_rate]').val()!="") 
-        var yll=parseFloat($('input[name=annual_interest_rate]').val())/100//获取输入月利率
+    if($('input[name=rates]').val()!="") 
+        var yll=parseFloat($('input[name=rates]').val())/100//获取输入月利率
     else
         var yll=0;
     var repayment_type=parseInt($('select[name=repayment_type] option:selected').val())

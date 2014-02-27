@@ -21,6 +21,7 @@
 		input.long{width:70%;}
 		input.btn-mini{width:20px;margin-top:0px;}
 	</style>
+	<script src="/static/js/script.js"></script>
 </head>
 
 <body onload="datepicker();$('input[type=text]').click();">
@@ -387,17 +388,20 @@
 			</table>
 		</div>
 		<span class="point">*为必填字段</span><br/>
-		<input type="submit" class="btn btn-info" value="通过" onclick="doSubmit("+PROCESS_STATUS_SPJY_TG+")"/>
-		<input type="submit" class="btn btn-info" value="有条件通过" onclick="doSubmit("+PROCESS_STATUS_SPJY_YTJTG+")"/>
-		<input type="submit" class="btn btn-info" value="退回重新调查" onclick="doSubmit("+PROCESS_STATUS_SPJY_CXDC+")"/>
-		<input type="submit" class="btn btn-info" value="拒绝" onclick="doSubmit("+PROCESS_STATUS_SPJY_JUJUE+")"/>
-		<input type="button" class="btn btn-info" value="打印" onclick="window.open('/Process/fksh/dy_sdhjyd')"/>	
+			
+		<script>
+        document.write("<input type='submit' class='btn btn-info' value='通过' onclick='doSubmit("+PROCESS_STATUS_SPJY_TG+")'/>");
+        document.write("<input type='submit' class='btn btn-info' value='有条件通过' onclick='doSubmit("+PROCESS_STATUS_SPJY_YTJTG+")'/>");
+		document.write("<input type='submit' class='btn btn-info' value='退回重新调查' onclick='doSubmit("+PROCESS_STATUS_SPJY_CXDC+")'/>");
+		document.write("<input type='submit' class='btn btn-info' value='拒绝' onclick='doSubmit("+PROCESS_STATUS_SPJY_JUJUE+")'/>");
+    </script>
+    	<input type="button" class="btn btn-info" value="打印" onclick="window.open('/Process/fksh/dy_sdhjyd')"/>
 		</form>
 	</div>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
-	<script src="/static/js/script.js"></script>
+	
 	<script src="/static/js/process.js"></script>
 	<script src="/static/js/bootstrap-datepicker.js"></script>
 	<script type="text/javascript">
@@ -412,7 +416,6 @@
 
 		function doSubmit(type){
 			document.getElementById("content").action = "/Process/fksh/edit_fksh/{{loan_apply_id}}/"+type;
-			document.getElementById("content").submit();
 		}
 	</script>
 </body>
