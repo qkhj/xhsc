@@ -31,20 +31,22 @@
 						<tr>
 							<th>日期</th>							
 							<th>管理类型</th>
-							<th>信贷员</th>
+							<th>客户经理</th>
 						</tr>
 					</thead>
 					<tbody class="center">
+						{%- for obj in monotors.items %}
 						<tr onclick="changeColor(this)">
-							<td><a href="#" onclick="iframe('Process/dhgl/new_bz')">2013-10-20</a></td>
+							{%- if obj.type == 1 %}
+							<td><a href="#" onclick="iframe('Process/dhgl/edit_bz/{{obj.id}}')">{{obj.monitor_date}}</a></td>
 							<td>标准</td>
-							<td>唐琳君</td>							
-						</tr>	
-						<tr onclick="changeColor(this)">
-							<td><a href="#" onclick="iframe('Process/dhgl/new_fbz')">2013-10-22</a></td>
+							{%- else %}
+							<td><a href="#" onclick="iframe('Process/dhgl/edit_fbz/{{obj.id}}')">{{obj.monitor_date}}</a></td>
 							<td>非标准</td>
+							{%- endif %}
 							<td>唐琳君</td>							
-						</tr>									
+						</tr>			
+						{%- endfor %}						
 					</tbody>
 				</table>
 			</div>

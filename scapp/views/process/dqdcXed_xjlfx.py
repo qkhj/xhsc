@@ -12,6 +12,7 @@ from scapp.config import PER_PAGE
 
 from scapp.models.credit_data.sc_cash_flow import SC_Cash_Flow
 from scapp.models.credit_data.sc_cash_flow_assist import SC_Cash_Flow_Assist
+from scapp.models.credit_data.sc_cash_flow_dec import SC_Cash_Flow_Dec
 
 from scapp import app
 
@@ -27,9 +28,12 @@ def dqdcXed_xjlfx(id):
 		cash_flow = [0 for i in range(13)]
 		cash_flow = ['']*13
 
+	cash_flow_dec = SC_Cash_Flow_Dec.query.filter_by(loan_apply_id=id).first()
+
 	return render_template("Process/dqdc/dqdcXed_xjlfx.html",id=id,cash_flow=cash_flow,
 		cash_flow_assist_0=cash_flow_assist_0,cash_flow_assist_1=cash_flow_assist_1,
-		cash_flow_assist_2=cash_flow_assist_2,cash_flow_assist_3=cash_flow_assist_3)
+		cash_flow_assist_2=cash_flow_assist_2,cash_flow_assist_3=cash_flow_assist_3,
+		cash_flow_dec=cash_flow_dec)
 
 # 贷款调查——编辑小额贷款(现金流分析)
 @app.route('/Process/dqdc/edit_dqdcXed_xjlfx/<int:id>', methods=['POST'])
@@ -157,11 +161,18 @@ def edit_dqdcXed_xjlfx(id):
 		SC_Cash_Flow_Assist.query.filter_by(loan_apply_id=id,type=1,assist_type=3).delete()
 		db.session.flush()
 		for i in range(len0+len1+len2,len0+len1+len2+len3):
-			print i-len0-len1-len2
+			#print i-len0-len1-len2
 			SC_Cash_Flow_Assist(id,1,3,name_cash_flow_assist_3_list[i-len0-len1-len2],month_0_list[i],
 		    	month_1_list[i],month_2_list[i],month_3_list[i],month_4_list[i],month_5_list[i],
 		    	month_6_list[i],month_7_list[i],month_8_list[i],month_9_list[i],month_10_list[i],
 		        month_11_list[i],month_12_list[i]).add()
+
+		cash_flow_dec = SC_Cash_Flow_Dec.query.filter_by(loan_apply_id=id).first()
+		if cash_flow_dec:
+			cash_flow_dec.dec_1 = request.form['dec_1']
+			cash_flow_dec.dec_2 = request.form['dec_2']
+		else:
+			SC_Cash_Flow_Dec(id,request.form['dec_1'],request.form['dec_2']).add()
 
 		# 事务提交
 		db.session.commit()

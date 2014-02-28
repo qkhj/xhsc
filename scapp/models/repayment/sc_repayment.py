@@ -18,9 +18,9 @@ class SC_Repayment(db.Model):
     # account=db.Column(db.String(32))#账号
     repayment_installments=db.Column(db.Integer,autoincrement=True)#当前还款期数
     clear_date=db.Column(db.DateTime)#实际还款日期
-    principal_balance=db.Column(db.DECIMAL(18,2))#当期本金剩余
-    interest_balance=db.Column(db.DECIMAL(18,2))#当期利息剩余
-    penalty_interest_balance=db.Column(db.DECIMAL(18,2))#当期罚息剩余
+    re_principal=db.Column(db.DECIMAL(18,2))#当期本金剩余
+    re_interest=db.Column(db.DECIMAL(18,2))#当期利息剩余
+    re_interest_balance=db.Column(db.DECIMAL(18,2))#当期罚息剩余
     principal_fx_balance=db.Column(db.DECIMAL(18,2))#本金罚息剩余
     interest_fx_balance=db.Column(db.DECIMAL(18,2))#利息罚息剩余
     total_fx=db.Column(db.DECIMAL(18,2))#当期实际缴纳罚息总额
@@ -30,8 +30,8 @@ class SC_Repayment(db.Model):
     modify_date=db.Column(db.DateTime,default=datetime.datetime.now())#修改日期
 
     def __init__(self,repayment_plan_detail_id,loan_apply_id,customer_no,
-                 contract_no,account,repayment_installments,clear_date,principal_balance,interest_balance,
-                 penalty_interest_balance,principal_fx_balance,interest_fx_balance,total_fx,total_repayment,
+                 contract_no,account,repayment_installments,clear_date,re_principal,re_interest,
+                 re_interest_balance,principal_fx_balance,interest_fx_balance,total_fx,total_repayment,
                  status,repayment_clear_date):
     	self.repayment_plan_detail_id = repayment_plan_detail_id
     	self.loan_apply_id = loan_apply_id
@@ -40,9 +40,9 @@ class SC_Repayment(db.Model):
     	# self.account = account
     	self.repayment_installments = repayment_installments
         self.clear_date = clear_date
-    	self.principal_balance = principal_balance
-    	self.interest_balance = interest_balance
-    	self.penalty_interest_balance = penalty_interest_balance
+    	self.re_principal = re_principal
+    	self.re_interest = re_interest
+    	self.re_interest_balance = re_interest_balance
     	self.principal_fx_balance = principal_fx_balance
     	self.interest_fx_balance = interest_fx_balance
         self.total_fx = total_fx

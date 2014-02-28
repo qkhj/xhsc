@@ -537,409 +537,6 @@
 				{%- endfor %}
 			</table>
 		</div>
-	<!--*****************************************财务信息概览**************************************************-->
-		<i class="icon-bookmark"></i><span class="titletip">财务信息概览</span>		
-		<div class="divBorder">
-			<table class="table-list" name="">
-				<tr>
-					<td class="table-label" rowspan="9" style="width:160px;">资产负债结构分析</td>
-					<td> 流动资产合计(元) </td>
-					<td>
-						<span>	
-							<input type="text" name="current_assets" value="{{financial_overview.current_assets}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>
-					<td> 流动负债合计(元) </td>	
-					<td>
-						<span>	
-							<input type="text" name="current_liabilities" value="{{financial_overview.current_liabilities}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>						
-				</tr>		
-				<tr>
-					<td> 现金及银行存款(元) </td>
-					<td>
-						<span>	
-							<input type="text" name="bank_deposits" value="{{financial_overview.bank_deposits}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>
-					<td> 应付账款(元) </td>	
-					<td>
-						<span>	
-							<input type="text" name="accounts_payable" value="{{financial_overview.accounts_payable}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>					
-				</tr>
-				<tr>
-					<td> 应收账款(元)  </td>
-					<td>
-						<span>	
-							<input type="text" name="accounts_receivable" value="{{financial_overview.accounts_receivable}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>
-					<td> 预收帐款(元) </td>	
-					<td>
-						<span>	
-							<input type="text" name="receipts_in_advance" value="{{financial_overview.receipts_in_advance}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>					
-				</tr>
-				<tr>
-					<td> 预付账款(元) </td>
-					<td>
-						<span>	
-							<input type="text" name="prepayments" value="{{financial_overview.prepayments}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>
-					<td> 短期借款(元) </td>	
-					<td>
-						<span>	
-							<input type="text" name="short_term_borrowings" value="{{financial_overview.short_term_borrowings}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>				
-				</tr>
-				<tr>
-					<td> 存货(元) </td>
-					<td>
-						<span>	
-							<input type="text" name="stock" value="{{financial_overview.stock}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>
-					<td> 长期借款(元) </td>	
-					<td>
-						<span>	
-							<input type="text" name="long_term_borrowings" value="{{financial_overview.long_term_borrowings}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>					
-				</tr>
-				<tr>
-					<td> 固定资产(元) </td>
-					<td>
-						<span>	
-							<input type="text" name="fixed_assets" value="{{financial_overview.fixed_assets}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>
-					<td> 负债合计(元) </td>	
-					<td>
-						<span>	
-							<input type="text" name="total_liabilities" value="{{financial_overview.total_liabilities}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>							
-				</tr>
-				<tr>
-					<td> 其他经营资产(元)  </td>
-					<td>
-						<span>	
-							<input type="text" name="other_operating_assets" value="{{financial_overview.other_operating_assets}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>
-					<td> 所有者权益(元) </td>	
-					<td>
-						<span>	
-							<input type="text" name="equity" value="{{financial_overview.equity}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>		
-				</tr>
-				<tr>
-					<td> 资产合计(元)  </td>
-					<td>
-						<span>	
-							<input type="text" name="total_assets" value="{{financial_overview.total_assets}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>
-					<td> 负债加权益(元) </td>	
-					<td>
-						<span>	
-							<input type="text" name="liabilities_plus_equity" value="{{financial_overview.liabilities_plus_equity}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>			
-				</tr>													
-				<tr>
-					<td> 其他非表内资产(元)  </td>
-					<td>
-						<span>	
-							<input type="text" name="other_non_sheet_assets" value="{{financial_overview.other_non_sheet_assets}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>
-					<td> 其他非表内负债(元)</td>	
-					<td>
-						<span>	
-							<input type="text" name="other_non_sheet_liabilities" value="{{financial_overview.other_non_sheet_liabilities}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-							<span class="je">人民币</span>
-							<span class="errorInfo"></span>						
-						</span>
-					</td>			
-				</tr>
-				<tr>
-					<td colspan="5">
-						<div class="divBorder">
-							<table id="gtjkr" class="table-list">				
-								<tr>
-									<td class="table-label" rowspan="4">比率分析</td>
-									<td> 月均营业额(元)</td>
-									<td>
-										<span>	
-											<input type="text" name="average_monthly_turnover" value="{{financial_overview.average_monthly_turnover}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-											<span class="je">人民币</span>
-											<span class="errorInfo"></span>						
-										</span>
-									</td>
-									<td> 平均净利润(元)</td>	
-									<td>
-										<span>	
-											<input type="text" name="average_net_profit" value="{{financial_overview.average_net_profit}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-											<span class="je">人民币</span>
-											<span class="errorInfo"></span>						
-										</span>
-									</td>
-									<td> 月平均可支配收入(元)</td>	
-									<td>
-										<span>	
-											<input type="text" name="average_monthly_disposable_income" value="{{financial_overview.average_monthly_disposable_income}}" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" /> <br/>
-											<span class="je">人民币</span>
-											<span class="errorInfo"></span>						
-										</span>
-									</td>									
-								</tr>
-								<tr>
-									<td> 资产负债率%</td>
-									<td>
-										<span>
-											<input type="text" style="width:40px" name="asset_liability_ratio" value="{{financial_overview.asset_liability_ratio}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
-											<span class="errorInfo">请输入0-100的数</span>
-										</span>
-									</td>
-									<td> 流动比率%</td>	
-									<td>
-										<span>
-											<input type="text" style="width:40px" name="current_ratio" value="{{financial_overview.current_ratio}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
-											<span class="errorInfo">请输入0-100的数</span>
-										</span>
-									</td>
-									<td> 速动比率%</td>	
-									<td>
-										<span>
-											<input type="text" style="width:40px" name="quick_ratio" value="{{financial_overview.quick_ratio}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
-											<span class="errorInfo">请输入0-100的数</span>
-										</span>
-									</td>											
-								</tr>
-								<tr>
-									<td> 存货周转率%</td>
-									<td>
-										<span>
-											<input type="text" style="width:40px" name="inventory_turnover_ratio" value="{{financial_overview.inventory_turnover_ratio}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
-											<span class="errorInfo">请输入0-100的数</span>
-										</span>
-									</td>
-									<td> 应收账款周转率%</td>	
-									<td>
-										<span>
-											<input type="text" style="width:40px" name="accounts_receivable_turnover_ratio" value="{{financial_overview.accounts_receivable_turnover_ratio}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
-											<span class="errorInfo">请输入0-100的数</span>
-										</span>
-									</td>
-									<td> 应付账款周转率%</td>	
-									<td>
-										<span>
-											<input type="text" style="width:40px" name="accounts_payable_turnover_ratio" value="{{financial_overview.accounts_payable_turnover_ratio}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
-											<span class="errorInfo">请输入0-100的数</span>
-										</span>
-									</td>											
-								</tr>
-								<tr>
-									<td> 资本回报率%</td>
-									<td>
-										<span>
-											<input type="text" style="width:40px" name="returns_on_capital" value="{{financial_overview.returns_on_capital}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
-											<span class="errorInfo">请输入0-100的数</span>
-										</span>
-									</td>
-									<td> 毛利率%</td>	
-									<td>
-										<span>
-											<input type="text" style="width:40px" name="gross_margin" value="{{financial_overview.gross_margin}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
-											<span class="errorInfo">请输入0-100的数</span>
-										</span>
-									</td>
-									<td> 净利润率%</td>	
-									<td>
-										<span>
-											<input type="text" style="width:40px" name="net_profit_margin" value="{{financial_overview.net_profit_margin}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onchange="check(this,0,100)" maxlength="4"/>%
-											<span class="errorInfo">请输入0-100的数</span>
-										</span>
-									</td>											
-								</tr>
-							</table>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
-		
-	<!--*****************************************非财务情况分析**************************************************-->
-		<i class="icon-bookmark"></i><span class="titletip">非财务情况分析</span>		
-		<div class="divBorder">
-			<table id="jydyw" class="table-list">
-				<tr>
-					<td class="table-label" style="width:170px;">经营历史和资本积累</td>
-					<td colspan="3">
-						<span>	
-							<textarea name="operating_history" onchange="spryMaxLength(this,256)" >{{non_financial_analysis.operating_history}}</textarea>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>								
-				</tr>
-				<tr>
-					<td class="table-label">生意现状：组织架构和市场</td>
-					<td colspan="3">
-						<span>	
-							<textarea name="structure_and_market" onchange="spryMaxLength(this,256)" >{{non_financial_analysis.structure_and_market}}</textarea>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>						
-				</tr>
-				<tr>
-					<td class="table-label">生意现状：财务</td>
-					<td colspan="3">
-						<span>	
-							<textarea name="finance" onchange="spryMaxLength(this,256)" >{{non_financial_analysis.finance}}</textarea>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>					
-				</tr>				
-				<tr>
-					<td class="table-label">自从上次申请后经营变化 </td>
-					<td style="width:310px;text-align:center;">
-						业务方面<br/>
-						<span>	
-							<textarea name="changes_in_operations_1" onchange="spryMaxLength(this,256)" style="width:290px;">{{non_financial_analysis.changes_in_operations_1}}</textarea><br/>
-							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>	
-					<td style="width:310px;text-align:center;">
-						私人方面<br/>
-						<span>	
-							<textarea name="changes_in_operations_2" onchange="spryMaxLength(this,256)" style="width:290px;">{{non_financial_analysis.changes_in_operations_2}}</textarea><br/>
-							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>	
-					<td></td>						
-				</tr>
-				<tr>
-					<td class="table-label">过去十二个月内的投资情况 </td>
-					<td style="width:310px;text-align:center;">
-						业务方面<br/>
-						<span>	
-							<textarea name="investment_1" onchange="spryMaxLength(this,256)" style="width:290px;">{{non_financial_analysis.investment_1}}</textarea><br/>
-							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>	
-					<td style="width:310px;text-align:center;">
-						私人方面<br/>
-						<span>	
-							<textarea name="investment_2" onchange="spryMaxLength(this,256)" style="width:290px;">{{non_financial_analysis.investment_2}}</textarea><br/>
-							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>	
-					<td></td>						
-				</tr>
-				<tr>
-					<td class="table-label">未来十二个月的投资计划 </td>
-					<td style="width:310px;text-align:center;">
-						业务方面<br/>
-						<span>	
-							<textarea name="investment_plan_1" onchange="spryMaxLength(this,256)" style="width:290px;">{{non_financial_analysis.investment_plan_1}}</textarea><br/>
-							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>	
-					<td style="width:310px;text-align:center;">
-						私人方面<br/>
-						<span>	
-							<textarea name="investment_plan_2" onchange="spryMaxLength(this,256)" style="width:290px;">{{non_financial_analysis.investment_plan_2}}</textarea><br/>
-							<span>&nbsp;</span>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>	
-					<td></td>						
-				</tr>
-				<tr>
-					<td class="table-label">贷款目的的详细描述</td>
-					<td colspan="3">
-						<span>	
-							<textarea name="loan_purpose_detail" onchange="spryMaxLength(this,256)" >{{non_financial_analysis.loan_purpose_detail}}</textarea>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>							
-				</tr>
-				<tr>
-					<td class="table-label">客户/法人/实际经营人/主要股东的私人情况</td>
-					<td colspan="3">
-						<span>	
-							<textarea name="personal_circumstances" onchange="spryMaxLength(this,256)" >{{non_financial_analysis.personal_circumstances}}</textarea>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>				
-				</tr>
-				<tr>
-					<td class="table-label">对客户的印象</td>
-					<td colspan="3">
-						<span>	
-							<textarea name="impression_of_the_customer" onchange="spryMaxLength(this,256)" >{{non_financial_analysis.impression_of_the_customer}}</textarea>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>						
-				</tr>
-				<tr>
-					<td class="table-label">其他还款来源分析</td>
-					<td colspan="3">
-						<span>	
-							<textarea name="other_sources_of_repayment" onchange="spryMaxLength(this,256)" >{{non_financial_analysis.other_sources_of_repayment}}</textarea>
-							<span class="errorInfo">字符数不得大于256</span>
-						</span>
-					</td>								
-				</tr>
-			</table>
-		</div>		
 	<!--*****************************************风险分析以及调查结论**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">风险分析以及调查结论</span>
 		<div class="divBorder">
@@ -948,8 +545,8 @@
 					<td class="table-label">分析结论</td>
 					<td colspan="7">
 						<span>
-							<textarea name="analysis_conclusion" onchange="spryMaxLength(this,256)">{{riskanalysis_and_findings.analysis_conclusion}}</textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="analysis_conclusion" onchange="spryMaxLength(this,2048)">{{riskanalysis_and_findings.analysis_conclusion}}</textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						<span>
 					</td>								
 				</tr>
@@ -1011,8 +608,8 @@
 					<td class="table-label">需要审议的其他内容</td>
 					<td colspan="7">
 						<span>
-							<textarea name="other_deliberations" value="{{riskanalysis_and_findings.other_deliberations}}" style="width:80%" onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="other_deliberations" value="{{riskanalysis_and_findings.other_deliberations}}" style="width:80%" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>						
 					</td>
 				</tr>	
@@ -1021,8 +618,8 @@
 					<td class="table-label">正</td>
 					<td colspan="4">
 						<span>
-							<textarea name="positive" value="{{riskanalysis_and_findings.positive}}" style="width:80%"onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="positive" value="{{riskanalysis_and_findings.positive}}" style="width:80%"onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>	
 					</td>
 				</tr>
@@ -1030,8 +627,8 @@
 					<td class="table-label">反</td>
 					<td colspan="4">
 						<span>
-							<textarea name="opposite" value="{{riskanalysis_and_findings.opposite}}" style="width:80%"onchange="spryMaxLength(this,256)"></textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="opposite" value="{{riskanalysis_and_findings.opposite}}" style="width:80%"onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>	
 					</td>
 				</tr>
@@ -1235,8 +832,8 @@
 					<td class="table-label" style="width:80px;">建议理由/发放条件</td>
 					<td colspan="7">
 						<span>	
-							<textarea name="approve_reason" onchange="spryMaxLength(this,256)">{{riskanalysis_and_findings.approve_reason}}</textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="approve_reason" onchange="spryMaxLength(this,2048)">{{riskanalysis_and_findings.approve_reason}}</textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>															
 				</tr>
@@ -1254,8 +851,8 @@
 					<td class="table-label" style="width:80px;">否决原因</td>
 					<td colspan="7">
 						<span>	
-							<textarea name="refuse_reason" onchange="spryMaxLength(this,256)">{{riskanalysis_and_findings.refuse_reason}}</textarea>
-							<span class="errorInfo">字符数不得大于256</span>
+							<textarea name="refuse_reason" onchange="spryMaxLength(this,2048)">{{riskanalysis_and_findings.refuse_reason}}</textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>															
 				</tr>

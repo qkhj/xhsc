@@ -40,8 +40,8 @@
 							<span>
 								<input type="hidden" name="type_0" value="0">
 								<input type="hidden" name="name_0" value="{{obj.items_name}}">
-								<textarea name="value_0" onchange="spryMaxLength(this,64)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于64</span>
+								<textarea name="value_0" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>
 						{%- endif %}
@@ -55,8 +55,8 @@
 							<span>
 								<input type="hidden" name="type_1" value="1">
 								<input type="hidden" name="name_1" value="{{obj.items_name}}">
-								<textarea name="value_1" onchange="spryMaxLength(this,64)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于64</span>
+								<textarea name="value_1" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>	
 						</td>
@@ -71,8 +71,8 @@
 							<span>
 								<input type="hidden" name="type_2" value="2">
 								<input type="hidden" name="name_2" value="{{obj.items_name}}">
-								<textarea name="value_2" onchange="spryMaxLength(this,64)">{{obj.content}}</textarea>
-								<span class="errorInfo">字符数不得大于64</span>
+								<textarea name="value_2" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
+								<span class="errorInfo">字符数不得大于2048</span>
 							</span>
 						</td>	
 						{%- endif %}
@@ -121,7 +121,7 @@
 							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
 							{%- else %}
-							<input type="text" name="value_4" onkeyup="setJe(this);" onblur='hj(4);yyqy();qyce();fxqjljsr();qyjcjybl()' maxlength="11" onclick="setJe(this)" value="{{obj.content}}" />
+							<input type="text" name="value_4" onkeyup="setJe(this);" onblur='hj(4);yyqy();qyce();fxqjljsr();qyjcjybl()' maxlength="11" onclick="setJe(this)" value="{{cross_examination[cross_examination.index(obj)+count_3].content}}" />
 							{%- endif %}
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
@@ -235,7 +235,7 @@
 							<input type="hidden" name="name_10" value="{{obj.items_name}}">
 						</td>
 						<td>
-							<input type="text" name="value_10" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
+							<input type="text" name="value_10" onclick="setJe2(this)" value="{{obj.content}}" readonly/>
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
 						</td>
@@ -248,7 +248,7 @@
 							<input type="hidden" name="name_11" value="{{obj.items_name}}">
 						</td>
 						<td>
-							<input type="text" name="value_11" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
+							<input type="text" name="value_11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
 						</td>
@@ -264,7 +264,7 @@
 							<input type="hidden" name="name_12" value="{{obj.items_name}}">
 						</td>
 						<td>
-							<input type="text" name="value_12" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
+							<input type="text" name="value_12" onclick="setJe2(this)" value="{{obj.content}}" readonly/>
 							<br/><span class="je">人民币</span>
 							<span class="errorInfo"></span>	
 						</td>
@@ -311,8 +311,8 @@
 					</td>
 					<td colspan="6">
 						<span>
-							<textarea name="value_0" onchange="spryMaxLength(this,64)"></textarea>
-							<span class="errorInfo">字符数不得大于64</span>
+							<textarea name="value_0" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>	
 				</tr>		
@@ -323,8 +323,8 @@
 					</td>
 					<td colspan="6">
 						<span>
-							<textarea name="value_1" onchange="spryMaxLength(this,64)"></textarea>
-							<span class="errorInfo">字符数不得大于64</span>
+							<textarea name="value_1" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>	
 				</tr>
@@ -335,8 +335,8 @@
 					</td>
 					<td colspan="6">
 						<span>
-							<textarea name="value_2" onchange="spryMaxLength(this,64)"></textarea>
-							<span class="errorInfo">字符数不得大于64</span>
+							<textarea name="value_2" onchange="spryMaxLength(this,2048)"></textarea>
+							<span class="errorInfo">字符数不得大于2048</span>
 						</span>
 					</td>	
 				</tr>
@@ -448,7 +448,7 @@
 						<input type="hidden" name="name_10" value="应有权益">
 					</td>
 					<td>
-						<input type="text" name="value_10" onkeyup="setJe(this);" value="0" onclick="setJe(this)" readonly/>
+						<input type="text" name="value_10" value="0" onclick="setJe2(this)" readonly/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -458,7 +458,7 @@
 						<input type="hidden" name="name_11" value="实际权益(资产负债表所有者权益)">
 					</td>
 					<td>
-						<input type="text" name="value_11" onkeyup="setJe(this);" value="0" onclick="setJe(this)" readonly/>
+						<input type="text" name="value_11" onkeyup="setJe(this);" value="{{balance_sheet.content}}" onclick="setJe(this)" readonly/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -470,7 +470,7 @@
 						<input type="hidden" name="name_12" value="权益差额(应有权益-实际权益)">
 					</td>
 					<td>
-						<input type="text" name="value_12" onkeyup="setJe(this);" value="0" onclick="setJe(this)" readonly/>
+						<input type="text" name="value_12" value="0" onclick="setJe2(this)" readonly/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>

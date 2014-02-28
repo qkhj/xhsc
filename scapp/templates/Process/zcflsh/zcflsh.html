@@ -14,9 +14,16 @@
 </head>
 
 <body>	
-	<div class="content">
+	<form id="content" method="POST" class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">资产分类审核</a>
+			{%- if customer_name %}
+				<input type="hidden" name="customer_name" value="{{customer_name}}">
+			{%- else %}
+				<input type="hidden" name="customer_name">
+			{%- endif %}
+			<input type="hidden" name="loan_type" value="{{loan_type}}"> 
+			<input type="hidden" name="classify" value="{{classify}}"> 
 		</div>		
 		<div class="row-fluid">			
 			<i class="icon-bookmark"></i><span class="titletip">贷后变更审核列表</span>			
@@ -37,29 +44,48 @@
 						</tr>
 					</thead>
 					<tbody class="center">
-						<tr onclick="changeColor(this)">					
-							<td><a href="#" onclick="iframe('Process/zcflsh/check_zcfl')">1</a></td>   
-							<td>1</td>
-							<td>王军忠</td>
-							<td>微贷款</td>
-							<td>300,000.00</td>
-							<td>抵押</td>
-							<td>20</td>	
-							<td>唐琳君</td>	
-							<td>关注</td>		
-							<td>正常</td>												
-						</tr>									
+						{%- for obj in loan_apply.items %}	
+						<tr onclick="changeColor(this)">		
+							<td><a href="#" onclick="iframe('Process/zcflsh/check_zcfl/{{obj.loan_apply_id}}')">{{obj.loan_apply_id}}</a></td>
+							{%- if obj.company_customer_no %}
+							<td>{{obj.company_customer_no}}</td>
+							<td>{{obj.company_customer_name}}</td>
+							{%- else %}
+							<td>{{obj.individual_customer_no}}</td>
+							<td>{{obj.individual_customer_name}}</td>
+							{%- endif %}
+							{%- if obj.loan_type == '1' %}	
+								<td>微贷</td>
+							{%- else %}	
+								<td>小额贷</td>
+							{%- endif %}
+							<td>{{obj.loan_amount}}</td>	
+							<td>担保方式</td>
+							<td>逾期天数</td>	
+							<th>客户经理</th>	
+							<th>系统资产分类</th>
+							<th>手工资产分类</th>					
+						</tr>
+						{%- endfor %}							
 					</tbody>
 				</table>
 			</div>
 			<div class="page-div">
-				<span style="CURSOR: pointer">&lt;&lt;</span>
-				&#160;<input type="text" value="1"/>
-				&#160;共&#160;<font color="#0088cc">1</font>&#160;页&#160;
-				<span style="CURSOR: pointer">&gt;&gt;</span>
+				{%- if loan_apply.has_prev %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Process/zcflsh/zcflsh_search/{{loan_apply.prev_num}}')">&lt;&lt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&lt;&lt;</span>
+				{%- endif %}
+					&#160;第&#160;<font color="#0088cc">{{loan_apply.page}}</font>&#160;页&#160;
+					&#160;共&#160;<font color="#0088cc">{{loan_apply.pages}}</font>&#160;页&#160;
+				{%- if loan_apply.has_next %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Process/zcflsh/zcflsh_search/{{loan_apply.next_num}}')">&gt;&gt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&gt;&gt;</span>
+				{%- endif %}
 			</div>
 		</div><!--/row-fluid -->
-	</div><!--/content -->
+	</form><!--/content -->
 	
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>

@@ -3,11 +3,12 @@ var PROCESS_STATUS_DKSQ = '101' //1.新申请
 var PROCESS_STATUS_DKSQSH = '201' //2分配A、B、运营岗
 var PROCESS_STATUS_DQDC = '301' //3.已分配/待调查
 var PROCESS_STATUS_DKSP = '401' //4.分配审贷会成员
-var PROCESS_STATUS_DKFKJH = '501' //5.设置还款计划
-var PROCESS_STATUS_SPJY_TG = '601' //6.审批通过
-var PROCESS_STATUS_SPJY_YTJTG = '602' //6.有条件通过
-var PROCESS_STATUS_SPJY_CXDC = '603' //6.重新调查
-var PROCESS_STATUS_SPJY_JUJUE = '604' //6.拒绝
+var PROCESS_STATUS_SPJY_TG = '501' //5.审批通过
+var PROCESS_STATUS_SPJY_YTJTG = '502' //5.有条件通过
+var PROCESS_STATUS_SPJY_CXDC = '503' //5.重新调查
+var PROCESS_STATUS_SPJY_JUJUE = '504' //5.拒绝
+
+var PROCESS_STATUS_DKFKJH = '601' //6.设置还款计划
 
 var ROLE_LEVEL_ADMIN = 0 //admin
 var ROLE_LEVEL_ZG = 1 //主管 
@@ -477,6 +478,163 @@ function hjje(obj,value){
     checkInput();
     return outputCharacters; 
 }
+//********************允许为负数*****************************
+function setJe2(obj){
+    $(obj).parent().find(".je").html(hjje2(obj,obj.value));
+}
+//金额转换大写,错误统计jegs
+function hjje2(obj,value){  
+    //alert(obj.value);   
+    var currencyDigits=value;               
+    // Constants:
+    var MAXIMUM_NUMBER = 99999999999.99;
+    // Predefine the radix characters and currency symbols for output:
+    var CN_ZERO = "零";
+    var CN_ONE = "壹";
+    var CN_TWO = "贰";
+    var CN_THREE = "叁";
+    var CN_FOUR = "肆";
+    var CN_FIVE = "伍";
+    var CN_SIX = "陆";
+    var CN_SEVEN = "柒";
+    var CN_EIGHT = "捌";
+    var CN_NINE = "玖";
+    var CN_TEN = "拾";
+    var CN_HUNDRED = "佰";
+    var CN_THOUSAND = "仟";
+    var CN_TEN_THOUSAND = "万";
+    var CN_HUNDRED_MILLION = "亿";
+    var CN_SYMBOL = "人民币";
+    var CN_DOLLAR = "元";
+    var CN_TEN_CENT = "角";
+    var CN_CENT = "分";
+    var CN_INTEGER = "整";
+    // Variables:
+    var integral; // Represent integral part of digit number.
+    var decimal; // Represent decimal part of digit number.
+    var outputCharacters; // The output result.
+    var parts;
+    var digits, radices, bigRadices, decimals;
+    var zeroCount;
+    var i, p, d;
+    var quotient, modulus;
+    // Validate input string:
+    currencyDigits = currencyDigits.toString();
+    // Normalize the format of input digits:
+    currencyDigits = currencyDigits.replace(/,/g, ""); // Remove comma delimiters.
+    currencyDigits = currencyDigits.replace(/^0+/, ""); // Trim zeros at the beginning.
+    // Assert the number is not greater than the maximum number.
+   
+        if(currencyDigits == ""){
+            if($(obj).parent().find(".errorInfo").css("display")!="none"&&jegs>0) {               
+                jegs--;   
+                //alert(jegs);
+                $(obj).parent().find(".errorInfo").hide(); 
+            } 
+            checkInput();
+            return "人民币";
+        }
+        else{
+
+            if($(obj).parent().find(".errorInfo").css("display")!="none"&&jegs>0)                
+                jegs--;   
+            //alert(jegs);
+            $(obj).parent().find(".errorInfo").hide();  
+        }
+   
+    // Process the coversion from currency digits to characters:
+    // Separate integral and decimal parts before processing coversion:
+    parts = currencyDigits.split(".");
+    if (parts.length > 1) {
+        integral = parts[0];
+        decimal = parts[1];
+        // Cut down redundant decimal digits that are after the second.
+        decimal = decimal.substr(0, 2);
+    }
+    else {
+        integral = parts[0];
+        decimal = "";
+    }
+    // Prepare the characters corresponding to the digits:
+    digits = new Array(CN_ZERO, CN_ONE, CN_TWO, CN_THREE, CN_FOUR, CN_FIVE, CN_SIX, CN_SEVEN, CN_EIGHT, CN_NINE);
+    radices = new Array("", CN_TEN, CN_HUNDRED, CN_THOUSAND);
+    bigRadices = new Array("", CN_TEN_THOUSAND, CN_HUNDRED_MILLION);
+    decimals = new Array(CN_TEN_CENT, CN_CENT);
+    // Start processing:
+    outputCharacters = "";
+    // Process integral part if it is larger than 0:
+     if (Number(integral) > 0) {//正数时
+        zeroCount = 0;
+        for (i = 0; i < integral.length; i++) {
+            p = integral.length - i - 1;
+            d = integral.substr(i, 1);
+            quotient = p / 4;
+            modulus = p % 4;
+            if (d == "0") {
+                zeroCount++;
+            }
+            else {
+                if (zeroCount > 0){
+                    outputCharacters += digits[0];
+                }
+                zeroCount = 0;
+                outputCharacters += digits[Number(d)] + radices[modulus];
+            }
+            if (modulus == 0 && zeroCount < 4) {
+                outputCharacters += bigRadices[quotient];
+            }
+        }
+        outputCharacters += CN_DOLLAR;
+    }
+    if (Number(integral) < 0) {//负数时
+        outputCharacters = "负";//先加负号
+        zeroCount = 0;
+        for (i = 1; i < integral.length; i++) { //去掉负号从第二位数字开始      
+            p = integral.length - i - 1;
+            d = integral.substr(i, 1);
+            quotient = p / 4;
+            modulus = p % 4;            
+            if (d == "0") {
+                zeroCount++;
+            }
+            else {
+                if (zeroCount > 0){
+                    outputCharacters += digits[0];
+                }
+                zeroCount = 0;
+                outputCharacters += digits[Number(d)] + radices[modulus];
+            }
+            if (modulus == 0 && zeroCount < 4) {
+                outputCharacters += bigRadices[quotient];
+            }
+        }
+        outputCharacters += CN_DOLLAR;
+    }
+    // Process decimal part if there is:
+    if (decimal != "") {
+        for (i = 0; i < decimal.length; i++) {
+            d = decimal.substr(i, 1);
+            if (d != "0") {
+                outputCharacters += digits[Number(d)] + decimals[i];
+            }
+        }
+    }
+    // Confirm and return the final output string:
+    if (outputCharacters == "") {
+        outputCharacters = CN_ZERO + CN_DOLLAR;
+    }
+    if (decimal == "") {
+        outputCharacters += CN_INTEGER;
+    }
+    outputCharacters = CN_SYMBOL + outputCharacters;
+
+    checkInput();
+    return outputCharacters; 
+}
+
+
+
+
 //验证1-100数字,错误统计num
 function check(obj,min,max){    
     if(parseInt(obj.value)<min || parseInt(obj.value)>max){
