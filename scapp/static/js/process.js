@@ -1974,6 +1974,67 @@ if(table=="jcjl"){//标准检测——检测记录
 							"</tr>");
 		datepicker();
     }
+//----------------------非标准监测--------------------------
+	if(table=="fbzjc_xjjyhck"){//现金及银行存款&应付账款
+        $("#"+table).append("<tr class='insideTb'>"+								
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+
+								"<td><input type='text' name=''/></td>"+	
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+									
+							"</tr>");
+    } 
+	if(table=="fbzjc_yszk"){//应收账款&预收账款
+        $("#"+table).append("<tr class='insideTb'>"+								
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+
+								"<td><input type='text' name=''/></td>"+	
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+									
+							"</tr>");
+    } 
+	if(table=="fbzjc_yfdk"){//预付账款&短期贷款
+        $("#"+table).append("<tr class='insideTb'>"+								
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+		
+								"<td><input type='text' name=''/></td>"+
+								"<td><input type='text' name=''/></td>"+	
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+									
+							"</tr>");
+    }
+	if(table=="fbzjc_ch"){//存货&长期负债
+        $("#"+table).append("<tr class='insideTb'>"+								
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+
+								"<td><input type='text' name=''/></td>"+	
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+									
+							"</tr>");
+    }
+	if(table=="fbzjc_sr"){//收入
+        $("#"+table).append("<tr class='insideTb'>"+								
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+									
+							"</tr>");
+    }
+	if(table=="fbzjc_blcb"){//变量成本
+        $("#"+table).append("<tr class='insideTb'>"+								
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+									
+							"</tr>");
+    }
     doubleIframe(frameid);
 }
 //表格删除行
