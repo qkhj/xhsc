@@ -12,13 +12,20 @@ from scapp import app
 from scapp import db
 from scapp.logic.total import Total
 
+import hashlib
+
+#get md5 of a input string  
+def GetStringMD5(str):  
+    m = hashlib.md5()
+    m.update(str)
+    return m.hexdigest() 
 
 # 登陆
 @app.route('/', methods=['GET'])
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        user = SC_User.query.filter_by(login_name=request.form['login_name'], login_password=request.form['login_password']).first()
+        user = SC_User.query.filter_by(login_name=request.form['login_name'], login_password=GetStringMD5(request.form['login_password'])).first()
         if user:
             if user.active == '0':
                 flash('该用户被禁用，请联系管理员','error')
@@ -123,8 +130,8 @@ def change_password(id):
     if request.method == 'POST':
         try:
             user = SC_User.query.filter_by(id=id).first()
-            if user.login_password == request.form['old_password']:
-                user.login_password = request.form['login_password']
+            if user.login_password == GetStringMD5(request.form['old_password']):
+                user.login_password = GetStringMD5(request.form['login_password'])
             else:
                 raise Exception
 

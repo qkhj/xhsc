@@ -26,8 +26,8 @@ from scapp.models.process import SC_Co_Borrower
 from scapp.models.process import SC_Guarantees_For_Others
 from scapp.models.process import SC_Guaranty
 from scapp.models.process import SC_Guarantees
-from scapp.models.process import SC_Financial_Overview
-from scapp.models.process import SC_Non_Financial_Analysis
+#from scapp.models.process import SC_Financial_Overview
+#from scapp.models.process import SC_Non_Financial_Analysis
 from scapp.models.process import SC_Riskanalysis_And_Findings
 from scapp.models.process import SC_Approval_Decision
 from scapp.models.process import SC_Credit_Upload

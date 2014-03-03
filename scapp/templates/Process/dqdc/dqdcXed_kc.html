@@ -16,7 +16,7 @@
 </head>
 
 <body onload="sub()">	
-	<form class="content">
+	<form class="content" method="POST" action="/Process/dqdc/new_kc/{{loan_apply_id}}" target="_parent">
 	<!--*****************************************存货**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">存货清单</span>
 		<input type="button" value="+" onclick="addTd('kcxx','dqdcXed_kc')" class="btn btn-info btn-mini" />
@@ -29,33 +29,35 @@
 					<th>买进单价</th>							
 					<th>买进总价值</th>						
 				</tr>
+				{%- for obj in stocks %}
 				<tr class="center">
 					<td>
 						<span id="name">	
-							<input type="text" name="name" onchange="spryMaxLength(this,32)"/><br/>&nbsp;
+							<input type="text" name="name" value="{{obj.name}}" onchange="spryMaxLength(this,32)"/><br/>&nbsp;
 							<span class="errorInfo">字符数不得大于32</span>
 						</span>
 					</td>	
 					<td>
 						<span>	
-							<input type="text" name="amount" class="subData1" onKeyUp="value=value.replace(/\D/g,'')" maxlength="32" onblur="mjzjz(this,'amount','purchase_price','purchase_total_price');sub()"/><br/>&nbsp;
+							<input type="text" name="amount" value="{{obj.amount}}" class="subData1" onKeyUp="value=value.replace(/\D/g,'')" maxlength="32" onblur="mjzjz(this,'amount','purchase_price','purchase_total_price');sub()"/><br/>&nbsp;
 						</span>
 					</td>						
 					<td>
 						<span>	
-							<input type="text" name="purchase_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18" onblur="mjzjz(this,'amount','purchase_price','purchase_total_price');sub()"/><br/>
+							<input type="text" name="purchase_price" value="{{obj.purchase_price}}" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18" onblur="mjzjz(this,'amount','purchase_price','purchase_total_price');sub()"/><br/>
 							<span class="je">人民币</span>	
 							<span class="errorInfo"></span>							
 						</span>
 					</td>
 					<td>
 						<span>	
-							<input type="text" name="purchase_total_price" class="subData2" onclick="setJe(this)" value="0" readonly/><br/>
+							<input type="text" name="purchase_total_price" value="{{obj.purchase_total_price}}" class="subData2" onclick="setJe(this)" value="0" readonly/><br/>
 							<span class="je">人民币</span>	
 							<span class="errorInfo"></span>							
 						</span>
 					</td>														
-				</tr>				
+				</tr>
+				{%- endfor %}				
 			</table>
 			<table id="kcxx" class="table-list">
 				<tr>
