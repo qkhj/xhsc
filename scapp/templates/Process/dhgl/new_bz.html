@@ -26,12 +26,8 @@
 			<div class="divBorder">				
 				<table class="table-list">		
 					<tr>
-						<td class="table-label">借款人<font class="red">*</font></td>
-						<!-- {%- if loan_apply.company_customer_name==''%} -->
-						<td><input type="text" name=""/></td>
-						<!-- {%- else %} -->
-						<!-- <td><input type="text" name=""/>{{loan_apply.company_customer_name}}</td>
-						{%- endif %} -->
+						<td class="table-label">借款人<font class="red">*</font></td>						
+						<td><input type="text" name=""/></td>						
 						<td class="table-label">客户经理<font class="red">*</font></td>	
 						<td><input type="text" name=""/></td>
 					</tr>			
@@ -100,8 +96,8 @@
 			</div>
 			<!--*****************************************检测记录**************************************************-->
 			<i class="icon-bookmark"></i><span class="titletip">检测记录</span>
-			<input type="button" value="+" onclick="addTd('jcjl','dksq_info')" class="btn btn-info btn-mini" style="padding:0 7px;margin-top:0px;"/>
-			<input type="button" value="-" onclick="removeTd('jcjl','dksq_info')" class="btn btn-info btn-mini" style="padding:0 9px;margin-top:0px;"/>
+			<input type="button" value="+" onclick="addTd('jcjl','content_frame')" class="btn btn-info btn-mini" style="padding:0 7px;margin-top:0px;"/>
+			<input type="button" value="-" onclick="removeTd('jcjl','content_frame')" class="btn btn-info btn-mini" style="padding:0 9px;margin-top:0px;"/>
 			<div class="divBorder">
 				<table id="jcjl" class="table-list">
 					<tr>	
