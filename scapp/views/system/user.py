@@ -15,6 +15,14 @@ from scapp.models import SC_Org
 
 from scapp import app
 
+import hashlib
+
+#get md5 of a input string  
+def GetStringMD5(str):  
+    m = hashlib.md5()
+    m.update(str)
+    return m.hexdigest() 
+
 # 使用者管理
 @app.route('/System/syzgl/<int:page>', methods=['GET'])
 def System_syzgl(page):
@@ -39,7 +47,7 @@ def new_user():
 				else:
 					belong_leader = None
 
-			user = SC_User(request.form['login_name'],request.form['login_password'],
+			user = SC_User(request.form['login_name'],GetStringMD5(request.form['login_password']),
 				request.form['real_name'],request.form['sex'],request.form['mobile'],
 				request.form['department'],request.form['level'],request.form['active'],
 				request.form['is_leader'],belong_leader)

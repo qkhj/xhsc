@@ -9,62 +9,37 @@ from scapp.models.credit_data.sc_stock import SC_Stock
 from scapp import app
 
 # 贷款调查——小额贷款(库存)
-@app.route('/Process/dqdc/dqdcXed_kc/<int:id>', methods=['GET'])
-def dqdcXed_kc(id):
-	stock = SC_Stock.query.filter_by(loan_apply_id=id).all()
-	return render_template("Process/dqdc/dqdcXed_kc.html",id=id,stock=stock)
+@app.route('/Process/dqdc/dqdcXed_kc/<int:loan_apply_id>', methods=['GET'])
+def dqdcXed_kc(loan_apply_id):
+	stocks = SC_Stock.query.filter_by(loan_apply_id=loan_apply_id).all()
+	return render_template("Process/dqdc/dqdcXed_kc.html",loan_apply_id=loan_apply_id,stocks=stocks)
 
 # 贷款调查——新增小额贷款(库存)
-@app.route('/Process/dqdc/new_kc/<int:loan_apply_id>', methods=['GET','POST'])
+@app.route('/Process/dqdc/new_kc/<int:loan_apply_id>', methods=['POST'])
 def new_kc(loan_apply_id):
-	if request.method == 'GET':
-		return render_template("Process/dqdc/new_kc.html",loan_apply_id=loan_apply_id)
-	else:
-		try:
-			SC_Stock(loan_apply_id,request.form['name'],request.form['amount'],
-				request.form['purchase_price'],request.form['purchase_total_price'],
-				request.form['sell_price'],request.form['sell_total_price'],
-				request.form['pre_rate']).add()
+	try:
+		SC_Stock.query.filter_by(loan_apply_id=loan_apply_id).delete()
+		db.session.flush()
 
-			# 事务提交
-			db.session.commit()
-			# 消息闪现
-			flash('保存成功','success')
-		except:
-			# 回滚
-			db.session.rollback()
-			logger.exception('exception')
-			# 消息闪现
-			flash('保存失败','error')
+		name_list = request.form.getlist('name')
+		amount_list = request.form.getlist('amount')
+		purchase_price_list = request.form.getlist('purchase_price')
+		purchase_total_price_list = request.form.getlist('purchase_total_price')
 
-		return redirect('Process/dqdc/dqdc')
+		# 循环获取表单
+		for i in range(len(name_list)):
+			SC_Stock(loan_apply_id,name_list[i],amount_list[i],
+				purchase_price_list[i],purchase_total_price_list[i],None,None,None).add()
 
-# 贷款调查——编辑小额贷款(库存)
-@app.route('/Process/dqdc/edit_kc/<int:id>', methods=['GET','POST'])
-def edit_kc(id):
-	if request.method == 'GET':
-		stock = SC_Stock.query.filter_by(id=id).first()
-		return render_template("Process/dqdc/edit_kc.html",stock=stock)
-	else:
-		try:
-			stock = SC_Stock.query.filter_by(id=id).first()
-			stock.name = request.form['name']
-			stock.amount = request.form['amount']
-			stock.purchase_price = request.form['purchase_price']
-			stock.purchase_total_price = request.form['purchase_total_price']
-			stock.sell_price = request.form['sell_price']
-			stock.sell_total_price = request.form['sell_total_price']
-			stock.pre_rate = request.form['pre_rate']
-
-			# 事务提交
-			db.session.commit()
-			# 消息闪现
-			flash('保存成功','success')
-		except:
-			# 回滚
-			db.session.rollback()
-			logger.exception('exception')
-			# 消息闪现
-			flash('保存失败','error')
-
-		return redirect('Process/dqdc/dqdc')
+		# 事务提交
+		db.session.commit()
+		# 消息闪现
+		flash('保存成功','success')
+	except:
+		# 回滚
+		db.session.rollback()
+		logger.exception('exception')
+		# 消息闪现
+		flash('保存失败','error')
+			
+	return redirect('Process/dqdc/dqdc')

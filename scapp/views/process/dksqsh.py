@@ -33,8 +33,8 @@ from scapp.models import SC_Co_Borrower
 from scapp.models import SC_Guarantees_For_Others
 from scapp.models import SC_Guaranty
 from scapp.models import SC_Guarantees
-from scapp.models import SC_Financial_Overview
-from scapp.models import SC_Non_Financial_Analysis
+#from scapp.models import SC_Financial_Overview
+#from scapp.models import SC_Non_Financial_Analysis
 from scapp.models import SC_Riskanalysis_And_Findings
 
 from scapp.models import View_Query_Loan
