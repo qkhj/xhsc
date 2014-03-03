@@ -317,7 +317,7 @@ class SC_Approval_Decision (db.Model):
 
     loan_date = db.Column(db.Date) #放款日期
     first_repayment_date = db.Column(db.Date) #第一次还贷日期
-
+    last_repayment_date  = db.Column(db.Date) #到期日
     management_coats = db.Column(db.String(32)) #管理费(元)
     agency_coats = db.Column(db.String(32)) #代理费(元)
     contract_date = db.Column(db.Date) #合同签订日期
