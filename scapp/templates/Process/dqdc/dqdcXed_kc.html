@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-cn">
 <head>	
 	<meta charset="utf-8">
@@ -11,7 +11,7 @@
 	<link href="/static/css/bootstrap.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
 	<style type="text/css">		
-		textarea{width:80%;}		
+		input.btn-mini{width:20px;margin-top:0px;}	
 	</style>
 </head>
 
@@ -19,46 +19,55 @@
 	<form class="content">
 	<!--*****************************************存货**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">存货清单</span>
-		<div id="KCQD">
-			<div style="margin-bottom:5px;">
-				<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dqdc/new_kc/{{id}}')">新增</a><!--*滚动条问题*-->
-			</div>
-			<div style="border:1px solid #94c1dc;">	
-				<table class="table-list" cellspacing="10" id="uesr-list">				
-					<tr>
-						<th>货物名称</th>
-						<th>数量</th>
-						<th>买进单价</th>
-						<th>买进总价值</th>							
-						<!-- <th>卖出单价</th>
-						<th>卖出总价值</th>						
-						<th>单位毛利率</th> -->
-						<th>操作</th>
-					</tr>   
-					{%- for obj in stock %}
-					<tr class="center" onclick="changeColor(this)">
-						<td><a href="#" onclick="iframe('Process/dqdc/edit_kc/{{obj.id}}')">{{obj.name}}</a></td>
-						<td class="subData1">{{obj.amount}}</td>
-						<td>{{obj.purchase_price}}</td>
-						<td class="subData2">{{obj.purchase_total_price}}</td>
-						<!-- <td>{{obj.sell_price}}</td>
-						<td>{{obj.sell_total_price}}</td>
-						<td>{{obj.pre_rate}}</td> -->
-						<td>
-							<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
-						</td>
-					</tr>		
-					{%- endfor %}
-					<tr>
-						<th>合计</th> 
-						<th id="sub1"></th>
-						<th></th>
-						<th id="sub2"></th>						
-						<th></th>
-					</tr>				
-				</table>
-			</div>
+		<input type="button" value="+" onclick="addTd('kcxx','dqdcXed_kc')" class="btn btn-info btn-mini" />
+		<input type="button" value="-" onclick="removeTd('kcxx','dqdcXed_kc');sub()" class="btn btn-info btn-mini" />
+		<div class="divBorder">	
+			<table id="kcxx" class="table-list">
+				<tr class="font-small">
+					<th>货物名称</th>
+					<th>数量</th>
+					<th>买进单价</th>							
+					<th>买进总价值</th>						
+				</tr>
+				<tr class="center">
+					<td>
+						<span id="name">	
+							<input type="text" name="name" onchange="spryMaxLength(this,32)"/><br/>&nbsp;
+							<span class="errorInfo">字符数不得大于32</span>
+						</span>
+					</td>	
+					<td>
+						<span>	
+							<input type="text" name="amount" class="subData1" onKeyUp="value=value.replace(/\D/g,'')" maxlength="32" onblur="mjzjz(this,'amount','purchase_price','purchase_total_price');sub()"/><br/>&nbsp;
+						</span>
+					</td>						
+					<td>
+						<span>	
+							<input type="text" name="purchase_price" onkeyup="setJe(this)" onclick="setJe(this)" maxlength="18" onblur="mjzjz(this,'amount','purchase_price','purchase_total_price');sub()"/><br/>
+							<span class="je">人民币</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>
+					<td>
+						<span>	
+							<input type="text" name="purchase_total_price" class="subData2" onclick="setJe(this)" value="0" readonly/><br/>
+							<span class="je">人民币</span>	
+							<span class="errorInfo"></span>							
+						</span>
+					</td>														
+				</tr>				
+			</table>
+			<table id="kcxx" class="table-list">
+				<tr>
+					<th style="border-top:none;">
+						<b>合计</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						数量:<span id="sub1"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						总价值:<span id="sub2"></span>
+					</th>
+				</tr>		
+			</table>
 		</div>
+		<input type="submit" value="提交" class="btn btn-info"/>
 	</form>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
@@ -71,21 +80,41 @@
 		var num=0;
 		var idCard=0;
 		var phone=0;
+		function mjzjz(obj,name1,name2,sumname){
+			var sum=0;
+			var a=$(obj).parent().parent().parent().find("input[name="+name1+"]").val();
+			var b=$(obj).parent().parent().parent().find("input[name="+name2+"]").val();
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b);}
+			sum=a*b;
+			$(obj).parent().parent().parent().find("input[name="+sumname+"]").val(sum);
+			$(obj).parent().parent().parent().find("input[name="+sumname+"]").click();
+		}
 		function sub(){
 			//var num=$(".tbData").length;			
 			//$("#sub1").text("总笔数："+num);
 			for(i=1;i<3;i++){
-				var sum=0;						
-				$.each($(".subData"+i),function(key,val){ 
-					if(val.innerHTML=="")
-						sum=sum;
-					else
-						sum += parseInt(val.innerHTML);
+				var sum=0;	
+				if($(".subData"+i).length==0){
 					if(i==1)
-						$("#sub"+i).html(sum); 
+						$("#sub"+i).html(0); 
 					else
-						$("#sub"+i).html(sum+"<br/><span class='je'>"+hjje($("#sub"+i),sum)+"</span>"); 	
-				}); 
+						$("#sub"+i).html(0+"（<span class='je'>"+hjje($("#sub"+i),0)+"</span>）"); 	
+				}
+				else{
+					$.each($(".subData"+i),function(key,val){ 
+						if(this.value=="")
+							sum=sum;
+						else
+							sum += parseInt(this.value);
+						if(i==1)
+							$("#sub"+i).html(sum); 
+						else
+							$("#sub"+i).html(sum+"（<span class='je'>"+hjje($("#sub"+i),sum)+"</span>）"); 	
+					}); 
+				}
 			}
 		}
 	</script>

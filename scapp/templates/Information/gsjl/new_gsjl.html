@@ -142,7 +142,7 @@
 				var engMinute=parseFloat(endTime.split(":")[1])
 				var hours=engHourse-startHourse
 				var minute=(engMinute-startMinute)/60
-				minute=Math.round(minute*100)
+				minute=Math.round(minute*10)
 				if(minute<0){
 					minute=minute+100
 					hours--;
