@@ -1948,16 +1948,16 @@ if(table=="jcjl"){//标准检测——检测记录
 								"</td>"+
 								"<td>"+
 									"<span>	" +
-										"<input type='text' name='' class='datepicker' data-date-format='yyyy-mm-dd' readonly/>" +
+										"<input type='text' name='monitor_date' class='datepicker' data-date-format='yyyy-mm-dd' readonly/>" +
 									"</span>" +
 								"</td>"+
 								"<td>"+
-									"<select name=''>"+
+									"<select name='monitor_type'>"+
 										"<option>标准检测</option>"+
 									"</select>"+
 								"</td>"+
 								"<td>"+
-									"<select name=''>"+
+									"<select name='monitor_content'>"+
 										"<option>贷款资金用途</option>"+
 										"<option>贷款归还情况</option>"+
 										"<option>客户经营情况</option>"+
@@ -1967,7 +1967,7 @@ if(table=="jcjl"){//标准检测——检测记录
 								"</td>"+
 								"<td>"+
 									"<span>	" +
-										"<input type='text' name='' />" +
+										"<input type='text' name='monitor_remark' />" +
 														
 									"</span>" +
 								"</td>"+
