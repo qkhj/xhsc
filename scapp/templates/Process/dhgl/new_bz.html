@@ -26,75 +26,34 @@
 			<div class="divBorder">				
 				<table class="table-list">		
 					<tr>
-						<td class="table-label">借款人<font class="red">*</font></td>
-						<!-- {%- if loan_apply.company_customer_name==''%} -->
-						<td><input type="text" name=""/></td>
-						<!-- {%- else %} -->
-						<!-- <td><input type="text" name=""/>{{loan_apply.company_customer_name}}</td>
-						{%- endif %} -->
-						<td class="table-label">客户经理<font class="red">*</font></td>	
-						<td><input type="text" name=""/></td>
+						<td class="table-label">借款人</td>
+						<td><input type="text" name="" value="{{checkForm.jkr}}" readonly="true"/></td>
+						<td class="table-label">客户经理</td>	
+						<td><input type="text" name="" value="{{checkForm.khjl}}" readonly="true"/></td>
 					</tr>			
 					<tr>
-						<td class="table-label">客户号<font class="red">*</font></td>
-						<td><input type="text" name=""/></td>
-						<td class="table-label">合同号<font class="red">*</font></td>
-						<td><input type="text" name=""/></td>
+						<td class="table-label">客户号</td>
+						<td><input type="text" name="" value="{{checkForm.khId}}" readonly="true"/></td>
+						<td class="table-label">合同号</td>
+						<td><input type="text" name="" value="{{checkForm.hkId}}" readonly="true"/></td>
 					</tr>		
 					<tr>
-						<td class="table-label">贷款金额<font class="red">*</font></td>
-						<td><input type="text" name=""/></td>
-						<td class="table-label">借据号<font class="red">*</font></td>
-						<td><input type="text" name=""/></td>
+						<td class="table-label">贷款金额</td>
+						<td><input type="text" name="" value="{{checkForm.dkje}}" readonly="true"/></td>
+						<td class="table-label">借据号</td>
+						<td><input type="text" name="" value="{{checkForm.jjId}}" readonly="true"/></td>
 					</tr>	
 					<tr>
-						<td class="table-label">放款日<font class="red">*</font></td>
-						<td><input type="text" id="create_date" name="create_date" class="datepicker"/></td>
-						<td class="table-label">到期日<font class="red">*</font></td>
-						<td><input type="text" id="" class="datepicker"/></td>
+						<td class="table-label">放款日</td>
+						<td><input type="text" value="{{checkForm.fkDate}}" readonly="true"/></td>
+						<td class="table-label">到期日</td>
+						<td><input type="text"  value="{{checkForm.dqDate}}" readonly="true"/></td>
 					</tr>
 					<tr>
-						<td class="table-label">利率<font class="red">*</font></td>
-						<td><input type="text" name=""/>%</td>
-						<td class="table-label">还贷期数<font class="red">*</font></td>
-						<td>
-							<select name="">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">10</option>
-								<option value="11">11</option>
-								<option value="12">12</option>
-								<option value="13">13</option>
-								<option value="14">14</option>
-								<option value="15">15</option>
-								<option value="16">16</option>
-								<option value="17">17</option>
-								<option value="18">18</option>
-								<option value="19">19</option>
-								<option value="20">20</option>
-								<option value="21">21</option>
-								<option value="22">22</option>
-								<option value="23">23</option>
-								<option value="24">24</option>
-							</select>
-						</td>						
-					</tr>	
-					<tr>
-						<td class="table-label">还款方式</td>
-						<td colspan="3">
-							<select name="">
-								<option>等额本息</option>
-								<option>等额本金</option>
-								<option>不规则还款</option>
-							</select>
-						</td>				
+						<td class="table-label">利率</td>
+						<td><input type="text" name="" value="{{checkForm.lv}}" readonly="true"/>%</td>
+						<td class="table-label">还贷期数</td>
+						<td><input type="text" name="" value="{{checkForm.hkqs}}" readonly="true"/>月</td>			
 					</tr>
 				</table>
 			</div>
