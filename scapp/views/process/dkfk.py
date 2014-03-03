@@ -32,8 +32,8 @@ from scapp.models import SC_Co_Borrower
 from scapp.models import SC_Guarantees_For_Others
 from scapp.models import SC_Guaranty
 from scapp.models import SC_Guarantees
-from scapp.models import SC_Financial_Overview
-from scapp.models import SC_Non_Financial_Analysis
+#from scapp.models import SC_Financial_Overview
+#from scapp.models import SC_Non_Financial_Analysis
 from scapp.models import SC_Riskanalysis_And_Findings
 from scapp.models.repayment.sc_repayment_plan import SC_Repayment_Plan
 from scapp.models.repayment.sc_repayment_plan_detail import SC_Repayment_plan_detail
