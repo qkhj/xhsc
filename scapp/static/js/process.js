@@ -1,4 +1,4 @@
-﻿//-----------------------新增贷款申请--------------------------------------
+//-----------------------新增贷款申请--------------------------------------
 //获取客户信息
 function getCustomer(belong_customer_type,belong_customer_value){
 	$("#dksq_info").attr("src","/Process/dksq/goto_new_dksq_info/" + belong_customer_type + "/" + belong_customer_value);
@@ -1937,6 +1937,36 @@ if(table=="dxzchj"){//大项支出合计
 								"</td>"+
 							"</tr>");
     }
+//----------------------贷前调查——库存--------------------------
+	if(table=="kcxx"){//库存信息
+        $("#"+table).append("<tr class='insideTb center'>"+								
+								"<td>"+
+									"<span>"+	
+										"<input type='text' name='name' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+
+										"<span class='errorInfo'>字符数不得大于32</span>"+
+									"</span>"+
+								"</td>"+	
+								"<td>"+
+									"<span>"+	
+										"<input type='text' name='amount' class='subData1' onKeyUp='value=value.replace(/[^0-9]/g,&apos;&apos;)' maxlength='32' onblur='mjzjz(this,\"amount\",\"purchase_price\",\"purchase_total_price\");sub()'/><br/>&nbsp;"+																
+									"</span>"+
+								"</td>"+
+								"<td>"+
+									"<span>"+	
+										"<input type='text' name='purchase_price' onkeyup='setJe(this)' onclick='setJe(this)' maxlength='18' onblur='mjzjz(this,\"amount\",\"purchase_price\",\"purchase_total_price\");sub()'/><br/>"+										
+										"<span class='je'>人民币</span>"+	
+										"<span class='errorInfo'></span>"+							
+									"</span>"+
+								"</td>"+
+								"<td>"+
+									"<span>"+	
+										"<input type='text' name='purchase_total_price' class='subData2' onclick='setJe(this)' value='0' readonly/><br/>"+										
+										"<span class='je'>人民币</span>"+
+										"<span class='errorInfo'></span>"+							
+									"</span>"+
+								"</td>"+							
+							"</tr>");
+    } 
 //----------------------贷后管理--------------------------
 if(table=="jcjl"){//标准检测——检测记录
 	number=document.getElementById(table).getElementsByTagName("tr").length
@@ -2026,6 +2056,26 @@ if(table=="jcjl"){//标准检测——检测记录
 							"</tr>");
     }
 	if(table=="fbzjc_blcb"){//变量成本
+        $("#"+table).append("<tr class='insideTb'>"+								
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+									
+							"</tr>");
+    }
+    if(table=="fbzjc_qt"){//其他
+        $("#"+table).append("<tr class='insideTb'>"+								
+								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
+								"<td><input type='text' name=''/></td>"+
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+	
+								"<td><input type='text' name=''/></td>"+									
+							"</tr>");
+    }
+    if(table=="fbzjc_qtsr"){//其他收入
         $("#"+table).append("<tr class='insideTb'>"+								
 								"<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='' style='width:70%;'/></td>"+	
 								"<td><input type='text' name=''/></td>"+
