@@ -12,7 +12,6 @@
 	<link href="../../../static/css/main.css" rel="stylesheet">
 	<link href="../../../static/css/datepicker.css" rel="stylesheet">
 	<style type="text/css">	
-		
 		input.btn-mini{width:20px;}
 		textarea{width:80%;}
 		.table-list .table-label{width:180px;}
@@ -435,7 +434,7 @@
 							<input type="hidden" name="" value="工资">
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" readonly/>
 						</td>
 						<td>
 							<input type="text" name=""/>
@@ -457,7 +456,7 @@
 							<input type="hidden" name="" value="社会保险">
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" readonly/>
 						</td>
 						<td>
 							<input type="text" name=""/>
@@ -479,7 +478,7 @@
 							<input type="hidden" name="" value="租金">
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" readonly/>
 						</td>
 						<td>
 							<input type="text" name=""/>
@@ -501,7 +500,7 @@
 							<input type="hidden" name="" value="交通运输费用">
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" readonly/>
 						</td>
 						<td>
 							<input type="text" name=""/>
@@ -523,7 +522,7 @@
 							<input type="hidden" name="" value="维护费用">
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" readonly/>
 						</td>
 						<td>
 							<input type="text" name=""/>
@@ -545,7 +544,7 @@
 							<input type="hidden" name="" value="水电费用">
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" readonly/>
 						</td>
 						<td>
 							<input type="text" name=""/>
@@ -567,7 +566,7 @@
 							<input type="hidden" name="" value="存货损失">
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" readonly/>
 						</td>
 						<td>
 							<input type="text" name=""/>
@@ -589,7 +588,7 @@
 							<input type="hidden" name="" value="税金">
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" readonly/>
 						</td>
 						<td>
 							<input type="text" name=""/>
@@ -604,28 +603,34 @@
 							<input type="text" name=""/>
 						</td>				
 					</tr>
+				</table>
+				<table class="table-list inline" id="fbzjc_qt">
 					<tr>
 						<td class="table-label">
 							&nbsp;&nbsp;&nbsp;&nbsp;其他
 							<input type="hidden" name="" value="0">
 							<input type="hidden" name="" value="其他">
+							<input type="button" value="+" onclick="addTd('fbzjc_qt','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_qt','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" value="0" readonly/>
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" value="0" readonly/>
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" value="0" readonly/>
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" value="0" readonly/>
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" value="0" readonly/>
 						</td>				
 					</tr>
+				</table>
+				<table class="table-list inline">
 					<tr>
 						<td class="table-label">
 							&nbsp;&nbsp;&nbsp;&nbsp;分期付款
@@ -633,7 +638,7 @@
 							<input type="hidden" name="" value="分期付款">
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" readonly/>
 						</td>
 						<td>
 							<input type="text" name=""/>
@@ -699,7 +704,7 @@
 							<input type="hidden" name="" value="家庭及其他支出">
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" readonly/>
 						</td>
 						<td>
 							<input type="text" name=""/>
@@ -714,28 +719,34 @@
 							<input type="text" name=""/>
 						</td>				
 					</tr>
+				</table>
+				<table class="table-list inline" id="fbzjc_qtsr">
 					<tr>
 						<td class="table-label">
 							&nbsp;&nbsp;&nbsp;&nbsp;其他收入
 							<input type="hidden" name="" value="0">
 							<input type="hidden" name="" value="其他收入">
+							<input type="button" value="+" onclick="addTd('fbzjc_qtsr','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_qtsr','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" value="0" readonly/>
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" value="0" readonly/>
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" value="0" readonly/>
 						</td>
 						<td>
-							<input type="text" name=""/>
+							<input type="text" name="" value="0" readonly/>
 						</td>
 						<td>
-							<input type="text" name=""/>
-						</td>				
+							<input type="text" name="" value="0" readonly/>
+						</td>	
 					</tr>
+				</table>
+				<table class="table-list inline">
 					<tr>
 						<td class="table-label">
 							<b>可供支配的家庭收入</b>
@@ -785,11 +796,11 @@
 					<tr>
 						<td class="table-label"><b>小微贷款专营机构</b></td>
 						<td>
-							<input type="text" name="">
+							<input type="text" name="" value="" readonly>
 						</td>	
 						<td class="table-label"><b>客户经理</b></td>
 						<td>
-							<input type="text" name="">
+							<input type="text" name="" value="" readonly>
 						</td>				
 						<td class="table-label"><b>填写日期</b></td>
 						<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>						
