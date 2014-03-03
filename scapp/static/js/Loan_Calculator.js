@@ -147,14 +147,13 @@ function calculate_debj(bj,yll,zqs){
 
 //-----------------------设置还款日期--------------------------------------
 function hkrq(){
-    var firstRq=$("input[name=loan_date]").val();
-    $("input[name=first_repayment_date]").val(firstRq);
+    var firstRq=$("input[name=loan_date]").val();    
     var nian=firstRq.split("-")[0]  
     var day=parseInt(firstRq.split("-")[2])
     day=creattime(day);
     $('input[role=hkr]').each(function(num){                
         var month=parseInt(firstRq.split("-")[1])
-        month=parseInt(month)+num
+        month=parseInt(month)+num+1
         month=creattime(month);
         if(month<=12){
             if(day==31){
@@ -175,7 +174,7 @@ function hkrq(){
                 this.value=nian+"-"+month+"-"+day;
         }   
         else{   
-            month=parseInt(firstRq.split("-")[1])+num-12
+            month=parseInt(firstRq.split("-")[1])+num-11
             month=creattime(month);
             nian=parseInt(firstRq.split("-")[0])+1
             if(month<=12){
@@ -197,7 +196,7 @@ function hkrq(){
                     this.value=nian+"-"+month+"-"+day;
             }
             else{
-                month=parseInt(firstRq.split("-")[1])+num-24
+                month=parseInt(firstRq.split("-")[1])+num-23
                 month=creattime(month);
                 nian=parseInt(firstRq.split("-")[0])+2
                 if(day==31){
@@ -217,7 +216,10 @@ function hkrq(){
                 else
                     this.value=nian+"-"+month+"-"+day;
             }
-        }
-    });
+        }        
+    }); 
+    $("input[name=first_repayment_date]").val($("input[role=hkr]")[0].value);//第一次贷款日期
+    var length=$("input[role=hkr]").length
+   $("input[name=last_repayment_date]").val($("input[role=hkr]")[length-1].value);//最后一次贷款日期
     
 }
