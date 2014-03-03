@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-cn">
 <head>	
 	<meta charset="utf-8">
@@ -17,7 +17,7 @@
 </head>
 
 <body onload="datepicker()">	
-	<form class="content">			
+	<form class="content" method="post" action="/Process/dhgl/new_bz_save">			
 		<div class="row-fluid">
 			<div class="well place">			
 				<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">贷后管理</a>
@@ -27,53 +27,13 @@
 				<table class="table-list">		
 					<tr>
 						<td class="table-label">借款人<font class="red">*</font></td>
+						<!-- {%- if loan_apply.company_customer_name==''%} -->
 						<td><input type="text" name=""/></td>
+						<!-- {%- else %} -->
+						<!-- <td><input type="text" name=""/>{{loan_apply.company_customer_name}}</td>
+						{%- endif %} -->
 						<td class="table-label">客户经理<font class="red">*</font></td>	
-						<td style="width:32%">
-							<input type="hidden" id="B_manager" name="B_loan_officer" value="{{loan_apply.B_loan_officer}}"/>
-							<input type="text" id="B_manager_name" value="{{loan_apply.B_loan_officer_name.login_name}}" readonly/>
-							<input type="button" value="搜索" class="btn" onclick="$('#B_xdyss').show();"/>
-							<span id="B_manager_name_spay">
-								<input type="hidden" id="yzB" value="{{loan_apply.B_loan_officer_name.login_name}}"/>
-								<span class="textfieldRequiredMsg">不能为空</span>
-							</span>							
-							<div class="display-div" id="B_xdyss" style="margin-top:-100px"><!--onmouseleave="setTimeout(function(){$('.display-div').hide();},3000)"-->
-								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
-								<div style="border:1px solid #94c1dc;">
-									<table class="table-list">
-										<tr>
-											<td class="table-label">客户经理编号</td>
-											<td><input type="text"/></td>	
-											<td class="table-label">客户经理名称</td>
-											<td><input type="text"/></td>	
-										</tr>
-									</table>
-								</div>																		
-								<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
-								<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
-								<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
-								<div style="border:1px solid #94c1dc;">
-									<table class="table-list">
-										<thead>
-											<tr>
-												<th>选择</th>	
-												<th>客户经理编号</th>												
-												<th>客户经理名称</th>												
-											</tr>
-										</thead>
-										<tbody class="center">
-											{%- for obj in user %}
-											<tr>
-												<td><input type="radio" name="xdy" onclick="get_name(this,'B_manager_name','B_manager');" onblur="hiddenInput('yzB',this)"/></td>	
-												<td>{{obj.id}}</td>												
-												<td>{{obj.real_name}}</td>												
-											</tr>		
-											{%- endfor %}									
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</td>						
+						<td><input type="text" name=""/></td>
 					</tr>			
 					<tr>
 						<td class="table-label">客户号<font class="red">*</font></td>
@@ -89,7 +49,7 @@
 					</tr>	
 					<tr>
 						<td class="table-label">放款日<font class="red">*</font></td>
-						<td><input type="text" id="" class="datepicker"/></td>
+						<td><input type="text" id="create_date" name="create_date" class="datepicker"/></td>
 						<td class="table-label">到期日<font class="red">*</font></td>
 						<td><input type="text" id="" class="datepicker"/></td>
 					</tr>
@@ -151,13 +111,22 @@
 						<th>监控内容</th>
 						<th>备注</th>								
 					</tr>
-					
+					{%- for obj in monitorList %}
+					<tr>	
+						<th>序号</th>					
+						<th><input type="text" name="monitor_date" class="tbInput" value="{{obj.monitor_date}}" readonly="true"/></th>
+						<th><input type="text" name="monitor_type" class="tbInput" value="{{obj.monitor_type}}" readonly="true"/></th>
+						<th><input type="text" name="monitor_content" class="tbInput" value="{{obj.monitor_content}}" readonly="true"/></th>	
+						<th><input type="text" name="monitor_remark" class="tbInput" value="{{obj.monitor_remark}}" readonly="true"/></th>			
+					</tr>
+					{%- endfor %}
 				</table>
 			</div>
 			<span class="point">*为必填字段</span><br/>
 			<input type="submit" class="btn btn-info" value="提交"/>
 			<input type="button" class="btn btn-info" value="返回" onclick="iframe('Process/dhgl/edit_dhgl')"/>
 		</div><!--/row-fluid -->
+		<input name="hiddenId" type="hidden" value="{{loan_apply_id}}"></input>
 	</form><!--/content -->
 	
 	<script src="../../../static/js/jquery-1.7.2.min.js"></script>
