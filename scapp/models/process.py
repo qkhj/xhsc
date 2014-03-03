@@ -228,128 +228,6 @@ class SC_Guarantees(db.Model):
     def add(self):
         db.session.add(self)
 
-# 财务信息概览
-class SC_Financial_Overview(db.Model):
-    __tablename__ = 'sc_financial_overview' 
-    id = db.Column(db.Integer, primary_key=True)
-    loan_apply_id=db.Column(db.Integer)
-    current_assets = db.Column(db.String(32)) #流动资产合计(元)
-    current_liabilities = db.Column(db.String(32)) #流动负债合计(元)
-    bank_deposits = db.Column(db.String(32)) #现金及银行存款(元)
-    accounts_payable = db.Column(db.String(32)) #应付账款(元)
-    accounts_receivable = db.Column(db.String(32)) #应收账款(元)
-    receipts_in_advance = db.Column(db.String(32)) #预收帐款(元)
-    prepayments = db.Column(db.String(32)) #预付账款(元)
-    short_term_borrowings = db.Column(db.String(32)) #短期借款(元)
-    stock = db.Column(db.String(32)) #存货(元)
-    long_term_borrowings = db.Column(db.String(32)) #长期借款(元)
-    fixed_assets = db.Column(db.String(32)) #固定资产(元)
-    total_liabilities = db.Column(db.String(32)) #负债合计(元)
-    other_operating_assets = db.Column(db.String(32)) #其他经营资产(元)
-    equity = db.Column(db.String(32)) #所有者权益(元)
-    total_assets = db.Column(db.String(32)) #资产合计(元)
-    liabilities_plus_equity = db.Column(db.String(32)) #负债加权益(元)
-    other_non_sheet_assets = db.Column(db.String(32)) #其他非表内资产(元)
-    other_non_sheet_liabilities = db.Column(db.String(32)) #其他非表内负债(元)
-
-    average_monthly_turnover = db.Column(db.String(32)) #月均营业额(元)
-    average_net_profit = db.Column(db.String(32)) #平均净利润(元)
-    average_monthly_disposable_income = db.Column(db.String(32)) #月平均可支配收入(元)
-    asset_liability_ratio = db.Column(db.String(32)) #资产负债率%
-    current_ratio = db.Column(db.String(32)) #流动比率%
-    quick_ratio = db.Column(db.String(32)) #速动比率%
-    inventory_turnover_ratio = db.Column(db.String(32)) #存货周转率%
-    accounts_receivable_turnover_ratio = db.Column(db.String(32)) #应收账款周转率%
-    accounts_payable_turnover_ratio = db.Column(db.String(32)) #应付账款周转率%
-    returns_on_capital = db.Column(db.String(32)) #资本回报率%
-    gross_margin = db.Column(db.String(32)) #毛利率%
-    net_profit_margin = db.Column(db.String(32)) #净利润率%
-
-    def __init__(self,loan_apply_id,current_assets,current_liabilities,bank_deposits,
-        accounts_payable,accounts_receivable,receipts_in_advance,prepayments,short_term_borrowings,
-        stock,long_term_borrowings,fixed_assets,total_liabilities,other_operating_assets,equity,
-        total_assets,liabilities_plus_equity,
-        other_non_sheet_assets,other_non_sheet_liabilities,average_monthly_turnover,average_net_profit,
-        average_monthly_disposable_income,asset_liability_ratio,current_ratio,quick_ratio,
-        inventory_turnover_ratio,accounts_receivable_turnover_ratio,accounts_payable_turnover_ratio,
-        returns_on_capital,gross_margin,net_profit_margin):
-        self.loan_apply_id = loan_apply_id
-        self.current_assets = current_assets
-        self.current_liabilities = current_liabilities
-        self.bank_deposits = bank_deposits
-        self.accounts_payable = accounts_payable
-        self.accounts_receivable = accounts_receivable
-        self.receipts_in_advance = receipts_in_advance
-        self.prepayments = prepayments
-        self.short_term_borrowings = short_term_borrowings
-        self.stock = stock
-        self.long_term_borrowings = long_term_borrowings
-        self.fixed_assets = fixed_assets
-        self.total_liabilities = total_liabilities
-        self.other_operating_assets = other_operating_assets
-        self.equity = equity
-        self.total_assets = total_assets
-        self.liabilities_plus_equity = liabilities_plus_equity
-        self.other_non_sheet_assets = other_non_sheet_assets
-        self.other_non_sheet_liabilities = other_non_sheet_liabilities
-        self.average_monthly_turnover = average_monthly_turnover
-        self.average_net_profit = average_net_profit
-        self.average_monthly_disposable_income = average_monthly_disposable_income
-        self.asset_liability_ratio = asset_liability_ratio
-        self.current_ratio = current_ratio
-        self.quick_ratio = quick_ratio
-        self.inventory_turnover_ratio = inventory_turnover_ratio
-        self.accounts_receivable_turnover_ratio = accounts_receivable_turnover_ratio
-        self.accounts_payable_turnover_ratio = accounts_payable_turnover_ratio
-        self.returns_on_capital = returns_on_capital
-        self.gross_margin = gross_margin
-        self.net_profit_margin = net_profit_margin
-
-    def add(self):
-        db.session.add(self)
-
-# 非财务情况分析
-class SC_Non_Financial_Analysis(db.Model):
-    __tablename__ = 'sc_non_financial_analysis' 
-    id = db.Column(db.Integer, primary_key=True)
-    loan_apply_id=db.Column(db.Integer)
-    operating_history = db.Column(db.String(256)) #经营历史和资本积累
-    structure_and_market = db.Column(db.String(256)) #生意现状：组织架构和市场
-    finance = db.Column(db.String(256)) #生意现状：财务
-    changes_in_operations_1 = db.Column(db.String(256)) #自从上次申请后经营变化(业务方面)
-    changes_in_operations_2 = db.Column(db.String(256)) #自从上次申请后经营变化(私人方面)
-    investment_1 = db.Column(db.String(256)) #过去十二个月内的投资情况(业务方面)
-    investment_2 = db.Column(db.String(256)) #过去十二个月内的投资情况(私人方面)
-    investment_plan_1 = db.Column(db.String(256)) #未来十二个月的投资计划(业务方面)
-    investment_plan_2 = db.Column(db.String(256)) #未来十二个月的投资计划(私人方面)
-    loan_purpose_detail = db.Column(db.String(256)) #贷款目的的详细描述
-    personal_circumstances = db.Column(db.String(256)) #客户/法人/实际经营人/主要股东的私人情况
-    impression_of_the_customer = db.Column(db.String(256)) #对客户的印象
-    other_sources_of_repayment = db.Column(db.String(256)) #其他还款来源分析
-
-    def __init__(self,loan_apply_id,operating_history,structure_and_market,finance,
-        changes_in_operations_1,changes_in_operations_2,
-        investment_1,investment_2,
-        investment_plan_1,investment_plan_2,
-        loan_purpose_detail,personal_circumstances,impression_of_the_customer,other_sources_of_repayment):
-        self.loan_apply_id = loan_apply_id
-        self.operating_history = operating_history
-        self.structure_and_market = structure_and_market
-        self.finance = finance
-        self.changes_in_operations_1 = changes_in_operations_1
-        self.changes_in_operations_2 = changes_in_operations_2
-        self.investment_1 = investment_1
-        self.investment_2 = investment_2
-        self.investment_plan_1 = investment_plan_1
-        self.investment_plan_2 = investment_plan_2
-        self.loan_purpose_detail = loan_purpose_detail
-        self.personal_circumstances = personal_circumstances
-        self.impression_of_the_customer = impression_of_the_customer
-        self.other_sources_of_repayment = other_sources_of_repayment
-
-    def add(self):
-        db.session.add(self)
-
 # 风险分析以及调查结论
 class SC_Riskanalysis_And_Findings(db.Model):
     __tablename__ = 'sc_riskanalysis_and_findings' 
@@ -519,7 +397,6 @@ class SC_Monitor(db.Model):
     create_user=db.Column(db.Integer)#创建人
     create_date=db.Column(db.Date)#创建时间
 
-
     def __init__(self,loan_apply_id,monitor_date,monitor_type,monitor_content,monitor_remark):
         self.loan_apply_id = loan_apply_id
         self.monitor_date = monitor_date
@@ -528,7 +405,6 @@ class SC_Monitor(db.Model):
         self.monitor_remark = monitor_remark
         self.create_user = current_user.id
         self.create_date = datetime.datetime.now()
-
 
     def add(self):
         db.session.add(self)
