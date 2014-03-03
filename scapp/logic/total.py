@@ -1,7 +1,9 @@
 #coding:utf-8
 from flask.ext.login import login_user, logout_user, current_user, login_required,flash
 from scapp.models import SC_UserRole
+from scapp.models import SC_User
 from scapp.models import SC_Loan_Apply
+from scapp.models import SC_Approval_Decision
 from scapp.pojo.waiting_work import Waiting
 from scapp.config import PROCESS_STATUS_DKSQSH
 from scapp.models import SC_Monitor
@@ -46,3 +48,12 @@ class Total():
 	def deleteBZ(self,loan_apply_id):
 		SC_Monitor.query.filter_by(loan_apply_id=loan_apply_id).delete()
 		db.session.flush()
+#通过贷款单获取合同信息
+	def getInformByloadId(self,loan_apply_id):
+		pactInform = SC_Approval_Decision.query.filter_by(loan_apply_id=loan_apply_id).first()
+		return pactInform
+class User():
+#获取用户名
+	def getUserName(self,id):
+		user = SC_User.query.filter_by(id=id).first()
+		return user.login_name
