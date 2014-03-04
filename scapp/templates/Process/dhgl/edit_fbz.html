@@ -8,8 +8,8 @@
 	<meta name="author" content="Muhammad Usman">
 
 	<!-- The styles -->
-	<link href="../../../static/css/bootstrap.css" rel="stylesheet">
-	<link href="../../../static/css/main.css" rel="stylesheet">
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
 	<style type="text/css">
 		textarea{width:80%;}
 		.table-list .table-label{width:180px;}
@@ -17,7 +17,7 @@
 </head>
 
 <body>	
-	<form class="content" method="POST" action="/Process/dhgl/new_fbz/{{loan_apply_id}}">
+	<form class="content" method="POST" action="/Process/dhgl/edit_fbz/{{loan_apply_id}}/{{index}}">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">贷后管理</a>
 		</div>			
@@ -78,7 +78,7 @@
 								</td>
 								<td>
 									<span>	
-										<input type="text" name="cash_deposit" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('cash_deposit','receivable','stock','total_current_assets');sum2('total_current_assets','total_fixed_assets','total_assets');cut2('total_assets','total_debt','owner_equity')"/>							
+										<input type="text" name="cash_deposit" value="{{balance_sheet_fbz.cash_deposit}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('cash_deposit','receivable','stock','total_current_assets');sum2('total_current_assets','total_fixed_assets','total_assets');cut2('total_assets','total_debt','owner_equity')"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -88,7 +88,7 @@
 								</td>						
 								<td>
 									<span>	
-										<input type="text" name="payable" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('payable','short_loan','long_loan','total_debt');cut2('total_assets','total_debt','owner_equity')"/>							
+										<input type="text" name="payable" value="{{balance_sheet_fbz.payable}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('payable','short_loan','long_loan','total_debt');cut2('total_assets','total_debt','owner_equity')"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -100,7 +100,7 @@
 								</td>
 								<td>
 									<span>	
-										<input type="text" name="receivable" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('cash_deposit','receivable','stock','total_current_assets');sum2('total_current_assets','total_fixed_assets','total_assets');cut2('total_assets','total_debt','owner_equity')"/>							
+										<input type="text" name="receivable" value="{{balance_sheet_fbz.receivable}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('cash_deposit','receivable','stock','total_current_assets');sum2('total_current_assets','total_fixed_assets','total_assets');cut2('total_assets','total_debt','owner_equity')"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -110,7 +110,7 @@
 								</td>
 								<td>
 									<span>	
-										<input type="text" name="short_loan" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('payable','short_loan','long_loan','total_debt');cut2('total_assets','total_debt','owner_equity')"/>							
+										<input type="text" name="short_loan" value="{{balance_sheet_fbz.short_loan}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('payable','short_loan','long_loan','total_debt');cut2('total_assets','total_debt','owner_equity')"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -122,7 +122,7 @@
 								</td>
 								<td>
 									<span>	
-										<input type="text" name="stock" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('cash_deposit','receivable','stock','total_current_assets');sum2('total_current_assets','total_fixed_assets','total_assets');cut2('total_assets','total_debt','owner_equity')"/>							
+										<input type="text" name="stock" value="{{balance_sheet_fbz.stock}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('cash_deposit','receivable','stock','total_current_assets');sum2('total_current_assets','total_fixed_assets','total_assets');cut2('total_assets','total_debt','owner_equity')"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -132,7 +132,7 @@
 								</td>
 								<td>
 									<span>	
-										<input type="text" name="long_loan" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('payable','short_loan','long_loan','total_debt');cut2('total_assets','total_debt','owner_equity')"/>							
+										<input type="text" name="long_loan" value="{{balance_sheet_fbz.long_loan}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum3('payable','short_loan','long_loan','total_debt');cut2('total_assets','total_debt','owner_equity')"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -144,7 +144,7 @@
 								</td>
 								<td>
 									<span>	
-										<input type="text" value="0" readonly name="total_current_assets" onclick="setJe(this);"/>							
+										<input type="text" readonly name="total_current_assets" value="{{balance_sheet_fbz.total_current_assets}}" onclick="setJe(this);"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -154,7 +154,7 @@
 								</td>	
 								<td>
 									<span>	
-										<input type="text" value="0" readonly name="total_debt" onclick="setJe(this);"/>							
+										<input type="text" readonly name="total_debt" value="{{balance_sheet_fbz.total_debt}}"  onclick="setJe(this);"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -166,7 +166,7 @@
 								</td>
 								<td>
 									<span>	
-										<input type="text" name="total_fixed_assets" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum2('total_current_assets','total_fixed_assets','total_assets');cut2('total_assets','total_debt','owner_equity')"/>							
+										<input type="text" name="total_fixed_assets" value="{{balance_sheet_fbz.total_fixed_assets}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="sum2('total_current_assets','total_fixed_assets','total_assets');cut2('total_assets','total_debt','owner_equity')"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -176,7 +176,7 @@
 								</td>
 								<td>
 									<span>	
-										<input type="text" value="0" readonly name="owner_equity" onclick="setJe2(this);"/>							
+										<input type="text" readonly name="owner_equity" value="{{balance_sheet_fbz.owner_equity}}" onclick="setJe2(this);"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -188,7 +188,7 @@
 								</td>
 								<td>
 									<span>	
-										<input type="text" value="0" readonly name="total_assets" onclick="setJe(this);"/>							
+										<input type="text" readonly name="total_assets" value="{{balance_sheet_fbz.total_assets}}" onclick="setJe(this);"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -198,7 +198,7 @@
 								</td>
 								<td>
 									<span>	
-										<input type="text" value="0" readonly name="debt_and_owner_equity" onclick="setJe(this);" onclick="setJe(this);"/>							
+										<input type="text" readonly name="debt_and_owner_equity" value="{{balance_sheet_fbz.debt_and_owner_equity}}" onclick="setJe(this);" onclick="setJe(this);"/>							
 										<br/><span class="je">人民币</span>
 										<span class="errorInfo"></span>	
 									</span>							
@@ -209,7 +209,7 @@
 									<b>对资产负债表的评注</b>
 								</td>
 								<td colspan="5">
-									<textarea name="remark" onchange="spryMaxLength(this,1024)"></textarea>	
+									<textarea name="remark" onchange="spryMaxLength(this,1024)">{{balance_sheet_fbz.remark}}</textarea>	
 									<span class="errorInfo">字符数不得大于1024</span>									
 								</td>						
 							</tr>							
@@ -226,7 +226,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;收入
 								</td>
 								<td>
-									<input type="text" name="income" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="cut2('income','cost','gross_profit');cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="income" value="{{profit_loss_fbz.income}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="cut2('income','cost','gross_profit');cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>
@@ -236,7 +236,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;变量成本
 								</td>
 								<td>
-									<input type="text" name="cost" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="cut2('income','cost','gross_profit');cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="cost" value="{{profit_loss_fbz.cost}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="cut2('income','cost','gross_profit');cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>
@@ -246,7 +246,7 @@
 									<b>毛利</b>
 								</td>
 								<td>
-									<input type="text" name="gross_profit" value="0" readonly onclick="setJe2(this);"/>
+									<input type="text" name="gross_profit" value="{{profit_loss_fbz.gross_profit}}" readonly onclick="setJe2(this);"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>
@@ -256,7 +256,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;工资
 								</td>
 								<td>
-									<input type="text" name="salary" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="salary" value="{{profit_loss_fbz.salary}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -266,7 +266,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;社会保险
 								</td>
 								<td>
-									<input type="text" name="insurance" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="insurance" value="{{profit_loss_fbz.insurance}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -276,7 +276,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;租金
 								</td>
 								<td>
-									<input type="text" name="rent" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="rent" value="{{profit_loss_fbz.rent}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -286,7 +286,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;交通运输费用
 								</td>
 								<td>
-									<input type="text" name="freight" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="freight" value="{{profit_loss_fbz.freight}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -296,7 +296,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;维护费用
 								</td>
 								<td>
-									<input type="text" name="maintain" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="maintain" value="{{profit_loss_fbz.maintain}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -306,7 +306,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;水电费用
 								</td>
 								<td>
-									<input type="text" name="utility" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="utility" value="{{profit_loss_fbz.utility}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -316,7 +316,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;存货损失
 								</td>
 								<td>
-									<input type="text" name="stock_loss" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="stock_loss" value="{{profit_loss_fbz.stock_loss}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -326,7 +326,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;税金
 								</td>
 								<td>
-									<input type="text" name="taxes" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="taxes" value="{{profit_loss_fbz.taxes}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -336,7 +336,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;其他
 								</td>
 								<td>
-									<input type="text" name="others" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="others" value="{{profit_loss_fbz.others}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -346,7 +346,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;分期付款
 								</td>
 								<td>
-									<input type="text" name="stages" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
+									<input type="text" name="stages" value="{{profit_loss_fbz.stages}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="jycbze();cut2('gross_profit','total_cost','net_profit');kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -356,7 +356,7 @@
 									<b>经营成本总额</b>
 								</td>
 								<td>
-									<input type="text" name="total_cost" value="0" onclick="setJe(this);" readonly/>
+									<input type="text" name="total_cost" value="{{profit_loss_fbz.total_cost}}"  onclick="setJe(this);" readonly/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -366,7 +366,7 @@
 									<b>净利润</b>
 								</td>
 								<td>
-									<input type="text" name="net_profit" value="0" onclick="setJe2(this);" readonly/>
+									<input type="text" name="net_profit" value="{{profit_loss_fbz.net_profit}}"  onclick="setJe2(this);" readonly/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -376,7 +376,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;家庭及其他支出
 								</td>
 								<td>
-									<input type="text" name="other_pay" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="kzpsr()"/>
+									<input type="text" name="other_pay" value="{{profit_loss_fbz.other_pay}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -386,7 +386,7 @@
 									&nbsp;&nbsp;&nbsp;&nbsp;其他收入
 								</td>
 								<td>
-									<input type="text" name="other_income" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="kzpsr()"/>
+									<input type="text" name="other_income" value="{{profit_loss_fbz.other_income}}" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" onblur="kzpsr()"/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>	
@@ -396,7 +396,7 @@
 									<b>可供支配的家庭收入</b>
 								</td>
 								<td>
-									<input type="text" name="family_income" value="0" onclick="setJe2(this);" readonly/>
+									<input type="text" name="family_income" value="{{profit_loss_fbz.family_income}}" onclick="setJe2(this);" readonly/>
 									<span class="je">人民币</span>
 									<span class="errorInfo"></span>	
 								</td>				
@@ -415,7 +415,7 @@
 									<b>对整体经营发展及贷款应用的评注</b>
 								</td>
 								<td colspan="5">
-									<textarea name="remark2" onchange="spryMaxLength(this,1024)"></textarea>	
+									<textarea name="remark2" onchange="spryMaxLength(this,1024)">{{profit_loss_fbz.remark2}}</textarea>	
 									<span class="errorInfo">字符数不得大于1024</span>									
 								</td>				
 							</tr>
@@ -427,9 +427,9 @@
 	</form><!--/content -->
 	
 	
-	<script src="../../../static/js/jquery-1.7.2.min.js"></script>
-	<script src="../../../static/js/bootstrap.min.js"></script>
-	<script src="../../../static/js/script.js"></script>
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
 	<script type="text/javascript">
 		var max=0;
 		var jegs=0;

@@ -26,7 +26,6 @@ class View_Query_Loan(db.Model):
     examiner_2 = db.Column(db.Integer)
     approver = db.Column(db.Integer)
     classify = db.Column(db.Integer)
-    classify_dec = db.Column(db.String)
 
     # 外键名称
     #view_marketing_loan_officer_name = db.relationship('SC_User',backref = db.backref('view_marketing_loan_officer_name', lazy = 'dynamic'))
