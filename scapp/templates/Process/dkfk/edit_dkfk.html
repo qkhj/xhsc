@@ -24,7 +24,7 @@
 	</script>
 </head>
 
-<body onload="datepicker();setje();sum(1);sum(2);sum(3);">	
+<body onload="datepicker();setje();sum(1);sum(2);sum(3);$('input[name=amount]').click()">	
 	<form class="content" method="POST" action="/Process/dkfk/edit_dkfk/{{id}}">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">贷款还款</a>
@@ -87,7 +87,7 @@
 					<tr>
 						<td class="table-label">还款方式</td>
 						<td>
-							<select name="repayment_type" onchange="show_calculate();" readonly>
+							<select name="repayment_type" onchange="show_calculate();" disabled>
 								{%- if approval_decision.repayment_type == '1' %}
 								<option value="1" selected>等额本金</option>
 								{%- else %}
@@ -102,7 +102,7 @@
 						</td>
 						<td class="table-label">还贷期数<font class="red">*</font></td>
 						<td>
-							<select name="deadline" style="width:60px" onchange="show_calculate();sum(1);sum(2);sum(3);" readonly>
+							<select name="deadline" style="width:60px" onchange="show_calculate();sum(1);sum(2);sum(3);" disabled>
 								{%- if approval_decision.deadline == '1' %}
 									<option value="1" selected>1</option>
 								{%- else %}
@@ -259,7 +259,10 @@
 						{%- if approval_decision.first_repayment_date %}
 						<td><input type="text" name="first_repayment_date" value="{{approval_decision.first_repayment_date}}" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>	
 						{%- else %}		
-						<td><input type="text" name="first_repayment_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>	
+						<td>
+							<input type="text" name="first_repayment_date" readonly/>
+							<input type="hidden" name="last_repayment_date"/>
+						</td>	
 						{%- endif %}		
 					</tr>
 					<tr>
@@ -306,7 +309,7 @@
 			</div>
 			<!--**********************************************按钮组**********************************************-->
 			<div style="margin-bottom:20px;">
-				<input type="submit" value="提交" class="btn btn-info"/>
+				<input type="submit" value="提交" class="btn btn-info"/><br/>&nbsp;
 			<div>
 		</div><!--/row-fluid -->
 	</div><!--/content -->

@@ -26,6 +26,7 @@
 			<div class="divBorder">				
 				<table class="table-list">		
 					<tr>
+
 						<td class="table-label">借款人</td>
 						<td><input type="text" name="" value="{{checkForm.jkr}}" readonly="true"/></td>
 						<td class="table-label">客户经理</td>	
@@ -59,8 +60,8 @@
 			</div>
 			<!--*****************************************检测记录**************************************************-->
 			<i class="icon-bookmark"></i><span class="titletip">检测记录</span>
-			<input type="button" value="+" onclick="addTd('jcjl','dksq_info')" class="btn btn-info btn-mini" style="padding:0 7px;margin-top:0px;"/>
-			<input type="button" value="-" onclick="removeTd('jcjl','dksq_info')" class="btn btn-info btn-mini" style="padding:0 9px;margin-top:0px;"/>
+			<input type="button" value="+" onclick="addTd('jcjl','content_frame')" class="btn btn-info btn-mini" style="padding:0 7px;margin-top:0px;"/>
+			<input type="button" value="-" onclick="removeTd('jcjl','content_frame')" class="btn btn-info btn-mini" style="padding:0 9px;margin-top:0px;"/>
 			<div class="divBorder">
 				<table id="jcjl" class="table-list">
 					<tr>	
@@ -85,7 +86,7 @@
 			<input type="submit" class="btn btn-info" value="提交"/>
 			<input type="button" class="btn btn-info" value="返回" onclick="iframe('Process/dhgl/edit_dhgl')"/>
 		</div><!--/row-fluid -->
-		<input name="hiddenId" type="hidden" value="{{loan_apply_id}}"></input>
+		<input name="hiddenId" type="hidden" value="{{loan_apply_id}}"/>
 	</form><!--/content -->
 	
 	<script src="../../../static/js/jquery-1.7.2.min.js"></script>
