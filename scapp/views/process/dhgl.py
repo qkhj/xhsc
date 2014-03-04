@@ -49,6 +49,27 @@ def edit_dhgl(loan_apply_id,page):
 @app.route('/Process/dhgl/new_bz/<int:loan_apply_id>', methods=['GET'])
 def new_bz(loan_apply_id):
 	loan_apply = View_Query_Loan.query.filter_by(loan_apply_id=loan_apply_id).first()
+
+	checkForm = getCheckForm(loan_apply_id,loan_apply)
+	monitorList = SC_Monitor.query.filter_by(loan_apply_id=loan_apply_id).all()
+	return render_template("Process/dhgl/new_bz.html",loan_apply=loan_apply,monitorList=monitorList,loan_apply_id=loan_apply_id,checkForm=checkForm)
+
+# 贷后管理——保存新标准
+@app.route('/Process/dhgl/new_bz_save', methods=['POST'])
+def new_bz_save():
+	total = Total()
+	loan_apply_id = request.form["hiddenId"]
+	#先删除所有标准
+	total.deleteBZ(loan_apply_id)	
+	#新增页面所有标准
+	total.addNewBZ(loan_apply_id,request)
+	loan_apply = View_Query_Loan.query.filter_by(loan_apply_id=loan_apply_id).first()
+	monitorList = SC_Monitor.query.filter_by(loan_apply_id=loan_apply_id).all()
+	checkForm = getCheckForm(loan_apply_id,loan_apply)
+	return render_template("Process/dhgl/new_bz.html",loan_apply=loan_apply,monitorList=monitorList,checkForm=checkForm)
+
+#获取前台form表单
+def getCheckForm(loan_apply_id,loan_apply):
 	#前台form表单
 	checkForm = CheckForm()
 	#借款人#客户号
@@ -80,22 +101,7 @@ def new_bz(loan_apply_id):
 	checkForm.lv = pactInform.rates
 	#期数
 	checkForm.hkqs = pactInform.deadline
-
-	monitorList = SC_Monitor.query.filter_by(loan_apply_id=loan_apply_id).all()
-	return render_template("Process/dhgl/new_bz.html",loan_apply=loan_apply,monitorList=monitorList,loan_apply_id=loan_apply_id,checkForm=checkForm)
-
-# 贷后管理——保存新标准
-@app.route('/Process/dhgl/new_bz_save', methods=['POST'])
-def new_bz_save():
-	total = Total()
-	loan_apply_id = request.form["hiddenId"]
-	#先删除所有标准
-	total.deleteBZ(loan_apply_id)	
-	#新增页面所有标准
-	total.addNewBZ(loan_apply_id,request)
-	loan_apply = View_Query_Loan.query.filter_by(loan_apply_id=loan_apply_id).first()
-	monitorList = SC_Monitor.query.filter_by(loan_apply_id=loan_apply_id).all()
-	return render_template("Process/dhgl/new_bz.html",loan_apply=loan_apply,monitorList=monitorList)
+	return checkForm
 
 # 贷后管理——新增非标准
 @app.route('/Process/dhgl/new_fbz', methods=['GET'])
