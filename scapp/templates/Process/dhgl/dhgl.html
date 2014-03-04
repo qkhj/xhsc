@@ -58,8 +58,8 @@
 							{%- endif %}
 							<td>{{obj.loan_amount}}</td>	
 							<td>{{obj.create_date}}</td>	
-							<td><a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dhgl/new_bz/{{obj.loan_apply_id}}')">新增标准</a>
-								<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dhgl/new_fbz/{{obj.loan_apply_id}}')">新增非标准</a>
+							<td><a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dhgl/new_bz/{{obj.loan_apply_id}}')">标准</a>
+								<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dhgl/fbz/{{obj.loan_apply_id}}')">非标准</a>
 							</td>						
 						</tr>
 						{%- endfor %}											

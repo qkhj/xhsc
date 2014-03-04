@@ -13,38 +13,42 @@
 		
 </head>
 
-<body>	
+<body onload="setTimeOut();">
 	<div class="content">			
 		<div class="row-fluid">
 			<div class="well place">			
 				<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">贷后管理</a>
 			</div>	
+			{%- with messages = get_flashed_messages(with_categories=true) %}
+			  	{%- if messages %}
+		    	{%- for category, message in messages %}
+		    	<div class="alert alert-{{category}}">
+		      		{{message}}
+		      	</div>
+		    	{%- endfor %}
+			  	{%- endif %}
+			{%- endwith %}
 			<i class="icon-bookmark"></i><span class="titletip">管理信息列表</span>
 			<div style="margin-bottom:5px;">
-				<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dhgl/new_bz')">新增标准</a>
-				<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dhgl/new_fbz')">新增非标准</a>		
-				<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dhgl/dhgl')">返回</a>					
+				<a type="button" class="btn btn-info" href="#" onclick="iframe('Process/dhgl/new_fbz/{{loan_apply_id}}')">新增非标准</a>
 			</div>
 			<div style="border:1px solid #94c1dc;">				
 				<table class="table-list" cellspacing="10" id="uesr-list">
 					<thead>
 						<tr>
+							<th>序号</th>
 							<th>日期</th>							
 							<th>管理类型</th>
 							<th>客户经理</th>
 						</tr>
 					</thead>
 					<tbody class="center">
-						{%- for obj in monotors.items %}
+						{%- for obj in fbz %}
 						<tr onclick="changeColor(this)">
-							{%- if obj.type == 1 %}
-							<td><a href="#" onclick="iframe('Process/dhgl/edit_bz/{{obj.id}}')">{{obj.monitor_date}}</a></td>
-							<td>标准</td>
-							{%- else %}
-							<td><a href="#" onclick="iframe('Process/dhgl/edit_fbz/{{obj.id}}')">{{obj.monitor_date}}</a></td>
+							<td>{{obj.index+1}}</td>
+							<td><a href="#" onclick="iframe('Process/dhgl/edit_fbz/{{obj.loan_apply_id}}/{{obj.index}}')">{{obj.create_date}}</a></td>
 							<td>非标准</td>
-							{%- endif %}
-							<td>唐琳君</td>							
+							<td>{{current_user.real_name}}</td>							
 						</tr>			
 						{%- endfor %}						
 					</tbody>

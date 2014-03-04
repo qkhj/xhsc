@@ -434,3 +434,114 @@ class SC_Classify(db.Model):
 
     def add(self):
         db.session.add(self)
+
+# 非标准监测-资产负债表
+class SC_Balance_Sheet_Fbz(db.Model):
+    __tablename__ = 'sc_balance_sheet_fbz'
+    id=db.Column(db.Integer, primary_key=True)
+    loan_apply_id=db.Column(db.Integer)
+    index = db.Column(db.Integer) #递增的序号 从0开始
+    cash_deposit = db.Column(db.String(32)) #现金及存款
+    payable = db.Column(db.String(32)) #应付
+    receivable = db.Column(db.String(32)) #应收
+    short_loan = db.Column(db.String(32)) #短期借款
+    stock = db.Column(db.String(32)) #存货
+    long_loan = db.Column(db.String(32)) #长期借款
+    total_current_assets = db.Column(db.String(32)) #流动资产合计
+    total_debt = db.Column(db.String(32)) #负债总计
+    total_fixed_assets = db.Column(db.String(32)) #固定资产合计
+    owner_equity  = db.Column(db.String(32)) #所有者权益
+    total_assets = db.Column(db.String(32)) #资产总计
+    debt_and_owner_equity = db.Column(db.String(32)) #负债及所有者权益
+    remark = db.Column(db.String(2048)) #对资产负债表的评注
+    create_user = db.Column(db.Integer)
+    create_date = db.Column(db.DateTime)
+    modify_user = db.Column(db.Integer)
+    modify_date = db.Column(db.DateTime)
+
+    def __init__(self,loan_apply_id, index, cash_deposit,payable, receivable,short_loan,stock,long_loan,
+        total_current_assets,total_debt,total_fixed_assets,owner_equity,total_assets,debt_and_owner_equity,
+        remark):
+        self.loan_apply_id=loan_apply_id
+        self.index = index
+        self.cash_deposit = cash_deposit
+        self.payable = payable
+        self.receivable = receivable
+        self.short_loan = short_loan
+        self.stock = stock
+        self.long_loan = long_loan
+        self.total_current_assets = total_current_assets
+        self.total_debt = total_debt
+        self.total_fixed_assets = total_fixed_assets
+        self.owner_equity = owner_equity
+        self.total_assets = total_assets
+        self.debt_and_owner_equity = debt_and_owner_equity
+        self.remark = remark
+        self.create_user = current_user.id
+        self.create_date = datetime.datetime.now()
+
+    def add(self):
+        db.session.add(self)
+
+# 非标准监测-资产负债表
+class SC_Profit_Loss_Fbz(db.Model):
+    __tablename__ = 'sc_profit_loss_fbz'
+    id=db.Column(db.Integer, primary_key=True)
+    loan_apply_id=db.Column(db.Integer)
+    index = db.Column(db.Integer) #递增的序号 从0开始
+    income = db.Column(db.String(32)) #收入
+    cost = db.Column(db.String(32)) #变量成本
+    gross_profit  = db.Column(db.String(32)) #毛利
+    salary = db.Column(db.String(32)) #工资
+    insurance = db.Column(db.String(32)) #社会保险
+    rent = db.Column(db.String(32)) #租金
+    freight = db.Column(db.String(32)) #交通运输费用
+    maintain = db.Column(db.String(32)) #维护费用
+    utility  = db.Column(db.String(32)) #水电费用
+    stock_loss = db.Column(db.String(32)) #存货损失
+    taxes = db.Column(db.String(32)) #税金
+    others = db.Column(db.String(32)) #其它
+    stages = db.Column(db.String(32)) #分期付款
+    total_cost = db.Column(db.String(32)) #经营成本总额
+    net_profit = db.Column(db.String(32)) #净利润
+    other_pay = db.Column(db.String(32)) #家庭及其它支出
+    other_income = db.Column(db.String(32)) #其它收入
+    family_income = db.Column(db.String(32)) #可供支配的家庭收入
+    remark1 = db.Column(db.String(2048)) #remark1
+    remark2 = db.Column(db.String(2048)) #remark2
+
+    create_user = db.Column(db.Integer)
+    create_date = db.Column(db.DateTime)
+    modify_user = db.Column(db.Integer)
+    modify_date = db.Column(db.DateTime)
+
+    def __init__(self,loan_apply_id, index,income,cost,gross_profit,salary,insurance,
+        rent,freight,maintain,utility,stock_loss,taxes,others,stages,total_cost,net_profit,
+        other_pay,other_income,family_income,remark1,remark2):
+        self.loan_apply_id=loan_apply_id
+        self.index = index
+        self.income = income
+        self.cost = cost
+        self.gross_profit = gross_profit
+        self.salary = salary
+        self.insurance = insurance
+        self.rent = rent
+        self.freight = freight
+        self.maintain = maintain
+        self.utility = utility
+        self.stock_loss = stock_loss
+        self.taxes = taxes
+        self.others = others
+        self.stages = stages
+        self.total_cost = total_cost
+        self.net_profit = net_profit
+        self.other_pay = other_pay
+        self.other_income = other_income
+        self.family_income = family_income
+        self.remark1 = remark1
+        self.remark2 = remark2
+        self.create_user = current_user.id
+        self.create_date = datetime.datetime.now()
+
+    def add(self):
+        db.session.add(self)
