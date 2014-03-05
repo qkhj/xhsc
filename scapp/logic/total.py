@@ -9,6 +9,9 @@ from scapp.config import PROCESS_STATUS_DKSQSH
 from scapp.models import SC_Monitor
 from scapp import db
 from scapp.config import logger
+from scapp.models import SC_Classify
+from scapp.models import View_Query_Loan
+from scapp.config import PER_PAGE
 
 class Total():
 #待办事项统计
@@ -57,3 +60,33 @@ class User():
 	def getUserName(self,id):
 		user = SC_User.query.filter_by(id=id).first()
 		return user.login_name
+
+class Property():
+#保存资产质量分类
+	def addProperty(self,loan_apply_id,index_add,classify):
+		SC_Classify(loan_apply_id,index_add,classify,'',0).add()
+		db.session.commit()
+
+#查询最新质量分类
+	def queryLastProperty(self,loan_apply_id):
+		LastProperty = SC_Classify.query.filter_by(loan_apply_id=loan_apply_id).order_by("index_add desc").first()
+		return LastProperty
+#更新最新质量分类
+	def updateLastProperty(self,loan_apply_id,index_add,classify):
+		SC_Classify.query.filter_by(loan_apply_id=loan_apply_id,index_add=index_add).update({"classify":classify})
+		db.session.commit()
+#更新最新质量分类审核
+	def updateLastPropertyBysh(self,loan_apply_id,index_add,is_pass):
+		SC_Classify.query.filter_by(loan_apply_id=loan_apply_id,index_add=index_add).update({"is_pass":is_pass})
+		db.session.commit()
+#查询质量分类列表
+	def queryList(self,customer_name,loan_type,classify,page):
+		sql = " 1=1 "
+		if loan_type != '0':
+		    sql += " and loan_type='"+loan_type+"'"
+		if classify != '0':
+		    sql += " and classify='"+classify+"'"
+		if customer_name:
+		    sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
+		loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
+		return loan_apply
