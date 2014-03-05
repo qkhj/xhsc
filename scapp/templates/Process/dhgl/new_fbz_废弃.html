@@ -1,0 +1,830 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="../../../static/css/bootstrap.css" rel="stylesheet">
+	<link href="../../../static/css/main.css" rel="stylesheet">
+	<link href="../../../static/css/datepicker.css" rel="stylesheet">
+	<style type="text/css">	
+		input.btn-mini{width:20px;}
+		textarea{width:80%;}
+		.table-list .table-label{width:180px;}
+		.inline td{border-top:none;}
+	</style>	
+</head>
+
+<body onload="datepicker()">	
+	<form class="content">			
+		<div class="row-fluid">
+			<div class="well place">			
+				<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">贷后管理</a>
+			</div>	
+			<i class="icon-bookmark"></i><span class="titletip">非标检测</span>
+			<div class="divBorder">				
+				<table class="table-list">					
+					<tr>
+						<td class="table-label">客户经理</td>
+						<td><input type="text" name="" readonly /></td>
+						<td class="table-label">贷款金额</td>	
+						<td><input type="text" name="" readonly /></td>			
+						<td class="table-label">还款期数</td>	
+						<td><input type="text" name="" readonly /></td>								
+					</tr>	
+					<tr>
+						<td class="table-label">客户姓名</td>
+						<td><input type="text" name="" readonly /></td>
+						<td class="table-label">调查日期</td>	
+						<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>			
+						<td class="table-label">放款日期</td>	
+						<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" disabled/></td>		
+					</tr>
+					<tr>
+						<td class="table-label">上次调查日期</td>	
+						<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>			
+						<td class="table-label">剩余贷款金额</td>	
+						<td colspan="3"><input type="text" name="" readonly /></td>				
+					</tr>					
+				</table>
+			</div>
+		<!--*********************************************资产负债表*********************************************************-->
+			<i class="icon-bookmark"></i><span class="titletip">资产负债表</span>
+			<div class="divBorder">				
+				<table class="table-list">					
+					<tr>
+						<td class="table-label"><b>上期分析时间</b></td>
+						<td colspan="2"><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" disabled /></td>		
+						<td class="table-label"><b>本期分析时间</b></td>	
+						<td colspan="2"><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly /></td>					
+					</tr>	
+					<tr>
+						<th style="text-align:left;"><b>资产</b></th>
+						<th>上期分析情况</th>
+						<th>本期分析情况</th>	
+						<th style="text-align:left;"><b>负债</b></th>
+						<th>上期分析情况</th>
+						<th>本期分析情况</th>	
+					</tr>
+				</table>
+				<table class="table-list inline" id="fbzjc_xjjyhck">
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;现金及银行存款
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="现金及银行存款">
+							<input type="button" value="+" onclick="addTd('fbzjc_xjjyhck','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_xjjyhck','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;应付账款
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="应付账款">
+							<input type="button" value="+" onclick="addTd('fbzjc_xjjyhck','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_xjjyhck','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>						
+					</tr>							
+				</table>
+				<table class="table-list inline" id="fbzjc_yszk">
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;应收账款
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="应收账款">
+							<input type="button" value="+" onclick="addTd('fbzjc_yszk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_yszk','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;预收账款
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="预收账款">
+							<input type="button" value="+" onclick="addTd('fbzjc_yszk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_yszk','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>						
+					</tr>							
+				</table>
+				<table class="table-list inline" id="fbzjc_yfdk">
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;预付账款
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="预付账款">
+							<input type="button" value="+" onclick="addTd('fbzjc_yfdk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_yfdk','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;短期借款
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="短期借款">
+							<input type="button" value="+" onclick="addTd('fbzjc_yfdk','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_yfdk','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>						
+					</tr>							
+				</table>
+				<table class="table-list inline" id="fbzjc_ch">
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;存货
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="存货">
+							<input type="button" value="+" onclick="addTd('fbzjc_ch','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_ch','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;长期借款
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="长期借款">
+							<input type="button" value="+" onclick="addTd('fbzjc_ch','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_ch','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>						
+					</tr>							
+				</table>
+				<table class="table-list inline">
+					<tr>
+						<td class="table-label">
+							<b>&nbsp;&nbsp;&nbsp;&nbsp;流动资产合计</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="流动资产合计">
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td class="table-label">
+							<b>&nbsp;&nbsp;&nbsp;&nbsp;负债总计</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="负债总计">
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>						
+					</tr>							
+				</table>
+				<table class="table-list inline">
+					<tr>
+						<td class="table-label">
+							<b>&nbsp;&nbsp;&nbsp;&nbsp;固定资产合计</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="固定资产合计">
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td class="table-label">
+							<b>&nbsp;&nbsp;&nbsp;&nbsp;所有者权益</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="所有者权益">
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>						
+					</tr>							
+				</table>
+				<table class="table-list inline">
+					<tr>
+						<td class="table-label">
+							<b>资产总计</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="资产总计">
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td class="table-label">
+							<b>负债及所有者权益</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="负债及所有者权益">
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>
+						<td>
+							<span>	
+								<input type="text" name="value_0" value="0" readonly/>							
+							</span>							
+						</td>						
+					</tr>
+					<tr>
+						<td class="table-label">
+							<b>对资产负债表的评注</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="资产总计">
+						</td>
+						<td colspan="5">
+							<textarea name=''></textarea>			
+						</td>						
+					</tr>							
+				</table>
+			</div>
+		
+		<!--*********************************************损益发展情况*********************************************************-->
+			<i class="icon-bookmark"></i><span class="titletip">损益发展情况</span>
+			<div class="divBorder">				
+				<table class="table-list">					
+					<tr>
+						<th class="table-label">项目</th>
+						<th>上次检查的时间段平均值</th>	
+						<th>月份（或周）</th>
+						<th>月份（或周）</th>		
+						<th>月份（或周）</th>
+						<th>本次检查的时间段平均值</th>							
+					</tr>
+				</table>
+				<table class="table-list inline" id="fbzjc_sr">
+					<tr>
+						<td class="table-label">
+							<b>收入</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="收入">
+							<input type="button" value="+" onclick="addTd('fbzjc_sr','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_sr','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+					</tr>					
+				</table>
+				<table class="table-list inline" id="fbzjc_blcb">
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;变量成本
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="变量成本">
+							<input type="button" value="+" onclick="addTd('fbzjc_blcb','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_blcb','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>				
+					</tr>							
+				</table>
+				<table class="table-list inline">
+					<tr>
+						<td class="table-label">
+							<b>毛利</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="毛利">
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>				
+					</tr>							
+				</table>
+				<table class="table-list inline" id="fbzjc_blcb">
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;工资
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="工资">
+						</td>
+						<td>
+							<input type="text" name="" readonly/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>				
+					</tr>	
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;社会保险
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="社会保险">
+						</td>
+						<td>
+							<input type="text" name="" readonly/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>				
+					</tr>	
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;租金
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="租金">
+						</td>
+						<td>
+							<input type="text" name="" readonly/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>				
+					</tr>		
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;交通运输费用
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="交通运输费用">
+						</td>
+						<td>
+							<input type="text" name="" readonly/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>				
+					</tr>	
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;维护费用
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="维护费用">
+						</td>
+						<td>
+							<input type="text" name="" readonly/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>				
+					</tr>		
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;水电费用
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="水电费用">
+						</td>
+						<td>
+							<input type="text" name="" readonly/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>				
+					</tr>	
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;存货损失
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="存货损失">
+						</td>
+						<td>
+							<input type="text" name="" readonly/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>				
+					</tr>	
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;税金
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="税金">
+						</td>
+						<td>
+							<input type="text" name="" readonly/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>				
+					</tr>
+				</table>
+				<table class="table-list inline" id="fbzjc_qt">
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;其他
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="其他">
+							<input type="button" value="+" onclick="addTd('fbzjc_qt','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_qt','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>				
+					</tr>
+				</table>
+				<table class="table-list inline">
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;分期付款
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="分期付款">
+						</td>
+						<td>
+							<input type="text" name="" readonly/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>				
+					</tr>
+					<tr>
+						<td class="table-label">
+							<b>经营成本总额</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="经营成本总额">
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>				
+					</tr>
+					<tr>
+						<td class="table-label">
+							<b>净利润</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="净利润">
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>				
+					</tr>
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;家庭及其他支出
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="家庭及其他支出">
+						</td>
+						<td>
+							<input type="text" name="" readonly/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>
+						<td>
+							<input type="text" name=""/>
+						</td>				
+					</tr>
+				</table>
+				<table class="table-list inline" id="fbzjc_qtsr">
+					<tr>
+						<td class="table-label">
+							&nbsp;&nbsp;&nbsp;&nbsp;其他收入
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="其他收入">
+							<input type="button" value="+" onclick="addTd('fbzjc_qtsr','dqdcWd_zcfzb')" class="btn btn-info btn-mini" />
+							<input type="button" value="-" onclick="removeTd('fbzjc_qtsr','dqdcWd_zcfzb');" class="btn btn-info btn-mini" />
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>	
+					</tr>
+				</table>
+				<table class="table-list inline">
+					<tr>
+						<td class="table-label">
+							<b>可供支配的家庭收入</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="可供支配的家庭收入">
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>
+						<td>
+							<input type="text" name="" value="0" readonly/>
+						</td>				
+					</tr>
+					<tr>
+						<td class="table-label">
+							<b>对损益发展情况的评注</b>
+							<input type="hidden" name="" value="0">
+							<input type="hidden" name="" value="对损益发展情况的评注">
+						</td>
+						<td colspan="5">
+							<textarea name=""></textarea>
+						</td>				
+					</tr>
+				</table>					
+			</div>
+			<!--*********************************************整体结论*********************************************************-->
+			<i class="icon-bookmark"></i><span class="titletip">整体结论</span>
+			<div class="divBorder">				
+				<table class="table-list">			
+					<tr>
+						<td class="table-label">
+							<b>对整体经营发展及贷款应用的评注</b>
+						</td>
+						<td colspan="5">
+							<textarea name=""></textarea>
+						</td>				
+					</tr>
+					<tr>
+						<td class="table-label"><b>小微贷款专营机构</b></td>
+						<td>
+							<input type="text" name="" value="" readonly>
+						</td>	
+						<td class="table-label"><b>客户经理</b></td>
+						<td>
+							<input type="text" name="" value="" readonly>
+						</td>				
+						<td class="table-label"><b>填写日期</b></td>
+						<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>						
+					</tr>
+				</table>
+			</div>
+			
+			<span class="point">*为必填字段</span><br/>
+			<input type="submit" class="btn btn-info" value="提交"/>
+			<input type="button" class="btn btn-info" value="返回" onclick="iframe('Process/dhgl/edit_dhgl')"/>
+		</div><!--/row-fluid -->
+	</form><!--/content -->
+	
+	<script src="../../../static/js/jquery-1.7.2.min.js"></script>
+	<script src="../../../static/js/bootstrap.min.js"></script>
+	<script src="../../../static/js/bootstrap-datepicker.js"></script>
+	<script src="../../../static/js/script.js"></script>
+	<script src="../../../static/js/process.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+	</script>
+</body>
+</html>

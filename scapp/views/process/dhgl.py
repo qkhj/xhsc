@@ -12,6 +12,8 @@ from scapp.config import PER_PAGE
 from scapp.config import PROCESS_STATUS_SPJY_TG
 from scapp.config import PROCESS_STATUS_DKFKJH
 from scapp.models import SC_Monitor
+from scapp.models import SC_Balance_Sheet_Fbz
+from scapp.models import SC_Profit_Loss_Fbz
 from scapp.models import View_Query_Loan
 from scapp.logic.total import Total
 from scapp.logic.total import User
@@ -39,11 +41,6 @@ def dhgl_search(page):
 
 	loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
 	return render_template("Process/dhgl/dhgl.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
-	
-# 贷后管理——贷后管理
-@app.route('/Process/dhgl/edit_dhgl/<int:loan_apply_id>/<int:page>', methods=['GET'])
-def edit_dhgl(loan_apply_id,page):
-	return render_template("Process/dhgl/edit_dhgl.html",monotors=monotors)
 
 # 贷后管理——新增标准
 @app.route('/Process/dhgl/new_bz/<int:loan_apply_id>', methods=['GET'])
@@ -103,11 +100,110 @@ def getCheckForm(loan_apply_id,loan_apply):
 	checkForm.hkqs = pactInform.deadline
 	return checkForm
 
+# 贷后管理——非标准
+@app.route('/Process/dhgl/fbz/<int:loan_apply_id>', methods=['GET'])
+def fbz(loan_apply_id):
+	fbz = SC_Balance_Sheet_Fbz.query.filter_by(loan_apply_id=loan_apply_id).all()
+	return render_template("Process/dhgl/fbz.html",loan_apply_id=loan_apply_id,fbz=fbz)
+
 # 贷后管理——新增非标准
-@app.route('/Process/dhgl/new_fbz', methods=['GET'])
-def new_fbz():
-    return render_template("Process/dhgl/new_fbz.html")
-        
+@app.route('/Process/dhgl/new_fbz/<int:loan_apply_id>', methods=['GET','POST'])
+def new_fbz(loan_apply_id):
+	if request.method == 'GET':
+		return render_template("Process/dhgl/new_fbz.html",loan_apply_id=loan_apply_id)
+	else:
+		try:
+			index = SC_Balance_Sheet_Fbz.query.filter_by(loan_apply_id=loan_apply_id).count()
+		    # 保存资产负债表
+			SC_Balance_Sheet_Fbz(loan_apply_id,index, request.form['cash_deposit'],request.form['payable'],
+				request.form['receivable'],request.form['short_loan'],request.form['stock'],request.form['long_loan'],
+				request.form['total_current_assets'],request.form['total_debt'],request.form['total_fixed_assets'],
+				request.form['owner_equity'],request.form['total_assets'],request.form['debt_and_owner_equity'],
+				request.form['remark']).add()
+		    
+		    # 保存损益表
+			SC_Profit_Loss_Fbz(loan_apply_id, index,request.form['income'],request.form['cost'],
+				request.form['gross_profit'],request.form['salary'],request.form['insurance'],request.form['rent'],
+				request.form['freight'],request.form['maintain'],request.form['utility'],request.form['stock_loss'],
+				request.form['taxes'],request.form['others'],request.form['stages'],request.form['total_cost'],
+				request.form['net_profit'],request.form['other_pay'],request.form['other_income'],
+				request.form['family_income'],request.form['remark1'],request.form['remark2']).add()
+
+			# 事务提交
+			db.session.commit()
+			# 消息闪现
+			flash('保存成功','success')
+		except:
+			# 回滚
+			db.session.rollback()
+			logger.exception('exception')
+			# 消息闪现
+			flash('保存失败','error')
+		
+		return redirect('Process/dhgl/fbz/%d' % loan_apply_id) 
+    
+# 贷后管理——非标准
+@app.route('/Process/dhgl/edit_fbz/<int:loan_apply_id>/<int:index>', methods=['GET','POST'])
+def edit_fbz(loan_apply_id,index):
+	if request.method == 'GET':
+		balance_sheet_fbz = SC_Balance_Sheet_Fbz.query.filter_by(loan_apply_id=loan_apply_id,index=index).first()
+		profit_loss_fbz = SC_Profit_Loss_Fbz.query.filter_by(loan_apply_id=loan_apply_id,index=index).first()
+		return render_template("Process/dhgl/edit_fbz.html",loan_apply_id=loan_apply_id,index=index,
+			balance_sheet_fbz=balance_sheet_fbz,profit_loss_fbz=profit_loss_fbz)
+	else:
+		try:
+			# 保存资产负债表
+			balance_sheet_fbz = SC_Balance_Sheet_Fbz.query.filter_by(loan_apply_id=loan_apply_id,index=index).first()
+			balance_sheet_fbz.cash_deposit = request.form['cash_deposit']
+			balance_sheet_fbz.payable = request.form['payable']
+			balance_sheet_fbz.receivable = request.form['receivable']
+			balance_sheet_fbz.short_loan = request.form['short_loan']
+			balance_sheet_fbz.stock = request.form['stock']
+			balance_sheet_fbz.long_loan = request.form['long_loan']
+			balance_sheet_fbz.total_current_assets = request.form['total_current_assets']
+			balance_sheet_fbz.total_debt = request.form['total_debt']
+			balance_sheet_fbz.total_fixed_assets = request.form['total_fixed_assets']
+			balance_sheet_fbz.owner_equity = request.form['owner_equity']
+			balance_sheet_fbz.total_assets = request.form['total_assets']
+			balance_sheet_fbz.debt_and_owner_equity = request.form['debt_and_owner_equity']
+			balance_sheet_fbz.remark = request.form['remark']
+
+			# 保存损益表
+			profit_loss_fbz = SC_Profit_Loss_Fbz.query.filter_by(loan_apply_id=loan_apply_id,index=index).first()
+			profit_loss_fbz.income = request.form['income']
+			profit_loss_fbz.cost = request.form['cost']
+			profit_loss_fbz.gross_profit = request.form['gross_profit']
+			profit_loss_fbz.salary = request.form['salary']
+			profit_loss_fbz.insurance = request.form['insurance']
+			profit_loss_fbz.rent = request.form['rent']
+			profit_loss_fbz.freight = request.form['freight']
+			profit_loss_fbz.maintain = request.form['maintain']
+			profit_loss_fbz.utility = request.form['utility']
+			profit_loss_fbz.stock_loss = request.form['stock_loss']
+			profit_loss_fbz.taxes = request.form['taxes']
+			profit_loss_fbz.others = request.form['others']
+			profit_loss_fbz.stages = request.form['stages']
+			profit_loss_fbz.total_cost = request.form['total_cost']
+			profit_loss_fbz.net_profit = request.form['net_profit']
+			profit_loss_fbz.other_pay = request.form['other_pay']
+			profit_loss_fbz.other_income = request.form['other_income']
+			profit_loss_fbz.family_income = request.form['family_income']
+			profit_loss_fbz.remark1 = request.form['remark1']
+			profit_loss_fbz.remark2 = request.form['remark2']
+
+			# 事务提交
+			db.session.commit()
+			# 消息闪现
+			flash('保存成功','success')
+		except:
+			# 回滚
+			db.session.rollback()
+			logger.exception('exception')
+			# 消息闪现
+			flash('保存失败','error')
+		
+		return redirect('Process/dhgl/fbz/%d' % loan_apply_id) 
+
 # 贷后管理——管理信息列表
 @app.route('/Process/dhgl/glxxlb', methods=['GET'])
 def dhgl_glxxlb():

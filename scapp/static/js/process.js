@@ -616,8 +616,8 @@ if(table=="qcqyhj"){//期初权益合计&期初权益合计
 								"<td>"+
 									"<span>	"+
 										"<input type='hidden' name='type_3' value='3'>"+
-										"<input type='text' name='name_3' onchange='spryMaxLength(this,32)'/><br/>"+
-										"<span class='errorInfo'>字符数不得大于32</span>"+
+										"<input type='text' name='name_3' onchange='spryMaxLength(this,512)'/><br/>"+
+										"<span class='errorInfo'>字符数不得大于512</span>"+
 									"</span>"+
 								"</td>"+
 								"<td  style='text-align:left'>"+
@@ -630,8 +630,8 @@ if(table=="qcqyhj"){//期初权益合计&期初权益合计
 								"<td>"+
 									"<span>	"+
 										"<input type='hidden' name='type_4' value='4'>"+
-										"<input type='text' name='name_4' onchange='spryMaxLength(this,32)'/><br/>"+
-										"<span class='errorInfo'>字符数不得大于32</span>"+
+										"<input type='text' name='name_4' onchange='spryMaxLength(this,512)'/><br/>"+
+										"<span class='errorInfo'>字符数不得大于512</span>"+
 									"</span>"+
 								"</td>"+
 								"<td  style='text-align:left'>"+
@@ -648,8 +648,8 @@ if(table=="dxzchj"){//大项支出合计
 								"<td>"+
 									"<span>	"+
 										"<input type='hidden' name='type_5' value='5'>"+
-										"<input type='text' name='name_5' onchange='spryMaxLength(this,32)'/><br/>"+
-										"<span class='errorInfo'>字符数不得大于32</span>"+
+										"<input type='text' name='name_5' onchange='spryMaxLength(this,512)'/><br/>"+
+										"<span class='errorInfo'>字符数不得大于512</span>"+
 									"</span>"+
 								"</td>"+
 								"<td  style='text-align:left'>"+

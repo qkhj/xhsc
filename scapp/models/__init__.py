@@ -33,6 +33,8 @@ from scapp.models.process import SC_Approval_Decision
 from scapp.models.process import SC_Credit_Upload
 from scapp.models.process import SC_Monitor
 from scapp.models.process import SC_Classify
+from scapp.models.process import SC_Balance_Sheet_Fbz
+from scapp.models.process import SC_Profit_Loss_Fbz
 
 # 系统管理
 from scapp.models.system import SC_UserRole
