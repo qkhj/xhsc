@@ -414,7 +414,7 @@ class SC_Classify(db.Model):
     __tablename__ = 'sc_classify'
     id=db.Column(db.Integer, primary_key=True)
     loan_apply_id=db.Column(db.Integer)
-    index = db.Column(db.Integer) #递增的序号 从0开始
+    index_add = db.Column(db.Integer) #递增的序号 从0开始
     classify = db.Column(db.Integer) #等级
     classify_dec = db.Column(db.String(256)) #等级描述
     is_pass = db.Column(db.Integer) #是否通过
@@ -423,9 +423,9 @@ class SC_Classify(db.Model):
     confirm_user = db.Column(db.Integer)
     confirm_date = db.Column(db.DateTime)
 
-    def __init__(self,loan_apply_id, index, classify,classify_dec, is_pass):
+    def __init__(self,loan_apply_id, index_add, classify,classify_dec, is_pass):
         self.loan_apply_id = loan_apply_id
-        self.index = index
+        self.index_add = index_add
         self.classify = classify
         self.classify_dec = classify_dec
         self.is_pass = is_pass
