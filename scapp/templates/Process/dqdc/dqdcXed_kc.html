@@ -89,7 +89,7 @@
 			if(a==""){a=0;}
 			else{a=parseInt(a);}
 			if(b==""){b=0;}
-			else{b=parseInt(b);}
+			else{b=parseFloat(b);}
 			sum=a*b;
 			$(obj).parent().parent().parent().find("input[name="+sumname+"]").val(sum);
 			$(obj).parent().parent().parent().find("input[name="+sumname+"]").click();
@@ -110,7 +110,7 @@
 						if(this.value=="")
 							sum=sum;
 						else
-							sum += parseInt(this.value);
+							sum += parseFloat(this.value);
 						if(i==1)
 							$("#sub"+i).html(sum); 
 						else
