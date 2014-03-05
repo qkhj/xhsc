@@ -53,7 +53,7 @@ def khxxgl_search(page):
 	manager_name = request.form['manager_name']
 	customer_name = request.form['customer_name']
 	credentials_no = request.form['credentials_no']
-
+	customer_type = request.form['customer_type']
 	sql = " 1=1"
 	if manager != '0':
 		sql += " and manager="+manager
@@ -69,12 +69,12 @@ def khxxgl_search(page):
 	# 个人
 	if request.form['customer_type'] == 'Individual':
 		individual_customer = SC_Individual_Customer.query.filter(sql).order_by("id").paginate(page, per_page = PER_PAGE)
-		return render_template("Information/khxxgl.html",customer=individual_customer,
+		return render_template("Information/khxxgl.html",customer=individual_customer,customer_type=customer_type,
 			manager=manager,customer_name=customer_name,credentials_no=credentials_no,manager_name=manager_name)
 	# 公司
 	else:
 		company_customer = SC_Company_Customer.query.filter(sql).order_by("id").paginate(page, per_page = PER_PAGE)
-		return render_template("Information/khxxgl.html",customer=company_customer,
+		return render_template("Information/khxxgl.html",customer=company_customer,customer_type=customer_type,
 			manager=manager,customer_name=customer_name,credentials_no=credentials_no,manager_name=manager_name)
 
 # 跳转到新增客户页面

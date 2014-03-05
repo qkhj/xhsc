@@ -235,7 +235,7 @@ class SC_Riskanalysis_And_Findings(db.Model):
     loan_apply_id=db.Column(db.Integer)
     analysis_conclusion = db.Column(db.String(256)) #分析结论
     amount_recommended = db.Column(db.String(32)) #建议金额(元)
-    recommended_deadline = db.Column(db.Date) #建议期限
+    recommended_deadline = db.Column(db.String(32)) #建议期限
     recommended_rates = db.Column(db.String(32)) #建议利率
     monthly_repayment_amount = db.Column(db.String(32)) #每月还款额(元)
     recommended_way_of_security = db.Column(db.String(32)) #建议担保方式
