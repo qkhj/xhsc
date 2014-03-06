@@ -87,7 +87,7 @@
 					<tr>
 						<td class="table-label">还款方式</td>
 						<td>
-							<select name="repayment_type" onchange="show_calculate();" disabled>
+							<select name="repayment_type" onchange="show_calculate();" readonly>
 								{%- if approval_decision.repayment_type == '1' %}
 								<option value="1" selected>等额本金</option>
 								{%- else %}
@@ -102,7 +102,7 @@
 						</td>
 						<td class="table-label">还贷期数<font class="red">*</font></td>
 						<td>
-							<select name="deadline" style="width:60px" onchange="show_calculate();sum(1);sum(2);sum(3);" disabled>
+							<select name="deadline" style="width:60px" onchange="show_calculate();sum(1);sum(2);sum(3);" readonly>
 								{%- if approval_decision.deadline == '1' %}
 									<option value="1" selected>1</option>
 								{%- else %}
