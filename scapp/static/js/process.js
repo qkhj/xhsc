@@ -1937,6 +1937,109 @@ if(table=="dxzchj"){//大项支出合计
 								"</td>"+
 							"</tr>");
     }
+//----------------------贷前调查——固定资产清单--------------------------
+	if(table=="fdcxd"){//房地产详单
+        $("#"+table).append("<tr class='insideTb center'>"+								
+								"<td>"+	
+									"<input type='text' name='name' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+	
+									"<span class='errorInfo'>字符数不得大于32</span>"+											
+								"</td>"+	
+								"<td>"+											
+									"<input type='text' name='address' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+	
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='gfa' maxlength='11' onclick='setJe(this)' onkeyup='setJe(this)' onblur='zjz(this,\"gfa\",\"life\",\"purchase_price\");zjl(this,\"purchase_price\",\"land_area\",\"price\");sub()'/>"+	
+									"<br/><span class='je'>人民币</span>"+	
+									"<span class='errorInfo'></span>"+		
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='land_area' onchange='check(this,1,100)' onblur='zjl(this,\"purchase_price\",\"land_area\",\"price\");sub()' onkeyup='checkNUM(this)' style='width:40px'/>%"+	
+									"<br/>&nbsp;<span class='errorInfo'>请输入1-100的有效数字</span>"+	
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='life' onkeyup='checkNUM(this)' onblur='zjz(this,\"gfa\",\"life\",\"purchase_price\");zjl(this,\"purchase_price\",\"land_area\",\"price\");sub()' maxlength='10'/><br/>&nbsp;"+	
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='purchase_price' class='subData1' onclick='setJe(this)' value='0' readonly/>"+	
+									"<br/><span class='je'>人民币</span>"+		
+									"<span class='errorInfo'></span>"+		
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='price' class='subData2' onclick='setJe(this)' value='0' onblur='sub()'/>"+	
+									"<br/><span class='je'>人民币</span>"+		
+									"<span class='errorInfo'></span>"+	
+								"</td>"+					
+							"</tr>");
+		datepicker();
+    } 
+if(table=="sbjqcxd"){//设备及器材详单
+        $("#"+table).append("<tr class='insideTb center'>"+								
+								"<td>"+	
+									"<input type='text' name='name' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+	
+									"<span class='errorInfo'>字符数不得大于32</span>"+	
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='purchase_date' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+	
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='type_brand' maxlength='11' onclick='setJe(this)' onkeyup='setJe(this)' onblur='zjz(this,\"type_brand\",\"amount\",\"total_price\");zjl(this,\"total_price\",\"outward\",\"price\");sub()'/>"+											
+									"<br/><span class='je'>人民币</span>"+	
+									"<span class='errorInfo'></span>"+		
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='outward' onchange='check(this,1,100)' onblur='zjl(this,\"total_price\",\"outward\",\"price\");sub()' onkeyup='checkNUM(this)' style='width:40px'/>%"+	
+									"<br/>&nbsp;<span class='errorInfo'>请输入1-100的有效数字</span>"+	
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='amount' onkeyup='checkNUM(this)' maxlength='18' onblur='zjz(this,\"type_brand\",\"amount\",\"total_price\");zjl(this,\"total_price\",\"outward\",\"price\");sub()'/><br/>&nbsp;"+	
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='total_price' class='subData3' onclick='setJe(this)' value='0' readonly/><br/>"+	
+									"<span class='je'>人民币</span>"+		
+									"<span class='errorInfo'></span>"+		
+								"</td>"+	
+								"<td>"+	
+									"<input type='text' name='price' class='subData4' onclick='setJe(this)' value='0' onblur='sub()'/>"+	
+									"<br/><span class='je'>人民币</span>"+		
+									"<span class='errorInfo'></span>"+	
+								"</td>"+					
+							"</tr>");
+		datepicker();
+    } 
+if(table=="clxd"){//车辆详单
+        $("#"+table).append("<tr class='insideTb center'>"+								
+								"<td>"+
+									"<input type='text' name='name' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+
+									"<span class='errorInfo'>字符数不得大于32</span>"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='purchase_date' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+
+								"</td>"+									        
+								"<td>"+
+									"<input type='text' name='type_brand' maxlength='11' onclick='setJe(this)' onkeyup='setJe(this)' onblur='zjz(this,\"type_brand\",\"owner\",\"total_price\");zjl(this,\"total_price\",\"outward\",\"purchase_price\");sub()'/>"+
+									"<br/><span class='je'>人民币</span>"+
+									"<span class='errorInfo'></span>"+	
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='outward' onchange='check(this,1,100)' onblur='zjl(this,\"total_price\",\"outward\",\"purchase_price\");sub()' onkeyup='checkNUM(this)' style='width:40px'/>%"+
+									"<br/>&nbsp;<span class='errorInfo'>请输入1-100的有效数字</span>"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='owner' onkeyup='checkNUM(this)' maxlength='10' onblur='zjz(this,\"type_brand\",\"owner\",\"total_price\");zjl(this,\"total_price\",\"outward\",\"purchase_price\");sub()'/><br/>&nbsp;"+	
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='total_price' class='subData5' onclick='setJe(this)' value='0' readonly/>"+
+									"<br/><span class='je'>人民币</span>"+	
+									"<span class='errorInfo'></span>"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' class='subData6' name='purchase_price' onclick='setJe(this)' value='0' onblur='sub()'/>"+
+									"<br/><span class='je'>人民币</span>"+
+									"<span class='errorInfo'></span>"+	
+								"</td>"+				
+							"</tr>");
+		datepicker();
+    } 
 //----------------------贷前调查——库存--------------------------
 	if(table=="kcxx"){//库存信息
         $("#"+table).append("<tr class='insideTb center'>"+								
@@ -1948,7 +2051,7 @@ if(table=="dxzchj"){//大项支出合计
 								"</td>"+	
 								"<td>"+
 									"<span>"+	
-										"<input type='text' name='amount' class='subData1' onKeyUp='value=value.replace(/[^0-9]/g,&apos;&apos;)' maxlength='32' onblur='mjzjz(this,\"amount\",\"purchase_price\",\"purchase_total_price\");sub()'/><br/>&nbsp;"+																
+										"<input type='text' name='amount' class='subData1' onkeyup='checkNUM(this)' maxlength='32' onblur='mjzjz(this,\"amount\",\"purchase_price\",\"purchase_total_price\");sub()'/><br/>&nbsp;"+																
 									"</span>"+
 								"</td>"+
 								"<td>"+
@@ -1967,15 +2070,86 @@ if(table=="dxzchj"){//大项支出合计
 								"</td>"+							
 							"</tr>");
     } 
+//----------------------贷前调查——账款清单--------------------------
+	if(table=="yfzkxd"){//应付账款清单
+        $("#"+table).append("<tr class='insideTb center'>"+								
+								"<td>"+								
+									"<input type='text' name='name' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+								
+									"<span class='errorInfo'>字符数不得大于32</span>"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='occur_date' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='deadline' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='original_price' class='subData1' onkeyup='setJe(this)' onclick='setJe(this)' onblur='sub()' maxlength='11'/><br/>"+
+									"<span class='je'>人民币</span>	"+
+									"<span class='errorInfo'></span>"+	
+								"</td>"+
+								"<td>"+
+									"<select name='pay_type'>"+
+										"<option value='现金'>现金</option>"+
+										"<option value='预付款'>预付款</option>"+
+										"<option value='赊账'>赊账</option>"+
+										"<option value='短期票据'>短期票据</option>"+
+										"<option value='长期票据'>长期票据</option>"+
+									"</select><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='present_price' onkeyup='checkNUM(this)' maxlength='12'/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='cooperation_history' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+
+								"</td>"+				
+							"</tr>");
+		datepicker();
+    } 
+    if(table=="yszkxd"){//应收账款清单
+        $("#"+table).append("<tr class='insideTb center'>"+								
+								"<td>"+								
+									"<input type='text' name='name' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+								
+									"<span class='errorInfo'>字符数不得大于32</span>"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='occur_date' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='deadline' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='original_price' class='subData2' onkeyup='setJe(this)' onclick='setJe(this)' onblur='sub()' maxlength='11'/><br/>"+
+									"<span class='je'>人民币</span>	"+
+									"<span class='errorInfo'></span>"+	
+								"</td>"+
+								"<td>"+
+									"<select name='pay_type'>"+
+										"<option value='现金'>现金</option>"+
+										"<option value='预付款'>预付款</option>"+
+										"<option value='赊账'>赊账</option>"+
+										"<option value='短期票据'>短期票据</option>"+
+										"<option value='长期票据'>长期票据</option>"+
+									"</select><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='present_price' onkeyup='checkNUM(this)' maxlength='12'/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='cooperation_history' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+
+								"</td>"+				
+							"</tr>");
+		datepicker();
+    } 
 //----------------------贷后管理--------------------------
 if(table=="jcjl"){//标准检测——检测记录
-	number=document.getElementById(table).getElementsByTagName("tr").length
+	//number=document.getElementById(table).getElementsByTagName("tr").length
 	$("#"+table).append("<tr class='add'>"+
-								"<td>"+
-									"<span>	" +
-										number +
-									"</span>" +
-								"</td>"+
+								//"<td>"+
+									//"<span>	" +
+										//number +
+									//"</span>" +
+								//"</td>"+
 								"<td>"+
 									"<span>	" +
 										"<input type='text' name='monitor_date' class='datepicker' data-date-format='yyyy-mm-dd' readonly/>" +
