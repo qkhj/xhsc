@@ -64,16 +64,14 @@
 			<input type="button" value="-" onclick="removeTd('jcjl','content_frame')" class="btn btn-info btn-mini" style="padding:0 9px;margin-top:0px;"/>
 			<div class="divBorder">
 				<table id="jcjl" class="table-list">
-					<tr>	
-						<th>序号</th>					
+					<tr>					
 						<th>日期</th>
 						<th>监控方式</th>							
 						<th>监控内容</th>
 						<th>备注</th>								
 					</tr>
 					{%- for obj in monitorList %}
-					<tr>	
-						<th>序号</th>					
+					<tr>				
 						<th><input type="text" name="monitor_date" class="tbInput" value="{{obj.monitor_date}}" readonly="true"/></th>
 						<th><input type="text" name="monitor_type" class="tbInput" value="{{obj.monitor_type}}" readonly="true"/></th>
 						<th><input type="text" name="monitor_content" class="tbInput" value="{{obj.monitor_content}}" readonly="true"/></th>	
@@ -82,7 +80,6 @@
 					{%- endfor %}
 				</table>
 			</div>
-			<span class="point">*为必填字段</span><br/>
 			<input type="submit" class="btn btn-info" value="提交"/>
 		</div><!--/row-fluid -->
 		<input name="hiddenId" type="hidden" value="{{loan_apply_id}}"/>
