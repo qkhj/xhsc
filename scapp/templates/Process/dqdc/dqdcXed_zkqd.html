@@ -10,64 +10,151 @@
 	<!-- The styles -->
 	<link href="/static/css/bootstrap.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
-	<link href="/static/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
-	<style type="text/css">		
-		textarea{width:80%;}		
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<style type="text/css">	
+		input.btn-mini{width:20px;margin-top:0px;}	
+		input[type=text]{width:120px;}
+		select{width:100px;}
 	</style>
 </head>
 
-<body onload="sub()">	
+<body onload="sub();datepicker();">	
 	<form class="content">
-	<!--*****************************************账款清单**************************************************-->
-		<i class="icon-bookmark"></i><span class="titletip">应收帐款详单</span>
-		<div id="ZKXD">
-			<div style="margin-bottom:5px;">
-				<a type="button" class="btn btn-info" href="#" onclick="$('#dqdcXed_zkqd',window.parent.document).height(500);$('#content_frame',window.parent.parent.document).height(600);iframe('Process/dqdc/new_zkqd/{{id}}');">新增</a><!--*滚动条问题*-->
-			</div>
-			<div style="border:1px solid #94c1dc;">	
-				<table class="table-list" cellspacing="10" id="uesr-list">				
-					<tr>
-						<th>应收对象</th>  
-						<th>欠款日期</th>
-						<th>应还款日期</th>	
-						<th>应收金额</th>						
-						<th>应收类别</th>
-						<th>应收对象联系方式</th>						
-						<th>关系/生意模式</th>
-						<th>操作</th>
-					</tr>   
-					{%- for obj in accounts_list %}
-					<tr class="center" onclick="changeColor(this)">
-						<td><a href="#" onclick="iframe('Process/dqdc/edit_zkqd/{{obj.id}}')">{{obj.name}}</a></td>
-						<td>{{obj.occur_date}}</td>
-						<td>{{obj.deadline}}</td>
-						<td class="subData1">{{obj.original_price}}</td>
-						<td>{{obj.pay_type}}</td>
-						<td>{{obj.present_price}}</td>
-						<td>{{obj.cooperation_history}}</td>
-						<td>
-							<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
-						</td>
-					</tr>	
-					{%- endfor %}
-					<tr>
-						<th>合计</th> 
-						<th></th>
-						<th></th>
-						<th id="sub1"></th>						
-						<th></th>
-						<th></th>
-						<th></th>						
-						<th></th>
-					</tr>					
-				</table>
-			</div>
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#tab1" id="fdcxd" data-toggle="tab" onclick="$('#dqdcXed_gdzcqd',window.parent.document).height(500);$('#content_frame',window.parent.parent.document).height(800);">应付账款详单</a></li>
+				<li><a href="#tab2" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');">应收账款详单</a></li>
+			</ul>						
+			<div class="tab-content">
+				<!--*********************************应付账款详单*******************************************-->
+				<div class="tab-pane active" id="tab1">
+					<i class="icon-bookmark"></i><span class="titletip">应付账款详单</span>		
+					<input type="button" value="+" onclick="addTd('yfzkxd','dqdcXed_zkqd')" class="btn btn-info btn-mini" />
+					<input type="button" value="-" onclick="removeTd('yfzkxd','dqdcXed_zkqd');sub()" class="btn btn-info btn-mini" />	
+					<div class="divBorder">	
+						<table class="table-list" cellspacing="10" id="yfzkxd">				
+							<tr>
+								<th>应付对象</th>  
+								<th>欠款日期</th>
+								<th>应付款日期</th>	
+								<th>应付金额</th>						
+								<th>应付类别</th>
+								<th>应付对象联系方式</th>						
+								<th>关系/生意模式</th>
+							</tr> 
+							<tr class="center">
+								<td>								
+									<input type="text" name="name" onchange="spryMaxLength(this,32)"/><br/>&nbsp;								
+									<span class="errorInfo">字符数不得大于32</span>
+								</td>
+								<td>
+									<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>&nbsp;
+								</td>	
+								<td>
+									<input type="text" name="deadline" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>&nbsp;
+								</td>
+								<td>
+									<input type="text" name="original_price" class="subData1" onkeyup="setJe(this)" onclick="setJe(this)" onblur="sub()" maxlength="11"/><br/>
+									<span class="je">人民币</span>	
+									<span class="errorInfo"></span>	
+								</td>
+								<td>
+									<select name="pay_type">
+										<option value="现金">现金</option>
+										<option value="预付款">预付款</option>
+										<option value="赊账">赊账</option>
+										<option value="短期票据">短期票据</option>
+										<option value="长期票据">长期票据</option>
+									</select><br/>&nbsp;
+								</td>
+								<td>
+									<input type="text" name="present_price" onKeyUp="value=value.replace(/\D/g,'')" maxlength="12"/><br/>&nbsp;
+								</td>
+								<td>
+									<input type="text" name="cooperation_history" onchange="spryMaxLength(this,32)"/><br/>&nbsp;
+								</td>
+							</tr>									
+						</table>
+						<table id="kcxx" class="table-list">
+						<tr>
+							<th style="border-top:none;">
+								<b>合计</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;						
+								总金额:<span id="sub1"></span>
+							</th>
+						</tr>		
+					</table>
+					</div>
+					<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/><br/><br/><br/>		
+				</div><!--/应付账款详单-->
+
+				<!--**************************************应收账款详单**************************************-->
+				<div class="tab-pane" id="tab2">
+					<i class="icon-bookmark"></i><span class="titletip">应收账款详单</span>		
+					<input type="button" value="+" onclick="addTd('yszkxd','dqdcXed_zkqd')" class="btn btn-info btn-mini" />
+					<input type="button" value="-" onclick="removeTd('yszkxd','dqdcXed_zkqd');sub()" class="btn btn-info btn-mini" />
+							
+					<div class="divBorder">	
+						<table class="table-list" cellspacing="10" id="yszkxd">				
+							<tr>
+								<th>应收对象</th>  
+								<th>欠款日期</th>
+								<th>应还款日期</th>	
+								<th>应收金额</th>						
+								<th>应收类别</th>
+								<th>应收对象联系方式</th>						
+								<th>关系/生意模式</th>
+							</tr> 
+							<tr class="center">
+								<td>								
+									<input type="text" name="name" onchange="spryMaxLength(this,32)"/><br/>&nbsp;								
+									<span class="errorInfo">字符数不得大于32</span>
+								</td>
+								<td>
+									<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>&nbsp;
+								</td>	
+								<td>
+									<input type="text" name="deadline" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>&nbsp;
+								</td>
+								<td>
+									<input type="text" name="original_price" class="subData2" onkeyup="setJe(this)" onclick="setJe(this)" onblur="sub()" maxlength="11"/><br/>
+									<span class="je">人民币</span>	
+									<span class="errorInfo"></span>	
+								</td>
+								<td>
+									<select name="pay_type">
+										<option value="现金">现金</option>
+										<option value="预付款">预付款</option>
+										<option value="赊账">赊账</option>
+										<option value="短期票据">短期票据</option>
+										<option value="长期票据">长期票据</option>
+									</select><br/>&nbsp;
+								</td>
+								<td>
+									<input type="text" name="present_price" onKeyUp="value=value.replace(/\D/g,'')" maxlength="12"/><br/>&nbsp;
+								</td>
+								<td>
+									<input type="text" name="cooperation_history" onchange="spryMaxLength(this,32)"/><br/>&nbsp;
+								</td>
+							</tr>									
+						</table>
+						<table id="kcxx" class="table-list">
+						<tr>
+							<th style="border-top:none;">
+								<b>合计</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;						
+								总金额:<span id="sub2"></span>
+							</th>
+						</tr>		
+					</table>
+					</div>
+					<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/><br/><br/><br/>
+				</div><!--应收账款详单-->									
+			</div><!-- tabContent -->
 		</div>
 	</form>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
-	<script src="/static/js/jquery-ui-1.8.21.custom.min.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
 	<script src="/static/js/script.js"></script>
 	<script src="/static/js/process.js"></script>
 	<script type="text/javascript">
@@ -81,12 +168,12 @@
 			//$("#sub1").text("总笔数："+num);
 			for(i=1;i<3;i++){
 				var sum=0;						
-				$.each($(".subData"+i),function(key,val){ 
-					if(val.innerHTML=="")
+				$.each($(".subData"+i),function(){ 
+					if(this.value=="")
 						sum=sum;
 					else
-						sum += parseInt(val.innerHTML);					
-						$("#sub"+i).html(sum+"<br/><span class='je'>"+hjje($("#sub"+i),sum)+"</span>"); 	
+						sum += parseFloat(this.value);					
+						$("#sub"+i).html(sum+"（<span class='je'>"+hjje($("#sub"+i),sum)+"</span>）"); 	
 				}); 
 			}
 		}
