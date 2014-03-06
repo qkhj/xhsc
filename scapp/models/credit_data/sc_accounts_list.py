@@ -17,16 +17,15 @@ class SC_Accounts_List(db.Model):
     deadline=db.Column(db.Date)#到期日
     present_price= db.Column(db.String(32))#现值
     cooperation_history=db.Column(db.String(32))#合作历史
-    average_period=db.Column(db.String(32))#平均帐期
-    trading_frequency=db.Column(db.String(32)) #交易频率--页面选择，后台直接填入中文
-    turnover= db.Column(db.String(32))#分析期内的交易额
+    # average_period=db.Column(db.String(32))#平均帐期
+    # trading_frequency=db.Column(db.String(32)) #交易频率--页面选择，后台直接填入中文
+    # turnover= db.Column(db.String(32))#分析期内的交易额
     pay_type=db.Column(db.String(32)) #支付方式--页面选择，后台直接填入中文
-    source=db.Column(db.String(32)) #信息来源--页面选择，后台直接填入中文
-    other_info=db.Column(db.String(64)) #其他信息
+    # source=db.Column(db.String(32)) #信息来源--页面选择，后台直接填入中文
+    # other_info=db.Column(db.String(64)) #其他信息
+    mode_type = db.Column(db.Integer)#1-应付，2-应收
 
-
-    def __init__(self,loan_apply_id,name,original_price,occur_date,deadline,present_price,cooperation_history,
-                 average_period,trading_frequency,turnover,pay_type,source,other_info):
+    def __init__(self,loan_apply_id,name,original_price,occur_date,deadline,present_price,cooperation_history,pay_type,mode_type):
         self.loan_apply_id = loan_apply_id
         self.name = name
         self.original_price = original_price
@@ -34,12 +33,7 @@ class SC_Accounts_List(db.Model):
         self.deadline = deadline
         self.present_price = present_price
         self.cooperation_history = cooperation_history
-        self.average_period = average_period
-        self.trading_frequency = trading_frequency
-        self.turnover = turnover
         self.pay_type = pay_type
-        self.source = source
-        self.other_info = other_info
-
+        self.mode_type = mode_type
     def add(self):
         db.session.add(self)

@@ -17,9 +17,8 @@
 		select{width:100px;}
 	</style>
 </head>
-
 <body onload="sub();datepicker();">	
-	<form class="content">
+	<form class="content" method="post" action="/Process/dqdc/new_zkqd">
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#tab1" id="fdcxd" data-toggle="tab" onclick="$('#dqdcXed_gdzcqd',window.parent.document).height(500);$('#content_frame',window.parent.parent.document).height(800);">应付账款详单</a></li>
@@ -42,38 +41,20 @@
 								<th>应付对象联系方式</th>						
 								<th>关系/生意模式</th>
 							</tr> 
-							<tr class="center">
-								<td>								
-									<input type="text" name="name" onchange="spryMaxLength(this,32)"/><br/>&nbsp;								
-									<span class="errorInfo">字符数不得大于32</span>
-								</td>
-								<td>
-									<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>&nbsp;
-								</td>	
-								<td>
-									<input type="text" name="deadline" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>&nbsp;
-								</td>
-								<td>
-									<input type="text" name="original_price" class="subData1" onkeyup="setJe(this)" onclick="setJe(this)" onblur="sub()" maxlength="11"/><br/>
-									<span class="je">人民币</span>	
-									<span class="errorInfo"></span>	
-								</td>
-								<td>
-									<select name="pay_type">
-										<option value="现金">现金</option>
-										<option value="预付款">预付款</option>
-										<option value="赊账">赊账</option>
-										<option value="短期票据">短期票据</option>
-										<option value="长期票据">长期票据</option>
-									</select><br/>&nbsp;
-								</td>
-								<td>
-									<input type="text" name="present_price" onKeyUp="value=value.replace(/\D/g,'')" maxlength="12"/><br/>&nbsp;
-								</td>
-								<td>
-									<input type="text" name="cooperation_history" onchange="spryMaxLength(this,32)"/><br/>&nbsp;
-								</td>
-							</tr>									
+							{%- for obj in accounts_list %}
+								{%- if obj.mode_type==1%}
+								<tr class="center">
+									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" readonly="true"/></td>
+									<td><input type="text" name="occur_date" class="tbInput" value="{{obj.occur_date}}" readonly="true"/></td>
+									<td><input type="text" name="deadline" class="tbInput" value="{{obj.deadline}}" readonly="true"/></td>
+									<td><input type="text" name="original_price" class="subData1" value="{{obj.original_price}}" readonly="true"/></td>
+									<td><input type="text" name="pay_type" class="tbInput" value="{{obj.pay_type}}" readonly="true"/></td>
+									<td><input type="text" name="present_price" class="tbInput" value="{{obj.present_price}}" readonly="true"/></td>
+									<td><input type="text" name="cooperation_history" class="tbInput" value="{{obj.cooperation_history}}" readonly="true"/></td>
+									<td><input type="hidden" name="mode_type" class="tbInput" value="{{obj.mode_type}}"/></td>
+								</tr>
+								{%- endif%}	
+							{%- endfor %}								
 						</table>
 						<table id="kcxx" class="table-list">
 						<tr>
@@ -104,38 +85,20 @@
 								<th>应收对象联系方式</th>						
 								<th>关系/生意模式</th>
 							</tr> 
-							<tr class="center">
-								<td>								
-									<input type="text" name="name" onchange="spryMaxLength(this,32)"/><br/>&nbsp;								
-									<span class="errorInfo">字符数不得大于32</span>
-								</td>
-								<td>
-									<input type="text" name="occur_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>&nbsp;
-								</td>	
-								<td>
-									<input type="text" name="deadline" class="datepicker" data-date-format="yyyy-mm-dd" readonly/><br/>&nbsp;
-								</td>
-								<td>
-									<input type="text" name="original_price" class="subData2" onkeyup="setJe(this)" onclick="setJe(this)" onblur="sub()" maxlength="11"/><br/>
-									<span class="je">人民币</span>	
-									<span class="errorInfo"></span>	
-								</td>
-								<td>
-									<select name="pay_type">
-										<option value="现金">现金</option>
-										<option value="预付款">预付款</option>
-										<option value="赊账">赊账</option>
-										<option value="短期票据">短期票据</option>
-										<option value="长期票据">长期票据</option>
-									</select><br/>&nbsp;
-								</td>
-								<td>
-									<input type="text" name="present_price" onKeyUp="value=value.replace(/\D/g,'')" maxlength="12"/><br/>&nbsp;
-								</td>
-								<td>
-									<input type="text" name="cooperation_history" onchange="spryMaxLength(this,32)"/><br/>&nbsp;
-								</td>
-							</tr>									
+							{%- for obj in accounts_list %}
+								{%- if obj.mode_type==2%}
+								<tr class="center">
+									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" readonly="true"/></td>
+									<td><input type="text" name="occur_date" class="tbInput" value="{{obj.occur_date}}" readonly="true"/></td>
+									<td><input type="text" name="deadline" class="tbInput" value="{{obj.deadline}}" readonly="true"/></td>
+									<td><input type="text" name="original_price" class="subData2" value="{{obj.original_price}}" readonly="true"/></td>
+									<td><input type="text" name="pay_type" class="tbInput" value="{{obj.pay_type}}" readonly="true"/></td>
+									<td><input type="text" name="present_price" class="tbInput" value="{{obj.present_price}}" readonly="true"/></td>
+									<td><input type="text" name="cooperation_history" class="tbInput" value="{{obj.cooperation_history}}" readonly="true"/></td>
+									<td><input type="hidden" name="mode_type" class="tbInput" value="{{obj.mode_type}}"/></td>
+								</tr>	
+								{%- endif%}
+							{%- endfor %}		
 						</table>
 						<table id="kcxx" class="table-list">
 						<tr>
@@ -146,6 +109,7 @@
 						</tr>		
 					</table>
 					</div>
+					<input name="hiddenId" type="hidden" value="{{id}}"/>
 					<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/><br/><br/><br/>
 				</div><!--应收账款详单-->									
 			</div><!-- tabContent -->

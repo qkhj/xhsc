@@ -7,6 +7,7 @@ from scapp.config import logger
 from scapp.models.credit_data.sc_accounts_list import SC_Accounts_List
 
 from scapp import app
+from scapp.logic.total import Examine
 
 # 贷款调查——小额贷款(账款清单)
 @app.route('/Process/dqdc/dqdcXed_zkqd/<int:id>', methods=['GET'])
@@ -15,31 +16,15 @@ def dqdcXed_zkqd(id):
 	return render_template("Process/dqdc/dqdcXed_zkqd.html",id=id,accounts_list=accounts_list)
 
 # 贷款调查——新增小额贷款(账款清单)
-@app.route('/Process/dqdc/new_zkqd/<int:loan_apply_id>', methods=['GET','POST'])
-def new_zkqd(loan_apply_id):
-	if request.method == 'GET':
-		return render_template("Process/dqdc/new_zkqd.html",loan_apply_id=loan_apply_id)
-	else:
-		try:
-			SC_Accounts_List(loan_apply_id,request.form['name'],request.form['original_price'],
-				request.form['occur_date'],request.form['deadline'],
-				request.form['present_price'],request.form['cooperation_history'],
-				request.form['average_period'],request.form['trading_frequency'],
-				request.form['turnover'],request.form['pay_type'],
-				request.form['source'],request.form['other_info']).add()
-
-			# 事务提交
-			db.session.commit()
-			# 消息闪现
-			flash('保存成功','success')
-		except:
-			# 回滚
-			db.session.rollback()
-			logger.exception('exception')
-			# 消息闪现
-			flash('保存失败','error')
-
-		return redirect('Process/dqdc/dqdc')
+@app.route('/Process/dqdc/new_zkqd', methods=['GET','POST'])
+def new_zkqd():
+	loan_apply_id = request.form["hiddenId"]
+	examine = Examine()
+	#先删除所有记录
+	examine.deleteList(loan_apply_id)
+	#新增
+	examine.addList(loan_apply_id,request)
+	return redirect('Process/dqdc/dqdcXed_zkqd/'+loan_apply_id)
 
 # 贷款调查——编辑小额贷款(账款清单)
 @app.route('/Process/dqdc/edit_zkqd/<int:id>', methods=['GET','POST'])
