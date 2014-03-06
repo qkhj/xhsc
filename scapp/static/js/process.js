@@ -1967,6 +1967,77 @@ if(table=="dxzchj"){//大项支出合计
 								"</td>"+							
 							"</tr>");
     } 
+//----------------------贷前调查——账款清单--------------------------
+	if(table=="yfzkxd"){//应付账款清单
+        $("#"+table).append("<tr class='insideTb center'>"+								
+								"<td>"+								
+									"<input type='text' name='name' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+								
+									"<span class='errorInfo'>字符数不得大于32</span>"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='occur_date' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='deadline' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='original_price' class='subData1' onkeyup='setJe(this)' onclick='setJe(this)' onblur='sub()' maxlength='11'/><br/>"+
+									"<span class='je'>人民币</span>	"+
+									"<span class='errorInfo'></span>"+	
+								"</td>"+
+								"<td>"+
+									"<select name='pay_type'>"+
+										"<option value='现金'>现金</option>"+
+										"<option value='预付款'>预付款</option>"+
+										"<option value='赊账'>赊账</option>"+
+										"<option value='短期票据'>短期票据</option>"+
+										"<option value='长期票据'>长期票据</option>"+
+									"</select><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='present_price' onkeyup='checkNUM(this)' maxlength='12'/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='cooperation_history' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+
+								"</td>"+				
+							"</tr>");
+		datepicker();
+    } 
+    if(table=="yszkxd"){//应收账款清单
+        $("#"+table).append("<tr class='insideTb center'>"+								
+								"<td>"+								
+									"<input type='text' name='name' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+								
+									"<span class='errorInfo'>字符数不得大于32</span>"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='occur_date' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='deadline' class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='original_price' class='subData2' onkeyup='setJe(this)' onclick='setJe(this)' onblur='sub()' maxlength='11'/><br/>"+
+									"<span class='je'>人民币</span>	"+
+									"<span class='errorInfo'></span>"+	
+								"</td>"+
+								"<td>"+
+									"<select name='pay_type'>"+
+										"<option value='现金'>现金</option>"+
+										"<option value='预付款'>预付款</option>"+
+										"<option value='赊账'>赊账</option>"+
+										"<option value='短期票据'>短期票据</option>"+
+										"<option value='长期票据'>长期票据</option>"+
+									"</select><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='present_price' onkeyup='checkNUM(this)' maxlength='12'/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='text' name='cooperation_history' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+
+								"</td>"+				
+							"</tr>");
+		datepicker();
+    } 
 //----------------------贷后管理--------------------------
 if(table=="jcjl"){//标准检测——检测记录
 	number=document.getElementById(table).getElementsByTagName("tr").length
