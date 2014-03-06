@@ -2102,6 +2102,9 @@ if(table=="clxd"){//车辆详单
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='cooperation_history' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+
+								"</td>"+
+								"<td>"+
+									"<input type='hidden' name='mode_type' value='1'></input>"+
 								"</td>"+				
 							"</tr>");
 		datepicker();
@@ -2137,6 +2140,9 @@ if(table=="clxd"){//车辆详单
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='cooperation_history' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+
+								"</td>"+	
+								"<td>"+
+									"<input type='hidden' value='2' name='mode_type' /><br/>&nbsp;"+
 								"</td>"+				
 							"</tr>");
 		datepicker();
