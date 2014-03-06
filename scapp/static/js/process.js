@@ -2143,13 +2143,13 @@ if(table=="clxd"){//车辆详单
     } 
 //----------------------贷后管理--------------------------
 if(table=="jcjl"){//标准检测——检测记录
-	number=document.getElementById(table).getElementsByTagName("tr").length
+	//number=document.getElementById(table).getElementsByTagName("tr").length
 	$("#"+table).append("<tr class='add'>"+
-								"<td>"+
-									"<span>	" +
-										number +
-									"</span>" +
-								"</td>"+
+								//"<td>"+
+									//"<span>	" +
+										//number +
+									//"</span>" +
+								//"</td>"+
 								"<td>"+
 									"<span>	" +
 										"<input type='text' name='monitor_date' class='datepicker' data-date-format='yyyy-mm-dd' readonly/>" +
