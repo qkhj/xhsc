@@ -7,6 +7,7 @@ from scapp.config import logger
 from scapp.models.credit_data.sc_fixed_assets_estate import SC_Fixed_Assets_Estate
 from scapp.models.credit_data.sc_fixed_assets_equipment import SC_Fixed_Assets_Equipment
 from scapp.models.credit_data.sc_fixed_assets_car import SC_Fixed_Assets_Car
+from scapp.logic.total import AssetsList
 
 from scapp import app
 
@@ -132,59 +133,13 @@ def edit_equipment(id):
 
 		return redirect('Process/dqdc/dqdc')
 
-# 贷款调查——新增小额贷款(固定资产清单-汽车)
-@app.route('/Process/dqdc/new_car/<int:loan_apply_id>', methods=['GET','POST'])
-def new_car(loan_apply_id):
+# 贷款调查——新增小额贷款(固定资产清单)
+@app.route('/Process/dqdc/new_car', methods=['GET','POST'])
+def new_car():
 	if request.method == 'GET':
 		return render_template("Process/dqdc/new_car.html",loan_apply_id=loan_apply_id)
 	else:
-		try:
-			SC_Fixed_Assets_Car(loan_apply_id,request.form['name'],request.form['owner'],
-				request.form['type_brand'],request.form['purchase_date'],request.form['purchase_price'],
-				request.form['production_date'],request.form['total_price'],request.form['outward'],
-				request.form['remark']).add()
-
-			# 事务提交
-			db.session.commit()
-			# 消息闪现
-			flash('保存成功','success')
-		except:
-			# 回滚
-			db.session.rollback()
-			logger.exception('exception')
-			# 消息闪现
-			flash('保存失败','error')
-
-		return redirect('Process/dqdc/dqdc')
-
-# 贷款调查——编辑小额贷款(固定资产清单-汽车)
-@app.route('/Process/dqdc/edit_car/<int:id>', methods=['GET','POST'])
-def edit_car(id):
-	if request.method == 'GET':
-		fixed_assets_car = SC_Fixed_Assets_Car.query.filter_by(id=id).first()
-		return render_template("Process/dqdc/edit_car.html",fixed_assets_car=fixed_assets_car)
-	else:
-		try:
-			fixed_assets_car = SC_Fixed_Assets_Car.query.filter_by(id=id).first()
-			fixed_assets_car.name = request.form['name']
-			fixed_assets_car.owner = request.form['owner']
-			fixed_assets_car.type_brand = request.form['type_brand']
-			fixed_assets_car.purchase_date = request.form['purchase_date']
-			fixed_assets_car.purchase_price = request.form['purchase_price']
-			fixed_assets_car.production_date = request.form['production_date']
-			fixed_assets_car.total_price = request.form['total_price']
-			fixed_assets_car.outward = request.form['outward']
-			fixed_assets_car.remark = request.form['remark']
-
-			# 事务提交
-			db.session.commit()
-			# 消息闪现
-			flash('保存成功','success')
-		except:
-			# 回滚
-			db.session.rollback()
-			logger.exception('exception')
-			# 消息闪现
-			flash('保存失败','error')
-
-		return redirect('Process/dqdc/dqdc')
+		loan_apply_id = request.form['hiddenId']
+		assets = AssetsList()
+		assets.addList(loan_apply_id,request)
+		return redirect('Process/dqdc/dqdcXed_gdzcqd/'+loan_apply_id)
