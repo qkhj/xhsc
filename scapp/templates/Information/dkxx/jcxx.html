@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<style type="text/css">		
+		.table-list .table-label{width:150px;}		
+	</style>
+</head>
+
+<body>	
+	<div class="content">
+	<!--*****************************************基础信息**************************************************-->
+		<i class="icon-bookmark"></i><span class="titletip">基础信息</span>
+		<div class="divBorder">
+			<table class="table-list">
+				<tr>
+					<td class="table-label">贷款产品类型</td>
+					{%- if loan_apply.loan_type == '1' %}
+					<td>微贷款</td>		
+					{%- else %}
+					<td>小额贷款</td>		
+					{%- endif %}	
+					<td class="table-label">贷款类型</td>
+					{%- if loan_apply.loan_type == '1' %}
+					<td>微贷款</td>		
+					{%- else %}
+					<td>小额贷款</td>		
+					{%- endif %}								
+				</tr>
+				<tr>
+					<td class="table-label">贷款目的</td>
+					{%- for obj in loan_purpose %}
+						{%- if apply_info.loan_purpose == obj.id %}
+						<td>{{obj.type_name}}</td>
+						{%- endif %}
+					{%- endfor %}
+					<td class="table-label">客户经理</td>
+					<td>{{loan_apply.marketing_loan_officer_name.login_name}}</td>								
+				</tr>
+				<tr>
+					<td class="table-label">系统分类资产质量等级</td>
+					<td>正常</td>					
+					<td class="table-label">手工分类资产质量等级</td>
+					<td>正常</td>								
+				</tr>
+				<tr>
+					{%- if approval_decision %}
+					<td class="table-label">贷款金额(元)</td>
+					<td>{{approval_decision.amount}}</td>					
+					<td class="table-label">期数</td>
+					<td>{{approval_decision.deadline}}(月)</td>	
+					{%- else %}
+					<td class="table-label">贷款金额(元)</td>
+					<td>(未上会)</td>					
+					<td class="table-label">期数</td>
+					<td>(未上会)</td>	
+					{%- endif %}				
+				</tr>
+				<tr>
+					{%- if approval_decision %}
+					<td class="table-label">月利率</td>
+					<td>{{approval_decision.rates}}%</td>
+					{%- else %}
+					<td class="table-label">月利率</td>
+					<td>(未上会)</td>	
+					{%- endif %}		
+					<td class="table-label">货币</td>
+					<td>CNY</td>								
+				</tr>								
+			</table>
+		</div>
+	</div>
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript"></script>
+</body>
+</html>

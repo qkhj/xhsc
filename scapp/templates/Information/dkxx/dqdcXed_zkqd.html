@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<style type="text/css">	
+		input.btn-mini{width:20px;margin-top:0px;}	
+		input[type=text]{width:120px;}
+		select{width:100px;}
+	</style>
+</head>
+<body onload="sub();datepicker();$('input,textarea').attr({'disabled':'disabled'});">	
+	<form class="content" method="post" action="/Process/dqdc/new_zkqd">
+		<div class="tabbable">
+			<ul class="nav nav-tabs">
+				<li class="active"><a href="#tab1" id="fdcxd" data-toggle="tab" onclick="$('#dqdcXed_gdzcqd',window.parent.document).height(500);$('#content_frame',window.parent.parent.document).height(800);">应付账款详单</a></li>
+				<li><a href="#tab2" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');">应收账款详单</a></li>
+			</ul>						
+			<div class="tab-content">
+				<!--*********************************应付账款详单*******************************************-->
+				<div class="tab-pane active" id="tab1">
+					<i class="icon-bookmark"></i><span class="titletip">应付账款详单</span>		
+					<input type="button" value="+" onclick="addTd('yfzkxd','dqdcXed_zkqd')" class="btn btn-info btn-mini" />
+					<input type="button" value="-" onclick="removeTd('yfzkxd','dqdcXed_zkqd');sub()" class="btn btn-info btn-mini" />	
+					<div class="divBorder">	
+						<table class="table-list" cellspacing="10" id="yfzkxd">				
+							<tr>
+								<th>应付对象</th>  
+								<th>欠款日期</th>
+								<th>应付款日期</th>	
+								<th>应付金额</th>						
+								<th>应付类别</th>
+								<th>应付对象联系方式</th>						
+								<th>关系/生意模式</th>
+							</tr> 
+							{%- for obj in accounts_list %}
+								{%- if obj.mode_type==1%}
+								<tr class="center">
+									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" readonly="true"/></td>
+									<td><input type="text" name="occur_date" class="tbInput" value="{{obj.occur_date}}" readonly="true"/></td>
+									<td><input type="text" name="deadline" class="tbInput" value="{{obj.deadline}}" readonly="true"/></td>
+									<td><input type="text" name="original_price" class="subData1" value="{{obj.original_price}}" readonly="true"/></td>
+									<td><input type="text" name="pay_type" class="tbInput" value="{{obj.pay_type}}" readonly="true"/></td>
+									<td><input type="text" name="present_price" class="tbInput" value="{{obj.present_price}}" readonly="true"/></td>
+									<td><input type="text" name="cooperation_history" class="tbInput" value="{{obj.cooperation_history}}" readonly="true"/></td>
+									<td><input type="hidden" name="mode_type" class="tbInput" value="{{obj.mode_type}}"/></td>
+								</tr>
+								{%- endif%}	
+							{%- endfor %}								
+						</table>
+						<table id="kcxx" class="table-list">
+						<tr>
+							<th style="border-top:none;">
+								<b>合计</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;						
+								总金额:<span id="sub1"></span>
+							</th>
+						</tr>		
+					</table>
+					</div>
+					<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/><br/><br/><br/>		
+				</div><!--/应付账款详单-->
+
+				<!--**************************************应收账款详单**************************************-->
+				<div class="tab-pane" id="tab2">
+					<i class="icon-bookmark"></i><span class="titletip">应收账款详单</span>		
+					<input type="button" value="+" onclick="addTd('yszkxd','dqdcXed_zkqd')" class="btn btn-info btn-mini" />
+					<input type="button" value="-" onclick="removeTd('yszkxd','dqdcXed_zkqd');sub()" class="btn btn-info btn-mini" />
+							
+					<div class="divBorder">	
+						<table class="table-list" cellspacing="10" id="yszkxd">				
+							<tr>
+								<th>应收对象</th>  
+								<th>欠款日期</th>
+								<th>应还款日期</th>	
+								<th>应收金额</th>						
+								<th>应收类别</th>
+								<th>应收对象联系方式</th>						
+								<th>关系/生意模式</th>
+							</tr> 
+							{%- for obj in accounts_list %}
+								{%- if obj.mode_type==2%}
+								<tr class="center">
+									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" readonly="true"/></td>
+									<td><input type="text" name="occur_date" class="tbInput" value="{{obj.occur_date}}" readonly="true"/></td>
+									<td><input type="text" name="deadline" class="tbInput" value="{{obj.deadline}}" readonly="true"/></td>
+									<td><input type="text" name="original_price" class="subData2" value="{{obj.original_price}}" readonly="true"/></td>
+									<td><input type="text" name="pay_type" class="tbInput" value="{{obj.pay_type}}" readonly="true"/></td>
+									<td><input type="text" name="present_price" class="tbInput" value="{{obj.present_price}}" readonly="true"/></td>
+									<td><input type="text" name="cooperation_history" class="tbInput" value="{{obj.cooperation_history}}" readonly="true"/></td>
+									<td><input type="hidden" name="mode_type" class="tbInput" value="{{obj.mode_type}}"/></td>
+								</tr>	
+								{%- endif%}
+							{%- endfor %}		
+						</table>
+						<table id="kcxx" class="table-list">
+						<tr>
+							<th style="border-top:none;">
+								<b>合计</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;						
+								总金额:<span id="sub2"></span>
+							</th>
+						</tr>		
+					</table>
+					</div>
+					<input name="hiddenId" type="hidden" value="{{id}}"/>
+				</div><!--应收账款详单-->									
+			</div><!-- tabContent -->
+		</div>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		function sub(){
+			//var num=$(".tbData").length;			
+			//$("#sub1").text("总笔数："+num);
+			for(i=1;i<3;i++){
+				var sum=0;						
+				$.each($(".subData"+i),function(){ 
+					if(this.value=="")
+						sum=sum;
+					else
+						sum += parseFloat(this.value);					
+						$("#sub"+i).html(sum+"（<span class='je'>"+hjje($("#sub"+i),sum)+"</span>）"); 	
+				}); 
+			}
+		}
+	</script>
+</body>
+</html>
