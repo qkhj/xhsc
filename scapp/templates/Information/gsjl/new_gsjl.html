@@ -24,7 +24,7 @@
 	</script>
 </head>
 
-<body onload="datepicker();$('#start').timepicker();$('#end').timepicker();setTimeOut();">
+<body onload="datepicker();">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">客户经理管理</a>/<a href="#">工时记录</a>
 		</div>			
@@ -33,7 +33,7 @@
             {%- with messages = get_flashed_messages(with_categories=true) %}
 			  	{%- if messages %}
 		    	{%- for category, message in messages %}
-		    	<div class="alert alert-{{category}}" style="width:245px;margin:-10px auto 10px;">
+		    	<div class="alert alert-{{category}}">
 		      		{{message}}
 		      	</div>
 		    	{%- endfor %}
@@ -85,12 +85,12 @@
 							<td>
 								开始时间：
 								<span id="startTime">
-									<input type="text" name="beg_date" id="start" style="width:80px;" onblur="setHS()">
+									<input type="text" name="beg_date" id="start" style="width:80px;" onblur="checktime('start');">
 									<span class="textfieldRequiredMsg">不能为空</span>
 								</span><br/>
 								结束时间：
 								<span id="endTime">
-									<input type="text" name="end_date" id="end" style="width:80px;" onblur="setHS()"/>
+									<input type="text" name="end_date" id="end" style="width:80px;" onblur="checktime('end');"/>
 									<span class="textfieldRequiredMsg">不能为空</span>
 								</span>
 							</td>
@@ -132,6 +132,16 @@
 		var sprytextfield2 = new Spry.Widget.ValidationTextField("endTime", "none", {validateOn:["blur"]});
 		//var sprytextfield3 = new Spry.Widget.ValidationTextField("loan_period", "none", {validateOn:["blur"]});
 		var sprytextfield4 = new Spry.Widget.ValidationTextField("Time", "none", {validateOn:["blur"]});
+		function checktime(id){//验证时间格式
+			var reg=/^([0-1][0-9]|[2][0-3]):([0-5][0-9])$/;
+			var time=$("#"+id).val();
+			if(!reg.exec(time)){
+				alert("时间格式错误，请输入正确格式(如12:00)!")
+				$("#"+id).focus();
+			}
+			else
+				setHS();
+		}
 		function setHS(){
 			var startTime=$("#start").val();
 			var endTime=$("#end").val();
@@ -142,7 +152,7 @@
 				var engMinute=parseFloat(endTime.split(":")[1])
 				var hours=engHourse-startHourse
 				var minute=(engMinute-startMinute)/60
-				minute=Math.round(minute*10)
+				minute=Math.round(minute*100)
 				if(minute<0){
 					minute=minute+100
 					hours--;

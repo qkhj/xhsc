@@ -12,6 +12,10 @@ from scapp.config import logger
 from scapp.models import SC_Classify
 from scapp.models import View_Query_Loan
 from scapp.config import PER_PAGE
+from scapp.models.credit_data.sc_accounts_list import SC_Accounts_List
+from scapp.models.credit_data.sc_fixed_assets_car import SC_Fixed_Assets_Car
+from scapp.models.credit_data.sc_fixed_assets_estate import SC_Fixed_Assets_Estate
+from scapp.models.credit_data.sc_fixed_assets_equipment import SC_Fixed_Assets_Equipment
 
 class Total():
 #待办事项统计
@@ -90,3 +94,72 @@ class Property():
 		    sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
 		loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
 		return loan_apply
+#贷前调查
+class Examine():
+#先删除调查记录
+	def deleteList(self,loan_apply_id):
+		SC_Accounts_List.query.filter_by(loan_apply_id=loan_apply_id).delete()
+		db.session.flush()
+#新增页面所有调查记录
+	def addList(self,loan_apply_id,request):
+		try:
+			name_list = request.form.getlist('name')
+			original_price_list = request.form.getlist('original_price')
+			occur_date_list = request.form.getlist('occur_date')
+			deadline_list = request.form.getlist('deadline')
+			present_price_list = request.form.getlist('present_price')
+			cooperation_history_list = request.form.getlist('cooperation_history')
+			pay_type_list = request.form.getlist('pay_type')
+			mode_type_list = request.form.getlist('mode_type')
+			for i in range(len(name_list)):
+				SC_Accounts_List(loan_apply_id,name_list[i],original_price_list[i],occur_date_list[i],
+					deadline_list[i],present_price_list[i],cooperation_history_list[i],pay_type_list[i],
+					int(mode_type_list[i])).add()
+			# 事务提交
+			db.session.commit()
+			# 消息闪现
+			flash('保存成功','success')
+		except:
+			# 回滚
+			db.session.rollback()
+			logger.exception('exception')
+			# 消息闪现
+			flash('保存失败','error')
+#固定资产清单
+class AssetsList():
+	def addList(self,loan_apply_id,request):
+		try:
+			SC_Fixed_Assets_Car.query.filter_by(loan_apply_id=loan_apply_id).delete()
+			SC_Fixed_Assets_Equipment.query.filter_by(loan_apply_id=loan_apply_id).delete()
+			SC_Fixed_Assets_Estate.query.filter_by(loan_apply_id=loan_apply_id).delete()
+			db.session.flush()
+			name_list = request.form.getlist('name')
+			purchase_date_list = request.form.getlist('purchase_date')
+			purchase_price_list = request.form.getlist('purchase_price')
+			rate_list = request.form.getlist('rate')
+			total_list = request.form.getlist('total')
+			total_price_list = request.form.getlist('total_price')
+			rate_price_list = request.form.getlist('rate_price')
+			mode_list = request.form.getlist('mode')
+			for i in range(len(name_list)):
+				#新增车辆
+				if mode_list[i]=="3":
+					SC_Fixed_Assets_Car(loan_apply_id,name_list[i],purchase_date_list[i],purchase_price_list[i],
+						rate_list[i],total_list[i],total_price_list[i],rate_price_list[i]).add()
+				#新增设备
+				if mode_list[i]=="2":
+					SC_Fixed_Assets_Equipment(loan_apply_id,name_list[i],purchase_date_list[i],purchase_price_list[i],
+						rate_list[i],total_list[i],total_price_list[i],rate_price_list[i]).add()
+				if mode_list[i]=="1":
+					SC_Fixed_Assets_Estate(loan_apply_id,name_list[i],purchase_date_list[i],purchase_price_list[i],
+						rate_list[i],total_list[i],total_price_list[i],rate_price_list[i]).add()
+			# 事务提交
+			db.session.commit()
+			# 消息闪现
+			flash('保存成功','success')
+		except:
+			# 回滚
+			db.session.rollback()
+			logger.exception('exception')
+			# 消息闪现
+			flash('保存失败','error')
