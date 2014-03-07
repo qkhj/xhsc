@@ -1965,11 +1965,11 @@ if(table=="dxzchj"){//大项支出合计
 									"<span class='errorInfo'></span>"+
 								"</td>"+
 								"<td>"+
-									"<input type='text' class='subData2' name='rate_price' onclick='setJe(this)' value='0' onblur='sub()' readonly/>"+
+									"<input type='text' class='subData2' name='rate_price' onclick='setJe(this)' value='0' onkeyup='setJe(this)' onblur='sub()' />"+
 									"<br/><span class='je'>人民币</span>"+
 									"<span class='errorInfo'></span>"+	
-								"</td>"+	
-								"<td>"+
+								//"</td>"+	
+								//"<td>"+
 									"<input type='hidden' name='mode' value='1'/>"+	
 								"</td>"+			
 							"</tr>");
@@ -2002,11 +2002,11 @@ if(table=="sbjqcxd"){//设备及器材详单
 									"<span class='errorInfo'></span>"+
 								"</td>"+
 								"<td>"+
-									"<input type='text' class='subData4' name='rate_price' onclick='setJe(this)' value='0' onblur='sub()' readonly/>"+
+									"<input type='text' class='subData4' name='rate_price' onclick='setJe(this)' value='0' onkeyup='setJe(this)' onblur='sub()' />"+
 									"<br/><span class='je'>人民币</span>"+
 									"<span class='errorInfo'></span>"+	
-								"</td>"+	
-								"<td>"+
+								//"</td>"+	
+								//"<td>"+
 									"<input type='hidden' name='mode' value='2'/>"+	
 								"</td>"+			
 							"</tr>");
@@ -2039,11 +2039,11 @@ if(table=="clxd"){//车辆详单
 									"<span class='errorInfo'></span>"+
 								"</td>"+
 								"<td>"+
-									"<input type='text' class='subData6' name='rate_price' onclick='setJe(this)' value='0' onblur='sub()' readonly/>"+
+									"<input type='text' class='subData6' name='rate_price' onclick='setJe(this)' value='0' onkeyup='setJe(this)' onblur='sub()' />"+
 									"<br/><span class='je'>人民币</span>"+
 									"<span class='errorInfo'></span>"+	
-								"</td>"+	
-								"<td>"+
+								//"</td>"+	
+								//"<td>"+
 									"<input type='hidden' name='mode' value='3'/>"+	
 								"</td>"+			
 							"</tr>");
@@ -2111,8 +2111,8 @@ if(table=="clxd"){//车辆详单
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='cooperation_history' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+
-								"</td>"+
-								"<td>"+
+								//"</td>"+
+								//"<td>"+
 									"<input type='hidden' name='mode_type' value='1'></input>"+
 								"</td>"+				
 							"</tr>");
@@ -2149,8 +2149,8 @@ if(table=="clxd"){//车辆详单
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='cooperation_history' onchange='spryMaxLength(this,32)'/><br/>&nbsp;"+
-								"</td>"+	
-								"<td>"+
+								//"</td>"+	
+								//"<td>"+
 									"<input type='hidden' value='2' name='mode_type' /><br/>&nbsp;"+
 								"</td>"+				
 							"</tr>");
