@@ -100,11 +100,11 @@
 						<li onclick="leftmenu(this);changeiframe('Information/khxxgl')" id="khxxgl">
 							<a href="javascript:void(0);">客户信息管理</a>
 						</li>
-						<!--
+						{%- if role.role_level == 0 or role.role_level == 1 %}
 						<li onclick="leftmenu(this);changeiframe('Information/dkxxgl')" id="dkxxgl" >
 							<a href="javascript:void(0);">贷款信息管理</a>
 						</li>
-						-->
+						{%- endif %}
                         <!--<li onclick="leftmenu(this);changeiframe('Cust_mgr/search')" id="khjlgl" >-->
 							<!--<a href="javascript:void(0);">客户经理管理</a>-->
 						<!--</li>-->
@@ -171,6 +171,7 @@
 							<a href="javascript:void(0);">贷后变更审核</a>
 						</li> 
 						-->
+						<!--
 						<li onclick="leftmenu(this);changeiframe('Process/dhgl/dhgl')" id="dhgl" >
 							<a href="javascript:void(0);">贷后管理</a>
 						</li>  
@@ -182,7 +183,9 @@
 						<li onclick="leftmenu(this);changeiframe('Process/zcfl/zcfl')" id="zcfl" >
 							<a href="javascript:void(0);">资产分类</a>
 						</li> 
+
 						{%- endif %}	
+						-->
 					</ul>
 
                     <ul class="nav nav-list

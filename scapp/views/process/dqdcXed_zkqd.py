@@ -24,7 +24,7 @@ def new_zkqd():
 	examine.deleteList(loan_apply_id)
 	#新增
 	examine.addList(loan_apply_id,request)
-	return redirect('Process/dqdc/dqdcXed_zkqd/'+loan_apply_id)
+	return redirect('Process/dqdc/dqdcXed_zkqd/' + loan_apply_id)
 
 # 贷款调查——编辑小额贷款(账款清单)
 @app.route('/Process/dqdc/edit_zkqd/<int:id>', methods=['GET','POST'])

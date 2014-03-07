@@ -20,9 +20,9 @@ class SC_Fixed_Assets_Car(db.Model):
     total_price= db.Column(db.String(32))#总价
     # outward=db.Column(db.String(64))#外观评价
     # remark=db.Column(db.String(64))#备注
-    rate =db.Column(db.Integer)#折旧率
-    total =db.Column(db.Integer)#数量
-    rate_price=db.Column(db.Integer)#折旧后价值
+    rate =db.Column(db.String)#折旧率
+    total =db.Column(db.String)#数量
+    rate_price=db.Column(db.String)#折旧后价值
 
     def __init__(self,loan_apply_id,name,purchase_date,purchase_price,rate,total,total_price,
                  rate_price):

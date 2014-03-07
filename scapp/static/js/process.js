@@ -1953,14 +1953,14 @@ if(table=="dxzchj"){//大项支出合计
 									"<span class='errorInfo'></span>"+	
 								"</td>"+
 								"<td>"+
-									"<input type='text' name='rate' onchange='check(this,1,100)' onblur='zjl(this,\"total_price\",\"rate\",\"rate_price\");sub()' onkeyup='checkNUM(this)' style='width:40px'/>%"+
-									"<br/>&nbsp;<span class='errorInfo'>请输入1-100的有效数字</span>"+
+									"<input type='text' name='rate' onchange='check(this,1,1000)' onblur='zjl(this,\"total_price\",\"rate\",\"rate_price\");sub()' onkeyup='checkNUM(this)' style='width:40px'/>%"+
+									"<br/>&nbsp;<span class='errorInfo'>请输入1-1000的有效数字</span>"+
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='total' onkeyup='checkNUM(this)' maxlength='10' onblur='zjz(this,\"purchase_price\",\"total\",\"total_price\");zjl(this,\"total_price\",\"rate\",\"rate_price\");sub()'/><br/>&nbsp;"+	
 								"</td>"+
 								"<td>"+
-									"<input type='text' name='total_price' class='subData1' onclick='setJe(this)' value='0' readonly/>"+
+									"<input type='text' name='total_price' class='subData1' onclick='setJe(this)' value='0'/>"+
 									"<br/><span class='je'>人民币</span>"+	
 									"<span class='errorInfo'></span>"+
 								"</td>"+
@@ -1990,19 +1990,19 @@ if(table=="sbjqcxd"){//设备及器材详单
 									"<span class='errorInfo'></span>"+	
 								"</td>"+
 								"<td>"+
-									"<input type='text' name='rate' onchange='check(this,1,100)' onblur='zjl(this,\"total_price\",\"rate\",\"rate_price\");sub()' onkeyup='checkNUM(this)' style='width:40px'/>%"+
-									"<br/>&nbsp;<span class='errorInfo'>请输入1-100的有效数字</span>"+
+									"<input type='text' name='rate' onchange='check(this,1,1000)' onblur='zjl(this,\"total_price\",\"rate\",\"rate_price\");sub()' onkeyup='checkNUM(this)' style='width:40px'/>%"+
+									"<br/>&nbsp;<span class='errorInfo'>请输入1-1000的有效数字</span>"+
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='total' onkeyup='checkNUM(this)' maxlength='10' onblur='zjz(this,\"purchase_price\",\"total\",\"total_price\");zjl(this,\"total_price\",\"rate\",\"rate_price\");sub()'/><br/>&nbsp;"+	
 								"</td>"+
 								"<td>"+
-									"<input type='text' name='total_price' class='subData3' onclick='setJe(this)' value='0' readonly/>"+
+									"<input type='text' name='total_price' class='subData3' onclick='setJe(this)' value='0'/>"+
 									"<br/><span class='je'>人民币</span>"+	
 									"<span class='errorInfo'></span>"+
 								"</td>"+
 								"<td>"+
-									"<input type='text' class='subData4' name='rate_price' onclick='setJe(this)' value='0' onkeyup='setJe(this)' onblur='sub()' />"+
+								"<input type='text' class='subData4' name='rate_price' onclick='setJe(this)' value='0' onkeyup='setJe(this)' onblur='sub()' />"+
 									"<br/><span class='je'>人民币</span>"+
 									"<span class='errorInfo'></span>"+	
 								//"</td>"+	
@@ -2027,14 +2027,14 @@ if(table=="clxd"){//车辆详单
 									"<span class='errorInfo'></span>"+	
 								"</td>"+
 								"<td>"+
-									"<input type='text' name='rate' onchange='check(this,1,100)' onblur='zjl(this,\"total_price\",\"rate\",\"rate_price\");sub()' onkeyup='checkNUM(this)' style='width:40px'/>%"+
-									"<br/>&nbsp;<span class='errorInfo'>请输入1-100的有效数字</span>"+
+									"<input type='text' name='rate' onchange='check(this,1,1000)' onblur='zjl(this,\"total_price\",\"rate\",\"rate_price\");sub()' onkeyup='checkNUM(this)' style='width:40px'/>%"+
+									"<br/>&nbsp;<span class='errorInfo'>请输入1-1000的有效数字</span>"+
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='total' onkeyup='checkNUM(this)' maxlength='10' onblur='zjz(this,\"purchase_price\",\"total\",\"total_price\");zjl(this,\"total_price\",\"rate\",\"rate_price\");sub()'/><br/>&nbsp;"+	
 								"</td>"+
 								"<td>"+
-									"<input type='text' name='total_price' class='subData5' onclick='setJe(this)' value='0' readonly/>"+
+									"<input type='text' name='total_price' class='subData5' onclick='setJe(this)' value='0'/>"+
 									"<br/><span class='je'>人民币</span>"+	
 									"<span class='errorInfo'></span>"+
 								"</td>"+

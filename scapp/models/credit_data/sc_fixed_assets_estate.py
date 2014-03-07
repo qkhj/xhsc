@@ -22,9 +22,9 @@ class SC_Fixed_Assets_Estate(db.Model):
     # remark=db.Column(db.String(64))#备注
     purchase_date=db.Column(db.Date)#购置时间
     total_price= db.Column(db.String(32))#总价
-    rate =db.Column(db.Integer)#折旧率
-    total =db.Column(db.Integer)#数量
-    rate_price=db.Column(db.Integer)#折旧后价值
+    rate =db.Column(db.String)#折旧率
+    total =db.Column(db.String)#数量
+    rate_price=db.Column(db.String)#折旧后价值
     
 
     def __init__(self,loan_apply_id,name,purchase_date,purchase_price,rate,total,total_price,
