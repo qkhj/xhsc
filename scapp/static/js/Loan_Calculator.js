@@ -44,9 +44,9 @@ function show_calculate(){
 }
 
 function tqhk(qsqs,yhqbj,table){
-    var qs=parseInt($('select[name=loan_deadline] option:selected').val())
-    var bj=parseFloat($('input[name=loan_amount_num]').val())
-    var yll=parseFloat($('input[name=annual_interest_rate]').val())/100
+    var qs=parseInt($('select[name=deadline] option:selected').val())
+    var bj=parseFloat($('input[name=amount]').val())
+    var yll=parseFloat($('input[name=rates]').val())/100
 	var qsqs=parseInt(qsqs)
 	var syq=qsqs-1
     var syqbj=parseFloat($("#mybj"+syq).val())
@@ -67,7 +67,7 @@ function tqhk(qsqs,yhqbj,table){
         $li_data = $("<td></td>");
         var next_count=parseInt(n)+1
         $ul.append($li_qs.append(n))
-        $ul.append($li_mybj.append("<input class='tbblur1' id='mybj"+n+"' name='mybj"+n+"' value='"+result['mybj'][n]+"' onchange='tqhk("+next_count+","+result['yhqbj'][n-1]+",\"table_result\")'/>"))
+        $ul.append($li_mybj.append("<input type='text' class='tbblur1' id='mybj"+n+"' name='mybj"+n+"' value='"+result['mybj'][n]+"' onchange='tqhk("+next_count+","+result['yhqbj'][n-1]+",\"table_result\")'/>"))
 
         $ul.append($li_mylx.append("<span class='tbblur2' id='mylx"+n+"'>"+result['mylx'][n]+"</span><input type='hidden' name='mylx"+n+"' value='"+result['mylx'][n]+"'>"))
         $ul.append($li_mybx.append("<span class='tbblur3' id='mybx"+n+"'>"+result['mybx'][n]+"</span><input type='hidden' name='mybx"+n+"' value='"+result['mybx'][n]+"'>"))
