@@ -139,11 +139,6 @@ def edit_dkfk(id):
         
     return redirect("Process/dkfk/dkfk")
 
-# 贷款放款——编辑放款(放款信息)
-@app.route('/Process/dkfk/fkxx', methods=['GET'])
-def dkfk_fkxx():
-    return render_template("Process/dkfk/fkxx.html")
-
 # 贷款放款——编辑放款(还款计划)
 @app.route('/Process/dkfk/hkjh', methods=['GET'])
 def dkfk_hkjh():

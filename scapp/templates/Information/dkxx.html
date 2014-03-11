@@ -58,16 +58,35 @@
 					<table class="table-list">
 						<tr>
 							<td class="table-label">贷款编号</td>
-							<td style="width:8%">1</td>
+							<td style="width:8%">{{loan_apply.id}}</td>
 							<td class="table-label">客户编号</td>
-							<td style="width:8%">1</td>
+							<td style="width:8%">{{loan_apply.belong_customer_value}}</td>
 							<td class="table-label">客户名称</td>							
-							<td style="width:10%">王军忠</td>
-							<td class="table-label">贷款状态</td>							
-							<td style="width:10%">贷款期</td>
-							<td  style="text-align:center;">
-								<a type="button" class="btn btn-info" href="#" onclick="iframe('Information/dkxxgl')">返回</a>
-							</td>
+							<td style="width:10%">{{loan_apply.customer_name}}</td>
+							<td class="table-label">贷款状态</td>	
+							{%- if loan_apply.process_status == '101' %}	
+							<td style="width:10%">贷款已申请</td>		
+							{%- elif loan_apply.process_status == '201' %}			
+							<td style="width:10%">贷款申请已审批</td>
+							{%- elif loan_apply.process_status == '202' %}			
+							<td style="width:10%">贷款申请被拒绝</td>
+							{%- elif loan_apply.process_status == '301' %}	
+							<td style="width:10%">贷款已调查</td>		
+							{%- elif loan_apply.process_status == '401' %}			
+							<td style="width:10%">贷款调查已审批</td>
+							{%- elif loan_apply.process_status == '402' %}			
+							<td style="width:10%">贷款调查后拒绝</td>
+							{%- elif loan_apply.process_status == '501' %}	
+							<td style="width:10%">上会通过</td>	
+							{%- elif loan_apply.process_status == '502' %}	
+							<td style="width:10%">有条件通过</td>	
+							{%- elif loan_apply.process_status == '503' %}	
+							<td style="width:10%">重新调查</td>	
+							{%- elif loan_apply.process_status == '504' %}	
+							<td style="width:10%">上会被拒绝</td>	
+							{%- elif loan_apply.process_status == '601' %}			
+							<td style="width:10%">贷款计划通过</td>	
+							{%- endif %}
 						</tr>										
 					</table>
 				</div>														
@@ -80,13 +99,13 @@
 				<li >
 					<a onclick="$('#spxx_sqb').click();selectTag('tagContent1',this);" href="javascript:void(0)">审批信息</a> 
 				</li>
-				<li>
+				<li style="display:none">
 					<a onClick="selectTag('tagContent2',this);resizeFrame('hkjl');" href="javascript:void(0)">还款记录</a>
 				</li>
-				<li>
+				<li style="display:none">
 					<a onClick="selectTag('tagContent3',this);resizeFrame('glxxlb');" href="javascript:void(0)">贷后监控</a>
 				</li>
-				<li>
+				<li style="display:none">
 					<a onClick="selectTag('tagContent4',this);resizeFrame('dhbg');Frame();" href="javascript:void(0)">贷后变更</a>
 				</li>				
 			</ul>
@@ -98,15 +117,19 @@
 						<li class="selectTag"> 
 							<a onclick="tab('tagContent01','tabs1',this);Frame();" id="dkxx_jcxx" href="javascript:void(0)">基础信息</a> 
 						</li>
-						<li >
+						{%- if loan_apply.process_status >= '601'%}
+						<li>
+						{%- else %}
+						<li style="display:none">
+						{%- endif %}
 							<a onclick="tab('tagContent02','tabs1',this);Frame();" href="javascript:void(0)">还款计划表</a> 
 						</li>										
 					</ul>
 					<div class="tab" id="tagContent01">					
-						<iframe frameborder="0" width="100%;" id="jcxx" src="/Process/dhbg/jcxx" onload="resizeFrame('jcxx');"></iframe>
+						<iframe frameborder="0" width="100%;" id="jcxx" src="/Information/dkxx/jcxx/{{loan_apply.id}}" onload="resizeFrame('jcxx');"></iframe>
 					</div><!-- /基础信息 -->
 					<div class="tab" id="tagContent02" style="display:none;">
-						<iframe frameborder="0" width="100%;" id="hkjhb" src="/Process/dkfk/hkjh" onload="resizeFrame('hkjhb');"></iframe>
+						<iframe frameborder="0" width="100%;" id="hkjhb" src="/Information/dkxx/hkjh/{{loan_apply.id}}" onload="resizeFrame('hkjhb');"></iframe>
 					</div><!-- /还款计划表 -->
 				</div><!-- /第一个标签的内容 -->
 <!-- *******************************************第二个标签的内容*************************************************** -->
@@ -115,22 +138,34 @@
 						<li class="selectTag"> 
 							<a onclick="tab('tagContent11','tabs2',this);Frame();" id="spxx_sqb" href="javascript:void(0)">申请表</a> 
 						</li>
-						<li >
+						{%- if loan_apply.process_status >= '201'%}
+						<li>
+						{%- else %}
+						<li style="display:none">
+						{%- endif %}
 							<a onclick="$('#jbqk').click();tab('tagContent12','tabs2',this);Frame();" href="javascript:void(0)">调查表</a> 
 						</li>	
-						<li >
+						{%- if loan_apply.process_status >= '501'%}
+						<li>
+						{%- else %}
+						<li style="display:none">
+						{%- endif %}
 							<a onclick="tab('tagContent13','tabs2',this);Frame();" href="javascript:void(0)">审批决议</a> 
 						</li>
-						<li >
+						{%- if loan_apply.process_status >= '601'%}
+						<li>
+						{%- else %}
+						<li style="display:none">
+						{%- endif %}
 							<a onclick="tab('tagContent14','tabs2',this);Frame();" href="javascript:void(0)">放款信息</a> 
 						</li>									
 					</ul>
 					<div class="tab" id="tagContent11">					
-						<iframe frameborder="0" width="100%;" id="sqb" src="/Process/dksqsh/dksqsh_info" height="1700"></iframe>
+						<iframe frameborder="0" width="100%;" id="sqb" src="/Information/dkxx/dksqsh_info/{{loan_apply.belong_customer_type}}/{{loan_apply.belong_customer_value}}/{{loan_apply.id}}" height="1700"></iframe>
 					</div><!-- /申请表 -->
 					<div class="tab" id="tagContent12" style="display:none;">
 						<!--微贷-->
-						<div id="wdDcb"  style="display:none;">
+						<div id="wdDcb" style="display:none;">
 							<ul id="tabs21" class="tags">
 								<li class="selectTag"> 
 									<a onclick="thirdTb('tagContent121','tabs21',this);Frame();" id="dcb_jbqk" href="javascript:void(0)">基本情况</a> 
@@ -143,13 +178,13 @@
 								</li>																
 							</ul>
 							<div class="thirdTb" id="tagContent121">
-								<iframe frameborder="0" width="100%;" id="dqdcWd_jbqk" src="/Process/dqdc/dqdcWd_jbqk" height="975px"></iframe>	
+								<iframe frameborder="0" width="100%;" id="dqdcWd_jbqk" src="/Information/dkxx/dqdcWd_jbqk/{{loan_apply.belong_customer_type}}/{{loan_apply.belong_customer_value}}/{{loan_apply.id}}" height="975px"></iframe>	
 							</div><!-- /基础信息 -->		
 							<div class="thirdTb" id="tagContent122" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcWd_zcfzb" src="/Process/dqdc/dqdcWd_zcfzb" height="1550px"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcWd_zcfzb" src="/Information/dkxx/dqdcWd_zcfzb/{{loan_apply.id}}" height="1550px"></iframe>
 							</div><!-- /资产负债表 -->		
 							<div class="thirdTb" id="tagContent123" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcWd_syb" src="/Process/dqdc/dqdcWd_syb" height="2110px"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcWd_syb" src="/Information/dkxx/dqdcWd_syb/{{loan_apply.id}}" height="2110px"></iframe>
 							</div><!-- /损益表 -->
 						</div>	
 						<!--小额贷 ////////////////////////未完成-->
@@ -184,39 +219,39 @@
 								</li>															
 							</ul>
 							<div class="thirdTb" id="tagContent124">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_jbqk" src="/Process/dqdc/dqdcXed_jbqk" height="2460px"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_jbqk" src="/Information/dkxx/dqdcXed_jbqk/{{loan_apply.belong_customer_type}}/{{loan_apply.belong_customer_value}}/{{loan_apply.id}}" height="2460px"></iframe>
 							</div><!-- /基础信息 -->		
 							<div class="thirdTb" id="tagContent125" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_zcfzb" src="/Process/dqdc/dqdcXed_zcfzb" height="1100px"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_zcfzb" src="/Information/dkxx/dqdcXed_zcfzb/{{loan_apply.id}}" height="1100px"></iframe>
 							</div><!-- /资产负债表 -->		
 							<div class="thirdTb" id="tagContent126" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_jcjy" src="/Process/dqdc/dqdcXed_jcjy" height="550px"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_jcjy" src="/Information/dkxx/dqdcXed_jcjy/{{loan_apply.id}}" height="550px"></iframe>
 							</div><!-- /交叉检验 -->
 							<div class="thirdTb" id="tagContent127" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_ysqkfx" src="/Process/dqdc/dqdcXed_ysqkfx" height="1150px"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_ysqkfx" src="/Information/dkxx/dqdcXed_ysqkfx/{{loan_apply.id}}" height="1150px"></iframe>
 							</div><!-- /损益情况分析 -->
 							<div class="thirdTb" id="tagContent128" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_xjlfx" src="/Process/dqdc/dqdcXed_xjlfx" height="1460px"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_xjlfx" src="/Information/dkxx/dqdcXed_xjlfx/{{loan_apply.id}}" height="1460px"></iframe>
 							</div><!-- /现金流分析 -->
 							<div class="thirdTb" id="tagContent129" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_dbdydcb" src="/Process/dqdc/dqdcXed_dbdydcb" height="600px"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_dbdydcb" src="/Information/dkxx/dqdcXed_dbdydcb/{{loan_apply.id}}" height="600px"></iframe>
 							</div><!-- /担保抵押调查表 -->
 							<div class="thirdTb" id="tagContent1210" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_gdzcqd" src="/Process/dqdc/dqdcXed_gdzcqd" onload="$('#dqdcXed_gdzcqd').height($('#dqdcXed_gdzcqd').contents().find('#FDC').height()+40)"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_gdzcqd" src="/Information/dkxx/dqdcXed_gdzcqd/{{loan_apply.id}}" onload="$('#dqdcXed_gdzcqd').height($('#dqdcXed_gdzcqd').contents().find('#FDC').height()+40)"></iframe>
 							</div><!-- /固定资产清单 -->
 							<div class="thirdTb" id="tagContent1211" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_kc" src="/Process/dqdc/dqdcXed_kc" onload="$('#dqdcXed_kc').height($('#dqdcXed_kc').contents().find('.content').height()-50)"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_kc" src="/Information/dkxx/dqdcXed_kc/{{loan_apply.id}}" onload="$('#dqdcXed_kc').height($('#dqdcXed_kc').contents().find('.content').height()-50)"></iframe>
 							</div><!-- /库存 -->
 							<div class="thirdTb" id="tagContent1212" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_zkqd" src="/Process/dqdc/dqdcXed_zkqd" onload="$('#dqdcXed_zkqd').height($('#dqdcXed_zkqd').contents().find('.content').height()-50)"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_zkqd" src="/Information/dkxx/dqdcXed_zkqd/{{loan_apply.id}}" onload="$('#dqdcXed_zkqd').height($('#dqdcXed_zkqd').contents().find('.content').height()-50)"></iframe>
 							</div><!-- /账款清单 -->
 						</div>	
 					</div><!-- /调查表 -->
 					<div class="tab" id="tagContent13" style="display:none;">
-						<iframe frameborder="0" width="100%;" id="dksp_info" src="/Process/dksp/dksp_info" height="850"></iframe>
+						<iframe frameborder="0" width="100%;" id="dksp_info" src="/Information/dkxx/edit_sdhjyd/{{loan_apply.id}}" height="850"></iframe>
 					</div><!-- /审批决议 -->
 					<div class="tab" id="tagContent14" style="display:none;">
-						<iframe frameborder="0" width="100%;" id="fkxx" src="/Process/dkfk/fkxx" height="200"></iframe>
+						<iframe frameborder="0" width="100%;" id="fkxx" src="/Information/dkxx/fkxx/{{loan_apply.id}}" height="200"></iframe>
 					</div><!-- /放款信息 -->					
 				</div><!-- /第二个标签的内容 -->
 <!-- *****************************************************第三个标签的内容********************************************** -->

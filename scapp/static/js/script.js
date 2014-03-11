@@ -1,8 +1,10 @@
 ﻿//定义常量 与后台对应
 var PROCESS_STATUS_DKSQ = '101' //1.新申请
 var PROCESS_STATUS_DKSQSH = '201' //2分配A、B、运营岗
+var PROCESS_STATUS_DKSQSH_JUJUE = '202' //2申请被拒绝
 var PROCESS_STATUS_DQDC = '301' //3.已分配/待调查
 var PROCESS_STATUS_DKSP = '401' //4.分配审贷会成员
+var PROCESS_STATUS_DKSP_JUJUE = '402' //4.调查被拒绝
 var PROCESS_STATUS_SPJY_TG = '501' //5.审批通过
 var PROCESS_STATUS_SPJY_YTJTG = '502' //5.有条件通过
 var PROCESS_STATUS_SPJY_CXDC = '503' //5.重新调查
@@ -23,7 +25,6 @@ function createForm(action,arr){
     }
     tmpForm.appendTo(document.body).submit();
 }
-
 
 function submitForm(formId,action){
     document.getElementById(formId).action = action;

@@ -17,14 +17,14 @@
 	</style>
 </head>
 
-<body onload="sub();datepicker();">	
+<body onload="sub();datepicker();$('input,textarea').attr({'disabled':'disabled'});">	
 	<form class="content" method="post" action="/Process/dqdc/new_car">	
 	<div class="content">
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#tab1" data-toggle="tab" onclick="Frame();doubleIframe('dqdcXed_gdzcqd');">房地产详单</a></li>
-				<li><a href="#tab2" data-toggle="tab" onclick="Frame();doubleIframe('dqdcXed_gdzcqd');">设备及器材详单</a></li>
-				<li><a href="#tab3" data-toggle="tab" onclick="Frame();doubleIframe('dqdcXed_gdzcqd');">车辆详单</a></li>
+				<li class="active"><a href="#tab1" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');">房地产详单</a></li>
+				<li><a href="#tab2" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');">设备及器材详单</a></li>
+				<li><a href="#tab3" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');">车辆详单</a></li>
 			</ul>						
 			<div class="tab-content">
 				<!--房地产详单-->
@@ -54,8 +54,8 @@
 									<td><input type="text" name="rate" class="tbInput" value="{{obj.rate}}" readonly="true"/></td>	
 									<td><input type="text" name="total" class="tbInput" value="{{obj.total}}" readonly="true"/></td>	
 									<td><input type="text" name="total_price" class="subData1" value="{{obj.total_price}}" readonly="true"/></td>	
-									<td><input type="text" name="rate_price" class="subData2" value="{{obj.rate_price}}" readonly="true"/><!-- </td>
-									<td> --><input type="hidden" name="mode" value="1"/></td>		
+									<td><input type="text" name="rate_price" class="subData2" value="{{obj.rate_price}}" readonly="true"/></td>		
+									<td><input type="hidden" name="mode" value="1"/></td>		
 								</tr>	
 								{%- endfor %}								
 							</table>
@@ -69,7 +69,6 @@
 								</tr>		
 							</table>
 						</div>
-						<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/><br/><br/><br/>
 					</div>
 				</div><!--/房地产详单-->
 
@@ -78,8 +77,8 @@
 					<!--*****************************************设备及器材详单**************************************************-->
 					<div id="SBXD">
 						<i class="icon-bookmark"></i><span class="titletip">设备及器材详单</span>
-						<input type="button" value="+" id="add2" onclick="addTd('sbjqcxd','dqdcXed_gdzcqd')" class="btn btn-info btn-mini" />
-						<input type="button" value="-" id="cut2" onclick="removeTd('sbjqcxd','dqdcXed_gdzcqd');sub()" class="btn btn-info btn-mini" />
+						<input type="button" value="+" onclick="addTd('sbjqcxd','dqdcXed_gdzcqd')" class="btn btn-info btn-mini" />
+						<input type="button" value="-" onclick="removeTd('sbjqcxd','dqdcXed_gdzcqd');sub()" class="btn btn-info btn-mini" />
 						<div class="divBorder">	
 							<table class="table-list" cellspacing="10" id="sbjqcxd">
 								<tr>
@@ -99,8 +98,8 @@
 									<td><input type="text" name="rate" class="tbInput" value="{{obj.rate}}" readonly="true"/></td>	
 									<td><input type="text" name="total" class="tbInput" value="{{obj.total}}" readonly="true"/></td>	
 									<td><input type="text" name="total_price" class="subData3" value="{{obj.total_price}}" readonly="true"/></td>	
-									<td><input type="text" name="rate_price" class="subData4" value="{{obj.rate_price}}" readonly="true"/><!-- </td>
-									<td> --><input type="hidden" name="mode" value="2"/></td>		
+									<td><input type="text" name="rate_price" class="subData4" value="{{obj.rate_price}}" readonly="true"/></td>		
+									<td><input type="hidden" name="mode" value="2"/></td>		
 								</tr>	
 								{%- endfor %}															
 							</table>
@@ -113,8 +112,7 @@
 									</th>
 								</tr>		
 							</table>
-						</div>
-						<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/><br/><br/><br/>						
+						</div>					
 					</div>
 				</div><!--设备及器材详单-->		
 
@@ -144,8 +142,8 @@
 									<td><input type="text" name="rate" class="tbInput" value="{{obj.rate}}" readonly="true"/></td>	
 									<td><input type="text" name="total" class="tbInput" value="{{obj.total}}" readonly="true"/></td>	
 									<td><input type="text" name="total_price" class="subData5" value="{{obj.total_price}}" readonly="true"/></td>	
-									<td><input type="text" name="rate_price" class="subData6" value="{{obj.rate_price}}" readonly="true"/><!-- </td>
-									<td> --><input type="hidden" name="mode" value="3"/></td>		
+									<td><input type="text" name="rate_price" class="subData6" value="{{obj.rate_price}}" readonly="true"/></td>		
+									<td><input type="hidden" name="mode" value="3"/></td>		
 								</tr>	
 								{%- endfor %}							
 							</table>
@@ -160,7 +158,6 @@
 							</table>
 						</div>
 						<input name="hiddenId" type="hidden" value="{{id}}"/>
-						<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/><br/><br/><br/>
 					</div>
 				</div><!--车辆详单-->						
 			</div><!-- tabContent -->
