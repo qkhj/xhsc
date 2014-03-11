@@ -44,14 +44,42 @@
 							{%- for obj in accounts_list %}
 								{%- if obj.mode_type==1%}
 								<tr class="center">
-									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" readonly="true"/></td>
-									<td><input type="text" name="occur_date" class="tbInput" value="{{obj.occur_date}}" readonly="true"/></td>
-									<td><input type="text" name="deadline" class="tbInput" value="{{obj.deadline}}" readonly="true"/></td>
-									<td><input type="text" name="original_price" class="subData1" value="{{obj.original_price}}" readonly="true"/></td>
-									<td><input type="text" name="pay_type" class="tbInput" value="{{obj.pay_type}}" readonly="true"/></td>
-									<td><input type="text" name="present_price" class="tbInput" value="{{obj.present_price}}" readonly="true"/></td>
-									<td><input type="text" name="cooperation_history" class="tbInput" value="{{obj.cooperation_history}}" readonly="true"/><!-- </td>
-									<td> --><input type="hidden" name="mode_type" class="tbInput" value="{{obj.mode_type}}"/></td>
+									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" /></td>
+									<td><input type="text" name="occur_date" value="{{obj.occur_date}}" class='datepicker' data-date-format='yyyy-mm-dd' readonly/></td>
+									<td><input type="text" name="deadline" value="{{obj.deadline}}" class='datepicker' data-date-format='yyyy-mm-dd' readonly/></td>
+									<td><input type="text" name="original_price" class="subData1" value="{{obj.original_price}}" /></td>
+									<td>
+									<select name="pay_type" value="{{obj.pay_type}}" >
+										{%- if obj.pay_type=='现金'%}
+										<option value='现金' selected>现金</option>
+										{%- else %}
+										<option value='现金'>现金</option>
+										{%- endif %}
+										{%- if obj.pay_type=='预付款'%}
+										<option value='预付款' selected>预付款</option>
+										{%- else %}
+										<option value='预付款'>预付款</option>
+										{%- endif %}
+										{%- if obj.pay_type=='赊账'%}
+										<option value='赊账' selected>赊账</option>
+										{%- else %}
+										<option value='赊账'>赊账</option>
+										{%- endif %}
+										{%- if obj.pay_type=='短期票据'%}
+										<option value='短期票据' selected>短期票据</option>
+										{%- else %}
+										<option value='短期票据'>短期票据</option>
+										{%- endif %}
+										{%- if obj.pay_type=='长期票据'%}
+										<option value='长期票据' selected>长期票据</option>
+										{%- else %}
+										<option value='长期票据'>长期票据</option>
+										{%- endif %}
+									</select>
+									</td>
+									<td><input type="text" name="present_price" class="tbInput" value="{{obj.present_price}}" /></td>
+									<td><input type="text" name="cooperation_history" class="tbInput" value="{{obj.cooperation_history}}" /></td>
+									<td><input type="hidden" name="mode_type" class="tbInput" value="{{obj.mode_type}}"/></td>
 								</tr>
 								{%- endif%}	
 							{%- endfor %}								
@@ -88,6 +116,44 @@
 							{%- for obj in accounts_list %}
 								{%- if obj.mode_type==2%}
 								<tr class="center">
+<<<<<<< .mine
+									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" /></td>
+									<td><input type="text" name="occur_date" value="{{obj.occur_date}}" class='datepicker' data-date-format='yyyy-mm-dd' readonly/></td>
+									<td><input type="text" name="deadline" value="{{obj.deadline}}" class='datepicker' data-date-format='yyyy-mm-dd' readonly/></td>
+									<td><input type="text" name="original_price" class="subData1" value="{{obj.original_price}}" /></td>
+									<td>
+									<select name="pay_type" value="{{obj.pay_type}}" >
+										{%- if obj.pay_type=='现金'%}
+										<option value='现金' selected>现金</option>
+										{%- else %}
+										<option value='现金'>现金</option>
+										{%- endif %}
+										{%- if obj.pay_type=='预付款'%}
+										<option value='预付款' selected>预付款</option>
+										{%- else %}
+										<option value='预付款'>预付款</option>
+										{%- endif %}
+										{%- if obj.pay_type=='赊账'%}
+										<option value='赊账' selected>赊账</option>
+										{%- else %}
+										<option value='赊账'>赊账</option>
+										{%- endif %}
+										{%- if obj.pay_type=='短期票据'%}
+										<option value='短期票据' selected>短期票据</option>
+										{%- else %}
+										<option value='短期票据'>短期票据</option>
+										{%- endif %}
+										{%- if obj.pay_type=='长期票据'%}
+										<option value='长期票据' selected>长期票据</option>
+										{%- else %}
+										<option value='长期票据'>长期票据</option>
+										{%- endif %}
+									</select>
+									</td>
+									<td><input type="text" name="present_price" class="tbInput" value="{{obj.present_price}}" /></td>
+									<td><input type="text" name="cooperation_history" class="tbInput" value="{{obj.cooperation_history}}" /></td>
+									<td><input type="hidden" name="mode_type" class="tbInput" value="{{obj.mode_type}}"/></td>
+=======
 									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" readonly="true"/></td>
 									<td><input type="text" name="occur_date" class="tbInput" value="{{obj.occur_date}}" readonly="true"/></td>
 									<td><input type="text" name="deadline" class="tbInput" value="{{obj.deadline}}" readonly="true"/></td>
@@ -96,6 +162,7 @@
 									<td><input type="text" name="present_price" class="tbInput" value="{{obj.present_price}}" readonly="true"/></td>
 									<td><input type="text" name="cooperation_history" class="tbInput" value="{{obj.cooperation_history}}" readonly="true"/><!-- </td>
 									<td> --><input type="hidden" name="mode_type" class="tbInput" value="{{obj.mode_type}}"/></td>
+>>>>>>> .r184
 								</tr>	
 								{%- endif%}
 							{%- endfor %}		
