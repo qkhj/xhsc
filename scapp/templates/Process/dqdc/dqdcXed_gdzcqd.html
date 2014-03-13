@@ -48,14 +48,36 @@
 								
 								{%- for obj in fixed_assets_estate %}							
 								<tr class="center">
-									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" readonly="true"/></td>			
-									<td><input type="text" name="purchase_date" class="tbInput" value="{{obj.purchase_date}}" readonly="true"/></td>	
-									<td><input type="text" name="purchase_price" class="tbInput" value="{{obj.purchase_price}}" readonly="true"/></td>	
-									<td><input type="text" name="rate" class="tbInput" value="{{obj.rate}}" readonly="true"/></td>	
-									<td><input type="text" name="total" class="tbInput" value="{{obj.total}}" readonly="true"/></td>	
-									<td><input type="text" name="total_price" class="subData1" value="{{obj.total_price}}" readonly="true"/></td>	
-									<td><input type="text" name="rate_price" class="subData2" value="{{obj.rate_price}}" readonly="true"/><!-- </td>
-									<td> --><input type="hidden" name="mode" value="1"/></td>		
+									<td>
+									<input type='text' name='name' value="{{obj.name}}" onchange='spryMaxLength(this,32)'/><br/>&nbsp;
+									<span class='errorInfo'>字符数不得大于32</span>
+								</td>
+								<td>
+									<input type='text' name='purchase_date'  value="{{obj.purchase_date}}" class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;
+								</td>								        
+								<td>
+									<input type='text' name='purchase_price'  value="{{obj.purchase_price}}" maxlength='11' onclick="setJe(this)" onkeyup="setJe(this)" onblur="zjz(this,'purchase_price','total','total_price');zjl(this,'total_price','rate','rate_price');sub()"/>
+									<br/><span class='je'>人民币</span>
+									<span class='errorInfo'></span>
+								</td>
+								<td>
+									<input type='text' name='rate'  value="{{obj.rate}}" onchange="check(this,1,100)" onblur="zjl(this,'total_price','rate','rate_price');sub()" onkeyup="checkNUM(this)" style='width:40px'/>%
+									<br/>&nbsp;<span class='errorInfo'>请输入1-100的有效数字</span>
+								</td>
+								<td>
+									<input type='text' name='total'  value="{{obj.total}}" onkeyup='checkNUM(this)' maxlength='10' onblur="zjz(this,'purchase_price','total','total_price');zjl(this,'total_price','rate','rate_price');sub()"/><br/>&nbsp;
+								</td>
+								<td>
+									<input type='text' name='total_price'  value="{{obj.total_price}}" class='subData1' onclick="setJe(this)" readonly/>
+									<br/><span class='je'>人民币</span>
+									<span class='errorInfo'></span>
+								</td>
+								<td>
+									<input type='text' class='subData2'  value="{{obj.rate_price}}" name='rate_price' onclick='setJe(this)' onblur='sub()'/>
+									<br/><span class='je'>人民币</span>
+									<span class='errorInfo'></span>
+								</td>	
+									<td><input type="hidden" name="mode" value="1"/></td>		
 								</tr>	
 								{%- endfor %}								
 							</table>
@@ -93,14 +115,36 @@
 								</tr>								
 								{%- for obj in fixed_assets_equipment %}							
 								<tr class="center">
-									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" readonly="true"/></td>			
-									<td><input type="text" name="purchase_date" class="tbInput" value="{{obj.purchase_date}}" readonly="true"/></td>	
-									<td><input type="text" name="purchase_price" class="tbInput" value="{{obj.purchase_price}}" readonly="true"/></td>	
-									<td><input type="text" name="rate" class="tbInput" value="{{obj.rate}}" readonly="true"/></td>	
-									<td><input type="text" name="total" class="tbInput" value="{{obj.total}}" readonly="true"/></td>	
-									<td><input type="text" name="total_price" class="subData3" value="{{obj.total_price}}" readonly="true"/></td>	
-									<td><input type="text" name="rate_price" class="subData4" value="{{obj.rate_price}}" readonly="true"/><!-- </td>
-									<td> --><input type="hidden" name="mode" value="2"/></td>		
+									<td>
+									<input type='text' name='name' value="{{obj.name}}" onchange='spryMaxLength(this,32)'/><br/>&nbsp;
+									<span class='errorInfo'>字符数不得大于32</span>
+								</td>
+								<td>
+									<input type='text' name='purchase_date'  value="{{obj.purchase_date}}" class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;
+								</td>								        
+								<td>
+									<input type='text' name='purchase_price'  value="{{obj.purchase_price}}" maxlength='11' onclick="setJe(this)" onkeyup="setJe(this)" onblur="zjz(this,'purchase_price','total','total_price');zjl(this,'total_price','rate','rate_price');sub()"/>
+									<br/><span class='je'>人民币</span>
+									<span class='errorInfo'></span>
+								</td>
+								<td>
+									<input type='text' name='rate'  value="{{obj.rate}}" onchange="check(this,1,100)" onblur="zjl(this,'total_price','rate','rate_price');sub()" onkeyup="checkNUM(this)" style='width:40px'/>%
+									<br/>&nbsp;<span class='errorInfo'>请输入1-100的有效数字</span>
+								</td>
+								<td>
+									<input type='text' name='total'  value="{{obj.total}}" onkeyup='checkNUM(this)' maxlength='10' onblur="zjz(this,'purchase_price','total','total_price');zjl(this,'total_price','rate','rate_price');sub()"/><br/>&nbsp;
+								</td>
+								<td>
+									<input type='text' name='total_price'  value="{{obj.total_price}}" class='subData3' onclick="setJe(this)" readonly/>
+									<br/><span class='je'>人民币</span>
+									<span class='errorInfo'></span>
+								</td>
+								<td>
+									<input type='text' class='subData4'  value="{{obj.rate_price}}" name='rate_price' onclick='setJe(this)' onblur='sub()'/>
+									<br/><span class='je'>人民币</span>
+									<span class='errorInfo'></span>
+								</td>		
+									<td><input type="hidden" name="mode" value="2"/></td>		
 								</tr>	
 								{%- endfor %}															
 							</table>
@@ -138,14 +182,36 @@
 								</tr>	
 								{%- for obj in fixed_assets_car %}							
 								<tr class="center">
-									<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" readonly="true"/></td>			
-									<td><input type="text" name="purchase_date" class="tbInput" value="{{obj.purchase_date}}" readonly="true"/></td>	
-									<td><input type="text" name="purchase_price" class="tbInput" value="{{obj.purchase_price}}" readonly="true"/></td>	
-									<td><input type="text" name="rate" class="tbInput" value="{{obj.rate}}" readonly="true"/></td>	
-									<td><input type="text" name="total" class="tbInput" value="{{obj.total}}" readonly="true"/></td>	
-									<td><input type="text" name="total_price" class="subData5" value="{{obj.total_price}}" readonly="true"/></td>	
-									<td><input type="text" name="rate_price" class="subData6" value="{{obj.rate_price}}" readonly="true"/><!-- </td>
-									<td> --><input type="hidden" name="mode" value="3"/></td>		
+									<td>
+									<input type='text' name='name' value="{{obj.name}}" onchange='spryMaxLength(this,32)'/><br/>&nbsp;
+									<span class='errorInfo'>字符数不得大于32</span>
+								</td>
+								<td>
+									<input type='text' name='purchase_date'  value="{{obj.purchase_date}}" class='datepicker' data-date-format='yyyy-mm-dd' readonly/><br/>&nbsp;
+								</td>								        
+								<td>
+									<input type='text' name='purchase_price'  value="{{obj.purchase_price}}" maxlength='11' onclick="setJe(this)" onkeyup="setJe(this)" onblur="zjz(this,'purchase_price','total','total_price');zjl(this,'total_price','rate','rate_price');sub()"/>
+									<br/><span class='je'>人民币</span>
+									<span class='errorInfo'></span>
+								</td>
+								<td>
+									<input type='text' name='rate'  value="{{obj.rate}}" onchange="check(this,1,100)" onblur="zjl(this,'total_price','rate','rate_price');sub()" onkeyup="checkNUM(this)" style='width:40px'/>%
+									<br/>&nbsp;<span class='errorInfo'>请输入1-100的有效数字</span>
+								</td>
+								<td>
+									<input type='text' name='total'  value="{{obj.total}}" onkeyup='checkNUM(this)' maxlength='10' onblur="zjz(this,'purchase_price','total','total_price');zjl(this,'total_price','rate','rate_price');sub()"/><br/>&nbsp;
+								</td>
+								<td>
+									<input type='text' name='total_price'  value="{{obj.total_price}}" class='subData5' onclick="setJe(this)" readonly/>
+									<br/><span class='je'>人民币</span>
+									<span class='errorInfo'></span>
+								</td>
+								<td>
+									<input type='text' class='subData6'  value="{{obj.rate_price}}" name='rate_price' onclick='setJe(this)' onblur='sub()'/>
+									<br/><span class='je'>人民币</span>
+									<span class='errorInfo'></span>
+								</td>		
+									<td><input type="hidden" name="mode" value="3"/></td>		
 								</tr>	
 								{%- endfor %}							
 							</table>
