@@ -64,19 +64,39 @@
 						-->
 						<tr>
 							<td class="table-label">合同签订日期<font class="red">*</font></td>
+							{%- if approval_decision.contract_date %}
 							<td><input type="text" name="contract_date" value="{{approval_decision.contract_date}}" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
+							{%- else %}
+							<td><input type="text" name="contract_date" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
+							{%- endif %}
 							<td class="table-label">放款帐号<font class="red">*</font></td>
-							<td><input type="text" name="loan_account" value="{{approval_decision.loan_account}}" /></td>					
+							{%- if approval_decision.loan_account %}
+							<td><input type="text" name="loan_account" value="{{approval_decision.loan_account}}" /></td>	
+							{%- else %}
+							<td><input type="text" name="loan_account" /></td>
+							{%- endif %}									
 						</tr>	
 						<tr>
 							<td class="table-label">贷款合同编号<font class="red">*</font></td>
+							{%- if approval_decision.loan_contract_number %}
 							<td><input type="text" name="loan_contract_number" value="{{approval_decision.loan_contract_number}}" /></td>
+							{%- else %}
+							<td><input type="text" name="loan_contract_number" /></td>
+							{%- endif %}	
 							<td class="table-label">担保合同编号</td>
-							<td><input type="text" name="guarantee_contract_number" value="{{approval_decision.guarantee_contract_number}}" /></td>					
+							{%- if approval_decision.guarantee_contract_number %}
+							<td><input type="text" name="guarantee_contract_number" value="{{approval_decision.guarantee_contract_number}}" /></td>		
+							{%- else %}	
+							<td><input type="text" name="guarantee_contract_number"/></td>	
+							{%- endif %}			
 						</tr>
 						<tr>
 							<td class="table-label">抵押品合同编号</td>
-							<td colspan="3"><input type="text" name="collateral_contract_number" value="{{approval_decision.collateral_contract_number}}" /></td>			
+							{%- if approval_decision.collateral_contract_number %}
+							<td colspan="3"><input type="text" name="collateral_contract_number" value="{{approval_decision.collateral_contract_number}}" /></td>		
+							{%- else %}	
+							<td colspan="3"><input type="text" name="collateral_contract_number"/></td>
+							{%- endif %}		
 						</tr>
 					</table>
 				</div>
