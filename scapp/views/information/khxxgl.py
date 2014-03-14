@@ -40,10 +40,10 @@ from scapp import app
 # 客户信息管理
 @app.route('/Information/khxxgl', methods=['GET'])
 def Information_khxxgl():
-    org = SC_Org.query.order_by("id").all()
+    #org = SC_Org.query.order_by("id").all()
     user = View_Get_Cus_Mgr.query.filter("role_level>=2").order_by("id").all()#客户经理
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
-    return render_template("Information/khxxgl_search.html",org=org,user=user,role=role)
+    return render_template("Information/khxxgl_search.html",user=user,role=role)
 	
 # 客户信息搜索
 @app.route('/Information/khxxgl_search/<int:page>', methods=['GET','POST'])
