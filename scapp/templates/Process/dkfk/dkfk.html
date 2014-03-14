@@ -36,8 +36,6 @@
 							<th>贷款类型</th>
 							<th>贷款金额</th>
 							<th>申请时间</th>
-							<th>放款日期</th>
-							<th>第一次还款日期</th>
 						</tr>
 					</thead>
 					<tbody class="center">
@@ -56,10 +54,8 @@
 							{%- else %}	
 								<td>小额贷</td>
 							{%- endif %}
-							<td>{{obj.loan_amount}}</td>	
-							<td>{{obj.create_date}}</td>	
-							<td>放款日期</td>
-							<td>第一次还款日期</td>							
+							<td>{{obj.amount}}</td>	
+							<td>{{obj.create_date}}</td>							
 						</tr>
 						{%- endfor %}							
 					</tbody>

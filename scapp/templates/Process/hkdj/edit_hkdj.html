@@ -23,14 +23,19 @@
 				<table class="table-list">
 					<tr>
 						<td class="table-label">贷款编号</td>
-						<td width="120px">1</td>
+						<td width="120px">{{loan_apply.loan_apply_id}}</td>
 						<td class="table-label">客户名称</td>
-						<td>王军忠</td>
+						{%- if loan_apply.company_customer_name %}
+							<td>{{loan_apply.company_customer_name}}</td>
+						{%- else %}
+							<td>{{loan_apply.individual_customer_name}}</td>
+						{%- endif %}
 						<td class="table-label">贷款类型</td>
-						<td>微贷款</td>
-						<td width="190px">
-							<input type="button" class="btn btn-info" value="返回" onclick="iframe('Process/hkdj/hkdj')"/>	
-						</td>
+						{%- if loan_apply.loan_type == '1' %}
+							<td>微贷款</td>		
+						{%- else %}
+							<td>小额贷款</td>		
+						{%- endif %}
 					</tr>														
 				</table>
 			</div>	
@@ -44,18 +49,22 @@
 							<th>还款方式</th>
 							<th>第一次还贷日期</th>							
 							<th>放款日期</th>
-							<th>年利率%</th>
+							<th>月利率%</th>
 							<th>贷款额</th>
 						</tr>
 					</thead>
 					<tbody class="center">
 						<tr>					
-							<td>12</td>
+							<td>{{loan_apply.deadline}}</td>
+							{%- if loan_apply.repayment_type == 1 %}
+							<td>等额本金</td>
+							{%- else %}
 							<td>等额本息</td>
-							<td>2009-06-20</td>
-							<td>2009-05-20</td>
-							<td>3.0000</td>	
-							<td>300,000.00</td>												
+							{%- endif %}
+							<td>{{loan_apply.first_repayment_date}}</td>
+							<td>{{loan_apply.loan_date}}</td>
+							<td>{{loan_apply.rates}}</td>	
+							<td>{{loan_apply.amount}}</td>												
 						</tr>										
 					</tbody>
 				</table>
@@ -73,22 +82,22 @@
 						</tr>
 					</thead>
 					<tbody class="center">
-						<tr class="errer">					
-							<td>3</td>
-							<td>2008-08-20</td>
-							<td>8,333.33</td>
-							<td>1,250.62</td>
-							<td>100.00</td>	
-							<td>9,683.96</td>												
+					{%- for obj in loan_repayment %}
+						{%- if obj.status == 0 %}
+						<tr class="info">		
+						{%- elif obj.status == 1 %}	
+						<tr class="warning">	
+						{%- elif obj.status == 2 %}	
+						<tr class="errer">
+						{%- endif %}	
+							<td>{{obj.installments}}</td>
+							<td>{{obj.repayment_date}}</td>
+							<td>{{obj.re_principal}}</td>
+							<td>{{obj.re_interest}}</td>
+							<td>{{obj.re_penalty_interest}}</td>	
+							<td>{{obj.total_repayment}}</td>												
 						</tr>	
-						<tr class="warning">					
-							<td>4</td>
-							<td>2008-09-20</td>
-							<td>0.00</td>
-							<td>0.00</td>
-							<td>0.00</td>	
-							<td>0.00</td>												
-						</tr>
+					{%- endfor %}
 						<tr>					
 							<td>总计</td>
 							<td></td>
@@ -104,7 +113,7 @@
 					</tbody>
 				</table>
 			</div>	
-			<span class="point">*红色是逾期，黄色是已还但未还清</span><br/>
+			<span class="point">*蓝色是未还, 红色是逾期，黄色是已还但未还清</span><br/>
 			<input type="submit" value="偿还欠款" class="btn btn-info"/>
 		</div><!--/row-fluid -->
 	</form><!--/content -->
