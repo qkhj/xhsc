@@ -121,11 +121,11 @@
 									<span class="errorInfo">字符数不得大于16</span>
 								</span>
 							</td>	
-							<td class="table-label">电话/手机<font class="red">*</font></td>
+							<td class="table-label">电话/手机</td>
 							<td>
 								<span id="mobile">
 		    						<input type="text" name="mobile" value="{{target_customer.mobile}}" onKeyUp="value=value.replace(/\D/g,'')" maxlength="12"/>
-		    						<span class="textfieldRequiredMsg">不能为空</span>
+		    						<!-- <span class="textfieldRequiredMsg">不能为空</span> -->
 		  							<span class="textfieldInvalidFormatMsg">格式无效</span>
 		  							<span class="textfieldMinCharsMsg">格式无效</span>
 		  							<span class="textfieldMaxCharsMsg">格式无效</span>
@@ -143,11 +143,11 @@
 									<label><input type="radio" name="sex" value="0" checked/>女</label>
 								{%- endif %}
 							</td>
-							<td class="table-label">年龄<font class="red">*</font></td>
+							<td class="table-label">年龄</td>
 							<td>
 								<span id="age">
 									<input type="text" style="width:30px;" name="age" value="{{target_customer.age}}" onKeyUp="value=value.replace(/\D/g,'')" onchange="check(this,1,100)" maxlength="3"/>岁
-									<span class="textfieldRequiredMsg">不能为空</span>
+									<!-- <span class="textfieldRequiredMsg">不能为空</span> -->
 									<span class="errorInfo">请输入1-100的数</span>
 								</span>
 							</td>													
@@ -422,8 +422,8 @@
 		var sprytextfield2 = new Spry.Widget.ValidationTextField("manager_name_spay1", "none", {validateOn:["blur"]});
 		var sprytextfield3 = new Spry.Widget.ValidationTextField("manager_name_spay2", "none", {validateOn:["blur"]});
 		var sprytextfield4 = new Spry.Widget.ValidationTextField("manager_name_spay3", "none", {validateOn:["blur"]});
-		var sprytextfield5 = new Spry.Widget.ValidationTextField("mobile", "integer", {validateOn:["blur"], minChars:11, maxChars:12});
-		var sprytextfield6 = new Spry.Widget.ValidationTextField("age", "none", {validateOn:["blur"]});
+		// var sprytextfield5 = new Spry.Widget.ValidationTextField("mobile", "integer", {validateOn:["blur"], minChars:11, maxChars:12});
+		// var sprytextfield6 = new Spry.Widget.ValidationTextField("age", "none", {validateOn:["blur"]});
 		function show_table(value){
 			if(value=="1"){
 		        $("#dpxx").hide();		       
