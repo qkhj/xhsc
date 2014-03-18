@@ -384,9 +384,10 @@ function hjje(obj,value){
     // }
     // Normalize the format of input digits:
     currencyDigits = currencyDigits.replace(/,/g, ""); // Remove comma delimiters.
-    currencyDigits = currencyDigits.replace(/^0+/, ""); // Trim zeros at the beginning.
+    //currencyDigits = currencyDigits.replace(/^0+/, ""); // 自动去除首个0
     // Assert the number is not greater than the maximum number.
     if ((currencyDigits != ""&&(currencyDigits).match(/^((\d{1,3}(,\d{3})*(.((\d{3},)*\d{1,3}))?)|(\d+(.\d+)?))$/) == null)||(currencyDigits.match(/[^,.\d]/) != null)){
+          // alert(currencyDigits)
         if($(obj).parent().find(".errorInfo").css("display")=="none")               
             jegs++;  
         $(obj).parent().find(".errorInfo").show();
@@ -523,7 +524,7 @@ function hjje2(obj,value){
     currencyDigits = currencyDigits.toString();
     // Normalize the format of input digits:
     currencyDigits = currencyDigits.replace(/,/g, ""); // Remove comma delimiters.
-    currencyDigits = currencyDigits.replace(/^0+/, ""); // Trim zeros at the beginning.
+    //currencyDigits = currencyDigits.replace(/^0+/, ""); // Trim zeros at the beginning.
     // Assert the number is not greater than the maximum number.
    
         if(currencyDigits == ""){
