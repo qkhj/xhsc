@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<style type="text/css">
+		textarea{width:80%;}
+		.inline td{border-top:none;}
+		.short{width:50px;}
+	</style>
+</head>
+
+<body onload="datepicker()">	
+	<div class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">晋级审核</a>
+		</div>	
+		<div class="row-fluid">
+			<i class="icon-bookmark"></i><span class="titletip">客户经理层级评估</span>
+			<div class="divBorder">	
+				<table class="table-list" >				
+					<tr>
+						<td class="table-label" colspan="2">客户经理姓名</td>
+						<td style="width:200px;">张三</td>
+						<td class="table-label" colspan="2">评估日期</td>
+						<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
+						<td class="table-label">评估月份</td>
+						<td><input type="text" name=""/></td>
+					</tr>
+				</table>	
+				<table class="table-list inline" >	
+					<tr class="center">
+						<td class="table-label" colspan="2"><b>项目</b></td>			
+						<td class="table-label" style="width:100px;"><b>分值</b></td>	
+						<td class="table-label" style="width:100px;"><b>评估标准</b></td>
+						<td class="table-label" style="width:100px;"><b>打分区间</b></td>
+						<td class="table-label" style="width:100px;"><b>得分</b></td>
+						<td class="table-label" ><b>备注</b></td>
+					</tr>
+					<tr class="center">
+						<td rowspan="27" style="width:70px;">定量评估项</td>			
+						<td rowspan="5" style="width:70px;">贷款使用率</td>	
+						<td rowspan="5">10</td>
+						<td>90%-100%</td>
+						<td>10</td>
+						<td rowspan="5"><input type="text" name="" class="short"/></td>
+						<td rowspan="5">评估标准=贷款余额÷合同金额×100%</td>
+					</tr>
+					<tr class="center">
+						<td>80%-90%</td>
+						<td>8-9</td>
+					</tr>
+					<tr class="center">
+						<td>70%-80%</td>
+						<td>7-8</td>
+					</tr>
+					<tr class="center">
+						<td>50%-70%</td>
+						<td>3-7</td>
+					</tr>
+					<tr class="center">
+						<td>30%以下</td>
+						<td>0</td>
+					</tr>
+					<tr class="center">		
+						<td rowspan="5">利息收回率</td>	
+						<td rowspan="5">15</td>
+						<td>100%</td>
+						<td>15</td>
+						<td rowspan="5"><input type="text" name="" class="short"/></td>
+						<td rowspan="5">评估标准=每月实收客户利息÷每月应收客户息×100%</td>
+					</tr>
+					<tr class="center">
+						<td>99.5%-99.9%</td>
+						<td>10</td>
+					</tr>
+					<tr class="center">
+						<td>99%-99.5%</td>
+						<td>8-10</td>
+					</tr>
+					<tr class="center">
+						<td>97-99%</td>
+						<td>5-8</td>
+					</tr>
+					<tr class="center">
+						<td>97%以下</td>
+						<td>0-5</td>
+					</tr>
+					<tr class="center">		
+						<td rowspan="5">逾期率</td>	
+						<td rowspan="5">15</td>
+						<td>0</td>
+						<td>15</td>
+						<td rowspan="5"><input type="text" name="" class="short"/></td>
+						<td rowspan="5">评估标准=逾期金额÷贷款余额×100%</td>
+					</tr>
+					<tr class="center">
+						<td>0.1%-0.5%以内</td>
+						<td>10-14</td>
+					</tr>
+					<tr class="center">
+						<td>0.6%-1%</td>
+						<td>5-10</td>
+					</tr>
+					<tr class="center">
+						<td>1.1%-1.4%</td>
+						<td>2-4</td>
+					</tr>
+					<tr class="center">
+						<td>1.5%以上</td>
+						<td>0</td>
+					</tr>
+					<tr class="center">		
+						<td rowspan="5">逾期回收率</td>	
+						<td rowspan="5">15</td>
+						<td>100%</td>
+						<td>15</td>
+						<td rowspan="5"><input type="text" name="" class="short"/></td>
+						<td rowspan="5">评估标准=当期逾期回收金额÷上期逾期余额×100%</td>
+					</tr>
+					<tr class="center">
+						<td>80%-100%</td>
+						<td>12-15</td>
+					</tr>
+					<tr class="center">
+						<td>60%-80%</td>
+						<td>8-12</td>
+					</tr>
+					<tr class="center">
+						<td>40%-60%</td>
+						<td>5-8</td>
+					</tr>
+					<tr class="center">
+						<td>0-40%</td>
+						<td>0-5</td>
+					</tr>
+					<tr class="center">		
+						<td rowspan="5">逾期余额</td>	
+						<td rowspan="5">15</td>
+						<td>0</td>
+						<td>15</td>
+						<td rowspan="5"><input type="text" name="" class="short"/></td>
+						<td rowspan="5">逾期未还贷款余额</td>
+					</tr>
+					<tr class="center">
+						<td>0-20万元</td>
+						<td>12</td>
+					</tr>
+					<tr class="center">
+						<td>20-60万元</td>
+						<td>10</td>
+					</tr>
+					<tr class="center">
+						<td>60-100万元</td>
+						<td>7</td>
+					</tr>
+					<tr class="center">
+						<td>100万元以上</td>
+						<td>0</td>
+					</tr>
+					<tr class="center">		
+						<td rowspan="2">瑕疵贷款率</td>	
+						<td rowspan="2">10</td>
+						<td>0-1.5%</td>
+						<td>10-1</td>
+						<td rowspan="2"><input type="text" name="" class="short"/></td>
+						<td rowspan="2">评估标准=逾期后还款总额÷贷款余额×100%</td>
+					</tr>
+					<tr class="center">
+						<td>1.5%以上</td>
+						<td>0</td>
+					</tr>
+					<tr class="center">		
+						<td rowspan="5">定性评估</td>	
+						<td>客户潜在价值</td>
+						<td>4</td>
+						<td colspan="2">——</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td>客户数量、客户综合实力、客户的职业或朋友圈、客户的信用、道德测评等。</td>
+					</tr>
+					<tr class="center">	
+						<td>自我培训能力</td>
+						<td>4</td>
+						<td colspan="2">——</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td></td>
+					</tr>
+					<tr class="center">	
+						<td>团队合作能力</td>
+						<td>4</td>
+						<td colspan="2">——</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td></td>
+					</tr>
+					<tr class="center">	
+						<td>客户管理能力</td>
+						<td>4</td>
+						<td colspan="2">——</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td></td>
+					</tr>
+					<tr class="center">	
+						<td>组织协调能力</td>
+						<td>4</td>
+						<td colspan="2">——</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td></td>
+					</tr>
+					<tr class="center">		
+						<td rowspan="2">加分项</td>	
+						<td>存款</td>
+						<td colspan="5">存款余额每增加10万元加1分，总分10分</td>
+					</tr>
+					<tr class="center">			
+						<td>电子银行产品</td>
+						<td colspan="5">每增加5个客户加1分，总分10分</td>
+					</tr>
+					<tr class="center">
+						<td class="table-label" colspan="3">
+							<b>总分</b>
+							<input type="text" name="" class="short"/>
+						</td>		
+						<td class="table-label" colspan="4">
+							<b>总评价</b>
+							<label><input type="radio" name=""/>通过（80分及以上）</label>
+							<label><input type="radio" name=""/>未通过（80分以下）</label>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="center">其他评价</td>			
+						<td colspan="5"><textarea name=""></textarea></td>	
+					</tr>
+				</table>		
+			</div>
+			<input type="button" class="btn btn-info" value="提交" onclick="iframe('Performance/khjlgl/jjsh')"/>	
+		</div><!--/row-fluid -->
+	</div><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+</body>
+</html>
