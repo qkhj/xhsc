@@ -12,34 +12,43 @@ from scapp.config import logger
 from scapp.config import PER_PAGE
 
 from scapp.models import SC_User
+from scapp.models import SC_UserRole
 from scapp.models import SC_Industry
 from scapp.models import SC_Business_Type
 from scapp.models import SC_Loan_Purpose
 from scapp.models import SC_Target_Customer
+
+from scapp.models import View_Get_Cus_Mgr
 
 from scapp import app
 
 # 来访登记
 @app.route('/Information/lfdj/lfdj', methods=['GET'])
 def Information_lfdj():
-    return render_template("Information/lfdj/lfdj_search.html")
+    user = View_Get_Cus_Mgr.query.filter("role_level>=2").order_by("id").all()#客户经理
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    return render_template("Information/lfdj/lfdj_search.html",user=user,role=role)
 	
 # 来访登记
 @app.route('/Information/lfdj/lfdj_search/<int:page>', methods=['GET','POST'])
 def lfdj_search(page):
-    # 模糊查询
+    #模糊查询
+    manager = request.form['manager']
     customer_name = request.form['customer_name']
     beg_date = request.form['beg_date'] + " 00:00:00"
     end_date = request.form['end_date'] + " 23:59:59"
 
-    sql = "create_date between '"+beg_date+"' and '"+end_date + "' "
+    sql = " 1=1"
+    if manager != '0':
+        sql += " and receiver="+manager
+    sql += " and create_date between '"+beg_date+"' and '"+end_date + "' "
     if customer_name:
         sql += " and (customer_name like '%"+customer_name+"%' or shop_name like '%"+customer_name+"%') "
 
     target_customer = SC_Target_Customer.query.filter(sql).order_by("id").paginate(page, per_page = PER_PAGE)
 
-    return render_template("Information/lfdj/lfdj.html",target_customer=target_customer,customer_name=customer_name,
-        beg_date=request.form['beg_date'],end_date=request.form['end_date'])
+    return render_template("Information/lfdj/lfdj.html",target_customer=target_customer,manager=manager,
+        customer_name=customer_name,beg_date=request.form['beg_date'],end_date=request.form['end_date'])
 
 # 新增来访登记
 @app.route('/Information/lfdj/new_lfdj', methods=['GET','POST'])

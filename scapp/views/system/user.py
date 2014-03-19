@@ -148,7 +148,7 @@ def active_user(id,active):
 def reset_pwd(id):
     try:
         user = SC_User.query.filter_by(id=id).first()
-        user.login_password = '12345'
+        user.login_password = GetStringMD5('12345')
         
         # 事务提交
         db.session.commit()
