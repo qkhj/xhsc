@@ -122,7 +122,7 @@
 						{%- else %}
 						<li style="display:none">
 						{%- endif %}
-							<a onclick="tab('tagContent02','tabs1',this);Frame();" href="javascript:void(0)">还款计划表</a> 
+							<a onclick="tab('tagContent02','tabs1',this);resizeFrame('hkjhb');Frame();" href="javascript:void(0)">还款计划表</a> 
 						</li>										
 					</ul>
 					<div class="tab" id="tagContent01">					
@@ -143,14 +143,14 @@
 						{%- else %}
 						<li style="display:none">
 						{%- endif %}
-							<a onclick="$('#jbqk').click();tab('tagContent12','tabs2',this);Frame();" href="javascript:void(0)">调查表</a> 
+							<a onclick="$('#jbqk').click();tab('tagContent12','tabs2',this);resizeFrame('dqdcXed_jbqk');Frame();" href="javascript:void(0)">调查表</a> 
 						</li>	
 						{%- if loan_apply.process_status >= '501'%}
 						<li>
 						{%- else %}
 						<li style="display:none">
 						{%- endif %}
-							<a onclick="tab('tagContent13','tabs2',this);Frame();" href="javascript:void(0)">审批决议</a> 
+							<a onclick="tab('tagContent13','tabs2',this);resizeFrame('dksp_info');Frame();" href="javascript:void(0)">审批决议</a> 
 						</li>
 						{%- if loan_apply.process_status >= '601'%}
 						<li>
@@ -191,31 +191,31 @@
 						<div id="xeDcb">
 							<ul id="tabs22" class="tags">
 								<li class="selectTag"> 
-									<a onclick="thirdTb('tagContent124','tabs22',this);Frame();" id="jbqk" href="javascript:void(0)">基本情况</a> 
+									<a onclick="thirdTb('tagContent124','tabs22',this);resizeFrame('dqdcXed_jbqk');Frame();" id="jbqk" href="javascript:void(0)">基本情况</a> 
 								</li>
 								<li >
-									<a onclick="thirdTb('tagContent125','tabs22',this);Frame();" href="javascript:void(0)">资产负债表</a> 
+									<a onclick="thirdTb('tagContent125','tabs22',this);resizeFrame('dqdcXed_zcfzb');Frame();" href="javascript:void(0)">资产负债表</a> 
 								</li>	
 								<li >
-									<a onclick="thirdTb('tagContent126','tabs22',this);Frame();" href="javascript:void(0)">交叉检验</a> 
+									<a onclick="thirdTb('tagContent126','tabs22',this);resizeFrame('dqdcXed_jcjy');Frame();" href="javascript:void(0)">交叉检验</a> 
 								</li>	
 								<li >
-									<a onclick="thirdTb('tagContent127','tabs22',this);Frame();" href="javascript:void(0)">损益情况分析</a> 
+									<a onclick="thirdTb('tagContent127','tabs22',this);resizeFrame('dqdcXed_ysqkfx');Frame();" href="javascript:void(0)">损益情况分析</a> 
 								</li>
 								<li >
-									<a onclick="thirdTb('tagContent128','tabs22',this);Frame();" href="javascript:void(0)">现金流分析</a> 
+									<a onclick="thirdTb('tagContent128','tabs22',this);resizeFrame('dqdcXed_xjlfx');Frame();" href="javascript:void(0)">现金流分析</a> 
 								</li>
 								<li >
-									<a onclick="thirdTb('tagContent129','tabs22',this);Frame();" href="javascript:void(0)">担保抵押调查表</a> 
+									<a onclick="thirdTb('tagContent129','tabs22',this);resizeFrame('dqdcXed_dbdydcb');Frame();" href="javascript:void(0)">担保抵押调查表</a> 
 								</li>
 								<li >
-									<a onclick="thirdTb('tagContent1210','tabs22',this);Frame();" href="javascript:void(0)">固定资产清单</a> 
+									<a onclick="thirdTb('tagContent1210','tabs22',this);resizeFrame('dqdcXed_gdzcqd');Frame();" href="javascript:void(0)">固定资产清单</a> 
 								</li>
 								<li >
-									<a onclick="thirdTb('tagContent1211','tabs22',this);Frame();" href="javascript:void(0)">库存</a> 
+									<a onclick="thirdTb('tagContent1211','tabs22',this);resizeFrame('dqdcXed_kc');Frame();" href="javascript:void(0)">库存</a> 
 								</li>
 								<li >
-									<a onclick="thirdTb('tagContent1212','tabs22',this);Frame();" href="javascript:void(0)">账款清单</a> 
+									<a onclick="thirdTb('tagContent1212','tabs22',this);resizeFrame('dqdcXed_zkqd');Frame();" href="javascript:void(0)">账款清单</a> 
 								</li>															
 							</ul>
 							<div class="thirdTb" id="tagContent124">
@@ -237,13 +237,13 @@
 								<iframe frameborder="0" width="100%;" id="dqdcXed_dbdydcb" src="/Information/dkxx/dqdcXed_dbdydcb/{{loan_apply.id}}" height="600px"></iframe>
 							</div><!-- /担保抵押调查表 -->
 							<div class="thirdTb" id="tagContent1210" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_gdzcqd" src="/Information/dkxx/dqdcXed_gdzcqd/{{loan_apply.id}}" onload="$('#dqdcXed_gdzcqd').height($('#dqdcXed_gdzcqd').contents().find('#FDC').height()+40)"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_gdzcqd" src="/Information/dkxx/dqdcXed_gdzcqd/{{loan_apply.id}}" height="600px"></iframe>
 							</div><!-- /固定资产清单 -->
 							<div class="thirdTb" id="tagContent1211" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_kc" src="/Information/dkxx/dqdcXed_kc/{{loan_apply.id}}" onload="$('#dqdcXed_kc').height($('#dqdcXed_kc').contents().find('.content').height()-50)"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_kc" src="/Information/dkxx/dqdcXed_kc/{{loan_apply.id}}" height="600px"></iframe>
 							</div><!-- /库存 -->
 							<div class="thirdTb" id="tagContent1212" style="display:none;">
-								<iframe frameborder="0" width="100%;" id="dqdcXed_zkqd" src="/Information/dkxx/dqdcXed_zkqd/{{loan_apply.id}}" onload="$('#dqdcXed_zkqd').height($('#dqdcXed_zkqd').contents().find('.content').height()-50)"></iframe>
+								<iframe frameborder="0" width="100%;" id="dqdcXed_zkqd" src="/Information/dkxx/dqdcXed_zkqd/{{loan_apply.id}}" height="600px"></iframe>
 							</div><!-- /账款清单 -->
 						</div>	
 					</div><!-- /调查表 -->

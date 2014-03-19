@@ -13,7 +13,7 @@
 		
 </head>
 
-<body>	
+<body onload="sub()">	
 	<form class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">还款登记</a>
@@ -23,14 +23,19 @@
 				<table class="table-list">
 					<tr>
 						<td class="table-label">贷款编号</td>
-						<td width="120px">1</td>
+						<td width="120px">{{loan_apply.loan_apply_id}}</td>
 						<td class="table-label">客户名称</td>
-						<td>王军忠</td>
+						{%- if loan_apply.company_customer_name %}
+							<td>{{loan_apply.company_customer_name}}</td>
+						{%- else %}
+							<td>{{loan_apply.individual_customer_name}}</td>
+						{%- endif %}
 						<td class="table-label">贷款类型</td>
-						<td>微贷款</td>
-						<td width="190px">
-							<input type="button" class="btn btn-info" value="返回" onclick="iframe('Process/hkdj/hkdj')"/>	
-						</td>
+						{%- if loan_apply.loan_type == '1' %}
+							<td>微贷款</td>		
+						{%- else %}
+							<td>小额贷款</td>		
+						{%- endif %}
 					</tr>														
 				</table>
 			</div>	
@@ -44,18 +49,22 @@
 							<th>还款方式</th>
 							<th>第一次还贷日期</th>							
 							<th>放款日期</th>
-							<th>年利率%</th>
+							<th>月利率%</th>
 							<th>贷款额</th>
 						</tr>
 					</thead>
 					<tbody class="center">
 						<tr>					
-							<td>12</td>
+							<td>{{loan_apply.deadline}}</td>
+							{%- if loan_apply.repayment_type == 1 %}
+							<td>等额本金</td>
+							{%- else %}
 							<td>等额本息</td>
-							<td>2009-06-20</td>
-							<td>2009-05-20</td>
-							<td>3.0000</td>	
-							<td>300,000.00</td>												
+							{%- endif %}
+							<td>{{loan_apply.first_repayment_date}}</td>
+							<td>{{loan_apply.loan_date}}</td>
+							<td>{{loan_apply.rates}}</td>	
+							<td>{{loan_apply.amount}}</td>												
 						</tr>										
 					</tbody>
 				</table>
@@ -73,29 +82,45 @@
 						</tr>
 					</thead>
 					<tbody class="center">
-						<tr class="errer">					
-							<td>3</td>
-							<td>2008-08-20</td>
-							<td>8,333.33</td>
-							<td>1,250.62</td>
-							<td>100.00</td>	
-							<td>9,683.96</td>												
+					{%- for obj in loan_repayment %}
+						{%- if obj.status == 0 %}
+						<tr class="info">		
+						{%- elif obj.status == 1 %}	
+						<tr class="warning">	
+						{%- elif obj.status == 2 %}	
+						<tr class="errer">
+						{%- endif %}	
+							<td>{{obj.installments}}</td>
+							<td>{{obj.repayment_date}}</td>
+							<td class="subData1">{{obj.re_principal}}</td>
+							<td class="subData2">{{obj.re_interest}}</td>
+							<td class="subData3">{{obj.re_penalty_interest}}</td>	
+							<td class="subData4">{{obj.total_repayment}}</td>												
 						</tr>	
-						<tr class="warning">					
-							<td>4</td>
-							<td>2008-09-20</td>
-							<td>0.00</td>
-							<td>0.00</td>
-							<td>0.00</td>	
-							<td>0.00</td>												
+					{%- endfor %} 
+						<!-- <tr class="info">						
+							<td>xx</td>
+							<td>xx</td>
+							<td class="subData1">1</td>
+							<td class="subData2">2</td>
+							<td class="subData3">3</td>	
+							<td class="subData4">4</td>												
 						</tr>
+						<tr class="info">						
+							<td>xx</td>
+							<td>xx</td>
+							<td class="subData1">1</td>
+							<td class="subData2">2</td>
+							<td class="subData3">3</td>	
+							<td class="subData4">4</td>												
+						</tr> -->
 						<tr>					
-							<td>总计</td>
-							<td></td>
-							<td>8,333.33</td>
-							<td>1,250.62</td>
-							<td>100.00</td>	
-							<td>9,683.96</td>												
+							<th>总计</th>
+							<th></th>
+							<th id="sub1"></th>
+							<th id="sub2"></th>
+							<th id="sub3"></th>	
+							<th id="sub4"></th>												
 						</tr>
 						<tr>					
 							<td colspan="2" style="background:#afd5eb;">偿还金额</td>							
@@ -104,7 +129,7 @@
 					</tbody>
 				</table>
 			</div>	
-			<span class="point">*红色是逾期，黄色是已还但未还清</span><br/>
+			<span class="point">*蓝色是未还, 红色是逾期，黄色是已还但未还清</span><br/>
 			<input type="submit" value="偿还欠款" class="btn btn-info"/>
 		</div><!--/row-fluid -->
 	</form><!--/content -->
@@ -112,5 +137,31 @@
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		function sub(){
+			
+			for(i=1;i<5;i++){
+				var sum=0;	
+				if($(".subData"+i).length==0){
+					$("#sub"+i).html(0); 
+					$("#sub"+i).html(0+"<br/><span class='je'>"+hjje($("#sub"+i),0)+"</span>"); 	
+				}					
+				else{
+					$.each($(".subData"+i),function(){ 
+						if(this.innerHTML=="")
+							sum=sum;
+						else
+							sum += parseFloat(this.innerHTML);
+						$("#sub"+i).html(sum+"<br/><span class='je'>"+hjje($("#sub"+i),sum)+"</span>"); 	
+					}); 
+				}
+			}
+		}
+	</script>
 </body>
 </html>

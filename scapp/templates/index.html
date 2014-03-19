@@ -159,10 +159,11 @@
 						<li onclick="leftmenu(this);changeiframe('Process/dkfk/dkfk')" id="dkfk" >
 							<a href="javascript:void(0);">贷款归还计划</a>
 						</li>
-						<!--
-						<li onclick="leftmenu(this);changeiframe('Process/hkdj/hkdj_search')" id="hkdj" >
-							<a href="javascript:void(0);">还款登记</a>
+						
+						<li onclick="leftmenu(this);changeiframe('Process/hkdj/hkdj')" id="hkdj" >
+							<a href="javascript:void(0);">还款记录</a>
 						</li> 
+						<!--
 					 	<li onclick="leftmenu(this);changeiframe('Process/dhbg/dhbg_search')" id="dhbg" >
 							<a href="javascript:void(0);">贷后变更</a>
 						</li> 
@@ -193,9 +194,47 @@
 								hidden
 							{%- endif %}
 							" id="jxgl">
-						<li class="nav-header">客户经理绩效管理</li>
+						<li class="nav-header">绩效薪酬</li>
                         <li onclick="leftmenu(this);changeiframe('Cust_mgr/search')" id="gsgl" class="active">
 							<a href="javascript:void(0);">工时管理</a>
+						</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/grxc_search')" id="grxc">
+							<a href="javascript:void(0);">个人薪酬</a>
+						</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/xccx_search')" id="xccx">
+							<a href="javascript:void(0);">薪酬查询</a>
+						</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/xcxd_search')" id="xcxd">
+							<a href="javascript:void(0);">薪酬详单</a>
+						</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/ywcctj_search')" id="ywcctj">
+							<a href="javascript:void(0);">业务差错统计</a>
+						</li>	
+						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/fxbzj_search')" id="fxbzj">
+							<a href="javascript:void(0);">风险保证金</a>
+						</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/xccspz')" id="xccspz">
+							<a href="javascript:void(0);">薪酬参数配置</a>
+						</li>
+						<li class="nav-header">员工评估考核</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/ygpgkh/pgcx_search')" id="pgcx">
+							<a href="javascript:void(0);">评估查询</a>
+						</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/ygpgkh/pxqpg_search')" id="pxqpg">
+							<a href="javascript:void(0);">培训期评估</a>
+						</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/ygpgkh/zgpg_search')" id="zgpg">
+							<a href="javascript:void(0);">在岗评估</a>
+						</li>
+						<li class="nav-header">客户经理管理</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/jbdy_search')" id="jbdy">
+							<a href="javascript:void(0);">级别定义</a>
+						</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/cjcx_search')" id="cjcx">
+							<a href="javascript:void(0);">层级查询</a>
+						</li>
+						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/jjsh_search')" id="jjsh">
+							<a href="javascript:void(0);">晋级审核</a>
 						</li>
 					</ul>
 					<ul class="nav nav-list 
@@ -225,9 +264,11 @@
 						<li onclick="leftmenu(this);changeiframe('Report/bar')" id="bar" >
 							<a href="javascript:void(0);">柱状图</a>
 						</li>
+						<!--
 						<li onclick="leftmenu(this);changeiframe('Report/pie')" id="pie" >
 							<a href="javascript:void(0);">饼图</a>
 						</li>	
+						-->
 					</ul>
                     <ul class="nav nav-list
 							{%- if menu != "xtgj"%}
@@ -264,7 +305,7 @@
 							<a href="javascript:void(0);">机构管理</a>
 						</li>
 						<li onclick="leftmenu(this);changeiframe('System/syzgl/1')" id="syzgl" >
-							<a href="javascript:void(0);">使用者管理</a>
+							<a href="javascript:void(0);">用户管理</a>
 						</li>
 						<li onclick="leftmenu(this);changeiframe('System/jsqxgl/1')" id="jsqxgl" >
 							<a href="javascript:void(0);">角色权限管理</a>

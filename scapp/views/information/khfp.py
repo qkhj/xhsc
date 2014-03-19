@@ -25,17 +25,23 @@ from scapp import app
 # 客户分配
 @app.route('/Information/khfp', methods=['GET'])
 def Information_khfp():
-    return render_template("Information/khfp/khfp_search.html")
+    user = View_Get_Cus_Mgr.query.filter("role_level>=2").order_by("id").all()#客户经理
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    return render_template("Information/khfp/khfp_search.html",user=user,role=role)
 	
 # 客户分配
 @app.route('/Information/khfp/khfp_search/<int:page>', methods=['GET','POST'])
 def khfp_search(page):
     # 模糊查询
+    manager = request.form['manager']
     customer_name = request.form['customer_name']
     beg_date = request.form['beg_date'] + " 00:00:00"
     end_date = request.form['end_date'] + " 23:59:59"
 
-    sql = "create_date between '"+beg_date+"' and '"+end_date + "' "
+    sql = " 1=1"
+    if manager != '0':
+        sql += " and receiver="+manager
+    sql += " and create_date between '"+beg_date+"' and '"+end_date + "' "
     if customer_name:
         sql += " and (customer_name like '%"+customer_name+"%' or shop_name like '%"+customer_name+"%') "
 
@@ -44,7 +50,7 @@ def khfp_search(page):
     users = View_Get_Cus_Mgr.query.filter("role_level>=2").order_by("id").all()#客户经理
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
     return render_template("Information/khfp/khfp.html",users=users,role=role,target_customer=target_customer,
-        customer_name=customer_name,beg_date=request.form['beg_date'],end_date=request.form['end_date'])
+        manager=manager,customer_name=customer_name,beg_date=request.form['beg_date'],end_date=request.form['end_date'])
 
 # 编辑客户分配
 @app.route('/Information/khfp/edit_khfp/<int:page>/<int:target_customer_id>/<int:user_id>', methods=['GET','POST'])

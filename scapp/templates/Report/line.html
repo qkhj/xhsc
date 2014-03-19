@@ -4,64 +4,46 @@
 <script type="text/javascript" src="/static/ofc2/swfobject.js"></script>
 </head>
 <body>
-<h2>折线图</h2>
-<div id="my_chart"></div>
+<h2>折线图</h2><input type="button" onclick="OFC.jquery.imageData('my_chart');" value="导出">
+<form id="content" method="POST" action="/Report/flash/export_pic" target="targetFrame">
+  <div id="my_chart"></div>
+  <input type="hidden" id="imageData" name="imageData">
+</form>
+<iframe id="targetFrame" name="targetFrame" style="width:0;height:0;display:none"></iframe>
 </body>
 <script type="text/javascript">
-swfobject.embedSWF("/static/ofc2/open-flash-chart.swf", "my_chart",
-  "100%", "450", "9.0.0", "expressInstall.swf",
-  {"get-data":"getDemoData"});
-function getDemoData(){
-	var barData={
-  "y_legend":{
-    "text":   "Time of day",
-    "style": "{color: #736AFF;}"
-  },
-	"elements":[
-		{
-			"type":      "line",
-			"colour":    "#736AFF",
-			"text":      "Avg. wave height (cm)",
-			"font-size": 10,
-			"width":     1,
-			"dot-style": {
-				"type":"star", "colour":"#a44a80", "dot-size": 5,
-				"tip":"#val#<br>#x_label#" },
-			"on-show":	{"type": "shrink-in", "cascade":1, "delay":0.5},
-			"values" :   [
-				1.5,1.69,1.88,2.06,2.21,2.34,2.43,
-				2.48,2.49,2.47,2.40,2.30,2.17,2.01,
-				1.83,1.64,1.44,1.24,1.05,0.88,0.74,
-				0.62,0.54,0.50,0.50,0.54,0.61,0.72,
-				0.86,1.03,1.22,1.41,1.61,1.81,1.99,
-				2.15,2.29,2.39,2.46,2.49,2.48,
-				{"value":2.44,"colour":"#FF0000","tip":"monkies"},
-				2.35,2.23,2.08]
-		}
-	],
-
-  "x_axis":{
-    "labels": {
-      "rotate": "vertical",
-      "labels":["2:00am","2:10","2:20","2:30","2:40","2:50",
-                "3:00am","3:10","3:20","3:30","3:40","3:50",
-                "4:00am","4:10","4:20","4:30","4:40","4:50",
-                "5:00am","5:10","5:20","5:30","5:40","5:50",
-                "6:00am","6:10","6:20","6:30","6:40","6:50",
-                "7:00am","7:10","7:20","7:30","7:40","7:50",
-                "8:00am","8:10","8:20","8:30","8:40","8:50",
-                "9:00am","9:10","9:20"]
-    }
-  },
-
-  "y_axis":{
-    "max":   3
-  },
-  "bg_colour":"#ffffff"
-
-};
-   return JSON.stringify(barData);
-}
+swfobject.embedSWF("/static/ofc2/open-flash-chart-SimplifiedChinese.swf", "my_chart",
+  "100%", "400", "9.0.0", "expressInstall.swf",
+  {"data-file":"/Report/create/line_hollow"});
 
 </script>
+<script type="text/javascript">
+  OFC = {};
+
+  OFC.jquery = {
+      name: "jQuery",
+      version: function(src) { 
+        return $('#'+ src)[0].get_version() 
+      },
+      rasterize: function (src, dst) {
+       $('#'+ dst).replaceWith(OFC.jquery.image(src)) 
+      },
+      image: function(src) { 
+        return "<img src='data:image/png;base64," + $('#'+src)[0].get_img_binary() + "' />"
+      },
+      imageData: function(src) { 
+        $("#imageData").val($('#'+src)[0].get_img_binary());
+        submitForm('content','/Report/flash/export_pic');
+      }
+  };
+
+  // Using an object as namespaces is JS Best Practice. I like the Control.XXX style.
+  //if (!Control) {var Control = {}}
+  //if (typeof(Control == "undefined")) {var Control = {}}
+  if (typeof(Control == "undefined")) {var Control = {OFC: OFC.jquery}};
+
+</script>
+  <script src="/static/js/jquery-1.7.2.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+  <script src="/static/js/script.js"></script>
 </html>

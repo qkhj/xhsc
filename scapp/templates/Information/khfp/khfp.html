@@ -17,6 +17,11 @@
 	<form id="content" method="POST" class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">客户分配</a>
+			{%- if manager %}
+				<input type="hidden" name="manager" value="{{manager}}">
+			{%- else %}
+				<input type="hidden" name="manager">
+			{%- endif %}
 			{%- if customer_name %}
 				<input type="hidden" name="customer_name" value="{{customer_name}}">
 			{%- else %}
