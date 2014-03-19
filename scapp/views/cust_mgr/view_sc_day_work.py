@@ -48,14 +48,14 @@ def new_cust_mgr():
         return redirect('/Cust_mgr/add')
 
     elif request.method=='GET':
-        return render_template('/Information/gsjl/new_gsjl.html')
+        return render_template('/Performance/gsjl/new_gsjl.html')
 
 
 # 客户经理工时查询,查询界面
 @app.route('/Cust_mgr/search', methods=['GET','POST'])
 def show_cust_mgr_search():
     user=db.engine.execute("SELECT * FROM view_get_cus_mgr WHERE role_level>='2'")
-    return render_template('/Information/gsjl/gsjl_search.html',user=user)
+    return render_template('/Performance/gsjl/gsjl_search.html',user=user)
 
 # 客户经理工时查询,查询结果
 @app.route('/Cust_mgr/search_result/<int:page>', methods=['GET','POST'])
@@ -74,7 +74,7 @@ def cust_mgr_search_result(page):
         data=sc_day_work.get_data_by_conditions(page,beg_date,end_date,user_id,current_user.id,'PAGE')
 
 
-        return render_template('/Information/gsjl/gsjl.html',data=data,beg_date=beg_date,end_date=end_date,user_id=user_id)
+        return render_template('/Performance/gsjl/gsjl.html',data=data,beg_date=beg_date,end_date=end_date,user_id=user_id)
     elif request.method=='POST':
         user_id=request.form['yunying_loan_officer']
         s_beg_date=str(request.form['beg_date'])
@@ -106,3 +106,168 @@ def cust_mgr_search_result(page):
         filename=str(year)+'_'+str(month)+'_'+str(day)+'_'+'客户经理工时统计表'+'.xls'
         exp=export_excel()
         return exp.export_download(filename,'客户经理工时统计表',exl_hdngs,data,exl_hdngs_xf,data_xfs)
+
+# 个人薪酬——搜索
+@app.route('/Performance/jxxc/grxc_search', methods=['GET'])
+def grxc_search():
+    return render_template("Performance/jxxc/grxc_search.html")
+
+# 个人薪酬
+@app.route('/Performance/jxxc/grxc', methods=['GET'])
+def grxc():
+    return render_template("Performance/jxxc/grxc.html")
+
+# 薪酬查询——搜索
+@app.route('/Performance/jxxc/xccx_search', methods=['GET'])
+def xccx_search():
+    return render_template("Performance/jxxc/xccx_search.html")
+
+# 薪酬查询
+@app.route('/Performance/jxxc/xccx', methods=['GET'])
+def xccx():
+    return render_template("Performance/jxxc/xccx.html")
+
+# 薪酬详单——搜索
+@app.route('/Performance/jxxc/xcxd_search', methods=['GET'])
+def xcxd_search():
+    return render_template("Performance/jxxc/xcxd_search.html")
+
+# 薪酬详单
+@app.route('/Performance/jxxc/xcxd', methods=['GET'])
+def xcxd():
+    return render_template("Performance/jxxc/xcxd.html")
+
+# 业务差错统计——搜索
+@app.route('/Performance/jxxc/ywcctj_search', methods=['GET'])
+def ywcctj_search():
+    return render_template("Performance/jxxc/ywcctj_search.html")
+
+# 业务差错统计
+@app.route('/Performance/jxxc/ywcctj', methods=['GET'])
+def ywcctj():
+    return render_template("Performance/jxxc/ywcctj.html")
+
+# 新增业务差错
+@app.route('/Performance/jxxc/new_ywcc', methods=['GET'])
+def new_ywcc():
+    return render_template("Performance/jxxc/new_ywcc.html")
+
+# 风险保证金——搜索
+@app.route('/Performance/jxxc/fxbzj_search', methods=['GET'])
+def fxbzj_search():
+    return render_template("Performance/jxxc/fxbzj_search.html")
+
+# 风险保证金
+@app.route('/Performance/jxxc/fxbzj', methods=['GET'])
+def fxbzj():
+    return render_template("Performance/jxxc/fxbzj.html")
+
+# 薪酬参数配置
+@app.route('/Performance/jxxc/xccspz', methods=['GET'])
+def xccspz():
+    return render_template("Performance/jxxc/xccspz.html")
+
+# 评估查询——搜索
+@app.route('/Performance/ygpgkh/pgcx_search', methods=['GET'])
+def pgcx_search():
+    return render_template("Performance/ygpgkh/pgcx_search.html")
+
+# 评估查询
+@app.route('/Performance/ygpgkh/pgcx', methods=['GET'])
+def pgcx():
+    return render_template("Performance/ygpgkh/pgcx.html")
+
+# 培训期评估——搜索
+@app.route('/Performance/ygpgkh/pxqpg_search', methods=['GET'])
+def pxqpg_search():
+    return render_template("Performance/ygpgkh/pxqpg_search.html")
+
+# 培训期评估列表
+@app.route('/Performance/ygpgkh/pxqpglist', methods=['GET'])
+def pxqpglist():
+    return render_template("Performance/ygpgkh/pxqpglist.html")
+
+# 培训期评估(废弃)
+@app.route('/Performance/ygpgkh/pxqpg', methods=['GET'])
+def pxqpg():
+    return render_template("Performance/ygpgkh/pxqpg.html")
+
+# 课堂培训评估
+@app.route('/Performance/ygpgkh/ktpxpg', methods=['GET'])
+def ktpxpg():
+    return render_template("Performance/ygpgkh/ktpxpg.html")
+
+# 实际操作评估
+@app.route('/Performance/ygpgkh/sjczpg', methods=['GET'])
+def sjczpg():
+    return render_template("Performance/ygpgkh/sjczpg.html")
+
+# 最终评估
+@app.route('/Performance/ygpgkh/zzpg', methods=['GET'])
+def zzpg():
+    return render_template("Performance/ygpgkh/zzpg.html")
+
+# 在岗评估——搜索
+@app.route('/Performance/ygpgkh/zgpg_search', methods=['GET'])
+def zgpg_search():
+    return render_template("Performance/ygpgkh/zgpg_search.html")
+
+# 在岗评估列表
+@app.route('/Performance/ygpgkh/zgpglist', methods=['GET'])
+def zgpglist():
+    return render_template("Performance/ygpgkh/zgpglist.html")
+
+# 在岗评估
+@app.route('/Performance/ygpgkh/zgpg', methods=['GET'])
+def zgpg():
+    return render_template("Performance/ygpgkh/zgpg.html")
+
+# 新增客户经理KPI
+@app.route('/Performance/ygpgkh/new_khjlKPI', methods=['GET'])
+def new_khjlKPI():
+    return render_template("Performance/ygpgkh/new_khjlKPI.html")
+
+# 新增后台岗KPI
+@app.route('/Performance/ygpgkh/new_htgKPI', methods=['GET'])
+def new_htgKPI():
+    return render_template("Performance/ygpgkh/new_htgKPI.html")
+
+# 级别定义——搜索
+@app.route('/Performance/khjlgl/jbdy_search', methods=['GET'])
+def jbdy_search():
+    return render_template("Performance/khjlgl/jbdy_search.html")
+
+# 级别定义
+@app.route('/Performance/khjlgl/jbdy', methods=['GET'])
+def jbdy():
+    return render_template("Performance/khjlgl/jbdy.html")
+
+# 层级查询——搜索
+@app.route('/Performance/khjlgl/cjcx_search', methods=['GET'])
+def cjcx_search():
+    return render_template("Performance/khjlgl/cjcx_search.html")
+
+# 层级查询
+@app.route('/Performance/khjlgl/cjcx', methods=['GET'])
+def cjcx():
+    return render_template("Performance/khjlgl/cjcx.html")
+
+# 晋级审核——搜索
+@app.route('/Performance/khjlgl/jjsh_search', methods=['GET'])
+def jjsh_search():
+    return render_template("Performance/khjlgl/jjsh_search.html")
+
+# 晋级审核列表
+@app.route('/Performance/khjlgl/jjshlist', methods=['GET'])
+def jjshlist():
+    return render_template("Performance/khjlgl/jjshlist.html")
+
+# 晋级审核
+@app.route('/Performance/khjlgl/jjsh', methods=['GET'])
+def jjsh():
+    return render_template("Performance/khjlgl/jjsh.html")
+
+# 层级评估
+@app.route('/Performance/khjlgl/cjpg', methods=['GET'])
+def cjpg():
+    return render_template("Performance/khjlgl/cjpg.html")
