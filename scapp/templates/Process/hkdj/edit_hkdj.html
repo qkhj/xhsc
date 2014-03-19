@@ -13,7 +13,7 @@
 		
 </head>
 
-<body>	
+<body onload="sub()">	
 	<form class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">流程管理</a>/<a href="#">还款登记</a>
@@ -92,19 +92,35 @@
 						{%- endif %}	
 							<td>{{obj.installments}}</td>
 							<td>{{obj.repayment_date}}</td>
-							<td>{{obj.re_principal}}</td>
-							<td>{{obj.re_interest}}</td>
-							<td>{{obj.re_penalty_interest}}</td>	
-							<td>{{obj.total_repayment}}</td>												
+							<td class="subData1">{{obj.re_principal}}</td>
+							<td class="subData2">{{obj.re_interest}}</td>
+							<td class="subData3">{{obj.re_penalty_interest}}</td>	
+							<td class="subData4">{{obj.total_repayment}}</td>												
 						</tr>	
-					{%- endfor %}
+					{%- endfor %} 
+						<!-- <tr class="info">						
+							<td>xx</td>
+							<td>xx</td>
+							<td class="subData1">1</td>
+							<td class="subData2">2</td>
+							<td class="subData3">3</td>	
+							<td class="subData4">4</td>												
+						</tr>
+						<tr class="info">						
+							<td>xx</td>
+							<td>xx</td>
+							<td class="subData1">1</td>
+							<td class="subData2">2</td>
+							<td class="subData3">3</td>	
+							<td class="subData4">4</td>												
+						</tr> -->
 						<tr>					
-							<td>总计</td>
-							<td></td>
-							<td>8,333.33</td>
-							<td>1,250.62</td>
-							<td>100.00</td>	
-							<td>9,683.96</td>												
+							<th>总计</th>
+							<th></th>
+							<th id="sub1"></th>
+							<th id="sub2"></th>
+							<th id="sub3"></th>	
+							<th id="sub4"></th>												
 						</tr>
 						<tr>					
 							<td colspan="2" style="background:#afd5eb;">偿还金额</td>							
@@ -121,5 +137,31 @@
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		function sub(){
+			
+			for(i=1;i<5;i++){
+				var sum=0;	
+				if($(".subData"+i).length==0){
+					$("#sub"+i).html(0); 
+					$("#sub"+i).html(0+"<br/><span class='je'>"+hjje($("#sub"+i),0)+"</span>"); 	
+				}					
+				else{
+					$.each($(".subData"+i),function(){ 
+						if(this.innerHTML=="")
+							sum=sum;
+						else
+							sum += parseFloat(this.innerHTML);
+						$("#sub"+i).html(sum+"<br/><span class='je'>"+hjje($("#sub"+i),sum)+"</span>"); 	
+					}); 
+				}
+			}
+		}
+	</script>
 </body>
 </html>
