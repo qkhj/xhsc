@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<style type="text/css">
+		textarea{width:80%;}
+		.table-list .table-label{width:100px;}
+		.inline td{border-top:none;}
+		.short{width:50px;}
+	</style>
+</head>
+
+<body onload="datepicker()">	
+	<form class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">在岗评估</a>
+		</div>	
+		<div class="row-fluid">
+			<i class="icon-bookmark"></i><span class="titletip">后台岗KPI评估</span>
+			<div class="divBorder">	
+				<table class="table-list" >				
+					<tr>
+						<td class="table-label" colspan="2">客户经理姓名</td>
+						<td style="width:200px;">张三</td>
+						<td class="table-label" colspan="2">评估日期</td>
+						<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
+						<td class="table-label">评估月份</td>
+						<td><input type="text" name=""/></td>
+					</tr>
+				</table>	
+				<table class="table-list inline" >				
+					<tr class="center">
+						<td class="table-label" colspan="6"><b>考核指标</b></td>			
+					</tr>
+					<tr class="center">
+						<td class="table-label" colspan="2"><b>KPI指标</b></td>			
+						<td class="table-label" style="width:330px;"><b>说明</b></td>	
+						<td class="table-label" style="width:80px;"><b>权重</b></td>
+						<td class="table-label" style="width:90px;"><b>得分</b></td>
+						<td class="table-label" style="width:300px;"><b>分值计算方法</b></td>
+					</tr>
+					<tr class="center">
+						<td rowspan="3">部门业绩</td>			
+						<td>贷款余额</td>	
+						<td>贷款规模当月计划完成情况</td>
+						<td>15</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td>实际完成量÷计划完成量×100%×权重分数</td>
+					</tr>
+					<tr class="center">		
+						<td>管户数</td>	
+						<td>管户数当月计划完成情况</td>
+						<td>15</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td>实际完成量÷计划完成量×100%×权重分数</td>
+					</tr>
+					<tr class="center">		
+						<td>利润贡献度</td>	
+						<td>利息收入当月计划完成情况</td>
+						<td>15</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td>实际完成量÷计划完成量×100%×权重分数</td>
+					</tr>
+					<tr class="center">
+						<td rowspan="8">工作质量</td>			
+						<td>系统维护及数据录入</td>	
+						<td>数据录入的正确性及完整性</td>
+						<td>5</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td rowspan="8">评估组按照被评估人日常工作表现进行打分。</td>
+					</tr>
+					<tr class="center">		
+						<td>业务统计</td>	
+						<td>当月管户数计划完成情况</td>
+						<td>5</td>
+						<td><input type="text" name="" class="short"/></td>
+					</tr>
+					<tr class="center">		
+						<td>办理贷款合同</td>	
+						<td>合同签署量</td>
+						<td>10</td>
+						<td><input type="text" name="" class="short"/></td>
+					</tr>
+					<tr class="center">		
+						<td>放款处理</td>	
+						<td>放款文件处理量</td>
+						<td>5</td>
+						<td><input type="text" name="" class="short"/></td>
+					</tr>
+					<tr class="center">		
+						<td>信贷档案管理</td>	
+						<td>信贷管理是否标准、合规</td>
+						<td>5</td>
+						<td><input type="text" name="" class="short"/></td>
+					</tr>
+					<tr class="center">		
+						<td>客户关系维护</td>	
+						<td>辅助客户经理进行简单的客户维护</td>
+						<td>5</td>
+						<td><input type="text" name="" class="short"/></td>
+					</tr>
+					<tr class="center">		
+						<td>案例整理</td>	
+						<td>对典型案例进行编写整理及案例库的管理</td>
+						<td>5</td>
+						<td><input type="text" name="" class="short"/></td>
+					</tr>
+					<tr class="center">		
+						<td>风险控制</td>	
+						<td>从后台角度对客户进行风险分析并提醒客户经理</td>
+						<td>5</td>
+						<td><input type="text" name="" class="short"/></td>
+					</tr>
+					<tr class="center">
+						<td>日常行为评估</td>			
+						<td>日常行为评估</td>	
+						<td>个人工作状态、出勤状况等</td>
+						<td>10</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td>根据实际情况实行扣分制，由评估人确定</td>
+					</tr>
+					<tr class="center">
+						<td>逾期率</td>			
+						<td>逾期率</td>	
+						<td>逾期率控制情况</td>
+						<td>——</td>
+						<td><input type="text" name="" class="short"/></td>
+						<td>
+							1%≤逾期率≤1.5%，以上三项总分×90%；<br/>
+							1.5%≤逾期率≤2%，以上三项总分×70%；<br/>
+							2%≤逾期率≤3%，以上三项总分×50%；<br/>
+							3%≤逾期率，当月评估为0分
+						</td>
+					</tr>
+					<tr class="center">
+						<td class="table-label" colspan="3"><b>总分</b>
+							<input type="text" name="" class="short"/></td>		
+						<td class="table-label" colspan="3"><b>总评价</b>
+							<select name="">
+								<option>不合格</option>
+								<option>合格</option>
+								<option>良好</option>
+								<option>优秀</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="center">其他评价</td>			
+						<td colspan="5"><textarea name=""></textarea></td>	
+					</tr>
+				</table>		
+			</div>
+			<input type="button" class="btn btn-info" value="提交" onclick="iframe('Performance/ygpgkh/zgpg')"/>		
+		</div><!--/row-fluid -->
+	</form><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+</body>
+</html>
