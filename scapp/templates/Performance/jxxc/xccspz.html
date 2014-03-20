@@ -11,13 +11,16 @@
 	<link href="/static/css/bootstrap.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
 	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<!-- ************************验证样式************************-->
+	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
 	<style type="text/css">
 		input[type="text"]{width:90px;}
 	</style>
 </head>
 
 <body onload="datepicker()">	
-	<form class="content">
+	<form class="content" action="/Performance/add" method="POST">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">薪酬参数配置</a>
 		</div>		
@@ -37,12 +40,20 @@
 					</tr>					
 					<tbody class="center">
 						<tr class="tbData" onclick="changeColor(this)">
-							<td>实习客户经理</td>	
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>						
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>							
+							<td>实习客户经理</td>
+							{%- if queryInform_1!=''%}
+							<td><input type="text" name="level_base" value="{{queryInform_1.base_payment}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" value="{{queryInform_1.A1}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" value="{{queryInform_1.A2}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>			
+							<td><input type="text" name="level_A3" value="{{queryInform_1.A3}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" value="{{queryInform_1.R}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							{%- else %}
+							<td><input type="text" name="level_base" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>			
+							<td><input type="text" name="level_A3" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							{%- endif%}	
 							<td rowspan="6">
 								无抵押无担保贷款r1：100%<br/>
 								保证信用担保类贷款r2:  90%<br/>
@@ -51,49 +62,333 @@
 							</td>
 						</tr>
 						<tr class="tbData" onclick="changeColor(this)">
-							<td>初级客户经理</td>	
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>						
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
+							<td>初级客户经理</td>
+							{%- if queryInform_2!=''%}
+							<td><input type="text" name="level_base" value="{{queryInform_2.base_payment}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" value="{{queryInform_2.A1}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" value="{{queryInform_2.A2}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							<td><input type="text" name="level_A3" value="{{queryInform_2.A3}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" value="{{queryInform_2.R}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							{%- else%}
+							<td><input type="text" name="level_base" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>			
+							<td><input type="text" name="level_A3" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							{%- endif%}
 						</tr>
 						<tr class="tbData" onclick="changeColor(this)">
 							<td>中级客户经理</td>	
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>						
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
+							{%- if queryInform_3!=''%}
+							<td><input type="text" name="level_base" value="{{queryInform_3.base_payment}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" value="{{queryInform_3.A1}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" value="{{queryInform_3.A2}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							<td><input type="text" name="level_A3" value="{{queryInform_3.A3}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" value="{{queryInform_3.R}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							{%- else%}
+							<td><input type="text" name="level_base" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>			
+							<td><input type="text" name="level_A3" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							{%- endif%}
 						</tr>
 						<tr class="tbData" onclick="changeColor(this)">
 							<td>高级客户经理</td>	
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>						
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
+							{%- if queryInform_4!=''%}
+							<td><input type="text" name="level_base" value="{{queryInform_4.base_payment}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" value="{{queryInform_4.A1}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" value="{{queryInform_4.A2}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							<td><input type="text" name="level_A3" value="{{queryInform_4.A3}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" value="{{queryInform_4.R}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							{%- else%}
+							<td><input type="text" name="level_base" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>			
+							<td><input type="text" name="level_A3" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							{%- endif%}
 						</tr>
 						<tr class="tbData" onclick="changeColor(this)">
 							<td>客户经理主管</td>	
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>						
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
+							{%- if queryInform_5!=''%}
+							<td><input type="text" name="level_base" value="{{queryInform_5.base_payment}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" value="{{queryInform_5.A1}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" value="{{queryInform_5.A2}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							<td><input type="text" name="level_A3" value="{{queryInform_5.A3}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" value="{{queryInform_5.R}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							{%- else%}
+							<td><input type="text" name="level_base" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>			
+							<td><input type="text" name="level_A3" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							{%- endif%}	
 						</tr>
 						<tr class="tbData" onclick="changeColor(this)">
 							<td>高级客户经理主管</td>	
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>						
-							<td><input type="text" name=""/></td>
-							<td><input type="text" name=""/></td>
+							{%- if queryInform_6!=''%}
+							<td><input type="text" name="level_base" value="{{queryInform_6.base_payment}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" value="{{queryInform_6.A1}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" value="{{queryInform_6.A2}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							<td><input type="text" name="level_A3" value="{{queryInform_6.A3}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" value="{{queryInform_6.R}}" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							{%- else%}
+							<td><input type="text" name="level_base" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A1" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_A2" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>			
+							<td><input type="text" name="level_A3" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>
+							<td><input type="text" name="level_R" onKeyUp="value=value.replace(/[^\d\.]/g,'')"/></td>	
+							{%- endif%}
 						</tr><!-- /数据 -->	
 					</tbody>									
 				</table>
 			</div>
-			
+			<i class="icon-bookmark"></i><span class="titletip">绩效评估组分配</span><br/>
+			<div class="divBorder">				
+				<table class="table-list" cellspacing="10" id="uesr-list">				
+					<tr>	
+						<td class="table-label">评估人A</th>
+						<td>
+							<input type="hidden" id="yunying_manager1" name="performance_a" value="{{inform.performance_a}}"/>
+							<input type="text" id="yunying_manager_name1" value="{{inform_name_a}}" readonly/>
+							<input type="button" value="搜索" class="btn" onclick="$('#yunying_xdyss1').show();"/>
+							<span id="pgrA">
+								<input type="hidden" id="yz_yunying1" value=""/>
+								<span class="textfieldRequiredMsg">不能为空</span>
+							</span>							
+							<div class="display-div" id="yunying_xdyss1" style="margin-top:-350px;">
+								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+								<div style="border:1px solid #94c1dc;">
+									<table class="table-list">
+										<tr>
+											<td class="table-label">客户经理编号</td>
+											<td><input type="text"/></td>	
+											<td class="table-label">客户经理名称</td>
+											<td><input type="text"/></td>	
+										</tr>
+									</table>
+								</div>																		
+								<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+								<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+								<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+								<div style="border:1px solid #94c1dc;">
+									<table class="table-list">
+										<thead>
+											<tr>
+												<th>选择</th>	
+												<th>客户经理编号</th>												
+												<th>客户经理名称</th>												
+											</tr>
+										</thead>
+										<tbody class="center">	
+										{%- for obj in user %}										
+											<tr>
+												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name1','yunying_manager1');" onblur="hiddenInput('yz_yunying1',this)"/></td>	
+												<td>{{obj.id}}</td>										
+												<td>{{obj.real_name}}</td>								
+											</tr>	
+										{%- endfor %}							
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</td>
+						<td class="table-label">评估人B</th>
+						<td>
+							<input type="hidden" id="yunying_manager2" name="performance_b" value="{{inform.performance_b}}"/>
+							<input type="text" id="yunying_manager_name2" value="{{inform_name_b}}" readonly/>
+							<input type="button" value="搜索" class="btn" onclick="$('#yunying_xdyss2').show();"/>
+							<span id="pgrB">
+								<input type="hidden" id="yz_yunying2" value=""/>
+								<span class="textfieldRequiredMsg">不能为空</span>
+							</span>							
+							<div class="display-div" id="yunying_xdyss2" style="margin-top:-350px;">
+								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+								<div style="border:1px solid #94c1dc;">
+									<table class="table-list">
+										<tr>
+											<td class="table-label">客户经理编号</td>
+											<td><input type="text"/></td>	
+											<td class="table-label">客户经理名称</td>
+											<td><input type="text"/></td>	
+										</tr>
+									</table>
+								</div>																		
+								<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+								<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+								<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+								<div style="border:1px solid #94c1dc;">
+									<table class="table-list">
+										<thead>
+											<tr>
+												<th>选择</th>	
+												<th>客户经理编号</th>												
+												<th>客户经理名称</th>												
+											</tr>
+										</thead>
+										<tbody class="center">	
+										{%- for obj in user %}										
+											<tr>
+												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name2','yunying_manager2');" onblur="hiddenInput('yz_yunying2',this)"/></td>	
+												<td>{{obj.id}}</td>									
+												<td>{{obj.real_name}}</td>								
+											</tr>	
+										{%- endfor %}								
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="table-label">评估人C</th>
+						<td colspan="3">
+							<input type="hidden" id="yunying_manager3" name="performance_c" value="{{inform.performance_c}}"/>
+							<input type="text" id="yunying_manager_name3" value="{{inform_name_c}}" readonly/>
+							<input type="button" value="搜索" class="btn" onclick="$('#yunying_xdyss3').show();"/>
+							<span id="pgrC">
+								<input type="hidden" id="yz_yunying3" value=""/>
+								<span class="textfieldRequiredMsg">不能为空</span>
+							</span>							
+							<div class="display-div" id="yunying_xdyss3" style="margin-top:-350px;">
+								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+								<div style="border:1px solid #94c1dc;">
+									<table class="table-list">
+										<tr>
+											<td class="table-label">客户经理编号</td>
+											<td><input type="text"/></td>	
+											<td class="table-label">客户经理名称</td>
+											<td><input type="text"/></td>	
+										</tr>
+									</table>
+								</div>																		
+								<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+								<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+								<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+								<div style="border:1px solid #94c1dc;">
+									<table class="table-list">
+										<thead>
+											<tr>
+												<th>选择</th>	
+												<th>客户经理编号</th>												
+												<th>客户经理名称</th>												
+											</tr>
+										</thead>
+										<tbody class="center">	
+										{%- for obj in user %}											
+											<tr>
+												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name3','yunying_manager3');" onblur="hiddenInput('yz_yunying3',this)"/></td>	
+												<td>{{obj.id}}</td>										
+												<td>{{obj.real_name}}</td>								
+											</tr>
+										{%- endfor %}									
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</td>
+					</tr>										
+				</table>
+			</div>
+			<i class="icon-bookmark"></i><span class="titletip">客户经理层级评估组分配</span><br/>
+			<div class="divBorder">				
+				<table class="table-list" cellspacing="10" id="uesr-list">				
+					<tr>	
+						<td class="table-label">评估人A</th>
+						<td>
+							<input type="hidden" id="yunying_manager4" name="level_a" value="{{inform.level_a}}"/>
+							<input type="text" id="yunying_manager_name4" value="{{inform_name_d}}" readonly/>
+							<input type="button" value="搜索" class="btn" onclick="$('#yunying_xdyss4').show();"/>
+							<span id="pgrAA">
+								<input type="hidden" id="yz_yunying4" value=""/>
+								<span class="textfieldRequiredMsg">不能为空</span>
+							</span>							
+							<div class="display-div" id="yunying_xdyss4" style="margin-top:-350px;">
+								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+								<div style="border:1px solid #94c1dc;">
+									<table class="table-list">
+										<tr>
+											<td class="table-label">客户经理编号</td>
+											<td><input type="text"/></td>	
+											<td class="table-label">客户经理名称</td>
+											<td><input type="text"/></td>	
+										</tr>
+									</table>
+								</div>																		
+								<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+								<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+								<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+								<div style="border:1px solid #94c1dc;">
+									<table class="table-list">
+										<thead>
+											<tr>
+												<th>选择</th>	
+												<th>客户经理编号</th>												
+												<th>客户经理名称</th>												
+											</tr>
+										</thead>
+										<tbody class="center">		
+										{%- for obj in user %}										
+											<tr>
+												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name4','yunying_manager4');" onblur="hiddenInput('yz_yunying4',this)"/></td>	
+												<td>{{obj.id}}</td>										
+												<td>{{obj.real_name}}</td>								
+											</tr>
+										{%- endfor %}								
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</td>
+						<td class="table-label">评估人B</th>
+						<td>
+							<input type="hidden" id="yunying_manager5" name="level_b" value="{{inform.level_b}}"/>
+							<input type="text" id="yunying_manager_name5" value="{{inform_name_e}}" readonly/>
+							<input type="button" value="搜索" class="btn" onclick="$('#yunying_xdyss5').show();"/>
+							<span id="pgrBB">
+								<input type="hidden" id="yz_yunying5" value=""/>
+								<span class="textfieldRequiredMsg">不能为空</span>
+							</span>							
+							<div class="display-div" id="yunying_xdyss5" style="margin-top:-350px;">
+								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+								<div style="border:1px solid #94c1dc;">
+									<table class="table-list">
+										<tr>
+											<td class="table-label">客户经理编号</td>
+											<td><input type="text"/></td>	
+											<td class="table-label">客户经理名称</td>
+											<td><input type="text"/></td>	
+										</tr>
+									</table>
+								</div>																		
+								<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+								<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+								<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+								<div style="border:1px solid #94c1dc;">
+									<table class="table-list">
+										<thead>
+											<tr>
+												<th>选择</th>	
+												<th>客户经理编号</th>												
+												<th>客户经理名称</th>												
+											</tr>
+										</thead>
+										<tbody class="center">	
+										{%- for obj in user %}										
+											<tr>
+												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name5','yunying_manager5');" onblur="hiddenInput('yz_yunying5',this)"/></td>	
+												<td>{{obj.id}}</td>										
+												<td>{{obj.real_name}}</td>								
+											</tr>
+										{%- endfor %}								
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</td>
+					</tr>										
+				</table>
 			</div>
 			<input type="submit" class="btn btn-info" value="提交"/>	
 		</div><!--/row-fluid -->
@@ -103,5 +398,12 @@
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>
 	<script src="/static/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+	</script>
 </body>
 </html>

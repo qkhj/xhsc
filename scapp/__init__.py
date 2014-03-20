@@ -143,6 +143,8 @@ import views.repayment.view_loan_expire#到期终止贷款统计视图
 import views.repayment.view_loan_repayment#贷款还款记录统计视图
 import views.repayment.view_loan_change_record
 import views.cust_mgr.view_sc_day_work #客户经理工时记录
+
+import views.performance.parameter_config
 #---------------------------------
 #ORM自动生成使用--johnny
 #---------------------------------

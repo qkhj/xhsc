@@ -162,11 +162,6 @@ def fxbzj_search():
 def fxbzj():
     return render_template("Performance/jxxc/fxbzj.html")
 
-# 薪酬参数配置
-@app.route('/Performance/jxxc/xccspz', methods=['GET'])
-def xccspz():
-    return render_template("Performance/jxxc/xccspz.html")
-
 # 评估查询——搜索
 @app.route('/Performance/ygpgkh/pgcx_search', methods=['GET'])
 def pgcx_search():
