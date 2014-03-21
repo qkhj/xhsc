@@ -102,9 +102,13 @@
 				<tr>
 					<td class="table-label">婚姻状况</td>
 					<td>
-						{%- if customer.marriage == '1' %}
+						{%- if customer.marriage == '3' %}
+							<span>丧偶</span>
+						{%- elif customer.marriage == '2' %}
+							<span>离异</span>
+						{%- elif customer.marriage == '1' %}
 							<span>已婚</span>
-						{%- else %}
+						{%- elif customer.marriage == '0' %}
 							<span>未婚</span>
 						{%- endif %}
 					</td>

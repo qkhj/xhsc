@@ -160,16 +160,26 @@
 				<tr>
 					<td class="table-label">婚姻状况</td>
 					<td colspan="3">
-						<select name="marriage">
+						<select name="marriage">							
+							{%- if customer.marriage == '0' %}
+							<option value="0" selected>未婚</option>
+							{%- else %}	
+							<option value="0">未婚</option>
+							{%- endif %}
 							{%- if customer.marriage == '1' %}
 							<option value="1" selected>已婚</option>
 							{%- else %}	
 							<option value="1">已婚</option>
 							{%- endif %}
-							{%- if customer.marriage == '0' %}
-							<option value="0" selected>未婚</option>
+							{%- if customer.marriage == '2' %}
+							<option value="2" selected>离异</option>
 							{%- else %}	
-							<option value="0">未婚</option>
+							<option value="2">离异</option>
+							{%- endif %}
+							{%- if customer.marriage == '3' %}
+							<option value="3" selected>丧偶</option>
+							{%- else %}	
+							<option value="3">丧偶</option>
 							{%- endif %}
 						</select>
 					</td>	
