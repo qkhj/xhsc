@@ -12,7 +12,10 @@ from scapp.models import SC_Role
 from scapp.models import SC_UserRole
 from scapp.models import SC_Privilege
 from scapp.models import SC_Org
+from scapp.models import SC_Application
+from scapp.models import SC_Menu
 
+import json
 from scapp import app
 
 import hashlib
@@ -182,39 +185,12 @@ def new_role():
 			db.session.flush()
 
 			# 保存具体权限
-#			SC_Privilege(role.id,'xxgl',request.form['xxgl']).add()
-#			SC_Privilege(role.id,'khxxgl',request.form['khxxgl']).add()
-#			SC_Privilege(role.id,'dkxxgl',request.form['dkxxgl']).add()
-#			SC_Privilege(role.id,'lcgl',request.form['lcgl']).add()
-#			SC_Privilege(role.id,'lfdj',request.form['lfdj']).add()
-#			SC_Privilege(role.id,'dksq',request.form['dksq']).add()
-#			SC_Privilege(role.id,'dksqsh',request.form['dksqsh']).add()
-#			SC_Privilege(role.id,'dqdc',request.form['dqdc']).add()
-#			SC_Privilege(role.id,'dksp',request.form['dksp']).add()
-#			SC_Privilege(role.id,'dkfk',request.form['dkfk']).add()
-#			SC_Privilege(role.id,'fksh',request.form['fksh']).add()
-#			SC_Privilege(role.id,'hkdj',request.form['hkdj']).add()
-#			SC_Privilege(role.id,'dhbg',request.form['dhbg']).add()
-#			SC_Privilege(role.id,'dhbgsh',request.form['dhbgsh']).add()
-#			SC_Privilege(role.id,'dhgl',request.form['dhgl']).add()
-#			SC_Privilege(role.id,'zcfl',request.form['zcfl']).add()
-#			SC_Privilege(role.id,'zcflsh',request.form['zcflsh']).add()
-#			SC_Privilege(role.id,'xtgj',request.form['xtgj']).add()
-#			SC_Privilege(role.id,'hkjhjsgj',request.form['hkjhjsgj']).add()
-#			SC_Privilege(role.id,'xtgl',request.form['xtgl']).add()
-#			SC_Privilege(role.id,'ywcspz',request.form['ywcspz']).add()
-#			SC_Privilege(role.id,'jkpz',request.form['jkpz']).add()
-#			SC_Privilege(role.id,'rzrj',request.form['rzrj']).add()
-#			SC_Privilege(role.id,'sjzd',request.form['sjzd']).add()
-#			SC_Privilege(role.id,'jggl',request.form['jggl']).add()
-#			SC_Privilege(role.id,'syzgl',request.form['syzgl']).add()
-#			SC_Privilege(role.id,'jsqxgl',request.form['jsqxgl']).add()
-#			SC_Privilege(role.id,'tjbb',request.form['tjbb']).add()
-#			SC_Privilege(role.id,'kh',request.form['kh']).add()
-#			SC_Privilege(role.id,'dkgjztfl',request.form['dkgjztfl']).add()
-#			SC_Privilege(role.id,'xdgzlclb',request.form['xdgzlclb']).add()
-#			SC_Privilege(role.id,'pcscbbcx',request.form['pcscbbcx']).add()
-#			SC_Privilege(role.id,'zhgllbb',request.form['zhgllbb']).add()
+			app_tree = SC_Application.query.order_by("id").all()
+			for app in app_tree:
+				SC_Privilege('SC_Role',role.id,'SC_Application',app.application_code,request.form[app.application_code]).add()
+				menu_tree = SC_Menu.query.filter_by(application=app.id).order_by("id").all()
+				for menu in menu_tree:
+					SC_Privilege('SC_Role',role.id,'SC_Menu',menu.menu_code,request.form[menu.menu_code]).add()
 
 			# 事务提交
 			db.session.commit()
@@ -230,7 +206,21 @@ def new_role():
 		return redirect('System/jsqxgl/1')
 
 	elif request.method == 'GET':
-		return render_template("System/new_role.html")
+		#读取所有模块
+		data = []
+		app_tree = SC_Application.query.order_by("id").all()
+		for app in app_tree:
+			dic = {}
+			dic['id'] = app.id
+			dic['name'] = app.application_name
+			dic['code'] = app.application_code
+			app_children = []
+			menu_tree = SC_Menu.query.filter_by(application=app.id).order_by("id").all()
+			for menu in menu_tree:
+				app_children.append({'id':menu.id,'name':menu.menu_name,'code':menu.menu_code})
+			dic['children'] = app_children
+			data.append(dic)
+		return render_template("System/new_role.html",data=data)
 
 # 更新角色
 @app.route('/System/edit_role/<int:id>', methods=['GET','POST'])
@@ -240,39 +230,16 @@ def edit_role(id):
 			SC_Role.query.filter_by(id=id).update({"role_name":request.form['role_name'],"role_level":request.form['role_level']})
 
 			# 更新权限
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='xxgl').update({"priviliege_operation":request.form['xxgl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='khxxgl').update({"priviliege_operation":request.form['khxxgl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='dkxxgl').update({"priviliege_operation":request.form['dkxxgl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='lcgl').update({"priviliege_operation":request.form['lcgl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='lfdj').update({"priviliege_operation":request.form['lfdj']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='dksq').update({"priviliege_operation":request.form['dksq']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='dksqsh').update({"priviliege_operation":request.form['dksqsh']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='dqdc').update({"priviliege_operation":request.form['dqdc']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='dksp').update({"priviliege_operation":request.form['dksp']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='dkfk').update({"priviliege_operation":request.form['dkfk']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='fksh').update({"priviliege_operation":request.form['fksh']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='hkdj').update({"priviliege_operation":request.form['hkdj']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='dhbg').update({"priviliege_operation":request.form['dhbg']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='dhbgsh').update({"priviliege_operation":request.form['dhbgsh']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='dhgl').update({"priviliege_operation":request.form['dhgl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='zcfl').update({"priviliege_operation":request.form['zcfl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='zcflsh').update({"priviliege_operation":request.form['zcflsh']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='xtgj').update({"priviliege_operation":request.form['xtgj']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='hkjhjsgj').update({"priviliege_operation":request.form['hkjhjsgj']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='xtgl').update({"priviliege_operation":request.form['xtgl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='ywcspz').update({"priviliege_operation":request.form['ywcspz']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='jkpz').update({"priviliege_operation":request.form['jkpz']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='rzrj').update({"priviliege_operation":request.form['rzrj']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='sjzd').update({"priviliege_operation":request.form['sjzd']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='jggl').update({"priviliege_operation":request.form['jggl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='syzgl').update({"priviliege_operation":request.form['syzgl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='jsqxgl').update({"priviliege_operation":request.form['jsqxgl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='tjbb').update({"priviliege_operation":request.form['tjbb']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='kh').update({"priviliege_operation":request.form['kh']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='dkgjztfl').update({"priviliege_operation":request.form['dkgjztfl']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='xdgzlclb').update({"priviliege_operation":request.form['xdgzlclb']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='pcscbbcx').update({"priviliege_operation":request.form['pcscbbcx']})
-#			SC_Privilege.query.filter_by(priviliege_master_id=id,priviliege_access='zhgllbb').update({"priviliege_operation":request.form['zhgllbb']})
+			SC_Privilege.query.filter_by(privilege_master='SC_Role',priviliege_master_id=id).delete()
+			db.session.flush()
+
+			# 保存具体权限
+			app_tree = SC_Application.query.order_by("id").all()
+			for app in app_tree:
+				SC_Privilege('SC_Role',id,'SC_Application',app.application_code,request.form[app.application_code]).add()
+				menu_tree = SC_Menu.query.filter_by(application=app.id).order_by("id").all()
+				for menu in menu_tree:
+					SC_Privilege('SC_Role',id,'SC_Menu',menu.menu_code,request.form[menu.menu_code]).add()
 
 			# 事务提交
 			db.session.commit()
@@ -289,6 +256,26 @@ def edit_role(id):
 
 	elif request.method == 'GET':
 		role = SC_Role.query.filter_by(id=id).first()
-		#privileges = SC_Privilege.query.filter_by(priviliege_master_id=id).order_by(SC_Privilege.id).all()
+		
+		#读取所有模块
+		data = []
+		app_tree = SC_Application.query.order_by("id").all()
+		for app in app_tree:
+			dic = {}
+			dic['id'] = app.id
+			dic['name'] = app.application_name
+			dic['code'] = app.application_code
+			app_children = []
+			menu_tree = SC_Menu.query.filter_by(application=app.id).order_by("id").all()
+			for menu in menu_tree:
+				app_children.append({'id':menu.id,'name':menu.menu_name,'code':menu.menu_code})
+			dic['children'] = app_children
+			data.append(dic)
+		#获取该role的所有权限
+		privileges_app = SC_Privilege.query.filter_by(privilege_master='SC_Role',priviliege_access='SC_Application',
+			priviliege_master_id=id).order_by("id").all()
+		privileges_menu = SC_Privilege.query.filter_by(privilege_master='SC_Role',priviliege_access='SC_Menu',
+			priviliege_master_id=id).order_by("id").all()
 
-		return render_template("System/edit_role.html",role=role)
+		return render_template("System/edit_role.html",role=role,data=data,privileges_app=privileges_app,
+			privileges_menu=privileges_menu)

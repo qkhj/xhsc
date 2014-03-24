@@ -81,6 +81,7 @@ import views.system.rzrj
 import views.system.user
 import views.system.sjzd
 import views.system.jggl
+import views.system.mkgl
 
 import views.information.khxxgl
 import views.information.dkxxgl

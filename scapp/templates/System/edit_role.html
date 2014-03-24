@@ -67,8 +67,82 @@
 					</table>
 				</div>
 				<span class="point">*为必填字段</span><br/>
-				<input type="submit" class="btn btn-info" value="提交" style="margin:0;"/>
-				<a class="btn btn-info" href="#" style="margin:5px 0;" onclick="iframe('System/jsqxgl/1')">返回</a><br/>
+				<input type="submit" class="btn btn-info" value="提交" style="margin:0;"/><br/>
+
+				{%- for app in data %}				
+				<div class="div-box">				
+					<table class="table-list" cellspacing="10" id="uesr-list">			
+						<tr>
+							<td>
+								<b>+ {{app.name}}</b>
+								<select id="{{app.code}}" name="{{app.code}}" onchange="change_select(this,'{{app.code}}')">
+									{%- set flag = 0 %}
+									{%- for obj in privileges_app %}
+										{%- if obj.priviliege_access_value == app.code %}
+											{%- set flag = 1 %}
+											{%- if obj.priviliege_operation == 2 %}
+											<option value="2" selected>维护</option>
+											{%- else %}
+											<option value="2">维护</option>
+											{%- endif %}
+											{%- if obj.priviliege_operation == 1 %}
+											<option value="1" selected>查询</option>
+											{%- else %}
+											<option value="1">查询</option>
+											{%- endif %}
+											{%- if obj.priviliege_operation == 0 %}
+											<option value="0" selected>无权限</option>
+											{%- else %}
+											<option value="0">无权限</option>
+											{%- endif %}
+										{%- endif %}
+									{%- endfor %}
+									{%- if flag == 0 %}
+										<option value="2">维护</option>
+										<option value="1">查询</option>
+										<option value="0">无权限</option>
+									{%- endif %}
+								</select>
+							</td>							
+						</tr>
+						<tr>
+							<td>
+								{%- for menu in app.children %}
+									{{menu.name}}
+									<select id="{{menu.code}}" name="{{menu.code}}" class="{{app.code}}" >
+										{%- set flag = 0 %}
+										{%- for obj in privileges_menu %}
+											{%- if obj.priviliege_access_value == menu.code %}
+												{%- set flag = 1 %}
+												{%- if obj.priviliege_operation == 2 %}
+												<option value="2" selected>维护</option>
+												{%- else %}
+												<option value="2">维护</option>
+												{%- endif %}
+												{%- if obj.priviliege_operation == 1 %}
+												<option value="1" selected>查询</option>
+												{%- else %}
+												<option value="1">查询</option>
+												{%- endif %}
+												{%- if obj.priviliege_operation == 0 %}
+												<option value="0" selected>无权限</option>
+												{%- else %}
+												<option value="0">无权限</option>
+												{%- endif %}
+											{%- endif %}
+										{%- endfor %}
+										{%- if flag == 0 %}
+											<option value="2">维护</option>
+											<option value="1">查询</option>
+											<option value="0">无权限</option>
+										{%- endif %}
+									</select>
+								{%- endfor %}
+							</td>
+						</tr>	
+					</table>
+				</div>
+				{%- endfor %}
 			</form>
 		</div><!--/row-fluid -->
 	</div><!--/content -->
