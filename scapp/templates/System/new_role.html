@@ -51,9 +51,38 @@
 					</table>
 				</div>
 				<span class="point">*为必填字段</span><br/>
-				<input type="submit" class="btn btn-info" value="提交" style="margin:0;"/>
-				<a class="btn btn-info" href="#" style="margin:5px 0;" onclick="iframe('System/jsqxgl/1')">返回</a><br/>
-			
+				<input type="submit" class="btn btn-info" value="提交" style="margin:0;"/><br/>
+
+				<i class="icon-bookmark"></i><span class="titletip">功能权限</span>	
+				{%- for app in data %}				
+				<div class="div-box">				
+					<table class="table-list" cellspacing="10" id="uesr-list">			
+						<tr>
+							<td>
+								<b>+ {{app.name}}</b>
+								<select id="{{app.code}}" name="{{app.code}}" onchange="change_select(this,'{{app.code}}')">
+									<option value="2">维护</option>
+									<option value="1">查询</option>
+									<option value="0">无权限</option>
+								</select>
+							</td>							
+						</tr>
+						<tr>
+							<td>
+								{%- for menu in app.children %}
+									{{menu.name}}
+									<select id="{{menu.code}}" name="{{menu.code}}" class="{{app.code}}" >
+										<option value="2">维护</option>
+										<option value="1">查询</option>
+										<option value="0">无权限</option>
+									</select>
+								{%- endfor %}
+							</td>
+						</tr>	
+					</table>
+				</div>
+				{%- endfor %}
+				
 			</form>
 		</div><!--/row-fluid -->
 	</div><!--/content -->

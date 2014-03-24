@@ -47,15 +47,15 @@ def fksh_search(page):
     # loan_apply = SC_Loan_Apply.query.order_by("id").paginate(page, per_page = PER_PAGE)
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = ""
+    sql = " 1=1"
     if loan_type != '0':
-        sql = "loan_type='"+loan_type+"' and "
+        sql = "loan_type='"+loan_type+"' "
 
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
     #if role.role_level == 3:#后台运营岗
     #    sql += " process_status='"+PROCESS_STATUS_SPJY_YTJTG+"'"
     #else:
-    sql += " process_status='"+PROCESS_STATUS_DKSP+"'"
+    sql += " and (process_status='"+PROCESS_STATUS_DKSP+"' or process_status='"+PROCESS_STATUS_SPJY_YTJTG+"')"
     sql += " and (examiner_1="+str(current_user.id)+" or examiner_2="+str(current_user.id)+" or approver="+str(current_user.id)+")"
 
     if customer_name:
@@ -86,7 +86,7 @@ def edit_sdhjyd(loan_apply_id):
     else :
         customer = SC_Individual_Customer.query.filter_by(id=loan_apply.belong_customer_value).first()
 
-    return render_template("Process/fksh/edit_sdhjyd.html",loan_apply_id=loan_apply_id,
+    return render_template("Process/fksh/edit_sdhjyd.html",loan_apply_id=loan_apply_id,loan_apply=loan_apply,
         riskanalysis_and_findings=riskanalysis_and_findings,customer=customer,
         approval_decision=approval_decision,co_borrower=co_borrower,guaranty=guaranty,
         guarantees=guarantees)
@@ -109,7 +109,8 @@ def edit_fksh(loan_apply_id,type):
                 approval_decision.bool_guarantees = request.form['bool_guarantees']
                 approval_decision.other_resolution = request.form['other_resolution']
                 approval_decision.refuse_reason = request.form['refuse_reason']
-                approval_decision.conditional_pass = request.form['conditional_pass']
+                if type == PROCESS_STATUS_SPJY_YTJTG:
+                    approval_decision.conditional_pass = request.form['conditional_pass']
 
                 approval_decision.modify_user = current_user.id
                 approval_decision.modify_date = datetime.datetime.now()
