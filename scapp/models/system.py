@@ -99,9 +99,6 @@ class SC_Role(db.Model):
     modify_user = db.Column(db.Integer)
     modify_date = db.Column(db.DateTime)
 
-    # 外键
-    privileges = db.relationship('SC_Privilege', backref='role')
-
     def __init__(self, role_name, role_level):
         self.role_name = role_name
         self.role_level = role_level
@@ -117,16 +114,33 @@ class SC_Role(db.Model):
 class SC_Privilege(db.Model):
     __tablename__ = 'sc_privilege' 
     id = db.Column(db.Integer, primary_key=True)
-    privilege_master = db.Column(db.String(8))
-    priviliege_master_id = db.Column(db.Integer, db.ForeignKey('sc_role.id'))
-    priviliege_access = db.Column(db.String(16))
-    priviliege_access_value = db.Column(db.Integer)
-    priviliege_operation = db.Column(db.String(32))
+    privilege_master = db.Column(db.String(32))
+    priviliege_master_id = db.Column(db.Integer)
+    priviliege_access = db.Column(db.String(32))
+    priviliege_access_value = db.Column(db.String(32))
+    priviliege_operation = db.Column(db.Integer)
 
-    def __init__(self, priviliege_master_id, priviliege_access,priviliege_operation):
+    def __init__(self,privilege_master,priviliege_master_id, priviliege_access,priviliege_access_value,priviliege_operation):
+        self.privilege_master = privilege_master
         self.priviliege_master_id = priviliege_master_id
         self.priviliege_access = priviliege_access
+        self.priviliege_access_value = priviliege_access_value
         self.priviliege_operation = priviliege_operation
+
+    def add(self):
+        db.session.add(self)
+
+# 模块表
+class SC_Application(db.Model):
+    __tablename__ = 'sc_application' 
+    id = db.Column(db.Integer, primary_key=True)
+    application_code = db.Column(db.String(32))
+    application_name = db.Column(db.String(32))
+    application_desc = db.Column(db.Integer)
+
+    def __init__(self, application_code, application_name):
+        self.application_code = application_code
+        self.application_name = application_name
 
     def add(self):
         db.session.add(self)
@@ -135,27 +149,23 @@ class SC_Privilege(db.Model):
 class SC_Menu(db.Model):
     __tablename__ = 'sc_menu' 
     id = db.Column(db.Integer, primary_key=True)
+    menu_code = db.Column(db.String(32))
     menu_name = db.Column(db.String(32))
-    menu_parent = db.Column(db.Integer)
-    url = db.Column(db.String(32))
-    application = db.Column(db.String(32))
-    menu_icon = db.Column(db.String(128))
-    is_visible = db.Column(db.Integer)
-    is_leaf = db.Column(db.Integer)
+    menu_desc = db.Column(db.Integer)
+    application = db.Column(db.Integer, db.ForeignKey('sc_application.id'))
 
-    def __init__(self, menu_name, menu_parent,url,application,menu_icon,is_visible,is_leaf):
+    #外键
+    application_fk = db.relationship('SC_Application', backref='application_fk')
+
+    def __init__(self, menu_code,menu_name,application):
+        self.menu_code = menu_code
         self.menu_name = menu_name
-        self.menu_parent = menu_parent
-        self.url = url
         self.application = application
-        self.menu_icon = menu_icon
-        self.is_visible = is_visible
-        self.is_leaf = is_leaf
 
     def add(self):
         db.session.add(self)
 
-# 支行表
+# 机构表
 class SC_Org(db.Model):
     __tablename__ = 'sc_org' 
     id = db.Column(db.Integer, primary_key=True)

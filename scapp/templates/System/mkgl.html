@@ -23,26 +23,32 @@
             <!--
                 //树节点单击回调
             var pId = 0;
+            var pType = 'root'
             function zTreeOnClick(event, treeId, treeNode) {
                 pId = treeNode.id;
+                pType = treeNode.type
+                if(pType == 'sc_menu'){
+                    //disabled新增按钮
+
+                }
+                else{
+                    //enabled新增按钮
+
+                }
                 var childNodes = $.fn.zTree.getZTreeObj("tree").transformToArray(treeNode);
                 childNodes.shift();
                 var content = "";
                 //表格赋值
                 for (var i = 0; i < childNodes.length; i++) {
-                    var levelStr = "<td>一级银行</td>";
-                    if (childNodes[i].level == '1') {
-                        levelStr = "<td>二级银行</td>";
-                    }
-                    else if (childNodes[i].level == '2') {
-                        levelStr = "<td>分理处</td>";
+                    var levelStr = "<td>模块</td>";
+                    if (childNodes[i].type == 'sc_menu') {
+                        levelStr = "<td>菜单</td>";
                     }
                     content += "<tr class='num'>" +
-                            "<td>" + childNodes[i].id + "</td>" +
-                            "<td><a href='#' onclick=iframe('System/edit_jggl/" + childNodes[i].id + "')>" + childNodes[i].name + "</a></td>" +
+                            "<td><a href='#' onclick=iframe('System/edit_mkgl/"+childNodes[i].type+"/"+childNodes[i].id+"')>" + childNodes[i].name + "</a></td>" +
+                            "<td>"+childNodes[i].code+"</td>" + 
                             levelStr +
-                    "<td>" + treeNode.name + "</td>" +
-                            "<td><input type='button' class='btn btn-danger btn-mini' value='删除' onclick=iframe('System/delete_jggl/" + childNodes[i].id + "') ></td>" +
+                            "<td><input type='button' class='btn btn-danger btn-mini' value='删除' onclick=iframe('System/delete_mkgl/"+childNodes[i].type+"/"+childNodes[i].id+"') ></td>" +
                             "</tr>";
                 }
                 $("table tbody").html(content);
@@ -58,7 +64,7 @@
                 },
                 async: {
                     enable: true,
-                    url: "/System/tree/SC_Org"
+                    url: "/System/tree/access"
                 },
                 callback: {
                     onClick: zTreeOnClick
@@ -75,7 +81,7 @@
     <body onload="setTimeOut();">	
         <div class="content">
             <div class="well place">			
-                <i class="icon-home"></i><a href="#">系统管理</a>/<a href="#">机构管理</a>
+                <i class="icon-home"></i><a href="#">系统管理</a>/<a href="#">模块管理</a>
             </div>	
             {%- with messages = get_flashed_messages(with_categories=true) %}
             {%- if messages %}
@@ -88,23 +94,22 @@
             {%- endwith %}
             <div class="row-fluid">	
                 <div class="span4">		
-                    <i class="icon-bookmark"></i><span class="titletip">机构列表</span>			
+                    <i class="icon-bookmark"></i><span class="titletip">模块列表</span>			
                     <ul id="tree" class="ztree"></ul>	
                 </div>
                 <div class="span8" style="margin-top:25px;">
                     <!--<div class="box-content">  -->
                     <div style="margin-bottom:5px;">
-                        <a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_jggl/' + pId);">新增</a>
+                        <a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_mkgl/'+pType+'/'+pId);">新增</a>
                     </div>
                     <div style="border:1px solid #94c1dc;">				
                         <table class="table-list" cellspacing="10">
                             <thead>
                                 <tr>
-                                    <th width="20%">机构号</th>
-                                    <th width="30%" >机构名称</th>
-                                    <th width="20%">机构类型</th>	
-                                    <th width="20%">上级银行</th>							
-                                    <th width="10%">操作</th>
+                                    <th width="30%">名称</th>
+                                    <th width="15%">编码</th>
+                                    <th width="15%">类型</th>								
+                                    <th width="15%">操作</th>
                                 </tr>
                             </thead>
                             <tbody class="center">

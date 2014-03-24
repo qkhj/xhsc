@@ -17,16 +17,10 @@ def System_jggl():
     return render_template("System/jggl.html")
 
 # 加载树
-@app.route('/System/tree/<tablename>/<int:id>', methods=['GET','POST'])
-def init_tree(tablename,id):
+@app.route('/System/tree/SC_Org', methods=['GET','POST'])
+def init_org_tree():
     # 加载所有
-    if id == 0:
-        tree = eval(tablename).query.order_by("id").all()
-
-    # 加载对应id的子节点
-    else:
-        tree = eval(tablename).query.filter_by(pId=id).order_by("id").all()
-
+    tree = SC_Org.query.order_by("id").all()
     return helpers.show_result_content(tree) # 返回json
 	
 # 新增机构
