@@ -17,7 +17,7 @@
 </head>
 
 <body onload="datepicker()">	
-	<form class="content">
+	<form class="content" action="/Performance/jxxc/addError" method="POST">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">业务差错统计</a>
 		</div>
@@ -28,8 +28,8 @@
 					<tr>
 						<td class="table-label">业务员<font class="red">*</font></td>
 						<td>
-							<input type="hidden" id="yunying_manager" name="yunying_loan_officer" value=""/>
-							<input type="text" id="yunying_manager_name" value="" readonly/>
+							<input type="hidden" id="yunying_manager" name="manager_id" value=""/>
+							<input type="text" id="yunying_manager_name" value="" name="manager_name" readonly/>
 							<input type="button" value="搜索" class="btn" onclick="$('#yunying_xdyss').show();"/>
 							<span id="yunying_manager_name_spay">
 								<input type="hidden" id="yz_yunying" value=""/>
@@ -59,27 +59,27 @@
 												<th>客户经理名称</th>												
 											</tr>
 										</thead>
-										<tbody class="center">											
+										<tbody class="center">	
+										{%- for obj in user %}											
 											<tr>
 												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name','yunying_manager');" onblur="hiddenInput('yz_yunying',this)"/></td>	
-												<td>1</td>												
-												<td>2</td>												
-											</tr>								
+												<td>{{obj.id}}</td>										
+												<td>{{obj.real_name}}</td>												
+											</tr>
+										{%- endfor %}								
 										</tbody>
 									</table>
 								</div>
 							</div>
 						</td>
-						<td class="table-label">岗位级别</td>
-						<td><input type="text" name="" readonly/></td>
+						<td class="table-label">时间</td>
+						<td><input type="text" name="create_time" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
 					</tr>								
 					<tr>
-						<td class="table-label">时间</td>
-						<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
 						<td class="table-label">出错原因<font class="red">*</font></td>
 						<td>
 							<span id="reason">
-								<input type="text" name=""/>
+								<input type="text" name="error_reason"/>
 								<span class="textfieldRequiredMsg">不能为空</span>
 							</span>
 						</td>

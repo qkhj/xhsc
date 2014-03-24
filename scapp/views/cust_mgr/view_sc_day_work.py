@@ -137,21 +137,6 @@ def xcxd_search():
 def xcxd():
     return render_template("Performance/jxxc/xcxd.html")
 
-# 业务差错统计——搜索
-@app.route('/Performance/jxxc/ywcctj_search', methods=['GET'])
-def ywcctj_search():
-    return render_template("Performance/jxxc/ywcctj_search.html")
-
-# 业务差错统计
-@app.route('/Performance/jxxc/ywcctj', methods=['GET'])
-def ywcctj():
-    return render_template("Performance/jxxc/ywcctj.html")
-
-# 新增业务差错
-@app.route('/Performance/jxxc/new_ywcc', methods=['GET'])
-def new_ywcc():
-    return render_template("Performance/jxxc/new_ywcc.html")
-
 # 风险保证金——搜索
 @app.route('/Performance/jxxc/fxbzj_search', methods=['GET'])
 def fxbzj_search():
@@ -161,11 +146,6 @@ def fxbzj_search():
 @app.route('/Performance/jxxc/fxbzj', methods=['GET'])
 def fxbzj():
     return render_template("Performance/jxxc/fxbzj.html")
-
-# 薪酬参数配置
-@app.route('/Performance/jxxc/xccspz', methods=['GET'])
-def xccspz():
-    return render_template("Performance/jxxc/xccspz.html")
 
 # 评估查询——搜索
 @app.route('/Performance/ygpgkh/pgcx_search', methods=['GET'])
