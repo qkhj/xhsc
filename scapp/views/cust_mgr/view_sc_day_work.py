@@ -212,16 +212,6 @@ def new_khjlKPI():
 def new_htgKPI():
     return render_template("Performance/ygpgkh/new_htgKPI.html")
 
-# 级别定义——搜索
-@app.route('/Performance/khjlgl/jbdy_search', methods=['GET'])
-def jbdy_search():
-    return render_template("Performance/khjlgl/jbdy_search.html")
-
-# 级别定义
-@app.route('/Performance/khjlgl/jbdy', methods=['GET'])
-def jbdy():
-    return render_template("Performance/khjlgl/jbdy.html")
-
 # 层级查询——搜索
 @app.route('/Performance/khjlgl/cjcx_search', methods=['GET'])
 def cjcx_search():

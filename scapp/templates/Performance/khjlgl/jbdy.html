@@ -24,31 +24,84 @@
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
 			<div class="divBorder">	
+			<form id="content" method="POST">
+				<input type="hidden" name="level_id" value="{{level_id}}">
+				<input type="hidden" name="manager_name" value="{{manager_name}}">
+				<input type="hidden" name="user_id" id="user_id">
+				<input type="hidden" name="option_id" id="option_id">
 				<table class="table-list" >				
 					<tr>
 						<th>员工工号</th>
 						<th>员工姓名</th>
 						<th>客户经理级别</th>	
 					</tr>
-															
-					<tr class="center">
-						<td>001</td>
-						<td>小芳</td>
-						<td>
-							<select name="">
-								<option>初级客户经理</option>
-								<option>中级客户经理</option>
-								<option>高级客户经理</option>
-								<option>客户经理主管</option>
-								<option>高级客户经理主管</option>
-							</select>
-						</td>
-					</tr>		
+					{%- if data %}
+						{%- for obj in data %}										
+							<tr class="center">
+								<td>{{obj.user_id}}</td>
+								<td>{{obj.login_name}}</td>
+								{%- if obj.priviliege_access_value %}
+									<td><select onchange="setAction('content','/Performance/khjlgl/edit',
+										{{obj.user_id}},this.value)">
+										{%- if obj.priviliege_access_value=='1' %}
+											<option selected value="1">实习客户经理</option>
+										{%- else%}
+											<option value="1">实习客户经理</option>
+										{%- endif%}
+										{%- if obj.priviliege_access_value=='2' %}
+											<option selected value="2">初级客户经理</option>
+										{%- else%}
+											<option value="2">初级客户经理</option>
+										{%- endif%}
+										{%- if obj.priviliege_access_value=='3' %}
+											<option selected value="3">中级客户经理</option>
+										{%- else%}
+											<option value="3">中级客户经理</option>
+										{%- endif%}
+										{%- if obj.priviliege_access_value=='4' %}
+											<option selected value="4">高级客户经理</option>
+										{%- else%}
+											<option value="4">高级客户经理</option>
+										{%- endif%}
+										{%- if obj.priviliege_access_value=='5' %}
+											<option selected value="5">客户经理主管</option>
+										{%- else%}
+											<option value="5">客户经理主管</option>
+										{%- endif%}
+										{%- if obj.priviliege_access_value=='6' %}
+											<option selected value="6">高级客户经理主管</option>
+										{%- else%}
+											<option value="6">高级客户经理主管</option>
+										{%- endif%}
+									</select></td>
+								{%- else %}
+									<td><select onchange="setAction('content','/Performance/khjlgl/edit',
+										{{obj.user_id}},this.value)">
+										<option value="0">---请选择---</option>
+										<option value="1">实习客户经理</option>
+										<option value="2">初级客户经理</option>
+										<option value="3">中级客户经理</option>
+										<option value="4">高级客户经理</option>
+										<option value="5">客户经理主管</option>
+										<option value="6">高级客户经理主管</option>
+									</select></td>
+								{%- endif%}
+							</tr>
+						{%- endfor %}	
+					{%- endif %}	
 				</table>
+			</form>
 			</div>
 		</div><!--/row-fluid -->
 	</div><!--/content -->
-	
+	<script>
+		function setAction(formId,action,user_id,option_id){
+			$("#user_id").val(user_id)
+			$("#option_id").val(option_id)
+		    document.getElementById(formId).action = action;
+		    document.getElementById(formId).submit();
+		}
+	</script>
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>

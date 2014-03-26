@@ -65,6 +65,4 @@ def config():
 def add():
 	parameter = Parameter()
 	parameter.add(request)
-
-
 	return redirect("/Performance/config")

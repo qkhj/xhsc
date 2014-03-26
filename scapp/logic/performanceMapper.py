@@ -106,20 +106,20 @@ class Level():
 			sql +=" and sc_privilege.priviliege_access_value="+level_id
 		sql += " and sc_privilege.privilege_master='SC_User' "
 		sql += " and sc_privilege.priviliege_access = 'sc_account_manager_level'"
-		sql += " and sc_privilege.priviliege_master_id=sc_user.id"
+		sql += " and sc_privilege.priviliege_master_id=sc_user.id order by sc_privilege.priviliege_access_value,sc_user.id"
 		data = db.engine.execute(sql)
 		return data
 
 	def edit(self,user_id,level_id):
-		data = SC_Privilege.query.filter_by(priviliege_master_id=user_id,priviliege_master="SC_User",priviliege_access
-			="sc_account_manager_level",priviliege_access_value=level_id)
+		data = SC_Privilege.query.filter_by(priviliege_master_id=user_id,privilege_master="SC_User",priviliege_access
+			="sc_account_manager_level").first()
 		if data:
-			SC_Privilege.query.filter_by(priviliege_master_id=user_id,priviliege_master="SC_User",priviliege_access
+			SC_Privilege.query.filter_by(priviliege_master_id=user_id,privilege_master="SC_User",priviliege_access
 				="sc_account_manager_level").update({"priviliege_access_value":level_id})
 			db.session.commit()
 		else:
 			try:
-				SC_Privilege("SC_User",user_id,"sc_account_manager_level",level_id,"").add()
+				SC_Privilege("SC_User",user_id,"sc_account_manager_level",level_id,0).add()
 				# 事务提交
 				db.session.commit()
 				# 消息闪现
