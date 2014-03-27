@@ -5,7 +5,7 @@ import os
 from flask import Module, session, request, render_template, redirect, url_for,flash
 from flask.ext.login import current_user
 from sqlalchemy.sql import or_ 
-import datetime
+import datetime,time,xlwt,re
 
 from scapp import db
 from scapp.config import logger
@@ -20,7 +20,11 @@ from scapp.models import SC_Target_Customer
 
 from scapp.models import View_Get_Cus_Mgr
 
+from scapp.tools.export_excel import export_excel
+from scapp.views.information.lfdj_dic import my_dic
 from scapp import app
+import json
+ezxf=xlwt.easyxf #样式转换
 
 # 来访登记
 @app.route('/Information/lfdj/lfdj', methods=['GET'])
@@ -49,6 +53,78 @@ def lfdj_search(page):
 
     return render_template("Information/lfdj/lfdj.html",target_customer=target_customer,manager=manager,
         customer_name=customer_name,beg_date=request.form['beg_date'],end_date=request.form['end_date'])
+
+# 来访登记
+@app.route('/Information/lfdj/export_lfdj', methods=['GET','POST'])
+def export_lfdj():
+    #模糊查询
+    manager = request.form['manager']
+    customer_name = request.form['customer_name']
+    beg_date = request.form['beg_date'] + " 00:00:00"
+    end_date = request.form['end_date'] + " 23:59:59"
+
+    sql = "SELECT sc_user.real_name,"
+    sql += "(case reception_type when '1' then '咨询' when '2' then '扫街' end)reception_type ,sc_target_customer.create_date,"
+    sql += "(case yingxiao_status when 1 then '已营销' when 0 then '未营销' end)yingxiao_status,"
+    sql += "(case client_status when 1 then '现在有需求' when 2 then '态度良好无需求拒绝' when 3 then '态度恶劣拒绝' when 4 then '以后会有需求并填回执' when 5 then '以后有需求未填回执' end)client_status,"
+    sql += "(case is_apply_form when 1 then '已申请' when 0 then '未申请' end)is_apply_form,"
+    sql += "(case is_have_account when 1 then '已有管户' when 0 then '未有管户' end)is_have_account,customer_name,sc_target_customer.mobile,"
+    sql += "(case sc_target_customer.sex when 1 then '男' when 0 then '女' end)sex,"
+    sql += "sc_target_customer.age,address,sc_industry.type_name as industry,business_content,shop_name,period, "
+    sql += "property_scope,monthly_sales,employees,sc_business_type.type_name as business_type,is_need_loan,sc_loan_purpose.type_name as loan_purpose,loan_amount, "
+    sql += "repayment_type,guarantee_type,house_property,loan_attention,"
+    sql += "(case is_have_loan when 1 then '是' when 0 then '否' end)is_have_loan,"
+    sql += "(case is_known_xhnsh when 1 then '知道' when 0 then '不知道' end)is_known_xhnsh,business_with_xhnsh,"
+    sql += "(case is_need_service when 1 then '手机银行' when 2 then '转账电话' when 3 then 'pos机' when 4 then '网上银行' when 5 then '借记卡' when 6 then '贷记卡' when 7 then '无需求' end)is_need_service,"
+    sql += "status "
+    sql += "FROM (select * from sc_target_customer where "
+    sql += " 1=1"
+    if manager != '0':
+        sql += " and receiver="+manager
+    sql += " and create_date between '"+beg_date+"' and '"+end_date + "' "
+    if customer_name:
+        sql += " and (customer_name like '%"+customer_name+"%' or shop_name like '%"+customer_name+"%') "
+    sql += ")sc_target_customer INNER JOIN sc_user ON sc_target_customer.receiver = sc_user.id "
+    sql += "left JOIN sc_industry ON sc_target_customer.industry = sc_industry.id "
+    sql += "left JOIN sc_loan_purpose ON sc_target_customer.loan_purpose = sc_loan_purpose.id "
+    sql += "left JOIN sc_business_type ON sc_target_customer.business_type = sc_business_type.id "
+
+    data=db.engine.execute(sql)
+    #for row in data:
+    #    row['reception_type'] = my_dic['reception_type'][str(dic['reception_type'])]
+
+    exl_hdngs=['接待人','营销方式','营销时间','营销状态','客户状态','是否向小微支行填写申请表？','是否在其他兴化农商行有管户？',#1
+        '客户名称','电话','性别','年龄','地址','所属行业','经营内容',#2
+        '店铺名称','经营期限','资产规模','月销售额','雇员数量','企业类别',#3
+        '是否有贷款需求','贷款目的','贷款数额','希望的还款方式','能提供的担保方式','房产产权情况','贷款关注程度',#4
+        '是否在银行贷过款','知道兴化农商行吗？','您在兴化农村商业银行办理过什么业务？','您是否需要办理以下银行产品']#5
+
+    type_str = 'text text date text text text text text'#1
+    type_str += ' text text text text text text text'#2
+    type_str += ' text text text text text text'#3
+    type_str += ' text text text text text text text'#4
+    type_str += ' text text text text'#5
+
+    types= type_str.split()
+
+    exl_hdngs_xf=ezxf('font: bold on;align: wrap on,vert centre,horiz center')
+    types_to_xf_map={
+        'int':ezxf(num_format_str='#,##0'),
+        'date':ezxf(num_format_str='yyyy-mm-dd'),
+        'datetime':ezxf(num_format_str='yyyy-mm-dd HH:MM:SS'),
+        'ratio':ezxf(num_format_str='#,##0.00%'),
+        'text':ezxf(),
+        'price':ezxf(num_format_str='￥#,##0.00')
+    }
+
+    data_xfs=[types_to_xf_map[t] for t in types]
+    date=datetime.datetime.now()
+    year=date.year
+    month=date.month
+    day=date.day
+    filename=str(year)+'_'+str(month)+'_'+str(day)+'_'+'来访登记统计表'+'.xls'
+    exp=export_excel()
+    return exp.export_download(filename,'来访登记统计表',exl_hdngs,data,exl_hdngs_xf,data_xfs)
 
 # 新增来访登记
 @app.route('/Information/lfdj/new_lfdj', methods=['GET','POST'])
