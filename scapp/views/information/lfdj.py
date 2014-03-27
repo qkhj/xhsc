@@ -21,7 +21,7 @@ from scapp.models import SC_Target_Customer
 from scapp.models import View_Get_Cus_Mgr
 
 from scapp.tools.export_excel import export_excel
-from scapp.views.information.lfdj_dic import my_dic
+#from scapp.views.information.lfdj_dic import my_dic
 from scapp import app
 import json
 ezxf=xlwt.easyxf #样式转换
