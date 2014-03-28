@@ -16,17 +16,25 @@
 	</style>
 </head>
 
-<body onload="datepicker()">	
+<body onload="datepicker();setTimeOut();">
 	<div class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">培训期评估</a>
 		</div>	
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+		  	{%- if messages %}
+	    	{%- for category, message in messages %}
+	    	<div class="alert alert-{{category}}" style="width:99%;margin:-10px auto 10px;">
+	      		{{message}}
+	      	</div>
+	    	{%- endfor %}
+		  	{%- endif %}
+		{%- endwith %}
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">培训期评估列表</span>
 			<div style="border:1px solid #94c1dc;">				
 				<table class="table-list" cellspacing="10" id="uesr-list">				
 					<tr>	
-						<th>员工工号</th>
 						<th>员工姓名</th>
 						<th>课堂培训评估</th>
 						<th>实际操作评估（一）</th>
@@ -35,34 +43,84 @@
 						<th>最终评估</th>	
 					</tr>					
 					<tbody class="center">
+					{%- for obj in kpi_train_final %}
 						<tr class="tbData" onclick="changeColor(this)">
-							<!-- <td><a href="#" onclick="iframe('Performance/pxqpg')">001</a></td>	 -->	
-							<td>001</td>					
-							<td>小芳</td>
-							<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/ktpxpg')"/></td>
-							<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/sjczpg')"/></td>
-							<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/sjczpg')"/></td>
-							<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/sjczpg')"/></td>
-							<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/zzpg')"/></td>
+							<!-- <td><a href="#" onclick="iframe('Performance/pxqpg')">001</a></td>	 -->				
+							<td>{{obj.real_name}}</td>
+
+							{%- if obj.score_1 %}
+								{%- if obj.score_1 < '60' %}
+									<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/ktpxpg/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_1 >= '60' and obj.score_1 < '80' %}
+									<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/ktpxpg/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_1 >= '80' and obj.score_1 < '90' %}
+									<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/ktpxpg/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_1 >= '90' and obj.score_1 <= '100' %}
+									<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/ktpxpg/{{obj.user_id}}')"/></td>
+								{%- endif %}
+							{%- else %}
+								<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/ktpxpg/{{obj.user_id}}')"/></td>
+							{%- endif %}
+
+							{%- if obj.score_2 %}
+								{%- if obj.score_2 < '60' %}
+									<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/sjczpg/1/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_2 >= '60' and obj.score_2 < '80' %}
+									<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/sjczpg/1/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_2 >= '80' and obj.score_2 < '90' %}
+									<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/sjczpg/1/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_2 >= '90' and obj.score_2 <= '100' %}
+									<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/sjczpg/1/{{obj.user_id}}')"/></td>
+								{%- endif %}
+							{%- else %}
+								<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/sjczpg/1/{{obj.user_id}}')"/></td>
+							{%- endif %}
+
+							{%- if obj.score_3 %}
+								{%- if obj.score_3 < '60' %}
+									<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/sjczpg/2/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_3 >= '60' and obj.score_3 < '80' %}
+									<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/sjczpg/2/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_3 >= '80' and obj.score_3 < '90' %}
+									<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/sjczpg/2/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_3 >= '90' and obj.score_3 <= '100' %}
+									<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/sjczpg/2/{{obj.user_id}}')"/></td>
+								{%- endif %}
+							{%- else %}
+								<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/sjczpg/2/{{obj.user_id}}')"/></td>
+							{%- endif %}
+
+							{%- if obj.score_4 %}
+								{%- if obj.score_4 < '60' %}
+									<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/sjczpg/3/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_4 >= '60' and obj.score_4 < '80' %}
+									<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/sjczpg/3/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_4 >= '80' and obj.score_4 < '90' %}
+									<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/sjczpg/3/{{obj.user_id}}')"/></td>
+								{%- elif obj.score_4 >= '90' and obj.score_4 <= '100' %}
+									<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/sjczpg/3/{{obj.user_id}}')"/></td>
+								{%- endif %}
+							{%- else %}
+								<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/sjczpg/3/{{obj.user_id}}')"/></td>
+							{%- endif %}
+
+							{%- if obj.avg_score %}
+								{%- if obj.avg_score < '60' %}
+									<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/zzpg/{{obj.user_id}}')"/></td>
+								{%- elif obj.avg_score >= '60' and obj.avg_score < '80' %}
+									<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/zzpg/{{obj.user_id}}')"/></td>
+								{%- elif obj.avg_score >= '80' and obj.avg_score < '90' %}
+									<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/zzpg/{{obj.user_id}}')"/></td>
+								{%- elif obj.avg_score >= '90' and obj.avg_score <= '100' %}
+									<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/zzpg/{{obj.user_id}}')"/></td>
+								{%- endif %}
+							{%- else %}
+								<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/zzpg/{{obj.user_id}}')"/></td>
+							{%- endif %}
 						</tr>
-						<!--下面为按钮样式-->
-						<tr class="tbData" onclick="changeColor(this)">
-							<td>002</td>							
-							<td>张三</td>							
-							<td><input type="button" class="btn btn-danger" name="" value="不合格"/></td>	
-							<td><input type="button" class="btn btn-success" name="" value="合格"/></td>
-							<td><input type="button" class="btn btn-success" name="" value="良好"/></td>
-							<td><input type="button" class="btn btn-success" name="" value="优秀"/></td>
-							<td><input type="button" class="btn btn-warning" name="" value="未评估"/></td>
-						</tr><!-- /数据 -->		
+					{%- endfor %}
 					</tbody>									
 				</table>
-			</div>
-			<div class="page-div">
-					<span style="CURSOR: pointer">&lt;&lt;</span>				
-					&#160;第&#160;<font color="#0088cc">1</font>&#160;页&#160;
-					&#160;共&#160;<font color="#0088cc">1</font>&#160;页&#160;				
-					<span style="CURSOR: pointer">&gt;&gt;</span>
 			</div>
 		</div><!--/row-fluid -->
 	</div><!--/content -->

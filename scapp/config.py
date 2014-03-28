@@ -72,7 +72,6 @@ class ProConfig(Config):
     # }
     # 如何使用
     #test = db.session.execute("select * from sc_role",bind=db.get_engine(app,bind="CRM_DB2")).fetchall()
-    
     DEBUG = True
 
 class DevConfig(Config):
