@@ -20,7 +20,7 @@
 </head>
 
 <body onload="datepicker()">	
-	<form class="content">
+	<form class="content" action="/Performance/ygpgkh/ktpxpg/{{user.id}}" method="POST">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">培训期评估</a>
 		</div>	
@@ -30,15 +30,15 @@
 				<table class="table-list" >				
 					<tr>
 						<td class="table-label">姓名</td>
-						<td>小芳</td>
+						<td>{{user.real_name}}</td>
 						<td class="table-label">评估时间</td>
-						<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
+						<td><input type="text" name="train_date" value="{{kpi_train.train_date}}" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
 					</tr>	
 					<tr>
 						<td class="table-label">岗位倾向</td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="job_tendency" value="{{kpi_train.job_tendency}}" /></td>
 						<td class="table-label">课堂培训学时</td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="class_hour" value="{{kpi_train.class_hour}}" /></td>
 					</tr>							
 				</table>
 				<table class="table-list inline" >	
@@ -58,14 +58,14 @@
 						<td class="table-label">得分</td>
 					</tr>	
 					<tr class="center">
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
+						<td></td>
+						<td><input type="text" name="cqqk_1" value="{{kpi_train.cqqk_1}}" /></td>
 						<td>5%</td>
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="cqqk_2" value="{{kpi_train.cqqk_2}}" /></td>
+						<td></td>
+						<td><input type="text" name="ktjl_1" value="{{kpi_train.ktjl_1}}" /></td>
 						<td>5%</td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="ktjl_2" value="{{kpi_train.ktjl_2}}" /></td>
 					</tr>	
 					<tr class="center">
 						<td class="table-label" rowspan="2">课堂发言</td>
@@ -80,14 +80,14 @@
 						<td class="table-label">得分</td>
 					</tr>	
 					<tr class="center">
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
+						<td></td>
+						<td><input type="text" name="ktfy_1" value="{{kpi_train.ktfy_1}}" /></td>
 						<td>5%</td>
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="ktfy_2" value="{{kpi_train.ktfy_2}}" /></td>
+						<td></td>
+						<td><input type="text" name="ktcs_1" value="{{kpi_train.ktcs_1}}" /></td>
 						<td>5%</td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="ktcs_2" value="{{kpi_train.ktcs_2}}" /></td>
 					</tr>
 					<tr class="center">
 						<td class="table-label" rowspan="2">模拟表现</td>
@@ -102,14 +102,14 @@
 						<td class="table-label">得分</td>
 					</tr>	
 					<tr class="center">
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
+						<td></td>
+						<td><input type="text" name="mnbx_1" value="{{kpi_train.mnbx_1}}" /></td>
 						<td>5%</td>
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="mnbx_2" value="{{kpi_train.mnbx_2}}" /></td>
+						<td></td>
+						<td><input type="text" name="ztbx_1" value="{{kpi_train.ztbx_1}}" /></td>
 						<td>5%</td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="ztbx_2" value="{{kpi_train.ztbx_2}}" /></td>
 					</tr>
 					<tr class="center">
 						<td class="table-label" rowspan="2">技术知识</td>
@@ -124,14 +124,14 @@
 						<td class="table-label">得分</td>
 					</tr>	
 					<tr class="center">
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
+						<td></td>
+						<td><input type="text" name="jszs_1" value="{{kpi_train.jszs_1}}" /></td>
 						<td>5%</td>
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="jszs_2" value="{{kpi_train.jszs_2}}" /></td>
+						<td></td>
+						<td><input type="text" name="tdxz_1" value="{{kpi_train.tdxz_1}}" /></td>
 						<td>5%</td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="tdxz_2" value="{{kpi_train.tdxz_2}}" /></td>
 					</tr>
 					<tr class="center">
 						<td class="table-label" rowspan="2">沟通协调</td>
@@ -146,25 +146,41 @@
 						<td class="table-label">得分</td>
 					</tr>	
 					<tr class="center">
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
+						<td></td>
+						<td><input type="text" name="xtgt_1" value="{{kpi_train.xtgt_1}}" /></td>
 						<td>5%</td>
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="xtgt_2" value="{{kpi_train.xtgt_2}}" /></td>
+						<td></td>
+						<td><input type="text" name="jyks_1" value="{{kpi_train.jyks_1}}" /></td>
 						<td>5%</td>
-						<td><input type="text" name=""/></td>
+						<td><input type="text" name="jyks_2" value="{{kpi_train.jyks_2}}" /></td>
 					</tr>	
 					<tr>
 						<td class="table-label center"><b>综合得分</b></td>
-						<td colspan="4"><input type="text" name=""/></td>
+						<td colspan="4"><input type="text" name="total" value="{{kpi_train.total}}"/></td>
 						<td class="table-label center"><b>评估结果</b></td>
 						<td colspan="4">
-							<select name="">
-								<option>不合格</option>
-								<option>合格</option>
-								<option>良好</option>
-								<option>优秀</option>
+							<select name="result">
+								{%- if kpi_train.result == 4 %}
+								<option value="4" selected>不合格</option>
+								{%- else %}
+								<option value="4">不合格</option>
+								{%- endif %}
+								{%- if kpi_train.result == 3 %}
+								<option value="3" selected>合格</option>
+								{%- else %}
+								<option value="3">合格</option>
+								{%- endif %}
+								{%- if kpi_train.result == 2 %}
+								<option value="2" selected>良好</option>
+								{%- else %}
+								<option value="2">良好</option>
+								{%- endif %}
+								{%- if kpi_train.result == 1 %}
+								<option value="1" selected>优秀</option>
+								{%- else %}
+								<option value="1">优秀</option>
+								{%- endif %}
 							</select>
 						</td>
 					</tr>
@@ -174,26 +190,26 @@
 					<tr>
 						<td class="table-label center"><b>综合表现</b></td>
 						<td colspan="4">
-							<textarea name=""></textarea>
+							<textarea name="performance">{{kpi_train.performance}}</textarea>
 						</td>
 						<td class="table-label center"><b>重点关注</b></td>
 						<td colspan="4">
-							<textarea name=""></textarea>
+							<textarea name="focus_on">{{kpi_train.focus_on}}</textarea>
 						</td>
 					</tr>		
 					<tr>
 						<td class="table-label center"><b>下期工作指标</b></td>
 						<td colspan="4">
-							<textarea name=""></textarea>
+							<textarea name="next_work_target">{{kpi_train.next_work_target}}</textarea>
 						</td>
 						<td class="table-label center"><b>个人期望</b></td>
 						<td colspan="4">
-							<textarea name=""></textarea>
+							<textarea name="individual_expectations">{{kpi_train.individual_expectations}}</textarea>
 						</td>
 					</tr>		
 				</table>
 			</div>
-			<input type="button" class="btn btn-info" value="提交" onclick="iframe('Performance/ygpgkh/pxqpglist')"/>		
+			<input type="submit" class="btn btn-info" value="提交"/>		
 		</div><!--/row-fluid -->
 	</form><!--/content -->
 	

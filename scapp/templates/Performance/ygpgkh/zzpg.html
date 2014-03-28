@@ -18,7 +18,7 @@
 </head>
 
 <body onload="datepicker()">	
-	<form class="content">
+	<form class="content" action="/Performance/ygpgkh/zzpg/{{user.id}}" method="POST">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">培训期评估</a>
 		</div>	
@@ -28,59 +28,120 @@
 				<table class="table-list" >				
 					<tr>
 						<td class="table-label">姓名</td>
-						<td>小芳</td>
+						<td>{{user.real_name}}</td>
 						<td class="table-label">岗位倾向</td>
-						<td><input type="text" name=""/></td>						
+						{%- if kpi_train_final.job_tendency %}
+						<td><input type="text" name="job_tendency" value="{{kpi_train_final.job_tendency}}" /></td>
+						{%- else %}
+						<td><input type="text" name="job_tendency" /></td>
+						{%- endif %}						
 					</tr>	
 					<tr>
 						<td class="table-label">培训周期</td>
-						<td><input type="text" name=""/></td>
+						{%- if kpi_train_final.training_cycle %}
+						<td><input type="text" name="training_cycle" value="{{kpi_train_final.training_cycle}}" /></td>
+						{%- else %}
+						<td><input type="text" name="training_cycle" /></td>
+						{%- endif %}
 						<td class="table-label">岗位分配</td>
-						<td><input type="text" name=""/></td>
+						{%- if kpi_train_final.job_final %}
+						<td><input type="text" name="job_final" value="{{kpi_train_final.job_final}}" /></td>
+						{%- else %}
+						<td><input type="text" name="job_final" /></td>
+						{%- endif %}
 					</tr>	
 					<tr>
 						<td class="table-label">课堂培训结业评估得分</td>
-						<td><input type="text" name=""/></td>
+						{%- if kpi_train_final.score_1 %}
+						<td><input type="text" name="score_1" value="{{kpi_train_final.score_1}}" readonly/></td>
+						{%- else %}
+						<td><input type="text" name="score_1" /></td>
+						{%- endif %}
 						<td class="table-label">第1期实际操作培训评估</td>
-						<td><input type="text" name=""/></td>
+						{%- if kpi_train_final.score_2 %}
+						<td><input type="text" name="score_2" value="{{kpi_train_final.score_2}}" readonly/></td>
+						{%- else %}
+						<td><input type="text" name="score_2" /></td>
+						{%- endif %}
 					</tr>	
 					<tr>
 						<td class="table-label">第2期实际操作培训评估</td>
-						<td><input type="text" name=""/></td>
+						{%- if kpi_train_final.score_3 %}
+						<td><input type="text" name="score_3" value="{{kpi_train_final.score_3}}" readonly/></td>
+						{%- else %}
+						<td><input type="text" name="score_3" /></td>
+						{%- endif %}
 						<td class="table-label">第3期实际操作培训评估</td>
-						<td><input type="text" name=""/></td>
+						{%- if kpi_train_final.score_4 %}
+						<td><input type="text" name="score_4" value="{{kpi_train_final.score_4}}" readonly/></td>
+						{%- else %}
+						<td><input type="text" name="score_4" /></td>
+						{%- endif %}
 					</tr>	
 					<tr>
 						<td class="table-label">总分</td>
-						<td><input type="text" name=""/></td>
+						{%- if kpi_train_final.total_score %}
+						<td><input type="text" name="total_score" value="{{kpi_train_final.total_score}}" readonly/></td>
+						{%- else %}
+						<td><input type="text" name="total_score" /></td>
+						{%- endif %}
 						<td class="table-label">平均分</td>
-						<td><input type="text" name=""/></td>
+						{%- if kpi_train_final.avg_score %}
+						<td><input type="text" name="avg_score" value="{{kpi_train_final.avg_score}}" readonly/></td>
+						{%- else %}
+						<td><input type="text" name="avg_score" /></td>
+						{%- endif %}
 					</tr>	
 					<tr>
 						<td class="table-label">总评价</td>
 						<td>
-							<select name="">
-								<option value="不合格">不合格</option>
-								<option value="合格">合格</option>
-								<option value="良好">良好</option>
-								<option value="优秀">优秀</option>
+							<select name="zpj">
+								{%- if kpi_train_final.zpj == 4 %}
+								<option value="4" selected>不合格</option>
+								{%- else %}
+								<option value="4">不合格</option>
+								{%- endif %}
+								{%- if kpi_train_final.zpj == 3 %}
+								<option value="3" selected>合格</option>
+								{%- else %}
+								<option value="3">合格</option>
+								{%- endif %}
+								{%- if kpi_train_final.zpj == 2 %}
+								<option value="2" selected>良好</option>
+								{%- else %}
+								<option value="2">良好</option>
+								{%- endif %}
+								{%- if kpi_train_final.zpj == 1 %}
+								<option value="1" selected>优秀</option>
+								{%- else %}
+								<option value="1">优秀</option>
+								{%- endif %}
 							</select>
 						</td>
 						<td class="table-label">能否上岗</td>
 						<td>
-							<label><input type="radio" name="iswork"/>能</label>
-							<label><input type="radio" name="iswork"/>否</label>
+							{%- if kpi_train_final.is_ok == 0 %}
+							<label><input type="radio" value="1" name="is_ok"/>能</label>
+							<label><input type="radio" value="0" name="is_ok" checked/>否</label>
+							{%- else %}
+							<label><input type="radio" value="1" name="is_ok" checked/>能</label>
+							<label><input type="radio" value="0" name="is_ok" />否</label>
+							{%- endif %}
 						</td>
 					</tr>	
 					<tr>
 						<td class="table-label">建议与期望</td>
 						<td colspan="3">
-							<textarea name=""></textarea>
+							{%- if kpi_train_final.jyyqw %}
+							<textarea name="jyyqw">{{kpi_train_final.jyyqw}}</textarea>
+							{%- else %}
+							<textarea name="jyyqw"></textarea>
+							{%- endif %}
 						</td>
 					</tr>		
 				</table>				
 			</div>
-			<input type="button" class="btn btn-info" value="提交" onclick="iframe('Performance/ygpgkh/pxqpglist')"/>		
+			<input type="submit" class="btn btn-info" value="提交"/>		
 		</div><!--/row-fluid -->
 	</form><!--/content -->
 	
