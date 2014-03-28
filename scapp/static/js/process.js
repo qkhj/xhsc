@@ -2172,7 +2172,8 @@ if(table=="jcjl"){//标准检测——检测记录
 								"</td>"+
 								"<td>"+
 									"<select name='monitor_type'>"+
-										"<option>标准检测</option>"+
+										"<option value='电话监控'>电话监控</option>"+
+										"<option value='上门监控'>上门监控</option>"+
 									"</select>"+
 								"</td>"+
 								"<td>"+
