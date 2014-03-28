@@ -47,6 +47,9 @@ db = SQLAlchemy(app)
 
 # flask-login---start
 from scapp.models import SC_User
+from scapp.views.cust_mgr.autoload.load import timing
+time = timing()
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 @login_manager.unauthorized_handler
@@ -146,9 +149,9 @@ import views.repayment.view_loan_change_record
 import views.cust_mgr.view_sc_day_work #客户经理工时记录
 import views.cust_mgr.view_kpi_ygpgkh #员工评估考核
 
-import views.performance.parameter_config
-import views.performance.business_error_list
-import views.performance.level
+import views.cust_mgr.performance.parameter_config
+import views.cust_mgr.performance.business_error_list
+import views.cust_mgr.performance.level
 #---------------------------------
 #ORM自动生成使用--johnny
 #---------------------------------
