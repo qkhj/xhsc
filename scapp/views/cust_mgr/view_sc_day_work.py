@@ -147,25 +147,12 @@ def fxbzj_search():
 def fxbzj():
     return render_template("Performance/jxxc/fxbzj.html")
 
-# 层级查询——搜索
-@app.route('/Performance/khjlgl/cjcx_search', methods=['GET'])
-def cjcx_search():
-    return render_template("Performance/khjlgl/cjcx_search.html")
 
-# 层级查询
-@app.route('/Performance/khjlgl/cjcx', methods=['GET'])
-def cjcx():
-    return render_template("Performance/khjlgl/cjcx.html")
 
 # 晋级审核——搜索
 @app.route('/Performance/khjlgl/jjsh_search', methods=['GET'])
 def jjsh_search():
     return render_template("Performance/khjlgl/jjsh_search.html")
-
-# 晋级审核列表
-@app.route('/Performance/khjlgl/jjshlist', methods=['GET'])
-def jjshlist():
-    return render_template("Performance/khjlgl/jjshlist.html")
 
 # 晋级审核
 @app.route('/Performance/khjlgl/jjsh', methods=['GET'])

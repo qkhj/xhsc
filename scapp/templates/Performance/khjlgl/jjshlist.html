@@ -23,33 +23,59 @@
 		</div>	
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+			<form id="content" method="POST">
+				<input type="hidden" name="user_id" id="user_id">
+				<input type="hidden" name="apply_type" id="apply_type">
+				<input type="hidden" name="level_id" id="level_id">
+				<input type="hidden" name="apply_result" id="apply_result">
 			<div class="divBorder">	
 				<table class="table-list" >				
 					<tr>
 						<th>员工工号</th>
 						<th>员工姓名</th>	
-						<th>目前岗位</th>
-					</tr>															
-					<tr class="center">
-						<td><a href="#" onclick="iframe('Performance/khjlgl/jjsh')">001</a></td>
-						<td>小芳</td>
-						<td>高级客户经理</td>
+						<th>目前级别</th>
+						<th>审核操作</th>
+						<th>审核结果</th>
 					</tr>
+					{%- for obj in data%}															
 					<tr class="center">
-						<td><a href="#" onclick="iframe('Performance/khjlgl/jjsh')">002</a></td>
-						<td>张三</td>
-						<td>中级客户经理</td>
+						<td>{{obj[0].manager_id}}</td>
+						<td>{{obj[3].login_name}}</td>
+						<td>{{obj[2].level_name}}</td>
+						{%- if obj[0].apply_type==1%}
+							<td>晋级</td>
+						{%- else%}
+							<td>降级</td>
+						{%- endif%}
+						{%- if obj[0].apply_result==1%}
+							<td><select onchange="setAction('content','/Performance/level/edit',
+								{{obj[0].manager_id}},{{obj[0].apply_type}},{{obj[2].level_id}},this.value)">
+								<option value="0">---请选择---</option>
+								<option value="2">同意</option>
+								<option value="3">不同意</option></select>
+							</td>
+						{%- elif obj[0].apply_result==2%}
+							<td>同意</td>
+						{%-else%}
+							<td>不同意</td>
+						{%- endif%}
 					</tr>
-					<tr class="center">
-						<td><a href="#" onclick="iframe('Performance/khjlgl/jjsh')">003</a></td>
-						<td>李四</td>
-						<td>初级级客户经理</td>
-					</tr>
+					{%- endfor %}
 				</table>
 			</div>
+		</form>
 		</div><!--/row-fluid -->
 	</div><!--/content -->
-	
+	<script>
+		function setAction(formId,action,user_id,apply_type,level_id,apply_result){
+			$("#user_id").val(user_id)
+			$("#apply_type").val(apply_type)
+			$("#level_id").val(level_id)
+			$("#apply_result").val(apply_result)
+		    document.getElementById(formId).action = action;
+		    document.getElementById(formId).submit();
+		}
+	</script>
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>
