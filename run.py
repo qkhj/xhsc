@@ -7,7 +7,7 @@ from scapp import app
 
 manager = Manager(app)
 
-server = Server(host='0.0.0.0', port=8888)
+server = Server(host='0.0.0.0', port=8888,use_reloader=False)
 manager.add_command("runserver", server)
 
 if __name__ == '__main__':

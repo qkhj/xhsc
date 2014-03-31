@@ -12,14 +12,14 @@ class SC_assess_record(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     manager_id=db.Column(db.String(11))#员工工号
     assess_time=db.Column(db.String(11))#评估时间
-    assess_type=db.Column(db.String(11))#评估类型
-    assess_result=db.Column(db.String(11))#评估结果
+    assess_arg=db.Column(db.String(11))#最近评估平均分
+    assess_sum=db.Column(db.String(11))#评估次数
 
-    def __init__(self,manager_id,assess_time,assess_type,assess_result):
+    def __init__(self,manager_id,assess_time,assess_arg,assess_sum):
     	self.manager_id = manager_id
     	self.assess_time = assess_time
-    	self.assess_type = assess_type
-    	self.assess_result = assess_result
+    	self.assess_arg = assess_arg
+    	self.assess_sum = assess_sum
 
 	def add(self):
 		db.session.add(self)
