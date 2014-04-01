@@ -26,33 +26,61 @@
 			<div style="border:1px solid #94c1dc;">				
 				<table class="table-list" cellspacing="10" id="uesr-list">				
 					<tr>	
-						<th>员工工号</th>
 						<th>员工姓名</th>
+						<th>评估月份</th>
 						<th>评估类型</th>
 						<th>评估状态</th>
 					</tr>					
 					<tbody class="center">
+					{%- for obj in kpi %}
 						<tr class="tbData" onclick="changeColor(this)">
-							<td><a href="#" onclick="iframe('Performance/ygpgkh/zgpg')">001</a></td>
-							<td>小芳</td>
-							<td>客户经理KPI</td>
-							<td>未评估</td>
+							
+							{%- if tablename == 'SC_Kpi_Officer' %}
+								<td>{{obj.user_id_fk.real_name}}</td>
+								<td>{{obj.assess_date}}</td>
+								<td>客户经理KPI</td>
+								{%- if obj.total %}
+									{%- if obj.total|int < 60 %}
+										<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/khjlKPI/{{obj.id}}')"/></td>
+									{%- elif obj.total|int >= 60 and obj.total|int < 80 %}
+										<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/khjlKPI/{{obj.id}}')"/></td>
+									{%- elif obj.total|int >= 80 and obj.total|int < 90 %}
+										<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/khjlKPI/{{obj.id}}')"/></td>
+									{%- elif obj.total|int >= 90 and obj.total|int <= 100 %}
+										<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/khjlKPI/{{obj.id}}')"/></td>
+									{%- endif %}
+								{%- else %}
+									<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/khjlKPI/{{obj.id}}')"/></td>
+								{%- endif %}
+							{%- else %}
+								<td>{{obj.sc_kpi_yunying_ibfk_1.real_name}}</td>
+								<td>{{obj.assess_date}}</td>
+								<td>后台岗KPI</td>
+								{%- if obj.total %}
+									{%- if obj.total|int < 60 %}
+										<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/htgKPI/{{obj.id}}')"/></td>
+									{%- elif obj.total|int >= 60 and obj.total|int < 80 %}
+										<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/htgKPI/{{obj.id}}')"/></td>
+									{%- elif obj.total|int >= 80 and obj.total|int < 90 %}
+										<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/htgKPI/{{obj.id}}')"/></td>
+									{%- elif obj.total|int >= 90 and obj.total|int <= 100 %}
+										<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/htgKPI/{{obj.id}}')"/></td>
+									{%- endif %}
+								{%- else %}
+									<td><input type="button" class="btn btn-warning" name="" value="未评估" onclick="iframe('Performance/ygpgkh/htgKPI/{{obj.id}}')"/></td>
+								{%- endif %}
+							{%- endif %}
+							
 						</tr>
-						<!--下面为按钮样式-->
-						<tr class="tbData" onclick="changeColor(this)">
-							<td>002</td>							
-							<td>张三</td>
-							<td>后台岗KPI</td>							
-							<td>合格</td>
-						</tr><!-- /数据 -->		
+					{%- endfor %}
 					</tbody>									
 				</table>
 			</div>
 			<div class="page-div">
-					<span style="CURSOR: pointer">&lt;&lt;</span>				
-					&#160;第&#160;<font color="#0088cc">1</font>&#160;页&#160;
-					&#160;共&#160;<font color="#0088cc">1</font>&#160;页&#160;				
-					<span style="CURSOR: pointer">&gt;&gt;</span>
+				<span style="CURSOR: pointer">&lt;&lt;</span>				
+				&#160;第&#160;<font color="#0088cc">1</font>&#160;页&#160;
+				&#160;共&#160;<font color="#0088cc">1</font>&#160;页&#160;				
+				<span style="CURSOR: pointer">&gt;&gt;</span>
 			</div>
 		</div><!--/row-fluid -->
 	</div><!--/content -->

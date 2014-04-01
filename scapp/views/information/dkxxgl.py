@@ -17,6 +17,8 @@ from scapp.models import SC_Guarantees_For_Others
 from scapp.models import SC_Guaranty
 from scapp.models import SC_Guarantees
 from scapp.models import SC_Riskanalysis_And_Findings
+from scapp.models import SC_Monitor
+
 from scapp.models.credit_data.sc_cross_examination import SC_Cross_Examination
 from scapp.models.credit_data.sc_balance_sheet import SC_Balance_Sheet
 from scapp.models.credit_data.sc_profit_loss import SC_Profit_Loss
@@ -31,8 +33,13 @@ from scapp.models.credit_data.sc_fixed_assets_estate import SC_Fixed_Assets_Esta
 from scapp.models.credit_data.sc_fixed_assets_equipment import SC_Fixed_Assets_Equipment
 from scapp.models.credit_data.sc_stock import SC_Stock
 from scapp.models.credit_data.sc_accounts_list import SC_Accounts_List
+
 from scapp.config import PER_PAGE
 from scapp.models import View_Query_Loan
+
+from scapp.logic.total import Total
+from scapp.logic.total import User
+from scapp.pojo.bz_check_form import CheckForm
 
 from scapp import app
 
@@ -295,6 +302,50 @@ def dkxx_edit_sdhjyd(loan_apply_id):
 def dkxx_dkfk_fkxx(loan_apply_id):
     approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=loan_apply_id).first()
     return render_template("Information/dkxx/fkxx.html",approval_decision=approval_decision)
+
+# 贷后管理--标准监控
+@app.route('/Information/dkxx/dhgl/<int:loan_apply_id>', methods=['GET'])
+def dkxx_dhgl(loan_apply_id):
+    loan_apply = View_Query_Loan.query.filter_by(loan_apply_id=loan_apply_id).first()
+
+    checkForm = getCheckForm(loan_apply_id,loan_apply)
+    monitorList = SC_Monitor.query.filter_by(loan_apply_id=loan_apply_id).all()
+    return render_template("Information/dkxx/new_bz.html",loan_apply=loan_apply,monitorList=monitorList,loan_apply_id=loan_apply_id,checkForm=checkForm)
+
+#获取前台form表单
+def getCheckForm(loan_apply_id,loan_apply):
+    #前台form表单
+    checkForm = CheckForm()
+    #借款人#客户号
+    if loan_apply.individual_customer_name:
+        checkForm.jkr = loan_apply.individual_customer_name
+        checkForm.khId = loan_apply.individual_customer_id
+    if loan_apply.company_customer_name:
+        checkForm.jkr = loan_apply.company_customer_name
+        checkForm.khId = loan_apply.company_customer_id
+    #客户经理
+    A_loan = loan_apply.A_loan_officer
+    B_loan = loan_apply.B_loan_officer
+    yunying_loan = loan_apply.yunying_loan_officer
+    user = User()
+    A_name = user.getUserName(A_loan)
+    B_name = user.getUserName(B_loan)
+    yunying_name = user.getUserName(yunying_loan)
+    checkForm.khjl= A_name + ","+ B_name + "," + yunying_name
+    #合同号
+    pactInform = Total().getInformByloadId(loan_apply_id)
+    checkForm.hkId = pactInform.loan_contract_number
+    #贷款金额
+    checkForm.dkje = pactInform.amount
+    #放款日
+    checkForm.fkDate = pactInform.loan_date
+    #到期日
+    checkForm.dqDate = pactInform.last_repayment_date
+    #利率
+    checkForm.lv = pactInform.rates
+    #期数
+    checkForm.hkqs = pactInform.deadline
+    return checkForm
 
 # 贷款信息管理——贷款信息(还款记录)
 @app.route('/Information/dkxx_hkjl', methods=['GET'])
