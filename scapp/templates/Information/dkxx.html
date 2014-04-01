@@ -102,8 +102,12 @@
 				<li style="display:none">
 					<a onClick="selectTag('tagContent2',this);resizeFrame('hkjl');" href="javascript:void(0)">还款记录</a>
 				</li>
+				{%- if loan_apply.process_status >= '601'%}
+				<li>
+				{%- else %}
 				<li style="display:none">
-					<a onClick="selectTag('tagContent3',this);resizeFrame('glxxlb');" href="javascript:void(0)">贷后监控</a>
+				{%- endif %}
+					<a onClick="selectTag('tagContent3',this);resizeFrame('dhgl');Frame();" href="javascript:void(0)">贷后监控</a>
 				</li>
 				<li style="display:none">
 					<a onClick="selectTag('tagContent4',this);resizeFrame('dhbg');Frame();" href="javascript:void(0)">贷后变更</a>
@@ -260,7 +264,7 @@
 				</div><!-- /还款记录 -->
 <!-- *********************************************************第四个标签的内容******************************************** -->
 				<div class="tagContent" id="tagContent3">
-					<iframe frameborder="0" width="100%;" id="glxxlb" src="/Process/dhgl/glxxlb" onload="resizeFrame('glxxlb');"></iframe>
+					<iframe frameborder="0" width="100%;" id="dhgl" src="/Information/dkxx/dhgl/{{loan_apply.id}}" onload="resizeFrame('glxxlb');"></iframe>
 				</div><!-- /贷后监控 -->
 <!-- ****************************************************第五个标签的内容******************************************** -->
 				<div class="tagContent" id="tagContent4">

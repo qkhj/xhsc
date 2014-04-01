@@ -49,13 +49,13 @@
 							<td>{{obj.real_name}}</td>
 
 							{%- if obj.score_1 %}
-								{%- if obj.score_1 < '60' %}
+								{%- if obj.score_1|int < 60 %}
 									<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/ktpxpg/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_1 >= '60' and obj.score_1 < '80' %}
+								{%- elif obj.score_1|int >= 60 and obj.score_1|int < 80 %}
 									<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/ktpxpg/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_1 >= '80' and obj.score_1 < '90' %}
+								{%- elif obj.score_1|int >= 80 and obj.score_1|int < 90 %}
 									<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/ktpxpg/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_1 >= '90' and obj.score_1 <= '100' %}
+								{%- elif obj.score_1|int >= 90 and obj.score_1|int <= 100 %}
 									<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/ktpxpg/{{obj.user_id}}')"/></td>
 								{%- endif %}
 							{%- else %}
@@ -63,13 +63,13 @@
 							{%- endif %}
 
 							{%- if obj.score_2 %}
-								{%- if obj.score_2 < '60' %}
+								{%- if obj.score_2|int < 60 %}
 									<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/sjczpg/1/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_2 >= '60' and obj.score_2 < '80' %}
+								{%- elif obj.score_2|int >= 60 and obj.score_2|int < 80 %}
 									<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/sjczpg/1/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_2 >= '80' and obj.score_2 < '90' %}
+								{%- elif obj.score_2|int >= 80 and obj.score_2|int < 90 %}
 									<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/sjczpg/1/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_2 >= '90' and obj.score_2 <= '100' %}
+								{%- elif obj.score_2|int >= 90 and obj.score_2|int <= 100 %}
 									<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/sjczpg/1/{{obj.user_id}}')"/></td>
 								{%- endif %}
 							{%- else %}
@@ -77,13 +77,13 @@
 							{%- endif %}
 
 							{%- if obj.score_3 %}
-								{%- if obj.score_3 < '60' %}
+								{%- if obj.score_3|int < 60 %}
 									<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/sjczpg/2/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_3 >= '60' and obj.score_3 < '80' %}
+								{%- elif obj.score_3|int >= 60 and obj.score_3|int < 80 %}
 									<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/sjczpg/2/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_3 >= '80' and obj.score_3 < '90' %}
+								{%- elif obj.score_3|int >= 80 and obj.score_3|int < 90 %}
 									<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/sjczpg/2/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_3 >= '90' and obj.score_3 <= '100' %}
+								{%- elif obj.score_3|int >= 90 and obj.score_3|int <= 100 %}
 									<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/sjczpg/2/{{obj.user_id}}')"/></td>
 								{%- endif %}
 							{%- else %}
@@ -91,13 +91,13 @@
 							{%- endif %}
 
 							{%- if obj.score_4 %}
-								{%- if obj.score_4 < '60' %}
+								{%- if obj.score_4|int < 60 %}
 									<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/sjczpg/3/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_4 >= '60' and obj.score_4 < '80' %}
+								{%- elif obj.score_4|int >= 60 and obj.score_4|int < 80 %}
 									<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/sjczpg/3/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_4 >= '80' and obj.score_4 < '90' %}
+								{%- elif obj.score_4|int >= 80 and obj.score_4|int < 90 %}
 									<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/sjczpg/3/{{obj.user_id}}')"/></td>
-								{%- elif obj.score_4 >= '90' and obj.score_4 <= '100' %}
+								{%- elif obj.score_4|int >= 90 and obj.score_4|int <= 100 %}
 									<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/sjczpg/3/{{obj.user_id}}')"/></td>
 								{%- endif %}
 							{%- else %}
@@ -105,13 +105,13 @@
 							{%- endif %}
 
 							{%- if obj.avg_score %}
-								{%- if obj.avg_score < '60' %}
+								{%- if obj.avg_score|int < 60 %}
 									<td><input type="button" class="btn btn-danger" name="" value="不合格" onclick="iframe('Performance/ygpgkh/zzpg/{{obj.user_id}}')"/></td>
-								{%- elif obj.avg_score >= '60' and obj.avg_score < '80' %}
+								{%- elif obj.avg_score|int >= 60 and obj.avg_score|int < 80 %}
 									<td><input type="button" class="btn btn-success" name="" value="合格" onclick="iframe('Performance/ygpgkh/zzpg/{{obj.user_id}}')"/></td>
-								{%- elif obj.avg_score >= '80' and obj.avg_score < '90' %}
+								{%- elif obj.avg_score|int >= 80 and obj.avg_score|int < 90 %}
 									<td><input type="button" class="btn btn-success" name="" value="良好" onclick="iframe('Performance/ygpgkh/zzpg/{{obj.user_id}}')"/></td>
-								{%- elif obj.avg_score >= '90' and obj.avg_score <= '100' %}
+								{%- elif obj.avg_score|int >= 90 and obj.avg_score|int <= 100 %}
 									<td><input type="button" class="btn btn-success" name="" value="优秀" onclick="iframe('Performance/ygpgkh/zzpg/{{obj.user_id}}')"/></td>
 								{%- endif %}
 							{%- else %}
