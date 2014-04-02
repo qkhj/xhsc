@@ -137,57 +137,60 @@ def edit_dkfk(id):
         # 回滚
         db.session.rollback()
         logger.exception('exception')
-        # 消息闪现
+        # 消息闪现 
         flash('保存失败','error')
+    #计算绩效
+    reckonIncome(id)
+    return redirect("Process/dkfk/dkfk")    
 
+# class test():       
+def reckonIncome(self,id):
+    #计算绩效
+    data = SC_Loan_Apply.query.filter_by(id=id).first()
+    level = SC_Privilege.query.filter_by(priviliege_master_id=data.A_loan_officer).first()
+    information = SC_Approval_Decision.query.filter_by(loan_apply_id=id).first()
+    #获取放贷日期
+    lending_date = information.loan_date
+    #计算绩效日期
+    year = lending_date.strftime('%Y')
+    month = lending_date.strftime('%m')
+    if month==11:
+        year = year+1
+        month = 1
+    elif month==12:
+        year = year+1
+        month=2
+    else:
+        month=month+2
+    payment_date = datetime.date(year,month,1)
+    #是否已配置客户经理层级
+    if level:
+        #查询层级
+        level_id = level.priviliege_access_value
+        #查询所有绩效参数
+        parameter = SC_parameter_configure.query.filter_by(level_id=level_id).first()
+        #折算笔数
+        amount = amount(information.amount)
+        #所得绩效
+        total = float(parameter.A1)*amount
+        yunying_total = total*0.1
+        A_total = total*0.6
+        B_total = total*0.3
+        try:
+            SC_loan_income_list(id,data.marketing_loan_officer,yunying_total,data.A_loan_officer,
+                A_total,data.B_loan_officer,B_total,payment_date).add()
+                # 事务提交
+            db.session.commit()
+            # 消息闪现
+            flash('保存成功','success')
+        except:
+            # 回滚
+            db.session.rollback()
+            logger.exception('exception')
+            # 消息闪现
+            flash('保存失败','error')
+    
 
-
-        #计算绩效
-        data = SC_Loan_Apply.query.filter_by(id=id).first()
-        level = SC_Privilege.query.filter_by(priviliege_master_id=data.A_loan_officer).first()
-        information = SC_Approval_Decision.query.filter_by(loan_apply_id=id).first()
-        #获取放贷日期
-        lending_date = information.loan_date
-        #计算绩效日期
-        year = lending_date.strftime('%Y')
-        month = lending_date.strftime('%m')
-        if month==11:
-            year = year+1
-            month = 1
-        elif month==12:
-            year = year+1
-            month=2
-        else:
-            month=month+2
-        payment_date = datetime.date(year,month,1)
-        #是否已配置客户经理层级
-        if level:
-            #查询层级
-            level_id = level.priviliege_access_value
-            #查询所有绩效参数
-            parameter = SC_parameter_configure.query.filter_by(level_id=level_id).first()
-            #折算笔数
-            amount = amount(information.amount)
-            #所得绩效
-            total = float(parameter.A1)*amount+float(parameter.A2)+float("贡献"*(parameter.A3/100)*parameter.R*r)
-            yunying_total = total*0.1
-            A_total = total*0.6
-            B_total = total*0.3
-            try:
-                SC_loan_income_list(id,data.marketing_loan_officer,yunying_total,data.A_loan_officer,
-                    A_total,data.B_loan_officer,B_total,payment_date).add()
-                    # 事务提交
-                db.session.commit()
-                # 消息闪现
-                flash('保存成功','success')
-            except:
-                # 回滚
-                db.session.rollback()
-                logger.exception('exception')
-                # 消息闪现
-                flash('保存失败','error')
-        
-    return redirect("Process/dkfk/dkfk")
 
 # 贷款放款——编辑放款(还款计划)
 @app.route('/Process/dkfk/hkjh', methods=['GET'])
