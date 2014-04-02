@@ -18,9 +18,9 @@ class SC_Repayment(db.Model):
     # account=db.Column(db.String(32))#账号
     repayment_installments=db.Column(db.Integer,autoincrement=True)#当前还款期数
     clear_date=db.Column(db.DateTime)#实际还款日期
-    re_principal=db.Column(db.DECIMAL(18,2))#当期本金剩余
-    re_interest=db.Column(db.DECIMAL(18,2))#当期利息剩余
-    re_penalty_interest=db.Column(db.DECIMAL(18,2))#当期罚息剩余
+    re_principal=db.Column(db.DECIMAL(18,2))#当期还款本金
+    re_interest=db.Column(db.DECIMAL(18,2))#当期还款利息
+    re_penalty_interest=db.Column(db.DECIMAL(18,2))#当期罚息
     principal_fx_balance=db.Column(db.DECIMAL(18,2))#本金罚息剩余
     interest_fx_balance=db.Column(db.DECIMAL(18,2))#利息罚息剩余
     total_fx=db.Column(db.DECIMAL(18,2))#当期实际缴纳罚息总额

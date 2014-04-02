@@ -37,13 +37,13 @@ from scapp.models.process import SC_Balance_Sheet_Fbz
 from scapp.models.process import SC_Profit_Loss_Fbz
 
 # 系统管理
-from scapp.models.system import SC_UserRole
-from scapp.models.system import SC_User
-from scapp.models.system import SC_Role
-from scapp.models.system import SC_Privilege
-from scapp.models.system import SC_Menu
-from scapp.models.system import SC_Org
-from scapp.models.system import SC_Application
+from scapp.models.system.system import SC_UserRole
+from scapp.models.system.system import SC_User
+from scapp.models.system.system import SC_Role
+from scapp.models.system.system import SC_Privilege
+from scapp.models.system.system import SC_Menu
+from scapp.models.system.system import SC_Org
+from scapp.models.system.system import SC_Application
 
 #视图管理
 from scapp.models.views import View_Query_Loan
