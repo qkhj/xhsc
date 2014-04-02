@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+</head>
+
+<body onload="datepicker()">	
+	<div class="content">
+		<div class="well place">			
+			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">风险保证金详单</a>
+		</div>	
+		<form method="POST">
+			<input type="hidden" name="user_name" value="{{user_name}}">
+		<div class="row-fluid">
+			<i class="icon-bookmark"></i><span class="titletip">风险保证金</span>
+			<div style="border:1px solid #94c1dc;">				
+				<table class="table-list" cellspacing="10" id="uesr-list">				
+					<tr>	
+						<th>操作月份</th>
+						<th>金额</th>
+						<th>操作类型</th>
+						<th>剩余保证金</th>
+					</tr>					
+					<tbody class="center">
+						{%- if data %}
+						{%- for obj in data.items %}
+							<tr class="tbData" onclick="changeColor(this)">
+								<td>{{obj.payment_time.strftime('%Y-%m')}}</td>		
+								<td>{{obj.inout_payment}}</td>
+								{%- if obj.inout_type==1%}
+									<td>缴纳保证金</td>
+								{%- elif obj.inout_type==2%}
+									<td>逾期扣除</td>
+								{%- else%}
+									<td>返还保证金</td>
+								{%- endif%}	
+								<td>{{obj.last_margin}}</td>						
+							</tr><!-- /数据 -->	
+							{%- endfor %}
+						{%- endif%}	
+					</tbody>									
+				</table>
+			</div>
+			<div class="page-div">
+					{%- if data.has_prev %}
+						<span style="CURSOR: pointer" onclick="submitForm('content','/Performance/jxxc/fxbzj/{{data.prev_num}}')">&lt;&lt;</span>
+					{%- else %}
+						<span style="CURSOR: pointer">&lt;&lt;</span>
+					{%- endif %}
+					&#160;第&#160;<font color="#0088cc">{{data.page}}</font>&#160;页&#160;
+					&#160;共&#160;<font color="#0088cc">{{data.pages}}</font>&#160;页&#160;
+					{%- if data.has_next %}
+						<span style="CURSOR: pointer" onclick="submitForm('content','/Performance/jxxc/fxbzj/{{data.next_num}}')">&gt;&gt;</span>
+					{%- else %}
+						<span style="CURSOR: pointer">&gt;&gt;</span>
+					{%- endif %}
+			</div>
+		</div><!--/row-fluid -->
+	</form>
+	</div><!--/content -->
+	
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+</body>
+</html>

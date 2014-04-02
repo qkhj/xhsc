@@ -17,7 +17,7 @@ class SC_payment_list(db.Model):
     assess_result=db.Column(db.String(11))#评估结果
     last_performance=db.Column(db.String(11))#最终绩效
     deduct_margin=db.Column(db.String(11))#本月保证金
-    given_margin=db.Column(db.String(11))#返还总保证金
+    given_margin=db.Column(db.String(11))#本月返还保证金
     deduct_payment=db.Column(db.String(11))#当月扣款
     total_payment=db.Column(db.String(11))#当月总工资
 
