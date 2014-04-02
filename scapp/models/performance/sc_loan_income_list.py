@@ -17,10 +17,10 @@ class SC_loan_income_list(db.Model):
     singel_performance_A=db.Column(db.String(11))#所得绩效
     manager_id_B=db.Column(db.String(11))#B岗员工工号
     singel_performance_B=db.Column(db.String(11))#所得绩效
-    create_time=db.Column(db.DateTime)#记录时间
+    create_time=db.Column(db.DateTime)#绩效时间
 
     def __init__(self,loan_apply_id,manager_id,singel_performance,manager_id_A,
-        singel_performance_A,manager_id_B,singel_performance_B):
+        singel_performance_A,manager_id_B,singel_performance_B,create_time):
     	self.loan_apply_id = loan_apply_id
         self.manager_id = manager_id
     	self.singel_performance = singel_performance
@@ -28,7 +28,7 @@ class SC_loan_income_list(db.Model):
         self.singel_performance_A = singel_performance_A
         self.manager_id_B = manager_id_B
         self.singel_performance_B = singel_performance_B      
-        self.create_time = datetime.datetime.now()
+        self.create_time = create_time
 
 	def add(self):
 		db.session.add(self)

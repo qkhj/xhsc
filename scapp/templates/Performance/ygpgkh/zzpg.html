@@ -17,7 +17,7 @@
 	</style>
 </head>
 
-<body onload="datepicker();sum()">	
+<body onload="datepicker()">	
 	<form class="content" action="/Performance/ygpgkh/zzpg/{{user.id}}" method="POST">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">培训期评估</a>
@@ -53,13 +53,13 @@
 					<tr>
 						<td class="table-label">课堂培训结业评估得分</td>
 						{%- if kpi_train_final.score_1 %}
-						<td><input type="text" name="score_1" value="{{kpi_train_final.score_1}}" onchange="sum()" readonly/></td>
+						<td><input type="text" name="score_1" value="{{kpi_train_final.score_1}}" readonly/></td>
 						{%- else %}
-						<td><input type="text" name="score_1" onchange="sum()"/></td>
+						<td><input type="text" name="score_1" /></td>
 						{%- endif %}
 						<td class="table-label">第1期实际操作培训评估</td>
 						{%- if kpi_train_final.score_2 %}
-						<td><input type="text" name="score_2" value="{{kpi_train_final.score_2}}" onchange="sum()" readonly/></td>
+						<td><input type="text" name="score_2" value="{{kpi_train_final.score_2}}" readonly/></td>
 						{%- else %}
 						<td><input type="text" name="score_2" /></td>
 						{%- endif %}
@@ -67,15 +67,15 @@
 					<tr>
 						<td class="table-label">第2期实际操作培训评估</td>
 						{%- if kpi_train_final.score_3 %}
-						<td><input type="text" name="score_3" value="{{kpi_train_final.score_3}}" onchange="sum()" readonly/></td>
+						<td><input type="text" name="score_3" value="{{kpi_train_final.score_3}}" readonly/></td>
 						{%- else %}
-						<td><input type="text" name="score_3" onchange="sum()" /></td>
+						<td><input type="text" name="score_3" /></td>
 						{%- endif %}
 						<td class="table-label">第3期实际操作培训评估</td>
 						{%- if kpi_train_final.score_4 %}
-						<td><input type="text" name="score_4" value="{{kpi_train_final.score_4}}" onchange="sum()" readonly/></td>
+						<td><input type="text" name="score_4" value="{{kpi_train_final.score_4}}" readonly/></td>
 						{%- else %}
-						<td><input type="text" name="score_4" onchange="sum()" /></td>
+						<td><input type="text" name="score_4" /></td>
 						{%- endif %}
 					</tr>	
 					<tr>
@@ -83,19 +83,19 @@
 						{%- if kpi_train_final.total_score %}
 						<td><input type="text" name="total_score" value="{{kpi_train_final.total_score}}" readonly/></td>
 						{%- else %}
-						<td><input type="text" name="total_score" readonly/></td>
+						<td><input type="text" name="total_score" /></td>
 						{%- endif %}
 						<td class="table-label">平均分</td>
 						{%- if kpi_train_final.avg_score %}
 						<td><input type="text" name="avg_score" value="{{kpi_train_final.avg_score}}" readonly/></td>
 						{%- else %}
-						<td><input type="text" name="avg_score" readonly/></td>
+						<td><input type="text" name="avg_score" /></td>
 						{%- endif %}
 					</tr>	
 					<tr>
 						<td class="table-label">总评价</td>
 						<td>
-							<select name="zpj" readonly>
+							<select name="zpj">
 								{%- if kpi_train_final.zpj == 4 %}
 								<option value="4" selected>不合格</option>
 								{%- else %}
@@ -121,11 +121,11 @@
 						<td class="table-label">能否上岗</td>
 						<td>
 							{%- if kpi_train_final.is_ok == 0 %}
-							<label><input type="radio" value="1" name="is_ok" id="yes"/>能</label>
-							<label><input type="radio" value="0" name="is_ok" id="no" checked/>否</label>
+							<label><input type="radio" value="1" name="is_ok"/>能</label>
+							<label><input type="radio" value="0" name="is_ok" checked/>否</label>
 							{%- else %}
-							<label><input type="radio" value="1" name="is_ok" id="yes" checked/>能</label>
-							<label><input type="radio" value="0" name="is_ok" id="no" />否</label>
+							<label><input type="radio" value="1" name="is_ok" checked/>能</label>
+							<label><input type="radio" value="0" name="is_ok" />否</label>
 							{%- endif %}
 						</td>
 					</tr>	
@@ -149,34 +149,5 @@
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>
 	<script src="/static/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript">		
-		function sum(){
-			var sum=0;
-			var a1=parseFloat($("input[name=score_1]").val());
-			var a2=parseFloat($("input[name=score_2]").val());
-			var a3=parseFloat($("input[name=score_3]").val());
-			var a4=parseFloat($("input[name=score_4]").val());
-			sum=a1+a2+a3+a4;
-			$("input[name=total_score]").val(sum);//总分
-			var avery=sum/4
-			$("input[name=avg_score]").val(avery);//平均分
-			if(avery>=90){//优秀
-				$("select[name=zpj]").html('<option value="4">不合格</option><option value="3">合格</option><option value="2">良好</option><option value="1" selected>优秀</option>');
-				$("#yes").click();
-			}
-			else if(avery>=80&&avery<90){//良好
-				$("select[name=zpj]").html('<option value="4">不合格</option><option value="3">合格</option><option value="2" selected>良好</option><option value="1">优秀</option>');
-				$("#yes").click();
-			}
-			else if(avery>=60&&avery<80){//合格
-				$("select[name=zpj]").html('<option value="4">不合格</option><option value="3" selected>合格</option><option value="2">良好</option><option value="1">优秀</option>');
-				$("#yes").click();
-			}
-			else{//不合格
-				$("select[name=zpj]").html('<option value="4" selected>不合格</option><option value="3">合格</option><option value="2">良好</option><option value="1">优秀</option>');
-				$("#no").click();
-			}
-		}
-	</script>
 </body>
 </html>

@@ -39,6 +39,9 @@ from scapp.models.repayment.sc_repayment_plan import SC_Repayment_Plan
 from scapp.models.repayment.sc_repayment_plan_detail import SC_Repayment_plan_detail
 
 from scapp.models import View_Query_Loan
+from scapp.models import SC_Privilege
+from scapp.models.performance.sc_loan_income_list import SC_loan_income_list 
+from scapp.models.performance.sc_parameter_configure import SC_parameter_configure
 
 from scapp import app
 
@@ -136,6 +139,53 @@ def edit_dkfk(id):
         logger.exception('exception')
         # 消息闪现
         flash('保存失败','error')
+
+
+
+        #计算绩效
+        data = SC_Loan_Apply.query.filter_by(id=id).first()
+        level = SC_Privilege.query.filter_by(priviliege_master_id=data.A_loan_officer).first()
+        information = SC_Approval_Decision.query.filter_by(loan_apply_id=id).first()
+        #获取放贷日期
+        lending_date = information.loan_date
+        #计算绩效日期
+        year = lending_date.strftime('%Y')
+        month = lending_date.strftime('%m')
+        if month==11:
+            year = year+1
+            month = 1
+        elif month==12:
+            year = year+1
+            month=2
+        else:
+            month=month+2
+        payment_date = datetime.date(year,month,1)
+        #是否已配置客户经理层级
+        if level:
+            #查询层级
+            level_id = level.priviliege_access_value
+            #查询所有绩效参数
+            parameter = SC_parameter_configure.query.filter_by(level_id=level_id).first()
+            #折算笔数
+            amount = amount(information.amount)
+            #所得绩效
+            total = float(parameter.A1)*amount+float(parameter.A2)+float("贡献"*(parameter.A3/100)*parameter.R*r)
+            yunying_total = total*0.1
+            A_total = total*0.6
+            B_total = total*0.3
+            try:
+                SC_loan_income_list(id,data.marketing_loan_officer,yunying_total,data.A_loan_officer,
+                    A_total,data.B_loan_officer,B_total,payment_date).add()
+                    # 事务提交
+                db.session.commit()
+                # 消息闪现
+                flash('保存成功','success')
+            except:
+                # 回滚
+                db.session.rollback()
+                logger.exception('exception')
+                # 消息闪现
+                flash('保存失败','error')
         
     return redirect("Process/dkfk/dkfk")
 
@@ -143,3 +193,22 @@ def edit_dkfk(id):
 @app.route('/Process/dkfk/hkjh', methods=['GET'])
 def dkfk_hkjh():
     return render_template("Process/dkfk/hkjh.html")
+
+#折算笔数
+def amount(amount):
+    if amount<=50000:
+        return 0.7
+    elif amount>50000 and amount<=150000:
+        return 1
+    elif amount>150000 and amount<=300000:
+        return 1.5
+    elif amount>300000 and amount<=500000:
+        return 2
+    elif amount>500000 and amount<=1000000:
+        return 3
+    elif amount>1000000 and amount<=2000000:
+        return 3.5
+    elif amount>2000000 and amount<3000000:
+        return 4
+    elif amount>3000000:
+        return 5

@@ -32,7 +32,7 @@ def config():
 		if inform.level_b:
 			inform_name_e = SC_User.query.filter_by(id=inform.level_b).first().login_name
 		else:
-			inform_name_e=""
+			inform_name_e=""	
 	else:
 		inform = ""
 	queryInform_1 = ""	
@@ -58,7 +58,7 @@ def config():
 	return render_template("Performance/jxxc/xccspz.html",inform=inform,queryInform_1=queryInform_1,
 		queryInform_2=queryInform_2,queryInform_3=queryInform_3,queryInform_4=queryInform_4,queryInform_5=queryInform_5,
 		queryInform_6=queryInform_6,user=user,inform_name_a=inform_name_a,inform_name_b=inform_name_b,
-		inform_name_c=inform_name_c,inform_name_d=inform_name_d,inform_name_e=inform_name_e)
+		inform_name_c=inform_name_c,inform_name_d=inform_name_d,inform_name_e=inform_name_e,back_payment=inform.back_payment)
 
 # 参数配置新增
 @app.route('/Performance/add', methods=['POST'])
