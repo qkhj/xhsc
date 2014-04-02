@@ -17,46 +17,59 @@
 	<div class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">薪酬查询</a>
-		</div>		
+		</div>	
+		<form method="POST">
+			<input type="hidden" name="beg_time" value="{{beg_time}}">
+			<input type="hidden" name="end_time" value="{{end_time}}">	
+			<input type="hidden" name="user_id" value="{{user_id}}">	
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">薪酬列表</span>
 			<div style="border:1px solid #94c1dc;">				
 				<table class="table-list" cellspacing="10" id="uesr-list">				
 					<tr>	
 						<th>姓名</th>
-						<th>职位</th>
-						<th>起始时间</th>
-						<th>截至时间</th>
+						<th>工资时间</th>
 						<th>基本工资</th>
 						<th>绩效薪酬</th>
 						<th>评估结果</th>
-						<th>风险保证金</th>
-						<th>返还保证金</th>
+						<th>缴纳风险保证金</th>
+						<th>返还风险保证金</th>
 						<th>总工资</th>
 					</tr>					
 					<tbody class="center">
-						<tr class="tbData" onclick="changeColor(this)">
-							<td>小芳</td>
-							<td>主管</td>
-							<td>2003-12-17</td>		
-							<td>2003-12-17</td>						
-							<td>2000</td>	
-							<td>10000</td>							
-							<td>合格</td>
-							<td>3100</td>
-							<td>0</td>
-							<td>8000</td>
-						</tr><!-- /数据 -->		
+						{%- if data %}
+							{%- for obj in data.items %}
+								<tr class="tbData" onclick="changeColor(this)">
+									<td>{{obj.manager_id_fk.login_name}}</td>
+									<td>{{obj.payment_time.strftime('%Y-%m')}}</td>		
+									<td>{{obj.base_payment}}</td>						
+									<td>{{obj.last_performance}}</td>	
+									<td>{{obj.assess_result}}</td>							
+									<td>{{obj.deduct_margin}}</td>
+									<td>{{obj.given_margin}}</td>
+									<td>{{obj.total_payment}}</td>
+								</tr><!-- /数据 -->	
+								{%- endfor %}
+						{%- endif%}		
 					</tbody>									
 				</table>
 			</div>
 			<div class="page-div">
-					<span style="CURSOR: pointer">&lt;&lt;</span>				
-					&#160;第&#160;<font color="#0088cc">1</font>&#160;页&#160;
-					&#160;共&#160;<font color="#0088cc">1</font>&#160;页&#160;				
-					<span style="CURSOR: pointer">&gt;&gt;</span>
+					{%- if data.has_prev %}
+						<span style="CURSOR: pointer" onclick="submitForm('content','/Performance/jxxc/grxc/{{data.prev_num}}')">&lt;&lt;</span>
+					{%- else %}
+						<span style="CURSOR: pointer">&lt;&lt;</span>
+					{%- endif %}
+					&#160;第&#160;<font color="#0088cc">{{data.page}}</font>&#160;页&#160;
+					&#160;共&#160;<font color="#0088cc">{{data.pages}}</font>&#160;页&#160;
+					{%- if data.has_next %}
+						<span style="CURSOR: pointer" onclick="submitForm('content','/Performance/jxxc/grxc/{{data.next_num}}')">&gt;&gt;</span>
+					{%- else %}
+						<span style="CURSOR: pointer">&gt;&gt;</span>
+					{%- endif %}
 			</div>
 		</div><!--/row-fluid -->
+	</form>
 	</div><!--/content -->
 	
 	<script src="/static/js/jquery-1.7.2.min.js"></script>

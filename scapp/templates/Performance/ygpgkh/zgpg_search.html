@@ -13,23 +13,14 @@
 	<link href="/static/css/datepicker.css" rel="stylesheet">
 </head>
 
-<body onload="datepicker();setTimeOut();">
+<body onload="datepicker()">	
 	<div class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">绩效管理</a>/<a href="#">在岗评估</a>
 		</div>		
-		{%- with messages = get_flashed_messages(with_categories=true) %}
-		  	{%- if messages %}
-	    	{%- for category, message in messages %}
-	    	<div class="alert alert-{{category}}" style="width:99%;margin:-10px auto 10px;">
-	      		{{message}}
-	      	</div>
-	    	{%- endfor %}
-		  	{%- endif %}
-		{%- endwith %}
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">在岗评估搜索</span>
-			<form action="/Performance/ygpgkh/zgpglist" method="POST">
+			<form>
 				<div style="border:1px solid #94c1dc;">
 					<table class="table-list">
 						<tr>
@@ -37,21 +28,12 @@
 							<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
 							<td class="table-label">截至时间</td>
 							<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
-						</tr>	
-						<tr>
 							<td class="table-label">员工姓名</td>
 							<td><input type="text" name=""/></td>
-							<td class="table-label">评估类型</td>
-							<td>
-								<select name="tablename"/>
-								<option value="SC_Kpi_Officer">客户经理KPI</option>
-								<option value="SC_Kpi_Yunying">运营岗KPI</option>
-								</select>
-							</td>
-						</tr>						
+						</tr>							
 					</table>
 				</div>
-				<input type="submit" class="btn btn-info" value="搜索"/>								
+				<input type="button" class="btn btn-info" value="搜索" onclick="iframe('Performance/ygpgkh/zgpglist')"/>								
 			</form>
 		</div><!--/row-fluid -->
 	</div><!--/content -->

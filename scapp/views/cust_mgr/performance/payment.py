@@ -6,38 +6,38 @@ from scapp.models import SC_User
 from scapp.models import SC_UserRole
 
 from scapp.models import SC_Privilege
+from scapp.models.performance.sc_loan_income_list import SC_loan_income_list 
+from scapp.models.performance.sc_risk_margin_list import SC_risk_margin_list 
+from scapp.models.performance.sc_risk_margin import SC_risk_margin 
+from scapp.models.performance.sc_payment_list import SC_payment_list 
+from scapp.logic.cust_mgr.sc_payment import Payment
 
 
-
-# 薪酬-搜索
-@app.route('/Performance/jxxc/ywcctj_search', methods=['GET'])
-def ywcctj_search():
+# 个人薪酬——搜索
+@app.route('/Performance/jxxc/grxc_search', methods=['GET'])
+def grxc_search():
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
     level = role.role_level #取得用户权限等级
-    #普通员工
     if level==2 or level==3:
-    	# business = Business()
-    	# data = business.queryByPerson(current_user.id,1)
-    	return render_template("Performance/jxxc/ywcctj_search_common.html")
+        return render_template("Performance/jxxc/grxc_search.html")
     else:
-		return render_template("Performance/jxxc/ywcctj_search.html")
+        user = SC_User.query.order_by("id").all()
+        return render_template("Performance/jxxc/xccx_search.html",user=user)
 
-#薪酬计算
-def payroll(self,user_id,date):
-    role = SC_UserRole.query.filter_by(user_id=user_id).first().role
-    role_level = role.role_level #取得用户权限等级
-    #客户经理
-    if role_level==2:
-        #查询所处层级
-        data = SC_Privilege.query.filter_by(priviliege_master_id=user_id,privilege_master="SC_User",priviliege_access
-            ="sc_account_manager_level").first()
-        level_id = data.priviliege_access_value
-        #查询基本工资
-        parameter = SC_parameter_configure.query.filter_by(level_id=level_id).first()
-        base_payment = parameter.base_payment
-        #查询上月绩效
-        
-
+# 个人薪酬
+@app.route('/Performance/jxxc/grxc/<int:page>', methods=['POST'])
+def grxc(page):
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    level = role.role_level #取得用户权限等级
+    payment = Payment()
+    if level==2 or level==3:
+        data = payment.getPaymentByPerson(page,request,current_user.id)
+        return render_template("Performance/jxxc/grxc.html",data=data,beg_time = request.form['beg_time'],
+            end_time = request.form['end_time'])
+    else:
+        data = payment.getPaymentByQuery(page,request)
+        return render_template("Performance/jxxc/xccx.html",data=data,beg_time = request.form['beg_time'],
+            end_time = request.form['end_time'],user_id = request.form['user_id'])
 
 
 
