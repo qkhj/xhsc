@@ -10,10 +10,8 @@ class SC_payment_list(db.Model):
     '''
     __tablename__ = 'sc_payment_list'
     id = db.Column(db.Integer, primary_key=True)
-    manager_id=db.Column(db.Integer)#员工工号
-    manager_type=db.Column(db.Integer)#员工类型
-    payment_time=db.Column(db.String(11))#工资时间
-    position=db.Column(db.String(11))#职位
+    manager_id=db.Column(db.Integer,db.ForeignKey('sc_user.id'))#员工工号
+    payment_time=db.Column(db.DateTime)#工资时间
     base_payment=db.Column(db.String(11))#基本工资
     total_performance=db.Column(db.String(11))#所得总绩效
     assess_result=db.Column(db.String(11))#评估结果
@@ -23,12 +21,13 @@ class SC_payment_list(db.Model):
     deduct_payment=db.Column(db.String(11))#当月扣款
     total_payment=db.Column(db.String(11))#当月总工资
 
-    def __init__(self,manager_id,manager_type,payment_time,position,base_payment,total_performance,
+     # 外键名称
+    manager_id_fk = db.relationship('SC_User',foreign_keys=[manager_id], backref = db.backref('manager_id_fk', lazy = 'dynamic'))
+
+    def __init__(self,manager_id,payment_time,base_payment,total_performance,
         assess_result,last_performance,deduct_margin,given_margin,deduct_payment,total_payment):
     	self.manager_id = manager_id
-    	self.manager_type = manager_type
     	self.payment_time = payment_time
-    	self.position = position
         self.base_payment = base_payment
         self.total_performance = total_performance
         self.assess_result = assess_result

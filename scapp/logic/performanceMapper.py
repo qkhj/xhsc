@@ -3,6 +3,9 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 
 from scapp.models.performance.sc_parameter_configure import SC_parameter_configure
 from scapp.models.performance.sc_business_error_list import SC_business_error_list
+from scapp.models.performance.sc_performance_list import SC_performance_list
+from scapp.models.performance.sc_account_manager_level import SC_account_manager_level
+from scapp.models.performance.sc_examine_rise import SC_examine_rise
 from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
@@ -133,3 +136,62 @@ class Level():
                 logger.exception('exception')
                 # 消息闪现
                 flash('保存失败', 'error')
+
+    #层级查询
+    def queryPerform(self, request):
+        level_id = request.form['level_id']
+        manager_name = request.form['manager_name']
+        sql = "select a.month AS month,a.manager_id AS manager_id,d.level_name AS level_name,"
+        sql += " a.count AS count,a.valid_sum AS valid_sum,a.month_rest as month_rest,a.balance_scale as balance_scale,"
+        sql += " b.login_name as login_name,c.total as assess_result"
+        sql += " from"
+        if level_id != "0":
+            if manager_name:
+                sql += " (select p.* from sc_performance_list p,sc_user q where p.manager_id=q.id and level_id=" + level_id + " and q.login_name like '%%" + manager_name + "%%') a"
+            else:
+                sql += " (select p.* from sc_performance_list p where level_id=" + level_id + ") a"
+        else:
+            if manager_name:
+                sql += " (select p.* from sc_performance_list p,sc_user q where p.manager_id=q.id and q.login_name like '%%" + manager_name + "%%') a"
+            else:
+                sql += " sc_performance_list a"
+        sql += " LEFT JOIN (select total, DATE_FORMAT(assess_date, '%%Y-%%M') as assess_date from sc_kpi_officer) c"
+        sql += " on c.assess_date=DATE_FORMAT(a.MONTH, '%%Y-%%M')"
+        sql += " LEFT JOIN sc_user b ON b.id = a.manager_id"
+        sql += " LEFT JOIN sc_account_manager_level d ON d.level_id = a.level_id order by a.month desc"
+        data = db.engine.execute(sql)
+        return data
+
+    #晋级查询
+    def queryRise(self):
+        data = db.session.query(SC_examine_rise, SC_Privilege, SC_account_manager_level, SC_User).filter(
+            SC_examine_rise.manager_id == SC_User.id, SC_Privilege.priviliege_master_id == SC_User.id,
+            SC_Privilege.privilege_master == "SC_User",
+            SC_Privilege.priviliege_access == "sc_account_manager_level",
+            SC_account_manager_level.level_id == SC_Privilege.priviliege_access_value).all()
+        return data
+
+    #晋级审核
+    def editRise(self, manager_id, apply_type, level_id, apply_result):
+        try:
+            #同意
+            if apply_result == '2':
+                #晋级
+                if apply_type == '1':
+                    SC_Privilege.query.filter_by(priviliege_master_id=manager_id, privilege_master="SC_User",
+                                                 priviliege_access
+                                                 ="sc_account_manager_level").update(
+                        {"priviliege_access_value": int(level_id) + 1})
+                else:
+                    SC_Privilege.query.filter_by(priviliege_master_id=manager_id, privilege_master="SC_User",
+                                                 priviliege_access
+                                                 ="sc_account_manager_level").update(
+                        {"priviliege_access_value": int(level_id) - 1})
+            SC_examine_rise.query.filter_by(manager_id=manager_id, apply_result=1).update(
+                {"apply_result": apply_result})
+            # 事务提交
+            db.session.commit()
+        except:
+            # 回滚
+            db.session.rollback()
+            logger.exception('exception')

@@ -172,11 +172,10 @@
 							<a href="javascript:void(0);">贷后变更审核</a>
 						</li> 
 						-->
-						
+						<!--
 						<li onclick="leftmenu(this);changeiframe('Process/dhgl/dhgl')" id="dhgl" >
 							<a href="javascript:void(0);">贷后管理</a>
 						</li>  
-						<!--
 						{%- if role.role_level == 0 or role.role_level == 1 %}
 						<li onclick="leftmenu(this);changeiframe('Process/zcfl/zcfl')" id="zcfl" >
 							<a href="javascript:void(0);">资产分类审核</a>
@@ -199,15 +198,15 @@
                         <li onclick="leftmenu(this);changeiframe('Cust_mgr/search')" id="gsgl" class="active">
 							<a href="javascript:void(0);">工时管理</a>
 						</li>
+						{%- if role.role_level == 2 or role.role_level == 3 %}
 						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/grxc_search')" id="grxc">
 							<a href="javascript:void(0);">个人薪酬</a>
 						</li>
-						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/xccx_search')" id="xccx">
+						{%- else %}
+						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/grxc_search')" id="xccx">
 							<a href="javascript:void(0);">薪酬查询</a>
 						</li>
-						<!-- <li onclick="leftmenu(this);changeiframe('Performance/jxxc/xcxd_search')" id="xcxd">
-							<a href="javascript:void(0);">薪酬详单</a>
-						</li> -->
+						{%- endif%}
 						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/ywcctj_search')" id="ywcctj">
 							<a href="javascript:void(0);">业务差错统计</a>
 						</li>	
