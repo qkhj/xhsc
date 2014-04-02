@@ -85,3 +85,4 @@ SQLALCHEMY_DATABASE_URI = 'mysql://%s:%s@%s:%s/%s' % (_DBUSER, _DBPASS, _DBHOST,
 #SQLALCHEMY_DATABASE_URI = 'ibm_db_sa://%s:%s@%s:%s/%s' % (_DBUSER, _DBPASS, _DBHOST, _DBPORT, _DBNAME)
 #迁移数据路径 --johnny
 SQLALCHEMY_MIGRATE_REPO = os.path.join(_HERE, 'db_repository')
+

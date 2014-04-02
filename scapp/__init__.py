@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #coding=utf-8
 import sys
+from scapp.models.system import system
 
 reload(sys)  
 sys.setdefaultencoding('utf8')
@@ -158,7 +159,6 @@ import views.cust_mgr.performance.margin
 #ORM自动生成使用--johnny
 #---------------------------------
 
-from scapp.models import system
 from scapp.models import process
 from scapp.models import information
 
