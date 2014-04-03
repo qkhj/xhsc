@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 #coding=utf-8
 import sys
-from scapp.models.system import system
 
 reload(sys)  
 sys.setdefaultencoding('utf8')
@@ -46,10 +45,11 @@ app.config.from_object('scapp.config.ProConfig') # mysql
 # 初始化数据库
 db = SQLAlchemy(app)
 
-# flask-login---start
-from scapp.models import SC_User
 from scapp.views.cust_mgr.autoload.load import timing
 time = timing()
+
+# flask-login---start
+from scapp.models import SC_User
 
 login_manager = LoginManager()
 login_manager.init_app(app)

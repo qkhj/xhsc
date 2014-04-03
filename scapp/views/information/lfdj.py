@@ -66,17 +66,19 @@ def export_lfdj():
     sql = "SELECT sc_user.real_name,"
     sql += "(case reception_type when '1' then '咨询' when '2' then '扫街' end)reception_type ,sc_target_customer.create_date,"
     sql += "(case yingxiao_status when 1 then '已营销' when 0 then '未营销' end)yingxiao_status,"
-    sql += "(case client_status when 1 then '现在有需求' when 2 then '态度良好无需求拒绝' when 3 then '态度恶劣拒绝' when 4 then '以后会有需求并填回执' when 5 then '以后有需求未填回执' end)client_status,"
+    sql += "(case client_status when 1 then '现在有需求' when 2 then '态度良好无需求拒绝' when 3 then '态度恶劣拒绝' when 4 then '以后会有需求并填回执' when 5 then '以后有需求未填回执' "
+    sql += "when 6 then '有需求但不符要求-年龄不符合要求' when 7 then '有需求但不符要求-经营年限不足一年' when 8 then '有需求但不符要求-外地人在本地居住低于两年' when 9 then '有需求但不符要求-家属不同意' "
+    sql += "when 10 then '有需求但不符要求-有不良嗜号' when 11 then '有需求但不符要求-其他' end)client_status,"
     sql += "(case is_apply_form when 1 then '已申请' when 0 then '未申请' end)is_apply_form,"
-    sql += "(case is_have_account when 1 then '已有管户' when 0 then '未有管户' end)is_have_account,customer_name,sc_target_customer.mobile,"
+    sql += "remark,customer_name,sc_target_customer.mobile,"
     sql += "(case sc_target_customer.sex when 1 then '男' when 0 then '女' end)sex,"
     sql += "sc_target_customer.age,address,sc_industry.type_name as industry,business_content,shop_name,period, "
     sql += "property_scope,monthly_sales,employees,sc_business_type.type_name as business_type,is_need_loan,sc_loan_purpose.type_name as loan_purpose,loan_amount, "
     sql += "repayment_type,guarantee_type,house_property,loan_attention,"
     sql += "(case is_have_loan when 1 then '是' when 0 then '否' end)is_have_loan,"
     sql += "(case is_known_xhnsh when 1 then '知道' when 0 then '不知道' end)is_known_xhnsh,business_with_xhnsh,"
-    sql += "(case is_need_service when 1 then '手机银行' when 2 then '转账电话' when 3 then 'pos机' when 4 then '网上银行' when 5 then '借记卡' when 6 then '贷记卡' when 7 then '无需求' end)is_need_service,"
-    sql += "status "
+    sql += "(case is_need_service when 1 then '手机银行' when 2 then '转账电话' when 3 then 'pos机' when 4 then '网上银行' when 5 then '借记卡' when 6 then '贷记卡' when 7 then '无需求' end)is_need_service "
+    #sql += "status "
     sql += "FROM (select * from sc_target_customer where "
     sql += " 1=1"
     if manager != '0':
@@ -93,14 +95,14 @@ def export_lfdj():
     #for row in data:
     #    row['reception_type'] = my_dic['reception_type'][str(dic['reception_type'])]
 
-    exl_hdngs=['接待人','营销方式','营销时间','营销状态','客户状态','是否向小微支行填写申请表？','是否在其他兴化农商行有管户？',#1
-        '客户名称','电话','性别','年龄','地址','所属行业','经营内容',#2
+    exl_hdngs=['营销人','营销方式','营销时间','营销状态','客户状态','是否向小微支行填写申请表？',#1
+        '备注','客户名称','电话','性别','年龄','地址','所属行业','经营内容',#2
         '店铺名称','经营期限','资产规模','月销售额','雇员数量','企业类别',#3
         '是否有贷款需求','贷款目的','贷款数额','希望的还款方式','能提供的担保方式','房产产权情况','贷款关注程度',#4
-        '是否在银行贷过款','知道兴化农商行吗？','您在兴化农村商业银行办理过什么业务？','您是否需要办理以下银行产品']#5
+        '是否在他行有借款','知道兴化农商行吗？','您在兴化农村商业银行办理过什么业务？','您是否需要办理以下银行产品']#5
 
     type_str = 'text text date text text text text text'#1
-    type_str += ' text text text text text text text'#2
+    type_str += ' text text text text text text text text'#2
     type_str += ' text text text text text text'#3
     type_str += ' text text text text text text text'#4
     type_str += ' text text text text'#5
@@ -136,7 +138,7 @@ def new_lfdj():
             yingxiao_status = request.form['yingxiao_status']
             client_status = request.form['client_status']
             is_apply_form = request.form['is_apply_form']
-            is_have_account = request.form['is_have_account']
+            remark = request.form['remark']
 
             customer_name = request.form['customer_name']
             mobile = request.form['mobile']
@@ -189,12 +191,12 @@ def new_lfdj():
             is_need_service = request.form['is_need_service']
 
             SC_Target_Customer(current_user.id,reception_type,
-                yingxiao_status,client_status,is_apply_form,is_have_account,
+                yingxiao_status,client_status,is_apply_form,
                 customer_name,mobile,sex,age,address,
                 industry,business_content,shop_name,period,property_scope,monthly_sales,employees,
                 business_type,is_need_loan,loan_purpose,loan_amount,repayment_type,guarantee_type,
                 house_property,loan_attention,is_have_loan,is_known_xhnsh,business_with_xhnsh,
-                is_need_service,0,None,None,None,0).add()
+                is_need_service,0,None,None,None,0,remark).add()
 
             # 事务提交
             db.session.commit()
@@ -229,7 +231,7 @@ def edit_lfdj(id):
             target_customer.yingxiao_status = request.form['yingxiao_status']
             target_customer.client_status = request.form['client_status']
             target_customer.is_apply_form = request.form['is_apply_form']
-            target_customer.is_have_account = request.form['is_have_account']
+            target_customer.remark = request.form['remark']
             
             target_customer.customer_name = request.form['customer_name']
             target_customer.mobile = request.form['mobile']

@@ -96,17 +96,7 @@
 								<label><input type="radio" name="is_apply_form" value="1" onclick="set(this.value)"/>已申请</label>
 								<label><input type="radio" name="is_apply_form" value="0" onclick="set(this.value)" checked />未申请</label>
 								{%- endif %}
-							</td>
-							<td class="table-label">是否在其他兴化农商行有管户？</td>
-							<td>
-								{%- if target_customer.is_have_account == '1' %}
-								<label><input type="radio" name="is_have_account" value="1" onclick="set(this.value)" checked />已有管户</label>
-								<label><input type="radio" name="is_have_account" value="0" onclick="set(this.value)"/>未有管户</label>
-								{%- else %}
-								<label><input type="radio" name="is_have_account" value="1" onclick="set(this.value)"/>已有管户</label>
-								<label><input type="radio" name="is_have_account" value="0" onclick="set(this.value)" checked />未有管户</label>
-								{%- endif %}
-							</td>						
+							</td>					
 						</tr>
 					</table>
 				</div>
