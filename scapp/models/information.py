@@ -1,5 +1,5 @@
 #coding:utf-8
-from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask.ext.login import current_user
 
 from scapp import db
 
@@ -16,7 +16,6 @@ class SC_Target_Customer(db.Model):
     yingxiao_status = db.Column(db.Integer) # 营销状态
     client_status = db.Column(db.Integer) # 客户状态
     is_apply_form = db.Column(db.Integer) # 是否向小微支行填写申请表？
-    is_have_account = db.Column(db.Integer) # 是否在其他兴化农商行有管户？
 
     customer_name = db.Column(db.String(32)) #客户名称
     mobile = db.Column(db.String(16)) #电话
@@ -53,7 +52,7 @@ class SC_Target_Customer(db.Model):
     loan_officer_date = db.Column(db.DateTime)
 
     bool_regisiter = db.Column(db.Integer) #已录入
-
+    remark = db.Column(db.String(256)) #备注
     create_user = db.Column(db.Integer)
     create_date = db.Column(db.DateTime)
     modify_user = db.Column(db.Integer)
@@ -72,17 +71,16 @@ class SC_Target_Customer(db.Model):
     # 外键名称
     loan_purpose_name_for_tc = db.relationship('SC_Loan_Purpose', backref = db.backref('loan_purpose_name_for_tc', lazy = 'dynamic'))
 
-    def __init__(self,receiver,reception_type,yingxiao_status,client_status,is_apply_form,is_have_account,
+    def __init__(self,receiver,reception_type,yingxiao_status,client_status,is_apply_form,
         customer_name,mobile,sex,age,address,industry,business_content,
         shop_name,period,property_scope,monthly_sales,employees,business_type,is_need_loan,loan_purpose,
         loan_amount,repayment_type,guarantee_type,house_property,loan_attention,is_have_loan,is_known_xhnsh,
-        business_with_xhnsh,is_need_service,status,manager,loan_officer,loan_officer_date,bool_regisiter):
+        business_with_xhnsh,is_need_service,status,manager,loan_officer,loan_officer_date,bool_regisiter,remark):
         self.receiver = receiver
         self.reception_type = reception_type
         self.yingxiao_status = yingxiao_status
         self.client_status = client_status
         self.is_apply_form = is_apply_form
-        self.is_have_account = is_have_account
         self.customer_name = customer_name
         self.mobile = mobile
         self.sex = sex
@@ -112,6 +110,7 @@ class SC_Target_Customer(db.Model):
         self.loan_officer = loan_officer
         self.bool_regisiter = bool_regisiter
         self.loan_officer_date = loan_officer_date
+        self.remark = remark
         self.create_user = current_user.id
         self.create_date = datetime.datetime.now()
         self.modify_user = current_user.id
