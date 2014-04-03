@@ -5,10 +5,15 @@ import os
 from flask import Module, session, request, render_template, redirect, url_for,flash
 from flask.ext.login import current_user
 import datetime
+import datetime,time,xlwt,re
 
 from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
+
+from scapp.models import SC_User
+from scapp.models import SC_UserRole
+
 from scapp.config import PROCESS_STATUS_SPJY_TG
 from scapp.config import PROCESS_STATUS_DKFKJH
 from scapp.models import SC_Monitor
@@ -19,6 +24,8 @@ from scapp.logic.total import Total
 from scapp.logic.total import User
 from scapp import app
 from scapp.pojo.bz_check_form import CheckForm
+from scapp.tools.export_excel import export_excel
+ezxf=xlwt.easyxf #样式转换
 
 # 贷后管理
 @app.route('/Process/dhgl/dhgl', methods=['GET'])
@@ -203,6 +210,57 @@ def edit_fbz(loan_apply_id,index):
 			flash('保存失败','error')
 		
 		return redirect('Process/dhgl/fbz/%d' % loan_apply_id) 
+
+# 贷后管理——导出标准监控
+@app.route('/Process/dhgl/export_bz', methods=['POST'])
+def dhgl_export_bz():
+	#模糊查询
+	customer_name = request.form['customer_name']
+	loan_type = request.form['loan_type']
+
+	sql = "select sc_loan_apply.customer_name,sc_user.real_name,sc_monitor.monitor_date,"
+	sql += "sc_monitor.monitor_type,sc_monitor.monitor_remark from sc_monitor left join "
+	sql += "(select id,loan_type,customer_name from sc_loan_apply where "
+	if loan_type != '0':
+	    sql += "loan_type='"+loan_type+"' and "
+	sql += " process_status='"+PROCESS_STATUS_DKFKJH+"'"
+
+	role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+	if role.role_level >= 2:
+		sql += " and (A_loan_officer="+str(current_user.id)+" or B_loan_officer="+str(current_user.id)+" or yunying_loan_officer="+str(current_user.id)+")"
+
+	if customer_name:
+		sql += " and customer_name like '%"+customer_name+"%'"
+	sql += ")sc_loan_apply on sc_monitor.loan_apply_id = sc_loan_apply.id "
+	sql += "left join sc_user on sc_monitor.create_user = sc_user.id"
+
+	data=db.session.execute(sql)
+	#for row in data:
+	#    row['reception_type'] = my_dic['reception_type'][str(dic['reception_type'])]
+
+	exl_hdngs=['客户名称','客户经理','日期','监控方式','备注']
+
+	type_str = 'text text date text text'
+	types= type_str.split()
+
+	exl_hdngs_xf=ezxf('font: bold on;align: wrap on,vert centre,horiz center')
+	types_to_xf_map={
+	    'int':ezxf(num_format_str='#,##0'),
+	    'date':ezxf(num_format_str='yyyy-mm-dd'),
+	    'datetime':ezxf(num_format_str='yyyy-mm-dd HH:MM:SS'),
+	    'ratio':ezxf(num_format_str='#,##0.00%'),
+	    'text':ezxf(),
+	    'price':ezxf(num_format_str='￥#,##0.00')
+	}
+
+	data_xfs=[types_to_xf_map[t] for t in types]
+	date=datetime.datetime.now()
+	year=date.year
+	month=date.month
+	day=date.day
+	filename=str(year)+'_'+str(month)+'_'+str(day)+'_'+'标准监控统计表'+'.xls'
+	exp=export_excel()
+	return exp.export_download(filename,'标准监控统计表',exl_hdngs,data,exl_hdngs_xf,data_xfs)
 
 # 贷后管理——管理信息列表
 @app.route('/Process/dhgl/glxxlb', methods=['GET'])
