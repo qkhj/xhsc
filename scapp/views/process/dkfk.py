@@ -143,7 +143,6 @@ def edit_dkfk(id):
     reckonIncome(id)
     return redirect("Process/dkfk/dkfk")    
 
-# class test():       
 def reckonIncome(self,id):
     #计算绩效
     data = SC_Loan_Apply.query.filter_by(id=id).first()
@@ -152,8 +151,8 @@ def reckonIncome(self,id):
     #获取放贷日期
     lending_date = information.loan_date
     #计算绩效日期
-    year = lending_date.strftime('%Y')
-    month = lending_date.strftime('%m')
+    year = int(lending_date.strftime('%Y'))
+    month = int(lending_date.strftime('%m'))
     if month==11:
         year = year+1
         month = 1
@@ -170,7 +169,7 @@ def reckonIncome(self,id):
         #查询所有绩效参数
         parameter = SC_parameter_configure.query.filter_by(level_id=level_id).first()
         #折算笔数
-        amount = amount(information.amount)
+        amount = self.amount(information.amount)
         #所得绩效
         total = float(parameter.A1)*amount
         yunying_total = total*0.1

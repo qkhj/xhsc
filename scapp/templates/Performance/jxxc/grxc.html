@@ -33,6 +33,7 @@
 						<th>评估结果</th>
 						<th>缴纳风险保证金</th>
 						<th>返还风险保证金</th>
+						<th>逾期金额</th>
 						<th>总工资</th>
 					</tr>					
 					<tbody class="center">
@@ -46,6 +47,7 @@
 									<td>{{obj.assess_result}}</td>							
 									<td>{{obj.deduct_margin}}</td>
 									<td>{{obj.given_margin}}</td>
+									<td>{{obj.deduct_payment}}</td>
 									<td>{{obj.total_payment}}</td>
 								</tr><!-- /数据 -->	
 								{%- endfor %}
