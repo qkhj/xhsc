@@ -27,17 +27,16 @@ class timing():
 			if month==1:
 				year = year-1
 				month = 12
-			search_date = str(year)+"."+str(month)
+			search_date = str(year)+"-"+str(month)
 		   	sql = "select sc_user.* from sc_userrole,sc_role,sc_user where "
 			sql +=" sc_userrole.role_id=sc_role.id and sc_role.role_level=2 and sc_user.id=sc_userrole.user_id"
 			data = db.engine.execute(sql)
 			for i in data:
-				print i.id
 				assess = SC_assess_record.query.filter_by(manager_id=i.id).first()
 				if assess:
 					if assess.assess_sum=='3':
 						#获取客户经理上月业绩
-						achieve = SC_performance_list.query.filter_by(manager_id=i.id,month=search_date).first()
+						achieve = SC_performance_list.query.filter("manager_id="+i.id+" and DATE_FORMAT(month, '%%Y-%%m')='"+search_date+"'").first()
 						if assess.assess_arg>90:
 							if achieve:
 								if achieve.level_id!='6':

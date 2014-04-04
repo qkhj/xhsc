@@ -28,6 +28,7 @@
 						<th>姓名</th>
 						<th>返还总保证金</th>
 						<th>逾期保证金</th>
+						<th>已扣保证金</th>
 						<th>总保证金</th>
 					</tr>					
 					<tbody class="center">
@@ -35,7 +36,8 @@
 							<td><a href="#" onclick="iframe('Performance/jxxc/fxbzj_list/1/{{data.manager_id}}')">{{data.manager_id}}</td>		
 							<td>{{data.risk_margin_fk.login_name}}</td>
 							<td>{{data.given_margin}}</td>		
-							<td>{{data.overduce_margin}}</td>						
+							<td>{{data.overduce_margin}}</td>		
+							<td>{{data.deduct_margin}}</td>					
 							<td>{{data.total_margin}}</td>	
 						</tr><!-- /数据 -->	
 					</tbody>									

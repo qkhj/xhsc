@@ -23,5 +23,5 @@ class SC_risk_margin_list(db.Model):
     	self.inout_type = inout_type
         self.last_margin = last_margin
 
-	def add(self):
-		db.session.add(self)
+    def add(self):
+        db.session.add(self)
