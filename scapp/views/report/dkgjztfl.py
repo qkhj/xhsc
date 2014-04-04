@@ -14,6 +14,10 @@ def dkgjztfl():
 def dkgjztfl_1():
     return render_template("Report/dkgjztfl_1.html")
 
+@app.route('/Report/dkgjztfl_1_search/<int:page>', methods=['POST'])
+def dkgjztfl_1_search(page):
+    return render_template("Report/dkgjztfl_1_search.html")
+
 # 贷款根据状态分类——2. 被拒绝的贷款
 @app.route('/Report/dkgjztfl_2', methods=['GET'])
 def dkgjztfl_2():

@@ -7,6 +7,10 @@ from scapp.logic.cust_mgr import sc_kpi
 from scapp.models.cust_mgr.sc_kpi_train import SC_Kpi_Train
 from scapp.models.cust_mgr.sc_kpi_train_final import SC_Kpi_Train_Final
 from scapp.models.cust_mgr.sc_kpi_train_operate import SC_Kpi_Train_Operate
+from scapp.models.cust_mgr.sc_kpi_officer import SC_Kpi_Officer
+from scapp.models.cust_mgr.sc_kpi_yunying import SC_Kpi_Yunying
+
+from scapp.logic.cust_mgr.sc_payment import Payment
 
 from scapp import app
 from scapp import db
@@ -238,29 +242,106 @@ def zzpg(user_id):
 
         return redirect('Performance/ygpgkh/pxqpglist')
 
-
-
 # 在岗评估——搜索
 @app.route('/Performance/ygpgkh/zgpg_search', methods=['GET'])
 def zgpg_search():
     return render_template("Performance/ygpgkh/zgpg_search.html")
 
 # 在岗评估列表
-@app.route('/Performance/ygpgkh/zgpglist', methods=['GET'])
+@app.route('/Performance/ygpgkh/zgpglist', methods=['POST'])
 def zgpglist():
-    return render_template("Performance/ygpgkh/zgpglist.html")
+    tablename = request.form['tablename']
+    kpi = eval(tablename).query.order_by("id").all()
+    return render_template("Performance/ygpgkh/zgpglist.html",tablename=tablename,kpi=kpi)
 
-# 在岗评估
-@app.route('/Performance/ygpgkh/zgpg', methods=['GET'])
-def zgpg():
-    return render_template("Performance/ygpgkh/zgpg.html")
+# 新增或编辑客户经理KPI
+@app.route('/Performance/ygpgkh/khjlKPI/<int:id>', methods=['GET','POST'])
+def khjlKPI(id):
+    if request.method == 'GET':
+        kpi_officer = SC_Kpi_Officer.query.filter_by(id=id).first()
+        return render_template("Performance/ygpgkh/khjlKPI.html",kpi_officer=kpi_officer)
+    else:
+        kpi_officer = SC_Kpi_Officer.query.filter_by(id=id).first()
+        try:
+            kpi_officer.bq_dkye = request.form['bq_dkye']
+            kpi_officer.bq_ghs = request.form['bq_ghs']
+            kpi_officer.bq_khs = request.form['bq_khs']
+            kpi_officer.bq_lxsr = request.form['bq_lxsr']
+            kpi_officer.bq_zsbs = request.form['bq_zsbs']
+            kpi_officer.bm_dkye = request.form['bm_dkye']
+            kpi_officer.bm_ghs = request.form['bm_ghs']
+            kpi_officer.bm_lrgxd = request.form['bm_lrgxd']
+            kpi_officer.gr_dkye = request.form['gr_dkye']
+            kpi_officer.gr_ghs = request.form['gr_ghs']
+            kpi_officer.gr_xzkhs = request.form['gr_xzkhs']
+            kpi_officer.gr_zsbs = request.form['gr_zsbs']
+            kpi_officer.gr_lrgxd = request.form['gr_lrgxd']
+            kpi_officer.rcxwpg = request.form['rcxwpg']
+            kpi_officer.yql = request.form['yql']
+            kpi_officer.total = request.form['total']
+            kpi_officer.result = request.form['result']
+            kpi_officer.qtpj = request.form['qtpj']
+            kpi_officer.xq_dkye = request.form['xq_dkye']
+            kpi_officer.xq_ghs = request.form['xq_ghs']
+            kpi_officer.xq_xzkhs = request.form['xq_xzkhs']
+            kpi_officer.xq_lxsr = request.form['xq_lxsr']
+            kpi_officer.xq_zsbs = request.form['xq_zsbs']
+            kpi_officer.manager = current_user.id
+            kpi_officer.date_2 = datetime.datetime.now()
 
-# 新增客户经理KPI
-@app.route('/Performance/ygpgkh/new_khjlKPI', methods=['GET'])
-def new_khjlKPI():
-    return render_template("Performance/ygpgkh/new_khjlKPI.html")
+            pay = Payment()
+            pay.payroll(kpi_officer.user_id,kpi_officer.assess_date,kpi_officer.total)
 
-# 新增后台岗KPI
-@app.route('/Performance/ygpgkh/new_htgKPI', methods=['GET'])
-def new_htgKPI():
-    return render_template("Performance/ygpgkh/new_htgKPI.html")
+            # 事务提交
+            db.session.commit()
+            # 消息闪现
+            flash('保存成功','success')
+        except:
+            # 回滚
+            db.session.rollback()
+            logger.exception('exception')
+            # 消息闪现
+            flash('保存失败','error')
+
+        return redirect('Performance/ygpgkh/zgpg_search')
+
+# 新增或编辑后台岗KPI
+@app.route('/Performance/ygpgkh/htgKPI/<int:id>', methods=['GET','POST'])
+def htgKPI(id):
+    if request.method == 'GET':
+        kpi_yunying = SC_Kpi_Yunying.query.filter_by(id=id).first()
+        return render_template("Performance/ygpgkh/htgKPI.html",kpi_yunying=kpi_yunying)
+    else:
+        try:
+            kpi_yunying = SC_Kpi_Yunying.query.filter_by(id=id).first()
+            kpi_yunying.bm_dkye = request.form['bm_dkye']
+            kpi_yunying.bm_ghs = request.form['bm_ghs']
+            kpi_yunying.bm_lrgxd = request.form['bm_lrgxd']
+            kpi_yunying.gz_sjlr = request.form['gz_sjlr']
+            kpi_yunying.gz_ywtj = request.form['gz_ywtj']
+            kpi_yunying.gz_ht = request.form['gz_ht']
+            kpi_yunying.gz_fk = request.form['gz_fk']
+            kpi_yunying.gz_dagl = request.form['gz_dagl']
+            kpi_yunying.gz_khgx = request.form['gz_khgx']
+            kpi_yunying.gz_alzl = request.form['gz_alzl']
+            kpi_yunying.gz_fxkz = request.form['gz_fxkz']
+            kpi_yunying.gz_rcxw = request.form['gz_rcxw']
+            kpi_yunying.gz_yql = request.form['gz_yql']
+            kpi_yunying.total = request.form['total']
+            kpi_yunying.result = request.form['result']
+            kpi_yunying.qtpj = request.form['qtpj']
+            kpi_yunying.manager = current_user.id
+            kpi_yunying.date_2 = datetime.datetime.now()
+
+            # 事务提交
+            db.session.commit()
+            # 消息闪现
+            flash('保存成功','success')
+        except:
+            # 回滚
+            db.session.rollback()
+            logger.exception('exception')
+            # 消息闪现
+            flash('保存失败','error')
+
+        return redirect('Performance/ygpgkh/zgpg_search')

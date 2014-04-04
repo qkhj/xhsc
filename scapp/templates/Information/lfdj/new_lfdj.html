@@ -53,6 +53,12 @@
 									<option value="3">态度恶劣拒绝</option>
 									<option value="4">以后会有需求并填回执</option>
 									<option value="5">以后有需求未填回执</option>
+									<option value="6">有需求但不符要求-年龄不符合要求</option>
+									<option value="7">有需求但不符要求-经营年限不足一年</option>
+									<option value="8">有需求但不符要求-外地人在本地居住低于两年</option>
+									<option value="9">有需求但不符要求-家属不同意</option>
+									<option value="10">有需求但不符要求-有不良嗜号</option>
+									<option value="11">有需求但不符要求-其他</option>
 								</select>
 							</td>	
 						</tr>		
@@ -61,12 +67,14 @@
 							<td>
 								<label><input type="radio" name="is_apply_form" value="1" onclick="set(this.value)"/>已申请</label>
 								<label><input type="radio" name="is_apply_form" value="0" onclick="set(this.value)" checked />未申请</label>
-							</td>
-							<td class="table-label">是否在其他兴化农商行有管户？</td>
+							</td>	
+							<td class="table-label">备注</td>
 							<td>
-								<label><input type="radio" name="is_have_account" value="1" onclick="set(this.value)"/>已有管户</label>
-								<label><input type="radio" name="is_have_account" value="0" onclick="set(this.value)" checked />未有管户</label>
-							</td>						
+								<span id="remark">	
+									<input type="text" name="remark" onchange="spryMaxLength(this,256)" class="long"/>
+									<span class="errorInfo">字符数不得大于256</span>
+								</span>
+							</td>		
 						</tr>
 					</table>
 				</div>
@@ -251,7 +259,7 @@
 									<option value="一般了解">一般了解</option>
 								</select>
 							</td>
-							<td class="table-label">是否在银行贷过款</td>
+							<td class="table-label">是否在他行有借款</td>
 							<td>
 								<label><input type="radio" name="is_have_loan" value="1" />是</label>
 								<label><input type="radio" name="is_have_loan" value="0" checked/>否</label>
