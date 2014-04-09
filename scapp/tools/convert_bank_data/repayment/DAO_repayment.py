@@ -5,7 +5,7 @@
 __author__ = 'johhny'
 
 from ..config import logger
-from ..db_conn import local_db_conn
+from ..db_conn import local_db_conn,INSERT_UPDATE_TRAN
 from ..overdue import DAO_overdue
 
 
@@ -34,30 +34,20 @@ def insert_rep(loan_apply_id,tran_no,last_repayment_day,crnt_pr,arfn_pr,crnt_int
                    "clear_date,total_repayment,status) " \
                    "VALUES " \
                    "(%s,%s,%f,%f,%d,%f,%d)"%(loan_apply_id,tran_no,arfn_pr,arfn_int,last_repayment_day,total_repayment,status)
-    logger.info(REP_INSERT_STR)
-    trans_local=local_db_conn.begin()
-    try:
-        local_db_conn.execute(REP_INSERT_STR)
-        trans_local.commit()
-    except():
-        logger.error("error")
-        trans_local.rollback()
+    INSERT_UPDATE_TRAN(REP_INSERT_STR)
+
+    return None
 
 #插入错误账号信息
 def insert_wrong_account(account_no):
     logger.info("插入错误账号信息-"+str(account_no)+"")
     WRONG_INSERT_STR="INSERT INTO wrong_account_record (account_no) VALUES (%s)"%(account_no)
-    logger.info(WRONG_INSERT_STR)
-    trans_local=local_db_conn.begin()
-    try:
-        local_db_conn.execute(WRONG_INSERT_STR)
-        trans_local.commit()
-    except:
-        logger.error("error")
-        trans_local.rollback()
+    INSERT_UPDATE_TRAN(WRONG_INSERT_STR)
+
+    return None
 
 
-#获得已还清期数与账号
+#获得需要更新的期数与账号
 def get_need_update_id():
     QUERY_STR="SELECT id,loan_apply_id,repayment_installments FROM sc_repayment WHERE status<>'3'"
     data=local_db_conn.execute(QUERY_STR).fetchall()
@@ -88,28 +78,19 @@ def update_rep(loan_apply_id,tran_no,last_repayment_day,crnt_pr,arfn_pr,crnt_int
                    "loan_apply_id=%s,repayment_installments=%s,re_principal=%f,re_interest=%f," \
                    "clear_date=%d,total_repayment=%f,status=%d " \
                    "WHERE id=%s"%(loan_apply_id,tran_no,arfn_pr,arfn_int,last_repayment_day,total_repayment,status,id)
-    logger.info(REP_UPDATE_STR)
-    trans_local=local_db_conn.begin()
-    try:
-        local_db_conn.execute(REP_UPDATE_STR)
-        trans_local.commit()
-    except():
-        logger.error("error")
-        trans_local.rollback()
+    INSERT_UPDATE_TRAN(REP_UPDATE_STR)
 
+    return None
 
 #计算上月利润贡献
-def cal_last_month_intrest():
-    INSERT_STR="INSERT INTO sc_sta_mlm(user_id,intrest,month) " \
-              "SELECT sla.A_loan_officer,SUM(sr.re_interest),date_format(NOW(),'%Y-%m') FROM sc_repayment AS sr " \
+def insert_last_month_intrest():
+    INSERT_STR="INSERT INTO sc_sta_mlm (user_id,intrest,month) " \
+              "SELECT sla.A_loan_officer,SUM(sr.re_interest),date_format(NOW(),'%Y-%m-%D') FROM sc_repayment AS sr " \
               "INNER JOIN sc_loan_apply AS sla ON sr.loan_apply_id=sla.id " \
               "WHERE date_format(sr.clear_date,'%Y-%m') = date_format(DATE_SUB(curdate(), INTERVAL 1 MONTH),'%Y-%m') " \
               "AND sr.status=3 GROUP BY sla.A_loan_officer"
-    logger.info(INSERT_STR)
-    trans_local=local_db_conn.begin()
-    try:
-        local_db_conn.execute(INSERT_STR)
-        trans_local.commit()
-    except():
-        logger.error("error")
-        trans_local.rollback()
+    logger.info("============开始更新每月客户利润贡献===========")
+    INSERT_UPDATE_TRAN(INSERT_STR)
+    logger.info("============每月客户利润贡献更新完毕===========")
+    return None
+
