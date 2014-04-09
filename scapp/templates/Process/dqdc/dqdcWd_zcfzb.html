@@ -25,7 +25,7 @@
 		<i class="icon-bookmark"></i><span class="titletip">资产负债表</span>
 		{%- if balance_sheets %}
 		<div class="divBorder">
-			<table class="table-list" id="yfzk">
+			<table class="table-list">
 					<tr>
 						<td class="table-label" colspan="2"><b>资产</b></td>
 						<td class="table-label" colspan="2"><b>负债</b></td>
@@ -60,7 +60,11 @@
 						</td>								
 					</tr>	
 					{%- endif %}
-				{%- endfor %}		
+				{%- endfor %}	
+			</table>
+		</div>	
+		<div class="divBorder">
+			<table class="table-list" id="yfzk">
 				{%- for obj in balance_sheets %}
 					{%- if obj.loan_type == 0 %}
 					<tr>
@@ -765,13 +769,13 @@
 		</div>	
 		{%- else %}
 		<div class="divBorder">			
-			<table class="table-list" id="yfzk">
+			<table class="table-list">
 				<tr>
 					<td class="table-label" colspan="2"><b>资产</b></td>
 					<td class="table-label" colspan="2"><b>负债</b></td>
 				</tr>
 				<tr>
-					<td class="table-label" style="width:162px;"><b>流动资产 </b>
+					<td class="table-label"><b>流动资产 </b>
 					<input type="hidden" name="type_8" value="8">
 					<input type="hidden" name="name_8" value="流动资产">
 					</td>
@@ -782,7 +786,7 @@
 							<span class="errorInfo"></span>						
 						</span>	
 					</td>
-					<td class="table-label" style="width:162px;"><b>短期负债</b>
+					<td class="table-label"><b>短期负债</b>
 					<input type="hidden" name="type_9" value="9">
 					<input type="hidden" name="name_9" value="短期负债">
 					</td>
@@ -794,6 +798,10 @@
 						</span>	
 					</td>		
 				</tr>
+			</table>
+		</div>	
+		<div class="divBorder">
+			<table class="table-list" id="yfzk">
 				<tr>
 					<td class="table-label">
 						<b>&nbsp;&nbsp;&nbsp;&nbsp;现金及银行存款</b>
