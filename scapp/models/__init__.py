@@ -49,3 +49,4 @@ from scapp.models.system.system import SC_Application
 from scapp.models.views import View_Query_Loan
 from scapp.models.views import View_Get_Cus_Mgr
 from scapp.models.views import View_Loan_Repayment
+from scapp.models.views import View_Loan_Disbursed
