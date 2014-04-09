@@ -140,7 +140,7 @@ def edit_dkfk(id):
         # 消息闪现 
         flash('保存失败','error')
     #计算绩效
-    reckonIncome(id)
+   # self.reckonIncome(id)
     return redirect("Process/dkfk/dkfk")    
 
 def reckonIncome(self,id):

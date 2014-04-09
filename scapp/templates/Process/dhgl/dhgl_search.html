@@ -29,7 +29,7 @@
 		{%- endwith %}
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">贷款搜索</span>
-			<form method="POST" action="/Process/dhgl/dhgl_search/1">
+			<form id="content" method="POST" action="/Process/dhgl/dhgl_search/1">
 				<div style="border:1px solid #94c1dc;">
 					<table class="table-list">
 						<tr>
@@ -46,7 +46,9 @@
 						</tr>							
 					</table>
 				</div>
-				<input type="submit" class="btn btn-info" value="搜索"/>										
+				<input type="submit" class="btn btn-info" value="搜索"/>	
+				<input type="button" class="btn btn-info" value="导出标准监控" onclick="submitForm('content','/Process/dhgl/export_bz')"/>
+			</div>											
 			</form><!--/搜索-->
 		</div><!--/row-fluid -->
 	</div><!--/content -->

@@ -55,9 +55,9 @@ def dksqsh_search(page):
     # loan_apply = SC_Loan_Apply.query.order_by("id").paginate(page, per_page = PER_PAGE)
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = ""
+    sql = " 1=1 and "
     if loan_type != '0':
-        sql = "loan_type='"+loan_type+"' and "
+        sql += " loan_type='"+loan_type+"' and "
     sql += " process_status='"+PROCESS_STATUS_DKSQ+"'"
 
     if customer_name:
