@@ -30,5 +30,5 @@ class SC_loan_income_list(db.Model):
         self.singel_performance_B = singel_performance_B      
         self.create_time = create_time
 
-	def add(self):
-		db.session.add(self)
+    def add(self):
+        db.session.add(self)

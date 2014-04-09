@@ -8,17 +8,16 @@ from scapp.models import SC_UserRole
 from scapp.models.performance.sc_performance_list import SC_performance_list 
 import datetime
 from scapp.logic.cust_mgr.sc_margin import Margin
-
-# from scapp.views.process.dkfk import test
-
-
+from scapp.logic.cust_mgr.sc_payment import Payment
 
 
 # 风险保证金——搜索
 @app.route('/Performance/jxxc/fxbzj_search', methods=['GET'])
 def fxbzj_search():
-	# test = test()
-	# test.reckonIncome(32)
+	# date= datetime.datetime.now()
+	# pay = Payment()
+	# pay.payroll(18,date,90)
+
 	role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
 	level = role.role_level #取得用户权限等级
 	#普通员工
@@ -28,7 +27,7 @@ def fxbzj_search():
 		return render_template("Performance/jxxc/fxbzj_person.html",data=data)
 	else:
 		user = SC_User.query.order_by("id").all()
-		return render_template("Performance/jxxc/fxbzj_search.html",user=user)
+    	return render_template("Performance/jxxc/fxbzj_search.html",user=user)
 
 # 风险保证金
 @app.route('/Performance/jxxc/fxbzj/<int:page>', methods=['POST'])

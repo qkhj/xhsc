@@ -25,5 +25,5 @@ class SC_risk_margin(db.Model):
         self.dedcut_margin = dedcut_margin
         self.total_margin = total_margin
 
-	def add(self):
-		db.session.add(self)
+    def add(self):
+        db.session.add(self)

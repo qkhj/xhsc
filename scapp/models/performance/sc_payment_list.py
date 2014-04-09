@@ -37,6 +37,5 @@ class SC_payment_list(db.Model):
         self.deduct_payment = deduct_payment
         self.total_payment = total_payment
 
-
-	def add(self):
-		db.session.add(self)
+    def add(self):
+        db.session.add(self)

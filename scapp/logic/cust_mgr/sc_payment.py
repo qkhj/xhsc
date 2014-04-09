@@ -3,12 +3,17 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 
 from scapp.models.performance.sc_payment_list import SC_payment_list 
 from scapp.models.performance.sc_business_error_list import SC_business_error_list 
+from scapp.models.performance.sc_parameter_configure import SC_parameter_configure 
+from scapp.models.performance.sc_risk_margin_list import SC_risk_margin_list 
+from scapp.models.performance.sc_risk_margin import SC_risk_margin
 from scapp.models.cust_mgr.sc_sta_mlm import SC_Sta_Mlm 
 from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
 from scapp.models import SC_User,SC_UserRole
 from scapp.models import SC_Privilege
+from scapp.models.performance.sc_performance_list import SC_performance_list 
+from decimal import *
 
 
 class Payment():
@@ -27,6 +32,7 @@ class Payment():
 		sql = "payment_time between '"+beg_time+"' and '"+end_time+"'"
 		if user_id:
 			sql += " and manager_id="+user_id
+		print sql
 		data = SC_payment_list.query.filter(sql).order_by("payment_time asc").paginate(page, per_page = PER_PAGE)
 		return data
 
@@ -48,30 +54,60 @@ class Payment():
 				base_payment = parameter.base_payment
 				#查询上月绩效
 				sql = "SELECT sum(sum1) as total FROM (( SELECT sum(singel_performance) AS sum1"
-				sql +=" FROM sc_loan_income_list WHERE DATE_FORMAT(create_time, '%%Y-%%M') = DATE_FORMAT("+date+", '%%Y-%%M'))"
+				sql +=" FROM sc_loan_income_list WHERE DATE_FORMAT(create_time, '%%Y-%%m') = '"+today+"')"
 				sql +=" UNION (SELECT sum(singel_performance_A) AS sum1 FROM sc_loan_income_list WHERE"
-				sql +=" DATE_FORMAT(create_time, '%%Y-%%M') = DATE_FORMAT("+date+", '%%Y-%%M'))"
+				sql +=" DATE_FORMAT(create_time, '%%Y-%%m') = '"+today+"')"
 				sql +=" UNION (SELECT sum(singel_performance_B) AS sum1 FROM sc_loan_income_list WHERE"
-				sql +=" DATE_FORMAT(create_time, '%%Y-%%M') = DATE_FORMAT("+date+", '%%Y-%%M'))) AS p"
+				sql +=" DATE_FORMAT(create_time, '%%Y-%%m') = '"+today+"')) AS p"
 				last_performance = db.engine.execute(sql).first()
+				if not last_performance.total:
+					performance_total = 0
+				else:
+					performance_total = last_performance.total
 	            #获取当月利息，逾期率等参数
-				mlmSql = "user_id="+user_id
-				mlmSql+=" and DATE_FORMAT(month, '%%Y-%%M')="+today
+				mlmSql = "user_id="+str(user_id)
+				mlmSql+=" and DATE_FORMAT(month, '%Y-%m')='"+today+"'"
 				mlm_list = SC_Sta_Mlm.query.filter(mlmSql).first()
 				#当月逾期金额
-				M=mim_list.overdue_amount
-				r=0.8
-				last_performance_result=last_performance.total+float(parameter.A2)+float((mlm_list.intrest)*(parameter.A3/100)*parameter.R*r)-M
+				M=mlm_list.overdue_amount
+				#当月瑕疵贷款率
+				defact_rate =Decimal(mlm_list.defact_rate)
+				#当月逾期比率
+				overdue_rate =Decimal(mlm_list.overdue_rate)
+				#获取客户经理上月业绩
+				achieve = SC_performance_list.query.filter("manager_id="+str(user_id)+" and DATE_FORMAT(month, '%Y-%m')='"+today+"'").all()
+				achieve_count=Decimal(0)
+				for i in range(len(achieve)):
+					achieve_count+=Decimal(achieve[i].valid_sum)
+				#需扣除管户数金额
+				company =0
+				#需扣除绩效比例
+				bit=0
+				if defact_rate>0.1:
+					company=Decimal(parameter.A2)*Decimal(achieve_count)
+				elif defact_rate>=0.05 and defact_rate<0.1:
+					company=Decimal(mlm_list.overdue_num)*Decimal(parameter.A2)*8
+				else:
+					company=Decimal(mlm_list.overdue_num)*Decimal(parameter.A2)*5
+				if overdue_rate<0.01:
+					company+=Decimal(mlm_list.overdue_num)*50
+				elif overdue_rate>=0.01 and overdue_rate<0.03:
+					bit=(overdue_rate-0.01)*20
+				else:
+					bit=1
+				#假定r固定
+				r=Decimal(0.8)
+				performance_result=(Decimal(performance_total)+Decimal(parameter.A2)*Decimal(achieve_count)+mlm_list.intrest*(Decimal(parameter.A3)/100)*Decimal(parameter.R)/100*r-Decimal(M))*Decimal(1-bit)
 
 	            #计算最终绩效(评估后)
 				if score<60:
 					last_performance_result=0
 				elif score>=60 and score<100:
-					last_performance_result=last_performance_result
+					last_performance_result=performance_result
 				else:
-					last_performance_result=int(last_performance_result)*1.05
+					last_performance_result=int(performance_result)*1.05
 				#当月总工资
-				old_total_payment = base_payment+last_performance_result
+				old_total_payment = Decimal(base_payment)+Decimal(last_performance_result)
 				year = date.strftime('%Y')
 				month = date.strftime('%m')
 				#获取3月前日期
@@ -85,13 +121,15 @@ class Payment():
 						month=12
 				old_3_date = str(year)+"-"+str(month)
 				#获取3月前逾期金额
-				mlm3Sql = "user_id="+user_id
-				mlm3Sql+=" and DATE_FORMAT(month, '%%Y-%%M')="+old_3_date
+				mlm3Sql = "user_id="+str(user_id)
+				mlm3Sql+=" and DATE_FORMAT(month, '%Y-%m')='"+old_3_date+"'"
 				mlm3_list = SC_Sta_Mlm.query.filter(mlm3Sql).first()
 				#如果总保险金低于逾期扣款
 				nega_margin=0
 				#风险保证金实体
-				margin = SC_risk_margin.query.filter_by(anager_id=user_id).first()
+				margin = SC_risk_margin.query.filter_by(manager_id=user_id).first()
+				if not margin:
+					margin = self.addScRisk(user_id)
 				if mlm3_list:
 					#逾期保险金增加，总保险金减少
 					margin.overduce_margin=int(margin.overduce_margin)+mlm3_list.overdue_amount
@@ -102,32 +140,31 @@ class Payment():
 					    nega_margin=mlm3_list.overdue_amount-int(margin.total_margin)
 					#新增逾期记录
 					SC_risk_margin_list(user_id,date,mlm3_list.overdue_amount,2,margin.total_margin).add()
-	                
 	            #计算需缴纳风险保证金
 				pay_margin=0
 				if old_total_payment<=2000:
 					pay_margin = 0
 				elif old_total_payment>2000:
 					if old_total_payment>5000:
-						pay_margin+=(5000-2000)*0.3
+						pay_margin+=Decimal((5000-2000)*0.3)
 						if old_total_payment>8000:
-							pay_margin+=(8000-5000)*0.4
-							pay_margin+=(old_total_payment-8000)*0.5
+							pay_margin+=Decimal((8000-5000)*0.4)
+							pay_margin+=(old_total_payment-8000)*Decimal(0.5)
 						else:
-							pay_margin+=(old_total_payment-5000)*0.3
+							pay_margin+=(old_total_payment-5000)*Decimal(0.3)
 					else:
-						pay_margin+=(old_total_payment-2000)*0.3
+						pay_margin+=(old_total_payment-2000)*Decimal(0.3)
 				#总保证金变化
 				margin.total_margin=margin.total_margin+pay_margin
 				#新增风险保险金记录
 				SC_risk_margin_list(user_id,date,pay_margin,1,margin.total_margin).add()
 				#获取3年前日期
-				old_date = str(year-3)+"-"+str(month)
+				old_date = str(int(year)-3)+"-"+str(month)
 				#返还保证金
 				return_margin=0
 				if margin.total_margin>=50000:
 					riskSql = "manager_id="+user_id
-					riskSql+=" and DATE_FORMAT(payment_time, '%%Y-%%M')="+old_date
+					riskSql+=" and DATE_FORMAT(payment_time, '%Y-%m')='"+old_date+"'"
 					riskSql+=" and inout_type=1"
 					margin_list = SC_risk_margin_list.query.filter(riskSql).first()
 					if margin_list:
@@ -149,7 +186,7 @@ class Payment():
 						SC_risk_margin_list(user_id,date,return_margin,3,margin.total_margin).add()
 				#最终工资计算
 				last_payment = old_total_payment-pay_margin+return_margin-nega_margin
-				SC_payment_list(user_id,date,base_payment,last_performance.total,score,
+				SC_payment_list(user_id,date,base_payment,performance_total,score,
 	                last_performance_result,pay_margin,return_margin,M,last_payment).add()
 			db.session.commit()
 		except:
@@ -159,15 +196,15 @@ class Payment():
 
 		#后台岗工资统计
 		#查询总客户经理人数
-		userData = SC_UserRole.query.filter("role.role_level=2").all()
+		userData = SC_UserRole.query.filter("role_id=3").all()
 		#查询当月已计算工资人数
-		sql="DATE_FORMAT(payment_time, '%%Y-%%M')="+today
+		sql="DATE_FORMAT(payment_time, '%Y-%m')='"+today+"'"
 		paymentData = SC_payment_list.query.filter(sql).all()
 		if len(userData)==len(paymentData):
-			backPayment(date,paymentData)
+			self.backPayment(user_id,date,paymentData)
 
 	#后台岗工资计算
-	def backPayment(self,date,paymentData):
+	def backPayment(self,user_id,date,paymentData):
 		try:
 			today = date.strftime('%Y')+"-"+date.strftime('%m')
 			#计算客户经理总绩效
@@ -178,29 +215,34 @@ class Payment():
 			arg = float(total/len(paymentData))
 
 			#获取所有后台岗人员
-			userData = SC_UserRole.query.filter("role.role_level=3").all()
+			userData = SC_UserRole.query.filter("role_id=4").all()
 			for i in range(len(userData)):
-				manager_id = userData[i].user.id 
+				print userData[i].user_id
+				manager_id = userData[i].user_id 
 				parameter = SC_parameter_configure.query.first()
 				if parameter:
 					#后台岗基本工资
 					base_payment = parameter.back_payment
 					#计算业务差错
-					sql="manager_id="+manager_id
-					sql+=" and DATE_FORMAT(create_time, '%%Y-%%M')="+today
+					sql="manager_id="+str(manager_id)
+					sql+=" and DATE_FORMAT(create_time, '%Y-%m')='"+today+"'"
 					errorData = SC_business_error_list.query.filter(sql).all()
 					
 					#计算总工资
-					old_total_payment = base_payment+arg/2
+					old_total_payment = float(base_payment)+arg/2
+					print old_total_payment
 					#风险保证金实体
-					margin = SC_risk_margin.query.filter_by(manager_id=user_id).first()
+					margin = SC_risk_margin.query.filter_by(manager_id=manager_id).first()
+					if not margin:
+						margin = self.addScRisk(manager_id)
+					#需扣差错
+					errorSum=0
 					if errorData:
-						#需扣差错
-						errorSum = errorData*20
+						errorSum = len(errorData)*20
 						#逾期保险金增加，总保险金减少
 						margin.overduce_margin=int(margin.overduce_margin)+errorSum
 						#新增逾期记录
-						SC_risk_margin_list(user_id,date,errorSum,2,margin.total_margin).add()
+						SC_risk_margin_list(manager_id,date,errorSum,2,margin.total_margin).add()
 		            #计算需缴纳风险保证金
 					pay_margin=0
 					if old_total_payment<=2000:
@@ -216,25 +258,24 @@ class Payment():
 						else:
 							pay_margin+=(old_total_payment-2000)*0.3
 					#总保证金变化
-					
-					margin.total_margin=margin.total_margin+pay_margin
+					margin.total_margin=float(margin.total_margin)+pay_margin
 					#新增风险保险金记录
-					SC_risk_margin_list(user_id,date,pay_margin,1,margin.total_margin).add()
+					SC_risk_margin_list(manager_id,date,pay_margin,1,margin.total_margin).add()
 					#获取3年前日期
-					old_date = str(date.strftime('%Y')-3)+"-"+str(date.strftime('%m'))
+					old_date = str(int(date.strftime('%Y'))-3)+"-"+str(date.strftime('%m'))
 					#返还保证金
 					return_margin=0
 					if margin.total_margin>=30000:
-						riskSql = "manager_id="+user_id
-						riskSql+=" and DATE_FORMAT(payment_time, '%%Y-%%M')="+old_date
+						riskSql = "manager_id="+str(manager_id)
+						riskSql+=" and DATE_FORMAT(payment_time, '%Y-%m')='"+old_date+"'"
 						riskSql+=" and inout_type=1"
 						margin_list = SC_risk_margin_list.query.filter(riskSql).first()
 						if margin_list:
 							#达到返还要求,获得返还值
-							return_margin = margin_list.inout_payment
-							margin.given_margin=margin.given_margin+return_margin
+							return_margin = float(margin_list.inout_payment)
+							margin.given_margin=float(margin.given_margin)+return_margin
 							#所扣总值小于逾期总值
-							if margin.deduct_margin<margin.overduce_margin:
+							if float(margin.deduct_margin)<float(margin.overduce_margin):
 								if margin.deduct_margin+return_margin<=margin.overduce_margin:
 									return_margin=0
 									#最终所扣保险金=原先所扣保险金+返还
@@ -244,12 +285,24 @@ class Payment():
 									margin.deduct_margin = margin.overduce_margin
 							margin.total_margin=margin.total_margin-return_margin
 							#新增返还风险保险金记录
-							SC_risk_margin_list(user_id,date,return_margin,3,margin.total_margin).add()
-							#最终工资计算
-							last_payment = old_total_payment-pay_margin+return_margin-nega_margin
-							SC_payment_list(user_id,date,base_payment,arg/2,"",
+							SC_risk_margin_list(manager_id,date,return_margin,3,margin.total_margin).add()
+					#最终工资计算
+					last_payment = old_total_payment-pay_margin+return_margin
+					SC_payment_list(manager_id,date,base_payment,arg/2,"",
 		            			arg/2,pay_margin,return_margin,errorSum,last_payment).add()
-		        			db.session.commit()
+        			db.session.commit()
+		except:
+			# 回滚
+			db.session.rollback()
+			logger.exception('exception')
+
+	#不存在风险保证金实体则创建
+	def addScRisk(self,user_id):
+		try:
+			SC_risk_margin(user_id,0,0,0,0).add()
+			db.session.commit()
+			data = SC_risk_margin.query.filter_by(manager_id=user_id).first()
+			return data
 		except:
 			# 回滚
 			db.session.rollback()
