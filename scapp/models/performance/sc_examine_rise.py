@@ -21,6 +21,5 @@ class SC_examine_rise(db.Model):
     	self.apply_type = apply_type
     	self.apply_result = apply_result
 
-
-	def add(self):
-		db.session.add(self)
+    def add(self):
+        db.session.add(self)
