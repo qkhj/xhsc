@@ -5,6 +5,7 @@ from scapp.models import SC_User
 from scapp.models import SC_Loan_Apply
 from scapp.models import SC_Approval_Decision
 from scapp.pojo.waiting_work import Waiting
+from scapp.config import PROCESS_STATUS_DKSQ
 from scapp.config import PROCESS_STATUS_DKSQSH
 from scapp.models import SC_Monitor
 from scapp import db
@@ -24,12 +25,13 @@ class Total():
         role_level = role.role_level
         waiting = Waiting()
         if role_level == 1:
-            counts = SC_Loan_Apply.query.filter("process_status=" + PROCESS_STATUS_DKSQSH).count()
+            counts = SC_Loan_Apply.query.filter("process_status='" + PROCESS_STATUS_DKSQ+"'").count()
             waiting.dksqsh = counts
         if role_level == 2:
-            sql = "A_loan_officer = " + str(current_user.id) + " or "
-            sql += "B_loan_officer = " + str(current_user.id) + " or "
-            sql += "yunying_loan_officer = " + str(current_user.id) + ""
+            sql = "process_status = " + PROCESS_STATUS_DKSQSH
+            sql += " A_loan_officer = " + str(current_user.id) + " or "
+            sql += " B_loan_officer = " + str(current_user.id) + " or "
+            sql += " yunying_loan_officer = " + str(current_user.id) + ""
             counts1 = SC_Loan_Apply.query.filter(sql).count()
             waiting.dqdc = counts1
         return waiting

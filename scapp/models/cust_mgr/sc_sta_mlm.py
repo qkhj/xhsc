@@ -14,6 +14,7 @@ class SC_Sta_Mlm(db.Model):
     user_id =db.Column(db.Integer, db.ForeignKey('sc_user.id')) #用户ID
     intrest=db.Column(db.Float) #当月利润贡献
     defact_rate=db.Column(db.Float) #当月瑕疵贷款率
+    overdue_num=db.Column(db.Integer)#当月当前逾期笔数
     overdue_rate=db.Column(db.Float) #当月当前逾期率
     overdue_num=db.Column(db.Integer) #当月逾期笔数
     overdue_amount=db.Column(db.Float) #当月当前逾期金额

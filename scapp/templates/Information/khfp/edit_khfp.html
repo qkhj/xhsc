@@ -57,31 +57,86 @@
 							</td>
 							<td class="table-label">客户状态</td>
 							<td>
-								<select name="client_status">
-									{%- if target_customer.client_status == 1 %}
-										<option value="1" selected>现在有需求</option>
+								<select name="client_status" style="width:300px;">
+									{%- if target_customer.client_status == 12 %}
+									<option value="12" selected>老板不在员工不提供有效信息</option>
 									{%- else %}
-										<option value="1">现在有需求</option>
+									<option value="12">老板不在员工不提供有效信息</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 13 %}
+									<option value="13" selected>店铺关门或转让中</option>
+									{%- else %}
+									<option value="13">店铺关门或转让中</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 1 %}
+									<option value="1" selected>现在有需求</option>
+									{%- else %}
+									<option value="1">现在有需求</option>
 									{%- endif %}
 									{%- if target_customer.client_status == 2 %}
-										<option value="2" selected>态度良好无需求拒绝</option>
+									<option value="2" selected>态度良好无需求拒绝</option>
 									{%- else %}
-										<option value="2">态度良好无需求拒绝</option>
+									<option value="2">态度良好无需求拒绝</option>
 									{%- endif %}
 									{%- if target_customer.client_status == 3 %}
-										<option value="3" selected>态度恶劣拒绝</option>
+									<option value="3" selected>态度恶劣拒绝</option>
 									{%- else %}
-										<option value="3">态度恶劣拒绝</option>
+									<option value="3">态度恶劣拒绝</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 14 %}
+									<option value="14" selected>有需求但有管户问题</option>
+									{%- else %}
+									<option value="14">有需求但有管户问题</option>
 									{%- endif %}
 									{%- if target_customer.client_status == 4 %}
-										<option value="4" selected>以后会有需求并填回执</option>
+									<option value="4" selected>以后会有需求并填回执</option>
 									{%- else %}
-										<option value="4">以后会有需求并填回执</option>
+									<option value="4">以后会有需求并填回执</option>
 									{%- endif %}
 									{%- if target_customer.client_status == 5 %}
-										<option value="5" selected>以后有需求未填回执</option>
+									<option value="5" selected>以后有需求未填回执</option>
 									{%- else %}
-										<option value="5">以后有需求未填回执</option>
+									<option value="5">以后有需求未填回执</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 15 %}
+									<option value="15" selected>有需求但认为利率高</option>
+									{%- else %}
+									<option value="15">有需求但认为利率高</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 16 %}
+									<option value="16" selected>现在有需求并填申请</option>
+									{%- else %}
+									<option value="16">现在有需求并填申请</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 6 %}
+									<option value="6" selected>有需求但不符要求-年龄不符合要求</option>
+									{%- else %}
+									<option value="6">有需求但不符要求-年龄不符合要求</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 7 %}
+									<option value="7" selected>有需求但不符要求-经营年限不足一年</option>
+									{%- else %}
+									<option value="7">有需求但不符要求-经营年限不足一年</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 8 %}
+									<option value="8" selected>有需求但不符要求-外地人在本地居住低于两年</option>
+									{%- else %}
+									<option value="8">有需求但不符要求-外地人在本地居住低于两年</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 9 %}
+									<option value="9" selected>有需求但不符要求-家属不同意</option>
+									{%- else %}
+									<option value="9">有需求但不符要求-家属不同意</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 10 %}
+									<option value="10" selected>有需求但不符要求-有不良嗜号</option>
+									{%- else %}
+									<option value="10">有需求但不符要求-有不良嗜号</option>
+									{%- endif %}
+									{%- if target_customer.client_status == 11 %}
+									<option value="11" selected>有需求但不符要求-其他</option>
+									{%- else %}
+									<option value="11">有需求但不符要求-其他</option>
 									{%- endif %}
 								</select>
 							</td>	

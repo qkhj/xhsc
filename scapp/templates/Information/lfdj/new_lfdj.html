@@ -47,12 +47,17 @@
 							</td>
 							<td class="table-label">客户状态</td>
 							<td>
-								<select name="client_status">
+								<select name="client_status" style="width:300px;">
+									<option value="12">老板不在员工不提供有效信息</option>
+									<option value="13">店铺关门或转让中</option>
 									<option value="1">现在有需求</option>
 									<option value="2">态度良好无需求拒绝</option>
 									<option value="3">态度恶劣拒绝</option>
+									<option value="14">有需求但有管户问题</option>
 									<option value="4">以后会有需求并填回执</option>
 									<option value="5">以后有需求未填回执</option>
+									<option value="15">有需求但认为利率高</option>
+									<option value="16">现在有需求并填申请</option>
 									<option value="6">有需求但不符要求-年龄不符合要求</option>
 									<option value="7">有需求但不符要求-经营年限不足一年</option>
 									<option value="8">有需求但不符要求-外地人在本地居住低于两年</option>
@@ -279,19 +284,22 @@
 								</span>
 							</td>						
 						</tr>
+						
+					</table>
+				</div>
+				<div class="divBorder">
+					<table class="table-list">				
 						<tr>
-							<td class="table-label">您是否需要办理以下银行产品</td>
-							<td colspan="3">
-								<select name="is_need_service">
-									<option value="1">手机银行</option>
-									<option value="2">转账电话</option>
-									<option value="3">pos机</option>
-									<option value="4">网上银行</option>
-									<option value="5">借记卡</option>
-									<option value="6">贷记卡</option>
-									<option value="7">无需求</option>
-								</select>
-							</td>					
+							<td class="table-label" style="font-size:12px;">您是否需要办理以下银行产品</td>
+							<td class="font-small">
+								<label><input type="checkbox" name="is_need_service" value="1"/>手机银行</label>
+								<label><input type="checkbox" name="is_need_service" value="2"/>转账电话</label>
+								<label><input type="checkbox" name="is_need_service" value="4"/>pos机</label>
+								<label><input type="checkbox" name="is_need_service" value="8"/>网上银行</label>
+								<label><input type="checkbox" name="is_need_service" value="16"/>借记卡</label>
+								<label><input type="checkbox" name="is_need_service" value="32"/>贷记卡</label>
+								<label><input type="checkbox" name="is_need_service" value="64"/>无需求</label>
+							</td>											
 						</tr>
 					</table>
 				</div>

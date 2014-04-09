@@ -1,6 +1,6 @@
 #coding:utf-8
 from scapp import db
-        
+
 # 获取贷款信息
 class View_Query_Loan(db.Model):
     __tablename__ = 'view_query_loan'
@@ -63,3 +63,16 @@ class View_Loan_Repayment(db.Model):
     ratio = db.Column(db.String)#利率
     loan_status = db.Column(db.String)#贷款状态
     loan_manager = db.Column(db.String)#客户经理
+
+# 已发放贷款
+class View_Loan_Disbursed(db.Model):
+    __tablename__ = 'view_loan_disbursed'
+    id = db.Column(db.Integer, primary_key=True)
+    loan_type = db.Column(db.Integer)
+    customer_name = db.Column(db.String)
+    amount = db.Column(db.String)#贷款数额
+    ratio = db.Column(db.String)#利率
+    lending_date = db.Column(db.Date)#放款日期
+    loan_status = db.Column(db.String)#贷款状态
+    loan_manager = db.Column(db.String)#客户经理
+

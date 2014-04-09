@@ -66,8 +66,12 @@ def export_lfdj():
     sql = "SELECT sc_user.real_name,"
     sql += "(case reception_type when '1' then '咨询' when '2' then '扫街' end)reception_type ,sc_target_customer.create_date,"
     sql += "(case yingxiao_status when 1 then '已营销' when 0 then '未营销' end)yingxiao_status,"
-    sql += "(case client_status when 1 then '现在有需求' when 2 then '态度良好无需求拒绝' when 3 then '态度恶劣拒绝' when 4 then '以后会有需求并填回执' when 5 then '以后有需求未填回执' "
-    sql += "when 6 then '有需求但不符要求-年龄不符合要求' when 7 then '有需求但不符要求-经营年限不足一年' when 8 then '有需求但不符要求-外地人在本地居住低于两年' when 9 then '有需求但不符要求-家属不同意' "
+    sql += "(case client_status when 12 then '老板不在员工不提供有效信息' when 13 then '店铺关门或转让中' "
+    sql += "when 1 then '现在有需求' when 2 then '态度良好无需求拒绝' when 3 then '态度恶劣拒绝' "
+    sql += "when 14 then '有需求但有管户问题' when 4 then '以后会有需求并填回执' when 5 then '以后有需求未填回执' "
+    sql += "when 15 then '有需求但认为利率高' when 16 then '现在有需求并填申请' "
+    sql += "when 6 then '有需求但不符要求-年龄不符合要求' when 7 then '有需求但不符要求-经营年限不足一年' "
+    sql += "when 8 then '有需求但不符要求-外地人在本地居住低于两年' when 9 then '有需求但不符要求-家属不同意' "
     sql += "when 10 then '有需求但不符要求-有不良嗜号' when 11 then '有需求但不符要求-其他' end)client_status,"
     sql += "(case is_apply_form when 1 then '已申请' when 0 then '未申请' end)is_apply_form,"
     sql += "remark,customer_name,sc_target_customer.mobile,"
@@ -77,7 +81,10 @@ def export_lfdj():
     sql += "repayment_type,guarantee_type,house_property,loan_attention,"
     sql += "(case is_have_loan when 1 then '是' when 0 then '否' end)is_have_loan,"
     sql += "(case is_known_xhnsh when 1 then '知道' when 0 then '不知道' end)is_known_xhnsh,business_with_xhnsh,"
-    sql += "(case is_need_service when 1 then '手机银行' when 2 then '转账电话' when 3 then 'pos机' when 4 then '网上银行' when 5 then '借记卡' when 6 then '贷记卡' when 7 then '无需求' end)is_need_service "
+    sql += "concat((case CONVERT(is_need_service,SIGNED)&1 when 1 then '手机银行 ' else '' end),(case CONVERT(is_need_service,SIGNED)&2 when 2 then '转账电话 ' else '' end),"
+    sql += "(case CONVERT(is_need_service,SIGNED)&4 when 4 then 'pos机 ' else '' end),(case CONVERT(is_need_service,SIGNED)&8 when 8 then '网上银行 ' else '' end),"
+    sql += "(case CONVERT(is_need_service,SIGNED)&16 when 16 then '借记卡 ' else '' end),(case CONVERT(is_need_service,SIGNED)&32 when 32 then '贷记卡 ' else '' end),"
+    sql += "(case CONVERT(is_need_service,SIGNED)&64 when 64 then '无需求 ' else '' end)) as is_need_service "
     #sql += "status "
     sql += "FROM (select * from sc_target_customer where "
     sql += " 1=1"
@@ -91,6 +98,7 @@ def export_lfdj():
     sql += "left JOIN sc_loan_purpose ON sc_target_customer.loan_purpose = sc_loan_purpose.id "
     sql += "left JOIN sc_business_type ON sc_target_customer.business_type = sc_business_type.id "
 
+    print sql
     data=db.engine.execute(sql)
     #for row in data:
     #    row['reception_type'] = my_dic['reception_type'][str(dic['reception_type'])]
@@ -188,7 +196,11 @@ def new_lfdj():
                 is_have_loan = None
                 is_known_xhnsh = None
                 business_with_xhnsh = ''
-            is_need_service = request.form['is_need_service']
+
+            is_need_service = 0;
+            is_need_service_list = request.form.getlist('is_need_service')
+            for obj in is_need_service_list:
+                is_need_service += int(obj)
 
             SC_Target_Customer(current_user.id,reception_type,
                 yingxiao_status,client_status,is_apply_form,
@@ -196,7 +208,7 @@ def new_lfdj():
                 industry,business_content,shop_name,period,property_scope,monthly_sales,employees,
                 business_type,is_need_loan,loan_purpose,loan_amount,repayment_type,guarantee_type,
                 house_property,loan_attention,is_have_loan,is_known_xhnsh,business_with_xhnsh,
-                is_need_service,0,None,None,None,0,remark).add()
+                is_need_service,0,None,current_user.id,None,0,remark).add()
 
             # 事务提交
             db.session.commit()
@@ -283,7 +295,11 @@ def edit_lfdj(id):
                 target_customer.is_known_xhnsh = None
                 target_customer.business_with_xhnsh = ''
                 
-            target_customer.is_need_service = request.form['is_need_service']
+            is_need_service = 0;
+            is_need_service_list = request.form.getlist('is_need_service')
+            for obj in is_need_service_list:
+                is_need_service += int(obj)
+            target_customer.is_need_service = is_need_service
 
             target_customer.modify_user = current_user.id
             target_customer.modify_date = datetime.datetime.now()

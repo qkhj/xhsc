@@ -13,7 +13,7 @@ from db_conn import local_db_conn
 logger=config.logger
 
 s_wrong_account = set('')
-
+s_info_wrong_account = set('')
 
 def insert_update_data():
     try:
@@ -35,30 +35,63 @@ def insert_update_data():
             '''
             #获得需要更新的id
             update_id = Interface_bank_data.get_need_update_id()
-            check_result = check_id_install(loan_apply_id, tran_no, update_id)
+            INSERT_FLAG=True
             if loan_apply_id is None:
                 if account not in s_wrong_account:
                     Interface_bank_data.insert_wrong_account(account)
                     s_wrong_account.add(account)
                 continue
-            elif check_result:
+            elif len(update_id)>0:
                 for item in update_id:
                     if loan_apply_id == item.loan_apply_id and tran_no == item.repayment_installments:
+                        INSERT_FLAG=False
                         result = Interface_bank_data.update_rep(loan_apply_id, tran_no, last_repayment_day, crnt_pr,
                                                                 arfn_pr, crnt_int, arfn_int, item.id)
-            else:
+            if INSERT_FLAG:
                 result = Interface_bank_data.insert_rep(loan_apply_id, tran_no, last_repayment_day, crnt_pr, arfn_pr,
                                                         crnt_int, arfn_int)
 
         logger.info("=======导入还款信息结束========")
+
+        logger.info("=======开始导入银行贷款信息========")
+        bank_loans_data = local_db_conn.execute(config.BANK_LOANS_QUERY_STR).fetchall()
+        for data in bank_loans_data:
+            loan_account=data['LN_LN_ACCT_NO']#还款账号
+            loan_apply_id = assist.get_lai_by_account(loan_account)
+            loan_status=data['LN_ACCT_STS']#贷款状态
+            loan_total_amount=data['LN_TOTL_LN_AMT_HYPO_AMT']#贷款总额
+            loan_balance=data['LN_LN_BAL']#贷款余额
+            loan_deliver_date=data['LN_FRST_ALFD_DT_N']#放款日期
+            loan_due_date=data['LN_DUE_DT_N']#贷款到期日期
+            loan_closed_date=data['LN_CLSD_DT_N']#贷款结清日期，未结清为0
+            loan_cleared_pr_n=data['LN_ARFN_SCHD_PR_N']#已还本金期数
+            loan_cleared_in_n=data['LN_ARFN_SCHD_INT_N']#已还利息期数
+            loan_overdue_amount=data['LN_DLAY_PR_TOTL']#逾期金额
+            loan_overdue_date=data['LN_DLAY_LN_DT_N']#逾期日期
+
+            BANK_LOAN_UPDATE_ID=Interface_bank_data.get_need_update_bli()
+            INSERT_INFO_FLAG=True
+
+            if loan_apply_id is None:
+                if loan_account not in s_info_wrong_account:
+                    Interface_bank_data.insert_wrong_account(loan_account)
+                    s_info_wrong_account.add(loan_account)
+                continue
+            elif len(BANK_LOAN_UPDATE_ID)>0:
+                for obj in BANK_LOAN_UPDATE_ID:
+                    if loan_apply_id == obj.loan_apply_id:
+                        INSERT_INFO_FLAG=False
+                        BLI_result=Interface_bank_data.update_bank_loans_info(obj['id'],loan_apply_id,loan_account,
+                                    loan_status,loan_total_amount,loan_balance,loan_deliver_date,loan_due_date,
+                                    loan_closed_date,loan_cleared_pr_n,loan_cleared_in_n,loan_overdue_amount,loan_overdue_date)
+
+            if INSERT_INFO_FLAG:
+                BLI_result=Interface_bank_data.insert_bank_loans_info(loan_apply_id,loan_account,
+                            loan_status,loan_total_amount,loan_balance,loan_deliver_date,loan_due_date,
+                            loan_closed_date,loan_cleared_pr_n,loan_cleared_in_n,loan_overdue_amount,loan_overdue_date)
+
+        logger.info("=======导入银行贷款信息结束========")
     except():
         logger.error("error")
 
 
-#判断贷款申请ID和期数是否在更新列表中
-def check_id_install(loan_apply_id, tran_no, update_data):
-    for item in update_data:
-        if loan_apply_id == item.loan_apply_id and tran_no == item.repayment_installments:
-            return True
-        else:
-            return False
