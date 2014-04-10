@@ -26,6 +26,7 @@ from scapp.models import SC_Relation_Type
 from scapp.models import SC_Industry
 from scapp.models import SC_Business_Type
 from scapp.models import SC_Loan_Purpose
+from scapp.models import SC_Risk_Level
 
 from scapp.models import SC_Loan_Apply
 from scapp.models import SC_Apply_Info
@@ -92,10 +93,11 @@ def goto_new_dksq_info(belong_customer_type,belong_customer_value):
     financial_affairs = SC_Financial_Affairs.query.filter_by(belong_customer_type=belong_customer_type,
         belong_customer_value=belong_customer_value).first()
     loan_purpose = SC_Loan_Purpose.query.order_by("id").all()
+    risk_level = SC_Risk_Level.query.order_by("id").all()
 
     return render_template("Process/dksq/new_dksq_info.html",belong_customer_type=belong_customer_type,
         customer=customer,manager_info=manager_info,financial_affairs=financial_affairs,
-        loan_purpose=loan_purpose)
+        loan_purpose=loan_purpose,risk_level=risk_level)
 
 # 新增贷款申请信息
 @app.route('/Process/dksq/new_dksq/<belong_customer_type>/<int:belong_customer_value>', methods=['POST'])
@@ -103,7 +105,7 @@ def new_dksq(belong_customer_type,belong_customer_value):
     try:
         #生成贷款申请表
         loan_apply = SC_Loan_Apply(request.form['loan_type'],belong_customer_type,belong_customer_value,request.form['customer_name'],request.form['evaluation'],
-            current_user.id,None,None,None,None,None,None,PROCESS_STATUS_DKSQ)
+            current_user.id,None,None,None,None,None,None,PROCESS_STATUS_DKSQ,request.form['risk_level'])
         loan_apply.add()
 
         #清理缓存
@@ -212,6 +214,7 @@ def goto_edit_dksq_info(belong_customer_type,belong_customer_value,id):
     financial_affairs = SC_Financial_Affairs.query.filter_by(belong_customer_type=belong_customer_type,
         belong_customer_value=belong_customer_value).first()
     loan_purpose = SC_Loan_Purpose.query.order_by("id").all()
+    risk_level = SC_Risk_Level.query.order_by("id").all()
     apply_info = SC_Apply_Info.query.filter_by(loan_apply_id=id).first()
     credit_history = SC_Credit_History.query.filter_by(loan_apply_id=id).all()
     co_borrower = SC_Co_Borrower.query.filter_by(loan_apply_id=id).all()
@@ -221,7 +224,7 @@ def goto_edit_dksq_info(belong_customer_type,belong_customer_value,id):
 
     return render_template("Process/dksq/edit_dksq_info.html",belong_customer_type=belong_customer_type,belong_customer_value=belong_customer_value,
         customer=customer,loan_apply=loan_apply,manager_info=manager_info,financial_affairs=financial_affairs,
-        loan_purpose=loan_purpose,apply_info=apply_info,credit_history=credit_history
+        loan_purpose=loan_purpose,risk_level=risk_level,apply_info=apply_info,credit_history=credit_history
         ,co_borrower=co_borrower,guarantees_for_others=guarantees_for_others,guaranty=guaranty
         ,guarantees=guarantees)
 
@@ -233,7 +236,7 @@ def edit_dksq(id):
         #保存贷款申请表
         SC_Loan_Apply.query.filter_by(id=id).update({"loan_type":request.form['loan_type'],
             "evaluation":request.form['evaluation'],"marketing_loan_officer":current_user.id,
-            "modify_user":current_user.id,"modify_date":datetime.datetime.now()})
+            "modify_user":current_user.id,"modify_date":datetime.datetime.now(),"risk_level":request.form['risk_level']})
 
         #保存申请信息
         SC_Apply_Info.query.filter_by(loan_apply_id=id).update({"loan_amount_num":request.form['loan_amount_num'],

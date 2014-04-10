@@ -17,6 +17,7 @@ from scapp.models.information import SC_Regisiter_Type
 from scapp.models.information import SC_Business_Type
 from scapp.models.information import SC_Asset_Type
 from scapp.models.information import SC_Loan_Purpose
+from scapp.models.information import SC_Risk_Level
 
 #流程管理
 from scapp.models.process import SC_Loan_Apply
@@ -49,4 +50,7 @@ from scapp.models.system.system import SC_Application
 from scapp.models.views import View_Query_Loan
 from scapp.models.views import View_Get_Cus_Mgr
 from scapp.models.views import View_Loan_Repayment
+from scapp.models.views import View_Bank_Loans_Main
 from scapp.models.views import View_Loan_Disbursed
+from scapp.models.views import View_Loan_Change_Record
+from scapp.models.views import View_Loan_Expected
