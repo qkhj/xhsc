@@ -10,16 +10,16 @@ class SC_assess_record(db.Model):
     '''
     __tablename__ = 'sc_assess_record'
     id = db.Column(db.Integer, primary_key=True)
-    manager_id=db.Column(db.String(11))#员工工号
+    manager_id=db.Column(db.Integer)#员工工号
     assess_time=db.Column(db.String(11))#评估时间
-    assess_arg=db.Column(db.String(11))#最近评估平均分
+    assess_arg=db.Column(db.String(11))#最近三次评估平均分
     assess_sum=db.Column(db.String(11))#评估次数
+    assess_score_1=db.Column(db.String(11))#最近的一次评估分
+    assess_score_2=db.Column(db.String(11))#最近的两次评估分
+    assess_score_3=db.Column(db.String(11))#最近的三次评估分
 
-    def __init__(self,manager_id,assess_time,assess_arg,assess_sum):
+    def __init__(self,manager_id):
     	self.manager_id = manager_id
-    	self.assess_time = assess_time
-    	self.assess_arg = assess_arg
-    	self.assess_sum = assess_sum
 
-	def add(self):
-		db.session.add(self)
+    def add(self):
+    	db.session.add(self)

@@ -4,6 +4,9 @@ from flask.ext.login import login_user, logout_user, current_user, login_require
 
 from scapp.models import SC_User
 from scapp.models import SC_UserRole
+
+from scapp.models.performance.sc_assess_record import SC_assess_record 
+
 from scapp.logic.cust_mgr import sc_kpi
 from scapp.models.cust_mgr.sc_kpi_train import SC_Kpi_Train
 from scapp.models.cust_mgr.sc_kpi_train_final import SC_Kpi_Train_Final
@@ -266,7 +269,6 @@ def zgpglist():
     if manager != '0':
         sql += " and user_id="+str(manager)
 
-    print sql
     kpi = eval(tablename).query.filter(sql).order_by("id").all()
     return render_template("Performance/ygpgkh/zgpglist.html",tablename=tablename,kpi=kpi,
         assess_date=assess_date,manager=manager)
@@ -306,8 +308,37 @@ def khjlKPI(id):
             kpi_officer.manager = current_user.id
             kpi_officer.date_2 = datetime.datetime.now()
 
-            pay = Payment()
-            pay.payroll(kpi_officer.user_id,kpi_officer.assess_date,kpi_officer.total)
+            #计算三个月的分数
+            assess_record = SC_assess_record.query.filter_by(manager_id=kpi_officer.user_id).first()
+            if assess_record:
+                if assess_record.assess_sum == '1':
+                    assess_record.assess_score_2 = assess_record.assess_score_1
+                    assess_record.assess_score_1 = request.form['total']
+                    assess_record.assess_sum = 2
+                    assess_record.assess_arg = (int(assess_record.assess_score_1)+int(assess_record.assess_score_2))/2
+                elif assess_record.assess_sum == '2':
+                    assess_record.assess_score_3 = assess_record.assess_score_2
+                    assess_record.assess_score_2 = assess_record.assess_score_1
+                    assess_record.assess_score_1 = request.form['total']
+                    assess_record.assess_sum = 3
+                    assess_record.assess_arg = (int(assess_record.assess_score_1)+int(assess_record.assess_score_2)+int(assess_record.assess_score_3))/3
+                elif assess_record.assess_sum == '3':
+                    assess_record.assess_score_3 = assess_record.assess_score_2
+                    assess_record.assess_score_2 = assess_record.assess_score_1
+                    assess_record.assess_score_1 = request.form['total']
+                    assess_record.assess_sum = 3
+                    assess_record.assess_arg = (int(assess_record.assess_score_1)+int(assess_record.assess_score_2)+int(assess_record.assess_score_3))/3
+            else:
+                assess_record_new = SC_assess_record(kpi_officer.user_id)
+                assess_record_new.add()
+                db.session.flush()
+                assess_record_new.assess_sum = 1
+                assess_record_new.assess_arg = request.form['total']
+                assess_record_new.assess_score_1 = request.form['total']
+
+            #调用贺珈的函数
+            #pay = Payment()
+            #pay.payroll(kpi_officer.user_id,kpi_officer.assess_date,kpi_officer.total)
 
             # 事务提交
             db.session.commit()
