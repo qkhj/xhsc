@@ -117,7 +117,13 @@ import views.process.zcfl
 import views.process.zcflsh
 
 import views.report.kh
-import views.report.dkgjztfl
+import views.report.dkgjztfl_1
+import views.report.dkgjztfl_2
+import views.report.dkgjztfl_3
+import views.report.dkgjztfl_4
+import views.report.dkgjztfl_5
+import views.report.dkgjztfl_6
+import views.report.dkgjztfl_7
 import views.report.xdgzlclb
 import views.report.pcscbbcx
 import views.report.zhgllbb
@@ -139,12 +145,12 @@ import views.credit_data.cash_flow
 #import views.credit_data.sc_assets_stock
 import views.credit_data.sc_cash_flow_assist
 
-import views.repayment.view_loan_disbursed#发放贷款统计视图
-import views.repayment.view_loan_overdue#逾期贷款统计视图
-import views.repayment.view_loan_refuse#拒绝贷款统计视图
-import views.repayment.view_loan_balance#贷款余额统计视图
-import views.repayment.view_loan_expected#预期贷款统计视图
-import views.repayment.view_loan_expire#到期终止贷款统计视图
+#import views.repayment.view_loan_disbursed#发放贷款统计视图
+#import views.repayment.view_loan_overdue#逾期贷款统计视图
+#import views.repayment.view_loan_refuse#拒绝贷款统计视图
+#import views.repayment.view_loan_balance#贷款余额统计视图
+#import views.repayment.view_loan_expected#预期贷款统计视图
+#import views.repayment.view_loan_expire#到期终止贷款统计视图
 import views.repayment.view_loan_repayment#贷款还款记录统计视图
 import views.repayment.view_loan_change_record
 import views.cust_mgr.view_sc_day_work #客户经理工时记录

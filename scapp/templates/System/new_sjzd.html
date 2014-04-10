@@ -40,6 +40,8 @@
 					资产类型
 				{%- elif tablename == 'SC_Loan_Purpose' %}
 					贷款用途
+				{%- elif tablename == 'SC_Risk_Level' %}
+					风险系数
 				{%- endif %}
 			</span>	
 			<form method="POST" action=/System/new_sjzd/{{tablename}}>
@@ -61,6 +63,8 @@
 									资产类型*
 								{%- elif tablename == 'SC_Loan_Purpose' %}
 									贷款用途*
+								{%- elif tablename == 'SC_Risk_Level' %}
+									风险系数*
 								{%- endif %}
 							</td>
 							<td>								
@@ -69,6 +73,14 @@
 									<span class="textfieldRequiredMsg">不能为空</span>
 								</span>
 							</td>
+							{%- if tablename == 'SC_Risk_Level' %}
+							<td>								
+								<span id="spry_type_value">
+									<input type="text" name="type_value"/>
+									<span class="textfieldRequiredMsg">不能为空</span>
+								</span>
+							</td>
+							{%- endif %}
 						</tr>						
 					</table>
 				</div>
@@ -82,7 +94,8 @@
 	<script src="/static/js/script.js"></script>
 	<script src="/static/js/system.js"></script>
 	<script type="text/javascript">
-		var sprytextfield1 = new Spry.Widget.ValidationTextField("spry_type", "none", {validateOn:["blur"]});		
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("spry_type", "none", {validateOn:["blur"]});	
+		var sprytextfield2 = new Spry.Widget.ValidationTextField("spry_type_value", "none", {validateOn:["blur"]});		
 	</script>
 </body>
 </html>
