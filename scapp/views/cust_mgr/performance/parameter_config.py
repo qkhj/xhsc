@@ -13,6 +13,7 @@ def config():
 	queryInform = parameter.query()
 	if len(queryInform)!=0:
 		inform = queryInform[0]
+		back_payment = inform.back_payment
 		if inform.performance_a:
 			inform_name_a = SC_User.query.filter_by(id=inform.performance_a).first().login_name
 		else:
@@ -35,6 +36,12 @@ def config():
 			inform_name_e=""	
 	else:
 		inform = ""
+		inform_name_a=""
+		inform_name_b=""
+		inform_name_c=""
+		inform_name_d=""
+		inform_name_e=""
+		back_payment=""
 	queryInform_1 = ""	
 	queryInform_2 = ""
 	queryInform_3 = ""	
@@ -58,7 +65,7 @@ def config():
 	return render_template("Performance/jxxc/xccspz.html",inform=inform,queryInform_1=queryInform_1,
 		queryInform_2=queryInform_2,queryInform_3=queryInform_3,queryInform_4=queryInform_4,queryInform_5=queryInform_5,
 		queryInform_6=queryInform_6,user=user,inform_name_a=inform_name_a,inform_name_b=inform_name_b,
-		inform_name_c=inform_name_c,inform_name_d=inform_name_d,inform_name_e=inform_name_e,back_payment=inform.back_payment)
+		inform_name_c=inform_name_c,inform_name_d=inform_name_d,inform_name_e=inform_name_e,back_payment=back_payment)
 
 # 参数配置新增
 @app.route('/Performance/add', methods=['POST'])

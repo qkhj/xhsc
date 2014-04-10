@@ -255,7 +255,7 @@
 				</table>	
 				<table class="table-list inline" >	
 					<tr>
-						<td rowspan="3" style="width:100px;">本期工作指标</td>
+						<td rowspan="3" style="width:100px;">下期工作指标</td>
 						<td style="width:90px;">贷款余额</td>
 						{%- if kpi_officer.xq_dkye %}
 						<td><input type="text" name="xq_dkye" value="{{kpi_officer.xq_dkye}}" /></td>
@@ -294,7 +294,9 @@
 					
 				</table>				
 			</div>
-			<input type="submit" class="btn btn-info" value="提交"/>		
+			{%- if not kpi_officer.total %}
+				<input type="submit" class="btn btn-info" value="提交"/>
+			{% endif%}	
 		</div><!--/row-fluid -->
 	</form><!--/content -->
 	
