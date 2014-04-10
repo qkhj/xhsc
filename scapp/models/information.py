@@ -643,3 +643,17 @@ class SC_Loan_Purpose(db.Model):
         
     def add(self):
         db.session.add(self)
+
+# 风险系数
+class SC_Risk_Level(db.Model):
+    __tablename__ = 'sc_risk_level'
+    id=db.Column(db.Integer, primary_key=True)
+    type_name=db.Column(db.String(64))
+    type_value=db.Column(db.String(16))
+
+    def __init__(self, type_name,type_value):
+        self.type_name = type_name
+        self.type_value = type_value
+        
+    def add(self):
+        db.session.add(self)
