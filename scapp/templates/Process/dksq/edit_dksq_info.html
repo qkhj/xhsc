@@ -56,6 +56,18 @@
 							{%- endif %}								
 						</select>
 					</td>
+					<td class="table-label">风险类型</td>
+					<td>
+						<select name="risk_level" style="width:200px">
+							{%- for obj in risk_level %}
+								{%- if loan_apply.risk_level == obj.id %}
+									<option value="{{obj.id}}" selected>{{obj.type_name}}：{{obj.type_value}}</option>
+								{%- else %}
+									<option value="{{obj.id}}">{{obj.type_name}}：{{obj.type_value}}</option>
+								{%- endif %}
+							{%- endfor %}
+						</select>
+					</td>
 				</tr>												
 			</table>
 		</div>

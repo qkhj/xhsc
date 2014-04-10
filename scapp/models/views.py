@@ -64,15 +64,76 @@ class View_Loan_Repayment(db.Model):
     loan_status = db.Column(db.String)#贷款状态
     loan_manager = db.Column(db.String)#客户经理
 
-# 已发放贷款
+# 已发放的贷款、到期终止的贷款、贷款余额、逾期贷款 视图
+class View_Bank_Loans_Main(db.Model):
+    __tablename__ = 'view_bank_loans_main'
+    id = db.Column(db.Integer, primary_key=True)
+    loan_apply_id = db.Column(db.Integer)
+    loan_account = db.Column(db.String)
+    loan_status = db.Column(db.Integer)
+    loan_total_amount = db.Column(db.DECIMAL(18,2))
+    loan_balance = db.Column(db.DECIMAL(18,2))
+    loan_deliver_date = db.Column(db.DateTime)
+    loan_due_date = db.Column(db.DateTime)
+    loan_closed_date = db.Column(db.DateTime)
+    loan_cleared_pr_n = db.Column(db.Integer)
+    loan_cleared_in_n = db.Column(db.Integer)
+    loan_overdue_amount = db.Column(db.DECIMAL(18,2))
+    loan_overdue_date = db.Column(db.DateTime)
+    modify_date = db.Column(db.DateTime)
+    
+    loan_type = db.Column(db.String)
+    customer_name = db.Column(db.String)
+    amount = db.Column(db.String)
+    ratio = db.Column(db.String)
+    deadline = db.Column(db.String)
+    lending_date = db.Column(db.Date)
+    status = db.Column(db.String)
+    loan_manager = db.Column(db.String)
+
+# 被拒绝的贷款 视图
 class View_Loan_Disbursed(db.Model):
     __tablename__ = 'view_loan_disbursed'
     id = db.Column(db.Integer, primary_key=True)
     loan_type = db.Column(db.Integer)
     customer_name = db.Column(db.String)
+    create_date = db.Column(db.Date)
     amount = db.Column(db.String)#贷款数额
     ratio = db.Column(db.String)#利率
+    deadline = db.Column(db.String)#期数
     lending_date = db.Column(db.Date)#放款日期
     loan_status = db.Column(db.String)#贷款状态
     loan_manager = db.Column(db.String)#客户经理
+    loan_amount_num = db.Column(db.String)
+
+# 贷后变更的贷款 视图
+class View_Loan_Change_Record(db.Model):
+    __tablename__ = 'view_loan_change_record'
+    id = db.Column(db.Integer, primary_key=True)
+    loan_apply_id = db.Column(db.Integer)
+    loan_type = db.Column(db.Integer)
+    change_content = db.Column(db.Integer)
+    customer_name = db.Column(db.String)
+    change_reason = db.Column(db.Date)
+    change_describe = db.Column(db.String)#贷款数额
+    create_date = db.Column(db.DateTime)
+    loan_manager = db.Column(db.String)#客户经理
+    loan_status = db.Column(db.String)
+
+# 预期的贷款 视图
+class View_Loan_Expected(db.Model):
+    __tablename__ = 'view_loan_expected'
+    repayment_date = db.Column(db.DateTime, primary_key=True)
+    customer_name = db.Column(db.String)
+    itelephone = db.Column(db.String)
+    ctelephone = db.Column(db.String)
+    loan_account = db.Column(db.String)
+    total = db.Column(db.DECIMAL(18,2))
+    principal = db.Column(db.DECIMAL(18,2))
+    interest = db.Column(db.DECIMAL(18,2))
+    installmenst = db.Column(db.String)
+    ratio = db.Column(db.String)
+    loan_manager = db.Column(db.String)#客户经理
+
+
 

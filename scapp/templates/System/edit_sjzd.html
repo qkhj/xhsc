@@ -40,6 +40,8 @@
 					资产类型
 				{%- elif tablename == 'SC_Loan_Purpose' %}
 					贷款用途
+				{%- elif tablename == 'SC_Risk_Level' %}
+					风险系数
 				{%- endif %}
 			</span>	
 			<form method="POST" action="/System/edit_sjzd/{{tablename}}/{{obj.id}}">
@@ -61,14 +63,24 @@
 									资产类型*
 								{%- elif tablename == 'SC_Loan_Purpose' %}
 									贷款用途*
+								{%- elif tablename == 'SC_Risk_Level' %}
+									风险系数*
 								{%- endif %}
 							</td>
 							<td>								
 								<span id="spry_type">
-									<input type="text" name="type_name" value={{obj.type_name}} />
+									<input type="text" name="type_name" value="{{obj.type_name}}" />
 									<span class="textfieldRequiredMsg">不能为空</span>
 								</span>
 							</td>
+							{%- if tablename == 'SC_Risk_Level' %}
+							<td>								
+								<span id="spry_type_value">
+									<input type="text" name="type_value" value="{{obj.type_value}}" />
+									<span class="textfieldRequiredMsg">不能为空</span>
+								</span>
+							</td>
+							{%- endif %}
 						</tr>						
 					</table>
 				</div>
