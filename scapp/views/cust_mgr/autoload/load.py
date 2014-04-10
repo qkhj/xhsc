@@ -15,7 +15,7 @@ class timing():
 	def __init__(self):
 		sched = Scheduler()
 		sched.daemonic = False
-		sched.add_cron_job(self.rise,month='4,7,10,12',day='1')  
+		sched.add_cron_job(self.rise,month='4,7,10,12',day='10',hour='1')  
 		sched.add_cron_job(self.kpi,month='1-12',day='1',hour='2')  #每月1号凌晨2点创建当月评估表
 		sched.start()
 
@@ -75,14 +75,14 @@ class timing():
 			sql += "where sc_role.role_level >= 2"
 			users = db.session.execute(sql)
 
-			now = datetime.datetime.now().date()
+			now = datetime.datetime.now().date().strftime("%Y-%m-%d")
 
 			for obj in users:
 				if obj.role_level == 2:#客户经理
-					insert_sql = "insert into sc_kpi_officer (user_id,assess_date) values ("+obj.id+",'"+now+"'')"
+					insert_sql = "insert into sc_kpi_officer (user_id,assess_date) values ("+str(obj.id)+",'"+now+"')"
 					db.session.execute(insert_sql)
 				elif obj.role_level == 3:#运营岗
-					insert_sql = "insert into sc_kpi_yunying (user_id,assess_date) values ("+obj.id+",'"+now+"'')"
+					insert_sql = "insert into sc_kpi_yunying (user_id,assess_date) values ("+str(obj.id)+",'"+now+"')"
 					db.session.execute(insert_sql)
 
 			# 事务提交

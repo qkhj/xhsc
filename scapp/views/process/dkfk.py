@@ -121,7 +121,6 @@ def edit_dkfk(id):
         SC_Repayment_plan_detail.query.filter_by(loan_apply_id=id,change_record=1).delete()
         db.session.flush()
         for i in range(1,int(request.form['deadline'])+1):
-            print i 
             SC_Repayment_plan_detail(repayment_plan_id,id,None,request.form['rates'],
                 request.form['mybj%d' % i],request.form['mylx%d' % i],
                 request.form['mybx%d' % i],i,request.form['myrq%d' % i],None,1).add() 
@@ -131,6 +130,8 @@ def edit_dkfk(id):
 
         # 事务提交
         db.session.commit()
+        #计算绩效
+        reckonIncome(id)
         # 消息闪现
         flash('保存成功','success')
     except:
@@ -139,11 +140,9 @@ def edit_dkfk(id):
         logger.exception('exception')
         # 消息闪现 
         flash('保存失败','error')
-    #计算绩效
-   # self.reckonIncome(id)
     return redirect("Process/dkfk/dkfk")    
 
-def reckonIncome(self,id):
+def reckonIncome(id):
     #计算绩效
     data = SC_Loan_Apply.query.filter_by(id=id).first()
     level = SC_Privilege.query.filter_by(priviliege_master_id=data.A_loan_officer).first()
@@ -169,9 +168,9 @@ def reckonIncome(self,id):
         #查询所有绩效参数
         parameter = SC_parameter_configure.query.filter_by(level_id=level_id).first()
         #折算笔数
-        amount = self.amount(information.amount)
+        inCount = amount(int(information.amount))
         #所得绩效
-        total = float(parameter.A1)*amount
+        total = float(parameter.A1)*inCount
         yunying_total = total*0.1
         A_total = total*0.6
         B_total = total*0.3
@@ -197,20 +196,20 @@ def dkfk_hkjh():
     return render_template("Process/dkfk/hkjh.html")
 
 #折算笔数
-def amount(amount):
-    if amount<=50000:
+def amount(am):
+    if am<=50000:
         return 0.7
-    elif amount>50000 and amount<=150000:
+    elif am>50000 and am<=150000:
         return 1
-    elif amount>150000 and amount<=300000:
+    elif am>150000 and am<=300000:
         return 1.5
-    elif amount>300000 and amount<=500000:
+    elif am>300000 and am<=500000:
         return 2
-    elif amount>500000 and amount<=1000000:
+    elif am>500000 and am<=1000000:
         return 3
-    elif amount>1000000 and amount<=2000000:
+    elif am>1000000 and am<=2000000:
         return 3.5
-    elif amount>2000000 and amount<3000000:
+    elif am>2000000 and am<3000000:
         return 4
-    elif amount>3000000:
+    elif am>3000000:
         return 5
