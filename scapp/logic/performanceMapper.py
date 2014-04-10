@@ -30,6 +30,7 @@ class Parameter():
             level_A2_list = request.form.getlist('level_A2')
             level_A3_list = request.form.getlist('level_A3')
             level_R_list = request.form.getlist('level_R')
+            back_payment = request.form['back_payment']
             performance_a = request.form['performance_a']
             performance_b = request.form['performance_b']
             performance_c = request.form['performance_c']
@@ -37,7 +38,7 @@ class Parameter():
             level_b = request.form['level_b']
             for i in range(len(level_base_list)):
                 SC_parameter_configure(i + 1, level_base_list[i], level_A1_list[i], level_A2_list[i],
-                                       level_A3_list[i], level_R_list[i], performance_a, performance_b, performance_c,
+                                       level_A3_list[i], level_R_list[i], back_payment,performance_a, performance_b, performance_c,
                                        level_a, level_b).add()
             # 事务提交
             db.session.commit()
@@ -155,8 +156,8 @@ class Level():
                 sql += " (select p.* from sc_performance_list p,sc_user q where p.manager_id=q.id and q.login_name like '%%" + manager_name + "%%') a"
             else:
                 sql += " sc_performance_list a"
-        sql += " LEFT JOIN (select total, DATE_FORMAT(assess_date, '%%Y-%%M') as assess_date from sc_kpi_officer) c"
-        sql += " on c.assess_date=DATE_FORMAT(a.MONTH, '%%Y-%%M')"
+        sql += " LEFT JOIN  sc_kpi_officer c"
+        sql += " on DATE_FORMAT(c.assess_date, '%%Y-%%M')=DATE_FORMAT(a.MONTH, '%%Y-%%M') and c.user_id=a.manager_id"
         sql += " LEFT JOIN sc_user b ON b.id = a.manager_id"
         sql += " LEFT JOIN sc_account_manager_level d ON d.level_id = a.level_id order by a.month desc"
         data = db.engine.execute(sql)

@@ -32,7 +32,6 @@ class Payment():
 		sql = "payment_time between '"+beg_time+"' and '"+end_time+"'"
 		if user_id:
 			sql += " and manager_id="+user_id
-		print sql
 		data = SC_payment_list.query.filter(sql).order_by("payment_time asc").paginate(page, per_page = PER_PAGE)
 		return data
 
@@ -69,11 +68,21 @@ class Payment():
 				mlmSql+=" and DATE_FORMAT(month, '%Y-%m')='"+today+"'"
 				mlm_list = SC_Sta_Mlm.query.filter(mlmSql).first()
 				#当月逾期金额
-				M=mlm_list.overdue_amount
+				M=0
 				#当月瑕疵贷款率
-				defact_rate =Decimal(mlm_list.defact_rate)
+				defact_rate=0
 				#当月逾期比率
-				overdue_rate =Decimal(mlm_list.overdue_rate)
+				overdue_rate=0
+				#当月逾期笔数
+				overdue_num=0
+				#当月利息贡献
+				intrest=0
+				if mlm_list:
+					M=mlm_list.overdue_amount
+					defact_rate =Decimal(mlm_list.defact_rate)
+					overdue_rate =Decimal(mlm_list.overdue_rate)
+					overdue_num = mlm_list.overdue_num
+					intrest = Decimal(mlm_list.intrest)
 				#获取客户经理上月业绩
 				achieve = SC_performance_list.query.filter("manager_id="+str(user_id)+" and DATE_FORMAT(month, '%Y-%m')='"+today+"'").all()
 				achieve_count=Decimal(0)
@@ -86,19 +95,21 @@ class Payment():
 				if defact_rate>0.1:
 					company=Decimal(parameter.A2)*Decimal(achieve_count)
 				elif defact_rate>=0.05 and defact_rate<0.1:
-					company=Decimal(mlm_list.overdue_num)*Decimal(parameter.A2)*8
+					company=Decimal(overdue_num)*Decimal(parameter.A2)*8
 				else:
-					company=Decimal(mlm_list.overdue_num)*Decimal(parameter.A2)*5
+					company=Decimal(overdue_num)*Decimal(parameter.A2)*5
 				if overdue_rate<0.01:
-					company+=Decimal(mlm_list.overdue_num)*50
+					company+=Decimal(overdue_num)*50
 				elif overdue_rate>=0.01 and overdue_rate<0.03:
 					bit=(overdue_rate-0.01)*20
 				else:
 					bit=1
-				#假定r固定
-				r=Decimal(0.8)
-				performance_result=(Decimal(performance_total)+Decimal(parameter.A2)*Decimal(achieve_count)+mlm_list.intrest*(Decimal(parameter.A3)/100)*Decimal(parameter.R)/100*r-Decimal(M))*Decimal(1-bit)
-
+				#毛利绩效
+				performance_result = 0
+				if overdue_rate>=0.01:
+					performance_result=(Decimal(performance_total)+Decimal(parameter.A2)*Decimal(achieve_count)+intrest*(Decimal(parameter.A3)/100)*Decimal(parameter.R)/100-Decimal(M))*Decimal(1-bit)
+				else:
+					performance_result=(Decimal(performance_total)+Decimal(parameter.A2)*Decimal(achieve_count)+intrest*(Decimal(parameter.A3)/100)*Decimal(parameter.R)/100-Decimal(M))-Decimal(company)
 	            #计算最终绩效(评估后)
 				if score<60:
 					last_performance_result=0
@@ -187,7 +198,7 @@ class Payment():
 				#最终工资计算
 				last_payment = old_total_payment-pay_margin+return_margin-nega_margin
 				SC_payment_list(user_id,date,base_payment,performance_total,score,
-	                last_performance_result,pay_margin,return_margin,M,last_payment).add()
+	                last_performance_result,float(pay_margin),float(return_margin),M,float(last_payment)).add()
 			db.session.commit()
 		except:
 			# 回滚
@@ -208,12 +219,11 @@ class Payment():
 		try:
 			today = date.strftime('%Y')+"-"+date.strftime('%m')
 			#计算客户经理总绩效
-			total =0
+			total =float(0)
 			for i in range(len(paymentData)): 
-				total+=paymentData[i].last_performance
+				total+=float(paymentData[i].last_performance)
 			#计算平均绩效
 			arg = float(total/len(paymentData))
-
 			#获取所有后台岗人员
 			userData = SC_UserRole.query.filter("role_id=4").all()
 			for i in range(len(userData)):
