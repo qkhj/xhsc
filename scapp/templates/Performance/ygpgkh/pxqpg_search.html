@@ -11,6 +11,9 @@
 	<link href="/static/css/bootstrap.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
 	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<!-- ************************验证样式************************-->
+	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
 </head>
 
 <body onload="datepicker()">	
@@ -20,20 +23,82 @@
 		</div>		
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">培训期评估搜索</span>
-			<form>
+			<form action="/Performance/ygpgkh/pxqpglist" method="POST">
 				<div style="border:1px solid #94c1dc;">
-					<table class="table-list">
+					<table class="table-list">	
 						<tr>
-							<td class="table-label">起始时间</td>
-							<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
-							<td class="table-label">截至时间</td>
-							<td><input type="text" name="" class="datepicker" data-date-format="yyyy-mm-dd" readonly/></td>
-							<td class="table-label">员工姓名</td>
-							<td><input type="text" name=""/></td>
-						</tr>							
+							<td class="table-label">客户经理</td>
+							<td colspan="3">
+								{%- if role.role_level == 0 or role.role_level == 1 %}
+									<input type="text" id="manager_name" name="manager_name" value="全部客户经理" readonly/>
+								{%- else %}
+									<input type="text" id="manager_name" name="manager_name" value="{{current_user.real_name}}" readonly/>
+								{%- endif %}
+								
+								{%- if role.role_level == 0 or role.role_level == 1 %}
+								<input type="button" value="搜索" class="btn" onclick="$('.display-div').show();" />
+								{%- else %}
+								<input type="button" value="搜索" class="btn" onclick="$('.display-div').show();" disabled/>
+								{%- endif %}
+								<span id="manager_name_spay">
+									{%- if role.role_level == 0 or role.role_level == 1 %}
+									<input type="hidden" id="manager" name="manager" value="0"/>
+									{%- else %}
+									<input type="hidden" id="manager" name="manager" value="{{current_user.id}}"/>
+									{%- endif %}
+									<span class="textfieldRequiredMsg">不能为空</span>
+								</span>
+								
+								<div class="display-div" id="xdyss"><!--onmouseleave="setTimeout(function(){$('.display-div').hide();},3000)"-->
+									<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
+									<div style="border:1px solid #94c1dc;">
+										<table class="table-list">
+											<tr>
+												<td class="table-label">客户经理编号</td>
+												<td><input type="text"/></td>	
+												<td class="table-label">客户经理名称</td>
+												<td><input type="text"/></td>	
+											</tr>
+										</table>
+									</div>																		
+									<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+									<input type="button" value="搜索" class="btn btn-info btn-mini pull-right"/><br/>
+									<i class="icon-bookmark"></i><span class="titletip">客户经理列表</span>
+									<div style="border:1px solid #94c1dc;">
+										<table class="table-list">
+											<thead>
+												<tr>
+													<th>选择</th>	
+													<th>客户经理编号</th>										
+													<th>客户经理名称</th>												
+												</tr>
+											</thead>
+											<tbody class="center">
+												<!--管理员或主管-->
+												{%- if role.role_level == 0 or role.role_level == 1 %}
+												<tr>
+													<td><input type="radio" name="xdy" onclick="get_name(this,'manager_name','manager');"/></td>		
+													<td>0</td>												
+													<td>全部客户经理</td>												
+												</tr>	
+												{%- endif %}
+												
+												{%- for obj in user %}
+												<tr>
+													<td><input type="radio" name="xdy" onclick="get_name(this,'manager_name','manager');"/></td>		
+													<td>{{obj.id}}</td>												
+													<td>{{obj.real_name}}</td>												
+												</tr>		
+												{%- endfor %}											
+											</tbody>
+										</table>
+									</div>
+								</div><!--/display-div-->
+							</td>	
+						</tr>					
 					</table>
 				</div>
-				<input type="button" class="btn btn-info" value="搜索" onclick="iframe('Performance/ygpgkh/pxqpglist')"/>								
+				<input type="submit" class="btn btn-info" value="搜索"/>	
 			</form>
 		</div><!--/row-fluid -->
 	</div><!--/content -->

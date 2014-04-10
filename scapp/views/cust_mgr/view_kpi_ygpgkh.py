@@ -3,6 +3,7 @@ from flask import Module, session, request, render_template, redirect, url_for,f
 from flask.ext.login import login_user, logout_user, current_user, login_required
 
 from scapp.models import SC_User
+from scapp.models import SC_UserRole
 from scapp.logic.cust_mgr import sc_kpi
 from scapp.models.cust_mgr.sc_kpi_train import SC_Kpi_Train
 from scapp.models.cust_mgr.sc_kpi_train_final import SC_Kpi_Train_Final
@@ -11,6 +12,8 @@ from scapp.models.cust_mgr.sc_kpi_officer import SC_Kpi_Officer
 from scapp.models.cust_mgr.sc_kpi_yunying import SC_Kpi_Yunying
 
 from scapp.logic.cust_mgr.sc_payment import Payment
+
+from scapp.models import View_Get_Cus_Mgr
 
 from scapp import app
 from scapp import db
@@ -21,13 +24,16 @@ import datetime
 # 培训期评估——搜索
 @app.route('/Performance/ygpgkh/pxqpg_search', methods=['GET'])
 def pxqpg_search():
-    return render_template("Performance/ygpgkh/pxqpg_search.html")
+    user = View_Get_Cus_Mgr.query.filter("role_level>=2").order_by("id").all()#客户经理
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    return render_template("Performance/ygpgkh/pxqpg_search.html",user=user,role=role)
 
 # 培训期评估列表
-@app.route('/Performance/ygpgkh/pxqpglist', methods=['GET'])
+@app.route('/Performance/ygpgkh/pxqpglist', methods=['POST'])
 def pxqpglist():
-    kpi_train_final = sc_kpi.get_user_kpi_train_final()
-    return render_template("Performance/ygpgkh/pxqpglist.html",kpi_train_final=kpi_train_final)
+    manager = request.form['manager']
+    kpi_train_final = sc_kpi.get_user_kpi_train_final(manager)
+    return render_template("Performance/ygpgkh/pxqpglist.html",manager=manager,kpi_train_final=kpi_train_final)
 
 # 培训期评估(废弃)
 @app.route('/Performance/ygpgkh/pxqpg', methods=['GET'])
@@ -245,14 +251,25 @@ def zzpg(user_id):
 # 在岗评估——搜索
 @app.route('/Performance/ygpgkh/zgpg_search', methods=['GET'])
 def zgpg_search():
-    return render_template("Performance/ygpgkh/zgpg_search.html")
+    user = View_Get_Cus_Mgr.query.filter("role_level>=2").order_by("id").all()#客户经理
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    return render_template("Performance/ygpgkh/zgpg_search.html",user=user,role=role)
 
 # 在岗评估列表
 @app.route('/Performance/ygpgkh/zgpglist', methods=['POST'])
 def zgpglist():
+    assess_date = request.form['assess_date']
+    manager = request.form['manager']
     tablename = request.form['tablename']
-    kpi = eval(tablename).query.order_by("id").all()
-    return render_template("Performance/ygpgkh/zgpglist.html",tablename=tablename,kpi=kpi)
+
+    sql = "DATE_FORMAT(assess_date,'%Y-%m') = '"+assess_date+"'"
+    if manager != '0':
+        sql += " and user_id="+str(manager)
+
+    print sql
+    kpi = eval(tablename).query.filter(sql).order_by("id").all()
+    return render_template("Performance/ygpgkh/zgpglist.html",tablename=tablename,kpi=kpi,
+        assess_date=assess_date,manager=manager)
 
 # 新增或编辑客户经理KPI
 @app.route('/Performance/ygpgkh/khjlKPI/<int:id>', methods=['GET','POST'])
