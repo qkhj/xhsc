@@ -27,3 +27,10 @@ def get_is_overdue(loan_apply_id,installments):
 
 
 
+
+
+
+
+
+
+

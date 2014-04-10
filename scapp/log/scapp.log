@@ -131,3 +131,212 @@ Traceback (most recent call last):
   File "D:\Development\android_workspace\SC\scapp\views\process\dqdc.py", line 349, in credit_upload
     if os.path.exists(os.path.join(UPLOAD_FOLDER_ABS,str(loan_apply_id))) == false:
 NameError: global name 'false' is not defined
+2014-03-05 16:01:36,181 ERROR exception
+Traceback (most recent call last):
+  File "/Users/johhny/project/xhsc_git/scapp/views/process/dqdc.py", line 165, in edit_dqdcWd_jbqk
+    db.session.commit()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/scoping.py", line 149, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 721, in commit
+    self.transaction.commit()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 354, in commit
+    self._prepare_impl()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 334, in _prepare_impl
+    self.session.flush()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1818, in flush
+    self._flush(objects)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1936, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 58, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1900, in _flush
+    flush_context.execute()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 372, in execute
+    rec.execute(self)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 525, in execute
+    uow
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 64, in save_obj
+    table, insert)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 569, in _emit_insert_statements
+    execute(statement, params)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 195, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/MySQLdb/cursors.py", line 201, in execute
+    self.errorhandler(self, exc, value)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (OperationalError) (1292, "Incorrect date value: '1' for column 'recommended_deadline' at row 1") 'INSERT INTO sc_riskanalysis_and_findings (loan_apply_id, analysis_conclusion, amount_recommended, recommended_deadline, recommended_rates, monthly_repayment_amount, recommended_way_of_security, income_ratio, survey_signature, survey_date, verification, others, bool_grant, amount, deadline, rates, monthly_repayment, approve_reason, refuse_reason, other_deliberations, positive, opposite, create_user, create_date, modify_user, modify_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)' (53, '', '', u'1', '', '', '', '', '', u'2014-03-05', 0, '', '1', '1000000', '6', '1.15', '66767', '', '', '', '', '', 19L, datetime.datetime(2014, 3, 5, 16, 1, 36, 173189), 19L, datetime.datetime(2014, 3, 5, 16, 1, 36, 173229))
+2014-03-05 16:03:06,035 ERROR exception
+Traceback (most recent call last):
+  File "/Users/johhny/project/xhsc_git/scapp/views/process/dqdc.py", line 165, in edit_dqdcWd_jbqk
+    db.session.commit()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/scoping.py", line 149, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 721, in commit
+    self.transaction.commit()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 354, in commit
+    self._prepare_impl()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 334, in _prepare_impl
+    self.session.flush()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1818, in flush
+    self._flush(objects)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1936, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 58, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1900, in _flush
+    flush_context.execute()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 372, in execute
+    rec.execute(self)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 525, in execute
+    uow
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 64, in save_obj
+    table, insert)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 569, in _emit_insert_statements
+    execute(statement, params)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 195, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/MySQLdb/cursors.py", line 201, in execute
+    self.errorhandler(self, exc, value)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (OperationalError) (1292, "Incorrect date value: '1' for column 'recommended_deadline' at row 1") 'INSERT INTO sc_riskanalysis_and_findings (loan_apply_id, analysis_conclusion, amount_recommended, recommended_deadline, recommended_rates, monthly_repayment_amount, recommended_way_of_security, income_ratio, survey_signature, survey_date, verification, others, bool_grant, amount, deadline, rates, monthly_repayment, approve_reason, refuse_reason, other_deliberations, positive, opposite, create_user, create_date, modify_user, modify_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)' (53, '', '', u'1', '', '', '', '', '', u'2014-03-05', 0, '', '1', '10000000', '10', '1.15', '2131', '', '', '', '', '', 19L, datetime.datetime(2014, 3, 5, 16, 3, 6, 28033), 19L, datetime.datetime(2014, 3, 5, 16, 3, 6, 28059))
+2014-03-05 16:06:27,188 ERROR exception
+Traceback (most recent call last):
+  File "/Users/johhny/project/xhsc_git/scapp/views/process/dqdc.py", line 165, in edit_dqdcWd_jbqk
+    db.session.commit()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/scoping.py", line 149, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 721, in commit
+    self.transaction.commit()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 354, in commit
+    self._prepare_impl()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 334, in _prepare_impl
+    self.session.flush()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1818, in flush
+    self._flush(objects)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1936, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 58, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1900, in _flush
+    flush_context.execute()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 372, in execute
+    rec.execute(self)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 525, in execute
+    uow
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 64, in save_obj
+    table, insert)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 569, in _emit_insert_statements
+    execute(statement, params)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 195, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/MySQLdb/cursors.py", line 201, in execute
+    self.errorhandler(self, exc, value)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (OperationalError) (1292, "Incorrect date value: '9' for column 'recommended_deadline' at row 1") 'INSERT INTO sc_riskanalysis_and_findings (loan_apply_id, analysis_conclusion, amount_recommended, recommended_deadline, recommended_rates, monthly_repayment_amount, recommended_way_of_security, income_ratio, survey_signature, survey_date, verification, others, bool_grant, amount, deadline, rates, monthly_repayment, approve_reason, refuse_reason, other_deliberations, positive, opposite, create_user, create_date, modify_user, modify_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)' (53, '', '1000000', u'9', '1.15', '11231', '', '', '', u'2014-03-05', 0, '', '1', '1000000', '8', '1.15', '22131', '', '', '', '', '', 19L, datetime.datetime(2014, 3, 5, 16, 6, 27, 183079), 19L, datetime.datetime(2014, 3, 5, 16, 6, 27, 183109))
+2014-03-05 16:10:31,598 ERROR exception
+Traceback (most recent call last):
+  File "/Users/johhny/project/xhsc_git/scapp/views/process/dqdc.py", line 261, in edit_dqdcXed_jbqk
+    db.session.commit()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/scoping.py", line 149, in do
+    return getattr(self.registry(), name)(*args, **kwargs)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 721, in commit
+    self.transaction.commit()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 354, in commit
+    self._prepare_impl()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 334, in _prepare_impl
+    self.session.flush()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1818, in flush
+    self._flush(objects)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1936, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/util/langhelpers.py", line 58, in __exit__
+    compat.reraise(exc_type, exc_value, exc_tb)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/session.py", line 1900, in _flush
+    flush_context.execute()
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 372, in execute
+    rec.execute(self)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/unitofwork.py", line 525, in execute
+    uow
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 64, in save_obj
+    table, insert)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/orm/persistence.py", line 569, in _emit_insert_statements
+    execute(statement, params)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 662, in execute
+    params)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 761, in _execute_clauseelement
+    compiled_sql, distilled_params
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 874, in _execute_context
+    context)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 1024, in _handle_dbapi_exception
+    exc_info
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/util/compat.py", line 195, in raise_from_cause
+    reraise(type(exception), exception, tb=exc_tb)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/base.py", line 867, in _execute_context
+    context)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/sqlalchemy/engine/default.py", line 324, in do_execute
+    cursor.execute(statement, parameters)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/MySQLdb/cursors.py", line 201, in execute
+    self.errorhandler(self, exc, value)
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/MySQLdb/connections.py", line 36, in defaulterrorhandler
+    raise errorclass, errorvalue
+OperationalError: (OperationalError) (1292, "Incorrect date value: '1' for column 'recommended_deadline' at row 1") 'INSERT INTO sc_riskanalysis_and_findings (loan_apply_id, analysis_conclusion, amount_recommended, recommended_deadline, recommended_rates, monthly_repayment_amount, recommended_way_of_security, income_ratio, survey_signature, survey_date, verification, others, bool_grant, amount, deadline, rates, monthly_repayment, approve_reason, refuse_reason, other_deliberations, positive, opposite, create_user, create_date, modify_user, modify_date) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)' (54, '', '', u'1', '', '', '', '', '', u'2014-03-05', 511, '', '1', '1000000', '10', '1.15', '10000', '', '', '', '', '', 20L, datetime.datetime(2014, 3, 5, 16, 10, 31, 591581), 20L, datetime.datetime(2014, 3, 5, 16, 10, 31, 591604))
+2014-03-05 17:05:33,657 ERROR exception
+Traceback (most recent call last):
+  File "/Users/johhny/project/xhsc_git/scapp/views/process/dkfk.py", line 110, in edit_dkfk
+    repayment_plan_new = SC_Repayment_Plan(id,request.form['repayment_type'],request.form['amount'],
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/werkzeug/datastructures.py", line 391, in __getitem__
+    raise exceptions.BadRequestKeyError(key)
+BadRequestKeyError: 400: Bad Request
+2014-03-05 17:06:47,184 ERROR exception
+Traceback (most recent call last):
+  File "/Users/johhny/project/xhsc_git/scapp/views/process/dkfk.py", line 110, in edit_dkfk
+    repayment_plan_new = SC_Repayment_Plan(id,request.form['repayment_type'],request.form['amount'],
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/werkzeug/datastructures.py", line 391, in __getitem__
+    raise exceptions.BadRequestKeyError(key)
+BadRequestKeyError: 400: Bad Request
+2014-03-05 17:16:43,787 ERROR exception
+Traceback (most recent call last):
+  File "/Users/johhny/project/xhsc_git/scapp/views/process/dkfk.py", line 110, in edit_dkfk
+    repayment_plan_new = SC_Repayment_Plan(id,request.form['repayment_type'],request.form['amount'],
+  File "/Users/johhny/project/xhsc/lib/python2.7/site-packages/werkzeug/datastructures.py", line 391, in __getitem__
+    raise exceptions.BadRequestKeyError(key)
+BadRequestKeyError: 400: Bad Request
