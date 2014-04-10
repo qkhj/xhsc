@@ -67,11 +67,11 @@
 						<td class="table-label">完成</td>
 						<td><input type="text" name="marketing_complete" value="{{kpi_train_operate.marketing_complete}}" /></td>
 						<td class="table-label">得分</td>
-						<td><input type="text" name="marketing_score" value="{{kpi_train_operate.marketing_score}}" /></td>
+						<td><input type="text" name="marketing_score" value="{{kpi_train_operate.marketing_score}}" onchange="sum()"/></td>
 						<td class="table-label">完成</td>
 						<td><input type="text" name="sign_complete" value="{{kpi_train_operate.sign_complete}}" /></td>
 						<td class="table-label">得分</td>
-						<td><input type="text" name="sign_score" value="{{kpi_train_operate.sign_score}}" /></td>
+						<td><input type="text" name="sign_score" value="{{kpi_train_operate.sign_score}}" onchange="sum()"/></td>
 					</tr>	
 					<tr class="center">
 						<td class="table-label" rowspan="2">贷款余额</td>
@@ -89,11 +89,11 @@
 						<td class="table-label">完成</td>
 						<td><input type="text" name="loan_balance_complete" value="{{kpi_train_operate.loan_balance_complete}}" /></td>
 						<td class="table-label">得分</td>
-						<td><input type="text" name="loan_balance_score" value="{{kpi_train_operate.loan_balance_score}}" /></td>
+						<td><input type="text" name="loan_balance_score" value="{{kpi_train_operate.loan_balance_score}}" onchange="sum()"/></td>
 						<td class="table-label">完成</td>
 						<td><input type="text" name="monitor_complete" value="{{kpi_train_operate.monitor_complete}}" /></td>
 						<td class="table-label">得分</td>
-						<td><input type="text" name="monitor_score" value="{{kpi_train_operate.monitor_score}}" /></td>
+						<td><input type="text" name="monitor_score" value="{{kpi_train_operate.monitor_score}}" onchange="sum()"/></td>
 					</tr>
 					<tr>
 						<td class="table-label center" colspan="10"><b>定性评估（总共40分）</b></td>
@@ -112,11 +112,11 @@
 					</tr>	
 					<tr class="center">
 						<td><b>5</b></td>
-						<td><input type="text" name="ywdlx" value="{{kpi_train_operate.ywdlx}}" /></td>
+						<td><input type="text" name="ywdlx" value="{{kpi_train_operate.ywdlx}}" onchange="sum()"/></td>
 						<td><b>5</b></td>
-						<td><input type="text" name="yxnl" value="{{kpi_train_operate.yxnl}}" /></td>
+						<td><input type="text" name="yxnl" value="{{kpi_train_operate.yxnl}}" onchange="sum()"/></td>
 						<td><b>5</b></td>
-						<td><input type="text" name="dqdc" value="{{kpi_train_operate.dqdc}}" /></td>
+						<td><input type="text" name="dqdc" value="{{kpi_train_operate.dqdc}}" onchange="sum()"/></td>
 					</tr>	
 					<tr class="center">
 						<td class="table-label" rowspan="2">审贷会陈述</td>
@@ -131,11 +131,11 @@
 					</tr>	
 					<tr class="center">
 						<td><b>5</b></td>
-						<td><input type="text" name="sdhcs" value="{{kpi_train_operate.sdhcs}}" /></td>
+						<td><input type="text" name="sdhcs" value="{{kpi_train_operate.sdhcs}}" onchange="sum()"/></td>
 						<td><b>4</b></td>
-						<td><input type="text" name="jszs" value="{{kpi_train_operate.jszs}}" /></td>
+						<td><input type="text" name="jszs" value="{{kpi_train_operate.jszs}}" onchange="sum()"/></td>
 						<td><b>4</b></td>
-						<td><input type="text" name="khfw" value="{{kpi_train_operate.khfw}}" /></td>
+						<td><input type="text" name="khfw" value="{{kpi_train_operate.khfw}}" onchange="sum()"/></td>
 					</tr>	
 					<tr class="center">
 						<td class="table-label" rowspan="2">考勤纪律</td>
@@ -150,11 +150,11 @@
 					</tr>	
 					<tr class="center">
 						<td><b>3</b></td>
-						<td><input type="text" name="kqjl" value="{{kpi_train_operate.kqjl}}" /></td>
+						<td><input type="text" name="kqjl" value="{{kpi_train_operate.kqjl}}" onchange="sum()"/></td>
 						<td><b>3</b></td>
-						<td><input type="text" name="zrx" value="{{kpi_train_operate.zrx}}" /></td>
+						<td><input type="text" name="zrx" value="{{kpi_train_operate.zrx}}" onchange="sum()"/></td>
 						<td><b>3</b></td>
-						<td><input type="text" name="gtxt" value="{{kpi_train_operate.gtxt}}" /></td>
+						<td><input type="text" name="gtxt" value="{{kpi_train_operate.gtxt}}" onchange="sum()"/></td>
 					</tr>
 					<tr class="center">
 						<td class="table-label" rowspan="2">团队协作</td>
@@ -164,7 +164,7 @@
 					</tr>	
 					<tr class="center">
 						<td><b>3</b></td>
-						<td><input type="text" name="tdxz" value="{{kpi_train_operate.tdxz}}" /></td>
+						<td><input type="text" name="tdxz" value="{{kpi_train_operate.tdxz}}" onchange="sum()"/></td>
 					</tr>
 					<tr>
 						<td class="table-label center" colspan="10"><b>评估结果</b></td>
@@ -174,7 +174,7 @@
 						<td colspan="4"><input type="text" name="total" value="{{kpi_train_operate.total}}" /></td>
 						<td class="table-label center"><b>评估结果</b></td>
 						<td colspan="4">
-							<select name="result">
+							<select name="result" readonly>
 								{%- if kpi_train_operate.result == 4 %}
 								<option value="4" selected>不合格</option>
 								{%- else %}
@@ -228,5 +228,38 @@
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>
 	<script src="/static/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript">		
+		function sum(){
+			var sum=0;
+			var a1=parseFloat($("input[name=marketing_score]").val());
+			var a2=parseFloat($("input[name=sign_score]").val());
+			var a3=parseFloat($("input[name=loan_balance_score]").val());
+			var a4=parseFloat($("input[name=monitor_score]").val());
+			var a5=parseFloat($("input[name=ywdlx]").val());
+			var a6=parseFloat($("input[name=yxnl]").val());
+			var a7=parseFloat($("input[name=dqdc]").val());
+			var a8=parseFloat($("input[name=sdhcs]").val());
+			var a9=parseFloat($("input[name=jszs]").val());
+			var a10=parseFloat($("input[name=khfw]").val());
+			var a11=parseFloat($("input[name=kqjl]").val());
+			var a12=parseFloat($("input[name=zrx]").val());
+			var a13=parseFloat($("input[name=gtxt]").val());
+			var a14=parseFloat($("input[name=tdxz]").val());
+			sum=a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12+a13+a14
+			$("input[name=total]").val(sum)//总分
+			if(sum>=90){//优秀
+				$("select[name=result]").html('<option value="4">不合格</option><option value="3">合格</option><option value="2">良好</option><option value="1" selected>优秀</option>')
+			}
+			else if(sum>=80&&sum<90){//良好
+				$("select[name=result]").html('<option value="4">不合格</option><option value="3">合格</option><option value="2" selected>良好</option><option value="1">优秀</option>')
+			}
+			else if(sum>=60&&sum<80){//合格
+				$("select[name=result]").html('<option value="4">不合格</option><option value="3" selected>合格</option><option value="2">良好</option><option value="1">优秀</option>')
+			}
+			else{//不合格
+				$("select[name=result]").html('<option value="4" selected>不合格</option><option value="3">合格</option><option value="2">良好</option><option value="1">优秀</option>')
+			}
+		}
+	</script>
 </body>
 </html>

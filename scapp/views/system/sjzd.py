@@ -11,6 +11,7 @@ from scapp.models.information import SC_Regisiter_Type
 from scapp.models.information import SC_Business_Type
 from scapp.models.information import SC_Asset_Type
 from scapp.models.information import SC_Loan_Purpose
+from scapp.models.information import SC_Risk_Level
 
 from scapp import app
 
@@ -25,18 +26,22 @@ def System_sjzd():
     business_type = SC_Business_Type.query.order_by("id").all()
     asset_type = SC_Asset_Type.query.order_by("id").all()
     loan_purpose = SC_Loan_Purpose.query.order_by("id").all()
+    risk_level = SC_Risk_Level.query.order_by("id").all()
 
     return render_template("System/sjzd.html", credentials_type=credentials_type
         , relation_Type=relation_Type, industry=industry
         , regisiter_type=regisiter_type, business_type=business_type, asset_type=asset_type
-        , loan_purpose=loan_purpose)
+        , loan_purpose=loan_purpose,risk_level=risk_level)
 		
 # 新增数据字典
 @app.route('/System/new_sjzd/<tablename>', methods=['GET','POST'])
 def new_sjzd(tablename):
 	if request.method == 'POST':
 		try:
-			eval(tablename+'(\''+request.form['type_name']+'\')').add()
+			if tablename != 'SC_Risk_Level':
+				eval(tablename+'(\''+request.form['type_name']+'\')').add()
+			else:
+				eval(tablename+'(\''+request.form['type_name']+'\',\''+request.form['type_value']+'\')').add()
 
 			# 事务提交
 			db.session.commit()
@@ -60,7 +65,9 @@ def edit_sjzd(tablename,id):
 		try:
 			obj = eval(tablename).query.filter_by(id=id).first()
 			obj.type_name = request.form['type_name']
-			
+			if tablename == 'SC_Risk_Level':
+				obj.type_value = request.form['type_value']
+
 			# 事务提交
 			db.session.commit()
 			# 消息闪现

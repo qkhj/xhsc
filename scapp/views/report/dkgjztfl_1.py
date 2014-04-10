@@ -5,7 +5,7 @@ from scapp import app
 from scapp.config import PER_PAGE
 from scapp.config import PROCESS_STATUS_DKFKJH
 
-from scapp.models import View_Loan_Disbursed
+from scapp.models import View_Bank_Loans_Main
 
 import datetime,time,xlwt,re
 from scapp.tools.export_excel import export_excel
@@ -26,30 +26,40 @@ def dkgjztfl_1():
 def dkgjztfl_1_search(page):
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = ""
+    loan_status = request.form['loan_status']
+    sql = " status = '"+PROCESS_STATUS_DKFKJH+"'"
     if loan_type != '0':
-        sql = "loan_type='"+loan_type+"' and "
-    sql += " loan_status='"+PROCESS_STATUS_DKFKJH+"'"
+        sql += " and loan_type='"+loan_type+"'"
+    if loan_status != '0':
+        if loan_status == '5':
+            sql += " and loan_status='"+loan_status+"'"
+        else:
+            sql += " and loan_status!='5'"
     if customer_name:
         sql += " and customer_name like '%"+customer_name+"%'"
 
-    view_loan_disbursed = View_Loan_Disbursed.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    bank_loans_main = View_Bank_Loans_Main.query.filter(sql).paginate(page, per_page = PER_PAGE)
     return render_template("Report/dkgjztfl_1_search.html",loan_type=loan_type,customer_name=customer_name,
-        view_loan_disbursed=view_loan_disbursed)
+        loan_status=loan_status,bank_loans_main=bank_loans_main)
 
 # 贷款根据状态分类——1. 已发放的贷款--导出
 @app.route('/Report/dkgjztfl_1_export', methods=['POST'])
 def dkgjztfl_1_export():
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = ""
+    loan_status = request.form['loan_status']
+    sql = " status = '"+PROCESS_STATUS_DKFKJH+"'"
     if loan_type != '0':
-        sql = "loan_type='"+loan_type+"' and "
-    sql += " loan_status='"+PROCESS_STATUS_DKFKJH+"'"
+        sql += " and loan_type='"+loan_type+"'"
+    if loan_status != '0':
+        if loan_status == '5':
+            sql += " and loan_status='"+loan_status+"'"
+        else:
+            sql += " and loan_status!='5'"
     if customer_name:
         sql += " and customer_name like '%"+customer_name+"%'"
 
-    data = View_Loan_Disbursed.query.filter(sql)
+    data = View_Bank_Loans_Main.query.filter(sql)
 
     exl_hdngs=['贷款编号','客户名称','利率','放款日期','贷款金额','负责客户经理','贷款状态']
 
@@ -74,39 +84,3 @@ def dkgjztfl_1_export():
     filename=str(year)+'_'+str(month)+'_'+str(day)+'_'+'已发放的贷款统计表'+'.xls'
     exp=export_excel()
     return exp.export_download(filename,'已发放的贷款统计表',exl_hdngs,data,exl_hdngs_xf,data_xfs)
-
-# 贷款根据状态分类——2. 被拒绝的贷款
-@app.route('/Report/dkgjztfl_2', methods=['GET'])
-def dkgjztfl_2():
-    return render_template("Report/dkgjztfl_2.html")
-
-# 贷款根据状态分类——3. 贷后变更的贷款
-@app.route('/Report/dkgjztfl_3', methods=['GET'])
-def dkgjztfl_3():
-    return render_template("Report/dkgjztfl_3.html")
-
-# 贷款根据状态分类——4. 到期终止的贷款
-@app.route('/Report/dkgjztfl_4', methods=['GET'])
-def dkgjztfl_4():
-    return render_template("Report/dkgjztfl_4.html")
-
-# 贷款根据状态分类——5. 贷款余额
-@app.route('/Report/dkgjztfl_5', methods=['GET'])
-def dkgjztfl_5():
-    return render_template("Report/dkgjztfl_5.html")
-
-# 贷款根据状态分类——6. 逾期贷款
-@app.route('/Report/dkgjztfl_6', methods=['GET'])
-def dkgjztfl_6():
-    return render_template("Report/dkgjztfl_6.html")
-
-# 贷款根据状态分类——7. 预期的还款
-@app.route('/Report/dkgjztfl_7', methods=['GET'])
-def dkgjztfl_7():
-    return render_template("Report/dkgjztfl_7.html")
-
-# 贷款根据状态分类——8. 还贷款记录
-@app.route('/Report/dkgjztfl_8', methods=['GET'])
-def dkgjztfl_8():
-    return render_template("Report/dkgjztfl_8.html")
-

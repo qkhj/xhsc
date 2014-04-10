@@ -10,7 +10,9 @@
 	<!-- The styles -->
 	<link href="/static/css/bootstrap.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
-	
+	<style type="text/css">
+		.table-list th{padding:0;font-size:12px;}
+	</style>
 </head>
 
 <body onload="sub()">	
@@ -23,64 +25,65 @@
 				<input type="hidden" name="customer_name">
 			{%- endif %}
 			<input type="hidden" name="loan_type" value="{{loan_type}}"> 
-			<input type="hidden" name="loan_status" value="{{loan_status}}"> 
 		</div>		
 		<div class="row-fluid">
-			<i class="icon-bookmark"></i><span class="titletip">已发放的贷款列表</span>
-			<div style="margin-bottom:5px;">	
-				<a type="button" class="btn btn-info" href="#" onclick="submitForm('content','/Report/dkgjztfl_1_export')">导出</a>
+			<i class="icon-bookmark"></i><span class="titletip">逾期贷款列表</span>
+			<div style="margin-bottom:5px;">				
+				<a type="button" class="btn btn-info" href="#" onclick="submitForm('content','/Report/dkgjztfl_5_export')">导出</a>
 			</div>
 			<div style="border:1px solid #94c1dc;">				
 				<table class="table-list" cellspacing="10" id="uesr-list">				
-					<tr>	
-						<th>贷款编号</th>
-						<th>客户名称</th>
+					<tr>						
 						<th>月利率</th>
-						<th>放款日期</th>
+						<th>还款截止日期</th>
 						<th>贷款金额</th>
 						<th>负责客户经理</th>
-						<th>贷款状态</th>
-					</tr>					
+						<th>应还款金额</th>
+						<th>客户名称</th>
+						<th>贷款编号</th>
+						<th>期数</th>
+						<th>逾期截止日</th>
+					</tr>		
 					<tbody class="center">
+						<!-- 数据 -->
 						{%- for obj in bank_loans_main.items %}
 						<tr class="tbData" onclick="changeColor(this)">
-							<td>{{obj.id}}</td>
-							<td>{{obj.customer_name}}</td>
 							<td>{{obj.ratio}}</td>
-							<td>{{obj.lending_date}}</td>							
-							<td class="subData2">{{obj.amount}}</td>	
-							<td>{{obj.loan_manager}}</td>	
-							{%- if obj.loan_status != '5' %}
-								<td>贷款期</td>
-							{%- else %}		
-								<td>结清</td>
-							{%- endif %}		
-						</tr>
-						{%- endfor %}		
+							<td>{{obj.ratio}}</td>							
+							<td class="subData2">{{obj.ratio}}</td>	
+							<td>{{obj.ratio}}</td>							
+							<td class="subData3">{{obj.ratio}}</td>
+							<td>{{obj.ratio}}</td>
+							<td>{{obj.ratio}}</td>
+							<td>{{obj.deadline}}</td>	
+							<td>{{obj.ratio}}</td>	
+						</tr><!-- /数据 -->	
+						{%- endfor %}											
 					</tbody>
 					<!-- 数据汇总 -->
 					<tr>
 						<th id="sub1"></th>
 						<th>&nbsp;</th>	
-						<th>&nbsp;</th>
-						<th>&nbsp;</th>							
 						<th id="sub2"></th>
+						<th>&nbsp;</th>							
+						<th id="sub3">&nbsp;</th>
 						<th>&nbsp;</th>
-						<th>&nbsp;</th>
-						
-					</tr><!-- /数据汇总 -->					
+						<th>&nbsp;</th>	
+						<th>&nbsp;</th>	
+						<th>&nbsp;</th>					
+					</tr><!-- /数据汇总 -->						
 				</table>
 			</div>
 			<div class="page-div">
 				{%- if bank_loans_main.has_prev %}
-					<span style="CURSOR: pointer" onclick="submitForm('content','/Report/dkgjztfl_1_search/{{bank_loans_main.prev_num}}')">&lt;&lt;</span>
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Report/dkgjztfl_6_search/{{bank_loans_main.prev_num}}')">&lt;&lt;</span>
 				{%- else %}
 					<span style="CURSOR: pointer">&lt;&lt;</span>
 				{%- endif %}
 				&#160;第&#160;<font color="#0088cc">{{bank_loans_main.page}}</font>&#160;页&#160;
 				&#160;共&#160;<font color="#0088cc">{{bank_loans_main.pages}}</font>&#160;页&#160;
 				{%- if bank_loans_main.has_next %}
-					<span style="CURSOR: pointer" onclick="submitForm('content','/Report/dkgjztfl_1_search/{{bank_loans_main.next_num}}')">&gt;&gt;</span>
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Report/dkgjztfl_6_search/{{bank_loans_main.next_num}}')">&gt;&gt;</span>
 				{%- else %}
 					<span style="CURSOR: pointer">&gt;&gt;</span>
 				{%- endif %}
@@ -95,7 +98,7 @@
 		function sub(){
 			var num=$(".tbData").length;			
 			$("#sub1").text("总笔数："+num);
-			for(i=2;i<5;i++){
+			for(i=2;i<8;i++){
 				var sum=0;						
 				$.each($(".subData"+i),function(key,val){ 
 					sum += parseInt(val.innerHTML);

@@ -44,7 +44,7 @@
                             <td><a href="#" onclick="$('.row-fluid').hide(); $('#jyxz').show(); Frame();">5. 经营性质</a></td>			
                             <td><a href="#" onclick="$('.row-fluid').hide(); $('#zchlx').show(); Frame();">6. 资产类型</a></td>
                             <td><a href="#" onclick="$('.row-fluid').hide(); $('#dkyt').show(); Frame();">7. 贷款用途 </a></td>
-                            <td></td>
+                            <td><a href="#" onclick="$('.row-fluid').hide(); $('#fxxs').show(); Frame();">8. 风险系数 </a></td>
                         </tr>				
                     </table>
                 </div>			
@@ -282,6 +282,42 @@
                                     </td>							
                                 </tr>
                                 {%- endfor %}														
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div><!--/贷款用途-->
+            <!--********************风险系数***********************-->
+            <div class="row-fluid" id="fxxs" style="display:none;">
+                <i class="icon-bookmark"></i><span class="titletip">风险系数</span>
+                <div id="allzchlx">
+                    <div style="margin-bottom:5px;">
+                        <a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_sjzd/SC_Risk_Level')">新增</a>   
+                        <a type="button" class="btn btn-info pull-right" href="#" onclick="$('.row-fluid').hide(); $('#sjzdList').show();">返回</a>
+                    </div>
+                    <div style="border:1px solid #94c1dc;">             
+                        <table class="table-list" cellspacing="10">
+                            <thead>
+                                <tr>
+                                    <th width="20%">编号</th>
+                                    <th width="30%">名称</th> 
+                                    <th width="30%">值</th>                              
+                                    <th width="20%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody class="center">
+                                {%- for obj in risk_level %}
+                                <tr class="num">
+                                    <td>{{obj.id}}</td>
+                                    <td>
+                                        <a href="#" onclick="iframe('System/edit_sjzd/SC_Risk_Level/{{obj.id}}')">{{obj.type_name}}</a>
+                                    </td>  
+                                    <td>{{obj.type_value}}</td>                
+                                    <td>
+                                        <input type="button" onclick="iframe('System/edit_sjzd/SC_Risk_Level/{{obj.id}}')" class="btn btn-danger btn-mini" value="编辑"/>   
+                                    </td>                           
+                                </tr>
+                                {%- endfor %}                                                       
                             </tbody>
                         </table>
                     </div>

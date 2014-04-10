@@ -23,6 +23,7 @@ class SC_Loan_Apply(db.Model):
     process_status = db.Column(db.String(4)) #处理状态
     classify = db.Column(db.Integer) #资产分类
     classify_dec = db.Column(db.String(256)) #资产分类说明
+    risk_level = db.Column(db.Integer,db.ForeignKey('sc_risk_level.id')) #营销信贷员
     create_user = db.Column(db.Integer)
     create_date = db.Column(db.DateTime)
     modify_user = db.Column(db.Integer)
@@ -42,11 +43,13 @@ class SC_Loan_Apply(db.Model):
     examiner_2_name = db.relationship('SC_User',foreign_keys=[examiner_2], backref = db.backref('examiner_2_name', lazy = 'dynamic'))
     # 外键名称
     approver_name = db.relationship('SC_User',foreign_keys=[approver], backref = db.backref('approver_name', lazy = 'dynamic'))
+    # 外键名称
+    risk_level_fk = db.relationship('SC_Risk_Level',foreign_keys=[risk_level], backref = db.backref('risk_level_fk', lazy = 'dynamic'))
 
 
     def __init__(self,loan_type,belong_customer_type,belong_customer_value,customer_name,
         evaluation,marketing_loan_officer,A_loan_officer,B_loan_officer,
-        yunying_loan_officer,examiner_1,examiner_2,approver,process_status):
+        yunying_loan_officer,examiner_1,examiner_2,approver,process_status,risk_level):
         self.loan_type = loan_type
         self.belong_customer_type = belong_customer_type
         self.belong_customer_value = belong_customer_value
@@ -62,6 +65,7 @@ class SC_Loan_Apply(db.Model):
         self.process_status = process_status
         self.classify = 1
         self.classify_dec = ''
+        self.risk_level = risk_level
         self.create_user = current_user.id
         self.create_date = datetime.datetime.now()
         self.modify_user = current_user.id
