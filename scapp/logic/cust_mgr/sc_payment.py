@@ -146,16 +146,17 @@ class Payment():
 				margin = SC_risk_margin.query.filter_by(manager_id=user_id).first()
 				if not margin:
 					margin = self.addScRisk(user_id)
-				if mlm3_list.overdue_amount:
-					#逾期保险金增加，总保险金减少
-					margin.overduce_margin=Decimal(margin.overduce_margin)+Decimal(mlm3_list.overdue_amount)
-					if Decimal(margin.total_margin)>=Decimal(mlm3_list.overdue_amount):               
-					    margin.total_margin=Decimal(margin.total_margin)-Decimal(mlm3_list.overdue_amount)
-					else:
-					    margin.total_margin=0
-					    nega_margin=Decimal(mlm3_list.overdue_amount)-Decimal(margin.total_margin)
-					#新增逾期记录
-					SC_risk_margin_list(user_id,date,mlm3_list.overdue_amount,2,margin.total_margin).add()
+				if mlm3_list:
+					if mlm3_list.overdue_amount:
+						#逾期保险金增加，总保险金减少
+						margin.overduce_margin=Decimal(margin.overduce_margin)+Decimal(mlm3_list.overdue_amount)
+						if Decimal(margin.total_margin)>=Decimal(mlm3_list.overdue_amount):               
+						    margin.total_margin=Decimal(margin.total_margin)-Decimal(mlm3_list.overdue_amount)
+						else:
+						    margin.total_margin=0
+						    nega_margin=Decimal(mlm3_list.overdue_amount)-Decimal(margin.total_margin)
+						#新增逾期记录
+						SC_risk_margin_list(user_id,date,mlm3_list.overdue_amount,2,margin.total_margin).add()
 	            #计算需缴纳风险保证金
 				pay_margin=0
 				if old_total_payment<=2000:
