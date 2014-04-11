@@ -41,6 +41,7 @@ from scapp.models.repayment.sc_repayment_plan_detail import SC_Repayment_plan_de
 from scapp.models import View_Query_Loan
 from scapp.models import SC_Privilege
 from scapp.models.performance.sc_loan_income_list import SC_loan_income_list 
+from scapp.models.performance.sc_performance_list import SC_performance_list
 from scapp.models.performance.sc_parameter_configure import SC_parameter_configure
 
 from scapp import app
@@ -161,6 +162,9 @@ def reckonIncome(id):
     else:
         month=month+2
     payment_date = datetime.date(year,month,1)
+    if month<10:
+        month = "0"+str(month)
+    after_date = str(year)+"-"+str(month)
     #是否已配置客户经理层级
     if level:
         #查询层级
@@ -174,10 +178,19 @@ def reckonIncome(id):
         yunying_total = total*0.1
         A_total = total*0.6
         B_total = total*0.3
+        #获取当月业绩记录
+        sql="DATE_FORMAT(month, '%Y-%m')='"+after_date+"'"
+        sql+=" and manager_id="+str(data.A_loan_officer)
+        sql+=" and level_id="+level_id
+        perform = SC_performance_list.query.filter(sql).first()
+        if not perform:
+            SC_performance_list(payment_date,data.A_loan_officer,inCount,0,0,0,level_id).add()
+        else:
+            perform.count=int(perform.count)+inCount
         try:
             SC_loan_income_list(id,data.marketing_loan_officer,yunying_total,data.A_loan_officer,
                 A_total,data.B_loan_officer,B_total,payment_date).add()
-                # 事务提交
+            # 事务提交
             db.session.commit()
             # 消息闪现
             flash('保存成功','success')

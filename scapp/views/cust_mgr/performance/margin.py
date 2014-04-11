@@ -30,10 +30,10 @@ def fxbzj_search():
     	return render_template("Performance/jxxc/fxbzj_search.html",user=user)
 
 # 风险保证金
-@app.route('/Performance/jxxc/fxbzj/<int:page>', methods=['POST'])
-def fxbzj(page):
+@app.route('/Performance/jxxc/fxbzj', methods=['POST'])
+def fxbzj():
 	margin = Margin()
-	data = margin.getMarginList(page,request)
+	data = margin.getMarginList(request)
 	return render_template("Performance/jxxc/fxbzj.html",data=data,user_id=request.form['user_id'])
 
 # 风险保证金——详单
