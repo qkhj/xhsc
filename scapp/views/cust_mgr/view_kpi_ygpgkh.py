@@ -337,8 +337,8 @@ def khjlKPI(id):
                 assess_record_new.assess_score_1 = request.form['total']
 
             #调用贺珈的函数
-            #pay = Payment()
-            #pay.payroll(kpi_officer.user_id,kpi_officer.assess_date,kpi_officer.total)
+            pay = Payment()
+            pay.payroll(kpi_officer.user_id,kpi_officer.assess_date,kpi_officer.total)
 
             # 事务提交
             db.session.commit()
