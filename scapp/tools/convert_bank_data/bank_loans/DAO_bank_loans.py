@@ -47,12 +47,19 @@ def get_need_update():
     return local_db_conn.execute(QUERY_STR).fetchall()
 
 
-#获得有效管户
-def get_hold_amount():
+#获得某个用户有效管户
+def get_hold_amount_by_user(user_id):
     QUERY_STR="SELECT COUNT(sblm.loan_apply_id) AS valid_sum,sla.A_loan_officer AS manager_id" \
               "FROM sc_bank_loans_main sblm INNER JOIN sc_loan_apply sla ON sblm.loan_apply_id = sla.id " \
+              "WHERE sblm.loan_status<>'5' AND sla.A_loan_officer=%s"%(user_id)
+    return local_db_conn.execute(QUERY_STR).fetchall()[0]['valid_sum']
+
+#获得所有管户信息
+def get_hold_amount():
+    QUERY_STR="SELECT COUNT(sblm.loan_apply_id) AS valid_sum,sla.A_loan_officer AS manager_id " \
+              "FROM sc_bank_loans_main sblm INNER JOIN sc_loan_apply sla ON sblm.loan_apply_id = sla.id " \
               "WHERE sblm.loan_status<>'5' GROUP BY sla.A_loan_officer"
-    return local_db_conn.execute(QUERY_STR)
+    return local_db_conn.execute(QUERY_STR).fetchall()
 
 
 #更新有效管户
@@ -64,7 +71,7 @@ def update_valid_num():
         month=datetime.datetime.strftime(now,'%Y-%m')
         for obj in data:
             UPDATE_STR="UPDATE sc_performance_list SET valid_sum=%s " \
-                       "WHERE manager_id=%s AND date_format(month,'%Y-%m')=%d"%(obj['valid_sum'],obj['manager_id'],month)
+                       "WHERE manager_id=%d AND date_format(month,'%%Y-%%m')=%s"%(obj['valid_sum'],obj['manager_id'],month)
             INSERT_UPDATE_TRAN(UPDATE_STR)
 
 
@@ -72,20 +79,36 @@ def update_valid_num():
 def update_overdue_info():
     QUERY_STR="SELECT COUNT(sblm.loan_apply_id) AS overdue_sum,SUM(sblm.loan_overdue_amount) AS overdue_amount,sla.A_loan_officer AS user_id" \
               "FROM sc_bank_loans_main sblm INNER JOIN sc_loan_apply sla ON sblm.loan_apply_id = sla.id " \
-              "WHERE sblm.loan_status='2' GROUP BY sla.A_loan_officer"
+              "WHERE sblm.loan_status='2' or sblm.loan_status='6' GROUP BY sla.A_loan_officer"
     data=local_db_conn.execute(QUERY_STR)
-    hold_amount=len(get_hold_amount())
+
 
     if len(data):
         #获取当前时间并转换为%Y-%m格式 用来与数据库中数据匹配
         now=datetime.datetime.now()
         month=datetime.datetime.strftime(now,'%Y-%m')
         for obj in data:
+            hold_amount=get_hold_amount_by_user(obj['user_id'])
             overdue_rate=obj['overdue_sum']/hold_amount
             UPDATE_STR="UPDATE sc_sta_mlm SET overdue_num=%s,overdue_amount=%s,overdue_rate=%f " \
-                       "WHERE user_id=%s AND data_format(month,'%Y-%m')=%d"\
-                       %(obj['overdue_sum'],obj['overdue_amount'],overdue_rate,obj['user_id'],month)
+                       "WHERE user_id=%d AND data_format(month,'%%Y-%%m')=%s"\
+                       %(obj['overdue_sum'],obj['overdue_amount'],overdue_rate,int(obj['user_id']),month)
             INSERT_UPDATE_TRAN(UPDATE_STR)
+
+
+# #更新瑕疵贷款信息
+# def update_defact_info():
+#     QUERY_STR="SELECT * FROM view_defact_loan "
+#     data=local_db_conn.execute(QUERY_STR)
+#
+#     if len(data):
+#         now=datetime.datetime.now()
+#         month=datetime.datetime.strftime(now,'%Y-%m')
+#         for obj in data:
+#             hold_amount=get_hold_amount(obj['user_id'])
+#
+#             UPDATE_STR=""
+
 
 
 
