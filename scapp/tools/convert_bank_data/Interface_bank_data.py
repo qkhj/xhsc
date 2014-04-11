@@ -79,14 +79,6 @@ def get_is_overdue(loan_apply_id,installments):
 
 
 
-def update_overdue_rate():
-    """
-    更新当前所有人逾期率
-    @return:None
-    """
-    return DAO_overdue.update_overdue_rate()
-
-
 #DAO_bank_loans
 
 def insert_bank_loans_info(loan_apply_id,loan_account,
@@ -145,3 +137,18 @@ def get_need_update_bli():
     @return:需要更新的银行贷款信息id与loan_apply_id
     """
     return DAO_bank_loans.get_need_update()
+
+
+def update_valid_num():
+    """
+    更新有效管户
+    @return:None
+    """
+    return DAO_bank_loans.update_valid_num()
+
+def update_overdue_rate():
+    """
+    更新所有人逾期率
+    @return:None
+    """
+    return DAO_bank_loans.update_overdue_info()
