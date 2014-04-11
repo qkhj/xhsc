@@ -78,11 +78,16 @@ class Payment():
 				#当月利息贡献
 				intrest=0
 				if mlm_list:
-					M=mlm_list.overdue_amount
-					defact_rate =Decimal(mlm_list.defact_rate)
-					overdue_rate =Decimal(mlm_list.overdue_rate)
-					overdue_num = mlm_list.overdue_num
-					intrest = Decimal(mlm_list.intrest)
+					if mlm_list.overdue_amount:
+						M=mlm_list.overdue_amount
+					if mlm_list.defact_rate:
+						defact_rate =Decimal(mlm_list.defact_rate)
+					if mlm_list.overdue_rate:
+						overdue_rate =Decimal(mlm_list.overdue_rate)
+					if mlm_list.overdue_num:
+						overdue_num = mlm_list.overdue_num
+					if mlm_list.intrest:
+						intrest = Decimal(mlm_list.intrest)
 				#获取客户经理上月业绩
 				achieve = SC_performance_list.query.filter("manager_id="+str(user_id)+" and DATE_FORMAT(month, '%Y-%m')='"+today+"'").all()
 				achieve_count=Decimal(0)
@@ -110,7 +115,7 @@ class Payment():
 					performance_result=(Decimal(performance_total)+Decimal(parameter.A2)*Decimal(achieve_count)+intrest*(Decimal(parameter.A3)/100)*Decimal(parameter.R)/100-Decimal(M))*Decimal(1-bit)
 				else:
 					performance_result=(Decimal(performance_total)+Decimal(parameter.A2)*Decimal(achieve_count)+intrest*(Decimal(parameter.A3)/100)*Decimal(parameter.R)/100-Decimal(M))-Decimal(company)
-	            #计算最终绩效(评估后)
+				#计算最终绩效(评估后)
 				if score<60:
 					last_performance_result=0
 				elif score>=60 and score<100:
@@ -141,14 +146,14 @@ class Payment():
 				margin = SC_risk_margin.query.filter_by(manager_id=user_id).first()
 				if not margin:
 					margin = self.addScRisk(user_id)
-				if mlm3_list:
+				if mlm3_list.overdue_amount:
 					#逾期保险金增加，总保险金减少
-					margin.overduce_margin=int(margin.overduce_margin)+mlm3_list.overdue_amount
-					if int(margin.total_margin)>=mlm3_list.overdue_amount:               
-					    margin.total_margin=int(margin.total_margin)-mlm3_list.overdue_amount
+					margin.overduce_margin=Decimal(margin.overduce_margin)+Decimal(mlm3_list.overdue_amount)
+					if Decimal(margin.total_margin)>=Decimal(mlm3_list.overdue_amount):               
+					    margin.total_margin=Decimal(margin.total_margin)-Decimal(mlm3_list.overdue_amount)
 					else:
 					    margin.total_margin=0
-					    nega_margin=mlm3_list.overdue_amount-int(margin.total_margin)
+					    nega_margin=Decimal(mlm3_list.overdue_amount)-Decimal(margin.total_margin)
 					#新增逾期记录
 					SC_risk_margin_list(user_id,date,mlm3_list.overdue_amount,2,margin.total_margin).add()
 	            #计算需缴纳风险保证金
@@ -177,7 +182,7 @@ class Payment():
 					riskSql = "manager_id="+user_id
 					riskSql+=" and DATE_FORMAT(payment_time, '%Y-%m')='"+old_date+"'"
 					riskSql+=" and inout_type=1"
-					margin_list = SC_risk_margin_list.query.filter(riskSql).first()
+					margin_list = sc_risk_margin_list.query.filter(riskSql).first()
 					if margin_list:
 						#达到返还要求,获得返还值
 						return_margin = margin_list.inout_payment
@@ -227,7 +232,6 @@ class Payment():
 			#获取所有后台岗人员
 			userData = SC_UserRole.query.filter("role_id=4").all()
 			for i in range(len(userData)):
-				print userData[i].user_id
 				manager_id = userData[i].user_id 
 				parameter = SC_parameter_configure.query.first()
 				if parameter:

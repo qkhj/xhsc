@@ -28,5 +28,5 @@ class SC_performance_list(db.Model):
         self.balance_scale = balance_scale
         self.level_id = level_id
 
-	def add(self):
-		db.session.add(self)
+    def add(self):
+        db.session.add(self)

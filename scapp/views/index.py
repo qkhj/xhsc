@@ -11,7 +11,7 @@ from scapp.config import logger
 from scapp import app
 from scapp import db
 from scapp.logic.total import Total
-
+from scapp.models.performance.sc_parameter_configure import SC_parameter_configure
 import hashlib
 
 #get md5 of a input string  
@@ -114,7 +114,12 @@ def xtgl():
 def jxgl():
     # privileges = SC_UserRole.query.filter_by(user_id=current_user.id).first().role.privileges
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
-    return render_template("index.html",menu = 'jxgl',role=role)
+    data = SC_parameter_configure.query.first()
+    hidden = 'true'
+    if data:
+        if data.performance_a==str(current_user.id) or data.performance_b==str(current_user.id) or data.performance_c==str(current_user.id):
+            hidden='false'
+    return render_template("index.html",menu = 'jxgl',role=role,hidden=hidden)
 
 # 统计报表
 @app.route('/tjbb', methods=['GET'])
