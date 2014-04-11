@@ -17,6 +17,7 @@ class timing():
 		sched.daemonic = False
 		sched.add_cron_job(self.rise,month='4,7,10,12',day='10',hour='1')  
 		sched.add_cron_job(self.kpi,month='1-12',day='1',hour='2')  #每月1号凌晨2点创建当月评估表
+		sched.add_cron_job(self.total,month='1-12',day='1',hour='2')  #每月1号凌晨2点创建上月余额规模
 		sched.start()
 
 	#晋降级线程
@@ -85,6 +86,32 @@ class timing():
 					insert_sql = "insert into sc_kpi_yunying (user_id,assess_date) values ("+str(obj.id)+",'"+now+"')"
 					db.session.execute(insert_sql)
 
+			# 事务提交
+			db.session.commit()
+		except:
+			# 回滚
+			db.session.rollback()
+			logger.exception('exception')
+
+	#创建上月余额规模
+	def total(self):
+		try:
+			d1 = datetime.datetime.now()
+			d3 = d1 - datetime.timedelta(hours=24)
+			last_day = d3.strftime("%Y")+"-"+d3.strftime("%m")
+			sql="select a.user_id as id from sc_userrole a,sc_role b where a.role_id=b.id and b.role_level=2"
+			data = db.session.execute(sql)
+			for obj in data:
+				loan_sql = "select sum(a.loan_balance) as loanSum from sc_bank_loans_main a,sc_loan_apply b where a.loan_apply_id=b.id and b.A_loan_officer="+str(obj.id)
+				dataSum = db.session.execute(loan_sql).fetchall()
+				#上月余额规模
+				for i in dataSum:
+					lastSum = i.loanSum
+					update_sql="DATE_FORMAT(month, '%Y-%m')='"+last_day+"'"
+					update_sql+=" and manager_id="+str(obj.id)
+					performanc_list = SC_performance_list.query.filter(update_sql).all()
+					for j in range(len(performanc_list)):
+						performanc_list[j].balance_scale=lastSum
 			# 事务提交
 			db.session.commit()
 		except:
