@@ -10,12 +10,12 @@ from scapp.models import SC_User,SC_UserRole
 
 
 class Margin():
-	def getMarginList(self,page,request):
+	def getMarginList(self,request):
 		user_id = request.form['user_id']
 		sql="1=1"
 		if user_id:
 			sql += " and manager_id="+user_id
-		data = SC_risk_margin.query.filter(sql).paginate(page, per_page = PER_PAGE)
+		data = SC_risk_margin.query.filter(sql)
 		return data
 	def getMarginListByPerson(self,user_id):
 		data = SC_risk_margin.query.filter_by(manager_id=user_id).first()
