@@ -8,6 +8,11 @@ from scapp.models.performance.sc_assess_record import SC_assess_record
 from scapp.models.performance.sc_performance_list import SC_performance_list 
 from scapp.models.performance.sc_examine_rise import SC_examine_rise
 from scapp.models.performance.sc_manager_level_index import SC_manager_level_index 
+from scapp.models import SC_Privilege
+from scapp.models.performance.sc_parameter_configure import SC_parameter_configure
+from scapp.models import SC_Loan_Apply
+from scapp.models import SC_Approval_Decision
+from scapp.models.performance.sc_loan_income_list import SC_loan_income_list 
 
 
 class timing():
@@ -18,6 +23,8 @@ class timing():
 		sched.add_cron_job(self.rise,month='4,7,10,12',day='10',hour='1')  
 		sched.add_cron_job(self.kpi,month='1-12',day='1',hour='2')  #每月1号凌晨2点创建当月评估表
 		sched.add_cron_job(self.total,month='1-12',day='1',hour='2')  #每月1号凌晨2点创建上月余额规模
+		sched.add_cron_job(self.perform,month='1-12',day='1',hour='3')  #每月1号凌晨3点初始化当月业绩表
+		sched.add_cron_job(self.first,month='1-12',day='1',hour='5')  #计算历史贷款笔数分成
 		sched.start()
 
 	#晋降级线程
@@ -109,8 +116,8 @@ class timing():
 					lastSum = i.loanSum
 					update_sql="DATE_FORMAT(month, '%Y-%m')='"+last_day+"'"
 					update_sql+=" and manager_id="+str(obj.id)
-					performanc_list = SC_performance_list.query.filter(update_sql).all()
-					for j in range(len(performanc_list)):
+					performanc_list = SC_performance_list.query.filter(update_sql).first()
+					if performanc_list:
 						performanc_list[j].balance_scale=lastSum
 			# 事务提交
 			db.session.commit()
@@ -118,3 +125,81 @@ class timing():
 			# 回滚
 			db.session.rollback()
 			logger.exception('exception')
+
+	#初始化当月业绩表
+	def perform(self):
+		try:	
+			today = datetime.datetime.now().strftime('%Y')+"-"+datetime.datetime.now().strftime('%m')
+			sql="select a.user_id as id from sc_userrole a,sc_role b where a.role_id=b.id and b.role_level=2"
+			data = db.session.execute(sql)
+			for obj in data:
+				#获取层级
+				level = SC_Privilege.query.filter_by(priviliege_master_id=obj.id,privilege_master="SC_User",
+					priviliege_access="sc_account_manager_level").first()
+				level_id=0
+				if level:
+					level_id = level.priviliege_access_value
+				insert_sql="DATE_FORMAT(month, '%Y-%m')='"+today+"'"
+				insert_sql+=" and manager_id="+str(obj.id)
+				performanc_list = SC_performance_list.query.filter(insert_sql).first()
+				if not performanc_list:
+					SC_performance_list(datetime.datetime.now(),obj.id,0,0,0,0,level_id).add()
+			db.session.commit()
+		except:
+			# 回滚
+			db.session.rollback()
+			logger.exception('exception')
+
+	#统计每笔贷款所得笔数绩效
+	def first(self):
+		try:
+			sql ="select a.* from sc_approval_decision a,sc_loan_apply b where a.loan_apply_id=b.id and b.process_status='601' and a.loan_apply_id not in (select loan_apply_id from sc_loan_income_list)"
+			data = db.session.execute(sql)
+			for obj in data:
+				#获取放贷日期
+				lending_date = obj.loan_date
+				#计算绩效日期
+				year = int(lending_date.strftime('%Y'))
+				month = int(lending_date.strftime('%m'))
+				if month==12:
+				    year = year+1
+				    month=1
+				payment_date = datetime.date(year,month,1)
+				#折算笔数
+				inCount = self.amount(int(obj.amount))
+				#查询层级
+				loan_apply = SC_Loan_Apply.query.filter_by(id=obj.loan_apply_id).first()
+				level = SC_Privilege.query.filter_by(priviliege_master_id=loan_apply.A_loan_officer,privilege_master="SC_User",priviliege_access="sc_account_manager_level").first()
+				#查询所有绩效参数
+				parameter = SC_parameter_configure.query.filter_by(level_id=level.priviliege_access_value).first()
+				#所得绩效
+				total = float(parameter.A1)*inCount
+				yunying_total = total*0.1
+				A_total = total*0.6
+				B_total = total*0.3
+				SC_loan_income_list(obj.loan_apply_id,loan_apply.yunying_loan_officer,yunying_total,loan_apply.A_loan_officer,
+					A_total,loan_apply.B_loan_officer,B_total,payment_date).add()
+		 	 # 事务提交
+			db.session.commit()
+		except:
+			# 回滚
+			db.session.rollback()
+			logger.exception('exception')
+	#折算笔数
+	def amount(self,am):
+	    if am<=50000:
+	        return 0.7
+	    elif am>50000 and am<=150000:
+	        return 1
+	    elif am>150000 and am<=300000:
+	        return 1.5
+	    elif am>300000 and am<=500000:
+	        return 2
+	    elif am>500000 and am<=1000000:
+	        return 3
+	    elif am>1000000 and am<=2000000:
+	        return 3.5
+	    elif am>2000000 and am<3000000:
+	        return 4
+	    elif am>3000000:
+	        return 5
