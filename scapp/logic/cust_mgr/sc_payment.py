@@ -38,6 +38,7 @@ class Payment():
 	#薪酬计算
 	def payroll(self,user_id,date,score):
 		today = date.strftime('%Y')+"-"+date.strftime('%m')
+		print today
 		try:
 	    	#客户经理工资计算
 			role = SC_UserRole.query.filter_by(user_id=user_id).first().role
@@ -53,12 +54,13 @@ class Payment():
 				base_payment = parameter.base_payment
 				#查询上月绩效
 				sql = "SELECT sum(sum1) as total FROM (( SELECT sum(singel_performance) AS sum1"
-				sql +=" FROM sc_loan_income_list WHERE DATE_FORMAT(create_time, '%%Y-%%m') = '"+today+"')"
+				sql +=" FROM sc_loan_income_list WHERE DATE_FORMAT(create_time, '%%Y-%%m') = '"+today+"' and manager_id="+str(user_id)+") "
 				sql +=" UNION (SELECT sum(singel_performance_A) AS sum1 FROM sc_loan_income_list WHERE"
-				sql +=" DATE_FORMAT(create_time, '%%Y-%%m') = '"+today+"')"
+				sql +=" DATE_FORMAT(create_time, '%%Y-%%m') = '"+today+"' and manager_id_A="+str(user_id)+")" 
 				sql +=" UNION (SELECT sum(singel_performance_B) AS sum1 FROM sc_loan_income_list WHERE"
-				sql +=" DATE_FORMAT(create_time, '%%Y-%%m') = '"+today+"')) AS p"
+				sql +=" DATE_FORMAT(create_time, '%%Y-%%m') = '"+today+"' and manager_id_B="+str(user_id)+")) AS p"
 				last_performance = db.engine.execute(sql).first()
+				print sql 
 				if not last_performance.total:
 					performance_total = 0
 				else:
@@ -109,6 +111,7 @@ class Payment():
 					bit=(overdue_rate-0.01)*20
 				else:
 					bit=1
+
 				#毛利绩效
 				performance_result = 0
 				if overdue_rate>=0.01:
@@ -116,9 +119,9 @@ class Payment():
 				else:
 					performance_result=(Decimal(performance_total)+Decimal(parameter.A2)*Decimal(achieve_count)+intrest*(Decimal(parameter.A3)/100)*Decimal(parameter.R)/100-Decimal(M))-Decimal(company)
 				#计算最终绩效(评估后)
-				if score<60:
+				if float(score)<60:
 					last_performance_result=0
-				elif score>=60 and score<100:
+				elif float(score)>=60 and float(score)<100:
 					last_performance_result=performance_result
 				else:
 					last_performance_result=int(performance_result)*1.05

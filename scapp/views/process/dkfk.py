@@ -146,21 +146,16 @@ def edit_dkfk(id):
 def reckonIncome(id):
     #计算绩效
     data = SC_Loan_Apply.query.filter_by(id=id).first()
-    level = SC_Privilege.query.filter_by(priviliege_master_id=data.A_loan_officer).first()
+    level = SC_Privilege.query.filter_by(priviliege_master_id=data.A_loan_officer,privilege_master="SC_User",priviliege_access="sc_account_manager_level").first()
     information = SC_Approval_Decision.query.filter_by(loan_apply_id=id).first()
     #获取放贷日期
     lending_date = information.loan_date
     #计算绩效日期
     year = int(lending_date.strftime('%Y'))
     month = int(lending_date.strftime('%m'))
-    if month==11:
+    if month==12:
         year = year+1
-        month = 1
-    elif month==12:
-        year = year+1
-        month=2
-    else:
-        month=month+2
+        month=1
     payment_date = datetime.date(year,month,1)
     if month<10:
         month = "0"+str(month)
@@ -181,14 +176,13 @@ def reckonIncome(id):
         #获取当月业绩记录
         sql="DATE_FORMAT(month, '%Y-%m')='"+after_date+"'"
         sql+=" and manager_id="+str(data.A_loan_officer)
-        sql+=" and level_id="+level_id
         perform = SC_performance_list.query.filter(sql).first()
         if not perform:
             SC_performance_list(payment_date,data.A_loan_officer,inCount,0,0,0,level_id).add()
         else:
             perform.count=int(perform.count)+inCount
         try:
-            SC_loan_income_list(id,data.marketing_loan_officer,yunying_total,data.A_loan_officer,
+            SC_loan_income_list(id,data.yunying_loan_officer,yunying_total,data.A_loan_officer,
                 A_total,data.B_loan_officer,B_total,payment_date).add()
             # 事务提交
             db.session.commit()
