@@ -11,10 +11,10 @@ import json
 def print_stock(loan_apply_id):
     data=SC_Stock.query.filter_by(loan_apply_id=loan_apply_id).all()
 
-    req = urllib2.Request('192.168.0.250:9000/ws/hello?wsdl')
+    req = urllib2.Request('http://192.168.0.250:8080/restWS/rest/Service/sc_stock')
 
     req.add_header('Content-Type', 'application/json')
 
-    response = urllib2.urlopen(req, json.dumps(data,ensure_ascii=False))
+    response = urllib2.urlopen(req, json.dumps(data,encoding=json_encoding,ensure_ascii=False))
     print response
     return None
