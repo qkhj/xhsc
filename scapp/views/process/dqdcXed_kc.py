@@ -15,7 +15,6 @@ def dqdcXed_kc(loan_apply_id):
     return render_template("Process/dqdc/dqdcXed_kc.html", loan_apply_id=loan_apply_id, stocks=stocks)
 
 
-
 # 贷款调查——新增小额贷款(库存)
 @app.route('/Process/dqdc/new_kc/<int:loan_apply_id>', methods=['POST'])
 def new_kc(loan_apply_id):
