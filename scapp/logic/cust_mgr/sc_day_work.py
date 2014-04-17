@@ -32,7 +32,7 @@ def get_data_by_conditions(page,beg_date,end_date,user_id,current_user_id,type='
                                    "from sc_day_work "
                                    "inner join sc_user ON sc_day_work.create_user=sc_user.id "
                                    "where sc_day_work.create_date between '"+beg_date+"' AND '"+end_date+"' "
-                                   "AND sc_day_work.create_user='"+current_user_id+"'")
+                                   "AND sc_day_work.create_user='"+str(current_user_id)+"'")
     else:
         if type=='PAGE':
             data=SC_Day_Work.query.filter(and_(SC_Day_Work.create_date.between(beg_date,end_date),
@@ -44,6 +44,6 @@ def get_data_by_conditions(page,beg_date,end_date,user_id,current_user_id,type='
                                    "from sc_day_work "
                                    "inner join sc_user ON sc_day_work.create_user=sc_user.id "
                                    "where sc_day_work.create_date between '"+beg_date+"' AND '"+end_date+"' "
-                                   "AND sc_day_work.create_user='"+user_id+"'")
+                                   "AND sc_day_work.create_user='"+str(user_id)+"'")
 
     return data
