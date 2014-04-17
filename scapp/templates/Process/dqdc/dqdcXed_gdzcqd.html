@@ -22,9 +22,9 @@
 	<div class="content">
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#tab1" data-toggle="tab" onclick="Frame();doubleIframe('dqdcXed_gdzcqd');">房地产详单</a></li>
-				<li><a href="#tab2" data-toggle="tab" onclick="Frame();doubleIframe('dqdcXed_gdzcqd');">设备及器材详单</a></li>
-				<li><a href="#tab3" data-toggle="tab" onclick="Frame();doubleIframe('dqdcXed_gdzcqd');">车辆详单</a></li>
+				<li class="active"><a href="#tab1" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');Frame();">房地产详单</a></li>
+				<li><a href="#tab2" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');Frame();">设备及器材详单</a></li>
+				<li><a href="#tab3" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');Frame();">车辆详单</a></li>
 			</ul>						
 			<div class="tab-content">
 				<!--房地产详单-->
@@ -76,8 +76,8 @@
 									<input type='text' class='subData2'  value="{{obj.rate_price}}" name='rate_price' onclick='setJe(this)' onblur='sub()'/>
 									<br/><span class='je'>人民币</span>
 									<span class='errorInfo'></span>
-								</td>	
-									<td><input type="hidden" name="mode" value="1"/></td>		
+									<input type="hidden" name="mode" value="1"/>
+								</td>		
 								</tr>	
 								{%- endfor %}								
 							</table>
@@ -91,7 +91,7 @@
 								</tr>		
 							</table>
 						</div>
-						<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/><br/><br/><br/>
+						<input type="submit" value="提交" class="btn btn-info"/>
 					</div>
 				</div><!--/房地产详单-->
 
@@ -143,8 +143,8 @@
 									<input type='text' class='subData4'  value="{{obj.rate_price}}" name='rate_price' onclick='setJe(this)' onblur='sub()'/>
 									<br/><span class='je'>人民币</span>
 									<span class='errorInfo'></span>
+									<input type="hidden" name="mode" value="2"/>
 								</td>		
-									<td><input type="hidden" name="mode" value="2"/></td>		
 								</tr>	
 								{%- endfor %}															
 							</table>
@@ -158,7 +158,7 @@
 								</tr>		
 							</table>
 						</div>
-						<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/><br/><br/><br/>						
+						<input type="submit" value="提交" class="btn btn-info"/>					
 					</div>
 				</div><!--设备及器材详单-->		
 
@@ -210,8 +210,8 @@
 									<input type='text' class='subData6'  value="{{obj.rate_price}}" name='rate_price' onclick='setJe(this)' onblur='sub()'/>
 									<br/><span class='je'>人民币</span>
 									<span class='errorInfo'></span>
+									<input type="hidden" name="mode" value="3"/>
 								</td>		
-									<td><input type="hidden" name="mode" value="3"/></td>		
 								</tr>	
 								{%- endfor %}							
 							</table>
@@ -226,12 +226,12 @@
 							</table>
 						</div>
 						<input name="hiddenId" type="hidden" value="{{id}}"/>
-						<input type="submit" value="提交" class="btn btn-info"/><br/><br/><br/><br/><br/><br/>
+						<input type="submit" value="提交" class="btn btn-info"/>
 					</div>
 				</div><!--车辆详单-->						
 			</div><!-- tabContent -->
 		</div>
-	
+		&nbsp;<input type="button" class="btn btn-info" value="打印" onclick="window.open('/Process/dqdc/dy_gdzcqd/{{id}}')"/>
 	</div>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>

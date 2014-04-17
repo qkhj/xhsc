@@ -17,7 +17,7 @@
 	
 </head>
 
-<body>
+<body onload="sub()">
 	<div class="content" style="width:1200px;margin:0 auto;">
 		
 		<div>				
@@ -34,595 +34,680 @@
 		<div>				
 			<table class="dayin">
 				<tr>
-					<td class="left" style="width:230px;">月份</td>			
-					<td style="width:65px;"><b>1月</b></td>		
-					<td style="width:65px;"><b>2月</b></td>	
-					<td style="width:65px;"><b>3月</b></td>	
-					<td style="width:65px;"><b>4月</b></td>	
-					<td style="width:65px;"><b>5月</b></td>	
-					<td style="width:65px;"><b>6月</b></td>	
-					<td style="width:65px;"><b>7月</b></td>	
-					<td style="width:65px;"><b>8月</b></td>	
-					<td style="width:65px;"><b>9月</b></td>	
-					<td style="width:65px;"><b>10月</b></td>	
-					<td style="width:65px;"><b>11月</b></td>	
-					<td style="width:65px;"><b>12月</b></td>	
-					<td style="width:70px;"><b>月均</b></td>	
+					<td class="left" style="width:250px;">月份</td>			
+					<td style="width:64px;"><b>1月</b></td>		
+					<td style="width:64px;"><b>2月</b></td>	
+					<td style="width:64px;"><b>3月</b></td>	
+					<td style="width:64px;"><b>4月</b></td>	
+					<td style="width:64px;"><b>5月</b></td>	
+					<td style="width:64px;"><b>6月</b></td>	
+					<td style="width:64px;"><b>7月</b></td>	
+					<td style="width:64px;"><b>8月</b></td>	
+					<td style="width:64px;"><b>9月</b></td>	
+					<td style="width:64px;"><b>10月</b></td>	
+					<td style="width:64px;"><b>11月</b></td>	
+					<td style="width:64px;"><b>12月</b></td>	
+					<td style="width:62px;"><b>月均</b></td>	
 					<td><b>合计</b></td>
 				</tr>
 				<tr>
 					<td class="left"><b>初期现金(10)</b></td>			
-					<td><b>1000000</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b class="tr1">{{cash_flow[1].early_cash}}</b></td>		
+					<td><b class="tr1">{{cash_flow[2].early_cash}}</b></td>	
+					<td><b class="tr1">{{cash_flow[3].early_cash}}</b></td>	
+					<td><b class="tr1">{{cash_flow[4].early_cash}}</b></td>	
+					<td><b class="tr1">{{cash_flow[5].early_cash}}</b></td>	
+					<td><b class="tr1">{{cash_flow[6].early_cash}}</b></td>	
+					<td><b class="tr1">{{cash_flow[7].early_cash}}</b></td>	
+					<td><b class="tr1">{{cash_flow[8].early_cash}}</b></td>	
+					<td><b class="tr1">{{cash_flow[9].early_cash}}</b></td>	
+					<td><b class="tr1">{{cash_flow[10].early_cash}}</b></td>	
+					<td><b class="tr1">{{cash_flow[11].early_cash}}</b></td>	
+					<td><b class="tr1">{{cash_flow[12].early_cash}}</b></td>	
+					<td><span id="ave1"></span></td>	
+					<td><span id="sum1"></span></td>
 				</tr>	
 				<tr>
 					<td class="left">现金销售额</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr2">{{cash_flow[1].sale_amount}}</td>		
+					<td class="tr2">{{cash_flow[2].sale_amount}}</td>	
+					<td class="tr2">{{cash_flow[3].sale_amount}}</td>	
+					<td class="tr2">{{cash_flow[4].sale_amount}}</td>	
+					<td class="tr2">{{cash_flow[5].sale_amount}}</td>	
+					<td class="tr2">{{cash_flow[6].sale_amount}}</td>	
+					<td class="tr2">{{cash_flow[7].sale_amount}}</td>	
+					<td class="tr2">{{cash_flow[8].sale_amount}}</td>	
+					<td class="tr2">{{cash_flow[9].sale_amount}}</td>	
+					<td class="tr2">{{cash_flow[10].sale_amount}}</td>	
+					<td class="tr2">{{cash_flow[11].sale_amount}}</td>	
+					<td class="tr2">{{cash_flow[12].sale_amount}}</td>	
+					<td><span id="ave2"></span></td>	
+					<td><span id="sum2"></span></td>
 				</tr>	
 				<tr>
 					<td class="left">应收账款回收</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr3">{{cash_flow[1].accounts_receivable}}</td>		
+					<td class="tr3">{{cash_flow[2].accounts_receivable}}</td>	
+					<td class="tr3">{{cash_flow[3].accounts_receivable}}</td>	
+					<td class="tr3">{{cash_flow[4].accounts_receivable}}</td>	
+					<td class="tr3">{{cash_flow[5].accounts_receivable}}</td>	
+					<td class="tr3">{{cash_flow[6].accounts_receivable}}</td>	
+					<td class="tr3">{{cash_flow[7].accounts_receivable}}</td>	
+					<td class="tr3">{{cash_flow[8].accounts_receivable}}</td>	
+					<td class="tr3">{{cash_flow[9].accounts_receivable}}</td>	
+					<td class="tr3">{{cash_flow[10].accounts_receivable}}</td>	
+					<td class="tr3">{{cash_flow[11].accounts_receivable}}</td>	
+					<td class="tr3">{{cash_flow[12].accounts_receivable}}</td>	
+					<td><span id="ave3"></span></td>	
+					<td><span id="sum3"></span></td>
 				</tr>
 				<tr>
 					<td class="left">客户预付款</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr4">{{cash_flow[1].prepaments}}</td>		
+					<td class="tr4">{{cash_flow[2].prepaments}}</td>	
+					<td class="tr4">{{cash_flow[3].prepaments}}</td>	
+					<td class="tr4">{{cash_flow[4].prepaments}}</td>	
+					<td class="tr4">{{cash_flow[5].prepaments}}</td>	
+					<td class="tr4">{{cash_flow[6].prepaments}}</td>	
+					<td class="tr4">{{cash_flow[7].prepaments}}</td>	
+					<td class="tr4">{{cash_flow[8].prepaments}}</td>	
+					<td class="tr4">{{cash_flow[9].prepaments}}</td>	
+					<td class="tr4">{{cash_flow[10].prepaments}}</td>	
+					<td class="tr4">{{cash_flow[11].prepaments}}</td>	
+					<td class="tr4">{{cash_flow[12].prepaments}}</td>	
+					<td><span id="ave4"></span></td>	
+					<td><span id="sum4"></span></td>
 				</tr>
 				<tr>
 					<td class="left"><b>经营现金流小计(1)</b></td>			
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b class="tr5">{{cash_flow[1].total_cash_flow}}</b></td>		
+					<td><b class="tr5">{{cash_flow[2].total_cash_flow}}</b></td>	
+					<td><b class="tr5">{{cash_flow[3].total_cash_flow}}</b></td>	
+					<td><b class="tr5">{{cash_flow[4].total_cash_flow}}</b></td>	
+					<td><b class="tr5">{{cash_flow[5].total_cash_flow}}</b></td>	
+					<td><b class="tr5">{{cash_flow[6].total_cash_flow}}</b></td>	
+					<td><b class="tr5">{{cash_flow[7].total_cash_flow}}</b></td>	
+					<td><b class="tr5">{{cash_flow[8].total_cash_flow}}</b></td>	
+					<td><b class="tr5">{{cash_flow[9].total_cash_flow}}</b></td>	
+					<td><b class="tr5">{{cash_flow[10].total_cash_flow}}</b></td>	
+					<td><b class="tr5">{{cash_flow[11].total_cash_flow}}</b></td>	
+					<td><b class="tr5">{{cash_flow[12].total_cash_flow}}</b></td>	
+					<td><span id="ave5"></span></td>	
+					<td><span id="sum5"></span></td>
 				</tr>
 				<tr>
 					<td class="left">现金购买原材料、服务、货物</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr6">{{cash_flow[1].cash_purchase}}</td>		
+					<td class="tr6">{{cash_flow[2].cash_purchase}}</td>	
+					<td class="tr6">{{cash_flow[3].cash_purchase}}</td>	
+					<td class="tr6">{{cash_flow[4].cash_purchase}}</td>	
+					<td class="tr6">{{cash_flow[5].cash_purchase}}</td>	
+					<td class="tr6">{{cash_flow[6].cash_purchase}}</td>	
+					<td class="tr6">{{cash_flow[7].cash_purchase}}</td>	
+					<td class="tr6">{{cash_flow[8].cash_purchase}}</td>	
+					<td class="tr6">{{cash_flow[9].cash_purchase}}</td>	
+					<td class="tr6">{{cash_flow[10].cash_purchase}}</td>	
+					<td class="tr6">{{cash_flow[11].cash_purchase}}</td>	
+					<td class="tr6">{{cash_flow[12].cash_purchase}}</td>	
+					<td><span id="ave6"></span></td>	
+					<td><span id="sum6"></span></td>
 				</tr>
 				<tr>
 					<td class="left">应付账款的支付</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr7">{{cash_flow[1].accounts_payable}}</td>		
+					<td class="tr7">{{cash_flow[2].accounts_payable}}</td>	
+					<td class="tr7">{{cash_flow[3].accounts_payable}}</td>	
+					<td class="tr7">{{cash_flow[4].accounts_payable}}</td>	
+					<td class="tr7">{{cash_flow[5].accounts_payable}}</td>	
+					<td class="tr7">{{cash_flow[6].accounts_payable}}</td>	
+					<td class="tr7">{{cash_flow[7].accounts_payable}}</td>	
+					<td class="tr7">{{cash_flow[8].accounts_payable}}</td>	
+					<td class="tr7">{{cash_flow[9].accounts_payable}}</td>	
+					<td class="tr7">{{cash_flow[10].accounts_payable}}</td>	
+					<td class="tr7">{{cash_flow[11].accounts_payable}}</td>	
+					<td class="tr7">{{cash_flow[12].accounts_payable}}</td>	
+					<td><span id="ave7"></span></td>	
+					<td><span id="sum7"></span></td>
 				</tr>
 				<tr>
 					<td class="left">购货的预付款项(原材料、服务费)</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr8">{{cash_flow[1].advance_purchases}}</td>		
+					<td class="tr8">{{cash_flow[2].advance_purchases}}</td>	
+					<td class="tr8">{{cash_flow[3].advance_purchases}}</td>	
+					<td class="tr8">{{cash_flow[4].advance_purchases}}</td>	
+					<td class="tr8">{{cash_flow[5].advance_purchases}}</td>	
+					<td class="tr8">{{cash_flow[6].advance_purchases}}</td>	
+					<td class="tr8">{{cash_flow[7].advance_purchases}}</td>	
+					<td class="tr8">{{cash_flow[8].advance_purchases}}</td>	
+					<td class="tr8">{{cash_flow[9].advance_purchases}}</td>	
+					<td class="tr8">{{cash_flow[10].advance_purchases}}</td>	
+					<td class="tr8">{{cash_flow[11].advance_purchases}}</td>	
+					<td class="tr8">{{cash_flow[12].advance_purchases}}</td>	
+					<td><span id="ave8"></span></td>	
+					<td><span id="sum8"></span></td>
 				</tr>
 				<tr>
 					<td class="left"><b>经营现金流出小计(2)</b></td>			
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b class="tr9">{{cash_flow[1].total_cash_outflow}}</b></td>		
+					<td><b class="tr9">{{cash_flow[2].total_cash_outflow}}</b></td>	
+					<td><b class="tr9">{{cash_flow[3].total_cash_outflow}}</b></td>	
+					<td><b class="tr9">{{cash_flow[4].total_cash_outflow}}</b></td>	
+					<td><b class="tr9">{{cash_flow[5].total_cash_outflow}}</b></td>	
+					<td><b class="tr9">{{cash_flow[6].total_cash_outflow}}</b></td>	
+					<td><b class="tr9">{{cash_flow[7].total_cash_outflow}}</b></td>	
+					<td><b class="tr9">{{cash_flow[8].total_cash_outflow}}</b></td>	
+					<td><b class="tr9">{{cash_flow[9].total_cash_outflow}}</b></td>	
+					<td><b class="tr9">{{cash_flow[10].total_cash_outflow}}</b></td>	
+					<td><b class="tr9">{{cash_flow[11].total_cash_outflow}}</b></td>	
+					<td><b class="tr9">{{cash_flow[12].total_cash_outflow}}</b></td>	
+					<td><span id="ave9"></span></td>	
+					<td><span id="sum9"></span></td>
 				</tr>
 				<tr>
 					<td class="left">工资及劳保</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr10">{{cash_flow[1].wage_labor}}</td>		
+					<td class="tr10">{{cash_flow[2].wage_labor}}</td>	
+					<td class="tr10">{{cash_flow[3].wage_labor}}</td>	
+					<td class="tr10">{{cash_flow[4].wage_labor}}</td>	
+					<td class="tr10">{{cash_flow[5].wage_labor}}</td>	
+					<td class="tr10">{{cash_flow[6].wage_labor}}</td>	
+					<td class="tr10">{{cash_flow[7].wage_labor}}</td>	
+					<td class="tr10">{{cash_flow[8].wage_labor}}</td>	
+					<td class="tr10">{{cash_flow[9].wage_labor}}</td>	
+					<td class="tr10">{{cash_flow[10].wage_labor}}</td>	
+					<td class="tr10">{{cash_flow[11].wage_labor}}</td>	
+					<td class="tr10">{{cash_flow[12].wage_labor}}</td>	
+					<td><span id="ave10"></span></td>	
+					<td><span id="sum10"></span></td>
 				</tr>
 				<tr>
 					<td class="left">税金</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr11">{{cash_flow[1].tax}}</td>		
+					<td class="tr11">{{cash_flow[2].tax}}</td>	
+					<td class="tr11">{{cash_flow[3].tax}}</td>	
+					<td class="tr11">{{cash_flow[4].tax}}</td>	
+					<td class="tr11">{{cash_flow[5].tax}}</td>	
+					<td class="tr11">{{cash_flow[6].tax}}</td>	
+					<td class="tr11">{{cash_flow[7].tax}}</td>	
+					<td class="tr11">{{cash_flow[8].tax}}</td>	
+					<td class="tr11">{{cash_flow[9].tax}}</td>	
+					<td class="tr11">{{cash_flow[10].tax}}</td>	
+					<td class="tr11">{{cash_flow[11].tax}}</td>	
+					<td class="tr11">{{cash_flow[12].tax}}</td>	
+					<td><span id="ave11"></span></td>	
+					<td><span id="sum11"></span></td>
 				</tr>
 				<tr>
 					<td class="left">交通费用</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr12">{{cash_flow[1].transportation_costs}}</td>		
+					<td class="tr12">{{cash_flow[2].transportation_costs}}</td>	
+					<td class="tr12">{{cash_flow[3].transportation_costs}}</td>	
+					<td class="tr12">{{cash_flow[4].transportation_costs}}</td>	
+					<td class="tr12">{{cash_flow[5].transportation_costs}}</td>	
+					<td class="tr12">{{cash_flow[6].transportation_costs}}</td>	
+					<td class="tr12">{{cash_flow[7].transportation_costs}}</td>	
+					<td class="tr12">{{cash_flow[8].transportation_costs}}</td>	
+					<td class="tr12">{{cash_flow[9].transportation_costs}}</td>	
+					<td class="tr12">{{cash_flow[10].transportation_costs}}</td>	
+					<td class="tr12">{{cash_flow[11].transportation_costs}}</td>	
+					<td class="tr12">{{cash_flow[12].transportation_costs}}</td>	
+					<td><span id="ave12"></span></td>	
+					<td><span id="sum12"></span></td>
 				</tr>
 				<tr>
 					<td class="left">租金</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr13">{{cash_flow[1].rent}}</td>		
+					<td class="tr13">{{cash_flow[2].rent}}</td>	
+					<td class="tr13">{{cash_flow[3].rent}}</td>	
+					<td class="tr13">{{cash_flow[4].rent}}</td>	
+					<td class="tr13">{{cash_flow[5].rent}}</td>	
+					<td class="tr13">{{cash_flow[6].rent}}</td>	
+					<td class="tr13">{{cash_flow[7].rent}}</td>	
+					<td class="tr13">{{cash_flow[8].rent}}</td>	
+					<td class="tr13">{{cash_flow[9].rent}}</td>	
+					<td class="tr13">{{cash_flow[10].rent}}</td>	
+					<td class="tr13">{{cash_flow[11].rent}}</td>	
+					<td class="tr13">{{cash_flow[12].rent}}</td>	
+					<td><span id="ave13"></span></td>	
+					<td><span id="sum13"></span></td>
 				</tr>
 				<tr>
 					<td class="left">维护费用</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr14">{{cash_flow[1].maintenance_fees}}</td>		
+					<td class="tr14">{{cash_flow[2].maintenance_fees}}</td>	
+					<td class="tr14">{{cash_flow[3].maintenance_fees}}</td>	
+					<td class="tr14">{{cash_flow[4].maintenance_fees}}</td>	
+					<td class="tr14">{{cash_flow[5].maintenance_fees}}</td>	
+					<td class="tr14">{{cash_flow[6].maintenance_fees}}</td>	
+					<td class="tr14">{{cash_flow[7].maintenance_fees}}</td>	
+					<td class="tr14">{{cash_flow[8].maintenance_fees}}</td>	
+					<td class="tr14">{{cash_flow[9].maintenance_fees}}</td>	
+					<td class="tr14">{{cash_flow[10].maintenance_fees}}</td>	
+					<td class="tr14">{{cash_flow[11].maintenance_fees}}</td>	
+					<td class="tr14">{{cash_flow[12].maintenance_fees}}</td>	
+					<td><span id="ave14"></span></td>	
+					<td><span id="sum14"></span></td>
 				</tr>
 				<tr>
 					<td class="left">水电费用</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr15">{{cash_flow[1].utility_bills}}</td>		
+					<td class="tr15">{{cash_flow[2].utility_bills}}</td>	
+					<td class="tr15">{{cash_flow[3].utility_bills}}</td>	
+					<td class="tr15">{{cash_flow[4].utility_bills}}</td>	
+					<td class="tr15">{{cash_flow[5].utility_bills}}</td>	
+					<td class="tr15">{{cash_flow[6].utility_bills}}</td>	
+					<td class="tr15">{{cash_flow[7].utility_bills}}</td>	
+					<td class="tr15">{{cash_flow[8].utility_bills}}</td>	
+					<td class="tr15">{{cash_flow[9].utility_bills}}</td>	
+					<td class="tr15">{{cash_flow[10].utility_bills}}</td>	
+					<td class="tr15">{{cash_flow[11].utility_bills}}</td>	
+					<td class="tr15">{{cash_flow[12].utility_bills}}</td>	
+					<td><span id="ave15"></span></td>	
+					<td><span id="sum15"></span></td>
 				</tr>
 				<tr>
 					<td class="left">通讯费用</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr16">{{cash_flow[1].advertising_fees}}</td>		
+					<td class="tr16">{{cash_flow[2].advertising_fees}}</td>	
+					<td class="tr16">{{cash_flow[3].advertising_fees}}</td>	
+					<td class="tr16">{{cash_flow[4].advertising_fees}}</td>	
+					<td class="tr16">{{cash_flow[5].advertising_fees}}</td>	
+					<td class="tr16">{{cash_flow[6].advertising_fees}}</td>	
+					<td class="tr16">{{cash_flow[7].advertising_fees}}</td>	
+					<td class="tr16">{{cash_flow[8].advertising_fees}}</td>	
+					<td class="tr16">{{cash_flow[9].advertising_fees}}</td>	
+					<td class="tr16">{{cash_flow[10].advertising_fees}}</td>	
+					<td class="tr16">{{cash_flow[11].advertising_fees}}</td>	
+					<td class="tr16">{{cash_flow[12].advertising_fees}}</td>	
+					<td><span id="ave16"></span></td>	
+					<td><span id="sum16"></span></td>
 				</tr>
 				<tr>
 					<td class="left">招待费用</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr17">{{cash_flow[1].social_intercourse_fees}}</td>		
+					<td class="tr17">{{cash_flow[2].social_intercourse_fees}}</td>	
+					<td class="tr17">{{cash_flow[3].social_intercourse_fees}}</td>	
+					<td class="tr17">{{cash_flow[4].social_intercourse_fees}}</td>	
+					<td class="tr17">{{cash_flow[5].social_intercourse_fees}}</td>	
+					<td class="tr17">{{cash_flow[6].social_intercourse_fees}}</td>	
+					<td class="tr17">{{cash_flow[7].social_intercourse_fees}}</td>	
+					<td class="tr17">{{cash_flow[8].social_intercourse_fees}}</td>	
+					<td class="tr17">{{cash_flow[9].social_intercourse_fees}}</td>	
+					<td class="tr17">{{cash_flow[10].social_intercourse_fees}}</td>	
+					<td class="tr17">{{cash_flow[11].social_intercourse_fees}}</td>	
+					<td class="tr17">{{cash_flow[12].social_intercourse_fees}}</td>	
+					<td><span id="ave17"></span></td>	
+					<td><span id="sum17"></span></td>
 				</tr>
+				{%- for obj in cash_flow_assist_0 %}
 				<tr>
-					<td class="left">其他费用</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="left">{{obj.name}}</td>			
+					<td class="tr18">{{obj.month_1}}</td>		
+					<td class="tr18">{{obj.month_2}}</td>	
+					<td class="tr18">{{obj.month_3}}</td>	
+					<td class="tr18">{{obj.month_4}}</td>	
+					<td class="tr18">{{obj.month_5}}</td>	
+					<td class="tr18">{{obj.month_6}}</td>	
+					<td class="tr18">{{obj.month_7}}</td>	
+					<td class="tr18">{{obj.month_8}}</td>	
+					<td class="tr18">{{obj.month_9}}</td>	
+					<td class="tr18">{{obj.month_10}}</td>	
+					<td class="tr18">{{obj.month_11}}</td>	
+					<td class="tr18">{{obj.month_12}}</td>	
+					<td><b name="ave18">{{((obj.month_1|int + obj.month_2|int + obj.month_3|int + obj.month_4|int + obj.month_5|int + obj.month_6|int + obj.month_7|int + obj.month_8|int + obj.month_9|int + obj.month_10|int + obj.month_11|int + obj.month_12|int)/12)|round(2)}}</b></td>	
+					<td><b name="sum18">{{obj.month_1|int + obj.month_2|int + obj.month_3|int + obj.month_4|int + obj.month_5|int + obj.month_6|int + obj.month_7|int + obj.month_8|int + obj.month_9|int + obj.month_10|int + obj.month_11|int + obj.month_12|int}}</b></td>
 				</tr>
+				{%- endfor %}
 				<tr>
 					<td class="left"><b>固定成本小计(3)</b></td>			
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b class="tr19">{{cash_flow[1].fixed_costs}}</b></td>		
+					<td><b class="tr19">{{cash_flow[2].fixed_costs}}</b></td>	
+					<td><b class="tr19">{{cash_flow[3].fixed_costs}}</b></td>	
+					<td><b class="tr19">{{cash_flow[4].fixed_costs}}</b></td>	
+					<td><b class="tr19">{{cash_flow[5].fixed_costs}}</b></td>	
+					<td><b class="tr19">{{cash_flow[6].fixed_costs}}</b></td>	
+					<td><b class="tr19">{{cash_flow[7].fixed_costs}}</b></td>	
+					<td><b class="tr19">{{cash_flow[8].fixed_costs}}</b></td>	
+					<td><b class="tr19">{{cash_flow[9].fixed_costs}}</b></td>	
+					<td><b class="tr19">{{cash_flow[10].fixed_costs}}</b></td>	
+					<td><b class="tr19">{{cash_flow[11].fixed_costs}}</b></td>	
+					<td><b class="tr19">{{cash_flow[12].fixed_costs}}</b></td>	
+					<td><span id="ave19"></span></td>	
+					<td><span id="sum19"></span></td>
 				</tr>
 				<tr>
 					<td class="left"><b>付款总额(4)=(2)+(3)</b></td>			
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b class="tr20">{{cash_flow[1].fkze}}</b></td>		
+					<td><b class="tr20">{{cash_flow[2].fkze}}</b></td>	
+					<td><b class="tr20">{{cash_flow[3].fkze}}</b></td>	
+					<td><b class="tr20">{{cash_flow[4].fkze}}</b></td>	
+					<td><b class="tr20">{{cash_flow[5].fkze}}</b></td>	
+					<td><b class="tr20">{{cash_flow[6].fkze}}</b></td>	
+					<td><b class="tr20">{{cash_flow[7].fkze}}</b></td>	
+					<td><b class="tr20">{{cash_flow[8].fkze}}</b></td>	
+					<td><b class="tr20">{{cash_flow[9].fkze}}1</b></td>	
+					<td><b class="tr20">{{cash_flow[10].fkze}}</b></td>	
+					<td><b class="tr20">{{cash_flow[11].fkze}}</b></td>	
+					<td><b class="tr20">{{cash_flow[12].fkze}}</b></td>	
+					<td><span id="ave20"></span></td>	
+					<td><span id="sum20"></span></td>
 				</tr>
 				<tr>
 					<td class="left"><b>营业活动现金净流量(5)=(1)-(4)</b></td>			
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b class="tr21">{{cash_flow[1].yyhdxj}}</b></td>		
+					<td><b class="tr21">{{cash_flow[2].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[3].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[4].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[5].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[6].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[7].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[8].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[9].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[10].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[11].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[12].yyhdxj}}</b></td>	
+					<td><span id="ave21"></span></td>	
+					<td><span id="sum21"></span></td>
 				</tr>
 				<tr>
 					<td class="left">购买新固定资产的支出</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>
-				<tr>
-					<td class="left">建设和装修等的支出</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>
-				<tr>
-					<td class="left">其他支出</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr22">{{cash_flow[1].fixed_asset_investment}}</td>		
+					<td class="tr22">{{cash_flow[2].fixed_asset_investment}}</td>	
+					<td class="tr22">{{cash_flow[3].fixed_asset_investment}}</td>	
+					<td class="tr22">{{cash_flow[4].fixed_asset_investment}}</td>	
+					<td class="tr22">{{cash_flow[5].fixed_asset_investment}}</td>	
+					<td class="tr22">{{cash_flow[6].fixed_asset_investment}}</td>	
+					<td class="tr22">{{cash_flow[7].fixed_asset_investment}}</td>	
+					<td class="tr22">{{cash_flow[8].fixed_asset_investment}}</td>	
+					<td class="tr22">{{cash_flow[9].fixed_asset_investment}}</td>	
+					<td class="tr22">{{cash_flow[10].fixed_asset_investment}}</td>	
+					<td class="tr22">{{cash_flow[11].fixed_asset_investment}}</td>	
+					<td class="tr22">{{cash_flow[12].fixed_asset_investment}}</td>	
+					<td><span id="ave22"></span></td>	
+					<td><span id="sum22"></span></td>
 				</tr>
 				<tr>
 					<td class="left">固定资产出售流入</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr23">{{cash_flow[1].disposal_of_fixed_assets}}</td>		
+					<td class="tr23">{{cash_flow[2].disposal_of_fixed_assets}}</td>	
+					<td class="tr23">{{cash_flow[3].disposal_of_fixed_assets}}</td>	
+					<td class="tr23">{{cash_flow[4].disposal_of_fixed_assets}}</td>	
+					<td class="tr23">{{cash_flow[5].disposal_of_fixed_assets}}</td>	
+					<td class="tr23">{{cash_flow[6].disposal_of_fixed_assets}}</td>	
+					<td class="tr23">{{cash_flow[7].disposal_of_fixed_assets}}</td>	
+					<td class="tr23">{{cash_flow[8].disposal_of_fixed_assets}}</td>	
+					<td class="tr23">{{cash_flow[9].disposal_of_fixed_assets}}</td>	
+					<td class="tr23">{{cash_flow[10].disposal_of_fixed_assets}}</td>	
+					<td class="tr23">{{cash_flow[11].disposal_of_fixed_assets}}</td>	
+					<td class="tr23">{{cash_flow[12].disposal_of_fixed_assets}}</td>	
+					<td><span id="ave23"></span></td>	
+					<td><span id="sum23"></span></td>
 				</tr>
 				<tr>
-					<td class="left">其他流入</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="left"><b>投资活动总现金流(6)</b></td>			
+					<td><b class="tr24">{{cash_flow[1].investment_cash_flow}}</b></td>		
+					<td><b class="tr24">{{cash_flow[2].investment_cash_flow}}</b></td>	
+					<td><b class="tr24">{{cash_flow[3].investment_cash_flow}}</b></td>	
+					<td><b class="tr24">{{cash_flow[4].investment_cash_flow}}</b></td>	
+					<td><b class="tr24">{{cash_flow[5].investment_cash_flow}}</b></td>	
+					<td><b class="tr24">{{cash_flow[6].investment_cash_flow}}</b></td>	
+					<td><b class="tr24">{{cash_flow[7].investment_cash_flow}}</b></td>	
+					<td><b class="tr24">{{cash_flow[8].investment_cash_flow}}</b></td>	
+					<td><b class="tr24">{{cash_flow[9].investment_cash_flow}}</b></td>	
+					<td><b class="tr24">{{cash_flow[10].investment_cash_flow}}</b></td>	
+					<td><b class="tr24">{{cash_flow[11].investment_cash_flow}}</b></td>	
+					<td><b class="tr24">{{cash_flow[12].investment_cash_flow}}</b></td>	
+					<td><span id="ave24"></span></td>	
+					<td><span id="sum24"></span></td>
 				</tr>
 				<tr>
-					<td class="left"><b>投资活动总现金流(7)</b></td>			
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="left">银行贷款</td>			
+					<td class="tr25">{{cash_flow[1].bank_loans}}</td>		
+					<td class="tr25">{{cash_flow[2].bank_loans}}</td>	
+					<td class="tr25">{{cash_flow[3].bank_loans}}</td>	
+					<td class="tr25">{{cash_flow[4].bank_loans}}</td>	
+					<td class="tr25">{{cash_flow[5].bank_loans}}</td>	
+					<td class="tr25">{{cash_flow[6].bank_loans}}</td>	
+					<td class="tr25">{{cash_flow[7].bank_loans}}</td>	
+					<td class="tr25">{{cash_flow[8].bank_loans}}</td>	
+					<td class="tr25">{{cash_flow[9].bank_loans}}</td>	
+					<td class="tr25">{{cash_flow[10].bank_loans}}</td>	
+					<td class="tr25">{{cash_flow[11].bank_loans}}</td>	
+					<td class="tr25">{{cash_flow[12].bank_loans}}</td>	
+					<td><span id="ave25"></span></td>	
+					<td><span id="sum25"></span></td>
 				</tr>
+				{%- for obj in cash_flow_assist_1 %}
+				<tr>		
+					<td class="left">{{obj.name}}</td>			
+					<td class="tr26">{{obj.month_1}}</td>		
+					<td class="tr26">{{obj.month_2}}</td>	
+					<td class="tr26">{{obj.month_3}}</td>	
+					<td class="tr26">{{obj.month_4}}</td>	
+					<td class="tr26">{{obj.month_5}}</td>	
+					<td class="tr26">{{obj.month_6}}</td>	
+					<td class="tr26">{{obj.month_7}}</td>	
+					<td class="tr26">{{obj.month_8}}</td>	
+					<td class="tr26">{{obj.month_9}}</td>	
+					<td class="tr26">{{obj.month_10}}</td>	
+					<td class="tr26">{{obj.month_11}}</td>	
+					<td class="tr26">{{obj.month_12}}</td>	
+					<td><b name="ave26">{{((obj.month_1|int + obj.month_2|int + obj.month_3|int + obj.month_4|int + obj.month_5|int + obj.month_6|int + obj.month_7|int + obj.month_8|int + obj.month_9|int + obj.month_10|int + obj.month_11|int + obj.month_12|int)/12)|round(2)}}</b></td>	
+					<td><b name="sum26">{{obj.month_1|int + obj.month_2|int + obj.month_3|int + obj.month_4|int + obj.month_5|int + obj.month_6|int + obj.month_7|int + obj.month_8|int + obj.month_9|int + obj.month_10|int + obj.month_11|int + obj.month_12|int}}</b></td>
+				</tr>
+				{%- endfor %}
 				<tr>
-					<td class="left">其他现金来源</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="left">偿还银行贷款本金及利息</td>			
+					<td class="tr27">{{cash_flow[1].repayments_bank}}</td>		
+					<td class="tr27">{{cash_flow[2].repayments_bank}}</td>	
+					<td class="tr27">{{cash_flow[3].repayments_bank}}</td>	
+					<td class="tr27">{{cash_flow[4].repayments_bank}}</td>	
+					<td class="tr27">{{cash_flow[5].repayments_bank}}</td>	
+					<td class="tr27">{{cash_flow[6].repayments_bank}}</td>	
+					<td class="tr27">{{cash_flow[7].repayments_bank}}</td>	
+					<td class="tr27">{{cash_flow[8].repayments_bank}}</td>	
+					<td class="tr27">{{cash_flow[9].repayments_bank}}</td>	
+					<td class="tr27">{{cash_flow[10].repayments_bank}}</td>	
+					<td class="tr27">{{cash_flow[11].repayments_bank}}</td>	
+					<td class="tr27">{{cash_flow[12].repayments_bank}}</td>	
+					<td><span id="ave27"></span></td>	
+					<td><span id="sum27"></span></td>
 				</tr>
+				{%- for obj in cash_flow_assist_2 %}
+				<tr>		
+					<td class="left">{{obj.name}}</td>			
+					<td class="tr28">{{obj.month_1}}</td>		
+					<td class="tr28">{{obj.month_2}}</td>	
+					<td class="tr28">{{obj.month_3}}</td>	
+					<td class="tr28">{{obj.month_4}}</td>	
+					<td class="tr28">{{obj.month_5}}</td>	
+					<td class="tr28">{{obj.month_6}}</td>	
+					<td class="tr28">{{obj.month_7}}</td>	
+					<td class="tr28">{{obj.month_8}}</td>	
+					<td class="tr28">{{obj.month_9}}</td>	
+					<td class="tr28">{{obj.month_10}}</td>	
+					<td class="tr28">{{obj.month_11}}</td>	
+					<td class="tr28">{{obj.month_12}}</td>	
+					<td><b name="ave28">{{((obj.month_1|int + obj.month_2|int + obj.month_3|int + obj.month_4|int + obj.month_5|int + obj.month_6|int + obj.month_7|int + obj.month_8|int + obj.month_9|int + obj.month_10|int + obj.month_11|int + obj.month_12|int)/12)|round(2)}}</b></td>	
+					<td><b name="sum28">{{obj.month_1|int + obj.month_2|int + obj.month_3|int + obj.month_4|int + obj.month_5|int + obj.month_6|int + obj.month_7|int + obj.month_8|int + obj.month_9|int + obj.month_10|int + obj.month_11|int + obj.month_12|int}}</b></td>
+				</tr>
+				{%- endfor %}
+				<tr>
+					<td class="left"><b>融资活动总现金流(7)</b></td>			
+					<td><b class="tr29">{{cash_flow[1].financing_cash_flow}}</b></td>		
+					<td><b class="tr29">{{cash_flow[2].financing_cash_flow}}</b></td>	
+					<td><b class="tr29">{{cash_flow[3].financing_cash_flow}}</b></td>	
+					<td><b class="tr29">{{cash_flow[4].financing_cash_flow}}</b></td>	
+					<td><b class="tr29">{{cash_flow[5].financing_cash_flow}}</b></td>	
+					<td><b class="tr29">{{cash_flow[6].financing_cash_flow}}</b></td>	
+					<td><b class="tr29">{{cash_flow[7].financing_cash_flow}}</b></td>	
+					<td><b class="tr29">{{cash_flow[8].financing_cash_flow}}</b></td>	
+					<td><b class="tr29">{{cash_flow[9].financing_cash_flow}}</b></td>	
+					<td><b class="tr29">{{cash_flow[10].financing_cash_flow}}</b></td>	
+					<td><b class="tr29">{{cash_flow[11].financing_cash_flow}}</b></td>	
+					<td><b class="tr29">{{cash_flow[12].financing_cash_flow}}</b></td>	
+					<td><span id="ave29"></span></td>	
+					<td><span id="sum29"></span></td>
+				</tr>
+				{%- for obj in cash_flow_assist_3 %}
+				<tr>
+					<td class="left">{{obj.name}}</td>			
+					<td class="tr30_{{obj.id}}">{{obj.month_1}}</td>		
+					<td class="tr30">{{obj.month_2}}</td>	
+					<td class="tr30">{{obj.month_3}}</td>	
+					<td class="tr30">{{obj.month_4}}</td>	
+					<td class="tr30">{{obj.month_5}}</td>	
+					<td class="tr30">{{obj.month_6}}</td>	
+					<td class="tr30">{{obj.month_7}}</td>	
+					<td class="tr30">{{obj.month_8}}</td>	
+					<td class="tr30">{{obj.month_9}}</td>	
+					<td class="tr30">{{obj.month_10}}</td>	
+					<td class="tr30">{{obj.month_11}}</td>	
+					<td class="tr30">{{obj.month_12}}</td>	
+					<td><b name="ave30">{{((obj.month_1|int + obj.month_2|int + obj.month_3|int + obj.month_4|int + obj.month_5|int + obj.month_6|int + obj.month_7|int + obj.month_8|int + obj.month_9|int + obj.month_10|int + obj.month_11|int + obj.month_12|int)/12)|round(2)}}</b></td>	
+					<td><b name="sum30">{{obj.month_1|int + obj.month_2|int + obj.month_3|int + obj.month_4|int + obj.month_5|int + obj.month_6|int + obj.month_7|int + obj.month_8|int + obj.month_9|int + obj.month_10|int + obj.month_11|int + obj.month_12|int}}</b></td>
+				</tr>
+				{%- endfor %}
 				<tr>
 					<td class="left">家庭开支</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr31">{{cash_flow[1].household_expenditure}}</td>		
+					<td class="tr31">{{cash_flow[2].household_expenditure}}</td>	
+					<td class="tr31">{{cash_flow[3].household_expenditure}}</td>	
+					<td class="tr31">{{cash_flow[4].household_expenditure}}</td>	
+					<td class="tr31">{{cash_flow[5].household_expenditure}}</td>	
+					<td class="tr31">{{cash_flow[6].household_expenditure}}</td>	
+					<td class="tr31">{{cash_flow[7].household_expenditure}}</td>	
+					<td class="tr31">{{cash_flow[8].household_expenditure}}</td>	
+					<td class="tr31">{{cash_flow[9].household_expenditure}}</td>	
+					<td class="tr31">{{cash_flow[10].household_expenditure}}</td>	
+					<td class="tr31">{{cash_flow[11].household_expenditure}}</td>	
+					<td class="tr31">{{cash_flow[12].household_expenditure}}</td>	
+					<td><span id="ave31"></span></td>	
+					<td><span id="sum31"></span></td>
 				</tr>
 				<tr>
 					<td class="left">私人使用资金</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="tr32">{{cash_flow[1].private_use}}</td>		
+					<td class="tr32">{{cash_flow[2].private_use}}</td>	
+					<td class="tr32">{{cash_flow[3].private_use}}</td>	
+					<td class="tr32">{{cash_flow[4].private_use}}</td>	
+					<td class="tr32">{{cash_flow[5].private_use}}</td>	
+					<td class="tr32">{{cash_flow[6].private_use}}</td>	
+					<td class="tr32">{{cash_flow[7].private_use}}</td>	
+					<td class="tr32">{{cash_flow[8].private_use}}</td>	
+					<td class="tr32">{{cash_flow[9].private_use}}</td>	
+					<td class="tr32">{{cash_flow[10].private_use}}</td>	
+					<td class="tr32">{{cash_flow[11].private_use}}</td>	
+					<td class="tr32">{{cash_flow[12].private_use}}</td>	
+					<td><span id="ave32"></span></td>	
+					<td><span id="sum32"></span></td>
 				</tr>
 				<tr>
 					<td class="left"><b>私人现金流总额(8)</b></td>			
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b class="tr33">{{cash_flow[1].private_cash_flow}}</b></td>		
+					<td><b class="tr33">{{cash_flow[2].private_cash_flow}}</b></td>	
+					<td><b class="tr33">{{cash_flow[3].private_cash_flow}}</b></td>	
+					<td><b class="tr33">{{cash_flow[4].private_cash_flow}}</b></td>	
+					<td><b class="tr33">{{cash_flow[5].private_cash_flow}}</b></td>	
+					<td><b class="tr33">{{cash_flow[6].private_cash_flow}}</b></td>	
+					<td><b class="tr33">{{cash_flow[7].private_cash_flow}}</b></td>	
+					<td><b class="tr33">{{cash_flow[8].private_cash_flow}}</b></td>	
+					<td><b class="tr33">{{cash_flow[9].private_cash_flow}}</b></td>	
+					<td><b class="tr33">{{cash_flow[10].private_cash_flow}}</b></td>	
+					<td><b class="tr33">{{cash_flow[11].private_cash_flow}}</b></td>	
+					<td><b class="tr33">{{cash_flow[12].private_cash_flow}}</b></td>	
+					<td><span id="ave33"></span></td>	
+					<td><span id="sum33"></span></td>
 				</tr>
 				<tr>
 					<td class="left"><b>累计现金(9)=(5)+(6)+(7)+(8)</b></td>			
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b class="tr34">{{cash_flow[1].ljxj}}</b></td>		
+					<td><b class="tr34">{{cash_flow[2].ljxj}}</b></td>	
+					<td><b class="tr34">{{cash_flow[3].ljxj}}</b></td>	
+					<td><b class="tr34">{{cash_flow[4].ljxj}}</b></td>	
+					<td><b class="tr34">{{cash_flow[5].ljxj}}</b></td>	
+					<td><b class="tr34">{{cash_flow[6].ljxj}}</b></td>	
+					<td><b class="tr34">{{cash_flow[7].ljxj}}</b></td>	
+					<td><b class="tr34">{{cash_flow[8].ljxj}}</b></td>	
+					<td><b class="tr34">{{cash_flow[9].ljxj}}</b></td>	
+					<td><b class="tr34">{{cash_flow[10].ljxj}}</b></td>	
+					<td><b class="tr34">{{cash_flow[11].ljxj}}</b></td>	
+					<td><b class="tr34">{{cash_flow[12].ljxj}}</b></td>	
+					<td><span id="ave34"></span></td>	
+					<td><span id="sum34"></span></td>
 				</tr>
 				<tr>
 					<td class="left"><b>期末现金(11)=(10)+(9)</b></td>			
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b class="tr35">{{cash_flow[1].qmxj}}</b></td>		
+					<td><b class="tr35">{{cash_flow[2].qmxj}}</b></td>	
+					<td><b class="tr35">{{cash_flow[3].qmxj}}</b></td>	
+					<td><b class="tr35">{{cash_flow[4].qmxj}}</b></td>	
+					<td><b class="tr35">{{cash_flow[5].qmxj}}</b></td>	
+					<td><b class="tr35">{{cash_flow[6].qmxj}}</b></td>	
+					<td><b class="tr35">{{cash_flow[7].qmxj}}</b></td>	
+					<td><b class="tr35">{{cash_flow[8].qmxj}}</b></td>	
+					<td><b class="tr35">{{cash_flow[9].qmxj}}</b></td>	
+					<td><b class="tr35">{{cash_flow[10].qmxj}}</b></td>	
+					<td><b class="tr35">{{cash_flow[11].qmxj}}</b></td>	
+					<td><b class="tr35">{{cash_flow[12].qmxj}}</b></td>	
+					<td><span id="ave35"></span></td>	
+					<td><span id="sum35"></span></td>
 				</tr>
 				<tr>
 					<td class="left">现金流分析及说明</td>			
-					<td class="left" colspan="14"></td>		
+					<td class="left" colspan="14">{{cash_flow_dec.dec_1}}</td>		
 				</tr>
 				<tr>
 					<td class="left">0-12期现金流出/现金流入</td>			
-					<td class="left" colspan="14"></td>		
+					<td class="left" colspan="14">{{cash_flow_dec.dec_2}}</td>		
 				</tr>
 			</table>
 		</div>	
 	</div>
-
+	<script src="/static/js/jquery-1.7.2.min.js"></script>	
+	<script type="text/javascript">	
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		function sub(){
+			for(i=1;i<$("tr").length;i++){
+				var sum=0;	
+				if($(".tr"+i).length==0){					
+					$("#sum"+i).html("<b>0</b>"); 
+					$("#ave"+i).html("<b>0</b>"); 	
+				}
+				else{
+					$.each($(".tr"+i),function(key,val){ 
+						if(this.innerHTML=="")
+							sum=sum;
+						else
+							sum += parseFloat(this.innerHTML);
+						$("#sum"+i).html("<b>"+sum+"</b>");							
+						var ave=parseFloat(sum)/12
+						ave=Math.round(ave*100)/100	
+						$("#ave"+i).html("<b>"+ave+"</b>"); 
+					}); 
+				}
+			}
+			/*//可增加项相加
+			var td=$("span[name=sum18]").parent().parent().find("td")
+			$.each(td,function(key){ 
+				fot(j=0;j<parseInt(td.length/2);j++){
+					if(key<(12*j)&&key>(0+12*(j-1)){
+						if(this.innerHTML=="")
+							sum=sum;
+						else
+							sum += parseFloat(this.innerHTML);
+						$("span[name=sum18]").html("<b>"+sum+"</b>")
+					}
+				}
+					
+				
+			}); */
+		}
+	</script>
 	
 </body>
 </html>

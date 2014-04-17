@@ -60,3 +60,16 @@ def edit_zkqd(id):
 			flash('保存失败','error')
 
 		return redirect('Process/dqdc/dqdc')
+
+
+# 打印应付账款清单
+@app.route('/Process/dqdc/dy_yfzkqd/<int:id>', methods=['GET'])
+def dy_yfzkqd(id):
+	accounts_list = SC_Accounts_List.query.filter_by(loan_apply_id=id).all()
+	return render_template("Print/dy_yfzkqd.html",id=id,accounts_list=accounts_list)
+
+# 打印应收账款清单
+@app.route('/Process/dqdc/dy_yszkqd/<int:id>', methods=['GET'])
+def dy_yszkqd(id):
+	accounts_list = SC_Accounts_List.query.filter_by(loan_apply_id=id).all()
+	return render_template("Print/dy_yszkqd.html",id=id,accounts_list=accounts_list)
