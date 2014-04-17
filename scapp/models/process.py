@@ -238,14 +238,8 @@ class SC_Riskanalysis_And_Findings(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     loan_apply_id=db.Column(db.Integer)
     analysis_conclusion = db.Column(db.String(256)) #分析结论
-    amount_recommended = db.Column(db.String(32)) #建议金额(元)
-    recommended_deadline = db.Column(db.String(32)) #建议期限
-    recommended_rates = db.Column(db.String(32)) #建议利率
-    monthly_repayment_amount = db.Column(db.String(32)) #每月还款额(元)
     recommended_way_of_security = db.Column(db.String(32)) #建议担保方式
     income_ratio = db.Column(db.String(32)) #月付款占可支配收入比重
-    survey_signature = db.Column(db.String(32)) #调查人签字
-    survey_date = db.Column(db.Date) #日期
     verification = db.Column(db.Integer) #客户信息收集与核实
     others = db.Column(db.String(256)) #其他
     bool_grant = db.Column(db.String(1)) #是否发放(建议)
@@ -265,21 +259,14 @@ class SC_Riskanalysis_And_Findings(db.Model):
     modify_user = db.Column(db.Integer)
     modify_date = db.Column(db.DateTime)
 
-    def __init__(self,loan_apply_id,analysis_conclusion,amount_recommended,recommended_deadline,
-        recommended_rates,monthly_repayment_amount,recommended_way_of_security,income_ratio,
-        survey_signature,survey_date,verification,others,bool_grant,amount,deadline,rates,
+    def __init__(self,loan_apply_id,analysis_conclusion,recommended_way_of_security,income_ratio,
+        verification,others,bool_grant,amount,deadline,rates,
         monthly_repayment,approve_reason,refuse_reason,
         other_deliberations,positive,opposite):
         self.loan_apply_id = loan_apply_id
         self.analysis_conclusion = analysis_conclusion
-        self.amount_recommended = amount_recommended
-        self.recommended_deadline = recommended_deadline
-        self.recommended_rates = recommended_rates
-        self.monthly_repayment_amount = monthly_repayment_amount
         self.recommended_way_of_security = recommended_way_of_security
         self.income_ratio = income_ratio
-        self.survey_signature = survey_signature
-        self.survey_date = survey_date
         self.verification = verification
         self.others = others
         self.bool_grant = bool_grant
