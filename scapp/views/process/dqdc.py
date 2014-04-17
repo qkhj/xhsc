@@ -109,14 +109,8 @@ def edit_dqdcWd_jbqk(id):
         riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
         if riskanalysis_and_findings:
             riskanalysis_and_findings.analysis_conclusion = request.form['analysis_conclusion']
-            riskanalysis_and_findings.amount_recommended = request.form['amount_recommended']
-            riskanalysis_and_findings.recommended_deadline = request.form['recommended_deadline']
-            riskanalysis_and_findings.recommended_rates = request.form['recommended_rates']
-            riskanalysis_and_findings.monthly_repayment_amount = request.form['monthly_repayment_amount']
             riskanalysis_and_findings.recommended_way_of_security = request.form['recommended_way_of_security']
             riskanalysis_and_findings.income_ratio = request.form['income_ratio']
-            riskanalysis_and_findings.survey_signature = request.form['survey_signature']
-            riskanalysis_and_findings.survey_date = request.form['survey_date']
 
             verification_list = request.form.getlist('verification')
             riskanalysis_and_findings.verification = 0
@@ -146,10 +140,7 @@ def edit_dqdcWd_jbqk(id):
                 verification_value += int(verification_list[i])
 
             SC_Riskanalysis_And_Findings(id,request.form['analysis_conclusion'],
-                request.form['amount_recommended'],request.form['recommended_deadline'],
-                request.form['recommended_rates'],request.form['monthly_repayment_amount'],
                 request.form['recommended_way_of_security'],request.form['income_ratio'],
-                request.form['survey_signature'],request.form['survey_date'],
                 verification_value,request.form['others'],
                 request.form['bool_grant'],request.form['amount'],
                 request.form['deadline'],request.form['rates'],
@@ -203,6 +194,32 @@ def dqdcXed_jbqk(belong_customer_type,belong_customer_value,id):
         apply_info=apply_info,loan_purpose=loan_purpose,credit_history=credit_history,
         guarantees_for_others=guarantees_for_others,riskanalysis_and_findings=riskanalysis_and_findings)
 
+# 贷款调查——小额贷款(基本情况)
+@app.route('/Process/dqdc/dqdcXed_jbqk_dy/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])
+def dqdcXed_jbqk_dy(belong_customer_type,belong_customer_value,id):
+    if belong_customer_type == 'Company':
+        customer = SC_Company_Customer.query.filter_by(id=belong_customer_value).first()
+    else :
+        customer = SC_Individual_Customer.query.filter_by(id=belong_customer_value).first()
+
+    loan_apply = SC_Loan_Apply.query.filter_by(id=id).first()
+    apply_info = SC_Apply_Info.query.filter_by(loan_apply_id=id).first()
+    loan_purpose = SC_Loan_Purpose.query.order_by("id").all()
+    credit_history = SC_Credit_History.query.filter_by(loan_apply_id=id).all()
+    co_borrower = SC_Co_Borrower.query.filter_by(loan_apply_id=id).all()
+    guarantees_for_others = SC_Guarantees_For_Others.query.filter_by(loan_apply_id=id).all()
+    guaranty = SC_Guaranty.query.filter_by(loan_apply_id=id).all()
+    guarantees = SC_Guarantees.query.filter_by(loan_apply_id=id).all()
+    #financial_overview = SC_Financial_Overview.query.filter_by(loan_apply_id=id).first()
+    #non_financial_analysis = SC_Non_Financial_Analysis.query.filter_by(loan_apply_id=id).first()
+    riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
+    
+    return render_template("Print/dy_khjbxx.html",belong_customer_type=belong_customer_type,
+        belong_customer_value=belong_customer_value,id=id,customer=customer,loan_apply=loan_apply,
+        apply_info=apply_info,loan_purpose=loan_purpose,credit_history=credit_history,co_borrower=co_borrower,
+        guaranty=guaranty,guarantees=guarantees,
+        guarantees_for_others=guarantees_for_others,riskanalysis_and_findings=riskanalysis_and_findings)
+
 # 编辑贷款调查——小额贷款(基本情况)
 @app.route('/Process/dqdc/edit_dqdcXed_jbqk/<int:id>', methods=['POST'])
 def edit_dqdcXed_jbqk(id):
@@ -210,14 +227,8 @@ def edit_dqdcXed_jbqk(id):
         riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
         if riskanalysis_and_findings:
             riskanalysis_and_findings.analysis_conclusion = request.form['analysis_conclusion']
-            riskanalysis_and_findings.amount_recommended = request.form['amount_recommended']
-            riskanalysis_and_findings.recommended_deadline = request.form['recommended_deadline']
-            riskanalysis_and_findings.recommended_rates = request.form['recommended_rates']
-            riskanalysis_and_findings.monthly_repayment_amount = request.form['monthly_repayment_amount']
             riskanalysis_and_findings.recommended_way_of_security = request.form['recommended_way_of_security']
             riskanalysis_and_findings.income_ratio = request.form['income_ratio']
-            riskanalysis_and_findings.survey_signature = request.form['survey_signature']
-            riskanalysis_and_findings.survey_date = request.form['survey_date']
 
             verification_list = request.form.getlist('verification')
             riskanalysis_and_findings.verification = 0
@@ -243,10 +254,7 @@ def edit_dqdcXed_jbqk(id):
                 verification_value += int(verification_list[i])
 
             SC_Riskanalysis_And_Findings(id,request.form['analysis_conclusion'],
-                request.form['amount_recommended'],request.form['recommended_deadline'],
-                request.form['recommended_rates'],request.form['monthly_repayment_amount'],
                 request.form['recommended_way_of_security'],request.form['income_ratio'],
-                request.form['survey_signature'],request.form['survey_date'],
                 verification_value,request.form['others'],
                 request.form['bool_grant'],request.form['amount'],
                 request.form['deadline'],request.form['rates'],

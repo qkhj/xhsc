@@ -12,7 +12,7 @@ class AlchemyEncoder(json.JSONEncoder):
         if isinstance(obj.__class__, DeclarativeMeta):
             # an SQLAlchemy class
             fields = {}
-            for field in [x for x in dir(obj) if not x.startswith('_') and x != 'metadata' and x != 'query' and x != 'query_class']:
+            for field in [x for x in dir(obj) if not x.startswith('_') and x != 'metadata' and x != 'query' and x != 'query_class' and x != 'add']:
                 data = obj.__getattribute__(field)
                 try:
                     json.dumps(data, ensure_ascii = False) # this will fail on non-encodable values, like other classes

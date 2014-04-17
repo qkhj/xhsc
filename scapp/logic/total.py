@@ -28,10 +28,10 @@ class Total():
             counts = SC_Loan_Apply.query.filter("process_status='" + PROCESS_STATUS_DKSQ+"'").count()
             waiting.dksqsh = counts
         if role_level == 2:
-            sql = "process_status = " + PROCESS_STATUS_DKSQSH
-            sql += " A_loan_officer = " + str(current_user.id) + " or "
+            sql = "process_status = '" + PROCESS_STATUS_DKSQSH + "' and "
+            sql += "(A_loan_officer = " + str(current_user.id) + " or "
             sql += " B_loan_officer = " + str(current_user.id) + " or "
-            sql += " yunying_loan_officer = " + str(current_user.id) + ""
+            sql += " yunying_loan_officer = " + str(current_user.id)+")"
             counts1 = SC_Loan_Apply.query.filter(sql).count()
             waiting.dqdc = counts1
         return waiting
