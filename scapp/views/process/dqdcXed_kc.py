@@ -43,3 +43,10 @@ def new_kc(loan_apply_id):
 		flash('保存失败','error')
 			
 	return redirect('Process/dqdc/dqdc')
+
+
+# 打印库存
+@app.route('/Process/dqdc/dy_dhd/<int:loan_apply_id>', methods=['GET'])
+def dy_dhd(loan_apply_id):
+	stocks = SC_Stock.query.filter_by(loan_apply_id=loan_apply_id).all()
+	return render_template("Print/dy_dhd.html",loan_apply_id=loan_apply_id,stocks=stocks)
