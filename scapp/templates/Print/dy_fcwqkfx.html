@@ -29,54 +29,110 @@
 		</div>
 		<div>				
 			<table class="dayin">
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 21 %}
 				<tr>
 					<td class="center"><b>经营历史和资本积累</b></td>			
-					<td colspan="4">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td>		
+					<td colspan="4">{{obj.content}}</td>		
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 22 %}
 				<tr>
 					<td class="center"><b>生意现状<br/>（组织架构和市场）</b></td>			
-					<td colspan="4">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td>		
-				</tr>	
+					<td colspan="4">{{obj.content}}</td>		
+				</tr>
+					{%- endif %}
+				{%- endfor %}	
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 23 %}
 				<tr>
 					<td class="center"><b>生意现状<br/>（财务）</b></td>			
-					<td colspan="4">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td>		
-				</tr>	
+					<td colspan="4">{{obj.content}}</td>		
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+
 				<tr>
 					<td class="center" style="width:200px;"><b>自从上次申请后经营变化<br/>（重复贷款）</b></td>			
 					<td class="center" style="width:80px;"><b>生意方面</b></td>		
-					<td style="width:220px;">XXXXXXXXXXXXXXXXXXX</td>			
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 26 %}
+					<td style="width:220px;">{{obj.content}}</td>	
+						{%- endif %}
+					{%- endfor %}		
 					<td class="center" style="width:80px;"><b>生意方面</b></td>	
-					<td style="width:220px;">XXXXXXXXXXXXXXXXXXXX</td>	
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 27 %}
+					<td style="width:220px;">{{obj.content}}</td>	
+						{%- endif %}
+					{%- endfor %}	
 				</tr>	
 				<tr>
 					<td class="center"><b>过去12个月的投资情况</b></td>			
 					<td class="center"><b>生意方面</b></td>		
-					<td>XXXXXXXXXXXXXXXXXXX</td>			
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 28 %}
+					<td style="width:220px;">{{obj.content}}</td>	
+						{%- endif %}
+					{%- endfor %}			
 					<td class="center"><b>生意方面</b></td>	
-					<td>XXXXXXXXXXXXXXXXXX</td>	
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 29 %}
+					<td style="width:220px;">{{obj.content}}</td>	
+						{%- endif %}
+					{%- endfor %}		
 				</tr>
 				<tr>
 					<td class="center"><b>未来12个月的投资计划</b></td>			
 					<td class="center"><b>生意方面</b></td>		
-					<td>XXXXXXXXXXXXXXXX</td>			
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 31 %}
+					<td style="width:220px;">{{obj.content}}</td>	
+						{%- endif %}
+					{%- endfor %}			
 					<td class="center"><b>生意方面</b></td>	
-					<td>XXXXXXXXXXXXXXXXX</td>	
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 32 %}
+					<td style="width:220px;">{{obj.content}}</td>	
+						{%- endif %}
+					{%- endfor %}	
 				</tr>
 				<tr>
-					<td class="center"><b>贷款目的详细描述</b></td>			
-					<td colspan="4">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td>	
+					<td class="center"><b>贷款目的详细描述</b></td>		
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 30 %}	
+					<td colspan="4">{{obj.content}}</td>	
+						{%- endif %}
+					{%- endfor %}	
 				</tr>
 				<tr>
-					<td class="center"><b>客户/法人/实际经营人/<br/>主要股东的私人情况</b></td>			
-					<td colspan="4">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td>	
+					<td class="center"><b>客户/法人/实际经营人/<br/>主要股东的私人情况</b></td>	
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 24 %}			
+					<td colspan="4">{{obj.content}}</td>	
+						{%- endif %}
+					{%- endfor %}
 				</tr>
 				<tr>
-					<td class="center"><b>对客户的印象</b></td>			
-					<td colspan="4">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td>	
+					<td class="center"><b>对客户的印象</b></td>		
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 25 %}		
+					<td colspan="4">{{obj.content}}</td>	
+						{%- endif %}
+					{%- endfor %}
 				</tr>
 				<tr>
-					<td class="center"><b>其他还款来源分析</b></td>			
-					<td colspan="4">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td>	
+					<td class="center"><b>其他还款来源分析</b></td>	
+					{%- for obj in balance_sheets %}
+						{%- if obj.loan_type == 33 %}			
+					<td colspan="4">{{obj.content}}</td>	
+						{%- endif %}
+					{%- endfor %}
 				</tr>
 			</table>
 		</div>	

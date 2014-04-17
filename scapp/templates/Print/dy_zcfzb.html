@@ -37,142 +37,228 @@
 					<td class="left" colspan="2"><b>资产</b></td>			
 					<td class="left" colspan="2"><b>负债</b></td>	
 				</tr>
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 8 %}
 				<tr>
-					<td class="left" style="width:250px"><b>流动资产</b></td>	
-					<td style="width:170px"><b>10000000000000</b></td>						
-					<td class="left" style="width:250px"><b>短期负债</b></td>	
-					<td><b>100000000</b></td>	
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
+						{%- endif %}		
+
+						{%- if obj.loan_type == 9 %}			
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>
+					<td><b>{{obj.content}}</b></td>	
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 0 %}
 				<tr>
-					<td class="left" style="padding-left:25px;"><b>现金及银行存款</b></td>	
-					<td><b>10000</b></td>						
-					<td class="left" style="padding-left:25px;"><b>应付账款</b></td>	
-					<td><b>10000</b></td>	
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{obj.items_name}}</b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+					{%- endif %}	
+					</td>
+					<td style="width:170px"><b>{{obj.content}}</b></td>		
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} </b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} 
+					{%- endif %}	
+					</td>						
+					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_0].content}}</b></td>
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+			
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 2 %}
 				<tr>
-					<td class="left" style="padding-left:50px;">现金</td>	
-					<td>10000</td>						
-					<td class="left" style="padding-left:50px;"></td>	
-					<td></td>	
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{obj.items_name}}</b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+					{%- endif %}	
+					</td>
+					<td style="width:170px"><b>{{obj.content}}</b></td>		
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}} </b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}} 
+					{%- endif %}	
+					</td>						
+					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_2].content}}</b></td>
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+				
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 4 %}
 				<tr>
-					<td class="left" style="padding-left:50px;">银行存款</td>	
-					<td>10000</td>						
-					<td class="left" style="padding-left:50px;"></td>	
-					<td></td>	
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{obj.items_name}}</b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+					{%- endif %}	
+					</td>
+					<td style="width:170px"><b>{{obj.content}}</b></td>		
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}} </b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}} 
+					{%- endif %}	
+					</td>						
+					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_4].content}}</b></td>
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 6 %}
 				<tr>
-					<td class="left" style="padding-left:25px;"><b>应收账款</b></td>	
-					<td><b>10000</b></td>					
-					<td class="left" style="padding-left:25px;"><b>预收账款</b></td>	
-					<td><b>10000</b></td>	
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{obj.items_name}}</b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+					{%- endif %}	
+					</td>
+					<td style="width:170px"><b>{{obj.content}}</b></td>		
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}} </b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}} 
+					{%- endif %}	
+					</td>						
+					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_6].content}}</b></td>
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+					
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 10 %}
 				<tr>
-					<td class="left" style="padding-left:50px;">客户的压货</td>	
-					<td>10000</td>						
-					<td class="left" style="padding-left:50px;"></td>	
-					<td></td>	
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{obj.items_name}}</b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+					{%- endif %}	
+					</td>
+					<td style="width:170px"><b>{{obj.content}}</b></td>		
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}} </b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}} 
+					{%- endif %}	
+					</td>						
+					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_10].content}}</b></td>
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 12 %}
 				<tr>
-					<td class="left" style="padding-left:25px;"><b>预付账款</b></td>	
-					<td><b>10000</b></td>						
-					<td class="left" style="padding-left:25px;"><b>短期贷款</b></td>	
-					<td><b>10000</b></td>	
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{obj.items_name}}</b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+					{%- endif %}	
+					</td>
+					<td style="width:170px"><b>{{obj.content}}</b></td>		
+					<td class="table-label">
+					{%- if obj.index == 0 %}
+						<b>&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}} </b>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}} 
+					{%- endif %}	
+					</td>						
+					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_12].content}}</b></td>
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 15 %}
 				<tr>
-					<td class="left" style="padding-left:50px;"></td>	
-					<td></td>						
-					<td class="left" style="padding-left:50px;">信用卡透支</td>	
-					<td></td>	
+					<td></td>
+					<td></td>
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 16 %}
 				<tr>
-					<td class="left" style="padding-left:50px;"></td>	
-					<td>10000</td>						
-					<td class="left" style="padding-left:50px;">个人借贷</td>	
-					<td></td>	
+					<td></td>
+					<td></td>
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+				
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 17 %}
 				<tr>
-					<td class="left" style="padding-left:50px;"></td>	
-					<td>10000</td>						
-					<td class="left" style="padding-left:50px;">其他机构贷款</td>	
-					<td></td>	
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
+					{%- endif %}
+
+					{%- if obj.loan_type == 18 %}
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 20 %}
 				<tr>
-					<td class="left" style="padding-left:25px;"><b>存货和原材料</b></td>	
-					<td><b>10000</b></td>						
-					<td class="left" style="padding-left:25px;"><b>社会集资</b></td>	
-					<td><b>10000</b></td>	
+					<td></td>
+					<td></td>
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
 				</tr>
+					{%- endif %}
+				{%- endfor %}
+				
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 19 %}
 				<tr>
-					<td class="left" style="padding-left:50px;">给厂家的退货</td>	
-					<td>10000</td>						
-					<td class="left" style="padding-left:50px;"></td>	
-					<td></td>	
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
+					{%- endif %}
+					{%- endfor %}		
+					{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 14 %}
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
 				</tr>
-				<tr>
-					<td class="left" style="padding-left:25px;"><b>固定资产</b></td>	
-					<td><b>10000</b></td>					
-					<td class="left" style="padding-left:25px;"><b>长期负债</b></td>	
-					<td><b>10000</b></td>	
-				</tr>
-				<tr>
-					<td class="left" style="padding-left:50px;">汽车（2009年购买）</td>	
-					<td>10000</td>						
-					<td class="left" style="padding-left:50px;"></td>	
-					<td></td>	
-				</tr>
-				<tr>
-					<td class="left" style="padding-left:25px;"><b>其他资产</b></td>	
-					<td><b>10000</b></td>					
-					<td class="left" style="padding-left:25px;"><b>其他负债</b></td>	
-					<td><b>10000</b></td>	
-				</tr>
-				<tr>
-					<td class="left" style="padding-left:50px;">预付押金</td>	
-					<td>10000</td>						
-					<td class="left" style="padding-left:50px;"></td>	
-					<td></td>	
-				</tr>
-				<tr>
-					<td class="left" style="padding-left:25px;"><b></b></td>	
-					<td></td>						
-					<td class="left" style="padding-left:25px;"><b>负债总计</b></td>	
-					<td><b>10000</b></td>
-				</tr>
-				<tr>
-					<td class="left" style="padding-left:25px;"><b></b></td>	
-					<td></td>						
-					<td class="left" style="padding-left:25px;"><b>所有者权益</b></td>	
-					<td><b>10000</b></td>
-				</tr>
-				<tr>
-					<td class="left" style="padding-left:25px;"><b>资产总计</b></td>	
-					<td><b>10000</b></td>					
-					<td class="left" style="padding-left:25px;"><b>负债和所有者权益总计</b></td>	
-					<td><b>10000</b></td>	
-				</tr>
-				<tr>
-					<td class="left" style="padding-left:25px;"></td>	
-					<td></td>						
-					<td class="left" style="padding-left:25px;">负债率%</td>	
-					<td>10000</td>	
-				</tr>
-				<tr>
-					<td class="left" style="padding-left:25px;"><b>流动比率</b></td>	
-					<td></td>						
-					<td class="left" style="padding-left:25px;">速动比率</td>	
-					<td>10000</td>	
-				</tr>
+					{%- endif %}
+				{%- endfor %}
+
 				<tr>
 					<td class="left" colspan="4">表外资产负债情况及评价</td>	
 				</tr>
 				<tr>
-					<td class="left" colspan="4" style="height:50px;">XXXXXXXXXXXXXXXXXX</td>	
+					<td class="left" colspan="4" style="height:50px;"></td>	
 				</tr>
 			</table>
 		</div>	
 	</div>
-
-	
 </body>
 </html>
