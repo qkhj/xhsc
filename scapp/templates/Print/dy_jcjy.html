@@ -11,7 +11,7 @@
 		*{font-size: 12px;margin:0;}
 		table{border-collapse:collapse;}
 		.dayin{width:100%;margin-top:10px;}
-		.dayin td{border:1px solid black;}
+		.dayin td{border:1px solid black;padding-right: 10px;}
 		.dayin .left{text-align:left;}
 		.dayin .center{text-align:center;}
 		.dayin .right{text-align:right;}
@@ -34,7 +34,7 @@
 				{%- for obj in cross_examination %}
 					{%- if obj.loan_type == 0 %}
 					<tr>
-						<td colspan="1"><b>{{obj.items_name}}</b></td>
+						<td colspan="1" style="width:30%;"><b>{{obj.items_name}}</b></td>
 						<td colspan="3" style="height:60px;">{{obj.content}}</td>
 					</tr>
 					{%- endif %}
@@ -62,19 +62,19 @@
 					{%- if obj.loan_type == 3 %}							
 						<tr>
 							{%- if obj.index == 0 %}
-							<td style="padding-left:25px;" ><b>{{obj.items_name}}</b></td>	
-							<td class="right" style="width:130px;"><b>{{obj.content}}</b></td>	
+							<td style="padding-left:25px;width:30%;"><b>{{obj.items_name}}</b></td>	
+							<td class="right"><b>{{obj.content}}</b></td>	
 							{%- else %}
-							<td style="padding-left:50px;">{{obj.items_name}}</td>	
-							<td class="right" style="width:130px;">{{obj.content}}</td>	
+							<td style="padding-left:50px;width:30%;">{{obj.items_name}}</td>	
+							<td class="right">{{obj.content}}</td>	
 							{%- endif %}
 							
 							{%- if obj.index == 0 %}
-							<td style="padding-left:25px;" ><b>{{cross_examination[cross_examination.index(obj)+count_3].items_name}}</b></td>
-							<td class="right" style="width:130px;"><b>{{obj.content}}</b></td>		
+							<td style="padding-left:25px;"><b>{{cross_examination[cross_examination.index(obj)+count_3].items_name}}</b></td>
+							<td class="right" ><b>{{obj.content}}</b></td>		
 							{%- else %}
-							<td style="padding-left:50px;">{{cross_examination[cross_examination.index(obj)+count_3].items_name}}</td>
-							<td class="right" style="width:130px;">{{obj.content}}</td>		
+							<td style="padding-left:50px;width:30%;">{{cross_examination[cross_examination.index(obj)+count_3].items_name}}</td>
+							<td class="right">{{obj.content}}</td>		
 							{%- endif %}
 						</tr>
 					{%- endif %}
@@ -84,11 +84,13 @@
 						<tr>
 							{%- if obj.index == 0 %}
 							<td style="padding-left:25px;" ><b>{{obj.items_name}}</b></td>								
-							<td class="right" colspan="3"><b>{{obj.content}}</b></td>		
+							<td class="right"><b>{{obj.content}}</b></td>		
 							{%- else %}
 							<td style="padding-left:50px;">{{obj.items_name}}</td>							
-							<td class="right" colspan="3">{{obj.content}}</td>			
-							{%- endif %}						
+							<td class="right">{{obj.content}}</td>			
+							{%- endif %}	
+							<td></td>
+							<td></td>					
 						</tr>
 					{%- endif %}
 				{%- endfor %}
