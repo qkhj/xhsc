@@ -35,557 +35,600 @@
 			<table class="dayin">
 				<tr>
 					<td class="left" style="width:230px;">项目</td>			
-					<td style="width:65px;"><b>1月</b></td>		
-					<td style="width:65px;"><b>2月</b></td>	
-					<td style="width:65px;"><b>3月</b></td>	
-					<td style="width:65px;"><b>4月</b></td>	
-					<td style="width:65px;"><b>5月</b></td>	
-					<td style="width:65px;"><b>6月</b></td>	
-					<td style="width:65px;"><b>7月</b></td>	
-					<td style="width:65px;"><b>8月</b></td>	
-					<td style="width:65px;"><b>9月</b></td>	
-					<td style="width:65px;"><b>10月</b></td>	
-					<td style="width:65px;"><b>11月</b></td>	
-					<td style="width:65px;"><b>12月</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_1}}</b></td>		
+					<td style="width:65px;"><b>{{profit_loss[0].month_2}}</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_3}}</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_4}}</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_5}}</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_6}}</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_7}}</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_8}}</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_9}}</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_10}}</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_11}}</b></td>	
+					<td style="width:65px;"><b>{{profit_loss[0].month_12}}</b></td>	
 					<td style="width:70px;"><b>合计</b></td>	
 					<td><b>月均</b></td>
 				</tr>
 				<tr>
 					<td class="left" colspan="15"><b>收入</b></td>
-				</tr>	
+				</tr>
+				{%- for i in range(1,1+count_1) %}	
 				<tr>
-					<td class="left" style="padding-left:25px;">电池销售</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="left" style="padding-left:25px;">{{profit_loss[i].items_name}}</td>			
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>	
-				<tr>
-					<td class="left" style="padding-left:25px;">厂家返利</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>					
+				{%- endfor %}	
+				{%- for i in range(1+count_1,2+count_1) %}				
 				<tr>
 					<td class="right"><b>合计(1)</b></td>		
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b>{{profit_loss[i].month_1}}</b></td>		
+					<td><b>{{profit_loss[i].month_2}}</b></td>	
+					<td><b>{{profit_loss[i].month_3}}</b></td>	
+					<td><b>{{profit_loss[i].month_4}}</b></td>	
+					<td><b>{{profit_loss[i].month_5}}</b></td>	
+					<td><b>{{profit_loss[i].month_6}}</b></td>	
+					<td><b>{{profit_loss[i].month_7}}</b></td>	
+					<td><b>{{profit_loss[i].month_8}}</b></td>	
+					<td><b>{{profit_loss[i].month_9}}</b></td>	
+					<td><b>{{profit_loss[i].month_10}}</b></td>	
+					<td><b>{{profit_loss[i].month_11}}</b></td>	
+					<td><b>{{profit_loss[i].month_12}}</b></td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}	
 				<tr>
 					<td class="left" colspan="15"><b>可变成本</b></td>
-				</tr>	
+				</tr>
+				{%- for i in range(2+count_1,2+count_1+count_3) %}	
 				<tr>
-					<td class="left" style="padding-left:25px;">电池销售</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="left" style="padding-left:25px;">{{profit_loss[i].items_name}}</td>			
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>	
+				{%- endfor %}
+				{%- for i in range(2+count_1+count_3,3+count_1+count_3) %}
 				<tr>
 					<td class="right"><b>合计(2)</b></td>		
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b>{{profit_loss[i].month_1}}</b></td>		
+					<td><b>{{profit_loss[i].month_2}}</b></td>	
+					<td><b>{{profit_loss[i].month_3}}</b></td>	
+					<td><b>{{profit_loss[i].month_4}}</b></td>	
+					<td><b>{{profit_loss[i].month_5}}</b></td>	
+					<td><b>{{profit_loss[i].month_6}}</b></td>	
+					<td><b>{{profit_loss[i].month_7}}</b></td>	
+					<td><b>{{profit_loss[i].month_8}}</b></td>	
+					<td><b>{{profit_loss[i].month_9}}</b></td>	
+					<td><b>{{profit_loss[i].month_10}}</b></td>	
+					<td><b>{{profit_loss[i].month_11}}</b></td>	
+					<td><b>{{profit_loss[i].month_12}}</b></td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}
+				{%- for i in range(3+count_1+count_3,4+count_1+count_3) %}
 				<tr>
 					<td class="right"><b>毛利=(1)-(2)</b></td>		
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b>{{profit_loss[i].month_1}}</b></td>		
+					<td><b>{{profit_loss[i].month_2}}</b></td>	
+					<td><b>{{profit_loss[i].month_3}}</b></td>	
+					<td><b>{{profit_loss[i].month_4}}</b></td>	
+					<td><b>{{profit_loss[i].month_5}}</b></td>	
+					<td><b>{{profit_loss[i].month_6}}</b></td>	
+					<td><b>{{profit_loss[i].month_7}}</b></td>	
+					<td><b>{{profit_loss[i].month_8}}</b></td>	
+					<td><b>{{profit_loss[i].month_9}}</b></td>	
+					<td><b>{{profit_loss[i].month_10}}</b></td>	
+					<td><b>{{profit_loss[i].month_11}}</b></td>	
+					<td><b>{{profit_loss[i].month_12}}</b></td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}
 				<tr>
-					<td class="left" colspan="15"><b>营业费用</b></td>
+					<td class="left" colspan="15"><b>固定支出</b></td>
 				</tr>
+				{%- for i in range(4+count_1+count_3,5+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">工资</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>	
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}	
+				{%- for i in range(5+count_1+count_3,6+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">经营性房屋租赁费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>	
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}	
+				{%- for i in range(6+count_1+count_3,7+count_1+count_3) %}	
 				<tr>
 					<td class="left" style="padding-left:25px;">水费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>	
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}	
+				{%- for i in range(7+count_1+count_3,8+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">电费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>	
+				{%- endfor %}
+				{%- for i in range(8+count_1+count_3,9+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">设备损耗</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>	
+				{%- endfor %}
+				{%- for i in range(9+count_1+count_3,10+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">伙食费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>	
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}	
+				{%- for i in range(10+count_1+count_3,11+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">电话费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>	
+				{%- endfor %}
+				{%- for i in range(11+count_1+count_3,12+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">公关费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>	
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}
+				{%- for i in range(12+count_1+count_3,13+count_1+count_3) %}	
 				<tr>
 					<td class="left" style="padding-left:25px;">汽车维修费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>	
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}	
+				{%- for i in range(13+count_1+count_3,14+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">机器维修费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>	
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}
+				{%- for i in range(14+count_1+count_3,15+count_1+count_3) %}	
 				<tr>
 					<td class="left" style="padding-left:25px;">广告费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>	
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}
+				{%- for i in range(15+count_1+count_3,16+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">运输邮费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}
+				{%- for i in range(16+count_1+count_3,17+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">物业管理费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>			
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}	
+				{%- for i in range(17+count_1+count_3,18+count_1+count_3) %}		
 				<tr>
 					<td class="left" style="padding-left:25px;">生产许可合格证</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}	
+				{%- for i in range(18+count_1+count_3,19+count_1+count_3) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">保险费</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}	
+				{%- for i in range(19+count_1+count_3,19+count_1+count_3+count_21) %}
 				<tr>
-					<td class="left" style="padding-left:25px;">其他</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="left" style="padding-left:25px;">{{profit_loss[i].items_name}}</td>			
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}	
+				{%- for i in range(19+count_1+count_3+count_21,20+count_1+count_3+count_21) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">税收</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>	
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}
+				{%- for i in range(20+count_1+count_3+count_21,21+count_1+count_3+count_21) %}	
 				<tr>
 					<td class="right"><b>总计(3)</b></td>		
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b>{{profit_loss[i].month_1}}</b></td>		
+					<td><b>{{profit_loss[i].month_2}}</b></td>	
+					<td><b>{{profit_loss[i].month_3}}</b></td>	
+					<td><b>{{profit_loss[i].month_4}}</b></td>	
+					<td><b>{{profit_loss[i].month_5}}</b></td>	
+					<td><b>{{profit_loss[i].month_6}}</b></td>	
+					<td><b>{{profit_loss[i].month_7}}</b></td>	
+					<td><b>{{profit_loss[i].month_8}}</b></td>	
+					<td><b>{{profit_loss[i].month_9}}</b></td>	
+					<td><b>{{profit_loss[i].month_10}}</b></td>	
+					<td><b>{{profit_loss[i].month_11}}</b></td>	
+					<td><b>{{profit_loss[i].month_12}}</b></td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}
+				{%- for i in range(21+count_1+count_3+count_21,22+count_1+count_3+count_21) %}	
 				<tr>
 					<td class="right"><b>分期还款（经营）(4)</b></td>		
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b>{{profit_loss[i].month_1}}</b></td>		
+					<td><b>{{profit_loss[i].month_2}}</b></td>	
+					<td><b>{{profit_loss[i].month_3}}</b></td>	
+					<td><b>{{profit_loss[i].month_4}}</b></td>	
+					<td><b>{{profit_loss[i].month_5}}</b></td>	
+					<td><b>{{profit_loss[i].month_6}}</b></td>	
+					<td><b>{{profit_loss[i].month_7}}</b></td>	
+					<td><b>{{profit_loss[i].month_8}}</b></td>	
+					<td><b>{{profit_loss[i].month_9}}</b></td>	
+					<td><b>{{profit_loss[i].month_10}}</b></td>	
+					<td><b>{{profit_loss[i].month_11}}</b></td>	
+					<td><b>{{profit_loss[i].month_12}}</b></td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}
+				{%- for i in range(22+count_1+count_3+count_21,23+count_1+count_3+count_21) %}
 				<tr>
 					<td class="right"><b>净利润=(1)-(2)-(3)-(4)</b></td>		
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td><b>{{profit_loss[i].month_1}}</b></td>		
+					<td><b>{{profit_loss[i].month_2}}</b></td>	
+					<td><b>{{profit_loss[i].month_3}}</b></td>	
+					<td><b>{{profit_loss[i].month_4}}</b></td>	
+					<td><b>{{profit_loss[i].month_5}}</b></td>	
+					<td><b>{{profit_loss[i].month_6}}</b></td>	
+					<td><b>{{profit_loss[i].month_7}}</b></td>	
+					<td><b>{{profit_loss[i].month_8}}</b></td>	
+					<td><b>{{profit_loss[i].month_9}}</b></td>	
+					<td><b>{{profit_loss[i].month_10}}</b></td>	
+					<td><b>{{profit_loss[i].month_11}}</b></td>	
+					<td><b>{{profit_loss[i].month_12}}</b></td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}
+				{%- for i in range(23+count_1+count_3+count_21,24+count_1+count_3+count_21) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">家庭开支</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
-				</tr>	
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
+				</tr>
+				{%- endfor %}	
+				{%- for i in range(24+count_1+count_3+count_21,25+count_1+count_3+count_21) %}
 				<tr>
 					<td class="left" style="padding-left:25px;">分期付款(私人用途)</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}	
+				{%- for i in range(25+count_1+count_3+count_21,25+count_1+count_3+count_21+count_28) %}
 				<tr>
-					<td class="left" style="padding-left:25px;">其他支出</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="left" style="padding-left:25px;">{{profit_loss[i].items_name}}</td>			
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}
+				{%- for i in range(25+count_1+count_3+count_21+count_28,25+count_1+count_3+count_21+count_28+count_29) %}
 				<tr>
-					<td class="left" style="padding-left:25px;">其他收入</td>			
-					<td>1</td>		
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td>1</td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="left" style="padding-left:25px;">{{profit_loss[i].items_name}}</td>			
+					<td>{{profit_loss[i].month_1}}</td>		
+					<td>{{profit_loss[i].month_2}}</td>	
+					<td>{{profit_loss[i].month_3}}</td>	
+					<td>{{profit_loss[i].month_4}}</td>	
+					<td>{{profit_loss[i].month_5}}</td>	
+					<td>{{profit_loss[i].month_6}}</td>	
+					<td>{{profit_loss[i].month_7}}</td>	
+					<td>{{profit_loss[i].month_8}}</td>	
+					<td>{{profit_loss[i].month_9}}</td>	
+					<td>{{profit_loss[i].month_10}}</td>	
+					<td>{{profit_loss[i].month_11}}</td>	
+					<td>{{profit_loss[i].month_12}}</td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}
+				{%- for i in range(25+count_1+count_3+count_21+count_28+count_29,26+count_1+count_3+count_21+count_28+count_29) %}
 				<tr>
-					<td class="right"><b>每月可支配资金</b></td>		
-					<td><b>1</b></td>		
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>	
-					<td><b>1</b></td>
+					<td class="right"><b>月可支配资金</b></td>		
+					<td><b>{{profit_loss[i].month_1}}</b></td>		
+					<td><b>{{profit_loss[i].month_2}}</b></td>	
+					<td><b>{{profit_loss[i].month_3}}</b></td>	
+					<td><b>{{profit_loss[i].month_4}}</b></td>	
+					<td><b>{{profit_loss[i].month_5}}</b></td>	
+					<td><b>{{profit_loss[i].month_6}}</b></td>	
+					<td><b>{{profit_loss[i].month_7}}</b></td>	
+					<td><b>{{profit_loss[i].month_8}}</b></td>	
+					<td><b>{{profit_loss[i].month_9}}</b></td>	
+					<td><b>{{profit_loss[i].month_10}}</b></td>	
+					<td><b>{{profit_loss[i].month_11}}</b></td>	
+					<td><b>{{profit_loss[i].month_12}}</b></td>	
+					<td><b>{{profit_loss[i].total}}</b></td>	
+					<td><b>{{profit_loss[i].pre_month}}</b></td>
 				</tr>
+				{%- endfor %}
 			</table>
 		</div>	
 	</div>

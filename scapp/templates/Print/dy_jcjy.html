@@ -31,100 +31,122 @@
 		</div>
 		<div>				
 			<table class="dayin">
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 0 %}
+					<tr>
+						<td colspan="1"><b>{{obj.items_name}}</b></td>
+						<td colspan="3" style="height:60px;">{{obj.content}}</td>
+					</tr>
+					{%- endif %}
+				{%- endfor %}
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 1 %}
+					<tr>
+						<td colspan="1"><b>{{obj.items_name}}</b></td>
+						<td colspan="3" style="height:60px;">{{obj.content}}</td>
+					</tr>
+					{%- endif %}
+				{%- endfor %}
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 2 %}
+					<tr>
+						<td colspan="1"><b>{{obj.items_name}}</b></td>
+						<td colspan="3" style="height:60px;">{{obj.content}}</td>
+					</tr>
+					{%- endif %}
+				{%- endfor %}
 				<tr>
-					<td colspan="2"><b>销售额交叉检验</b></td>	
+					<td colspan="4"><b>权益交叉检验</b></td>	
 				</tr>
-				<tr>	
-					<td colspan="2" style="height:60px;">XXXXXXXXXXXXXXXXXXXX</td>
-				</tr>
-				<tr>
-					<td colspan="2"><b>毛利润/成本交叉检验</b></td>	
-				</tr>
-				<tr>	
-					<td colspan="2" style="height:60px;">XXXXXXXXXXXXXXXXXXXX</td>
-				</tr>
-				<tr>
-					<td colspan="2"><b>其他交叉检验</b></td>	
-				</tr>
-				<tr>	
-					<td colspan="2" style="height:60px;">XXXXXXXXXXXXXXXXXXXX</td>
-				</tr>
-				<tr>
-					<td colspan="2"><b>权益交叉检验</b></td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;" >期初权益合计(时点)</td>	
-					<td class="right" style="width:300px;">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:50px;">期初权益1(时点)</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:50px;">期初权益2(时点)</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;">分析期间收入合计</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:50px;">分析期间经营收入1(时段)</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:50px;">分析期间经营收入2(时段)</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;">大项支出合计</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:50px;">大项支出1(时点/时段)</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:50px;">大项支出2(时点/时段)</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;">其他收入</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;">升值</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;">折旧(资产负债表内折旧)</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;">表外资产</td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;"><b>应有权益</b></td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;"><b>实际权益(资产负债表所有者权益)</b></td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;"><b>权益差额(应有权益-实际权益)</b></td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;"><b>分析期间累计收入</b></td>	
-					<td class="right">60000</td>	
-				</tr>
-				<tr>
-					<td style="padding-left:25px;"><b>权益交叉检验比率</b></td>	
-					<td class="right">60000</td>	
-				</tr>
-				
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 3 %}							
+						<tr>
+							{%- if obj.index == 0 %}
+							<td style="padding-left:25px;" ><b>{{obj.items_name}}</b></td>	
+							<td class="right" style="width:130px;"><b>{{obj.content}}</b></td>	
+							{%- else %}
+							<td style="padding-left:50px;">{{obj.items_name}}</td>	
+							<td class="right" style="width:130px;">{{obj.content}}</td>	
+							{%- endif %}
+							
+							{%- if obj.index == 0 %}
+							<td style="padding-left:25px;" ><b>{{cross_examination[cross_examination.index(obj)+count_3].items_name}}</b></td>
+							<td class="right" style="width:130px;"><b>{{obj.content}}</b></td>		
+							{%- else %}
+							<td style="padding-left:50px;">{{cross_examination[cross_examination.index(obj)+count_3].items_name}}</td>
+							<td class="right" style="width:130px;">{{obj.content}}</td>		
+							{%- endif %}
+						</tr>
+					{%- endif %}
+				{%- endfor %}	
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 5 %}							
+						<tr>
+							{%- if obj.index == 0 %}
+							<td style="padding-left:25px;" ><b>{{obj.items_name}}</b></td>								
+							<td class="right" colspan="3"><b>{{obj.content}}</b></td>		
+							{%- else %}
+							<td style="padding-left:50px;">{{obj.items_name}}</td>							
+							<td class="right" colspan="3">{{obj.content}}</td>			
+							{%- endif %}						
+						</tr>
+					{%- endif %}
+				{%- endfor %}
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 6 %}	
+						<tr>
+							<td style="padding-left:25px;"><b>{{obj.items_name}}</b></td>	
+							<td class="right"><b>{{obj.content}}</b></td>
+					{%- endif %}
+					{%- if obj.loan_type == 7 %}
+							<td style="padding-left:25px;"><b>{{obj.items_name}}</b></td>	
+							<td class="right"><b>{{obj.content}}</b></td>	
+						</tr>
+					{%- endif %}
+				{%- endfor %}
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 8 %}	
+						<tr>
+							<td style="padding-left:25px;"><b>{{obj.items_name}}</b></td>	
+							<td class="right"><b>{{obj.content}}</b></td>
+					{%- endif %}
+					{%- if obj.loan_type == 9 %}
+							<td style="padding-left:25px;"><b>{{obj.items_name}}</b></td>	
+							<td class="right"><b>{{obj.content}}</b></td>	
+						</tr>
+					{%- endif %}
+				{%- endfor %}
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 10 %}	
+						<tr>
+							<td style="padding-left:25px;"><b>{{obj.items_name}}</b></td>	
+							<td class="right"><b>{{obj.content}}</b></td>
+					{%- endif %}
+					{%- if obj.loan_type == 11 %}
+							<td style="padding-left:25px;"><b>{{obj.items_name}}</b></td>	
+							<td class="right"><b>{{obj.content}}</b></td>	
+						</tr>
+					{%- endif %}
+				{%- endfor %}
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 12 %}	
+						<tr>
+							<td style="padding-left:25px;"><b>{{obj.items_name}}</b></td>	
+							<td class="right"><b>{{obj.content}}</b></td>
+					{%- endif %}
+					{%- if obj.loan_type == 13 %}
+							<td style="padding-left:25px;"><b>{{obj.items_name}}</b></td>	
+							<td class="right"><b>{{obj.content}}</b></td>	
+						</tr>
+					{%- endif %}
+				{%- endfor %}
+				{%- for obj in cross_examination %}
+					{%- if obj.loan_type == 14 %}	
+						<tr>
+							<td style="padding-left:25px;"><b>{{obj.items_name}}</b></td>	
+							<td class="right" colspan="3"><b>{{obj.content}}%</b></td>
+					{%- endif %}
+				{%- endfor %}
 			</table>
 		</div>	
 	</div>
