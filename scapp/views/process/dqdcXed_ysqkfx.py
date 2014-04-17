@@ -47,4 +47,16 @@ def dqdcXed_ysqkfx(loan_apply_id):
 			# 消息闪现
 			flash('保存失败','error')
 		return redirect('Process/dqdc/dqdc')
+
+# 打印损益情况分析
+@app.route('/Process/dqdc/dy_syb/<int:loan_apply_id>', methods=['GET'])
+def dy_syb(loan_apply_id):
+		profit_loss = SC_Profit_Loss.query.filter_by(loan_apply_id=loan_apply_id).order_by("id").all()
+		count_1 = SC_Profit_Loss.query.filter_by(loan_apply_id=loan_apply_id,items_type=1).count()
+		count_3 = SC_Profit_Loss.query.filter_by(loan_apply_id=loan_apply_id,items_type=3).count()
+		count_21 = SC_Profit_Loss.query.filter_by(loan_apply_id=loan_apply_id,items_type=21).count()
+		count_28 = SC_Profit_Loss.query.filter_by(loan_apply_id=loan_apply_id,items_type=28).count()
+		count_29 = SC_Profit_Loss.query.filter_by(loan_apply_id=loan_apply_id,items_type=29).count()
+		return render_template("Print/dy_syb.html",loan_apply_id=loan_apply_id,profit_loss=profit_loss,
+			count_1=count_1,count_3=count_3,count_21=count_21,count_28=count_28,count_29=count_29)
 	

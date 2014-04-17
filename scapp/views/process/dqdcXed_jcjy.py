@@ -40,3 +40,12 @@ def dqdcXed_jcjy(loan_apply_id):
 			flash('保存失败','error')
 
 		return redirect('Process/dqdc/dqdc')
+
+# 打印交叉检验
+@app.route('/Process/dqdc/dy_jcjy/<int:loan_apply_id>', methods=['GET'])
+def dy_jcjy(loan_apply_id):
+		cross_examination = SC_Cross_Examination.query.filter_by(loan_apply_id=loan_apply_id).order_by("id").all()
+		count_3 = SC_Cross_Examination.query.filter_by(loan_apply_id=loan_apply_id,loan_type=3).count()
+		balance_sheet = SC_Balance_Sheet.query.filter_by(loan_apply_id=loan_apply_id,loan_type=16).first()#type=16为资产负债表中的所有者权益
+		return render_template("Print/dy_jcjy.html",loan_apply_id=loan_apply_id,
+			cross_examination=cross_examination,count_3=count_3,balance_sheet=balance_sheet)

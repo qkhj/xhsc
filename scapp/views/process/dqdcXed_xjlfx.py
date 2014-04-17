@@ -186,4 +186,24 @@ def edit_dqdcXed_xjlfx(id):
 		flash('保存失败','error')
 
 	return redirect('Process/dqdc/dqdc')
+
+# 打印现金流分析
+@app.route('/Process/dqdc/dy_xjl/<int:id>', methods=['GET'])
+def dy_xjl(id):
+	cash_flow = SC_Cash_Flow.query.filter_by(loan_apply_id=id,type=1).all()
+	cash_flow_assist_0 = SC_Cash_Flow_Assist.query.filter_by(loan_apply_id=id,type=1,assist_type=0).all()
+	cash_flow_assist_1 = SC_Cash_Flow_Assist.query.filter_by(loan_apply_id=id,type=1,assist_type=1).all()
+	cash_flow_assist_2 = SC_Cash_Flow_Assist.query.filter_by(loan_apply_id=id,type=1,assist_type=2).all()
+	cash_flow_assist_3 = SC_Cash_Flow_Assist.query.filter_by(loan_apply_id=id,type=1,assist_type=3).all()
+	if len(cash_flow) == 0: #用空串初始化cash_flow
+		cash_flow = [0 for i in range(13)]
+		cash_flow = ['']*13
+
+	cash_flow_dec = SC_Cash_Flow_Dec.query.filter_by(loan_apply_id=id).first()
+
+	return render_template("Print/dy_xjl.html",id=id,cash_flow=cash_flow,
+		cash_flow_assist_0=cash_flow_assist_0,cash_flow_assist_1=cash_flow_assist_1,
+		cash_flow_assist_2=cash_flow_assist_2,cash_flow_assist_3=cash_flow_assist_3,
+		cash_flow_dec=cash_flow_dec)
+
     
