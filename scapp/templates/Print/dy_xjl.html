@@ -377,35 +377,35 @@
 				</tr>
 				<tr>
 					<td class="left"><b>付款总额(4)=(2)+(3)</b></td>			
-					<td><b class="tr20">{{cash_flow[1].fkze}}</b></td>		
-					<td><b class="tr20">{{cash_flow[2].fkze}}</b></td>	
-					<td><b class="tr20">{{cash_flow[3].fkze}}</b></td>	
-					<td><b class="tr20">{{cash_flow[4].fkze}}</b></td>	
-					<td><b class="tr20">{{cash_flow[5].fkze}}</b></td>	
-					<td><b class="tr20">{{cash_flow[6].fkze}}</b></td>	
-					<td><b class="tr20">{{cash_flow[7].fkze}}</b></td>	
-					<td><b class="tr20">{{cash_flow[8].fkze}}</b></td>	
-					<td><b class="tr20">{{cash_flow[9].fkze}}1</b></td>	
-					<td><b class="tr20">{{cash_flow[10].fkze}}</b></td>	
-					<td><b class="tr20">{{cash_flow[11].fkze}}</b></td>	
-					<td><b class="tr20">{{cash_flow[12].fkze}}</b></td>	
+					<td><b class="tr20">{{cash_flow[1].total_cash_outflow|int + cash_flow[1].fixed_costs|int }}</b></td>		
+					<td><b class="tr20">{{cash_flow[2].total_cash_outflow|int + cash_flow[2].fixed_costs|int }}</b></td>	
+					<td><b class="tr20">{{cash_flow[3].total_cash_outflow|int + cash_flow[3].fixed_costs|int }}</b></td>	
+					<td><b class="tr20">{{cash_flow[4].total_cash_outflow|int + cash_flow[4].fixed_costs|int }}</b></td>	
+					<td><b class="tr20">{{cash_flow[5].total_cash_outflow|int + cash_flow[5].fixed_costs|int }}</b></td>	
+					<td><b class="tr20">{{cash_flow[6].total_cash_outflow|int + cash_flow[6].fixed_costs|int }}</b></td>	
+					<td><b class="tr20">{{cash_flow[7].total_cash_outflow|int + cash_flow[7].fixed_costs|int }}</b></td>	
+					<td><b class="tr20">{{cash_flow[8].total_cash_outflow|int + cash_flow[8].fixed_costs|int }}</b></td>	
+					<td><b class="tr20">{{cash_flow[9].total_cash_outflow|int + cash_flow[9].fixed_costs|int }}</b></td>	
+					<td><b class="tr20">{{cash_flow[10].total_cash_outflow|int + cash_flow[10].fixed_costs|int }}</b></td>	
+					<td><b class="tr20">{{cash_flow[11].total_cash_outflow|int + cash_flow[11].fixed_costs|int }}</b></td>	
+					<td><b class="tr20">{{cash_flow[12].total_cash_outflow|int + cash_flow[12].fixed_costs|int }}</b></td>	
 					<td><span id="ave20"></span></td>	
 					<td><span id="sum20"></span></td>
 				</tr>
 				<tr>
 					<td class="left"><b>营业活动现金净流量(5)=(1)-(4)</b></td>			
-					<td><b class="tr21">{{cash_flow[1].yyhdxj}}</b></td>		
-					<td><b class="tr21">{{cash_flow[2].yyhdxj}}</b></td>	
-					<td><b class="tr21">{{cash_flow[3].yyhdxj}}</b></td>	
-					<td><b class="tr21">{{cash_flow[4].yyhdxj}}</b></td>	
-					<td><b class="tr21">{{cash_flow[5].yyhdxj}}</b></td>	
-					<td><b class="tr21">{{cash_flow[6].yyhdxj}}</b></td>	
-					<td><b class="tr21">{{cash_flow[7].yyhdxj}}</b></td>	
-					<td><b class="tr21">{{cash_flow[8].yyhdxj}}</b></td>	
-					<td><b class="tr21">{{cash_flow[9].yyhdxj}}</b></td>	
-					<td><b class="tr21">{{cash_flow[10].yyhdxj}}</b></td>	
-					<td><b class="tr21">{{cash_flow[11].yyhdxj}}</b></td>	
-					<td><b class="tr21">{{cash_flow[12].yyhdxj}}</b></td>	
+					<td><b class="tr21">{{cash_flow[1].total_cash_flow|int - cash_flow[1].total_cash_outflow|int + cash_flow[1].fixed_costs|int }}</b></td>		
+					<td><b class="tr21">{{cash_flow[2].total_cash_flow|int - cash_flow[2].total_cash_outflow|int + cash_flow[2].fixed_costs|int }}</b></td>	
+					<td><b class="tr21">{{cash_flow[3].total_cash_flow|int - cash_flow[3].total_cash_outflow|int + cash_flow[3].fixed_costs|int }}</b></td>	
+					<td><b class="tr21">{{cash_flow[4].total_cash_flow|int - cash_flow[4].total_cash_outflow|int + cash_flow[4].fixed_costs|int }}</b></td>	
+					<td><b class="tr21">{{cash_flow[5].total_cash_flow|int - cash_flow[5].total_cash_outflow|int + cash_flow[5].fixed_costs|int }}</b></td>	
+					<td><b class="tr21">{{cash_flow[6].total_cash_flow|int - cash_flow[6].total_cash_outflow|int + cash_flow[6].fixed_costs|int }}</b></td>	
+					<td><b class="tr21">{{cash_flow[7].total_cash_flow|int - cash_flow[7].total_cash_outflow|int + cash_flow[7].fixed_costs|int }}</b></td>	
+					<td><b class="tr21">{{cash_flow[8].total_cash_flow|int - cash_flow[8].total_cash_outflow|int + cash_flow[8].fixed_costs|int }}</b></td>	
+					<td><b class="tr21">{{cash_flow[9].total_cash_flow|int - cash_flow[9].total_cash_outflow|int + cash_flow[9].fixed_costs|int }}</b></td>	
+					<td><b class="tr21">{{cash_flow[10].total_cash_flow|int - cash_flow[10].total_cash_outflow|int + cash_flow[10].fixed_costs|int }}</b></td>	
+					<td><b class="tr21">{{cash_flow[11].total_cash_flow|int - cash_flow[11].total_cash_outflow|int + cash_flow[11].fixed_costs|int }}</b></td>	
+					<td><b class="tr21">{{cash_flow[12].total_cash_flow|int - cash_flow[12].total_cash_outflow|int + cash_flow[12].fixed_costs|int }}</b></td>	
 					<td><span id="ave21"></span></td>	
 					<td><span id="sum21"></span></td>
 				</tr>
