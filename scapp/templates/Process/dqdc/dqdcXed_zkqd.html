@@ -21,8 +21,8 @@
 	<form class="content" method="post" action="/Process/dqdc/new_zkqd">
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#tab1" id="fdcxd" data-toggle="tab" onclick="$('#dqdcXed_gdzcqd',window.parent.document).height(500);$('#content_frame',window.parent.parent.document).height(800);">应付账款详单</a></li>
-				<li><a href="#tab2" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');">应收账款详单</a></li>
+				<li class="active"><a href="#tab1" id="fdcxd" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane active');$('#tab2').attr('class','tab-pane');doubleIframe('dqdcXed_zkqd');">应付账款详单</a></li>
+				<li><a href="#tab2" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane');$('#tab2').attr('class','tab-pane active');doubleIframe('dqdcXed_zkqd');">应收账款详单</a></li>
 			</ul>						
 			<div class="tab-content">
 				<!--*********************************应付账款详单*******************************************-->

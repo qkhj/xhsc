@@ -57,19 +57,21 @@
 					<td class="left">
 					{%- if obj.index == 0 %}
 						<b style="padding-left:25px">{{obj.items_name}}</b>
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
 					{%- else %}
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+					<td style="width:170px">{{obj.content}}</td>	
 					{%- endif %}	
-					</td>
-					<td style="width:170px"><b>{{obj.content}}</b></td>		
+					</td>	
 					<td class="left">
 					{%- if obj.index == 0 %}
-						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} </b>
-					{%- else %}
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} 
-					{%- endif %}	
-					</td>						
+						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} </b>						
 					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_0].content}}</b></td>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} 					
+						<td style="width:170px">{{balance_sheets[balance_sheets.index(obj)+count_0].content}}</td>
+					{%- endif %}	
+					</td>
 				</tr>
 					{%- endif %}
 				{%- endfor %}
@@ -80,19 +82,21 @@
 					<td class="left">
 					{%- if obj.index == 0 %}
 						<b style="padding-left:25px">{{obj.items_name}}</b>
+						<td style="width:170px"><b>{{obj.content}}</b></td>
 					{%- else %}
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+						<td style="width:170px">{{obj.content}}</td>
 					{%- endif %}	
-					</td>
-					<td style="width:170px"><b>{{obj.content}}</b></td>		
+					</td>		
 					<td class="left">
 					{%- if obj.index == 0 %}
 						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}} </b>
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_2].content}}</b></td>
 					{%- else %}
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}} 
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}}
+						<td style="width:170px">{{balance_sheets[balance_sheets.index(obj)+count_2].content}}</td> 
 					{%- endif %}	
-					</td>						
-					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_2].content}}</b></td>
+					</td>	
 				</tr>
 					{%- endif %}
 				{%- endfor %}
@@ -103,19 +107,21 @@
 					<td class="left">
 					{%- if obj.index == 0 %}
 						<b style="padding-left:25px">{{obj.items_name}}</b>
+						<td style="width:170px"><b>{{obj.content}}</b></td>
 					{%- else %}
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+						<td style="width:170px">{{obj.content}}</td>
 					{%- endif %}	
-					</td>
-					<td style="width:170px"><b>{{obj.content}}</b></td>		
+					</td>		
 					<td class="left">
 					{%- if obj.index == 0 %}
 						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}} </b>
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_4].content}}</b></td>
 					{%- else %}
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}} 
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_4].content}}</b></td>
 					{%- endif %}	
-					</td>						
-					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_4].content}}</b></td>
+					</td>					
 				</tr>
 					{%- endif %}
 				{%- endfor %}
@@ -126,19 +132,23 @@
 					<td class="left">
 					{%- if obj.index == 0 %}
 						<b style="padding-left:25px">{{obj.items_name}}</b>
+						<td style="width:170px"><b>{{obj.content}}</b></td>	
 					{%- else %}
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+						<td style="width:170px">{{obj.content}}</td>	
 					{%- endif %}	
 					</td>
-					<td style="width:170px"><b>{{obj.content}}</b></td>		
+						
 					<td class="left">
 					{%- if obj.index == 0 %}
 						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}} </b>
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_6].content}}</b></td>
 					{%- else %}
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}} 
+						<td style="width:170px">{{balance_sheets[balance_sheets.index(obj)+count_6].content}}</td>
 					{%- endif %}	
 					</td>						
-					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_6].content}}</b></td>
+					
 				</tr>
 					{%- endif %}
 				{%- endfor %}
@@ -149,19 +159,21 @@
 					<td class="left">
 					{%- if obj.index == 0 %}
 						<b style="padding-left:25px">{{obj.items_name}}</b>
+						<td style="width:170px"><b>{{obj.content}}</b></td>	
 					{%- else %}
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
-					{%- endif %}	
-					</td>
-					<td style="width:170px"><b>{{obj.content}}</b></td>		
-					<td class="left">
-					{%- if obj.index == 0 %}
-						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}} </b>
-					{%- else %}
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}} 
+						<td style="width:170px">{{obj.content}}</td>	
 					{%- endif %}	
 					</td>						
-					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_10].content}}</b></td>
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}} </b>					
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_10].content}}</b></td>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}} 
+						<td style="width:170px">{{balance_sheets[balance_sheets.index(obj)+count_10].content}}</td>
+					{%- endif %}	
+					</td>	
 				</tr>
 					{%- endif %}
 				{%- endfor %}
@@ -172,19 +184,21 @@
 					<td class="left">
 					{%- if obj.index == 0 %}
 						<b style="padding-left:25px">{{obj.items_name}}</b>
+						<td style="width:170px"><b>{{obj.content}}</b></td>	
 					{%- else %}
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+						<td style="width:170px">{{obj.content}}</td>	
 					{%- endif %}	
-					</td>
-					<td style="width:170px"><b>{{obj.content}}</b></td>		
+					</td>						
 					<td class="left">
 					{%- if obj.index == 0 %}
 						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}} </b>
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_12].content}}</b></td>
 					{%- else %}
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}} 
+						<td style="width:170px">{{balance_sheets[balance_sheets.index(obj)+count_12].content}}</td>
 					{%- endif %}	
-					</td>						
-					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_12].content}}</b></td>
+					</td>	
 				</tr>
 					{%- endif %}
 				{%- endfor %}
