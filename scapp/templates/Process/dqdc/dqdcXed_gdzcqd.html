@@ -22,9 +22,9 @@
 	<div class="content">
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#tab1" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');Frame();">房地产详单</a></li>
-				<li><a href="#tab2" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');Frame();">设备及器材详单</a></li>
-				<li><a href="#tab3" data-toggle="tab" onclick="doubleIframe('dqdcXed_gdzcqd');Frame();">车辆详单</a></li>
+				<li class="active"><a href="#tab1" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane active');$('#tab2').attr('class','tab-pane');$('#tab3').attr('class','tab-pane');doubleIframe('dqdcXed_gdzcqd');">房地产详单</a></li>
+				<li><a href="#tab2" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane');$('#tab2').attr('class','tab-pane active');$('#tab3').attr('class','tab-pane');doubleIframe('dqdcXed_gdzcqd');">设备及器材详单</a></li>
+				<li><a href="#tab3" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane active');$('#tab2').attr('class','tab-pane');$('#tab3').attr('class','tab-pane active');doubleIframe('dqdcXed_gdzcqd');">车辆详单</a></li>
 			</ul>						
 			<div class="tab-content">
 				<!--房地产详单-->
