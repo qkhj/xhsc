@@ -190,8 +190,8 @@
 					<td><input type="text" name="name_db" class="tbInput" value="{{obj.name}}" disabled/></td>
 					<td><input type="text" name="address_db" class="tbInput" value="{{obj.address}}" disabled/></td>							
 					<td><input type="text" name="id_number_db" class="tbInput" value="{{obj.id_number}}" disabled/></td>	
-					<td><input type="text" name="workunit_db" class="tbInput" value="{{obj.workunit}}" disabled/></td>
-					<td><input type="text" name="phone_db" class="tbInput" value="{{obj.phone}}" disabled/></td>	
+					<td><input type="text" name="workunit_db" class="tbInput" value="{{obj.phone}}" disabled/></td>
+					<td><input type="text" name="phone_db" class="tbInput" value="{{obj.workunit}}" disabled/></td>	
 					<td><input type="text" name="relationship_db" class="tbInput" value="{{obj.relationship}}" disabled/></td>										
 				</tr>
 				{%- endfor %}
@@ -504,8 +504,8 @@
 		document.write("<input type='submit' class='btn btn-info' value='拒绝' onclick='doSubmit("+PROCESS_STATUS_SPJY_JUJUE+")'/>");
     	</script>
     	{%- endif %}
-    	<input type="button" class="btn btn-info" value="打印" onclick="window.open('/Process/fksh/dy_sdhjyd')"/>
-		</form>
+    	<input type="button" class="btn btn-info" value="打印" onclick="window.open('/Process/fksh/dy_sdhjyd/{{loan_apply_id}}')"/>
+		
 	</div>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
