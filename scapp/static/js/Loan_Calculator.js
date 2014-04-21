@@ -16,30 +16,71 @@ function show_calculate(){
     else
         var yll=0;
     var repayment_type=parseInt($('select[name=repayment_type] option:selected').val())
-    if (repayment_type=='1')
-        result=calculate_debj(bj,yll,qs)
-    else
-        result=calculate(1,bj,0,yll,qs)
-    $('#table_result').html("");   
-    for (var n=1;n<=qs;n++){ 
-        $ul = $("<tr></tr>");
-        $li_qs=$("<td></td>")
-        $li_mybx = $("<td></td>");
-        $li_mybj = $("<td></td>");
-        $li_mylx = $("<td></td>");
-        $li_data = $("<td></td>");
-        var next_count=parseInt(n)+1
-        $ul.append($li_qs.append(n))
-        $ul.append($li_mybj.append("<input type='text' class='tbblur1' id='mybj"+n+"' name='mybj"+n+"' value='"+result['mybj'][n]+"' onchange='tqhk("+next_count+","+result['yhqbj'][n-1]+",\"table_result\")'/>"))
+    if (repayment_type=='1'){//等额本金
+        result=calculate_debj(bj,yll,qs);
+        $('#table_result').html("");   
+        for (var n=1;n<=qs;n++){ 
+            $ul = $("<tr></tr>");
+            $li_qs=$("<td></td>")
+            $li_mybx = $("<td></td>");
+            $li_mybj = $("<td></td>");
+            $li_mylx = $("<td></td>");
+            $li_data = $("<td></td>");
+            var next_count=parseInt(n)+1
+            $ul.append($li_qs.append(n))
+            $ul.append($li_mybj.append("<input type='text' class='tbblur1' id='mybj"+n+"' name='mybj"+n+"' value='"+result['mybj'][n]+"' onchange='tqhk("+next_count+","+result['yhqbj'][n-1]+",\"table_result\")'/>"))
+            $ul.append($li_mylx.append("<span id='mylx"+n+"'>"+result['mylx'][n]+"</span><input type='hidden' class='tbblur2' name='mylx"+n+"' value='"+result['mylx'][n]+"'>"))
+            $ul.append($li_mybx.append("<span id='mybx"+n+"'>"+result['mybx'][n]+"</span><input type='hidden' class='tbblur3' name='mybx"+n+"' value='"+result['mybx'][n]+"'>"))
+            $ul.append($li_data.append("<input type='text' name='myrq"+n+"' class='datepicker' data-date-format='yyyy-mm-dd' role='hkr' readonly/>"))
+            $('#table_result').append($ul)
 
-        $ul.append($li_mylx.append("<span class='tbblur2' id='mylx"+n+"'>"+result['mylx'][n]+"</span><input type='hidden' name='mylx"+n+"' value='"+result['mylx'][n]+"'>"))
-        $ul.append($li_mybx.append("<span class='tbblur3' id='mybx"+n+"'>"+result['mybx'][n]+"</span><input type='hidden' name='mybx"+n+"' value='"+result['mybx'][n]+"'>"))
-        $ul.append($li_data.append("<input type='text' name='myrq"+n+"' class='datepicker' data-date-format='yyyy-mm-dd' role='hkr' readonly/>"))
-        $('#table_result').append($ul)
-
+        }
+        hkrq();//设置还款日期
+        Frame();
     }
-    hkrq();//设置还款日期
-    Frame();
+    else if(repayment_type=='2'){//等额本息
+        result=calculate(1,bj,0,yll,qs);
+        $('#table_result').html("");   
+        for (var n=1;n<=qs;n++){ 
+            $ul = $("<tr></tr>");
+            $li_qs=$("<td></td>")
+            $li_mybx = $("<td></td>");
+            $li_mybj = $("<td></td>");
+            $li_mylx = $("<td></td>");
+            $li_data = $("<td></td>");
+            var next_count=parseInt(n)+1
+            $ul.append($li_qs.append(n))
+            $ul.append($li_mybj.append("<input type='text' class='tbblur1' id='mybj"+n+"' name='mybj"+n+"' value='"+result['mybj'][n]+"' onchange='tqhk("+next_count+","+result['yhqbj'][n-1]+",\"table_result\")'/>"))
+            $ul.append($li_mylx.append("<span id='mylx"+n+"'>"+result['mylx'][n]+"</span><input type='hidden' class='tbblur2' name='mylx"+n+"' value='"+result['mylx'][n]+"'>"))
+            $ul.append($li_mybx.append("<span id='mybx"+n+"'>"+result['mybx'][n]+"</span><input type='hidden' class='tbblur3' name='mybx"+n+"' value='"+result['mybx'][n]+"'>"))
+            $ul.append($li_data.append("<input type='text' name='myrq"+n+"' class='datepicker' data-date-format='yyyy-mm-dd' role='hkr' readonly/>"))
+            $('#table_result').append($ul)
+
+        }
+        hkrq();//设置还款日期
+        Frame();
+    }
+    else{//按月还息到期还本//利随本清
+        $('#table_result').html("");   
+        for (var n=1;n<=qs;n++){ 
+            $ul = $("<tr></tr>");
+            $li_qs=$("<td></td>")
+            $li_mybx = $("<td></td>");
+            $li_mybj = $("<td></td>");
+            $li_mylx = $("<td></td>");
+            $li_data = $("<td></td>");
+            var next_count=parseInt(n)+1
+            $ul.append($li_qs.append(n))
+            $ul.append($li_mybj.append("<input type='text' class='tbblur1' id='mybj"+n+"' name='mybj"+n+"' value='' onchange='sum(1)'/>"))
+            $ul.append($li_mylx.append("<input type='text' class='tbblur2' name='mylx"+n+"' value='' onchange='sum(2)'>"))
+            $ul.append($li_mybx.append("<input type='text' class='tbblur3' name='mybx"+n+"' value='' onchange='sum(3)'>"))
+            $ul.append($li_data.append("<input type='text' name='myrq"+n+"' class='datepicker' data-date-format='yyyy-mm-dd' role='hkr'/>"))
+            $('#table_result').append($ul)
+        }
+        hkrq();//设置还款日期
+        datepicker();
+        Frame();
+    }  
     
 }
 
@@ -68,9 +109,8 @@ function tqhk(qsqs,yhqbj,table){
         var next_count=parseInt(n)+1
         $ul.append($li_qs.append(n))
         $ul.append($li_mybj.append("<input type='text' class='tbblur1' id='mybj"+n+"' name='mybj"+n+"' value='"+result['mybj'][n]+"' onchange='tqhk("+next_count+","+result['yhqbj'][n-1]+",\"table_result\")'/>"))
-
-        $ul.append($li_mylx.append("<span class='tbblur2' id='mylx"+n+"'>"+result['mylx'][n]+"</span><input type='hidden' name='mylx"+n+"' value='"+result['mylx'][n]+"'>"))
-        $ul.append($li_mybx.append("<span class='tbblur3' id='mybx"+n+"'>"+result['mybx'][n]+"</span><input type='hidden' name='mybx"+n+"' value='"+result['mybx'][n]+"'>"))
+        $ul.append($li_mylx.append("<span id='mylx"+n+"'>"+result['mylx'][n]+"</span><input type='hidden' class='tbblur2' name='mylx"+n+"' value='"+result['mylx'][n]+"'>"))
+        $ul.append($li_mybx.append("<span id='mybx"+n+"'>"+result['mybx'][n]+"</span><input type='hidden' class='tbblur3' name='mybx"+n+"' value='"+result['mybx'][n]+"'>"))
         $ul.append($li_data.append("<input type='text' name='myrq"+n+"' class='datepicker' data-date-format='yyyy-mm-dd' role='hkr' readonly/>"))
         $('#table_result').append($ul)
 

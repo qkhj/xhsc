@@ -394,15 +394,25 @@
 					<td>
 						<select name="repayment_type">
 							{%- if approval_decision.repayment_type == 1 %}
-							<option value="1" selected>等额本金</option>
-							{%- else %}
-							<option value="1">等额本金</option>
-							{%- endif %}
-							{%- if approval_decision.repayment_type == 2 %}
-							<option value="2" selected>等额本息</option>
-							{%- else %}
-							<option value="2">等额本息</option>
-							{%- endif %}
+								<option value="1" selected>等额本金</option>
+								{%- else %}
+								<option value="1">等额本金</option>
+								{%- endif %}
+								{%- if approval_decision.repayment_type == 2 %}
+								<option value="2" selected>等额本息</option>
+								{%- else %}
+								<option value="2">等额本息</option>
+								{%- endif %}
+								{%- if approval_decision.repayment_type == 3 %}
+								<option value="3" selected>按月还息到期还本</option>
+								{%- else %}
+								<option value="3">按月还息到期还本</option>
+								{%- endif %}
+								{%- if approval_decision.repayment_type == 4 %}
+								<option value="4" selected>利随本清</option>
+								{%- else %}
+								<option value="4">利随本清</option>
+								{%- endif %}
 						</select>
 					</td>	
 					<td class="table-label" style="width:110px;">每期还款金额<font class="red">*</font></td>
