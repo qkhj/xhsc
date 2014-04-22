@@ -11,7 +11,7 @@
 		*{font-size: 15px;margin:0;}
 		table{border-collapse:collapse;}
 		.dayin{width:100%;margin-top:10px;}
-		.dayin td{border:1px solid black;padding:8px 0;height:95px;}
+		.dayin td{border:1px solid black;padding:8px;}
 		.center{text-align: center;}
 	</style>
 	
@@ -23,7 +23,7 @@
 		<div>				
 			<table style="width:100%">
 				<tr>
-					<td class="center"><span style="font-size:21px;font-weight:bold;line-height:35px;">非财务情况分析</span></td>
+					<td class="center"><span style="font-size:16px;font-weight:bold;line-height:35px;">非财务情况分析</span></td>
 				</tr>
 			</table>
 		</div>
@@ -58,7 +58,7 @@
 
 
 				<tr>
-					<td class="center" style="width:200px;"><b>自从上次申请后经营变化<br/>（重复贷款）</b></td>			
+					<td class="center" style="width:25%;"><b>自从上次申请后经营变化<br/>（重复贷款）</b></td>			
 					<td class="center" style="width:80px;"><b>生意方面</b></td>		
 					{%- for obj in balance_sheets %}
 						{%- if obj.loan_type == 26 %}

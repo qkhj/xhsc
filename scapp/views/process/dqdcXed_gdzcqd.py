@@ -143,3 +143,13 @@ def new_car():
 		assets = AssetsList()
 		assets.addList(loan_apply_id,request)
 		return redirect('Process/dqdc/dqdcXed_gdzcqd/'+loan_apply_id)
+
+# 打印固定资产清单
+@app.route('/Process/dqdc/dy_gdzcqd/<int:id>', methods=['GET'])
+def dy_gdzcqd(id):
+	fixed_assets_estate = SC_Fixed_Assets_Estate.query.filter_by(loan_apply_id=id).all()
+	fixed_assets_equipment = SC_Fixed_Assets_Equipment.query.filter_by(loan_apply_id=id).all()
+	fixed_assets_car = SC_Fixed_Assets_Car.query.filter_by(loan_apply_id=id).all()
+
+	return render_template("Print/dy_gdzcqd.html",id=id,fixed_assets_estate=fixed_assets_estate,
+		fixed_assets_equipment=fixed_assets_equipment,fixed_assets_car=fixed_assets_car)
