@@ -35,9 +35,11 @@
 					<tr>
 						<td class="table-label">还款方式</td>
 						<td>
-							<select name="repayment_type" onchange="show_calculate();" >								
+							<select name="repayment_type" onchange="show_calculate();sum(1);sum(2);sum(3);" >								
 								<option value="1" selected>等额本金</option>
 								<option value="2">等额本息</option>
+								<option value="3">按月还息到期还本</option>
+								<option value="4">利随本清</option>
 							</select>
 						</td>
 						<td class="table-label">还贷期数<font class="red">*</font></td>
@@ -130,7 +132,7 @@
 						</tr>
 					</thead>							
 				</table>
-			</div><br/>			
+			</div><br/>	<br/><br/><br/>		
 		</div><!--/row-fluid -->
 	</div><!--/content -->
 	
@@ -153,18 +155,10 @@
 			var sum=0;
 			var value;
 			$(".tbblur"+num).each(function(){
-				if(num==1){
-					if(this.value=="")
-						value=0;
-					else
-						value=parseFloat(this.value);
-				}
-				else{
-					if(this.innerHTML=="")
-						value=0;
-					else
-						value=parseFloat(this.innerHTML);
-				}
+				if(this.value=="")
+					value=0;
+				else
+					value=parseFloat(this.value);
 				sum+=value;
 			})
 			sum=Math.round(sum*100)/100;//取小数点后两位

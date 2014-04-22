@@ -140,7 +140,23 @@ def edit_fksh(loan_apply_id,type):
     return redirect("Process/fksh/fksh") 
 
 # 打印审贷会决议单
-@app.route('/Process/fksh/dy_sdhjyd', methods=['GET'])
-def dy_sdhjyd():
-    return render_template("Process/fksh/dy_sdhjyd.html")
+@app.route('/Process/fksh/dy_sdhjyd/<int:loan_apply_id>', methods=['GET'])
+def dy_sdhjyd(loan_apply_id):
+    loan_apply = SC_Loan_Apply.query.filter_by(id=loan_apply_id).first()
+    riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=loan_apply_id).first()
+    approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=loan_apply_id).first()
+    co_borrower = SC_Co_Borrower.query.filter_by(loan_apply_id=loan_apply_id).all()
+    guaranty = SC_Guaranty.query.filter_by(loan_apply_id=loan_apply_id).all()
+    guaranty = SC_Guaranty.query.filter_by(loan_apply_id=loan_apply_id).all()
+    guarantees = SC_Guarantees.query.filter_by(loan_apply_id=loan_apply_id).all()
+
+    if loan_apply.belong_customer_type == 'Company':
+        customer = SC_Company_Customer.query.filter_by(id=loan_apply.belong_customer_value).first()
+    else :
+        customer = SC_Individual_Customer.query.filter_by(id=loan_apply.belong_customer_value).first()
+
+    return render_template("Print/dy_sdhjyd.html",loan_apply_id=loan_apply_id,loan_apply=loan_apply,
+        riskanalysis_and_findings=riskanalysis_and_findings,customer=customer,
+        approval_decision=approval_decision,co_borrower=co_borrower,guaranty=guaranty,
+        guarantees=guarantees)
     
