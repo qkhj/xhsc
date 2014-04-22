@@ -107,7 +107,7 @@
 					<tr>
 						<td class="table-label">还款方式</td>
 						<td>
-							<select name="repayment_type" onchange="show_calculate();" readonly>
+							<select name="repayment_type" onchange="show_calculate();sum(1);sum(2);sum(3);" readonly>							
 								{%- if approval_decision.repayment_type == 1 %}
 								<option value="1" selected>等额本金</option>
 								{%- else %}
@@ -117,6 +117,16 @@
 								<option value="2" selected>等额本息</option>
 								{%- else %}
 								<option value="2">等额本息</option>
+								{%- endif %}
+								{%- if approval_decision.repayment_type == 3 %}
+								<option value="3" selected>按月还息到期还本</option>
+								{%- else %}
+								<option value="3">按月还息到期还本</option>
+								{%- endif %}
+								{%- if approval_decision.repayment_type == 4 %}
+								<option value="4" selected>利随本清</option>
+								{%- else %}
+								<option value="4">利随本清</option>
 								{%- endif %}
 							</select>
 						</td>
@@ -310,8 +320,8 @@
 						<tr>
 							<td>{{obj.repayment_installments}}</td>
 							<td><input onchange="tqhk({{obj.repayment_installments+1}},0,&quot;table_result&quot;)" value="{{obj.principal}}" name="mybj{{obj.repayment_installments}}" id="mybj{{obj.repayment_installments}}" class="tbblur1"></td>
-							<td><span id="mylx{{obj.repayment_installments}}" class="tbblur2">{{obj.interest}}</span><input type="hidden" value="{{obj.interest}}" name="mylx{{obj.repayment_installments}}"></td>
-							<td><span id="mybx{{obj.repayment_installments}}" class="tbblur3">{{obj.total}}</span><input type="hidden" value="{{obj.total}}" name="mybx{{obj.repayment_installments}}"></td>
+							<td><span id="mylx{{obj.repayment_installments}}">{{obj.interest}}</span><input type="hidden" class="tbblur2" value="{{obj.interest}}" name="mylx{{obj.repayment_installments}}"></td>
+							<td><span id="mybx{{obj.repayment_installments}}">{{obj.total}}</span><input type="hidden" class="tbblur3" value="{{obj.total}}" name="mybx{{obj.repayment_installments}}"></td>
 							<td><input type="text" readonly="" data-date-format="yyyy-mm-dd" class="datepicker" name="myrq{{obj.repayment_installments}}" value="{{obj.clear_date}}"></td>
 						</tr>
 						{%- endfor %}		
@@ -353,18 +363,10 @@
 			var sum=0;
 			var value;
 			$(".tbblur"+num).each(function(){
-				if(num==1){
-					if(this.value=="")
-						value=0;
-					else
-						value=parseFloat(this.value);
-				}
-				else{
-					if(this.innerHTML=="")
-						value=0;
-					else
-						value=parseFloat(this.innerHTML);
-				}
+				if(this.value=="")
+					value=0;
+				else
+					value=parseFloat(this.value);				
 				sum+=value;
 			})
 			sum=Math.round(sum*100)/100;//取小数点后两位
