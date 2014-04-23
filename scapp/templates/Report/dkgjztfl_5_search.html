@@ -32,19 +32,21 @@
 			<div style="border:1px solid #94c1dc;">				
 				<table class="table-list" cellspacing="10" id="uesr-list">				
 					<tr>
+						<th>贷款编号</th>
+						<th>客户名称</th>
 						<th>月利率</th>
 						<th>放款日期</th>
 						<th>贷款金额</th>
 						<th>负责客户经理</th>
 						<th>贷款类型</th>
-						<th>客户名称</th>
-						<th>贷款编号</th>
 						<th>贷款余额</th>
 					</tr>					
 					<tbody class="center">
 						<!-- 数据 -->
 						{%- for obj in bank_loans_main.items %}
 						<tr class="tbData" onclick="changeColor(this)">
+							<td>{{obj.loan_apply_id}}</td>
+							<td>{{obj.customer_name}}</td>
 							<td>{{obj.ratio}}</td>
 							<td>{{obj.loan_deliver_date}}</td>							
 							<td class="subData2">{{obj.loan_total_amount}}</td>	
@@ -54,8 +56,6 @@
 							{%- else %}
 								<td>小额贷</td>
 							{%- endif %}
-							<td>{{obj.customer_name}}</td>
-							<td>{{obj.loan_apply_id}}</td>
 							<td class="subData3">{{obj.loan_balance}}</td>	
 						</tr><!-- /数据 -->		
 						{%- endfor %}											
@@ -96,7 +96,7 @@
 	<script type="text/javascript">		
 		function sub(){
 			var num=$(".tbData").length;			
-			$("#sub1").text("总笔数："+num);
+			$("#sub1").text("本页总笔数："+num);
 			for(i=2;i<6;i++){
 				var sum=0;						
 				$.each($(".subData"+i),function(key,val){ 
