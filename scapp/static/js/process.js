@@ -259,70 +259,99 @@ function addTd(table,frameid){
     }
 	if(table=="gtjkr"){//共同借款人
         $("#"+table).append("<tr class='add'>" +
-								"<td>" +
-									"<span>	" +
+								"<td rowspan='2' class='table-label'>" +
+									"姓名<span>	" +
 										"<input type='text' name='name' onchange='spryMaxLength(this,32)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于32</span>" +
 									"</span>" +
 								"</td>" +
 								"<td>" +
-									"<span>	" +
+									"与客户关系<span>	" +
 										"<input type='text' name='relationship' onchange='spryMaxLength(this,32)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于32</span>" +
 									"</span>" +
 								"</td>		" +					
 								"<td>" +
-									"<span>	" +
+									"身份证号码<span>	" +
 										"<input type='text' name='id_number' onchange='checkIdcard(this)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>证件号码有误</span>" +
 									"</span>" +
 								"</td>" +
 								"<td>" +
-									"<span>	" +
+									"家庭电话<span>	" +
 										"<input type='text' name='phone' class='tbInput' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)' onblur='getLength(this)'/><br/>&nbsp;" +
 										"<span class='errorInfo'>电话号码有误</span>" +
 									"</span>" +
 								"</td>" +
 								"<td>" +
-									"<span>	" +
+									"主营业务或职务<span>	" +
 										"<input type='text' name='main_business' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于128</span>" +
 									"</span>" +
 								"</td>	" +
 								"<td>" +
-									"<span>	" +
+									"经营地址或工作单位地址<span>	" +
 										"<input type='text' name='address' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于256</span>" +
 									"</span>" +
 								"</td>	" +
 								"<td>" +
-									"<span>	" +
+									"主要资产<span>	" +
 										"<input type='text' name='major_assets' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于256</span>" +
 									"</span>" +
 								"</td>" +
 								"<td>" +
-									"<span>	" +
+									"月收入<span>	" +
 										"<input type='text' name='monthly_income' onkeyup='setJe(this);' maxlength='11' class='tbInput'/><br/>" +
 										"<span class='je'>人民币</span>" +
 										"<span class='errorInfo'></span>		" +				
 									"</span>" +
 								"</td>" +
-                                /* "<td><input type='text' name='name' class='tbInput'/></td>" +
-                                "<td><input type='text' name='relationship' class='tbInput'/></td>" +
-                                "<td><input type='text' name='id_number' class='tbInput'/></td>" +
-                                "<td><input type='text' name='phone' class='tbInput'/></td>" +
-                                "<td><input type='text' name='main_business' class='tbInput'/></td>" +
-                                "<td><input type='text' name='address' class='tbInput'/></td>" +
-                                "<td><input type='text' name='major_assets' class='tbInput'/></td>" +
-                                "<td><input type='text' name='monthly_income' class='tbInput'/></td>" + */
-                            "</tr>");
+                            "</tr>"+
+                            "<tr class='add'>" +
+								"<td colspan='2'>" +
+									"家庭详细地址<span>	" +
+										"<input type='text' name='' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>" +
+										"<span>&nbsp;</span>" +
+										"<span class='errorInfo'>字符数不得大于128</span>" +
+									"</span>" +
+								"</td>" +	
+								"<td>" +
+									"户籍所在地<span>	" +
+										"<input type='text' name='' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>" +
+										"<span>&nbsp;</span>" +
+										"<span class='errorInfo'>字符数不得大于128</span>" +
+									"</span>" +
+								"</td>	" +
+								"<td>" +
+									"住房性质<span>	" +
+										"<select name=''>"+
+											"<option value='1'>自有产权(按揭)</option>"+
+											"<option value='2'>自有产权(无按揭)</option>"+
+											"<option value='3'>小产权</option>"+
+											"<option value='4'>租用</option>"+
+											"<option value='5'>其他</option>"+
+										"</select><br/>" +
+										"<span>&nbsp;</span>" +
+									"</span>" +
+								"</td>" +
+								"<td colspan='3'>" +
+									"备注<br/><span>	" +
+										"<input type='text' name='' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
+										"<span>&nbsp;</span>" +
+										"<span class='errorInfo'>字符数不得大于256</span>" +
+									"</span>" +
+								"</td>" +
+                            "</tr>"
+
+                            );
     }
     if(table=="dbr"){//担保人
         $("#"+table).append("<tr class='add'>" +
