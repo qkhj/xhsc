@@ -430,10 +430,10 @@
 	<!--*****************************************共同借款人**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">共同借款人</span>
 		<input type="button" value="+" onclick="addTd('gtjkr','dksq_info')" class="btn btn-info btn-mini" style="padding:0 7px;margin-top:0px;"/>
-		<input type="button" value="-" onclick="removeTd('gtjkr','dksq_info')" class="btn btn-info btn-mini" style="padding:0 9px;margin-top:0px;"/>
+		<input type="button" value="-" onclick="removeTd2('gtjkr','dksq_info')" class="btn btn-info btn-mini" style="padding:0 9px;margin-top:0px;"/>
 		<div class="divBorder">
 			<table id="gtjkr" class="table-list">
-				<tr class="font-small">
+				<!-- <tr class="font-small">
 					<th>姓名</th>
 					<th>与客户关系</th>
 					<th>身份证号码</th>							
@@ -441,8 +441,9 @@
 					<th>主营业务或职务（如受雇与别人）</th>
 					<th>经营地址或工作单位地址</th>		
 					<th>主要资产</th>
-					<th>月收入</th>									
-				</tr>
+					<th>月收入</th>							
+				</tr> -->
+
 				<!-- <tr class="center"><!--后期Js中要增加ID字段-->
 					<!--<td>
 						<span>	
@@ -691,6 +692,19 @@
 		var sprytextfield4 = new Spry.Widget.ValidationTextField("manager_name_spay", "none");
 		//var sprytextfield5 = new Spry.Widget.ValidationTextField("ffrq", "none");
 		//var sprytextfield4 = new Spry.Widget.ValidationTextField("release_date", "date", {format:"yyyy-mm-dd", isRequired:false, validateOn:["blur"]});
+		//表格删除行
+		function removeTd2(table,frameid){ 
+			if(max==0&&jegs==0&&num==0&&idCard==0){//判断页面中是否有错误，如果未判断直接删除可能导致提交按钮不可用
+				var tr= document.getElementById(table).getElementsByTagName("tr");
+			    if(tr.length>1){//至少要保留一行
+			        document.getElementById(table).deleteRow(tr.length-1);//删除最后一行
+			        document.getElementById(table).deleteRow(tr.length-1);//删除倒数第二行
+			   }
+			    doubleIframe(frameid);
+			}
+		    else
+		    	alert("页面中有错误，请修改后再进行删除操作！")
+		}
 	</script>
 </body>
 </html>
