@@ -376,36 +376,109 @@
 					<td><span id="sum19"></span></td>
 				</tr>
 				<tr>
-					<td class="left"><b>付款总额(4)=(2)+(3)</b></td>			
-					<td><b class="tr20">{{cash_flow[1].total_cash_outflow|int + cash_flow[1].fixed_costs|int }}</b></td>		
-					<td><b class="tr20">{{cash_flow[2].total_cash_outflow|int + cash_flow[2].fixed_costs|int }}</b></td>	
-					<td><b class="tr20">{{cash_flow[3].total_cash_outflow|int + cash_flow[3].fixed_costs|int }}</b></td>	
-					<td><b class="tr20">{{cash_flow[4].total_cash_outflow|int + cash_flow[4].fixed_costs|int }}</b></td>	
-					<td><b class="tr20">{{cash_flow[5].total_cash_outflow|int + cash_flow[5].fixed_costs|int }}</b></td>	
-					<td><b class="tr20">{{cash_flow[6].total_cash_outflow|int + cash_flow[6].fixed_costs|int }}</b></td>	
-					<td><b class="tr20">{{cash_flow[7].total_cash_outflow|int + cash_flow[7].fixed_costs|int }}</b></td>	
-					<td><b class="tr20">{{cash_flow[8].total_cash_outflow|int + cash_flow[8].fixed_costs|int }}</b></td>	
-					<td><b class="tr20">{{cash_flow[9].total_cash_outflow|int + cash_flow[9].fixed_costs|int }}</b></td>	
-					<td><b class="tr20">{{cash_flow[10].total_cash_outflow|int + cash_flow[10].fixed_costs|int }}</b></td>	
-					<td><b class="tr20">{{cash_flow[11].total_cash_outflow|int + cash_flow[11].fixed_costs|int }}</b></td>	
-					<td><b class="tr20">{{cash_flow[12].total_cash_outflow|int + cash_flow[12].fixed_costs|int }}</b></td>	
+					<td class="left"><b>付款总额(4)=(2)+(3)</b></td>	
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[1].total_cash_outflow}})+ parseInt({{cash_flow[1].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[2].total_cash_outflow}})+ parseInt({{cash_flow[2].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[3].total_cash_outflow}})+ parseInt({{cash_flow[3].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[4].total_cash_outflow}})+ parseInt({{cash_flow[4].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[5].total_cash_outflow}})+ parseInt({{cash_flow[5].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[6].total_cash_outflow}})+ parseInt({{cash_flow[6].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[7].total_cash_outflow}})+ parseInt({{cash_flow[7].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[8].total_cash_outflow}})+ parseInt({{cash_flow[8].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[9].total_cash_outflow}})+ parseInt({{cash_flow[9].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[10].total_cash_outflow}})+ parseInt({{cash_flow[10].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[11].total_cash_outflow}})+ parseInt({{cash_flow[11].fixed_costs}}))+"</b>")</td>
+					</script>			
+					<td><script>	
+					document.write("
+					<b class='tr20'>"+(parseInt({{cash_flow[12].total_cash_outflow}})+ parseInt({{cash_flow[12].fixed_costs}}))+"</b>")</td>
+					</script>
+					</script>	
 					<td><span id="ave20"></span></td>	
 					<td><span id="sum20"></span></td>
 				</tr>
 				<tr>
-					<td class="left"><b>营业活动现金净流量(5)=(1)-(4)</b></td>			
-					<td><b class="tr21">{{cash_flow[1].total_cash_flow|int - cash_flow[1].total_cash_outflow|int + cash_flow[1].fixed_costs|int }}</b></td>		
-					<td><b class="tr21">{{cash_flow[2].total_cash_flow|int - cash_flow[2].total_cash_outflow|int + cash_flow[2].fixed_costs|int }}</b></td>	
-					<td><b class="tr21">{{cash_flow[3].total_cash_flow|int - cash_flow[3].total_cash_outflow|int + cash_flow[3].fixed_costs|int }}</b></td>	
-					<td><b class="tr21">{{cash_flow[4].total_cash_flow|int - cash_flow[4].total_cash_outflow|int + cash_flow[4].fixed_costs|int }}</b></td>	
-					<td><b class="tr21">{{cash_flow[5].total_cash_flow|int - cash_flow[5].total_cash_outflow|int + cash_flow[5].fixed_costs|int }}</b></td>	
-					<td><b class="tr21">{{cash_flow[6].total_cash_flow|int - cash_flow[6].total_cash_outflow|int + cash_flow[6].fixed_costs|int }}</b></td>	
-					<td><b class="tr21">{{cash_flow[7].total_cash_flow|int - cash_flow[7].total_cash_outflow|int + cash_flow[7].fixed_costs|int }}</b></td>	
-					<td><b class="tr21">{{cash_flow[8].total_cash_flow|int - cash_flow[8].total_cash_outflow|int + cash_flow[8].fixed_costs|int }}</b></td>	
-					<td><b class="tr21">{{cash_flow[9].total_cash_flow|int - cash_flow[9].total_cash_outflow|int + cash_flow[9].fixed_costs|int }}</b></td>	
-					<td><b class="tr21">{{cash_flow[10].total_cash_flow|int - cash_flow[10].total_cash_outflow|int + cash_flow[10].fixed_costs|int }}</b></td>	
-					<td><b class="tr21">{{cash_flow[11].total_cash_flow|int - cash_flow[11].total_cash_outflow|int + cash_flow[11].fixed_costs|int }}</b></td>	
-					<td><b class="tr21">{{cash_flow[12].total_cash_flow|int - cash_flow[12].total_cash_outflow|int + cash_flow[12].fixed_costs|int }}</b></td>	
+					<td class="left"><b>营业活动现金净流量(5)=(1)-(4)</b></td>	
+					<td><script>	
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[1].total_cash_flow}}) - parseInt({{cash_flow[1].total_cash_outflow}}) + parseInt({{cash_flow[1].fixed_costs}})+"</b>")</td>
+					</script>
+					<td><script>	
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[2].total_cash_flow}}) - parseInt({{cash_flow[2].total_cash_outflow}}) + parseInt({{cash_flow[2].fixed_costs}})+"</b>")</td>
+					</script>
+					<td><script>	
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[3].total_cash_flow}}) - parseInt({{cash_flow[3].total_cash_outflow}}) + parseInt({{cash_flow[3].fixed_costs}})+"</b>")</td>
+					</script>	
+					<td><script>
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[4].total_cash_flow}}) - parseInt({{cash_flow[4].total_cash_outflow}}) + parseInt({{cash_flow[4].fixed_costs}})+"</b>")</td>
+					</script>
+					<td><script>	
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[5].total_cash_flow}}) - parseInt({{cash_flow[5].total_cash_outflow}}) + parseInt({{cash_flow[5].fixed_costs}})+"</b>")</td>
+					</script>
+					<td><script>	
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[6].total_cash_flow}}) - parseInt({{cash_flow[6].total_cash_outflow}}) + parseInt({{cash_flow[6].fixed_costs}})+"</b>")</td>
+					</script>
+					<td><script>	
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[7].total_cash_flow}}) - parseInt({{cash_flow[7].total_cash_outflow}}) + parseInt({{cash_flow[7].fixed_costs}})+"</b>")</td>
+					</script>	
+					<td><script>
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[8].total_cash_flow}}) - parseInt({{cash_flow[8].total_cash_outflow}}) + parseInt({{cash_flow[8].fixed_costs}})+"</b>")</td>
+					</script>	
+					<td><script>
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[9].total_cash_flow}}) - parseInt({{cash_flow[9].total_cash_outflow}}) + parseInt({{cash_flow[9].fixed_costs}})+"</b>")</td>
+					</script>	
+					<td><script>
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[10].total_cash_flow}}) - parseInt({{cash_flow[10].total_cash_outflow}}) + parseInt({{cash_flow[10].fixed_costs}})+"</b>")</td>
+					</script>	
+					<td><script>
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[11].total_cash_flow}}) - parseInt({{cash_flow[11].total_cash_outflow}}) + parseInt({{cash_flow[11].fixed_costs}})+"</b>")</td>
+					</script>	
+					<td><script>
+					document.write("
+					<td><b class='tr21'>"+parseInt({{cash_flow[12].total_cash_flow}}) - parseInt({{cash_flow[12].total_cash_outflow}}) + parseInt({{cash_flow[12].fixed_costs}})+"</b>")</td>
+					</script>
 					<td><span id="ave21"></span></td>	
 					<td><span id="sum21"></span></td>
 				</tr>

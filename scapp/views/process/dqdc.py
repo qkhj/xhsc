@@ -195,14 +195,15 @@ def dqdcXed_jbqk(belong_customer_type,belong_customer_value,id):
         guarantees_for_others=guarantees_for_others,riskanalysis_and_findings=riskanalysis_and_findings)
 
 # 贷款调查——小额贷款(基本情况)
-@app.route('/Process/dqdc/dqdcXed_jbqk_dy/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])
-def dqdcXed_jbqk_dy(belong_customer_type,belong_customer_value,id):
-    if belong_customer_type == 'Company':
-        customer = SC_Company_Customer.query.filter_by(id=belong_customer_value).first()
-    else :
-        customer = SC_Individual_Customer.query.filter_by(id=belong_customer_value).first()
-
+@app.route('/Process/dqdc/dy_jbqk/<int:id>', methods=['GET'])
+def dy_jbqk(id):
     loan_apply = SC_Loan_Apply.query.filter_by(id=id).first()
+    if loan_apply.belong_customer_type == 'Company':
+        customer = SC_Company_Customer.query.filter_by(id=loan_apply.belong_customer_value).first()
+    else :
+        customer = SC_Individual_Customer.query.filter_by(id=loan_apply.belong_customer_value).first()
+
+    
     apply_info = SC_Apply_Info.query.filter_by(loan_apply_id=id).first()
     loan_purpose = SC_Loan_Purpose.query.order_by("id").all()
     credit_history = SC_Credit_History.query.filter_by(loan_apply_id=id).all()
@@ -214,8 +215,8 @@ def dqdcXed_jbqk_dy(belong_customer_type,belong_customer_value,id):
     #non_financial_analysis = SC_Non_Financial_Analysis.query.filter_by(loan_apply_id=id).first()
     riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
     
-    return render_template("Print/dy_khjbxx.html",belong_customer_type=belong_customer_type,
-        belong_customer_value=belong_customer_value,id=id,customer=customer,loan_apply=loan_apply,
+    return render_template("Print/dy_khjbxx.html",belong_customer_type=loan_apply.belong_customer_type,
+        belong_customer_value=loan_apply.belong_customer_value,id=id,customer=customer,loan_apply=loan_apply,
         apply_info=apply_info,loan_purpose=loan_purpose,credit_history=credit_history,co_borrower=co_borrower,
         guaranty=guaranty,guarantees=guarantees,
         guarantees_for_others=guarantees_for_others,riskanalysis_and_findings=riskanalysis_and_findings)
