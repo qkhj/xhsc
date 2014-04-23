@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<style type="text/css">
+		*{font-size: 12px;margin:0;}
+		table{border-collapse:collapse;}
+		.dayin{width:100%;}
+		.dayin td{border:1px solid black;padding:4px 0;}
+		.center{text-align: center;}
+	</style>
+	
+</head>
+
+<body>
+	<div class="content" style="width:800px;margin:0 auto;">
+		
+		<div>				
+			<table style="width:100%">
+				<tr>
+					<td class="center" colspan="2"><span style="font-size:16px;font-weight:bold;">兴化农村商业银行小微贷款业务审贷会决议单</span></td>
+				</tr>
+				<tr>
+					<td style="text-align:left;"><b>审议日期：</b></td>
+					<td style="text-align:right;">单位：人民币元</td>
+				</tr>
+			</table>
+		</div>
+		<div>				
+			<table class="dayin">
+			<!--************************************************基本信息****************************************************-->
+				<tr>
+					<td colspan="7"><b>基本信息</b></td>				
+				</tr>
+				<tr>
+					<td class="center">客户名称</td>
+					<td colspan="3">{{customer.customer_name}}</td>		
+					<td class="center">客户经理</td>
+					<td colspan="2">XXXXXXXX</td>						
+				</tr>
+				<tr>
+					<td class="center">审议事项</td>
+					<td colspan="6">XXXXXXXXXX</td>					
+				</tr>
+				<tr>
+					<td class="center">建议贷款金额</td>
+					<td>{{riskanalysis_and_findings.amount}}</td>
+					<td class="center">建议期限</td>
+					<td colspan="2">{{riskanalysis_and_findings.deadline}}（月数）</td>
+					<td class="center">建议利率（月）</td>
+					<td>{{riskanalysis_and_findings.rates}}%</td>
+				</tr>
+				<tr>
+					<td class="center">贷款用途</td>
+					<td colspan="2">XXXXXXXXXX</td>
+					<td class="center">每月还款额</td>
+					<td colspan="3">{{riskanalysis_and_findings.monthly_repayment}}</td>
+				</tr>
+			</table>
+			<!--************************************************建议共同借款人****************************************************-->
+			<table class="dayin">
+				<tr>
+					<td colspan="8" style="border-top:none;"><b>建议共同借款人</b></td>				
+				</tr>			
+				<tr class="center">
+					<td>姓名</td>
+					<td>与客户关系</td>
+					<td>身份证号码</td>							
+					<td>家庭电话</td>
+					<td>主营业务或职务</td>
+					<td>经营地址或工作单位地址</td>		
+					<td>主要资产</td>
+					<td>月收入</td>								
+				</tr>
+				{%- for obj in co_borrower %}
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td>{{obj.name}}</td>
+					<td>{{obj.relationship}}</td>
+					<td>{{obj.id_number}}</td>
+					<td>{{obj.phone}}</td>
+					<td>{{obj.main_business}}</td>	
+					<td>{{obj.address}}</td>	
+					<td>{{obj.major_assets}}</td>
+					<td>{{obj.monthly_income}}</td>								
+				</tr>
+				{%- endfor %}
+			</table>
+			<!--************************************************建议担保方式****************************************************-->
+			<table class="dayin">
+				<tr>
+					<td colspan="6" style="border-top:none;"><b>建议担保方式</b></td>				
+				</tr>	
+				<tr>
+					<td colspan="6" style="border-top:none;"><b>&nbsp;&nbsp;&nbsp;&nbsp;抵押担保</b></td>				
+				</tr>	
+				<tr class="center">
+					<td>抵押人</td>
+					<td>抵押物名称</td>
+					<td>数量</td>							
+					<td>权证或单据号码</td>
+					<td>市场估价</td>
+					<td>抵押估价</td>						
+				</tr>
+				{%- for obj in co_borrower %}
+				<tr class="center">
+					<td>XXXXXXXX</td>
+					<td>{{obj.obj_name}}</td>
+					<td>XXXXXX</td>
+					<td>{{obj.registration_number}}</td>
+					<td>{{obj.appraisal}}</td>
+					<td>{{obj.mortgage}}</td>							
+				</tr>
+				{%- endfor %}
+				<tr>
+					<td colspan="6" style="border-top:none;"><b>&nbsp;&nbsp;&nbsp;&nbsp;质押担保</b></td>				
+				</tr>	
+				<tr class="center">
+					<td>质押人</td>
+					<td>质押物名称</td>
+					<td>数量</td>							
+					<td>权证或单据号码</td>
+					<td>市场估价</td>
+					<td>抵押估价</td>						
+				</tr>
+				<tr class="center">
+					<td>XXXXXXXX</td>
+					<td>XXXXXXXX</td>
+					<td>XXXXXX</td>
+					<td>XXXXXXXX</td>
+					<td>XXXXXXXX</td>
+					<td>XXXXXXXX</td>							
+				</tr>
+				<tr>
+					<td colspan="6" style="border-top:none;"><b>&nbsp;&nbsp;&nbsp;&nbsp;保证担保</b></td>				
+				</tr>	
+				<tr class="center">
+					<td>保证人</td>
+					<td colspan="2">身份证号码</td>
+					<td colspan="2">联系方式</td>							
+					<td>月收入</td>					
+				</tr>
+				{%- for obj in guarantees %}
+				<tr class="center">
+					<td>{{obj.name}}</td>
+					<td colspan="2">{{obj.id_number}}</td>
+					<td colspan="2">{{obj.workunit}}</td>
+					<td>XXXXXXX</td>
+				</tr>
+				{%- endfor %}
+			</table>
+			<!--************************************************需要审议的其他内容****************************************************-->
+			<table class="dayin">
+				<tr>
+					<td style="border-top:none;width:108px;" class="center"><b>需要审议的<br/>其他内容</b></td>	
+					<td colspan="8" style="border-top:none;">{{riskanalysis_and_findings.other_deliberations}}</td>			
+				</tr>
+				<tr>
+					<td rowspan="2" class="center"><b>正反因素分析</b></td>
+					<td class="center">正</td>
+					<td colspan="7">{{riskanalysis_and_findings.positive}}</td>
+				</tr>
+				<tr>
+					<td class="center">反</td>
+					<td colspan="7">{{riskanalysis_and_findings.opposite}}</td>
+				</tr>
+				<tr>
+					<td rowspan="14" style="width:75px;" class="center"><b>贷款决议情况</b></td>
+					<td rowspan="2" style="width:78px;" class="center">决议结论</td>
+					<td style="width:88px;"></td>
+					<td style="text-align:left;" colspan="5">1、同意。</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td colspan="5" style="text-align:left;">2、拒绝。主要拒绝原因：</td>
+				</tr>
+				<tr>
+					<td class="center">金额</td>
+					<td colspan="2" style="width:88px">{{approval_decision.amount}}</td>
+					<td style="width:100px" class="center">利率（月）</td>
+					<td style="width:100px">{{approval_decision.rates}}%</td>
+					<td style="width:100px" class="center">期限</td>
+					<td style="width:100px">{{approval_decision.deadline}}月</td>
+				</tr>
+				<tr>
+					<td class="center">还款方式</td>
+					<td colspan="2">{{approval_decision.repayment_type}}</td>
+					<td class="center">每期还款金额</td>
+					<td colspan="3">{{approval_decision.monthly_repayment}}</td>
+				</tr>
+				<tr class="center">
+					<td rowspan="2">借款人</td>
+					<td colspan="2">姓名</td>
+					<td colspan="4">身份证号码</td>
+				</tr>
+				<tr class="center">
+					<td colspan="2">{{customer.customer_name}}</td>
+					<td colspan="4">{{customer.credentials_no}}</td>
+				</tr>
+				<tr>
+					<td rowspan="2" class="center">共同借款人</td>
+					<td rowspan="2"></td>
+					<td colspan="5" style="text-align:left;">1、同意建议。</td>
+				</tr>
+				<tr>					
+					<td colspan="5" style="text-align:left;">2、对建议的改变：</td>
+				</tr>
+				<tr>
+					<td rowspan="2" class="center">抵质押</td>
+					<td rowspan="2"></td>
+					<td colspan="5" style="text-align:left;">1、同意建议。</td>
+				</tr>
+				<tr>					
+					<td colspan="5" style="text-align:left;">2、对建议的改变和其他决定：</td>
+				</tr>
+				<tr>
+					<td rowspan="2" class="center">保证</td>
+					<td rowspan="2"></td>
+					<td colspan="5" style="text-align:left;">1、同意建议。</td>
+				</tr>
+				<tr>					
+					<td colspan="5" style="text-align:left;">2、对建议的改变和其他决定：</td>
+				</tr>
+				<tr>
+					<td rowspan="2" class="center">其他决议内容</td>
+					<td rowspan="2"></td>
+					<td colspan="5" style="text-align:left;">1、同意申报审议的其他事项。</td>
+				</tr>
+				<tr>					
+					<td colspan="5" style="text-align:left;">2、其他决定和附加条件：</td>
+				</tr>
+				<tr class="center" style="height:30px;">					
+					<td><b>审贷会成员签字</b></td>
+					<td colspan="5"></td>
+					<td><b>日期</b></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr class="center">					
+					<td><b>资料完整性审查人意见</b></td>
+					<td></td>
+					<td><b>日期</b></td>
+					<td></td>				
+					<td><b>合规性审查人意见</b></td>
+					<td></td>
+					<td><b>日期</b></td>
+					<td></td>
+				</tr>
+				<tr>					
+					<td colspan="9" style="text-align:right;border:none;">V1.1-SP-20131222</td>
+				</tr>
+			</table>
+		</div>	
+	</div>
+
+	
+</body>
+</html>

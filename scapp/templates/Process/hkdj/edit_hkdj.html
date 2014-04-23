@@ -58,8 +58,12 @@
 							<td>{{loan_apply.deadline}}</td>
 							{%- if loan_apply.repayment_type == 1 %}
 							<td>等额本金</td>
-							{%- else %}
+							{%- elif loan_apply.repayment_type == 2 %}
 							<td>等额本息</td>
+							{%- elif loan_apply.repayment_type == 3 %}
+							<td>按月还息到期还本</td>
+							{%- elif loan_apply.repayment_type == 4 %}
+							<td>利随本清</td>
 							{%- endif %}
 							<td>{{loan_apply.first_repayment_date}}</td>
 							<td>{{loan_apply.loan_date}}</td>

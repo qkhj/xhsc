@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<style type="text/css">
+		*{font-size: 13px;margin:0;}
+		table{border-collapse:collapse;}
+		.dayin{width:100%;}
+		.dayin td{border:1px solid black;padding:8px 0;}
+		.center{text-align: center;}
+	</style>
+	
+</head>
+
+<body>
+	<div class="content" style="width:800px;margin:0 auto;">
+		
+		<div>				
+			<table style="width:100%">
+				<tr>
+					<td class="center"><span style="font-size:16px;font-weight:bold;">客户基本信息</span></td>
+				</tr>
+				<tr>
+					<td style="text-align:right;">单位：人民币元</td>
+				</tr>
+			</table>
+		</div>
+		<div>				
+			<table class="dayin">
+			<!--************************************************基本信息****************************************************-->
+				<tr>
+					<td colspan="8"><b>基本信息</b></td>				
+				</tr>
+				<tr>
+					<td class="center">申请者</td>
+					<td colspan="3">{{customer.customer_name}}</td>		
+					<td class="center">客户编号</td>
+					<td colspan="3">{{customer.id}}</td>						
+				</tr>
+				<tr>
+					<td class="center">性别</td>
+					{%- if customer.sex == '1' %}
+						<td colspan="3">男</td>	
+					{%- else %}
+						<td colspan="3">女</td>	
+					{%- endif %}	
+					<td class="center">身份证号码</td>
+					<td colspan="3">{{customer.credentials_no}}</td>						
+				</tr>
+				<tr>
+					<td class="center">住址</td>
+					<td colspan="3">{{customer.residence_address}}</td>		
+					<td class="center">移动电话</td>
+					<td>{{customer.mobile}}</td>		
+					<td class="center">固定电话</td>
+					<td>{{customer.telephone}}</td>					
+				</tr>
+				<tr>
+					<td class="center">企业名称</td>
+					<td colspan="3">{{customer.customer_name}}</td>		
+					<td class="center">组织类型</td>
+					<td>XXXXXXX</td>		
+					<td class="center">雇员人数</td>
+					<td>XXXXXXX</td>					
+				</tr>
+				<tr>
+					<td class="center">开业时间</td>
+					<td>{{customer.gsclrq}}</td>		
+					<td class="center">营业执照</td>
+					{%- if customer.yyzz %}	
+					<td>有</td>
+					{%- else %}
+					<td>无</td>
+					{%- endif %}
+					<td class="center" colspan="2">法定代表人/负责人</td>
+					<td colspan="2">{{customer.frdb}}</td>					
+				</tr>
+				<tr>
+					<td class="center">户籍所在地</td>
+					<td>XXXXX</td>		
+					<td class="center">经营地址</td>	
+					<td colspan="3">{{customer.zcdz}}</td>
+					<td class="center">经营范围</td>
+					<td>{{customer.gsyyfw}}</td>					
+				</tr>
+			<!--************************************************申请信息****************************************************-->
+				<tr>
+					<td colspan="8"><b>申请信息</b></td>				
+				</tr>
+				<tr>
+					<td class="center">申请金额</td>
+					<td colspan="2">{{apply_info.loan_amount_num}}</td>		
+					<td class="center">申请期限</td>	
+					<td colspan="4">{{apply_info.loan_deadline}}</td>	
+				</tr>
+				<tr>
+					<td class="center">贷款用途</td>
+					{%- for obj in loan_purpose %}
+						{%- if apply_info.loan_purpose == obj.id %}
+						<td colspan="2">{{obj.type_name}}</td>
+						{%- endif %}
+					{%- endfor %}		
+					<td class="center">详细说明</td>	
+					<td colspan="4">{{apply_info.details}}</td>	
+				</tr>
+				<tr>
+					<td class="center">贷款原因</td>
+					{%- for obj in loan_purpose %}
+						{%- if apply_info.loan_purpose == obj.id %}
+						<td colspan="7">{{obj.type_name}}</td>
+						{%- endif %}
+					{%- endfor %}
+				</tr>
+			<!--************************************************信贷历史****************************************************-->
+				<tr>
+					<td colspan="8"><b>信贷历史</b></td>				
+				</tr>
+				<tr>
+					<td class="center">信用状况是否正常</td>
+					<td colspan="7">正常/不正常/无征信记录</td>
+				</tr>
+				<tr>
+					<td class="center">融资来源</td>
+					<td class="center">贷款金额</td>
+					<td class="center">期限</td>
+					<td class="center">用途</td>
+					<td class="center">发放日期</td>
+					<td class="center">余额</td>
+					<td class="center">担保</td>
+					<td class="center">逾期信息</td>					
+				</tr>
+				{%- for obj in credit_history %}
+				<tr>
+					<td>{{obj.financing_sources}}</td>
+					<td>{{obj.loan_amount}}</td>
+					<td>{{obj.deadline}}</td>
+					<td>{{obj.use}}</td>
+					<td>{{obj.release_date}}</td>
+					<td>{{obj.overage}}</td>
+					<td>{{obj.guarantee}}</td>
+					<td>{{obj.late_information}}</td>					
+				</tr>
+				{%- endfor %}
+				<tr>
+					<td class="center">备注</td>
+					<td colspan="7">（信用状况不正常说明）</td>
+				</tr>
+			<!--************************************************共同借款人****************************************************-->
+				<tr>
+					<td colspan="8"><b>共同借款人</b></td>				
+				</tr>
+				<tr>
+					<td class="center">姓名</td>
+					<td class="center">与客户关系</td>
+					<td class="center">身份证号码</td>
+					<td class="center">家庭电话</td>
+					<td class="center">移动电话</td>
+					<td class="center">单位名称及地址</td>
+					<td class="center">主营业务或职务</td>
+					<td class="center">月收入</td>					
+				</tr>
+				{%- for obj in co_borrower %}
+				<tr>
+					<td>{{obj.name}}</td>
+					<td>{{obj.relationship}}</td>
+					<td>{{obj.id_number}}</td>
+					<td>{{obj.phone}}</td>
+					<td>{{obj.phone}}</td>
+					<td>{{obj.address}}</td>
+					<td>{{obj.main_business}}</td>
+					<td>{{obj.monthly_income}}</td>					
+				</tr>
+				{%- endfor %}
+				<tr>
+					<td class="center">家庭详细地址</td>
+					<td colspan="4">XXXXXXXXX</td>
+					<td class="center">户籍所在地</td>
+					<td colspan="2">XXXXXXXXX</td>
+				</tr>
+				<tr>
+					<td class="center">住房性质</td>
+					<td colspan="4">自有产权（按揭）/自有产权（无按揭）/小产权/租用/其他</td>
+					<td class="center">备注</td>
+					<td colspan="2">XXXXXXXXX</td>
+				</tr>
+			<!--************************************************建议抵押物****************************************************-->
+				<tr>
+					<td colspan="8"><b>建议抵押物</b></td>				
+				</tr>
+				<tr>
+					<td class="center">物品名称</td>
+					<td class="center" colspan="2">所有者、地址</td>
+					<td class="center">描述</td>
+					<td class="center">登记号</td>
+					<td class="center">估价（元）</td>
+					<td class="center">抵押（元）</td>
+					<td class="center">质押</td>				
+				</tr>
+				{%- for obj in guaranty %}
+				<tr>
+					<td>{{obj.obj_name}}</td>
+					<td>{{obj.owner_address}}</td>					
+					<td>{{obj.description}}</td>
+					<td>{{obj.registration_number}}</td>
+					<td>{{obj.appraisal}}</td>
+					<td>{{obj.mortgage}}</td>
+					<td>XXXXXXXXX</td>				
+				</tr>
+				{%- endfor %}
+			<!--************************************************风险分析****************************************************-->
+				<tr>
+					<td colspan="8"><b>风险分析</b></td>				
+				</tr>
+				<tr>
+					<td class="center">客户优势及风险因素分析</td>
+					<td colspan="7">{{riskanalysis_and_findings.analysis_conclusion}}</td>
+				</tr>
+			<!--************************************************调查结论****************************************************-->
+				<tr>
+					<td><b>调查结论</b></td>		
+					{%- if riskanalysis_and_findings == None or riskanalysis_and_findings.bool_grant == '1' %}
+					<td colspan="7">建议发放</td>
+					{%- else %}
+					<td colspan="7">建议否决</td>
+					{%- endif %}
+											
+				</tr>
+				<tr>
+					<td class="center" rowspan="3">建议发放内容</td>		
+					<td class="center">建议金额</td>	
+					<td colspan="2">{{riskanalysis_and_findings.amount}}</td>						
+					<td class="center">建议期限</td>					
+					<td>{{riskanalysis_and_findings.deadline}}</td>
+					<td class="center">建议月利率</td>					
+					<td>{{riskanalysis_and_findings.rates}}</td>
+				</tr>
+				<tr>		
+					<td class="center">每月还款额</td>	
+					<td colspan="2">{{riskanalysis_and_findings.monthly_repayment}}</td>						
+					<td class="center">月付款占<br/>可支配收入比重</td>					
+					<td>{{riskanalysis_and_findings.income_ratio}}</td>
+					<td class="center">建议担保方式</td>					
+					<td>{{riskanalysis_and_findings.recommended_way_of_security}}</td>
+				</tr>
+				<tr>		
+					<td class="center">客户查证情况</td>	
+					<td>1、2、3</td>						
+					<td colspan="6">1.营业执照  2.房地产权证  3.租赁合同  4.供销合同  5.账单  6.存货  7.存折  8.现金</td>	
+				</tr>
+				<tr>		
+					<td class="center">建议拒绝原因</td>	
+					<td colspan="7">{{riskanalysis_and_findings.refuse_reason}}</td>	
+				</tr>
+				<tr>		
+					<td class="center" colspan="2">调查人签名</td>	
+					<td colspan="2"></td>	
+					<td class="center" colspan="2">日期</td>	
+					<td colspan="2"></td>
+				</tr>
+			</table>
+		</div>	
+	</div>
+
+	
+</body>
+</html>

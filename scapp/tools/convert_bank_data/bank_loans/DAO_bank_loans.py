@@ -71,16 +71,16 @@ def update_valid_num():
         month=datetime.datetime.strftime(now,'%Y-%m')
         for obj in data:
             UPDATE_STR="UPDATE sc_performance_list SET valid_sum=%s " \
-                       "WHERE manager_id=%d AND date_format(month,'%%Y-%%m')=%s"%(obj['valid_sum'],obj['manager_id'],month)
+                       "WHERE manager_id=%d AND date_format(month,'%%%%Y-%%%%m')=%s "%(obj['valid_sum'],obj['manager_id'],month)
             INSERT_UPDATE_TRAN(UPDATE_STR)
 
 
 #更新逾期信息
 def update_overdue_info():
-    QUERY_STR="SELECT COUNT(sblm.loan_apply_id) AS overdue_sum,SUM(sblm.loan_overdue_amount) AS overdue_amount,sla.A_loan_officer AS user_id" \
+    QUERY_STR="SELECT COUNT(sblm.loan_apply_id) AS overdue_sum,SUM(sblm.loan_overdue_amount) AS overdue_amount,sla.A_loan_officer AS user_id " \
               "FROM sc_bank_loans_main sblm INNER JOIN sc_loan_apply sla ON sblm.loan_apply_id = sla.id " \
               "WHERE sblm.loan_status='2' or sblm.loan_status='6' GROUP BY sla.A_loan_officer"
-    data=local_db_conn.execute(QUERY_STR)
+    data=local_db_conn.execute(QUERY_STR).fetchall()
 
 
     if len(data):

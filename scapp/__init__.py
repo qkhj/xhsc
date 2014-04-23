@@ -4,6 +4,8 @@ import sys
 
 reload(sys)  
 sys.setdefaultencoding('utf8')
+from config import unopath
+sys.path.append(unopath)
 
 from flask import Flask, render_template,flash
 from flask.ext.login import LoginManager
@@ -78,6 +80,8 @@ def page_not_found(error):
 #加载试图--johnny 放在最后防止循环引用
 #---------------------------------
 import views.index
+
+import report.report_stock
 
 import views.system.ywcspz
 import views.system.jkpz

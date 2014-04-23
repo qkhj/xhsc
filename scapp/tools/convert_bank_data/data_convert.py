@@ -94,6 +94,6 @@ def insert_update_data():
     except():
         logger.error("error")
 
-    #Interface_bank_data.update_valid_num()
+    Interface_bank_data.update_valid_num()
     Interface_bank_data.update_overdue_rate()
 

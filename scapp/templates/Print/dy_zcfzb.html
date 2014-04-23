@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<style type="text/css">
+		*{font-size: 12px;margin:0;}
+		table{border-collapse:collapse;}
+		.dayin{width:100%;margin-top:10px;}
+		.dayin td{border:1px solid black;text-align:right;}
+		.dayin .left{text-align:left;}
+	</style>
+	
+</head>
+
+<body>
+	<div class="content" style="width:800px;margin:0 auto;">
+		
+		<div>				
+			<table style="width:100%">
+				<tr>
+					<td style="text-align:center;" colspan="2"><span style="font-size:16px;font-weight:bold;line-height:35px;">资产负债表</span></td>
+				</tr>
+				<tr>
+					<td style="text-align:left;">报表日期：3014-01-01&nbsp;&nbsp;&nbsp;09:30</td>
+					<td style="text-align:right;">单位：人民币</td>
+				</tr>
+			</table>
+		</div>
+		<div>				
+			<table class="dayin">
+				<tr>
+					<td class="left" colspan="2"><b>资产</b></td>			
+					<td class="left" colspan="2"><b>负债</b></td>	
+				</tr>
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 8 %}
+				<tr>
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
+						{%- endif %}		
+
+						{%- if obj.loan_type == 9 %}			
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>
+					<td><b>{{obj.content}}</b></td>	
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 0 %}
+				<tr>
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{obj.items_name}}</b>
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+					<td style="width:170px">{{obj.content}}</td>	
+					{%- endif %}	
+					</td>	
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} </b>						
+					<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_0].content}}</b></td>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_0].items_name}} 					
+						<td style="width:170px">{{balance_sheets[balance_sheets.index(obj)+count_0].content}}</td>
+					{%- endif %}	
+					</td>
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+			
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 2 %}
+				<tr>
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{obj.items_name}}</b>
+						<td style="width:170px"><b>{{obj.content}}</b></td>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+						<td style="width:170px">{{obj.content}}</td>
+					{%- endif %}	
+					</td>		
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}} </b>
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_2].content}}</b></td>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_2].items_name}}
+						<td style="width:170px">{{balance_sheets[balance_sheets.index(obj)+count_2].content}}</td> 
+					{%- endif %}	
+					</td>	
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+				
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 4 %}
+				<tr>
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{obj.items_name}}</b>
+						<td style="width:170px"><b>{{obj.content}}</b></td>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+						<td style="width:170px">{{obj.content}}</td>
+					{%- endif %}	
+					</td>		
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}} </b>
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_4].content}}</b></td>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_4].items_name}} 
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_4].content}}</b></td>
+					{%- endif %}	
+					</td>					
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 6 %}
+				<tr>
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{obj.items_name}}</b>
+						<td style="width:170px"><b>{{obj.content}}</b></td>	
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+						<td style="width:170px">{{obj.content}}</td>	
+					{%- endif %}	
+					</td>
+						
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}} </b>
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_6].content}}</b></td>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_6].items_name}} 
+						<td style="width:170px">{{balance_sheets[balance_sheets.index(obj)+count_6].content}}</td>
+					{%- endif %}	
+					</td>						
+					
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+					
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 10 %}
+				<tr>
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{obj.items_name}}</b>
+						<td style="width:170px"><b>{{obj.content}}</b></td>	
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+						<td style="width:170px">{{obj.content}}</td>	
+					{%- endif %}	
+					</td>						
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}} </b>					
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_10].content}}</b></td>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_10].items_name}} 
+						<td style="width:170px">{{balance_sheets[balance_sheets.index(obj)+count_10].content}}</td>
+					{%- endif %}	
+					</td>	
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 12 %}
+				<tr>
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{obj.items_name}}</b>
+						<td style="width:170px"><b>{{obj.content}}</b></td>	
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{obj.items_name}}
+						<td style="width:170px">{{obj.content}}</td>	
+					{%- endif %}	
+					</td>						
+					<td class="left">
+					{%- if obj.index == 0 %}
+						<b style="padding-left:25px">{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}} </b>
+						<td style="width:170px"><b>{{balance_sheets[balance_sheets.index(obj)+count_12].content}}</b></td>
+					{%- else %}
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{balance_sheets[balance_sheets.index(obj)+count_12].items_name}} 
+						<td style="width:170px">{{balance_sheets[balance_sheets.index(obj)+count_12].content}}</td>
+					{%- endif %}	
+					</td>	
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 15 %}
+				<tr>
+					<td></td>
+					<td></td>
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 16 %}
+				<tr>
+					<td></td>
+					<td></td>
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+				
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 17 %}
+				<tr>
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
+					{%- endif %}
+
+					{%- if obj.loan_type == 18 %}
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}</b></td>	
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 20 %}
+				<tr>
+					<td></td>
+					<td></td>
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}%</b></td>	
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+				
+				{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 19 %}
+				<tr>
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}%</b></td>	
+					{%- endif %}
+					{%- endfor %}		
+					{%- for obj in balance_sheets %}
+					{%- if obj.loan_type == 14 %}
+					<td class="left" style="width:250px"><b>{{obj.items_name}}</b></td>	
+					<td style="width:170px"><b>{{obj.content}}%</b></td>	
+				</tr>
+					{%- endif %}
+				{%- endfor %}
+
+				<tr>
+					<td class="left" colspan="4">表外资产负债情况及评价</td>	
+				</tr>
+				<tr>
+					<td class="left" colspan="4" style="height:50px;"></td>	
+				</tr>
+			</table>
+		</div>	
+	</div>
+</body>
+</html>
