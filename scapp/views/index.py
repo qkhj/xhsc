@@ -116,10 +116,13 @@ def jxgl():
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
     data = SC_parameter_configure.query.first()
     hidden = 'true'
+    levelHidden = 'true'
     if data:
         if data.performance_a==str(current_user.id) or data.performance_b==str(current_user.id) or data.performance_c==str(current_user.id):
             hidden='false'
-    return render_template("index.html",menu = 'jxgl',role=role,hidden=hidden)
+        if data.level_a==str(current_user.id) or data.level_b==str(current_user.id):
+            levelHidden='false'
+    return render_template("index.html",menu = 'jxgl',role=role,hidden=hidden,levelHidden=levelHidden)
 
 # 统计报表
 @app.route('/tjbb', methods=['GET'])
