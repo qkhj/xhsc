@@ -1,5 +1,4 @@
 #coding:utf-8
-from apscheduler.scheduler import Scheduler  
 import datetime
 from scapp import db
 from scapp.config import logger
@@ -13,20 +12,7 @@ from scapp.models.performance.sc_parameter_configure import SC_parameter_configu
 from scapp.models import SC_Loan_Apply
 from scapp.models import SC_Approval_Decision
 from scapp.models.performance.sc_loan_income_list import SC_loan_income_list 
-
-
-class timing():
-
-	def __init__(self):
-		sched = Scheduler()
-		sched.daemonic = False
-		sched.add_cron_job(self.rise,month='4,7,10,12',day='10',hour='1')  
-		sched.add_cron_job(self.kpi,month='1-12',day='1',hour='2')  #每月1号凌晨2点创建当月评估表
-		sched.add_cron_job(self.total,month='1-12',day='1',hour='2')  #每月1号凌晨2点创建上月余额规模
-		sched.add_cron_job(self.perform,month='1-12',day='1',hour='3')  #每月1号凌晨3点初始化当月业绩表
-		sched.add_cron_job(self.first,month='1-12',day='1',hour='5')  #计算历史贷款笔数分成
-		sched.start()
-
+class scriptload():
 	#晋降级线程
 	def rise(self):
 		try:
@@ -171,14 +157,16 @@ class timing():
 				loan_apply = SC_Loan_Apply.query.filter_by(id=obj.loan_apply_id).first()
 				level = SC_Privilege.query.filter_by(priviliege_master_id=loan_apply.A_loan_officer,privilege_master="SC_User",priviliege_access="sc_account_manager_level").first()
 				#查询所有绩效参数
-				parameter = SC_parameter_configure.query.filter_by(level_id=level.priviliege_access_value).first()
-				#所得绩效
-				total = float(parameter.A1)*inCount
-				yunying_total = total*0.1
-				A_total = total*0.6
-				B_total = total*0.3
-				SC_loan_income_list(obj.loan_apply_id,loan_apply.yunying_loan_officer,yunying_total,loan_apply.A_loan_officer,
-					A_total,loan_apply.B_loan_officer,B_total,payment_date).add()
+				if level:
+					parameter = SC_parameter_configure.query.filter_by(level_id=level.priviliege_access_value).first()
+					#所得绩效
+					if parameter:
+						total = float(parameter.A1)*inCount
+						yunying_total = total*0.1
+						A_total = total*0.6
+						B_total = total*0.3
+						SC_loan_income_list(obj.loan_apply_id,loan_apply.yunying_loan_officer,yunying_total,loan_apply.A_loan_officer,
+							A_total,loan_apply.B_loan_officer,B_total,payment_date).add()
 		 	 # 事务提交
 			db.session.commit()
 		except:
