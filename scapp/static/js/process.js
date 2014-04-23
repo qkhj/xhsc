@@ -318,33 +318,33 @@ function addTd(table,frameid){
                             "<tr class='add'>" +
 								"<td colspan='2'>" +
 									"家庭详细地址<span>	" +
-										"<input type='text' name='' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>" +
+										"<input type='text' name='home_addr' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于128</span>" +
 									"</span>" +
 								"</td>" +	
 								"<td>" +
 									"户籍所在地<span>	" +
-										"<input type='text' name='' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>" +
+										"<input type='text' name='hj_addr' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于128</span>" +
 									"</span>" +
 								"</td>	" +
 								"<td>" +
 									"住房性质<span>	" +
-										"<select name=''>"+
-											"<option value='1'>自有产权(按揭)</option>"+
-											"<option value='2'>自有产权(无按揭)</option>"+
-											"<option value='3'>小产权</option>"+
-											"<option value='4'>租用</option>"+
-											"<option value='5'>其他</option>"+
+										"<select name='home'>"+
+											"<option value='自有产权(按揭)'>自有产权(按揭)</option>"+
+											"<option value='自有产权(无按揭)'>自有产权(无按揭)</option>"+
+											"<option value='小产权'>小产权</option>"+
+											"<option value='租用'>租用</option>"+
+											"<option value='其他'>其他</option>"+
 										"</select><br/>" +
 										"<span>&nbsp;</span>" +
 									"</span>" +
 								"</td>" +
 								"<td colspan='3'>" +
 									"备注<br/><span>	" +
-										"<input type='text' name='' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
+										"<input type='text' name='remark' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于256</span>" +
 									"</span>" +
