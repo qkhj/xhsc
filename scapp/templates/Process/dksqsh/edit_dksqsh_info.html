@@ -667,18 +667,18 @@
 					<td>月收入<input type="text" name="monthly_income" class="tbInput" value="{{obj.monthly_income}}" disabled/></td>
 				</tr>
 				<tr class='add'>
-					<td colspan='2'>家庭详细地址<input type='text' name='' class='tbInput' disabled/></td>	
-					<td>户籍所在地<input type='text' name='' class='tbInput' disabled/></td>
+					<td colspan='2'>家庭详细地址<input type='text' name='home_addr' class='tbInput' disabled/></td>	
+					<td>户籍所在地<input type='text' name='hj_addr' class='tbInput' disabled/></td>
 					<td>住房性质
-						<select name='' disabled>
-							<option value='1'>自有产权(按揭)</option>
-							<option value='2'>自有产权(无按揭)</option>
-							<option value='3'>小产权</option>
-							<option value='4'>租用</option>
-							<option value='5'>其他</option>
+						<select name='home' disabled>
+							<option value='自有产权(按揭)'>自有产权(按揭)</option>
+							<option value='自有产权(无按揭)'>自有产权(无按揭)</option>
+							<option value='小产权'>小产权</option>
+							<option value='租用'>租用</option>
+							<option value='其他'>其他</option>
 						</select>
 					</td>
-					<td colspan='3'>备注<br/><input type='text' name='' class='tbInput' disabled/></td>
+					<td colspan='3'>备注<br/><input type='text' name='remark' class='tbInput' disabled/></td>
                 </tr>
 				{%- endfor %}
 			</table>
