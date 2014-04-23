@@ -67,7 +67,7 @@
 				<tr>
 					<td colspan="8" style="border-top:none;"><b>建议共同借款人</b></td>				
 				</tr>			
-				<tr class="center">
+				<!-- <tr class="center">
 					<td>姓名</td>
 					<td>与客户关系</td>
 					<td>身份证号码</td>							
@@ -76,18 +76,24 @@
 					<td>经营地址或工作单位地址</td>		
 					<td>主要资产</td>
 					<td>月收入</td>								
-				</tr>
+				</tr> -->
 				{%- for obj in co_borrower %}
 				<tr class="center"><!--后期Js中要增加ID字段-->
-					<td>{{obj.name}}</td>
-					<td>{{obj.relationship}}</td>
-					<td>{{obj.id_number}}</td>
-					<td>{{obj.phone}}</td>
-					<td>{{obj.main_business}}</td>	
-					<td>{{obj.address}}</td>	
-					<td>{{obj.major_assets}}</td>
-					<td>{{obj.monthly_income}}</td>								
+					<td rowspan='2'>姓名：{{obj.name}}</td>
+					<td>与客户关系：{{obj.relationship}}</td>	
+					<td>身份证号码：{{obj.id_number}}</td>
+					<td>家庭电话：{{obj.phone}}</td>
+					<td>主营业务或职务：{{obj.main_business}}</td>	
+					<td>经营地址或工作单位地址：{{obj.address}}</td>	
+					<td>主要资产：{{obj.major_assets}}</td>
+					<td>月收入：{{obj.monthly_income}}</td>
 				</tr>
+				<tr class='add'>
+					<td colspan='2'>家庭详细地址：</td>	
+					<td>户籍所在地：</td>
+					<td>住房性质：</td>
+					<td colspan='3'>备注<br/>：</td>
+                </tr>
 				{%- endfor %}
 			</table>
 			<!--************************************************建议担保方式****************************************************-->
