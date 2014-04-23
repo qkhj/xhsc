@@ -1,7 +1,8 @@
 #coding:utf-8
 from apscheduler.scheduler import Scheduler
 from scapp.views.cust_mgr.autoload.load import scriptload
-import daily_work, monthly_work
+from daily_work import daily_work
+from monthly_work import monthly_work
 
 
 class timing():
@@ -14,7 +15,7 @@ class timing():
         sched.add_cron_job(script.total, month='1-12', day='1', hour='2')  #每月1号凌晨2点创建上月余额规模
         sched.add_cron_job(script.perform, month='1-12', day='1', hour='3')  #每月1号凌晨3点初始化当月业绩表
         sched.add_cron_job(script.first, month='1-12', day='1', hour='5')  #计算历史贷款笔数分成
-        sched.add_cron_job(monthly_work.run(),month='1-12',day='1',hour='3') #银行每月客户经理有效管户更新
-        sched.add_cron_job(daily_work.data_convert, month='1-12', day='1-30', hour='4')#银行每日还款数据更新
+        sched.add_cron_job(monthly_work.run,month='1-12',day='1',hour='3') #银行每月客户经理有效管户更新
+        sched.add_cron_job(daily_work.run, month='1-12', day='1-30', hour='4')#银行每日还款数据更新
 
         sched.start()
