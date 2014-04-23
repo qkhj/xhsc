@@ -113,53 +113,96 @@ function addTd(table,frameid){
     }
     if(table=="dbInformation"){//担保信息
         $("#"+table).append("<tr class='add'>" +
-								"<td>" +
-									"<span>	" +
+								"<td rowspan='2' class='table-label'>" +
+									"姓名<span>	" +
 										"<input type='text' name='name_db' onchange='spryMaxLength(this,32)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于32</span>" +
 									"</span>" +
 								"</td>" +
 								"<td>" +
-									"<span>	" +
+									"地址<span>	" +
 										"<input type='text' name='address_db' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于256</span>" +
 									"</span>" +
 								"</td>		" +					
 								"<td>" +
-									"<span>	" +
+									"身份证号码<span>	" +
 										"<input type='text' name='id_number_db' onchange='checkIdcard(this)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>证件号码有误</span>" +
 									"</span>" +
 								"</td>	" +
 								"<td>" +
-									"<span>	" +
+									"工作单位<span>	" +
 										"<input type='text' name='workunit_db' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于256</span>" +
 									"</span>" +
 								"</td>" +
 								"<td>" +
-									"<span>	" +
+									"电话<span>	" +
 										"<input type='text' name='phone_db' class='tbInput' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)' onblur='getLength(this)'/><br/>&nbsp;" +
 										"<span class='errorInfo'>电话号码有误</span>" +
 									"</span>" +
 								"</td>	" +
 								"<td>" +
-									"<span>	" +
+									"与申请人关系<span>	" +
 										"<input type='text' name='relationship_db' onchange='spryMaxLength(this,32)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于32</span>" +
 									"</span>" +
 								"</td>" +
-                                /* "<td><input type='text' name='name_db' class='tbInput'/></td>" +
-                                "<td><input type='text' name='address_db' class='tbInput'/></td>" +
-                                "<td><input type='text' name='id_number_db' class='tbInput'/></td>" +
-                                "<td><input type='text' name='workunit_db' class='tbInput'/></td>" +
-                                "<td><input type='text' name='phone_db' class='tbInput'/></td>" +
-                                "<td><input type='text' name='relationship_db' class='tbInput'/></td>" + */
+								"<td>" +
+									"主要资产<span>	" +
+										"<input type='text' name='major_assets' value='' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
+										"<span>&nbsp;</span>" +
+										"<span class='errorInfo'>字符数不得大于256</span>" +
+									"</span>" +
+								"</td>" +
+								"<td>" +
+									"月收入<span>	" +
+										"<input type='text' name='monthly_income' value='' onkeyup='setJe(this);' maxlength='11' class='tbInput' onclick='setJe(this);'/><br/>" +
+										"<span class='je'>人民币</span>" +
+										"<span class='errorInfo'></span>	" +					
+									"</span>" +
+								"</td>" +
+							"</tr>"+
+                            "<tr class='add'>" +
+								"<td colspan='2'>" +
+									"家庭详细地址<span>	" +
+										"<input type='text' name='' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>" +
+										"<span>&nbsp;</span>" +
+										"<span class='errorInfo'>字符数不得大于128</span>" +
+									"</span>" +
+								"</td>" +	
+								"<td>" +
+									"户籍所在地<span>	" +
+										"<input type='text' name='' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>" +
+										"<span>&nbsp;</span>" +
+										"<span class='errorInfo'>字符数不得大于128</span>" +
+									"</span>" +
+								"</td>	" +
+								"<td>" +
+									"住房性质<span>	" +
+										"<select name=''>"+
+											"<option value='1'>自有产权(按揭)</option>"+
+											"<option value='2'>自有产权(无按揭)</option>"+
+											"<option value='3'>小产权</option>"+
+											"<option value='4'>租用</option>"+
+											"<option value='5'>其他</option>"+
+										"</select><br/>" +
+										"<span>&nbsp;</span>" +
+									"</span>" +
+								"</td>" +
+								"<td colspan='3'>" +
+									"备注<br/><span>	" +
+										"<input type='text' name='' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
+										"<span>&nbsp;</span>" +
+										"<span class='errorInfo'>字符数不得大于256</span>" +
+									"</span>" +
+								"</td>" +
                             "</tr>");
     }	
 	if(table=="xdls"){//信贷历史
@@ -363,7 +406,7 @@ function addTd(table,frameid){
 									"</span>" +
 								"</td>" +
 								"<td>" +
-									"与客户关系<span>	" +
+									"地址<span>	" +
 										"<input type='text' name='address_db' value='' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于256</span>" +
@@ -377,18 +420,18 @@ function addTd(table,frameid){
 									"</span>" +
 								"</td>	" +
 								"<td>" +
-									"家庭电话<span>	" +
+									"工作单位<span>	" +
 										"<input type='text' name='workunit_db' value='' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于256</span>" +
 									"</span>" +
 								"</td>" +
 								"<td>" +
-									"主营业务或职务<input type='text' name='phone_db' value='' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)' maxlength='11' class='tbInput'/><br/>" +
+									"电话<input type='text' name='phone_db' value='' onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)' maxlength='11' class='tbInput'/><br/>" +
 									"<span>&nbsp;</span>" +
 								"</td>	" +
 								"<td>" +
-									"经营地址或工作单位地址<span>	" +
+									"与申请人关系<span>	" +
 										"<input type='text' name='relationship_db' value='' onchange='spryMaxLength(this,32)' class='tbInput'/><br/>" +
 										"<span>&nbsp;</span>" +
 										"<span class='errorInfo'>字符数不得大于32</span>" +
