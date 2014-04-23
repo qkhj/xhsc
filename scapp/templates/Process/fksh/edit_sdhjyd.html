@@ -514,8 +514,17 @@
 		document.write("<input type='submit' class='btn btn-info' value='拒绝' onclick='doSubmit("+PROCESS_STATUS_SPJY_JUJUE+")'/>");
     	</script>
     	{%- endif %}
-    	<input type="button" class="btn btn-info" value="打印" onclick="window.open('/Process/fksh/dy_sdhjyd/{{loan_apply_id}}')"/>
-		
+    	</br>
+		<input type="button" value="打印非财务情况分析" class="btn btn-info" onclick="window.open('/Process/dqdc/dy_fcw/{{loan_apply_id}}')">
+		<input type="button" value="打印资产负债表" class="btn btn-info" onclick="window.open('/Process/dqdc/dy_zcfzb/{{loan_apply_id}}')">
+		<input type="button" class="btn btn-info" value="打印交叉检验" onclick="window.open('/Process/dqdc/dy_jcjy/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印损益表" onclick="window.open('/Process/dqdc/dy_syb/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印现金流分析" onclick="window.open('/Process/dqdc/dy_xjl/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印固定资产清单" onclick="window.open('/Process/dqdc/dy_gdzcqd/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印库存" onclick="window.open('/Process/dqdc/dy_dhd/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印应付账款清单" onclick="window.open('/Process/dqdc/dy_yfzkqd/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印应收账款清单" onclick="window.open('/Process/dqdc/dy_yszkqd/{{loan_apply_id}}')"/>
+		<input type="button" value="打印基本情况" class="btn btn-info" onclick="window.open('/Process/dqdc/dy_jbqk/{{loan_apply_id}}')"/>
 	</div>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>

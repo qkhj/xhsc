@@ -146,9 +146,14 @@ class SC_Co_Borrower(db.Model):
     address = db.Column(db.String(256)) #经营地址或工作单位地址
     major_assets = db.Column(db.String(256)) #主要资产
     monthly_income = db.Column(db.String(16)) #月收入
+    home_addr = db.Column(db.String(256)) #家庭详细地址
+    hj_addr = db.Column(db.String(256)) #户籍所在地
+    home = db.Column(db.String(256)) #住房性质
+    remark = db.Column(db.String(256)) #备注
 
     def __init__(self,loan_apply_id,name,relationship,
-                id_number,phone,main_business,address,major_assets,monthly_income):
+                id_number,phone,main_business,address,major_assets,monthly_income,
+                home_addr,hj_addr,home,remark):
         self.loan_apply_id = loan_apply_id
         self.name = name
         self.relationship = relationship
@@ -158,6 +163,10 @@ class SC_Co_Borrower(db.Model):
         self.address = address
         self.major_assets = major_assets
         self.monthly_income = monthly_income
+        self.home_addr = home_addr
+        self.hj_addr = hj_addr
+        self.home = home
+        self.remark = remark
 
     def add(self):
         db.session.add(self)

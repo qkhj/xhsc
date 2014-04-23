@@ -19,7 +19,7 @@ from scapp.models.credit_data.sc_balance_sheet import SC_Balance_Sheet
 
 from scapp import app
 
-from appy.pod.renderer import Renderer
+#from appy.pod.renderer import Renderer
 
 staff = [{'firstName': 'Delannay', 'name': 'Gaetan', 'age': 112},
 		{'firstName': 'Gauthier', 'name': 'Bastien', 'age': 5},
@@ -62,7 +62,7 @@ def dqdcXed_zcfzb(loan_apply_id):
 
 		return redirect('Process/dqdc/dqdc')
 
-@app.route('/Process/dqdc/dqdcXed_fcw_dy/<int:loan_apply_id>', methods=['GET'])
+@app.route('/Process/dqdc/dy_fcw/<int:loan_apply_id>', methods=['GET'])
 def dqdcXed_fcw_dy(loan_apply_id):
 	balance_sheets = SC_Balance_Sheet.query.filter_by(loan_apply_id=loan_apply_id).order_by("id").all()
 	count_0 = SC_Balance_Sheet.query.filter_by(loan_apply_id=loan_apply_id,loan_type=0).count()
@@ -75,7 +75,7 @@ def dqdcXed_fcw_dy(loan_apply_id):
 		balance_sheets=balance_sheets,count_0=count_0,count_2=count_2,count_4=count_4,count_6=count_6,
 		count_10=count_10,count_12=count_12)
 
-@app.route('/Process/dqdc/dqdcXed_zcfzb_dy/<int:loan_apply_id>', methods=['GET'])
+@app.route('/Process/dqdc/dy_zcfzb/<int:loan_apply_id>', methods=['GET'])
 def dqdcXed_zcfzb_dy(loan_apply_id):
 	balance_sheets = SC_Balance_Sheet.query.filter_by(loan_apply_id=loan_apply_id).order_by("id").all()
 	count_0 = SC_Balance_Sheet.query.filter_by(loan_apply_id=loan_apply_id,loan_type=0).count()
