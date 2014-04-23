@@ -27,10 +27,10 @@
 		<!--*****************************************共同借款人**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">共同借款人</span>
 		<input type="button" value="+" onclick="addTd('gtjkr','dqdcXed_dbdydcb')" class="btn btn-info btn-mini" />
-		<input type="button" value="-" onclick="removeTd2('gtjkr','dqdcXed_dbdydcb')" class="btn btn-info btn-mini" />
+		<input type="button" value="-" onclick="removeTd('gtjkr','dqdcXed_dbdydcb')" class="btn btn-info btn-mini" />
 		<div class="divBorder">
 			<table id="gtjkr" class="table-list">
-				<!-- <tr class="font-small">
+				<tr class="font-small">
 					<th>姓名</th>
 					<th>与客户关系</th>
 					<th>身份证号码</th>							
@@ -39,100 +39,63 @@
 					<th>经营地址或工作单位地址</th>		
 					<th>主要资产</th>
 					<th>月收入</th>									
-				</tr> -->
+				</tr>
 				{%- for obj in co_borrower %}
-				<tr class="add"><!--后期Js中要增加ID字段-->
-					<td rowspan='2' class='table-label'>
-						姓名<span>	
+				<tr class="center"><!--后期Js中要增加ID字段-->
+					<td>
+						<span>	
 							<input type="text" name="name" value="{{obj.name}}" onchange="spryMaxLength(this,32)" class="tbInput"/><br/>
 							<span>&nbsp;</span>
 							<span class="errorInfo">字符数不得大于32</span>
 						</span>
 					</td>
 					<td>
-						与客户关系<span>	
+						<span>	
 							<input type="text" name="relationship" value="{{obj.relationship}}" onchange="spryMaxLength(this,32)" class="tbInput"/><br/>
 							<span>&nbsp;</span>
 							<span class="errorInfo">字符数不得大于32</span>
 						</span>
 					</td>							
 					<td>
-						身份证号码<span>	
+						<span>	
 							<input type="text" name="id_number" value="{{obj.id_number}}" onchange="checkIdcard(this)" class="tbInput"/><br/>
 							<span>&nbsp;</span>
 							<span class="errorInfo">证件号码有误</span>
 						</span>
 					</td>
 					<td>
-						家庭电话<span>
-							<input type='text' name='phone' class='tbInput' value="{{obj.phone}}" onkeyup='value=value.replace(/[^0-9]/g,&apos;&apos;)' onblur='getLength(this)'/><br/>&nbsp;
-							<span class='errorInfo'>电话号码有误</span>
-						</span>
+						<input type="text" name="phone" class="tbInput" value="{{obj.phone}}" onKeyUp="value=value.replace(/\D/g,'')" maxlength="12"/><br/>
+						<span>&nbsp;</span>
 					</td>
 					<td>
-						主营业务或职务<span>	
+						<span>	
 							<input type="text" name="main_business" value="{{obj.main_business}}" onchange="spryMaxLength(this,128)" class="tbInput"/><br/>
 							<span>&nbsp;</span>
 							<span class="errorInfo">字符数不得大于128</span>
 						</span>
 					</td>	
 					<td>
-						经营地址或工作单位地址<span>	
+						<span>	
 							<input type="text" name="address" value="{{obj.address}}" onchange="spryMaxLength(this,256)" class="tbInput"/><br/>
 							<span>&nbsp;</span>
 							<span class="errorInfo">字符数不得大于256</span>
 						</span>
 					</td>	
 					<td>
-						主要资产<span>	
-							<input type="text" name="major_assets" value="{{obj.major_assets}}"onchange="spryMaxLength(this,256)" class="tbInput"/><br/>
+						<span>	
+							<input type="text" name="major_assets" value="{{obj.major_assets}}" onchange="spryMaxLength(this,256)" class="tbInput"/><br/>
 							<span>&nbsp;</span>
 							<span class="errorInfo">字符数不得大于256</span>
 						</span>
 					</td>
 					<td>
-						月收入<span>	
+						<span>	
 							<input type="text" name="monthly_income" value="{{obj.monthly_income}}" onkeyup="setJe(this);" maxlength="11" class="tbInput" onclick="setJe(this);"/><br/>
 							<span class="je">人民币</span>
 							<span class="errorInfo"></span>						
 						</span>
 					</td>											
 				</tr>
-				<tr class='add'>
-					<td colspan='2'>
-							家庭详细地址<span>
-								<input type='text' name='' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>
-								<span>&nbsp;</span>
-								<span class='errorInfo'>字符数不得大于128</span>
-							</span>
-						</td>	
-						<td>
-							户籍所在地<span>
-								<input type='text' name='' onchange='spryMaxLength(this,128)' class='tbInput'/><br/>
-								<span>&nbsp;</span>
-								<span class='errorInfo'>字符数不得大于128</span>
-							</span>
-						</td>
-						<td>
-							住房性质<span>
-								<select name=''>
-									<option value='1'>自有产权(按揭)</option>
-									<option value='2'>自有产权(无按揭)</option>
-									<option value='3'>小产权</option>
-									<option value='4'>租用</option>
-									<option value='5'>其他</option>
-								</select><br/>
-								<span>&nbsp;</span>
-							</span>
-						</td>
-						<td colspan='3'>
-							备注<br/><span>
-								<input type='text' name='' onchange='spryMaxLength(this,256)' class='tbInput'/><br/>
-								<span>&nbsp;</span>
-								<span class='errorInfo'>字符数不得大于256</span>
-							</span>
-						</td>
-                    </tr>
 				{%- endfor %}
 			</table>
 		</div>
@@ -285,7 +248,6 @@
 			</table>
 		</div>
 		<input type="submit" value="保存" class="btn btn-info"/>
-		<input type="button" value="打印" class="btn btn-info"/>
 	</form>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
@@ -298,19 +260,6 @@
 		var num=0;
 		var idCard=0;
 		var phone=0;
-		//表格删除行
-		function removeTd2(table,frameid){ 
-			if(max==0&&jegs==0&&num==0&&idCard==0){//判断页面中是否有错误，如果未判断直接删除可能导致提交按钮不可用
-				var tr= document.getElementById(table).getElementsByTagName("tr");
-			    if(tr.length>1){//至少要保留一行
-			        document.getElementById(table).deleteRow(tr.length-1);//删除最后一行
-			        document.getElementById(table).deleteRow(tr.length-1);//删除倒数第二行
-			   }
-			    doubleIframe(frameid);
-			}
-		    else
-		    	alert("页面中有错误，请修改后再进行删除操作！")
-		}
 	</script>
 </body>
 </html>

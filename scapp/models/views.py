@@ -65,7 +65,7 @@ class View_Loan_Repayment(db.Model):
     loan_manager = db.Column(db.String)#客户经理
 
 # 已发放的贷款、到期终止的贷款、贷款余额、逾期贷款 视图
-class View_Bank_Loans_Main(db.Model):
+class View_Bank_Loans_Main(db.Model,dict):
     __tablename__ = 'view_bank_loans_main'
     id = db.Column(db.Integer, primary_key=True)
     loan_apply_id = db.Column(db.Integer)

@@ -22,7 +22,7 @@ def dkgjztfl_6_search(page):
     loan_type = request.form['loan_type']
     sql = " loan_status = '2'"
     if loan_type != '0':
-        sql = " and loan_type='"+loan_type+"' and "
+        sql += " and loan_type='"+loan_type+"' "
     if customer_name:
         sql += " and customer_name like '%"+customer_name+"%'"
 

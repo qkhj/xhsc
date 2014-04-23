@@ -21,9 +21,9 @@ def dkgjztfl_7():
 def dkgjztfl_7_search(page):
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = ""
+    sql = " 1=1"
     if loan_type != '0':
-        sql = "loan_type='"+loan_type+"' and "
+        sql += " and loan_type='"+loan_type+"' "
     if customer_name:
         sql += " and customer_name like '%"+customer_name+"%'"
 

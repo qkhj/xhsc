@@ -38,55 +38,103 @@
 				</tr>
 				<tr>
 					<td class="center">申请者</td>
-					<td colspan="3">{{customer.customer_name}}</td>		
+					{%- if belong_customer_type == 'Company' %}
+					<td colspan="3">{{customer.frdb}}</td>	
+					{%- else %}
+					<td colspan="3">{{customer.customer_name}}</td>	
+					{%- endif %}
 					<td class="center">客户编号</td>
 					<td colspan="3">{{customer.id}}</td>						
 				</tr>
 				<tr>
-					<td class="center">性别</td>
-					{%- if customer.sex == '1' %}
-						<td colspan="3">男</td>	
+					{%- if belong_customer_type == 'Company' %}
+						<td class="center">性别</td>
+						<td colspan="3"></td>	
+						<td class="center">身份证号码</td>
+						<td colspan="3"></td>
 					{%- else %}
-						<td colspan="3">女</td>	
-					{%- endif %}	
-					<td class="center">身份证号码</td>
-					<td colspan="3">{{customer.credentials_no}}</td>						
+						<td class="center">性别</td>
+						{%- if customer.sex == '1' %}
+							<td colspan="3">男</td>	
+						{%- else %}
+							<td colspan="3">女</td>	
+						{%- endif %}	
+						<td class="center">身份证号码</td>
+						<td colspan="3">{{customer.credentials_no}}</td>
+					{%- endif %}						
 				</tr>
 				<tr>
-					<td class="center">住址</td>
-					<td colspan="3">{{customer.residence_address}}</td>		
-					<td class="center">移动电话</td>
-					<td>{{customer.mobile}}</td>		
-					<td class="center">固定电话</td>
-					<td>{{customer.telephone}}</td>					
+					{%- if belong_customer_type == 'Company' %}
+						<td class="center">住址</td>
+						<td colspan="3"></td>		
+						<td class="center">移动电话</td>
+						<td>{{customer.mobile}}</td>		
+						<td class="center">固定电话</td>
+						<td>{{customer.contact_phone}}</td>	
+					{%- else %}	
+						<td class="center">住址</td>
+						<td colspan="3">{{customer.residence_address}}</td>		
+						<td class="center">移动电话</td>
+						<td>{{customer.mobile}}</td>		
+						<td class="center">固定电话</td>
+						<td>{{customer.telephone}}</td>
+					{%- endif %}			
 				</tr>
 				<tr>
+					{%- if belong_customer_type == 'Company' %}
 					<td class="center">企业名称</td>
-					<td colspan="3">{{customer.customer_name}}</td>		
+					<td colspan="3">{{customer.customer_name}}</td>	
 					<td class="center">组织类型</td>
-					<td>XXXXXXX</td>		
+					<td></td>		
 					<td class="center">雇员人数</td>
-					<td>XXXXXXX</td>					
-				</tr>
-				<tr>
-					<td class="center">开业时间</td>
-					<td>{{customer.gsclrq}}</td>		
-					<td class="center">营业执照</td>
-					{%- if customer.yyzz %}	
-					<td>有</td>
+					<td></td>	
 					{%- else %}
-					<td>无</td>
-					{%- endif %}
-					<td class="center" colspan="2">法定代表人/负责人</td>
-					<td colspan="2">{{customer.frdb}}</td>					
+					<td class="center">企业名称</td>
+					<td colspan="3"></td>	
+					<td class="center">组织类型</td>
+					<td></td>		
+					<td class="center">雇员人数</td>
+					<td></td>	
+					{%- endif %}	
+									
 				</tr>
 				<tr>
-					<td class="center">户籍所在地</td>
-					<td>XXXXX</td>		
-					<td class="center">经营地址</td>	
-					<td colspan="3">{{customer.zcdz}}</td>
-					<td class="center">经营范围</td>
-					<td>{{customer.gsyyfw}}</td>					
+					{%- if belong_customer_type == 'Company' %}
+						<td class="center">开业时间</td>
+						<td>{{customer.gsclrq}}</td>		
+						<td class="center">营业执照</td>
+						{%- if customer.yyzz %}	
+						<td>有</td>
+						{%- else %}
+						<td>无</td>
+						{%- endif %}
+						<td class="center" colspan="2">法定代表人/负责人</td>
+						<td colspan="2">{{customer.frdb}}</td>	
+					{%- else %}			
+						<td class="center">开业时间</td>
+						<td></td>		
+						<td class="center">营业执照</td>
+						<td></td>
+						<td class="center" colspan="2">法定代表人/负责人</td>
+						<td colspan="2"></td>
+					{%- endif %}	
+				</tr>
+				<tr>
+					{%- if belong_customer_type == 'Company' %}
+						<td class="center">户籍所在地</td>
+						<td></td>		
+						<td class="center">经营地址</td>	
+						<td colspan="3">{{customer.zcdz}}</td>
+						<td class="center">经营范围</td>
+						<td>{{customer.gsyyfw}}</td>
+					{%- else %}		
+						<td class="center">户籍所在地</td>
+						<td>{{customer.residence}}</td>		
+						<td class="center">经营地址</td>	
+						<td colspan="3"></td>
+						<td class="center">经营范围</td>
+						<td></td>
+					{%- endif %}					
 				</tr>
 			<!--************************************************申请信息****************************************************-->
 				<tr>
@@ -122,7 +170,7 @@
 				</tr>
 				<tr>
 					<td class="center">信用状况是否正常</td>
-					<td colspan="7">正常/不正常/无征信记录</td>
+					<td colspan="7"></td>
 				</tr>
 				<tr>
 					<td class="center">融资来源</td>
@@ -248,8 +296,39 @@
 					<td>{{riskanalysis_and_findings.recommended_way_of_security}}</td>
 				</tr>
 				<tr>		
-					<td class="center">客户查证情况</td>	
-					<td>1、2、3</td>						
+					<td class="center">客户查证情况</td>
+					<td>
+						<script>
+								var verification = {{riskanalysis_and_findings.verification}}
+								if(parseInt(parseInt(verification)&1) != 0){
+									document.write("1 ")
+								}
+								if(parseInt(parseInt(verification)&2) != 0){
+									document.write("2 ")
+								}
+								if(parseInt(parseInt(verification)&4) != 0){
+									document.write("3 ")
+								}
+								if(parseInt(parseInt(verification)&8) != 0){
+									document.write("4 ")
+								}
+								if(parseInt(parseInt(verification)&16) != 0){
+									document.write("5 ")
+								}
+								if(parseInt(parseInt(verification)&32) != 0){
+									document.write("6 ")
+								}
+								if(parseInt(parseInt(verification)&64) != 0){
+									document.write("7 ")
+								}
+								if(parseInt(parseInt(verification)&128) != 0){
+									document.write("8 ")
+								}
+								if(parseInt(parseInt(verification)&256) != 0){
+									document.write("{{riskanalysis_and_findings.others}}")
+								}
+							</script>
+					</td>						
 					<td colspan="6">1.营业执照  2.房地产权证  3.租赁合同  4.供销合同  5.账单  6.存货  7.存折  8.现金</td>	
 				</tr>
 				<tr>		

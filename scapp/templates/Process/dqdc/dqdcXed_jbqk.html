@@ -590,15 +590,55 @@
 				<tr>
 					<td class="table-label" style="font-size:12px;">客户信息收集与核实</td>
 					<td class="font-small">
-						<label><input type="checkbox" name="verification" value="1"/>营业执照</label>
-						<label><input type="checkbox" name="verification" value="2"/>房产证</label>
-						<label><input type="checkbox" name="verification" value="4"/>租赁合同</label>
-						<label><input type="checkbox" name="verification" value="8"/>供销即采购合同</label>
-						<label><input type="checkbox" name="verification" value="16"/>账单</label>
-						<label><input type="checkbox" name="verification" value="32"/>存货清单</label>
-						<label><input type="checkbox" name="verification" value="64"/>银行存款账户</label>
-						<label><input type="checkbox" name="verification" value="128"/>现金</label>
-						<label><input type="checkbox" name="verification" value="256"/>其他<input type="text" name="others" style="width:80px;" value="{{riskanalysis_and_findings.others}}"/></label>
+						<script>
+								var verification = {{riskanalysis_and_findings.verification}}
+								if(parseInt(parseInt(verification)&1) != 0){
+									document.write("<label><input type='checkbox' name='verification' value='1' checked/>营业执照</label>")
+								}else{
+									document.write("<label><input type='checkbox' name='verification' value='1'/>营业执照</label>")
+								}
+								if(parseInt(parseInt(verification)&2) != 0){
+									document.write("<label><input type='checkbox' name='verification' value='2' checked/>房产证</label>")
+								}else{
+									document.write("<label><input type='checkbox' name='verification' value='2'/>房产证</label>")
+								}
+								if(parseInt(parseInt(verification)&4) != 0){
+									document.write("<label><input type='checkbox' name='verification' value='4' checked/>租赁合同</label>")
+								}else{
+									document.write("<label><input type='checkbox' name='verification' value='4'/>租赁合同</label>")
+								}
+								if(parseInt(parseInt(verification)&8) != 0){
+									document.write("<label><input type='checkbox' name='verification' value='8' checked/>供销即采购合同</label>")
+								}else{
+									document.write("<label><input type='checkbox' name='verification' value='8'/>供销即采购合同</label>")
+								}
+								if(parseInt(parseInt(verification)&16) != 0){
+									document.write("<label><input type='checkbox' name='verification' value='16' checked/>账单</label>")
+								}else{
+									document.write("<label><input type='checkbox' name='verification' value='16'/>账单</label>")
+								}
+								if(parseInt(parseInt(verification)&32) != 0){
+									document.write("<label><input type='checkbox' name='verification' value='32' checked/>存货清单</label>")
+								}else{
+									document.write("<label><input type='checkbox' name='verification' value='32'/>存货清单</label>")
+								}
+								if(parseInt(parseInt(verification)&64) != 0){
+									document.write("<label><input type='checkbox' name='verification' value='64' checked/>银行存款账户</label>")
+								}else{
+									document.write("<label><input type='checkbox' name='verification' value='64'/>银行存款账户</label>")
+								}
+								if(parseInt(parseInt(verification)&128) != 0){
+									document.write("<label><input type='checkbox' name='verification' value='128' checked/>现金</label>")
+								}else{
+									document.write("<label><input type='checkbox' name='verification' value='128'/>现金</label>")
+								}
+								if(parseInt(parseInt(verification)&256) != 0){
+									document.write("<label><input type='checkbox' name='verification' value='256' checked/>其他")
+								}else{
+									document.write("<label><input type='checkbox' name='verification' value='256'/>其他")
+								}
+							</script>
+							<input type="text" name="others" style="width:80px;" value="{{riskanalysis_and_findings.others}}"/></label>
 					</td>											
 				</tr>
 			</table>
@@ -825,7 +865,6 @@
 			</table>
 		</div>	
 		<input type="submit" value="保存" class="btn btn-info"/>
-		<input type="button" value="打印" class="btn btn-info" onclick="window.open('/Process/dqdc/dqdcXed_jbqk_dy/{{belong_customer_type}}/{{belong_customer_value}}/{{id}}')"/>
 	</form>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
