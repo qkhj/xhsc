@@ -260,19 +260,6 @@
 		var num=0;
 		var idCard=0;
 		var phone=0;
-		//表格删除行
-		function removeTd2(table,frameid){ 
-			if(max==0&&jegs==0&&num==0&&idCard==0){//判断页面中是否有错误，如果未判断直接删除可能导致提交按钮不可用
-				var tr= document.getElementById(table).getElementsByTagName("tr");
-			    if(tr.length>1){//至少要保留一行
-			        document.getElementById(table).deleteRow(tr.length-1);//删除最后一行
-			        document.getElementById(table).deleteRow(tr.length-1);//删除倒数第二行
-			   }
-			    doubleIframe(frameid);
-			}
-		    else
-		    	alert("页面中有错误，请修改后再进行删除操作！")
-		}
 	</script>
 </body>
 </html>
