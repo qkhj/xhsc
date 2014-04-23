@@ -230,12 +230,14 @@
 						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/jbdy_search')" id="jbdy">
 							<a href="javascript:void(0);">级别定义</a>
 						</li>
+						{%- if levelHidden=='false' %}
 						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/cjcx_search')" id="cjcx">
 							<a href="javascript:void(0);">层级查询</a>
 						</li>
 						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/jjshlist')" id="jjsh">
 							<a href="javascript:void(0);">晋级审核</a>
 						</li>
+						{%- endif%}
 					</ul>
 					<ul class="nav nav-list 
 							{%- if menu != "tjbb"%}
