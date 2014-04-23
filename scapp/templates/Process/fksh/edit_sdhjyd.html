@@ -187,23 +187,39 @@
 		&nbsp;&nbsp;&nbsp;<span class="titletip">保证担保</span>
 		<div class="divBorder">		
 			<table class="table-list" id="jybzdb">
-				<tr>
+				<!-- <tr>
 					<th>姓名</th>
 					<th>地址</th>
 					<th>身份证号码</th>							
 					<th>工作单位</th>
 					<th>电话</th>		
 					<th>与申请人关系</th>								
-				</tr>	
+				</tr> -->	
 				{%- for obj in guarantees %}
 				<tr class="center"><!--后期Js中要增加ID字段-->
-					<td><input type="text" name="name_db" class="tbInput" value="{{obj.name}}" disabled/></td>
-					<td><input type="text" name="address_db" class="tbInput" value="{{obj.address}}" disabled/></td>							
-					<td><input type="text" name="id_number_db" class="tbInput" value="{{obj.id_number}}" disabled/></td>	
-					<td><input type="text" name="workunit_db" class="tbInput" value="{{obj.phone}}" disabled/></td>
-					<td><input type="text" name="phone_db" class="tbInput" value="{{obj.workunit}}" disabled/></td>	
-					<td><input type="text" name="relationship_db" class="tbInput" value="{{obj.relationship}}" disabled/></td>										
+					<td rowspan='2' class='table-label'>姓名<input type="text" name="name" class="tbInput" value="{{obj.name}}" disabled/></td>
+					<td>地址<input type="text" name="relationship" class="tbInput" value="{{obj.address}}" disabled/></td>	
+					<td>身份证号码<input type="text" name="id_number" class="tbInput" value="{{obj.id_number}}" disabled/></td>
+					<td>工作单位<input type="text" name="phone" class="tbInput" value="{{obj.workunit}}" disabled/></td>
+					<td>电话<input type="text" name="main_business" class="tbInput" value="{{obj.phone}}" disabled/></td>	
+					<td>与申请人关系<input type="text" name="address" class="tbInput" value="{{obj.relationship}}" disabled/></td>	
+					<td>主要资产<input type="text" name="major_assets" class="tbInput" value="{{obj.major_assets}}" disabled/></td>
+					<td>月收入<input type="text" name="monthly_income" class="tbInput" value="{{obj.monthly_income}}" disabled/></td>
 				</tr>
+				<tr class='add'>
+					<td colspan='2'>家庭详细地址<input type='text' name='home_addr' value='' class='tbInput' disabled/></td>	
+					<td>户籍所在地<input type='text' name='hj_addr' value='' class='tbInput' disabled/></td>
+					<td>住房性质
+						<select name='home' disabled>
+							<option value='自有产权(按揭)'>自有产权(按揭)</option>
+							<option value='自有产权(无按揭)'>自有产权(无按揭)</option>
+							<option value='小产权'>小产权</option>
+							<option value='租用'>租用</option>
+							<option value='其他'>其他</option>
+						</select>
+					</td>
+					<td colspan='3'>备注<br/><input type='text' name='remark' value='' class='tbInput' disabled/></td>
+                </tr>
 				{%- endfor %}
 			</table>
 		</div>
