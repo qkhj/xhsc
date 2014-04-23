@@ -247,7 +247,7 @@ class Payment():
 					errorData = SC_business_error_list.query.filter(sql).all()
 					
 					#计算总工资
-					old_total_payment = float(base_payment)+arg/2
+					old_total_payment = float(base_payment)+arg*0.8
 					print old_total_payment
 					#风险保证金实体
 					margin = SC_risk_margin.query.filter_by(manager_id=manager_id).first()
