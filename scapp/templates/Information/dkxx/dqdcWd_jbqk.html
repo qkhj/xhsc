@@ -539,18 +539,38 @@
 					<td>月收入<input type="text" name="monthly_income" class="tbInput" value="{{obj.monthly_income}}" disabled/></td>
 				</tr>
 				<tr class='add'>
-					<td colspan='2'>家庭详细地址<input type='text' name='home_addr' class='tbInput' disabled/></td>	
-					<td>户籍所在地<input type='text' name='hj_addr' class='tbInput' disabled/></td>
+					<td colspan='2'>家庭详细地址<input type='text' name='home_addr' value='{{obj.home_addr}}' class='tbInput' disabled/></td>	
+					<td>户籍所在地<input type='text' name='hj_addr' value='{{obj.hj_addr}}' class='tbInput' disabled/></td>
 					<td>住房性质
 						<select name='home' disabled>
+							{%- if obj.home == '自有产权(按揭)' %}
+							<option value='自有产权(按揭)' selected>自有产权(按揭)</option>
+							{%- else %}
 							<option value='自有产权(按揭)'>自有产权(按揭)</option>
+							{%- endif %}
+							{%- if obj.home == '自有产权(无按揭)' %}
+							<option value='自有产权(无按揭)' selected>自有产权(无按揭)</option>
+							{%- else %}
 							<option value='自有产权(无按揭)'>自有产权(无按揭)</option>
+							{%- endif %}
+							{%- if obj.home == '小产权' %}
+							<option value='小产权' selected>小产权</option>
+							{%- else %}
 							<option value='小产权'>小产权</option>
+							{%- endif %}
+							{%- if obj.home == '租用' %}
+							<option value='租用' selected>租用</option>
+							{%- else %}
 							<option value='租用'>租用</option>
+							{%- endif %}
+							{%- if obj.home == '其他' %}
+							<option value='其他' selected>其他</option>
+							{%- else %}
 							<option value='其他'>其他</option>
+							{%- endif %}
 						</select>
 					</td>
-					<td colspan='3'>备注<br/><input type='text' name='remark' onchange='spryMaxLength(this,256)' class='tbInput' disabled/></td>
+					<td colspan='3'>备注<br/><input type='text' name='remark' value='{{obj.remark}}' onchange='spryMaxLength(this,256)' class='tbInput' disabled/></td>
                 </tr>
 				{%- endfor %}
 			</table>
@@ -570,28 +590,48 @@
 				</tr> -->
 				{%- for obj in guarantees %}
 				<tr class="center"><!--后期Js中要增加ID字段-->
-					<td rowspan='2' class='table-label'>姓名<input type="text" name="name" class="tbInput" value="{{obj.name}}" disabled/></td>
-					<td>地址<input type="text" name="relationship" class="tbInput" value="{{obj.address}}" disabled/></td>	
-					<td>身份证号码<input type="text" name="id_number" class="tbInput" value="{{obj.id_number}}" disabled/></td>
-					<td>工作单位<input type="text" name="phone" class="tbInput" value="{{obj.workunit}}" disabled/></td>
-					<td>电话<input type="text" name="main_business" class="tbInput" value="{{obj.phone}}" disabled/></td>	
-					<td>与申请人关系<input type="text" name="address" class="tbInput" value="{{obj.relationship}}" disabled/></td>	
-					<td>主要资产<input type="text" name="major_assets" class="tbInput" value="{{obj.major_assets}}" disabled/></td>
-					<td>月收入<input type="text" name="monthly_income" class="tbInput" value="{{obj.monthly_income}}" disabled/></td>
+					<td rowspan='2' class='table-label'>姓名<input type="text" name="name_db" class="tbInput" value="{{obj.name}}" disabled/></td>
+					<td>地址<input type="text" name="address_db" class="tbInput" value="{{obj.address}}" disabled/></td>	
+					<td>身份证号码<input type="text" name="id_number_db" class="tbInput" value="{{obj.id_number}}" disabled/></td>
+					<td>工作单位<input type="text" name="workunit_db" class="tbInput" value="{{obj.workunit}}" disabled/></td>
+					<td>电话<input type="text" name="phone_db" class="tbInput" value="{{obj.phone}}" disabled/></td>	
+					<td>与申请人关系<input type="text" name="relationship_db" class="tbInput" value="{{obj.relationship}}" disabled/></td>	
+					<td>主要资产<input type="text" name="major_assets_db" class="tbInput" value="{{obj.major_assets}}" disabled/></td>
+					<td>月收入<input type="text" name="monthly_income_db" class="tbInput" value="{{obj.monthly_income}}" disabled/></td>
 				</tr>
 				<tr class='add'>
-					<td colspan='2'>家庭详细地址<input type='text' name='home_addr' value='' class='tbInput' disabled/></td>	
-					<td>户籍所在地<input type='text' name='hj_addr' value='' class='tbInput' disabled/></td>
+					<td colspan='2'>家庭详细地址<input type='text' name='home_addr_db' value='{{obj.home_addr}}' class='tbInput' disabled/></td>	
+					<td>户籍所在地<input type='text' name='hj_addr_db' value='{{obj.hj_addr}}' class='tbInput' disabled/></td>
 					<td>住房性质
-						<select name='home' disabled>
+						<select name='home_db' disabled>
+							{%- if obj.home == '自有产权(按揭)' %}
+							<option value='自有产权(按揭)' selected>自有产权(按揭)</option>
+							{%- else %}
 							<option value='自有产权(按揭)'>自有产权(按揭)</option>
+							{%- endif %}
+							{%- if obj.home == '自有产权(无按揭)' %}
+							<option value='自有产权(无按揭)' selected>自有产权(无按揭)</option>
+							{%- else %}
 							<option value='自有产权(无按揭)'>自有产权(无按揭)</option>
+							{%- endif %}
+							{%- if obj.home == '小产权' %}
+							<option value='小产权' selected>小产权</option>
+							{%- else %}
 							<option value='小产权'>小产权</option>
+							{%- endif %}
+							{%- if obj.home == '租用' %}
+							<option value='租用' selected>租用</option>
+							{%- else %}
 							<option value='租用'>租用</option>
+							{%- endif %}
+							{%- if obj.home == '其他' %}
+							<option value='其他' selected>其他</option>
+							{%- else %}
 							<option value='其他'>其他</option>
+							{%- endif %}
 						</select>
 					</td>
-					<td colspan='3'>备注<br/><input type='text' name='remark' value='' class='tbInput' disabled/></td>
+					<td colspan='3'>备注<br/><input type='text' name='remark_db' value='{{obj.remark}}' class='tbInput' disabled/></td>
                 </tr>
 				{%- endfor %}
 			</table>

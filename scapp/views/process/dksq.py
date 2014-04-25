@@ -183,11 +183,18 @@ def new_dksq(belong_customer_type,belong_customer_value):
         workunit_db_list = request.form.getlist('workunit_db')
         phone_db_list = request.form.getlist('phone_db')
         relationship_db_list = request.form.getlist('relationship_db')
+        major_assets_db_list = request.form.getlist('major_assets_db')
+        monthly_income_db_list = request.form.getlist('monthly_income_db')
+        home_addr_db_list = request.form.getlist('home_addr_db')
+        hj_addr_db_list = request.form.getlist('hj_addr_db')
+        home_db_list = request.form.getlist('home_db')
+        remark_db_list = request.form.getlist('remark_db')
         # 循环获取表单
         for i in range(len(name_db_list)):
             SC_Guarantees(loan_apply.id,name_db_list[i],address_db_list[i],
                 id_number_db_list[i],workunit_db_list[i],phone_db_list[i],
-                relationship_db_list[i]).add()
+                relationship_db_list[i],major_assets_db_list[i],monthly_income_db_list[i],
+                home_addr_db_list[i],hj_addr_db_list[i],home_db_list[i],remark_db_list[i]).add()
 
         # 事务提交
         db.session.commit()

@@ -31,6 +31,7 @@
 								<select name="reception_type" onchange="show_table(this.value)">
 									<option value="1">咨询</option>
 									<option value="2">扫街</option>
+									<option value="3">转介绍</option>
 								</select>
 							</td>		
 						</tr>	
@@ -331,6 +332,9 @@
 		    }
 		    if(value=="2"){
 		        $("#dpxx").show();		        
+		    }
+		    if(value=="3"){
+		        $("#dpxx").hide();		        
 		    }
 		    Frame();
 		}

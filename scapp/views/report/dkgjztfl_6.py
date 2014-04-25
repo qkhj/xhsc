@@ -20,7 +20,7 @@ def dkgjztfl_6():
 def dkgjztfl_6_search(page):
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = " loan_status = '2'"
+    sql = " loan_status = '6'"
     if loan_type != '0':
         sql += " and loan_type='"+loan_type+"' "
     if customer_name:
@@ -35,15 +35,19 @@ def dkgjztfl_6_search(page):
 def dkgjztfl_6_export():
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = " loan_status = '2'"
+    sql = " loan_status = '6'"
     if loan_type != '0':
-        sql = " and loan_type='"+loan_type+"' and "
+        sql += " and loan_type='"+loan_type+"' "
     if customer_name:
         sql += " and customer_name like '%"+customer_name+"%'"
 
-    data = View_Bank_Loans_Main.query.filter(sql)
+    #data = View_Bank_Loans_Main.query.filter(sql)
+    query_sql = "select loan_apply_id,customer_name,ratio,amount,loan_manager,'' as qishu,loan_due_date,loan_closed_date "
+    query_sql += "from view_bank_loans_main where "
+    query_sql += sql
+    data=db.engine.execute(query_sql)
 
-    exl_hdngs=['贷款编号','客户名称','利率','放款日期','贷款金额','负责客户经理','贷款状态']
+    exl_hdngs=['贷款编号','客户名称','月利率','贷款金额','负责客户经理','期数','还款截止日期','逾期截止日']
 
     type_str = 'text text text date text text text'#1
     types= type_str.split()
@@ -63,7 +67,7 @@ def dkgjztfl_6_export():
     year=date.year
     month=date.month
     day=date.day
-    filename=str(year)+'_'+str(month)+'_'+str(day)+'_'+'已发放的贷款统计表'+'.xls'
+    filename=str(year)+'_'+str(month)+'_'+str(day)+'_'+'逾期贷款统计表'+'.xls'
     exp=export_excel()
-    return exp.export_download(filename,'已发放的贷款统计表',exl_hdngs,data,exl_hdngs_xf,data_xfs)
+    return exp.export_download(filename,'逾期贷款统计表',exl_hdngs,data,exl_hdngs_xf,data_xfs)
 
