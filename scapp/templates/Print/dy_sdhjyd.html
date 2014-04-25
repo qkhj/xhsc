@@ -41,11 +41,25 @@
 					<td class="center">客户名称</td>
 					<td colspan="3">{{customer.customer_name}}</td>		
 					<td class="center">客户经理</td>
-					<td colspan="2">XXXXXXXX</td>						
+					<td colspan="2">{{loan_apply.marketing_loan_officer_name.real_name}}</td>						
 				</tr>
 				<tr>
 					<td class="center">审议事项</td>
-					<td colspan="6">XXXXXXXXXX</td>					
+					{%- if approval_decision.sysx == 1 %}
+						<td colspan="6">新贷款</td>
+					{%- endif %}
+					{%- if approval_decision.sysx == 2 %}
+						<td colspan="6">重复贷款</td>
+					{%- endif %}
+					{%- if approval_decision.sysx == 3 %}
+						<td colspan="6">并行贷款</td>
+					{%- endif %}
+					{%- if approval_decision.sysx == 4 %}
+						<td colspan="6">变更贷款条件</td>
+					{%- endif %}
+					{%- if approval_decision.sysx == 5 %}
+						<td colspan="6">其他</td>
+					{%- endif %}				
 				</tr>
 				<tr>
 					<td class="center">建议贷款金额</td>
@@ -89,10 +103,10 @@
 					<td>月收入：{{obj.monthly_income}}</td>
 				</tr>
 				<tr class='add'>
-					<td colspan='2'>家庭详细地址：</td>	
-					<td>户籍所在地：</td>
-					<td>住房性质：</td>
-					<td colspan='3'>备注<br/>：</td>
+					<td colspan='2'>家庭详细地址：{{obj.home_addr}}</td>	
+					<td>户籍所在地：{{obj.hj_addr}}</td>
+					<td>住房性质：{{obj.home}}</td>
+					<td colspan='3'>备注<br/>：{{obj.remark}}</td>
                 </tr>
 				{%- endfor %}
 			</table>
@@ -112,9 +126,9 @@
 					<td>市场估价</td>
 					<td>抵押估价</td>						
 				</tr>
-				{%- for obj in co_borrower %}
+				{%- for obj in guaranty %}
 				<tr class="center">
-					<td>XXXXXXXX</td>
+					<td>{{obj.obj_name}}</td>
 					<td>{{obj.obj_name}}</td>
 					<td>XXXXXX</td>
 					<td>{{obj.registration_number}}</td>
@@ -122,25 +136,6 @@
 					<td>{{obj.mortgage}}</td>							
 				</tr>
 				{%- endfor %}
-				<tr>
-					<td colspan="6" style="border-top:none;"><b>&nbsp;&nbsp;&nbsp;&nbsp;质押担保</b></td>				
-				</tr>	
-				<tr class="center">
-					<td>质押人</td>
-					<td>质押物名称</td>
-					<td>数量</td>							
-					<td>权证或单据号码</td>
-					<td>市场估价</td>
-					<td>抵押估价</td>						
-				</tr>
-				<tr class="center">
-					<td>XXXXXXXX</td>
-					<td>XXXXXXXX</td>
-					<td>XXXXXX</td>
-					<td>XXXXXXXX</td>
-					<td>XXXXXXXX</td>
-					<td>XXXXXXXX</td>							
-				</tr>
 				<tr>
 					<td colspan="6" style="border-top:none;"><b>&nbsp;&nbsp;&nbsp;&nbsp;保证担保</b></td>				
 				</tr>	
@@ -154,8 +149,8 @@
 				<tr class="center">
 					<td>{{obj.name}}</td>
 					<td colspan="2">{{obj.id_number}}</td>
-					<td colspan="2">{{obj.workunit}}</td>
-					<td>XXXXXXX</td>
+					<td colspan="2">{{obj.phone}}</td>
+					<td>{{obj.monthly_income}}</td>
 				</tr>
 				{%- endfor %}
 			</table>

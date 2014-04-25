@@ -29,34 +29,33 @@
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">逾期贷款列表</span>
 			<div style="margin-bottom:5px;">				
-				<a type="button" class="btn btn-info" href="#" onclick="submitForm('content','/Report/dkgjztfl_5_export')">导出</a>
+				<a type="button" class="btn btn-info" href="#" onclick="submitForm('content','/Report/dkgjztfl_6_export')">导出</a>
 			</div>
 			<div style="border:1px solid #94c1dc;">				
 				<table class="table-list" cellspacing="10" id="uesr-list">				
-					<tr>						
+					<tr>		
+						<th>贷款编号</th>
+						<th>客户名称</th>
+						<th>贷款金额</th>				
 						<th>月利率</th>
-						<th>还款截止日期</th>
-						<th>贷款金额</th>
 						<th>负责客户经理</th>
 						<th>应还款金额</th>
-						<th>客户名称</th>
-						<th>贷款编号</th>
 						<th>期数</th>
+						<th>还款截止日期</th>
 						<th>逾期截止日</th>
 					</tr>		
 					<tbody class="center">
 						<!-- 数据 -->
 						{%- for obj in bank_loans_main.items %}
 						<tr class="tbData" onclick="changeColor(this)">
-							<td>{{obj.ratio}}</td>
-							<td>{{obj.ratio}}</td>							
-							<td class="subData2">{{obj.ratio}}</td>	
-							<td>{{obj.ratio}}</td>							
-							<td class="subData3">{{obj.ratio}}</td>
-							<td>{{obj.ratio}}</td>
-							<td>{{obj.ratio}}</td>
-							<td>{{obj.deadline}}</td>	
-							<td>{{obj.ratio}}</td>	
+							<td>{{obj.loan_apply_id}}</td>
+							<td>{{obj.customer_name}}</td>							
+							<td class="subData2">{{obj.amount}}</td>	
+							<td>{{obj.loan_manager}}</td>							
+							<td class="subData3">{{obj.loan_overdue_amount}}</td>
+							<td></td>
+							<td>{{obj.loan_due_date}}</td>
+							<td>{{obj.loan_closed_date}}</td>	
 						</tr><!-- /数据 -->	
 						{%- endfor %}											
 					</tbody>

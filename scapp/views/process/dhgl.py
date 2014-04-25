@@ -70,7 +70,7 @@ def new_bz_save():
 	loan_apply = View_Query_Loan.query.filter_by(loan_apply_id=loan_apply_id).first()
 	monitorList = SC_Monitor.query.filter_by(loan_apply_id=loan_apply_id).all()
 	checkForm = getCheckForm(loan_apply_id,loan_apply)
-	return render_template("Process/dhgl/new_bz.html",loan_apply=loan_apply,monitorList=monitorList,checkForm=checkForm)
+	return render_template("Process/dhgl/new_bz.html",loan_apply=loan_apply,monitorList=monitorList,checkForm=checkForm,loan_apply_id=loan_apply_id)
 
 #获取前台form表单
 def getCheckForm(loan_apply_id,loan_apply):

@@ -97,7 +97,9 @@ def edit_fksh(loan_apply_id,type):
     try:
         if type == PROCESS_STATUS_SPJY_TG or type == PROCESS_STATUS_SPJY_YTJTG or type == PROCESS_STATUS_SPJY_JUJUE:#有条件通过:#通过
             approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=loan_apply_id).first()
+            print request.form['sysx']
             if approval_decision:
+                approval_decision.sysx = request.form['sysx']
                 approval_decision.bool_grant = request.form['bool_grant']
                 approval_decision.amount = request.form['amount']
                 approval_decision.deadline = request.form['deadline']
@@ -116,7 +118,8 @@ def edit_fksh(loan_apply_id,type):
                 approval_decision.modify_date = datetime.datetime.now()
                 
             else:
-                SC_Approval_Decision(loan_apply_id,request.form['bool_grant'],request.form['amount'],request.form['deadline'],
+                SC_Approval_Decision(loan_apply_id,request.form['sysx'],request.form['bool_grant'],
+                    request.form['amount'],request.form['deadline'],
                     request.form['rates'],request.form['repayment_type'],request.form['monthly_repayment'],
                     request.form['bool_co_borrower'],request.form['bool_guaranty'],request.form['bool_guarantees'],
                     request.form['other_resolution'],request.form['refuse_reason'],request.form['conditional_pass']).add()

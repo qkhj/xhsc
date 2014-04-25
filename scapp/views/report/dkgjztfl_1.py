@@ -59,9 +59,15 @@ def dkgjztfl_1_export():
     if customer_name:
         sql += " and customer_name like '%"+customer_name+"%'"
 
-    data = View_Bank_Loans_Main.query.filter(sql).order_by("id").all()
+    #data = View_Bank_Loans_Main.query.filter(sql).order_by("id").all()
+    query_sql = "select loan_apply_id,customer_name,ratio,loan_deliver_date,amount,loan_manager,"
+    query_sql += "(case loan_status when 1 then '正常' when 2 then '逾期' when 3 then '–非应计' "
+    query_sql += "when 5 then '结清' when 6 then '部分逾期' end)loan_status from view_bank_loans_main where "
+    query_sql += sql
+
+    data=db.engine.execute(query_sql)
     
-    exl_hdngs=['贷款编号','客户名称','利率','放款日期','贷款金额','负责客户经理','贷款状态']
+    exl_hdngs=['贷款编号','客户名称','月利率','放款日期','贷款金额','负责客户经理','贷款状态']
 
     type_str = 'text text text date text text text'#1
     types= type_str.split()
