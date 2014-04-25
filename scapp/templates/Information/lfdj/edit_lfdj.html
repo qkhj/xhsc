@@ -31,9 +31,15 @@
 									{%- if target_customer.reception_type == '1' %}
 										<option value="1" selected>咨询</option>
 										<option value="2">扫街</option>
-									{%- else %}
+										<option value="3">转介绍</option>
+									{%- elif target_customer.reception_type == '2' %}
 										<option value="1">咨询</option>
 										<option value="2" selected>扫街</option>
+										<option value="3">转介绍</option>
+									{%- elif target_customer.reception_type == '3' %}
+										<option value="1">咨询</option>
+										<option value="2">扫街</option>
+										<option value="3" selected>转介绍</option>
 									{%- endif %}
 								</select>
 							</td>		

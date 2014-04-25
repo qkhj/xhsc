@@ -69,8 +69,10 @@
 							{%- endif %}
 							{%- if obj.reception_type == '1' %}
 							<td>咨询</td>
-							{%- else %}
+							{%- elif obj.reception_type == '2' %}
 							<td>扫街</td>
+							{%- elif obj.reception_type == '3' %}
+							<td>转介绍</td>
 							{%- endif %}
 							<td>{{obj.receiver_for_tc.login_name}}</td>
 							<td>{{obj.age}}</td>

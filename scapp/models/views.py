@@ -123,10 +123,9 @@ class View_Loan_Change_Record(db.Model):
 # 预期的贷款 视图
 class View_Loan_Expected(db.Model):
     __tablename__ = 'view_loan_expected'
-    repayment_date = db.Column(db.DateTime, primary_key=True)
+    clear_date = db.Column(db.DateTime, primary_key=True)
     customer_name = db.Column(db.String)
     itelephone = db.Column(db.String)
-    ctelephone = db.Column(db.String)
     loan_account = db.Column(db.String)
     total = db.Column(db.DECIMAL(18,2))
     principal = db.Column(db.DECIMAL(18,2))
