@@ -11,7 +11,7 @@ class SC_Target_Customer(db.Model):
     __tablename__ = 'sc_target_customer' 
     id = db.Column(db.Integer, primary_key=True)
     receiver = db.Column(db.Integer, db.ForeignKey('sc_user.id')) # 接待人
-    reception_type = db.Column(db.String(1)) #接待方式 (咨询 0/扫街 1)
+    reception_type = db.Column(db.String(1)) #接待方式 (咨询 0/扫街 1/转介绍 3)
 
     yingxiao_status = db.Column(db.Integer) # 营销状态
     client_status = db.Column(db.Integer) # 客户状态

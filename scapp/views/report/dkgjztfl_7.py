@@ -21,9 +21,9 @@ def dkgjztfl_7():
 def dkgjztfl_7_search(page):
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = ""
+    sql = " 1=1"
     if loan_type != '0':
-        sql = "loan_type='"+loan_type+"' and "
+        sql += " and loan_type='"+loan_type+"' "
     if customer_name:
         sql += " and customer_name like '%"+customer_name+"%'"
 
@@ -36,17 +36,21 @@ def dkgjztfl_7_search(page):
 def dkgjztfl_7_export():
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = ""
+    sql = " 1=1"
     if loan_type != '0':
-        sql = "loan_type='"+loan_type+"' and "
+        sql = " and loan_type='"+loan_type+"' "
     if customer_name:
         sql += " and customer_name like '%"+customer_name+"%'"
 
-    data = View_Loan_Expected.query.filter(sql)
+    #data = View_Loan_Expected.query.filter(sql)
+    query_sql = "select clear_date,customer_name,itelephone,loan_account,total,principal,interest,"
+    query_sql += "ratio,installmenst,loan_manager from view_loan_expected where "
+    query_sql += sql
+    data=db.engine.execute(query_sql)
 
-    exl_hdngs=['贷款编号','客户名称','利率','放款日期','贷款金额','负责客户经理','贷款状态']
+    exl_hdngs=['还贷日期','客户名称','电话','还款帐号','还款总额','应还本金','应还利息','贷款利率','还款顺序号','信贷员']
 
-    type_str = 'text text text date text text text'#1
+    type_str = 'date text text text text text text text text text'#1
     types= type_str.split()
 
     exl_hdngs_xf=ezxf('font: bold on;align: wrap on,vert centre,horiz center')
@@ -64,7 +68,7 @@ def dkgjztfl_7_export():
     year=date.year
     month=date.month
     day=date.day
-    filename=str(year)+'_'+str(month)+'_'+str(day)+'_'+'已发放的贷款统计表'+'.xls'
+    filename=str(year)+'_'+str(month)+'_'+str(day)+'_'+'预期的贷款统计表'+'.xls'
     exp=export_excel()
-    return exp.export_download(filename,'已发放的贷款统计表',exl_hdngs,data,exl_hdngs_xf,data_xfs)
+    return exp.export_download(filename,'预期的贷款统计表',exl_hdngs,data,exl_hdngs_xf,data_xfs)
 

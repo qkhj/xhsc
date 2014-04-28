@@ -25,7 +25,7 @@
 </head>
 
 <body onload="datepicker();$('input[type=text]').click();">
-	<div class="content">			
+	<form class="content" id="content" method="POST" target="_parent">	
 		<!--**********************基本信息**********************-->
 		<i class="icon-bookmark"></i><span class="titletip">基本信息</span>
 		<div class="divBorder">		
@@ -37,12 +37,40 @@
 					</td>	
 					<td class="table-label">审议事项<font class="red">*</font></td>
 					<td colspan="3">
-						<select name="">
+						<select name="sysx">
+						{%- if approval_decision %}
+							{%- if approval_decision.sysx == 1 %}
+								<option value="1" selected>新贷款</option>
+							{%- else %}
+								<option value="1">新贷款</option>
+							{%- endif %}
+							{%- if approval_decision.sysx == 2 %}
+								<option value="2" selected>重复贷款</option>
+							{%- else %}
+								<option value="2">重复贷款</option>
+							{%- endif %}
+							{%- if approval_decision.sysx == 3 %}
+								<option value="3" selected>并行贷款</option>
+							{%- else %}
+								<option value="3">并行贷款</option>
+							{%- endif %}
+							{%- if approval_decision.sysx == 4 %}
+								<option value="4" selected>变更贷款条件</option>
+							{%- else %}
+								<option value="4">变更贷款条件</option>
+							{%- endif %}
+							{%- if approval_decision.sysx == 5 %}
+								<option value="5" selected>其他</option>
+							{%- else %}
+								<option value="5">其他</option>
+							{%- endif %}
+						{%- else %}
 							<option value="1">新贷款</option>
 							<option value="2">重复贷款</option>
 							<option value="3">并行贷款</option>
 							<option value="4">变更贷款条件</option>
 							<option value="5">其他</option>
+						{%- endif %}
 						</select>
 					</td>	
 				</tr>
@@ -78,7 +106,7 @@
 		<i class="icon-bookmark"></i><span class="titletip">建议共同贷款人</span>
 		<div class="divBorder">	
 			<table class="table-list" id="jygtdkr">
-				<tr>
+				<!-- <tr>
 					<th>姓名</th>
 					<th>与客户关系</th>
 					<th>身份证号码</th>							
@@ -87,22 +115,52 @@
 					<th>经营地址或工作单位地址</th>		
 					<th>主要资产</th>
 					<th>月收入</th>								
-				</tr>
+				</tr> -->
 				{%- for obj in co_borrower %}
 				<tr class="center"><!--后期Js中要增加ID字段-->
-					<td><input type="text" name="name" class="tbInput" value="{{obj.name}}" disabled/><br/>&nbsp;</td>
-					<td><input type="text" name="relationship" class="tbInput" value="{{obj.relationship}}" disabled/><br/>&nbsp;</td>
-					<td><input type="text" name="id_number" class="tbInput" value="{{obj.id_number}}" disabled/><br/>&nbsp;</td>
-					<td><input type="text" name="phone" class="tbInput" value="{{obj.phone}}" disabled/><br/>&nbsp;</td>
-					<td><input type="text" name="main_business" class="tbInput" value="{{obj.main_business}}" disabled/><br/>&nbsp;</td>	
-					<td><input type="text" name="address" class="tbInput" value="{{obj.address}}" disabled/><br/>&nbsp;</td>	
-					<td><input type="text" name="major_assets" class="tbInput" value="{{obj.major_assets}}" disabled/><br/>&nbsp;</td>
-					<td>
-						<input type="text" name="monthly_income" class="tbInput" value="{{obj.monthly_income}}" onclick="setJe(this);" disabled/>
-						<span class="je">人民币</span>	
-						<span class="errorInfo"></span>	
-					</td>								
+					<td rowspan='2' class='table-label'>姓名<input type="text" name="name" class="tbInput" value="{{obj.name}}" disabled/></td>
+					<td>与客户关系<input type="text" name="relationship" class="tbInput" value="{{obj.relationship}}" disabled/></td>	
+					<td>身份证号码<input type="text" name="id_number" class="tbInput" value="{{obj.id_number}}" disabled/></td>
+					<td>家庭电话<input type="text" name="phone" class="tbInput" value="{{obj.phone}}" disabled/></td>
+					<td>主营业务或职务<input type="text" name="main_business" class="tbInput" value="{{obj.main_business}}" disabled/></td>	
+					<td>经营地址或工作单位地址<input type="text" name="address" class="tbInput" value="{{obj.address}}" disabled/></td>	
+					<td>主要资产<input type="text" name="major_assets" class="tbInput" value="{{obj.major_assets}}" disabled/></td>
+					<td>月收入<input type="text" name="monthly_income" class="tbInput" value="{{obj.monthly_income}}" disabled/></td>
 				</tr>
+				<tr class='add'>
+					<td colspan='2'>家庭详细地址<input type='text' name='home_addr' value='{{obj.home_addr}}' class='tbInput' disabled/></td>	
+					<td>户籍所在地<input type='text' name='hj_addr' value='{{obj.hj_addr}}' class='tbInput' disabled/></td>
+					<td>住房性质
+						<select name='home' disabled>
+							{%- if obj.home == '自有产权(按揭)' %}
+							<option value='自有产权(按揭)' selected>自有产权(按揭)</option>
+							{%- else %}
+							<option value='自有产权(按揭)'>自有产权(按揭)</option>
+							{%- endif %}
+							{%- if obj.home == '自有产权(无按揭)' %}
+							<option value='自有产权(无按揭)' selected>自有产权(无按揭)</option>
+							{%- else %}
+							<option value='自有产权(无按揭)'>自有产权(无按揭)</option>
+							{%- endif %}
+							{%- if obj.home == '小产权' %}
+							<option value='小产权' selected>小产权</option>
+							{%- else %}
+							<option value='小产权'>小产权</option>
+							{%- endif %}
+							{%- if obj.home == '租用' %}
+							<option value='租用' selected>租用</option>
+							{%- else %}
+							<option value='租用'>租用</option>
+							{%- endif %}
+							{%- if obj.home == '其他' %}
+							<option value='其他' selected>其他</option>
+							{%- else %}
+							<option value='其他'>其他</option>
+							{%- endif %}
+						</select>
+					</td>
+					<td colspan='3'>备注<br/><input type='text' name='remark' value='{{obj.remark}}' class='tbInput' disabled/></td>
+                </tr>
 				{%- endfor %}
 			</table>
 		</div>	
@@ -197,7 +255,6 @@
 				{%- endfor %}
 			</table>
 		</div>
-		<form id="content" method="POST" target="_parent">
 		<!--**********************其他信息**********************-->
 		<i class="icon-bookmark"></i><span class="titletip">其他信息</span>
 		<div class="divBorder">		
@@ -514,8 +571,17 @@
 		document.write("<input type='submit' class='btn btn-info' value='拒绝' onclick='doSubmit("+PROCESS_STATUS_SPJY_JUJUE+")'/>");
     	</script>
     	{%- endif %}
-    	<input type="button" class="btn btn-info" value="打印" onclick="window.open('/Process/fksh/dy_sdhjyd/{{loan_apply_id}}')"/>
-		
+    	</br>
+		<input type="button" value="打印非财务情况分析" class="btn btn-info" onclick="window.open('/Process/dqdc/dy_fcw/{{loan_apply_id}}')">
+		<input type="button" value="打印资产负债表" class="btn btn-info" onclick="window.open('/Process/dqdc/dy_zcfzb/{{loan_apply_id}}')">
+		<input type="button" class="btn btn-info" value="打印交叉检验" onclick="window.open('/Process/dqdc/dy_jcjy/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印损益表" onclick="window.open('/Process/dqdc/dy_syb/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印现金流分析" onclick="window.open('/Process/dqdc/dy_xjl/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印固定资产清单" onclick="window.open('/Process/dqdc/dy_gdzcqd/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印库存" onclick="window.open('/Process/dqdc/dy_dhd/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印应付账款清单" onclick="window.open('/Process/dqdc/dy_yfzkqd/{{loan_apply_id}}')"/>
+		<input type="button" class="btn btn-info" value="打印应收账款清单" onclick="window.open('/Process/dqdc/dy_yszkqd/{{loan_apply_id}}')"/>
+		<input type="button" value="打印基本情况" class="btn btn-info" onclick="window.open('/Process/dqdc/dy_jbqk/{{loan_apply_id}}')"/>
 	</div>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>

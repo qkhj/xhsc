@@ -64,7 +64,7 @@ def export_lfdj():
     end_date = request.form['end_date'] + " 23:59:59"
 
     sql = "SELECT sc_user.real_name,"
-    sql += "(case reception_type when '1' then '咨询' when '2' then '扫街' end)reception_type ,sc_target_customer.create_date,"
+    sql += "(case reception_type when '1' then '咨询' when '2' then '扫街' when '3' then '转介绍' end)reception_type ,sc_target_customer.create_date,"
     sql += "(case yingxiao_status when 1 then '已营销' when 0 then '未营销' end)yingxiao_status,"
     sql += "(case client_status when 12 then '老板不在员工不提供有效信息' when 13 then '店铺关门或转让中' "
     sql += "when 1 then '现在有需求' when 2 then '态度良好无需求拒绝' when 3 then '态度恶劣拒绝' "
@@ -98,7 +98,6 @@ def export_lfdj():
     sql += "left JOIN sc_loan_purpose ON sc_target_customer.loan_purpose = sc_loan_purpose.id "
     sql += "left JOIN sc_business_type ON sc_target_customer.business_type = sc_business_type.id "
 
-    print sql
     data=db.engine.execute(sql)
     #for row in data:
     #    row['reception_type'] = my_dic['reception_type'][str(dic['reception_type'])]

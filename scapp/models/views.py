@@ -65,7 +65,7 @@ class View_Loan_Repayment(db.Model):
     loan_manager = db.Column(db.String)#客户经理
 
 # 已发放的贷款、到期终止的贷款、贷款余额、逾期贷款 视图
-class View_Bank_Loans_Main(db.Model):
+class View_Bank_Loans_Main(db.Model,dict):
     __tablename__ = 'view_bank_loans_main'
     id = db.Column(db.Integer, primary_key=True)
     loan_apply_id = db.Column(db.Integer)
@@ -123,10 +123,9 @@ class View_Loan_Change_Record(db.Model):
 # 预期的贷款 视图
 class View_Loan_Expected(db.Model):
     __tablename__ = 'view_loan_expected'
-    repayment_date = db.Column(db.DateTime, primary_key=True)
+    clear_date = db.Column(db.DateTime, primary_key=True)
     customer_name = db.Column(db.String)
     itelephone = db.Column(db.String)
-    ctelephone = db.Column(db.String)
     loan_account = db.Column(db.String)
     total = db.Column(db.DECIMAL(18,2))
     principal = db.Column(db.DECIMAL(18,2))

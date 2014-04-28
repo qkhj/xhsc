@@ -29,7 +29,7 @@
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">预期的还款列表</span>
 			<div style="margin-bottom:5px;">				
-				<a type="button" class="btn btn-info" href="#" onclick="submitForm('content','/Report/dkgjztfl_5_export')">导出</a>
+				<a type="button" class="btn btn-info" href="#" onclick="submitForm('content','/Report/dkgjztfl_7_export')">导出</a>
 			</div>
 			<div style="border:1px solid #94c1dc;">				
 				<table class="table-list" cellspacing="10" id="uesr-list">	
@@ -49,7 +49,7 @@
 						<!-- 数据 -->
 						{%- for obj in view_Loan_expected.items %}
 						<tr class="tbData" onclick="changeColor(this)">
-							<td>{{obj.repayment_date}}</td>            
+							<td>{{obj.clear_date}}</td>            
 							<td>{{obj.customer_name}}</td>
 							{%- if obj.itelephone %}
 								<td>{{obj.itelephone}}</td>

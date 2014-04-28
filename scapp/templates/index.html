@@ -157,13 +157,13 @@
 							<a href="javascript:void(0);">审核决议</a>
 						</li> 
 						<li onclick="leftmenu(this);changeiframe('Process/dkfk/dkfk')" id="dkfk" >
-							<a href="javascript:void(0);">贷款归还计划</a>
+							<a href="javascript:void(0);">还款计划</a>
 						</li>
 						
 						<li onclick="leftmenu(this);changeiframe('Process/hkdj/hkdj')" id="hkdj" >
 							<a href="javascript:void(0);">还款记录</a>
 						</li> 
-						
+						<!--
 					 	<li onclick="leftmenu(this);changeiframe('Process/dhbg/dhbg_search')" id="dhbg" >
 							<a href="javascript:void(0);">贷后变更</a>
 						</li> 
@@ -171,7 +171,7 @@
 						<li onclick="leftmenu(this);changeiframe('Process/dhbgsh/dhbgsh_search')" id="dhbgsh" >
 							<a href="javascript:void(0);">贷后变更审核</a>
 						</li> 
-					
+					-->
 						
 						<li onclick="leftmenu(this);changeiframe('Process/dhgl/dhgl')" id="dhgl" >
 							<a href="javascript:void(0);">贷后管理</a>
@@ -230,14 +230,12 @@
 						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/jbdy_search')" id="jbdy">
 							<a href="javascript:void(0);">级别定义</a>
 						</li>
-						{%- if levelHidden=='false' %}
 						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/cjcx_search')" id="cjcx">
 							<a href="javascript:void(0);">层级查询</a>
 						</li>
 						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/jjshlist')" id="jjsh">
 							<a href="javascript:void(0);">晋级审核</a>
 						</li>
-						{%- endif%}
 					</ul>
 					<ul class="nav nav-list 
 							{%- if menu != "tjbb"%}
@@ -250,7 +248,7 @@
 							<a href="javascript:void(0);">客户</a>
 						</li>	
 						-->
-						<li onclick="leftmenu(this);changeiframe('Report/dkgjztfl')" id="dkgjztfl" >
+						<li onclick="leftmenu(this);changeiframe('Report/dkgjztfl')" id="dkgjztfl" class="active">
 							<a href="javascript:void(0);">贷款根据状态分类</a>
 						</li>		
 						<!--
@@ -341,7 +339,7 @@
 					{%- elif menu == "xtgl" %}
 						src="System/ywcspz"
 					{%- elif menu == "tjbb" %}
-						src="Report/kh"
+						src="Report/dkgjztfl"
 					{%- endif %}
 				width="100%;" id="content_frame" marginheight="0" marginwidth="0" height="100%" onload="resizeFrame('content_frame')"></iframe>
 			</div><!--/span-->
