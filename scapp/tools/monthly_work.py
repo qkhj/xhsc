@@ -6,4 +6,4 @@ from convert_bank_data import Interface_bank_data
 class monthly_work():
 
     def run(self):
-        Interface_bank_data.insert_last_month_intrest()
+        return Interface_bank_data.insert_last_month_intrest()

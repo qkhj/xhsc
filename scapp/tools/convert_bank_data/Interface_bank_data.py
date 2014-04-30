@@ -2,10 +2,9 @@
 """
 统一接口
 """
+import DAO_repayment, DAO_bank_loans, DAO_overdue
+
 __author__ = 'johhny'
-from repayment import DAO_repayment
-from overdue import DAO_overdue
-from bank_loans import DAO_bank_loans
 #DAO_repayment
 
 

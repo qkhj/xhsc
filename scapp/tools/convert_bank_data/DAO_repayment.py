@@ -2,11 +2,12 @@
 """
 银行还款数据转换辅助接口
 """
+import DAO_overdue
+
 __author__ = 'johhny'
 
-from ..config import logger
-from ..db_conn import local_db_conn,INSERT_UPDATE_TRAN
-from ..overdue import DAO_overdue
+from config import logger
+from db_conn import local_db_conn,INSERT_UPDATE_TRAN
 
 
 #插入还款记录

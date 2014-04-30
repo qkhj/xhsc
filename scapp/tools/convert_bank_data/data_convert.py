@@ -15,6 +15,7 @@ logger=config.logger
 s_wrong_account = set('')
 s_info_wrong_account = set('')
 
+
 def insert_update_data():
     try:
         logger.info("=======开始导入还款信息========")
@@ -96,4 +97,3 @@ def insert_update_data():
 
     Interface_bank_data.update_valid_num()
     Interface_bank_data.update_overdue_rate()
-
