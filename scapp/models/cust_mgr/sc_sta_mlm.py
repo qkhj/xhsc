@@ -16,7 +16,6 @@ class SC_Sta_Mlm(db.Model):
     defact_rate=db.Column(db.Float) #当月瑕疵贷款率
     overdue_num=db.Column(db.Integer)#当月当前逾期笔数
     overdue_rate=db.Column(db.Float) #当月当前逾期率
-    overdue_num=db.Column(db.Integer) #当月逾期笔数
     overdue_amount=db.Column(db.Float) #当月当前逾期金额
     month=db.Column(db.Integer) #当前月份
 
@@ -24,12 +23,13 @@ class SC_Sta_Mlm(db.Model):
     #外键
     sta_user = db.relationship('SC_User', backref=db.backref('sc_sta_mlm',lazy='dynamic'))
 
-    def __init__(self,user_id,intrest,defact_rate,overdue_rate,overdue_amount,month):
+    def __init__(self,user_id,intrest,defact_rate,overdue_rate,overdue_amount,month,overdue_num):
         self.user_id = user_id
         self.intrest = intrest
         self.defact_rate = defact_rate
         self.overdue_rate = overdue_rate
         self.overdue_amount = overdue_amount
+        self.overdue_num = overdue_num
         self.month = month
 
     def add(self):

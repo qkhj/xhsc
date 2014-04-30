@@ -4,8 +4,8 @@
 """
 __author__ = 'johhny'
 
-from ..config import logger
-from ..db_conn import local_db_conn,INSERT_UPDATE_TRAN
+from config import logger
+from db_conn import local_db_conn,INSERT_UPDATE_TRAN
 import datetime
 
 #新增贷款信息

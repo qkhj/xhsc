@@ -25,7 +25,7 @@ _DBUSER = "root"  # 数据库用户名
 _DBPASS = "root"  # 数据库用户名密码
 _DBHOST = "localhost"  # 服务器
 _DBPORT = '3306' #服务器端口
-_DBNAME = "sc_test"  # 数据库名称
+_DBNAME = "sc_schema"  # 数据库名称
 
 PER_PAGE = 10  # 每页数量
 UPLOAD_FOLDER_REL = '/static/upload' #上传目录(相对路径)
