@@ -7,4 +7,4 @@ __author__ = 'johhny'
 from convert_bank_data import data_convert
 class daily_work():
     def run(self):
-        data_convert.insert_update_data()
+        return data_convert.insert_update_data()

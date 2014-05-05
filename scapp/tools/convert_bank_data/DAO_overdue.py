@@ -5,9 +5,7 @@
 __author__ = 'johhny'
 
 import datetime
-from .. import assist
-from ..config import logger
-from ..db_conn import local_db_conn
+from db_conn import local_db_conn
 
 #根据loan_apply_id查询当前日期判断是否逾期
 def get_is_overdue(loan_apply_id,installments):
