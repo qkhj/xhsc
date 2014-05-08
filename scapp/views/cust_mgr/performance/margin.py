@@ -37,7 +37,7 @@ def fxbzj():
 	return render_template("Performance/jxxc/fxbzj.html",data=data,user_id=request.form['user_id'])
 
 # 风险保证金——详单
-@app.route('/Performance/jxxc/fxbzj_list/<int:page>/<int:manager_id>', methods=['GET'])
+@app.route('/Performance/jxxc/fxbzj_list/<int:page>/<int:manager_id>', methods=['GET','POST'])
 def fxbzj_list(page,manager_id):
 	margin = Margin()
 	data = margin.getMarginByPerson(page,manager_id)
