@@ -77,34 +77,36 @@ def getCheckForm(loan_apply_id,loan_apply):
 	#前台form表单
 	checkForm = CheckForm()
 	#借款人#客户号
-	if loan_apply.individual_customer_name:
-		checkForm.jkr = loan_apply.individual_customer_name
-		checkForm.khId = loan_apply.individual_customer_id
-	if loan_apply.company_customer_name:
-		checkForm.jkr = loan_apply.company_customer_name
-		checkForm.khId = loan_apply.company_customer_id
-	#客户经理
-	A_loan = loan_apply.A_loan_officer
-	B_loan = loan_apply.B_loan_officer
-	yunying_loan = loan_apply.yunying_loan_officer
-	user = User()
-	A_name = user.getUserName(A_loan)
-	B_name = user.getUserName(B_loan)
-	yunying_name = user.getUserName(yunying_loan)
-	checkForm.khjl= A_name + ","+ B_name + "," + yunying_name
+	if loan_apply:
+		if loan_apply.individual_customer_name:
+			checkForm.jkr = loan_apply.individual_customer_name
+			checkForm.khId = loan_apply.individual_customer_id
+		if loan_apply.company_customer_name:
+			checkForm.jkr = loan_apply.company_customer_name
+			checkForm.khId = loan_apply.company_customer_id
+		#客户经理
+		A_loan = loan_apply.A_loan_officer
+		B_loan = loan_apply.B_loan_officer
+		yunying_loan = loan_apply.yunying_loan_officer
+		user = User()
+		A_name = user.getUserName(A_loan)
+		B_name = user.getUserName(B_loan)
+		yunying_name = user.getUserName(yunying_loan)
+		checkForm.khjl= A_name + ","+ B_name + "," + yunying_name
 	#合同号
 	pactInform = Total().getInformByloadId(loan_apply_id)
-	checkForm.hkId = pactInform.loan_contract_number
-	#贷款金额
-	checkForm.dkje = pactInform.amount
-	#放款日
-	checkForm.fkDate = pactInform.loan_date
-	#到期日
-	checkForm.dqDate = pactInform.last_repayment_date
-	#利率
-	checkForm.lv = pactInform.rates
-	#期数
-	checkForm.hkqs = pactInform.deadline
+	if pactInform:
+		checkForm.hkId = pactInform.loan_contract_number
+		#贷款金额
+		checkForm.dkje = pactInform.amount
+		#放款日
+		checkForm.fkDate = pactInform.loan_date
+		#到期日
+		checkForm.dqDate = pactInform.last_repayment_date
+		#利率
+		checkForm.lv = pactInform.rates
+		#期数
+		checkForm.hkqs = pactInform.deadline
 	return checkForm
 
 # 贷后管理——非标准
