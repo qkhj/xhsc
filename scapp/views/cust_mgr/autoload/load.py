@@ -22,7 +22,9 @@ class scriptload():
 				year = year-1
 				month = 12
 			else:
-				month=month
+				month=int(month)-1
+				if month<10:
+					month = "0"+str(month)
 			search_date = str(year)+"-"+str(month)
 		   	sql = "select sc_user.id as id from sc_userrole,sc_role,sc_user where "
 			sql +=" sc_userrole.role_id=sc_role.id and sc_role.role_level=2 and sc_user.id=sc_userrole.user_id"
@@ -33,25 +35,30 @@ class scriptload():
 					if assess.assess_sum=='3':
 						#获取客户经理上月业绩
 						achieve = SC_performance_list.query.filter("manager_id="+str(data[i].id)+" and DATE_FORMAT(month, '%Y-%m')='"+search_date+"'").first()
-						if int(assess.assess_arg)>90:
-							if achieve:
+						if float(assess.assess_arg)>90:	
+							if achieve:		
 								if not achieve.level_id==6:
-									#获取高一层级考核业绩
-									base_achieve = SC_manager_level_index.query.filter_by(level_id=int(achieve.level_id)+1).first()
-									if float(achieve.count)>float(base_achieve.count) and float(achieve.valid_sum)>float(base_achieve.valid_sum) and float(achieve.balance_scale)>float(base_achieve.balance_scale):
+									#获取当前层级考核业绩
+									base_achieve = SC_manager_level_index.query.filter_by(level_id=int(achieve.level_id)).first()
+									if float(achieve.count)>=float(base_achieve.count) and float(achieve.valid_sum)>=float(base_achieve.valid_sum) and float(achieve.balance_scale)>=float(base_achieve.balance_scale):
 										SC_examine_rise(data[i].id,search_date,"1","1").add()
 									else:
 										if not achieve.level_id==1:
 											#获取低一层级考核业绩
-											base_achieve = SC_manager_level_index.query.filter_by(level_id=int(achieve.level_id)-1).first()
+											level_id_new=int(achieve.level_id)-1
+											base_achieve = SC_manager_level_index.query.filter_by(level_id=level_id_new).first()
 											if float(achieve.count)<float(base_achieve.count) and float(achieve.valid_sum)<float(base_achieve.valid_sum) and float(achieve.balance_scale)<float(base_achieve.balance_scale):
 												SC_examine_rise(data[i].id,search_date,"2","1").add()
 						else:
-							if not achieve.level_id==1:
-								#获取低一层级考核业绩
-								base_achieve = SC_manager_level_index.query.filter_by(level_id=int(achieve.level_id)-1).first()
-								if float(achieve.count)<float(base_achieve.count) and float(achieve.valid_sum)<float(base_achieve.valid_sum) and float(achieve.balance_scale)<float(base_achieve.balance_scale):
-									SC_examine_rise(data[i].id,search_date,"2","1").add()
+							if achieve:
+								if not achieve.level_id==1:
+									if float(assess.assess_arg)<60:	
+										SC_examine_rise(data[i].id,search_date,"2","1").add()
+									else:
+										#获取低一层级考核业绩
+										base_achieve = SC_manager_level_index.query.filter_by(level_id=int(achieve.level_id)-1).first()
+										if float(achieve.count)<float(base_achieve.count) and float(achieve.valid_sum)<float(base_achieve.valid_sum) and float(achieve.balance_scale)<float(base_achieve.balance_scale):
+											SC_examine_rise(data[i].id,search_date,"2","1").add()
 			# 事务提交
 			db.session.commit()
 		except:
@@ -104,7 +111,7 @@ class scriptload():
 					update_sql+=" and manager_id="+str(obj.id)
 					performanc_list = SC_performance_list.query.filter(update_sql).first()
 					if performanc_list:
-						performanc_list[j].balance_scale=lastSum
+						performanc_list.balance_scale=lastSum
 			# 事务提交
 			db.session.commit()
 		except:

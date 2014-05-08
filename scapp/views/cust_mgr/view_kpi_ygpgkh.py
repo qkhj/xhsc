@@ -21,7 +21,7 @@ from scapp.models import View_Get_Cus_Mgr
 from scapp import app
 from scapp import db
 from scapp.config import logger
-
+from decimal import *
 import datetime
 
 # 培训期评估——搜索
@@ -315,19 +315,19 @@ def khjlKPI(id):
                     assess_record.assess_score_2 = assess_record.assess_score_1
                     assess_record.assess_score_1 = request.form['total']
                     assess_record.assess_sum = 2
-                    assess_record.assess_arg = (int(assess_record.assess_score_1)+int(assess_record.assess_score_2))/2
+                    assess_record.assess_arg = (Decimal(assess_record.assess_score_1)+Decimal(assess_record.assess_score_2))/2
                 elif assess_record.assess_sum == '2':
                     assess_record.assess_score_3 = assess_record.assess_score_2
                     assess_record.assess_score_2 = assess_record.assess_score_1
                     assess_record.assess_score_1 = request.form['total']
                     assess_record.assess_sum = 3
-                    assess_record.assess_arg = (int(assess_record.assess_score_1)+int(assess_record.assess_score_2)+int(assess_record.assess_score_3))/3
+                    assess_record.assess_arg = (Decimal(assess_record.assess_score_1)+Decimal(assess_record.assess_score_2)+Decimal(assess_record.assess_score_3))/3
                 elif assess_record.assess_sum == '3':
                     assess_record.assess_score_3 = assess_record.assess_score_2
                     assess_record.assess_score_2 = assess_record.assess_score_1
                     assess_record.assess_score_1 = request.form['total']
                     assess_record.assess_sum = 3
-                    assess_record.assess_arg = (int(assess_record.assess_score_1)+int(assess_record.assess_score_2)+int(assess_record.assess_score_3))/3
+                    assess_record.assess_arg = (Decimal(assess_record.assess_score_1)+Decimal(assess_record.assess_score_2)+Decimal(assess_record.assess_score_3))/3
             else:
                 assess_record_new = SC_assess_record(kpi_officer.user_id)
                 assess_record_new.add()
@@ -381,6 +381,10 @@ def htgKPI(id):
             kpi_yunying.manager = current_user.id
             kpi_yunying.date_2 = datetime.datetime.now()
 
+            #调用贺珈的函数
+            pay = Payment()
+            pay.backPayment(kpi_yunying.user_id,kpi_yunying.assess_date,kpi_yunying.total)
+            
             # 事务提交
             db.session.commit()
             # 消息闪现
