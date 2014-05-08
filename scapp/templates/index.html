@@ -214,9 +214,12 @@
 						<li onclick="leftmenu(this);changeiframe('Performance/jxxc/fxbzj_search')" id="fxbzj">
 							<a href="javascript:void(0);">风险保证金</a>
 						</li>
+						<!-- 系统管理员 -->
+                        {%- if role.role_level == 0 %}
 						<li onclick="leftmenu(this);changeiframe('Performance/config')" id="xccspz">
 							<a href="javascript:void(0);">参数配置</a>
 						</li>
+						{%- endif%}
 						{%- if hidden=='false' %}
 							<li class="nav-header">员工评估考核</li>
 							<li onclick="leftmenu(this);changeiframe('Performance/ygpgkh/pxqpg_search')" id="pxqpg">
@@ -226,6 +229,7 @@
 								<a href="javascript:void(0);">在岗评估</a>
 							</li>
 						{%- endif%}
+						{%- if role.role_level == 0 or role.role_level == 1%}
 						<li class="nav-header">客户经理管理</li>
 						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/jbdy_search')" id="jbdy">
 							<a href="javascript:void(0);">级别定义</a>
@@ -233,9 +237,12 @@
 						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/cjcx_search')" id="cjcx">
 							<a href="javascript:void(0);">层级查询</a>
 						</li>
+						{%- endif%}
+						{%- if levelHidden=='false' %}
 						<li onclick="leftmenu(this);changeiframe('Performance/khjlgl/jjshlist')" id="jjsh">
 							<a href="javascript:void(0);">晋级审核</a>
 						</li>
+						{%- endif%}
 					</ul>
 					<ul class="nav nav-list 
 							{%- if menu != "tjbb"%}

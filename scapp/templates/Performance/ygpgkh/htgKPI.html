@@ -58,9 +58,9 @@
 						<td>贷款规模当月计划完成情况</td>
 						<td>15</td>
 						{%- if kpi_yunying.bm_dkye %}
-						<td><input type="text" name="bm_dkye" value="{{kpi_yunying.bm_dkye}}" class="short"/></td>
+						<td><input type="text" name="bm_dkye" value="{{kpi_yunying.bm_dkye}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="bm_dkye" class="short"/></td>
+						<td><input type="text" name="bm_dkye" class="short" onchange="sum()"/></td>
 						{%- endif %}
 						<td>实际完成量÷计划完成量×100%×权重分数</td>
 					</tr>
@@ -69,9 +69,9 @@
 						<td>管户数当月计划完成情况</td>
 						<td>15</td>
 						{%- if kpi_yunying.bm_ghs %}
-						<td><input type="text" name="bm_ghs" value="{{kpi_yunying.bm_ghs}}" class="short"/></td>
+						<td><input type="text" name="bm_ghs" value="{{kpi_yunying.bm_ghs}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="bm_ghs" class="short"/></td>
+						<td><input type="text" name="bm_ghs" class="short" onchange="sum()"/></td>
 						{%- endif %}
 						<td>实际完成量÷计划完成量×100%×权重分数</td>
 					</tr>
@@ -80,9 +80,9 @@
 						<td>利息收入当月计划完成情况</td>
 						<td>15</td>
 						{%- if kpi_yunying.bm_lrgxd %}
-						<td><input type="text" name="bm_lrgxd" value="{{kpi_yunying.bm_lrgxd}}" class="short"/></td>
+						<td><input type="text" name="bm_lrgxd" value="{{kpi_yunying.bm_lrgxd}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="bm_lrgxd" class="short"/></td>
+						<td><input type="text" name="bm_lrgxd" class="short" onchange="sum()"/></td>
 						{%- endif %}
 						<td>实际完成量÷计划完成量×100%×权重分数</td>
 					</tr>
@@ -92,9 +92,9 @@
 						<td>数据录入的正确性及完整性</td>
 						<td>5</td>
 						{%- if kpi_yunying.gz_sjlr %}
-						<td><input type="text" name="gz_sjlr" value="{{kpi_yunying.gz_sjlr}}" class="short"/></td>
+						<td><input type="text" name="gz_sjlr" value="{{kpi_yunying.gz_sjlr}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="gz_sjlr" class="short"/></td>
+						<td><input type="text" name="gz_sjlr" class="short" onchange="sum()"/></td>
 						{%- endif %}
 						<td rowspan="8">评估组按照被评估人日常工作表现进行打分。</td>
 					</tr>
@@ -103,9 +103,9 @@
 						<td>当月管户数计划完成情况</td>
 						<td>5</td>
 						{%- if kpi_yunying.gz_ywtj %}
-						<td><input type="text" name="gz_ywtj" value="{{kpi_yunying.gz_ywtj}}" class="short"/></td>
+						<td><input type="text" name="gz_ywtj" value="{{kpi_yunying.gz_ywtj}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="gz_ywtj" class="short"/></td>
+						<td><input type="text" name="gz_ywtj" class="short" onchange="sum()"/></td>
 						{%- endif %}
 					</tr>
 					<tr class="center">		
@@ -113,9 +113,9 @@
 						<td>合同签署量</td>
 						<td>10</td>
 						{%- if kpi_yunying.gz_ht %}
-						<td><input type="text" name="gz_ht" value="{{kpi_yunying.gz_ht}}" class="short"/></td>
+						<td><input type="text" name="gz_ht" value="{{kpi_yunying.gz_ht}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="gz_ht" class="short"/></td>
+						<td><input type="text" name="gz_ht" class="short" onchange="sum()"/></td>
 						{%- endif %}
 					</tr>
 					<tr class="center">		
@@ -123,9 +123,9 @@
 						<td>放款文件处理量</td>
 						<td>5</td>
 						{%- if kpi_yunying.gz_fk %}
-						<td><input type="text" name="gz_fk" value="{{kpi_yunying.gz_fk}}" class="short"/></td>
+						<td><input type="text" name="gz_fk" value="{{kpi_yunying.gz_fk}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="gz_fk" class="short"/></td>
+						<td><input type="text" name="gz_fk" class="short" onchange="sum()"/></td>
 						{%- endif %}
 					</tr>
 					<tr class="center">		
@@ -133,9 +133,9 @@
 						<td>信贷管理是否标准、合规</td>
 						<td>5</td>
 						{%- if kpi_yunying.gz_dagl %}
-						<td><input type="text" name="gz_dagl" value="{{kpi_yunying.gz_dagl}}" class="short"/></td>
+						<td><input type="text" name="gz_dagl" value="{{kpi_yunying.gz_dagl}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="gz_dagl" class="short"/></td>
+						<td><input type="text" name="gz_dagl" class="short" onchange="sum()"/></td>
 						{%- endif %}
 					</tr>
 					<tr class="center">		
@@ -143,9 +143,9 @@
 						<td>辅助客户经理进行简单的客户维护</td>
 						<td>5</td>
 						{%- if kpi_yunying.gz_khgx %}
-						<td><input type="text" name="gz_khgx" value="{{kpi_yunying.gz_khgx}}" class="short"/></td>
+						<td><input type="text" name="gz_khgx" value="{{kpi_yunying.gz_khgx}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="gz_khgx" class="short"/></td>
+						<td><input type="text" name="gz_khgx" class="short" onchange="sum()"/></td>
 						{%- endif %}
 					</tr>
 					<tr class="center">		
@@ -153,9 +153,9 @@
 						<td>对典型案例进行编写整理及案例库的管理</td>
 						<td>5</td>
 						{%- if kpi_yunying.gz_alzl %}
-						<td><input type="text" name="gz_alzl" value="{{kpi_yunying.gz_alzl}}" class="short"/></td>
+						<td><input type="text" name="gz_alzl" value="{{kpi_yunying.gz_alzl}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="gz_alzl" class="short"/></td>
+						<td><input type="text" name="gz_alzl" class="short" onchange="sum()"/></td>
 						{%- endif %}
 					</tr>
 					<tr class="center">		
@@ -163,9 +163,9 @@
 						<td>从后台角度对客户进行风险分析并提醒客户经理</td>
 						<td>5</td>
 						{%- if kpi_yunying.gz_fxkz %}
-						<td><input type="text" name="gz_fxkz" value="{{kpi_yunying.gz_fxkz}}" class="short"/></td>
+						<td><input type="text" name="gz_fxkz" value="{{kpi_yunying.gz_fxkz}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="gz_fxkz" class="short"/></td>
+						<td><input type="text" name="gz_fxkz" class="short" onchange="sum()"/></td>
 						{%- endif %}
 					</tr>
 					<tr class="center">
@@ -174,9 +174,9 @@
 						<td>个人工作状态、出勤状况等</td>
 						<td>10</td>
 						{%- if kpi_yunying.gz_rcxw %}
-						<td><input type="text" name="gz_rcxw" value="{{kpi_yunying.gz_rcxw}}" class="short"/></td>
+						<td><input type="text" name="gz_rcxw" value="{{kpi_yunying.gz_rcxw}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="gz_rcxw" class="short"/></td>
+						<td><input type="text" name="gz_rcxw" class="short" onchange="sum()"/></td>
 						{%- endif %}
 						<td>根据实际情况实行扣分制，由评估人确定</td>
 					</tr>
@@ -186,9 +186,9 @@
 						<td>逾期率控制情况</td>
 						<td>——</td>
 						{%- if kpi_yunying.gz_yql %}
-						<td><input type="text" name="gz_yql" value="{{kpi_yunying.gz_yql}}" class="short"/></td>
+						<td><input type="text" name="gz_yql" value="{{kpi_yunying.gz_yql}}" class="short" onchange="sum()"/></td>
 						{%- else %}
-						<td><input type="text" name="gz_yql" class="short"/></td>
+						<td><input type="text" name="gz_yql" class="short" onchange="sum()"/></td>
 						{%- endif %}
 						<td>
 							1%≤逾期率≤1.5%，以上三项总分×90%；<br/>
@@ -200,12 +200,12 @@
 					<tr class="center">
 						<td class="table-label" colspan="3"><b>总分</b>
 							{%- if kpi_yunying.total %}
-							<input type="text" name="total" value="{{kpi_yunying.total}}" class="short"/></td>	
+							<input type="text" name="total" value="{{kpi_yunying.total}}" class="short" readonly/></td>	
 							{%- else %}
-							<input type="text" name="total" class="short"/></td>
+							<input type="text" name="total" class="short" readonly/></td>
 							{%- endif %}	
 						<td class="table-label" colspan="3"><b>总评价</b>
-							<select name="result">
+							<select name="result" readonly>
 								{%- if kpi_yunying.result == 4 %}
 								<option value="4" selected>不合格</option>
 								{%- else %}
@@ -237,6 +237,9 @@
 						<td colspan="5"><textarea name="qtpj"></textarea></td>
 						{%- endif %}
 					</tr>
+					<tr>
+						<td colspan="6"><font class="red">注意:请确保所有客户经理已评估完毕，再评估运营岗</td>	
+					</tr>
 				</table>		
 			</div>
 			{%- if not kpi_yunying.total %}
@@ -249,5 +252,46 @@
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>
 	<script src="/static/js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript">
+		function sum(){
+			var sum=0;
+			var a1=parseFloat($('input[name=bm_dkye]').val());
+			var a2=parseFloat($('input[name=bm_ghs]').val());
+			var a3=parseFloat($('input[name=bm_lrgxd]').val());
+			var a4=parseFloat($('input[name=gz_sjlr]').val());
+			var a5=parseFloat($('input[name=gz_ywtj]').val());
+			var a6=parseFloat($('input[name=gz_ht]').val());
+			var a7=parseFloat($('input[name=gz_fk]').val());
+			var a8=parseFloat($('input[name=gz_dagl]').val());
+			var a9=parseFloat($('input[name=gz_khgx]').val());
+			var a10=parseFloat($('input[name=gz_alzl]').val());
+			var a11=parseFloat($('input[name=gz_fxkz]').val());
+			var a12=parseFloat($('input[name=gz_rcxw]').val());			
+			var a13=parseFloat($('input[name=gz_yql]').val());
+			if(a13<1)
+				sum=a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12;
+			if(a13>=1&&a13<=1.5)
+				sum=(a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12)*0.9;
+			if(a13>1.5&&a13<=2)
+				sum=(a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12)*0.7;
+			if(a13>2&&a13<=3)
+				sum=(a1+a2+a3+a4+a5+a6+a7+a8+a9+a10+a11+a12)*0.5;
+			if(a13>3)
+				sum=0;
+			$('input[name=total]').val(sum);
+			if(sum>=90&&sum<=100){
+				$("select[name=result]").html("<option value='4'>不合格</option><option value='3'>合格</option><option value='2'>良好</option><option value='1' selected>优秀</option>")
+			}
+			if(sum>=80&&sum<90){
+				$("select[name=result]").html("<option value='4'>不合格</option><option value='3'>合格</option><option value='2' selected>良好</option><option value='1'>优秀</option>")
+			}
+			if(sum>=60&&sum<80){
+				$("select[name=result]").html("<option value='4'>不合格</option><option value='3' selected>合格</option><option value='2'>良好</option><option value='1'>优秀</option>")
+			}
+			if(sum<60){
+				$("select[name=result]").html("<option value='4' selected>不合格</option><option value='3'>合格</option><option value='2'>良好</option><option value='1'>优秀</option>")
+			}
+		}
+	</script>
 </body>
 </html>
