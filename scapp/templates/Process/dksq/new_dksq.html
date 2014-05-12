@@ -56,6 +56,11 @@
 					</table>
 				</div>
 				<div class="page-div">
+					{%- if customer.pages %}
+						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/goto_new_dksq/{{belong_customer_type}}/1')">|&lt;&lt;</span>
+					{%- else %}
+						<span style="CURSOR: pointer">|&lt;&lt;</span>
+					{%- endif %}
 					{%- if customer.has_prev %}
 						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/goto_new_dksq/{{belong_customer_type}}/{{customer.prev_num}}')">&lt;&lt;</span>
 					{%- else %}
@@ -67,6 +72,11 @@
 						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/goto_new_dksq/{{belong_customer_type}}/{{customer.next_num}}')">&gt;&gt;</span>
 					{%- else %}
 						<span style="CURSOR: pointer">&gt;&gt;</span>
+					{%- endif %}
+					{%- if customer.pages %}
+						<span style="CURSOR: pointer" onclick="iframe('Process/dksq/goto_new_dksq/{{belong_customer_type}}/{{customer.pages}}')">&gt;&gt;|</span>
+					{%- else %}
+						<span style="CURSOR: pointer">&gt;&gt;|</span>
 					{%- endif %}
 				</div>										
 			</form><!--/搜索-->			

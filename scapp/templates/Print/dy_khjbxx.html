@@ -11,7 +11,7 @@
 		*{font-size: 13px;margin:0;}
 		table{border-collapse:collapse;}
 		.dayin{width:100%;}
-		.dayin td{border:1px solid black;padding:8px 0;}
+		.dayin td{border:1px solid black;padding:6px 0;}
 		.center{text-align: center;}
 	</style>
 	
@@ -221,6 +221,44 @@
 					<td>{{obj.phone}}</td>
 					<td>{{obj.address}}</td>
 					<td>{{obj.main_business}}</td>
+					<td>{{obj.monthly_income}}</td>					
+				</tr>
+				<tr>
+					<td class="center">家庭详细地址</td>
+					<td colspan="4">{{obj.home_addr}}</td>
+					<td class="center">户籍所在地</td>
+					<td colspan="2">{{obj.hj_addr}}</td>
+				</tr>
+				<tr>
+					<td class="center">住房性质</td>
+					<td colspan="4">{{obj.home}}</td>
+					<td class="center">备注</td>
+					<td colspan="2">{{obj.remark}}</td>
+				</tr>
+				{%- endfor %}
+				<!--************************************************担保人****************************************************-->
+				<tr>
+					<td colspan="8"><b>担保人</b></td>				
+				</tr>
+				<tr>
+					<td class="center">姓名</td>
+					<td class="center">与客户关系</td>
+					<td class="center">身份证号码</td>
+					<td class="center">家庭电话</td>
+					<td class="center">移动电话</td>
+					<td class="center">单位名称及地址</td>
+					<td class="center">主要资产</td>
+					<td class="center">月收入</td>					
+				</tr>
+				{%- for obj in guarantees %}
+				<tr>
+					<td>{{obj.name}}</td>
+					<td>{{obj.relationship}}</td>
+					<td>{{obj.id_number}}</td>
+					<td>{{obj.phone}}</td>
+					<td>{{obj.phone}}</td>
+					<td>{{obj.workunit}}</td>
+					<td>{{obj.major_assets}}</td>
 					<td>{{obj.monthly_income}}</td>					
 				</tr>
 				<tr>

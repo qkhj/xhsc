@@ -13,6 +13,8 @@ from scapp.config import logger
 from scapp.config import PER_PAGE
 from scapp.config import PROCESS_STATUS_DKSQSH
 from scapp.config import PROCESS_STATUS_DQDC
+from scapp.config import PROCESS_STATUS_DQDCXG
+from scapp.config import PROCESS_STATUS_SPJY_CXDC
 from scapp.config import UPLOAD_FOLDER_REL
 from scapp.config import UPLOAD_FOLDER_ABS
 
@@ -60,10 +62,10 @@ def dqdc_search(page):
     # loan_apply = SC_Loan_Apply.query.order_by("id").paginate(page, per_page = PER_PAGE)
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = ""
+    sql = " 1=1 "
     if loan_type != '0':
-        sql = "loan_type='"+loan_type+"' and "
-    sql += " process_status='"+PROCESS_STATUS_DKSQSH+"'"
+        sql = " and loan_type='"+loan_type+"' "
+    sql += " and (process_status='"+PROCESS_STATUS_DKSQSH+"' or process_status='"+PROCESS_STATUS_SPJY_CXDC+"' or process_status='"+PROCESS_STATUS_DQDCXG+"')"
     sql += " and (A_loan_officer="+str(current_user.id)+" or B_loan_officer="+str(current_user.id)+" or yunying_loan_officer="+str(current_user.id)+")"
 
     if customer_name:
@@ -95,7 +97,7 @@ def dqdcWd_jbqk(belong_customer_type,belong_customer_value,id):
     guaranty = SC_Guaranty.query.filter_by(loan_apply_id=id).all()
     guarantees = SC_Guarantees.query.filter_by(loan_apply_id=id).all()
     riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
-
+    
     return render_template("Process/dqdc/dqdcWd_jbqk.html",belong_customer_type=belong_customer_type,
         belong_customer_value=belong_customer_value,id=id,customer=customer,loan_apply=loan_apply,
         apply_info=apply_info,loan_purpose=loan_purpose,credit_history=credit_history,
@@ -109,8 +111,9 @@ def edit_dqdcWd_jbqk(id):
         riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
         if riskanalysis_and_findings:
             riskanalysis_and_findings.analysis_conclusion = request.form['analysis_conclusion']
-            riskanalysis_and_findings.recommended_way_of_security = request.form['recommended_way_of_security']
-            riskanalysis_and_findings.income_ratio = request.form['income_ratio']
+            riskanalysis_and_findings.other_deliberations = request.form['other_deliberations']
+            riskanalysis_and_findings.positive = request.form['positive']
+            riskanalysis_and_findings.opposite = request.form['opposite']
 
             verification_list = request.form.getlist('verification')
             riskanalysis_and_findings.verification = 0
@@ -121,9 +124,11 @@ def edit_dqdcWd_jbqk(id):
             riskanalysis_and_findings.others = request.form['others']
             riskanalysis_and_findings.bool_grant = request.form['bool_grant']
             if request.form['bool_grant'] == '1':
+                riskanalysis_and_findings.recommended_way_of_security = request.form['recommended_way_of_security']
+                riskanalysis_and_findings.income_ratio = request.form['income_ratio']
                 riskanalysis_and_findings.amount = request.form['amount']
                 riskanalysis_and_findings.deadline = request.form['deadline']
-                riskanalysis_and_findings.rates = request.form['rates']
+                riskanalysis_and_findings.rates = request.form['income_ratio']
                 riskanalysis_and_findings.monthly_repayment = request.form['monthly_repayment']
                 riskanalysis_and_findings.approve_reason = request.form['approve_reason']
             else:
@@ -228,8 +233,9 @@ def edit_dqdcXed_jbqk(id):
         riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
         if riskanalysis_and_findings:
             riskanalysis_and_findings.analysis_conclusion = request.form['analysis_conclusion']
-            riskanalysis_and_findings.recommended_way_of_security = request.form['recommended_way_of_security']
-            riskanalysis_and_findings.income_ratio = request.form['income_ratio']
+            riskanalysis_and_findings.other_deliberations = request.form['other_deliberations']
+            riskanalysis_and_findings.positive = request.form['positive']
+            riskanalysis_and_findings.opposite = request.form['opposite']
 
             verification_list = request.form.getlist('verification')
             riskanalysis_and_findings.verification = 0
@@ -240,9 +246,11 @@ def edit_dqdcXed_jbqk(id):
             riskanalysis_and_findings.others = request.form['others']
             riskanalysis_and_findings.bool_grant = request.form['bool_grant']
             if request.form['bool_grant'] == '1':
+                riskanalysis_and_findings.recommended_way_of_security = request.form['recommended_way_of_security']
+                riskanalysis_and_findings.income_ratio = request.form['income_ratio']
                 riskanalysis_and_findings.amount = request.form['amount']
                 riskanalysis_and_findings.deadline = request.form['deadline']
-                riskanalysis_and_findings.rates = request.form['rates']
+                riskanalysis_and_findings.rates = request.form['income_ratio']
                 riskanalysis_and_findings.monthly_repayment = request.form['monthly_repayment']
                 riskanalysis_and_findings.approve_reason = request.form['approve_reason']
             else:

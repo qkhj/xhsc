@@ -235,11 +235,9 @@
 								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 								<div style="border:1px solid #94c1dc;">
 									<table class="table-list">
-										<tr>
-											<td class="table-label">客户经理编号</td>
-											<td><input type="text"/></td>	
+										<tr>	
 											<td class="table-label">客户经理名称</td>
-											<td><input type="text"/></td>	
+											<td><input type="text" onchange="search(this)"/></td>	
 										</tr>
 									</table>
 								</div>																		
@@ -260,7 +258,7 @@
 											<tr>
 												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name1','yunying_manager1');" onblur="hiddenInput('yz_yunying1',this)"/></td>	
 												<td>{{obj.id}}</td>										
-												<td>{{obj.real_name}}</td>								
+												<td name="search">{{obj.real_name}}</td>							
 											</tr>	
 										{%- endfor %}							
 										</tbody>
@@ -281,11 +279,9 @@
 								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 								<div style="border:1px solid #94c1dc;">
 									<table class="table-list">
-										<tr>
-											<td class="table-label">客户经理编号</td>
-											<td><input type="text"/></td>	
+										<tr>	
 											<td class="table-label">客户经理名称</td>
-											<td><input type="text"/></td>	
+											<td><input type="text" onchange="search(this)"/></td>	
 										</tr>
 									</table>
 								</div>																		
@@ -306,7 +302,7 @@
 											<tr>
 												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name2','yunying_manager2');" onblur="hiddenInput('yz_yunying2',this)"/></td>	
 												<td>{{obj.id}}</td>									
-												<td>{{obj.real_name}}</td>								
+												<td name="search">{{obj.real_name}}</td>							
 											</tr>	
 										{%- endfor %}								
 										</tbody>
@@ -329,11 +325,9 @@
 								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 								<div style="border:1px solid #94c1dc;">
 									<table class="table-list">
-										<tr>
-											<td class="table-label">客户经理编号</td>
-											<td><input type="text"/></td>	
+										<tr>	
 											<td class="table-label">客户经理名称</td>
-											<td><input type="text"/></td>	
+											<td><input type="text" onchange="search(this)"/></td>	
 										</tr>
 									</table>
 								</div>																		
@@ -354,7 +348,7 @@
 											<tr>
 												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name3','yunying_manager3');" onblur="hiddenInput('yz_yunying3',this)"/></td>	
 												<td>{{obj.id}}</td>										
-												<td>{{obj.real_name}}</td>								
+												<td name="search">{{obj.real_name}}</td>								
 											</tr>
 										{%- endfor %}									
 										</tbody>
@@ -382,11 +376,9 @@
 								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 								<div style="border:1px solid #94c1dc;">
 									<table class="table-list">
-										<tr>
-											<td class="table-label">客户经理编号</td>
-											<td><input type="text"/></td>	
+										<tr>	
 											<td class="table-label">客户经理名称</td>
-											<td><input type="text"/></td>	
+											<td><input type="text" onchange="search(this)"/></td>	
 										</tr>
 									</table>
 								</div>																		
@@ -407,7 +399,7 @@
 											<tr>
 												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name4','yunying_manager4');" onblur="hiddenInput('yz_yunying4',this)"/></td>	
 												<td>{{obj.id}}</td>										
-												<td>{{obj.real_name}}</td>								
+												<td name="search">{{obj.real_name}}</td>							
 											</tr>
 										{%- endfor %}								
 										</tbody>
@@ -428,11 +420,9 @@
 								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 								<div style="border:1px solid #94c1dc;">
 									<table class="table-list">
-										<tr>
-											<td class="table-label">客户经理编号</td>
-											<td><input type="text"/></td>	
+										<tr>	
 											<td class="table-label">客户经理名称</td>
-											<td><input type="text"/></td>	
+											<td><input type="text" onchange="search(this)"/></td>	
 										</tr>
 									</table>
 								</div>																		
@@ -453,7 +443,7 @@
 											<tr>
 												<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name5','yunying_manager5');" onblur="hiddenInput('yz_yunying5',this)"/></td>	
 												<td>{{obj.id}}</td>										
-												<td>{{obj.real_name}}</td>								
+												<td name="search">{{obj.real_name}}</td>							
 											</tr>
 										{%- endfor %}								
 										</tbody>

@@ -27,7 +27,7 @@
 						<tr>							
 							<td class="table-label">接待方式<font class="red">*</font></td>
 							<td>
-								<select name="reception_type" onchange="show_table(this.value)">
+								<select name="reception_type">
 									{%- if target_customer.reception_type == '1' %}
 										<option value="1" selected>咨询</option>
 										<option value="2">扫街</option>
@@ -281,11 +281,7 @@
 						</tr>	
 					</table>
 				</div>
-				{%- if target_customer.reception_type == '1' %}
-				<div style="display:none;" id="dpxx">
-				{%- else %}
 				<div id="dpxx">
-				{%- endif %}
 					<i class="icon-bookmark"></i><span class="titletip">店铺信息</span>
 					<div style="border:1px solid #94c1dc;">
 						<table class="table-list">		

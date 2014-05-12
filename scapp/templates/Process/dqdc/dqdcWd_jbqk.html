@@ -724,7 +724,7 @@
 					<td class="table-label">需要审议的其他内容</td>
 					<td colspan="7">
 						<span>
-							<textarea name="other_deliberations" value="{{riskanalysis_and_findings.other_deliberations}}" style="width:80%" onchange="spryMaxLength(this,2048)"></textarea>
+							<textarea name="other_deliberations" style="width:80%" onchange="spryMaxLength(this,2048)">{{riskanalysis_and_findings.other_deliberations}}</textarea>
 							<span class="errorInfo">字符数不得大于2048</span>
 						</span>						
 					</td>
@@ -734,7 +734,7 @@
 					<td class="table-label">正</td>
 					<td colspan="4">
 						<span>
-							<textarea name="positive" value="{{riskanalysis_and_findings.positive}}" style="width:80%"onchange="spryMaxLength(this,2048)"></textarea>
+							<textarea name="positive" style="width:80%"onchange="spryMaxLength(this,2048)">{{riskanalysis_and_findings.positive}}</textarea>
 							<span class="errorInfo">字符数不得大于2048</span>
 						</span>	
 					</td>
@@ -743,7 +743,7 @@
 					<td class="table-label">反</td>
 					<td colspan="4">
 						<span>
-							<textarea name="opposite" value="{{riskanalysis_and_findings.opposite}}" style="width:80%"onchange="spryMaxLength(this,2048)"></textarea>
+							<textarea name="opposite" style="width:80%"onchange="spryMaxLength(this,2048)">{{riskanalysis_and_findings.opposite}}</textarea>
 							<span class="errorInfo">字符数不得大于2048</span>
 						</span>	
 					</td>
@@ -810,26 +810,26 @@
 			</table>
 		</div>
 	<!--*****************************************是否同意发放**************************************************-->
-		{%- if riskanalysis_and_findings == None or riskanalysis_and_findings.bool_grant == '1' %}
-		<label onclick="$('#jyff').show();$('#jyfj').hide();doubleIframe('dqdcWd_jbqk');">
-			<input type="radio" name="bool_grant" value="1" checked />建议发放
-		</label>
-		<label onclick="$('#jyfj').show();$('#jyff').hide();doubleIframe('dqdcWd_jbqk');">
-			<input type="radio" name="bool_grant" value="0" />建议否决
-		</label><br/>	
-		{%- else %}
+		{%- if riskanalysis_and_findings.bool_grant == '0' %}
 		<label onclick="$('#jyff').show();$('#jyfj').hide();doubleIframe('dqdcWd_jbqk');">
 			<input type="radio" name="bool_grant" value="1" />建议发放
 		</label>
 		<label onclick="$('#jyfj').show();$('#jyff').hide();doubleIframe('dqdcWd_jbqk');">
 			<input type="radio" name="bool_grant" value="0" checked/>建议否决
 		</label><br/>
+		{%- else %}
+		<label onclick="$('#jyff').show();$('#jyfj').hide();doubleIframe('dqdcWd_jbqk');">
+			<input type="radio" name="bool_grant" value="1" checked/>建议发放
+		</label>
+		<label onclick="$('#jyfj').show();$('#jyff').hide();doubleIframe('dqdcWd_jbqk');">
+			<input type="radio" name="bool_grant" value="0" />建议否决
+		</label><br/>
 		{%- endif %}
 	<!--*****************************************调查结论**************************************************-->
-		{%- if riskanalysis_and_findings == None or riskanalysis_and_findings.bool_grant == '1' %}
-		<div class="divBorder" id="jyff">
-		{%- else %}
+		{%- if riskanalysis_and_findings.bool_grant == '0' %}
 		<div class="divBorder" id="jyff" style="display:none;">
+		{%- else %}
+		<div class="divBorder" id="jyff">
 		{%- endif %}
 			<table class="table-list">				
 				<tr>
@@ -1013,9 +1013,9 @@
 		</div>
 	<!--*****************************************调查结论**************************************************-->
 		{%- if riskanalysis_and_findings.bool_grant == '0' %}
-		<div class="divBorder" id="jyfj">
+		<div class="divBorder" id="jyfj"  style="display:none;">
 		{%- else %}
-		<div class="divBorder" id="jyfj" style="display:none;">
+		<div class="divBorder" id="jyfj">
 		{%- endif %}
 			<table class="table-list">				
 				<tr>

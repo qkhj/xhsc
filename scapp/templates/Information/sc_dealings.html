@@ -42,7 +42,7 @@
 							<td>{{obj.deal_name}}</td>
 							<td>{{obj.deal_description}}</td>												
 							<td>
-								<input type="button" class="btn btn-warning btn-mini" value="删除"/>
+								<input type="button" class="btn btn-warning btn-mini" value="删除" onclick="top.createForm('/Delete/SC_Dealings/{{obj.id}}')"/>
 							</td>
 						</tr>		
 						{%- endfor %}								
