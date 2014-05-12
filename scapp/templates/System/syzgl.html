@@ -88,18 +88,28 @@
                     </table>
                 </div>
                 <div class="page-div">
+                	{%- if users.pages %}
+						<span style="CURSOR: pointer" onclick="iframe('System/syzgl/1')">|&lt;&lt;</span>
+					{%- else %}
+						<span style="CURSOR: pointer">|&lt;&lt;</span>
+					{%- endif %}
                     {%- if users.has_prev %}
-                    <span style="CURSOR: pointer" onclick="iframe('System/syzgl/{{users.prev_num}}')">&lt;&lt;</span>
+                    	<span style="CURSOR: pointer" onclick="iframe('System/syzgl/{{users.prev_num}}')">&lt;&lt;</span>
                     {%- else %}
-                    <span style="CURSOR: pointer">&lt;&lt;</span>
+                    	<span style="CURSOR: pointer">&lt;&lt;</span>
                     {%- endif %}
                     &#160;第&#160;<font color="#0088cc">{{users.page}}</font>&#160;页&#160;
                     &#160;共&#160;<font color="#0088cc">{{users.pages}}</font>&#160;页&#160;
                     {%- if users.has_next %}
-                    <span style="CURSOR: pointer" onclick="iframe('System/syzgl/{{users.next_num}}')">&gt;&gt;</span>
+                    	<span style="CURSOR: pointer" onclick="iframe('System/syzgl/{{users.next_num}}')">&gt;&gt;</span>
                     {%- else %}
-                    <span style="CURSOR: pointer">&gt;&gt;</span>
+                    	<span style="CURSOR: pointer">&gt;&gt;</span>
                     {%- endif %}
+                    {%- if users.pages %}
+						<span style="CURSOR: pointer" onclick="iframe('System/syzgl/{{users.pages}}')">&gt;&gt;|</span>
+					{%- else %}
+						<span style="CURSOR: pointer">&gt;&gt;|</span>
+					{%- endif %}
                 </div>
             </div><!--/row-fluid -->
         </div><!--/content -->

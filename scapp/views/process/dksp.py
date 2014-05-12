@@ -11,6 +11,7 @@ from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
 from scapp.config import PROCESS_STATUS_DQDC
+from scapp.config import PROCESS_STATUS_DQDCXG
 from scapp.config import PROCESS_STATUS_DKSP
 
 from scapp.models import SC_Individual_Customer
@@ -104,6 +105,26 @@ def edit_dksp(loan_apply_id):
         loan_apply.examiner_2 = request.form['examiner_2']
         loan_apply.approver = request.form['approver']
         loan_apply.process_status = PROCESS_STATUS_DKSP
+
+        # 事务提交
+        db.session.commit()
+        # 消息闪现
+        flash('保存成功','success')
+    except:
+        # 回滚
+        db.session.rollback()
+        logger.exception('exception')
+        # 消息闪现
+        flash('保存失败','error')
+
+    return redirect("Process/dksp/dksp")
+
+# 跳转到编辑贷款审批信息
+@app.route('/Process/dksp/edit_dksp_bk/<int:loan_apply_id>', methods=['POST'])
+def edit_dksp_bk(loan_apply_id):
+    try:
+        #保存贷款申请表
+        SC_Loan_Apply.query.filter_by(id=loan_apply_id).update({"process_status":PROCESS_STATUS_DQDCXG})
 
         # 事务提交
         db.session.commit()

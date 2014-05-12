@@ -82,6 +82,11 @@
 				</table>
 			</div>
 			<div class="page-div">
+				{%- if target_customer.pages %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Information/lfdj/lfdj_search/1')">|&lt;&lt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">|&lt;&lt;</span>
+				{%- endif %}
 				{%- if target_customer.has_prev %}
 					<span style="CURSOR: pointer" onclick="submitForm('content','/Information/lfdj/lfdj_search/{{target_customer.prev_num}}')">&lt;&lt;</span>
 				{%- else %}
@@ -93,6 +98,11 @@
 					<span style="CURSOR: pointer" onclick="submitForm('content','/Information/lfdj/lfdj_search/{{target_customer.next_num}}')">&gt;&gt;</span>
 				{%- else %}
 					<span style="CURSOR: pointer">&gt;&gt;</span>
+				{%- endif %}
+				{%- if target_customer.pages %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Information/lfdj/lfdj_search/{{target_customer.pages}}')">&gt;&gt;|</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&gt;&gt;|</span>
 				{%- endif %}
 			</div>
 		</div><!--/row-fluid -->

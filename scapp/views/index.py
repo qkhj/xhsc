@@ -7,6 +7,13 @@ from scapp.models import SC_Industry
 from scapp.models import SC_UserRole
 from scapp.models import SC_Privilege
 
+from scapp.models import SC_Dealings
+from scapp.models import SC_Relations
+from scapp.models import SC_Manage_Info
+from scapp.models import SC_Asset_Info
+from scapp.models import SC_Other_Info
+from scapp.models import SC_Financial_Affairs
+
 from scapp.config import logger
 from scapp import app
 from scapp import db
@@ -165,6 +172,24 @@ def change_password(id):
 def Tools_hkjhjsgj():
     return render_template("Tools/hkjhjsgj.html")
 
+# 删除函数
+@app.route('/Delete/<tablename>/<int:id>', methods=['POST'])
+def Delete_table(tablename,id):
+    try:
+        eval(tablename).query.filter_by(id=id).delete()
+        # 事务提交
+        db.session.commit()
+        # 消息闪现
+        flash('保存成功','success')
+    except:
+        # 回滚
+        db.session.rollback()
+        logger.exception('exception')
+        # 消息闪现
+        flash('保存失败','error')
+        
+    return redirect('xxgl')
+
 # 测试CRM
 @app.route('/testCRM', methods=['GET','POST'])
 def testCRM():
@@ -196,3 +221,6 @@ def testCRM():
         return render_template("testCRM.html")
     else:
         return render_template("testCRM.html")
+    
+    
+    

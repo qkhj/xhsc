@@ -834,11 +834,9 @@
 							<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 							<div style="border:1px solid #94c1dc;">
 								<table class="table-list">
-									<tr>
-										<td class="table-label">客户经理编号</td>
-										<td><input type="text"/></td>	
+									<tr>	
 										<td class="table-label">客户经理名称</td>
-										<td><input type="text"/></td>	
+										<td><input type="text" onchange="search(this)"/></td>	
 									</tr>
 								</table>
 							</div>																		
@@ -859,7 +857,7 @@
 										<tr>
 											<td><input type="radio" name="xdy" onclick="get_name(this,'A_manager_name','A_manager');" onblur="hiddenInput('yzA',this)"/></td>	
 											<td>{{obj.id}}</td>												
-											<td>{{obj.real_name}}</td>												
+											<td name="search">{{obj.real_name}}</td>											
 										</tr>		
 										{%- endfor %}									
 									</tbody>
@@ -886,11 +884,9 @@
 							<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 							<div style="border:1px solid #94c1dc;">
 								<table class="table-list">
-									<tr>
-										<td class="table-label">客户经理编号</td>
-										<td><input type="text"/></td>	
+									<tr>	
 										<td class="table-label">客户经理名称</td>
-										<td><input type="text"/></td>	
+										<td><input type="text" onchange="search(this)"/></td>	
 									</tr>
 								</table>
 							</div>																		
@@ -911,7 +907,7 @@
 										<tr>
 											<td><input type="radio" name="xdy" onclick="get_name(this,'B_manager_name','B_manager');" onblur="hiddenInput('yzB',this)"/></td>	
 											<td>{{obj.id}}</td>												
-											<td>{{obj.real_name}}</td>												
+											<td name="search">{{obj.real_name}}</td>											
 										</tr>		
 										{%- endfor %}									
 									</tbody>
@@ -932,11 +928,9 @@
 							<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 							<div style="border:1px solid #94c1dc;">
 								<table class="table-list">
-									<tr>
-										<td class="table-label">客户经理编号</td>
-										<td><input type="text"/></td>	
+									<tr>	
 										<td class="table-label">客户经理名称</td>
-										<td><input type="text"/></td>	
+										<td><input type="text" onchange="search(this)"/></td>	
 									</tr>
 								</table>
 							</div>																		
@@ -957,7 +951,7 @@
 										<tr>
 											<td><input type="radio" name="xdy" onclick="get_name(this,'yunying_manager_name','yunying_manager');" onblur="hiddenInput('yz_yunying',this)"/></td>	
 											<td>{{obj.id}}</td>												
-											<td>{{obj.real_name}}</td>												
+											<td name="search">{{obj.real_name}}</td>											
 										</tr>		
 										{%- endfor %}									
 									</tbody>
@@ -970,7 +964,11 @@
 		</div>
 
 		<span class="point">*为必填字段</span><br/>
-		<input type="submit" class="btn btn-info" value="核准"/><br/>
+		<input type="submit" class="btn btn-info" value="通过"/>
+		<script type="text/javascript">
+		var url = '/Process/dksqsh/edit_dksqsh_bk/{{loan_apply.id}}'
+		document.write("<input type='button' class='btn btn-info' value='退回修改' onclick=parent.createForm(\'"+url+"\')>");
+		</script>
 	</form>	
 		<!--**************************否决*********************************
 	<form class="content" method="POST" action="/Process/dksqsh/dksqsh_refuse/{{loan_apply.id}}" target="_parent">

@@ -46,9 +46,9 @@ def dkxxgl():
 def dkxxgl_search(page):
     customer_name = request.form['customer_name']
     loan_type = request.form['loan_type']
-    sql = ""
+    sql = " 1=1"
     if loan_type != '0':
-        sql = "loan_type='"+loan_type+"'"
+        sql = " and loan_type='"+loan_type+"'"
 
     if customer_name:
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
