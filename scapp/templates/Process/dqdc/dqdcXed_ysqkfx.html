@@ -48,8 +48,10 @@
 					<td style="width:61px;"><input type="text" value="{{profit_loss[0].month_12}}" name="month_12_0" class="datepicker" data-date-format="yyyy.mm" style="width:53px;" readonly/></td>	
 					<td style="width:61px;">总计
 						<input type="hidden" name="total_0" value="总计"></td>
-					<td>月平均
-						<input type="hidden" name="pre_month_0" value="月平均"></td>						
+					<td>
+						月平均
+						<input type="text" name="pre_month_0" value="{{profit_loss[0].pre_month}}" onchange="check(this,1,12)" onKeyUp="value=value.replace(/\D/g,'')" onblur="ave(this)" id="count"/>
+						<span class="errorInfo">(1-12)</span>						
 				</tr>								
 			</table>
 		</div>
@@ -1641,8 +1643,10 @@
 					<td style="width:61px;"><input type="text" name="month_12_0" class="datepicker" data-date-format="yyyy.mm" style="width:53px;" readonly/></td>	
 					<td style="width:61px;">总计
 						<input type="hidden" name="total_0" value="总计"></td>
-					<td>月平均
-						<input type="hidden" name="pre_month_0" value="月平均"></td>						
+					<td>
+						月平均
+						<input type="text" name="pre_month_0" value="12" onchange="check(this,1,12)" onKeyUp="value=value.replace(/\D/g,'')" onblur="ave(this)" id="count"/>
+						<span class="errorInfo">(1-12)</span>					
 				</tr>								
 			</table>
 		</div>
@@ -3175,7 +3179,8 @@
 		}
 		function average(obj,num){
 			var a=$(obj).parent().parent().find("input[name=total_"+num+"]").val();
-			var pre=parseInt(a)/12
+			var cound=$("#count").val();
+			var pre=parseInt(a)/parseInt(cound)
 			pre=Math.round(pre*100)/100
 			$(obj).parent().parent().find("input[name=pre_month_"+num+"]").val(pre);
 		}
@@ -3206,7 +3211,8 @@
 		}
 		function totalAve(num){
 			var a=$("input[name=total_"+num+"]").val();
-			var pre=parseInt(a)/12
+			var cound=$("#count").val();
+			var pre=parseInt(a)/parseInt(cound)
 			pre=Math.round(pre*100)/100
 			$("input[name=pre_month_"+num+"]").val(pre);
 		}
@@ -3301,6 +3307,15 @@
 			);
 			// alert(a);			
 			$("input[name=month_"+num+"_30]").val(sum);			
+		}
+		function ave(obj){
+			for(i=1;i<30;i++){
+				var total=$("input[name=total_"+i+"]").val();
+				var cound=$("#count").val();
+				var pre=parseInt(total)/parseInt(cound)
+				pre=Math.round(pre*100)/100
+				$("input[name=pre_month_"+i+"]").val(pre);
+			}
 		}
 	</script>
 </body>

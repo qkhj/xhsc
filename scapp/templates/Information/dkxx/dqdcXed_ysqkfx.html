@@ -48,7 +48,7 @@
 					<td style="width:61px;">总计
 						<input type="hidden" name="total_0" value="总计"></td>
 					<td>月平均
-						<input type="hidden" name="pre_month_0" value="月平均"></td>						
+						<input type="hidden" name="pre_month_0" value="{{profit_loss[0].pre_month}}" onchange="check(this,1,12)" onkeyup="value=value.replace(/[^\d]/g,'')"></td>						
 				</tr>								
 			</table>
 		</div>

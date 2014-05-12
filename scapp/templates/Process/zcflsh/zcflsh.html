@@ -71,6 +71,11 @@
 				</table>
 			</div>
 			<div class="page-div">
+				{%- if loan_apply.pages %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Process/zcflsh/zcflsh_search/1')">|&lt;&lt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">|&lt;&lt;</span>
+				{%- endif %}
 				{%- if loan_apply.has_prev %}
 					<span style="CURSOR: pointer" onclick="submitForm('content','/Process/zcflsh/zcflsh_search/{{loan_apply.prev_num}}')">&lt;&lt;</span>
 				{%- else %}
@@ -82,6 +87,11 @@
 					<span style="CURSOR: pointer" onclick="submitForm('content','/Process/zcflsh/zcflsh_search/{{loan_apply.next_num}}')">&gt;&gt;</span>
 				{%- else %}
 					<span style="CURSOR: pointer">&gt;&gt;</span>
+				{%- endif %}
+				{%- if loan_apply.pages %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Process/zcflsh/zcflsh_search/{{loan_apply.pages}}')">&gt;&gt;|</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&gt;&gt;|</span>
 				{%- endif %}
 			</div>
 		</div><!--/row-fluid -->

@@ -50,7 +50,7 @@
 							<td>{{obj.business_type_name.type_name}}</td>
 							<td>{{obj.stake}}</td>
 							<td>
-								<input type="button" class="btn btn-warning btn-mini" value="删除"/>
+								<input type="button" class="btn btn-warning btn-mini" value="删除" onclick="top.createForm('/Delete/SC_Manage_Info/{{obj.id}}')"/>
 							</td>
 						</tr>
 						{%- endfor %}															
@@ -178,11 +178,10 @@
 									<span class="errorInfo">证件号码有误</span>
 								</span>
 							</td>										
-							<td class="table-label">发证机关<font class="red">*</font></td>
+							<td class="table-label">发证机关</td>
 							<td>
 								<span id="credentials_org">
 									<input type="text" name="credentials_org" onchange="spryMaxLength(this,64)"/>
-									<span class="textfieldRequiredMsg">不能为空</span>
 									<span class="errorInfo">字符数不得大于64</span>
 								</span>	
 							</td>
@@ -212,7 +211,6 @@
 		//var sprytextfield4 = new Spry.Widget.ValidationTextField("establish_date", "date", {format:"yyyy-mm-dd"});
 		var sprytextfield5 = new Spry.Widget.ValidationTextField("manager_name", "none");
 		var sprytextfield6 = new Spry.Widget.ValidationTextField("credentials_no", "none");
-		var sprytextfield6 = new Spry.Widget.ValidationTextField("credentials_org", "none");
 	</script>
 </body>
 </html>

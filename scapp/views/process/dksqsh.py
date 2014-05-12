@@ -11,6 +11,7 @@ from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
 from scapp.config import PROCESS_STATUS_DKSQ
+from scapp.config import PROCESS_STATUS_DKSQXG
 from scapp.config import PROCESS_STATUS_DKSQSH
 
 from scapp.models import SC_Individual_Customer
@@ -110,6 +111,25 @@ def edit_dksqsh(id):
             "B_loan_officer":request.form['B_loan_officer'],"yunying_loan_officer":request.form['yunying_loan_officer'],
             "modify_user":current_user.id,"modify_date":datetime.datetime.now(),
             "process_status":PROCESS_STATUS_DKSQSH})
+
+        # 事务提交
+        db.session.commit()
+        # 消息闪现
+        flash('保存成功','success')
+    except:
+        # 回滚
+        db.session.rollback()
+        logger.exception('exception')
+        # 消息闪现
+        flash('保存失败','error')
+
+    return redirect("Process/dksqsh/dksqsh")
+
+@app.route('/Process/dksqsh/edit_dksqsh_bk/<int:id>', methods=['POST'])
+def edit_dksqsh_bk(id):
+    try:
+        #保存贷款申请表
+        SC_Loan_Apply.query.filter_by(id=id).update({"process_status":PROCESS_STATUS_DKSQXG})
 
         # 事务提交
         db.session.commit()

@@ -155,20 +155,12 @@ def new_lfdj():
             industry = request.form['industry']
             business_content = request.form['business_content']
 
-            if reception_type == '2':
-                shop_name = request.form['shop_name']
-                period = request.form['period']
-                property_scope = request.form['property_scope']
-                monthly_sales = request.form['monthly_sales']
-                employees = request.form['employees']
-                business_type = request.form['business_type']
-            else:
-                shop_name = ''
-                period = ''
-                property_scope = ''
-                monthly_sales = ''
-                employees = ''
-                business_type = None
+            shop_name = request.form['shop_name']
+            period = request.form['period']
+            property_scope = request.form['property_scope']
+            monthly_sales = request.form['monthly_sales']
+            employees = request.form['employees']
+            business_type = request.form['business_type']
 
             is_need_loan = request.form['is_need_loan']
             if is_need_loan == '1':
@@ -252,20 +244,12 @@ def edit_lfdj(id):
             target_customer.industry = request.form['industry']
             target_customer.business_content = request.form['business_content']
 
-            if request.form['reception_type'] == '2':
-                target_customer.shop_name = request.form['shop_name']
-                target_customer.period = request.form['period']
-                target_customer.property_scope = request.form['property_scope']
-                target_customer.monthly_sales = request.form['monthly_sales']
-                target_customer.employees = request.form['employees']
-                target_customer.business_type = request.form['business_type']
-            else:
-                target_customer.shop_name = ''
-                target_customer.period = ''
-                target_customer.property_scope = ''
-                target_customer.monthly_sales = ''
-                target_customer.employees = ''
-                target_customer.regisiter_type = None
+            target_customer.shop_name = request.form['shop_name']
+            target_customer.period = request.form['period']
+            target_customer.property_scope = request.form['property_scope']
+            target_customer.monthly_sales = request.form['monthly_sales']
+            target_customer.employees = request.form['employees']
+            target_customer.business_type = request.form['business_type']
 
             target_customer.is_need_loan = request.form['is_need_loan']
 

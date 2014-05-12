@@ -559,18 +559,22 @@
 			</table>
 		</div>
 		<span class="point">*为必填字段</span><br/>
-		{%- if loan_apply.process_status == '502' %}
-		<script>
-		document.write("<input type='submit' class='btn btn-info' value='通过' onclick='doSubmit("+PROCESS_STATUS_SPJY_TG+")'/>");
-		</script>
-		{%- else %}
-		<script>
-        document.write("<input type='submit' class='btn btn-info' value='通过' onclick='doSubmit("+PROCESS_STATUS_SPJY_TG+")'/>");
-        document.write("<input type='submit' class='btn btn-info' value='有条件通过' onclick='return check_conditional_pass("+PROCESS_STATUS_SPJY_YTJTG+")'/>");
-		document.write("<input type='submit' class='btn btn-info' value='退回重新调查' onclick='doSubmit("+PROCESS_STATUS_SPJY_CXDC+")'/>");
-		document.write("<input type='submit' class='btn btn-info' value='拒绝' onclick='doSubmit("+PROCESS_STATUS_SPJY_JUJUE+")'/>");
-    	</script>
-    	{%- endif %}
+		{%- if current_user.id == loan_apply.examiner_1 or current_user.id == loan_apply.examiner_2 or current_user.id == loan_apply.approver %}
+			{%- if loan_apply.process_status == '502' %}
+			<script>
+			document.write("<input type='submit' class='btn btn-info' value='通过' onclick='doSubmit("+PROCESS_STATUS_SPJY_TG+")'/>");
+			</script>
+			{%- else %}
+			<script>
+			var urlcxdc = '/Process/fksh/edit_fksh/'+{{loan_apply_id}}+'/'+PROCESS_STATUS_SPJY_CXDC
+			var urljujue = '/Process/fksh/edit_fksh/'+{{loan_apply_id}}+'/'+PROCESS_STATUS_SPJY_JUJUE
+	        document.write("<input type='submit' class='btn btn-info' value='通过' onclick='doSubmit("+PROCESS_STATUS_SPJY_TG+")'/>");
+	        document.write("<input type='submit' class='btn btn-info' value='有条件通过' onclick='return check_conditional_pass("+PROCESS_STATUS_SPJY_YTJTG+")'/>&nbsp");
+			document.write("<input type='button' class='btn btn-info' value='退回重新调查' onclick=parent.createForm(\'"+urlcxdc+"\')>&nbsp");
+			document.write("<input type='button' class='btn btn-info' value='拒绝' onclick=parent.createForm(\'"+urljujue+"\')>");
+	    	</script>
+	    	{%- endif %}
+	    {%- endif %}
     	</br>
 		<input type="button" value="打印非财务情况分析" class="btn btn-info" onclick="window.open('/Process/dqdc/dy_fcw/{{loan_apply_id}}')">
 		<input type="button" value="打印资产负债表" class="btn btn-info" onclick="window.open('/Process/dqdc/dy_zcfzb/{{loan_apply_id}}')">
