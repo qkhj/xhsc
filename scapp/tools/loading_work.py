@@ -12,7 +12,7 @@ class timing():
         script = scriptload()
         monthly = monthly_work()
         daily = daily_work()
-        sched.add_cron_job(script.rise, month='4,7,10,12', day='10', hour='1')
+        sched.add_cron_job(script.rise, month='1,4,7,10', day='10', hour='1')
         sched.add_cron_job(script.kpi, month='1-12', day='1', hour='2')  #每月1号凌晨2点创建当月评估表
         sched.add_cron_job(script.total, month='1-12', day='1', hour='2')  #每月1号凌晨2点创建上月余额规模
         sched.add_cron_job(script.perform, month='1-12', day='1', hour='3')  #每月1号凌晨3点初始化当月业绩表
