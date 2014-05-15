@@ -9,11 +9,14 @@ from scapp.models import View_Bank_Loans_Main
 import datetime,time,xlwt,re
 from scapp.tools.export_excel import export_excel
 ezxf=xlwt.easyxf #样式转换
-	
+
+from scapp.models import SC_Loan_Product
+
 # 贷款根据状态分类——5. 贷款余额 
 @app.route('/Report/dkgjztfl_5', methods=['GET'])
 def dkgjztfl_5():
-    return render_template("Report/dkgjztfl_5.html")
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Report/dkgjztfl_5.html",loan_product=loan_product)
 
 # 贷款根据状态分类——5. 贷款余额 
 @app.route('/Report/dkgjztfl_5_search/<int:page>', methods=['POST'])
@@ -27,8 +30,11 @@ def dkgjztfl_5_search(page):
         sql += " and customer_name like '%"+customer_name+"%'"
 
     bank_loans_main = View_Bank_Loans_Main.query.filter(sql).paginate(page, per_page = PER_PAGE)
+    
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Report/dkgjztfl_5_search.html",loan_type=loan_type,customer_name=customer_name,
-        bank_loans_main=bank_loans_main)
+        bank_loans_main=bank_loans_main,loan_product=loan_product)
 
 # 贷款根据状态分类——5. 贷款余额--导出
 @app.route('/Report/dkgjztfl_5_export', methods=['POST'])

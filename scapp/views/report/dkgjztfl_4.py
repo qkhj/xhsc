@@ -10,11 +10,14 @@ from scapp.models import View_Bank_Loans_Main
 import datetime,time,xlwt,re
 from scapp.tools.export_excel import export_excel
 ezxf=xlwt.easyxf #样式转换
-	
+
+from scapp.models import SC_Loan_Product
+
 # 贷款根据状态分类——4. 到期终止的贷款 
 @app.route('/Report/dkgjztfl_4', methods=['GET'])
 def dkgjztfl_4():
-    return render_template("Report/dkgjztfl_4.html")
+	loan_product = SC_Loan_Product.query.all()
+	return render_template("Report/dkgjztfl_4.html",loan_product=loan_product)
 
 # 贷款根据状态分类——4. 到期终止的贷款 
 @app.route('/Report/dkgjztfl_4_search/<int:page>', methods=['POST'])

@@ -46,10 +46,13 @@ from scapp.models.performance.sc_parameter_configure import SC_parameter_configu
 
 from scapp import app
 
+from scapp.models import SC_Loan_Product
+
 # 贷款放款
 @app.route('/Process/dkfk/dkfk', methods=['GET'])
 def Process_dkfk():
-    return render_template("Process/dkfk/dkfk_search.html")
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Process/dkfk/dkfk_search.html",loan_product=loan_product)
 	
 # 贷款放款——编辑放款
 @app.route('/Process/dkfk/dkfk_search/<int:page>', methods=['GET','POST'])
@@ -69,7 +72,10 @@ def dkfk_search(page):
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
 
     loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
-    return render_template("Process/dkfk/dkfk.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
+    
+    loan_product = SC_Loan_Product.query.all()
+    
+    return render_template("Process/dkfk/dkfk.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type,loan_product=loan_product)
 
 # 贷款放款——跳转到编辑放款(放款信息)
 @app.route('/Process/dkfk/goto_edit_dkfk/<int:id>', methods=['GET'])

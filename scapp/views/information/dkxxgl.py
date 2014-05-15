@@ -34,12 +34,15 @@ from scapp.models.credit_data.sc_accounts_list import SC_Accounts_List
 from scapp.config import PER_PAGE
 from scapp.models import View_Query_Loan
 
+from scapp.models import SC_Loan_Product
+
 from scapp import app
 
 # 贷款信息管理
 @app.route('/Information/dkxxgl', methods=['GET'])
 def dkxxgl():
-    return render_template("Information/dkxxgl_search.html")
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Information/dkxxgl_search.html",loan_product=loan_product)
 
 # 贷款信息管理
 @app.route('/Information/dkxxgl_search/<int:page>', methods=['POST'])
@@ -54,7 +57,8 @@ def dkxxgl_search(page):
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
 
     loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
-    return render_template("Information/dkxxgl.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Information/dkxxgl.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type,loan_product=loan_product)
 	
 # 贷款信息管理——贷款信息
 @app.route('/Information/dkxx/<int:loan_apply_id>', methods=['GET'])
@@ -69,8 +73,11 @@ def dkxx_jcxx(loan_apply_id):
     apply_info = SC_Apply_Info.query.filter_by(loan_apply_id=loan_apply_id).first()
     loan_purpose = SC_Loan_Purpose.query.order_by("id").all()
     approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=loan_apply_id).first()
+    
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Information/dkxx/jcxx.html",loan_apply=loan_apply,apply_info=apply_info,loan_purpose=loan_purpose,
-        approval_decision=approval_decision)
+        approval_decision=approval_decision,loan_product=loan_product)
 
 # 贷款信息管理用——贷款信息--还款计划
 @app.route('/Information/dkxx/hkjh/<int:loan_apply_id>', methods=['GET'])
@@ -103,12 +110,14 @@ def dkxx_dksqsh_info(belong_customer_type,belong_customer_value,id):
     guarantees_for_others = SC_Guarantees_For_Others.query.filter_by(loan_apply_id=id).all()
     guaranty = SC_Guaranty.query.filter_by(loan_apply_id=id).all()
     guarantees = SC_Guarantees.query.filter_by(loan_apply_id=id).all()
-
+    
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Information/dkxx/dksqsh_info.html",belong_customer_type=belong_customer_type,belong_customer_value=belong_customer_value,
         customer=customer,loan_apply=loan_apply,manager_info=manager_info,financial_affairs=financial_affairs,user=user,
         loan_purpose=loan_purpose,apply_info=apply_info,credit_history=credit_history
         ,co_borrower=co_borrower,guarantees_for_others=guarantees_for_others,guaranty=guaranty
-        ,guarantees=guarantees)
+        ,guarantees=guarantees,loan_product=loan_product)
 
 # 贷款信息管理用——审批信息--调查表--微贷款(基本情况)
 @app.route('/Information/dkxx/dqdcWd_jbqk/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])

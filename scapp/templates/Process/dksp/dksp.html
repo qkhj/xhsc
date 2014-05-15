@@ -54,11 +54,11 @@
 							<td>{{obj.individual_customer_no}}</td>
 							<td>{{obj.individual_customer_name}}</td>
 							{%- endif %}
-							{%- if obj.loan_type == '1' %}	
-								<td>微贷</td>
-							{%- else %}	
-								<td>小额贷</td>
-							{%- endif %}
+							{%- for pro in loan_product %}
+								{%- if obj.loan_type|int == pro.id %}
+								<td>{{pro.product_name}}</td>
+								{%- endif %}
+							{%- endfor %}
 							<td>{{obj.loan_amount}}</td>	
 							<td>{{obj.create_date}}</td>		
 						</tr>
