@@ -31,11 +31,11 @@
 							<td>{{loan_apply.individual_customer_name}}</td>
 						{%- endif %}
 						<td class="table-label">贷款类型</td>
-						{%- if loan_apply.loan_type == '1' %}
-							<td>微贷款</td>		
-						{%- else %}
-							<td>小额贷款</td>		
-						{%- endif %}
+						{%- for obj in loan_product %}
+							{%- if loan_apply.loan_type|int == obj.id %}
+							<td>{{obj.product_name}}</td>
+							{%- endif %}
+						{%- endfor %}
 					</tr>														
 				</table>
 			</div>	

@@ -181,11 +181,11 @@
 					</tr>
 					<tr>
 						<td class="table-label">贷款类型</td>
-						{%- if view_query_loan.loan_type == '1' %}
-							<td colspan="3"><span id="">微贷</span></td>	
-						{%- else %}
-							<td colspan="3"><span id="">小额贷</span></td>	
-						{%- endif %}								
+						{%- for obj in loan_product %}
+							{%- if view_query_loan.loan_type|int == obj.id %}
+							<td colspan="3">{{obj.product_name}}</td>
+							{%- endif %}
+						{%- endfor %}								
 					</tr>
 					<tr>
 						<td class="table-label">贷款期限</td>

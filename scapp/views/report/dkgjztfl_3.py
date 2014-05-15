@@ -9,11 +9,14 @@ from scapp.models import View_Loan_Change_Record
 import datetime,time,xlwt,re
 from scapp.tools.export_excel import export_excel
 ezxf=xlwt.easyxf #样式转换
-	
+
+from scapp.models import SC_Loan_Product
+
 # 贷款根据状态分类——3. 贷后变更的贷款 
 @app.route('/Report/dkgjztfl_3', methods=['GET'])
 def dkgjztfl_3():
-    return render_template("Report/dkgjztfl_3.html")
+	loan_product = SC_Loan_Product.query.all()
+	return render_template("Report/dkgjztfl_3.html",loan_product=loan_product)
 
 # 贷款根据状态分类——3. 贷后变更的贷款 
 @app.route('/Report/dkgjztfl_3_search/<int:page>', methods=['POST'])

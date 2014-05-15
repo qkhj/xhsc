@@ -8,7 +8,7 @@ import datetime
 class SC_Loan_Apply(db.Model):
     __tablename__ = 'sc_loan_apply' 
     id = db.Column(db.Integer, primary_key=True)
-    loan_type = db.Column(db.Integer) #贷款类型 微贷:1 小额贷:2
+    loan_type = db.Column(db.Integer) #贷款类型
     belong_customer_type = db.Column(db.String(32)) #客户类型 Company 或者 Individual
     belong_customer_value = db.Column(db.Integer) #客户id
     customer_name = db.Column(db.String(128)) #处理状态

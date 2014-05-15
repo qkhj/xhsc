@@ -38,16 +38,17 @@
 				<tr>				
 					<td class="table-label">贷款类型</td>
 					<td>
-						<select name="loan_type">
-							<option value="2">小额贷</option>	
-							<option value="1">微贷</option>								
+						<select name="loan_type" onchange="dyn_check(this)">
+							{%- for obj in loan_product %}
+								<option value="{{obj.id}}">{{obj.product_name}}</option>
+							{%- endfor %}							
 						</select>
 					</td>
 					<td class="table-label">风险类型</td>
 					<td>
 						<select name="risk_level" style="width:200px">
 							{%- for obj in risk_level %}
-							<option value={{obj.id}}>{{obj.type_name}}：{{obj.type_value}}</option>
+							<option value={{obj.id}}>{{obj.type_name}}</option>
 							{%- endfor %}
 						</select>
 					</td>
@@ -271,10 +272,11 @@
 					<td class="table-label">贷款金额（元）<font class="red">*</font></td>
 					<td>
 						<span id="loan_amount_num">	
-							<input type="text" name="loan_amount_num" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11"/>
+							<input type="text" name="loan_amount_num" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" 
+								onchange="check(this,{{loan_product[0].min_amount|int}},{{loan_product[0].max_amount|int}})"/>
 							<span class="textfieldRequiredMsg">必填</span><br/>
 							<span id="loan_amount_num_hj" class="je">人民币</span>	
-							<span class="errorInfo"></span>							
+							<span id="loan_amount_num_errorInfo" class="errorInfo">请输入{{loan_product[0].min_amount}}-{{loan_product[0].max_amount}}的数</span>						
 						</span>							
 					</td>	
 					<td class="table-label">贷款期限（月）<font class="red">*</font></td>
@@ -704,6 +706,21 @@
 			}
 		    else
 		    	alert("页面中有错误，请修改后再进行删除操作！")
+		}
+		function dyn_check(obj){
+			var index = obj.selectedIndex;
+			var min_amount = {{loan_product[0].min_amount}}
+			var max_amount = {{loan_product[0].max_amount}}
+			var i = 0;
+			{%- for obj in loan_product %}
+				if(index == i){
+					min_amount = {{obj.min_amount}}
+					max_amount = {{obj.max_amount}}
+				}
+				i++
+			{%- endfor %}
+			$("input[name='loan_amount_num']").attr("onchange","check(this,"+min_amount+","+max_amount+")");
+			$("#loan_amount_num_errorInfo").html("请输入"+min_amount+"-"+max_amount+"的数") 
 		}
 	</script>
 </body>

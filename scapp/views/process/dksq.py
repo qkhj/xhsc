@@ -44,6 +44,8 @@ from scapp.models import View_Query_Loan
 
 from scapp import app
 
+from scapp.models import SC_Loan_Product
+
 # 贷款申请
 @app.route('/Process/dksq/dksq', methods=['GET'])
 def Process_dksq():
@@ -96,9 +98,11 @@ def goto_new_dksq_info(belong_customer_type,belong_customer_value):
     loan_purpose = SC_Loan_Purpose.query.order_by("id").all()
     risk_level = SC_Risk_Level.query.order_by("id").all()
 
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Process/dksq/new_dksq_info.html",belong_customer_type=belong_customer_type,
         customer=customer,manager_info=manager_info,financial_affairs=financial_affairs,
-        loan_purpose=loan_purpose,risk_level=risk_level)
+        loan_purpose=loan_purpose,risk_level=risk_level,loan_product=loan_product)
 
 # 新增贷款申请信息
 @app.route('/Process/dksq/new_dksq/<belong_customer_type>/<int:belong_customer_value>', methods=['POST'])
@@ -238,11 +242,13 @@ def goto_edit_dksq_info(belong_customer_type,belong_customer_value,id):
     guaranty = SC_Guaranty.query.filter_by(loan_apply_id=id).all()
     guarantees = SC_Guarantees.query.filter_by(loan_apply_id=id).all()
         
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Process/dksq/edit_dksq_info.html",belong_customer_type=belong_customer_type,belong_customer_value=belong_customer_value,
         customer=customer,loan_apply=loan_apply,manager_info=manager_info,financial_affairs=financial_affairs,
         loan_purpose=loan_purpose,risk_level=risk_level,apply_info=apply_info,credit_history=credit_history
         ,co_borrower=co_borrower,guarantees_for_others=guarantees_for_others,guaranty=guaranty
-        ,guarantees=guarantees)
+        ,guarantees=guarantees,loan_product=loan_product)
 
 # 编辑贷款申请信息
 @app.route('/Process/dksq/edit_dksq/<int:id>', methods=['POST'])

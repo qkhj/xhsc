@@ -46,14 +46,14 @@
 				<tr>				
 					<td class="table-label">贷款类型</td>
 					<td>
-						<select name="loan_type">
-							{%- if loan_apply.loan_type == '1' %}
-								<option value="1" selected>微贷</option>
-								<option value="2">小额贷</option>
-							{%- else %}
-								<option value="1">微贷</option>
-								<option value="2" selected>小额贷</option>
-							{%- endif %}								
+						<select name="loan_type" onchange="dyn_check(this)">
+							{%- for obj in loan_product %}
+								{%- if loan_apply.loan_type|int == obj.id %}
+								<option value="{{obj.id}}" selected>{{obj.product_name}}</option>
+								{%- else %}
+								<option value="{{obj.id}}">{{obj.product_name}}</option>
+								{%- endif %}
+							{%- endfor %}							
 						</select>
 					</td>
 					<td class="table-label">风险类型</td>
@@ -61,9 +61,9 @@
 						<select name="risk_level" style="width:200px">
 							{%- for obj in risk_level %}
 								{%- if loan_apply.risk_level == obj.id %}
-									<option value="{{obj.id}}" selected>{{obj.type_name}}：{{obj.type_value}}</option>
+									<option value="{{obj.id}}" selected>{{obj.type_name}}</option>
 								{%- else %}
-									<option value="{{obj.id}}">{{obj.type_name}}：{{obj.type_value}}</option>
+									<option value="{{obj.id}}">{{obj.type_name}}</option>
 								{%- endif %}
 							{%- endfor %}
 						</select>
@@ -287,12 +287,17 @@
 				<tr>
 					<td class="table-label">贷款金额（元）<font class="red">*</font></td>
 					<td>
-						<span id="loan_amount_num">	
-							<input type="text" name="loan_amount_num" value="{{apply_info.loan_amount_num}}" onkeyup="setJe(this);" onclick="setJe(this)" maxlength="11"/>
-							<span class="textfieldRequiredMsg">不能为空</span><br/>
-							<span id="loan_amount_num_hj" class="je">人民币</span>	
-							<span class="errorInfo"></span>							
-						</span>	
+						{%- for obj in loan_product %}
+							{%- if loan_apply.loan_type|int == obj.id %}
+								<span id="loan_amount_num">	
+									<input type="text" name="loan_amount_num" value="{{apply_info.loan_amount_num}}" onkeyup="setJe(this);" onclick="setJe(this)" maxlength="11" 
+										onchange="check(this,{{obj.min_amount|int}},{{obj.max_amount|int}})"/>
+									<span class="textfieldRequiredMsg">不能为空</span><br/>
+									<span id="loan_amount_num_hj" class="je">人民币</span>	
+									<span id="loan_amount_num_errorInfo" class="errorInfo">请输入{{obj.min_amount}}-{{obj.max_amount}}的数</span>						
+								</span>
+							{%- endif %}	
+						{%- endfor %}
 					</td>	
 					<td class="table-label">贷款期限（月）<font class="red">*</font></td>
 					<td>
@@ -1092,6 +1097,21 @@
 			}
 		    else
 		    	alert("页面中有错误，请修改后再进行删除操作！")
+		}
+		function dyn_check(obj){
+			var index = obj.selectedIndex;
+			var min_amount = {{loan_product[0].min_amount}}
+			var max_amount = {{loan_product[0].max_amount}}
+			var i = 0;
+			{%- for obj in loan_product %}
+				if(index == i){
+					min_amount = {{obj.min_amount}}
+					max_amount = {{obj.max_amount}}
+				}
+				i++
+			{%- endfor %}
+			$("input[name='loan_amount_num']").attr("onchange","check(this,"+min_amount+","+max_amount+")");
+			$("#loan_amount_num_errorInfo").html("请输入"+min_amount+"-"+max_amount+"的数") 
 		}
 	</script>
 </body>
