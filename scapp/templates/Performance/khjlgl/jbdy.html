@@ -43,32 +43,32 @@
 								{%- if obj.priviliege_access_value %}
 									<td><select onchange="setAction('content','/Performance/khjlgl/edit',
 										{{obj.user_id}},this.value)">
-										{%- if obj.priviliege_access_value=='1' %}
+										{%- if obj.priviliege_access_value==1 %}
 											<option selected value="1">实习客户经理</option>
 										{%- else%}
 											<option value="1">实习客户经理</option>
 										{%- endif%}
-										{%- if obj.priviliege_access_value=='2' %}
+										{%- if obj.priviliege_access_value==2 %}
 											<option selected value="2">初级客户经理</option>
 										{%- else%}
 											<option value="2">初级客户经理</option>
 										{%- endif%}
-										{%- if obj.priviliege_access_value=='3' %}
+										{%- if obj.priviliege_access_value==3 %}
 											<option selected value="3">中级客户经理</option>
 										{%- else%}
 											<option value="3">中级客户经理</option>
 										{%- endif%}
-										{%- if obj.priviliege_access_value=='4' %}
+										{%- if obj.priviliege_access_value==4 %}
 											<option selected value="4">高级客户经理</option>
 										{%- else%}
 											<option value="4">高级客户经理</option>
 										{%- endif%}
-										{%- if obj.priviliege_access_value=='5' %}
+										{%- if obj.priviliege_access_value==5 %}
 											<option selected value="5">客户经理主管</option>
 										{%- else%}
 											<option value="5">客户经理主管</option>
 										{%- endif%}
-										{%- if obj.priviliege_access_value=='6' %}
+										{%- if obj.priviliege_access_value==6 %}
 											<option selected value="6">高级客户经理主管</option>
 										{%- else%}
 											<option value="6">高级客户经理主管</option>
