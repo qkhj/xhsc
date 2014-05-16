@@ -42,10 +42,13 @@ from scapp.models import View_Query_Loan
 
 from scapp import app
 
+from scapp.models import SC_Loan_Product
+
 # 贷款审批
 @app.route('/Process/dksp/dksp', methods=['GET'])
 def Process_dksp():
-    return render_template("Process/dksp/dksp_search.html")
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Process/dksp/dksp_search.html",loan_product=loan_product)
 	
 # 贷款审批
 @app.route('/Process/dksp/dksp_search/<int:page>', methods=['GET','POST'])
@@ -65,7 +68,10 @@ def dksp_search(page):
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
 
     loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
-    return render_template("Process/dksp/dksp.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
+    
+    loan_product = SC_Loan_Product.query.all()
+    
+    return render_template("Process/dksp/dksp.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type,loan_product=loan_product)
 
 # 跳转到编辑贷款审批信息
 @app.route('/Process/dksp/goto_edit_dksp/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])
@@ -91,9 +97,11 @@ def goto_edit_dksp_info(belong_customer_type,belong_customer_value,id):
     guarantees = SC_Guarantees.query.filter_by(loan_apply_id=id).all()
     riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
 
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Process/dksp/edit_dksp_info.html",
         customer=customer,id=id,loan_apply=loan_apply,loan_purpose=loan_purpose,apply_info=apply_info,
-        co_borrower=co_borrower,guaranty=guaranty,guarantees=guarantees,
+        co_borrower=co_borrower,guaranty=guaranty,guarantees=guarantees,loan_product=loan_product,
         riskanalysis_and_findings=riskanalysis_and_findings,user=user)
 
 # 跳转到编辑贷款审批信息

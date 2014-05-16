@@ -51,13 +51,13 @@
 					<td class="table-label">贷款类型</td>
 					<td>
 						<select name="loan_type" disabled>
-							{%- if loan_apply.loan_type == '1' %}
-								<option value="1" selected>微贷</option>
-								<option value="2">小额贷</option>
-							{%- else %}
-								<option value="1">微贷</option>
-								<option value="2" selected>小额贷</option>
-							{%- endif %}								
+							{%- for obj in loan_product %}
+								{%- if loan_apply.loan_type|int == obj.id %}
+								<option value="{{obj.id}}" selected>{{obj.product_name}}</option>
+								{%- else %}
+								<option value="{{obj.id}}">{{obj.product_name}}</option>
+								{%- endif %}
+							{%- endfor %}								
 						</select>
 					</td>
 				</tr>												

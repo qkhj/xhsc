@@ -48,10 +48,13 @@ from scapp.models import View_Query_Loan
 from scapp import app
 from sqlalchemy.sql import or_ 
 
+from scapp.models import SC_Loan_Product
+
 # 贷前调查
 @app.route('/Process/dqdc/dqdc', methods=['GET'])
 def Process_dqdc():
-    return render_template("Process/dqdc/dqdc_search.html")
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Process/dqdc/dqdc_search.html",loan_product=loan_product)
 	
 # 贷款调查——微贷
 @app.route('/Process/dqdc/dqdc_search/<int:page>', methods=['GET','POST'])
@@ -72,14 +75,20 @@ def dqdc_search(page):
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
 
     loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
-    return render_template("Process/dqdc/dqdc.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
+    
+    loan_product = SC_Loan_Product.query.all()
+    
+    return render_template("Process/dqdc/dqdc.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type,loan_product=loan_product)
 
 # 贷款调查——微贷信息
 @app.route('/Process/dqdc/dqdc_wd/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])
 def dqdc_wd(belong_customer_type,belong_customer_value,id):
     loan_apply = SC_Loan_Apply.query.filter_by(id=id).first()
+    
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Process/dqdc/dqdc_wd.html",loan_apply=loan_apply,belong_customer_type=belong_customer_type,
-        belong_customer_value=belong_customer_value,id=id)
+        belong_customer_value=belong_customer_value,id=id,loan_product=loan_product)
 
 # 贷款调查——微贷(基本情况)
 @app.route('/Process/dqdc/dqdcWd_jbqk/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])
@@ -174,8 +183,11 @@ def edit_dqdcWd_jbqk(id):
 @app.route('/Process/dqdc/dqdc_xed/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])
 def dqdc_xed(belong_customer_type,belong_customer_value,id):
     loan_apply = SC_Loan_Apply.query.filter_by(id=id).first()
+    
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Process/dqdc/dqdc_xed.html",loan_apply=loan_apply,belong_customer_type=belong_customer_type,
-        belong_customer_value=belong_customer_value,id=id)
+        belong_customer_value=belong_customer_value,id=id,loan_product=loan_product)
 
 # 贷款调查——小额贷款(基本情况)
 @app.route('/Process/dqdc/dqdcXed_jbqk/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])

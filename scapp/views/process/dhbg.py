@@ -11,11 +11,13 @@ from scapp.config import logger
 from scapp.config import PER_PAGE
 
 from scapp import app
+from scapp.models import SC_Loan_Product
 
 # 贷后变更搜索
 @app.route('/Process/dhbg/dhbg_search', methods=['GET'])
 def dhbg_search():
-    return render_template("Process/dhbg/dhbg_search.html")
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Process/dhbg/dhbg_search.html",loan_product=loan_product)
 
 # 贷后变更
 @app.route('/Process/dhbg/dhbg', methods=['GET'])

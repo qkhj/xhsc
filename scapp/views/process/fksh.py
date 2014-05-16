@@ -33,10 +33,13 @@ from scapp.models import View_Query_Loan
 from scapp import app
 from sqlalchemy.sql import or_ 
 
+from scapp.models import SC_Loan_Product
+
 # 放款审核
 @app.route('/Process/fksh/fksh', methods=['GET'])
 def Process_fksh():
-    return render_template("Process/fksh/fksh_search.html")
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Process/fksh/fksh_search.html",loan_product=loan_product)
 	
 # 放款审核
 @app.route('/Process/fksh/fksh_search/<int:page>', methods=['GET','POST'])
@@ -62,7 +65,10 @@ def fksh_search(page):
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
 
     loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
-    return render_template("Process/fksh/fksh.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
+    
+    loan_product = SC_Loan_Product.query.all()
+    
+    return render_template("Process/fksh/fksh.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type,loan_product=loan_product)
 
 # 放款审核——跳转到放款审核(放款信息)
 @app.route('/Process/fksh/goto_edit_fksh/<int:id>', methods=['GET'])

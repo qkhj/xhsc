@@ -13,18 +13,27 @@
 	
 </head>
 
-<body>	
+<body onload="setTimeOut();">	
 	<div class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">系统管理</a>/<a href="#">业务参数配置</a>
 		</div>		
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+            {%- if messages %}
+            {%- for category, message in messages %}
+            <div class="alert alert-{{category}}">
+                {{message}}
+            </div>
+            {%- endfor %}
+            {%- endif %}
+        {%- endwith %}
 		<div class="row-fluid">
 			<!-- 一级tab -->
 			<ul id="tags" class="tags">
 				<li class="selectTag"> 
 					<a onclick="selectTag('tagContent0',this);" href="javascript:void(0)">产品设置</a> 
 				</li>
-				<li >
+				<!-- <li >
 					<a onclick="selectTag('tagContent1',this)" href="javascript:void(0)">利率设置</a> 
 				</li>
 				<li>
@@ -38,7 +47,7 @@
 				</li>		
 				<li>
 					<a onClick="selectTag('tagContent5',this)" href="javascript:void(0)">资产质量分类</a>
-				</li>		
+				</li> -->
 			</ul>
 
 			<!-- 一级content -->
@@ -48,6 +57,9 @@
 					<!-- *************产品列表************* -->
 					<div id="content0">
 						<i class="icon-bookmark"></i><span class="titletip">产品列表</span>
+						<div style="margin-bottom:5px;">
+							<a type="button" class="btn btn-info" href="#" onclick="iframe('System/new_cp')">新增</a>					
+						</div>
 						<div style="border:1px solid #94c1dc;">				
 							<table class="table-list" cellspacing="10" id="uesr-list">
 								<thead>
@@ -60,59 +72,21 @@
 									</tr>
 								</thead>
 								<tbody class="center">
+									{%- for obj in loan_product %}
 									<tr onclick="changeColor(this)">
-										<td><a href="#" onclick="changeDiv('content1','content0')">微贷款</a></td>
-										<td>24</td>
-										<td>2000</td>
-										<td>10000</td>
+										<td><a href="#" onclick="iframe('System/edit_cp/{{obj.id}}')">{{obj.product_name}}</a></td>
+										<td>{{obj.max_deadline}}</td>
+										<td>{{obj.min_amount}}</td>
+										<td>{{obj.max_amount}}</td>
 										<td>
-											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
+											<input type="button" class="btn btn-danger btn-mini" value="编辑" onclick="iframe('System/edit_cp/{{obj.id}}')"/>	
 										</td>
-									</tr>
-									<tr onclick="changeColor(this)">
-										<td><a href="#">小额贷款</a></td>							
-										<td>24</td>
-										<td>10000</td>
-										<td>100000</td>
-										<td>
-											<input type="button" class="btn btn-danger btn-mini" value="删除"/>	
-										</td>
-									</tr>						
+									</tr>	
+									{%- endfor %}				
 								</tbody>
 							</table>
 						</div>
 					</div><!-- /产品列表 -->
-					<!-- *************产品信息************* -->
-					<div id="content1" style="display:none;">
-						<i class="icon-bookmark"></i><span class="titletip">产品信息</span>
-						<form>
-							<div style="border:1px solid #94c1dc;">
-								<table class="table-list">
-									<tr>
-										<td class="table-label">产品名称<font class="red">*</font></td>
-										<td><input type="text" value="微贷款"/></td>
-										<td class="table-label">最长期限（月）<font class="red">*</font></td>
-										<td><input type="text" value="24"/></td>
-									</tr>
-									<tr>
-										<td class="table-label">起始金额（元）<font class="red">*</font></td>
-										<td><input type="text" value="2000"/></td>
-										<td class="table-label">终止金额（元）<font class="red">*</font></td>
-										<td><input type="text" value="10000"/></td>
-									</tr>
-									<tr>
-										<td class="table-label">产品说明</td>
-										<td colspan="3">
-											<textarea style="width:95%;">专为解决个人临时性的消费资金困难而发放的期限为半年期和一年期两个档次、金额在5万元（含）以下的人民币短期消费用途贷款申请人须是单位正式干部职工，年龄不超过50岁；月工资额在2000元以上，并以其工资收入作为第一还款来源；贷款起点为2千元，贷款金额不超过贷款申请人月均工资的6倍，且最高不超过5万元。</textarea>
-										</td>
-									</tr>													
-								</table>
-							</div>
-							<span class="point">*为必填字段</span><br/>
-							<input type="submit" class="btn btn-info" value="保存"/>
-							<input type="button" class="btn btn-info" value="返回" onclick="changeDiv('content0','content1')"/>						
-						</form>
-					</div><!-- /产品信息 -->
 				</div>
 					
 <!-- ******************************************第二个标签的内容**************************************** -->

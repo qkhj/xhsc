@@ -13,10 +13,13 @@ import datetime,time,xlwt,re
 from scapp.tools.export_excel import export_excel
 ezxf=xlwt.easyxf #样式转换
 	
+from scapp.models import SC_Loan_Product
+
 # 贷款根据状态分类——2. 拒绝的贷款 
 @app.route('/Report/dkgjztfl_2', methods=['GET'])
 def dkgjztfl_2():
-    return render_template("Report/dkgjztfl_2.html")
+	loan_product = SC_Loan_Product.query.all()
+	return render_template("Report/dkgjztfl_2.html",loan_product=loan_product)
 
 # 贷款根据状态分类——2. 拒绝的贷款 
 @app.route('/Report/dkgjztfl_2_search/<int:page>', methods=['POST'])

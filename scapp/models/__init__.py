@@ -45,6 +45,7 @@ from scapp.models.system.system import SC_Privilege
 from scapp.models.system.system import SC_Menu
 from scapp.models.system.system import SC_Org
 from scapp.models.system.system import SC_Application
+from scapp.models.system.sc_loan_product import SC_Loan_Product
 
 #视图管理
 from scapp.models.views import View_Query_Loan
