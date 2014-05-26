@@ -11,6 +11,7 @@ from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
 from scapp.config import PROCESS_STATUS_DKSQ
+from scapp.config import PROCESS_STATUS_DKSQXG
 
 from scapp.tools.export_excel import export_excel
 
@@ -43,6 +44,8 @@ from scapp.models import View_Query_Loan
 
 from scapp import app
 
+from scapp.models import SC_Loan_Product
+
 # 贷款申请
 @app.route('/Process/dksq/dksq', methods=['GET'])
 def Process_dksq():
@@ -60,7 +63,7 @@ def dksq_search(page):
     sql = ""
     if loan_type != '0':
         sql = "loan_type='"+loan_type+"' and "
-    sql += " marketing_loan_officer="+str(current_user.id)+" and process_status='"+PROCESS_STATUS_DKSQ+"'"
+    sql += " marketing_loan_officer="+str(current_user.id)+" and (process_status='"+PROCESS_STATUS_DKSQ+"' or process_status='"+PROCESS_STATUS_DKSQXG+"')"
 
     if customer_name:
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
@@ -95,9 +98,11 @@ def goto_new_dksq_info(belong_customer_type,belong_customer_value):
     loan_purpose = SC_Loan_Purpose.query.order_by("id").all()
     risk_level = SC_Risk_Level.query.order_by("id").all()
 
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Process/dksq/new_dksq_info.html",belong_customer_type=belong_customer_type,
         customer=customer,manager_info=manager_info,financial_affairs=financial_affairs,
-        loan_purpose=loan_purpose,risk_level=risk_level)
+        loan_purpose=loan_purpose,risk_level=risk_level,loan_product=loan_product)
 
 # 新增贷款申请信息
 @app.route('/Process/dksq/new_dksq/<belong_customer_type>/<int:belong_customer_value>', methods=['POST'])
@@ -236,12 +241,14 @@ def goto_edit_dksq_info(belong_customer_type,belong_customer_value,id):
     guarantees_for_others = SC_Guarantees_For_Others.query.filter_by(loan_apply_id=id).all()
     guaranty = SC_Guaranty.query.filter_by(loan_apply_id=id).all()
     guarantees = SC_Guarantees.query.filter_by(loan_apply_id=id).all()
-
+        
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Process/dksq/edit_dksq_info.html",belong_customer_type=belong_customer_type,belong_customer_value=belong_customer_value,
         customer=customer,loan_apply=loan_apply,manager_info=manager_info,financial_affairs=financial_affairs,
         loan_purpose=loan_purpose,risk_level=risk_level,apply_info=apply_info,credit_history=credit_history
         ,co_borrower=co_borrower,guarantees_for_others=guarantees_for_others,guaranty=guaranty
-        ,guarantees=guarantees)
+        ,guarantees=guarantees,loan_product=loan_product)
 
 # 编辑贷款申请信息
 @app.route('/Process/dksq/edit_dksq/<int:id>', methods=['POST'])
@@ -295,7 +302,7 @@ def edit_dksq(id):
         remark_list = request.form.getlist('remark')
         # 循环获取表单
         for i in range(len(name_list)):
-            SC_Co_Borrower(loan_apply.id,name_list[i],relationship_list[i],
+            SC_Co_Borrower(id,name_list[i],relationship_list[i],
                 id_number_list[i],phone_list[i],main_business_list[i],
                 address_list[i],major_assets_list[i],monthly_income_list[i],
                 home_addr_list[i],hj_addr_list[i],home_list[i],remark_list[i]).add()
@@ -331,18 +338,29 @@ def edit_dksq(id):
         SC_Guarantees.query.filter_by(loan_apply_id=id).delete()
         db.session.flush()
         
+        #保存担保信息
         name_db_list = request.form.getlist('name_db')
         address_db_list = request.form.getlist('address_db')
         id_number_db_list = request.form.getlist('id_number_db')
         workunit_db_list = request.form.getlist('workunit_db')
         phone_db_list = request.form.getlist('phone_db')
         relationship_db_list = request.form.getlist('relationship_db')
+        major_assets_db_list = request.form.getlist('major_assets_db')
+        monthly_income_db_list = request.form.getlist('monthly_income_db')
+        home_addr_db_list = request.form.getlist('home_addr_db')
+        hj_addr_db_list = request.form.getlist('hj_addr_db')
+        home_db_list = request.form.getlist('home_db')
+        remark_db_list = request.form.getlist('remark_db')
         # 循环获取表单
         for i in range(len(name_db_list)):
             SC_Guarantees(id,name_db_list[i],address_db_list[i],
                 id_number_db_list[i],workunit_db_list[i],phone_db_list[i],
-                relationship_db_list[i]).add()
-
+                relationship_db_list[i],major_assets_db_list[i],monthly_income_db_list[i],
+                home_addr_db_list[i],hj_addr_db_list[i],home_db_list[i],remark_db_list[i]).add()
+        
+        #保存贷款申请表
+        SC_Loan_Apply.query.filter_by(id=id).update({"process_status":PROCESS_STATUS_DKSQ})
+    
         # 事务提交
         db.session.commit()
         # 消息闪现

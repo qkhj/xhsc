@@ -55,7 +55,7 @@
 							<td>{{obj.mortgage_amount}}</td>
 							<td>{{obj.mortgage_object}}</td>
 							<td>
-								<input type="button" class="btn btn-warning btn-mini" value="删除"/>
+								<input type="button" class="btn btn-warning btn-mini" value="删除" onclick="top.createForm('/Delete/SC_Asset_Info/{{obj.id}}')"/>
 							</td>
 						</tr>	
 						{%- endfor %}	

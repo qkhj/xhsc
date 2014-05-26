@@ -37,9 +37,11 @@ unopath = 'C:\PROGRA~1\OPENOF~1\program'
 openofficepath = 'C:\PROGRA~1\OPENOF~1\program\python.exe'
 
 PROCESS_STATUS_DKSQ = '101' #1.新申请
+PROCESS_STATUS_DKSQXG = '102' #1.新申请被退回修改的
 PROCESS_STATUS_DKSQSH = '201' #2.分配A、B、运营岗
 PROCESS_STATUS_DKSQSH_JUJUE = '202' #2.申请被拒绝
 PROCESS_STATUS_DQDC = '301' #3.已分配/待调查
+PROCESS_STATUS_DQDCXG = '302' #3.已分配/待调查被退回修改的
 PROCESS_STATUS_DKSP = '401' #4.已分配审贷会成员
 PROCESS_STATUS_DKSP_JUJUE = '402' #4.调查被拒绝
 PROCESS_STATUS_SPJY_TG = '501' #5.已审批通过

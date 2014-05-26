@@ -11,6 +11,7 @@ from scapp import db
 from scapp.config import logger
 from scapp.config import PER_PAGE
 from scapp.config import PROCESS_STATUS_DQDC
+from scapp.config import PROCESS_STATUS_DQDCXG
 from scapp.config import PROCESS_STATUS_DKSP
 
 from scapp.models import SC_Individual_Customer
@@ -41,10 +42,13 @@ from scapp.models import View_Query_Loan
 
 from scapp import app
 
+from scapp.models import SC_Loan_Product
+
 # 贷款审批
 @app.route('/Process/dksp/dksp', methods=['GET'])
 def Process_dksp():
-    return render_template("Process/dksp/dksp_search.html")
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Process/dksp/dksp_search.html",loan_product=loan_product)
 	
 # 贷款审批
 @app.route('/Process/dksp/dksp_search/<int:page>', methods=['GET','POST'])
@@ -64,7 +68,10 @@ def dksp_search(page):
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
 
     loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
-    return render_template("Process/dksp/dksp.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
+    
+    loan_product = SC_Loan_Product.query.all()
+    
+    return render_template("Process/dksp/dksp.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type,loan_product=loan_product)
 
 # 跳转到编辑贷款审批信息
 @app.route('/Process/dksp/goto_edit_dksp/<belong_customer_type>/<int:belong_customer_value>/<int:id>', methods=['GET'])
@@ -90,9 +97,11 @@ def goto_edit_dksp_info(belong_customer_type,belong_customer_value,id):
     guarantees = SC_Guarantees.query.filter_by(loan_apply_id=id).all()
     riskanalysis_and_findings = SC_Riskanalysis_And_Findings.query.filter_by(loan_apply_id=id).first()
 
+    loan_product = SC_Loan_Product.query.all()
+    
     return render_template("Process/dksp/edit_dksp_info.html",
         customer=customer,id=id,loan_apply=loan_apply,loan_purpose=loan_purpose,apply_info=apply_info,
-        co_borrower=co_borrower,guaranty=guaranty,guarantees=guarantees,
+        co_borrower=co_borrower,guaranty=guaranty,guarantees=guarantees,loan_product=loan_product,
         riskanalysis_and_findings=riskanalysis_and_findings,user=user)
 
 # 跳转到编辑贷款审批信息
@@ -104,6 +113,26 @@ def edit_dksp(loan_apply_id):
         loan_apply.examiner_2 = request.form['examiner_2']
         loan_apply.approver = request.form['approver']
         loan_apply.process_status = PROCESS_STATUS_DKSP
+
+        # 事务提交
+        db.session.commit()
+        # 消息闪现
+        flash('保存成功','success')
+    except:
+        # 回滚
+        db.session.rollback()
+        logger.exception('exception')
+        # 消息闪现
+        flash('保存失败','error')
+
+    return redirect("Process/dksp/dksp")
+
+# 跳转到编辑贷款审批信息
+@app.route('/Process/dksp/edit_dksp_bk/<int:loan_apply_id>', methods=['POST'])
+def edit_dksp_bk(loan_apply_id):
+    try:
+        #保存贷款申请表
+        SC_Loan_Apply.query.filter_by(id=loan_apply_id).update({"process_status":PROCESS_STATUS_DQDCXG})
 
         # 事务提交
         db.session.commit()

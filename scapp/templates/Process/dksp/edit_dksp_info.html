@@ -45,11 +45,11 @@
 					<td class="table-label">客户名称</td>
 					<td>{{loan_apply.customer_name}}</td>
 					<td class="table-label">贷款类型</td>
-					{%- if loan_apply.loan_type == '1' %}
-					<td>微贷</td>
-					{%- else %}
-					<td>小额贷</td>
-					{%- endif %}
+					{%- for obj in loan_product %}
+						{%- if loan_apply.loan_type|int == obj.id %}
+						<td>{{obj.product_name}}</td>
+						{%- endif %}
+					{%- endfor %}
 				</tr>															
 			</table>
 		</div>	
@@ -601,11 +601,9 @@
 								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 								<div style="border:1px solid #94c1dc;">
 									<table class="table-list">
-										<tr>
-											<td class="table-label">客户经理编号</td>
-											<td><input type="text"/></td>	
+										<tr>	
 											<td class="table-label">客户经理名称</td>
-											<td><input type="text"/></td>	
+											<td><input type="text" onchange="search(this)"/></td>	
 										</tr>
 									</table>
 								</div>																		
@@ -626,7 +624,7 @@
 											<tr>
 												<td><input type="radio" name="xdy" onclick="get_name(this,'examiner_1_name','examiner_1');" onblur="hiddenInput('yz_examiner_1',this)"/></td>	
 												<td>{{obj.id}}</td>												
-												<td>{{obj.real_name}}</td>												
+												<td name="search">{{obj.real_name}}</td>												
 											</tr>		
 											{%- endfor %}									
 										</tbody>
@@ -647,11 +645,9 @@
 								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 								<div style="border:1px solid #94c1dc;">
 									<table class="table-list">
-										<tr>
-											<td class="table-label">客户经理编号</td>
-											<td><input type="text"/></td>	
+										<tr>	
 											<td class="table-label">客户经理名称</td>
-											<td><input type="text"/></td>	
+											<td><input type="text" onchange="search(this)"/></td>	
 										</tr>
 									</table>
 								</div>																		
@@ -672,7 +668,7 @@
 											<tr>
 												<td><input type="radio" name="xdy" onclick="get_name(this,'examiner_2_name','examiner_2');" onblur="hiddenInput('yz_examiner_2',this)"/></td>	
 												<td>{{obj.id}}</td>												
-												<td>{{obj.real_name}}</td>												
+												<td name="search">{{obj.real_name}}</td>										
 											</tr>		
 											{%- endfor %}									
 										</tbody>
@@ -699,11 +695,9 @@
 								<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 								<div style="border:1px solid #94c1dc;">
 									<table class="table-list">
-										<tr>
-											<td class="table-label">客户经理编号</td>
-											<td><input type="text"/></td>	
+										<tr>	
 											<td class="table-label">客户经理名称</td>
-											<td><input type="text"/></td>	
+											<td><input type="text" onchange="search(this)"/></td>	
 										</tr>
 									</table>
 								</div>																		
@@ -724,7 +718,7 @@
 											<tr>
 												<td><input type="radio" name="xdy" onclick="get_name(this,'approver_name','approver');" onblur="hiddenInput('yz_approver',this)"/></td>	
 												<td>{{obj.id}}</td>												
-												<td>{{obj.real_name}}</td>												
+												<td name="search">{{obj.real_name}}</td>											
 											</tr>		
 											{%- endfor %}									
 										</tbody>
@@ -736,7 +730,11 @@
 				</table>
 			</div>
 			<span class="point">*为必填字段</span><br/>
-			<input type="submit" class="btn btn-info" value="提交"/>								
+			<input type="submit" class="btn btn-info" value="提交"/>		
+			<script type="text/javascript">
+				var url = '/Process/dksp/edit_dksp_bk/{{loan_apply.id}}'
+				document.write("<input type='button' class='btn btn-info' value='退回修改' onclick=parent.createForm(\'"+url+"\')>");
+			</script>						
 		</form>				
 	</div>
 	<script src="/static/js/jquery-1.7.2.min.js"></script>

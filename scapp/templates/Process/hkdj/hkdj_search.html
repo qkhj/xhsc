@@ -31,8 +31,9 @@
 							<td>
 								<select name="loan_type">
 									<option value="0">---全部---</option>
-									<option value="2">小额贷</option>	
-									<option value="1">微贷</option>								
+									{%- for obj in loan_product %}
+										<option value="{{obj.id}}">{{obj.product_name}}</option>
+									{%- endfor %}							
 								</select>
 							</td>	
 							<td class="table-label">客户名称</td>
@@ -65,11 +66,9 @@
 									<i class="icon-bookmark"></i><span class="titletip">客户经理搜索</span>
 									<div style="border:1px solid #94c1dc;">
 										<table class="table-list">
-											<tr>
-												<td class="table-label">客户经理编号</td>
-												<td><input type="text"/></td>	
+											<tr>	
 												<td class="table-label">客户经理名称</td>
-												<td><input type="text"/></td>	
+												<td><input type="text" onchange="search(this)"/></td>	
 											</tr>
 										</table>
 									</div>																		
@@ -99,7 +98,7 @@
 												<tr>
 													<td><input type="radio" name="xdy" onclick="get_name(this,'manager_name','manager');"/></td>		
 													<td>{{obj.id}}</td>												
-													<td>{{obj.real_name}}</td>												
+													<td name="search">{{obj.real_name}}</td>											
 												</tr>		
 												{%- endfor %}											
 											</tbody>

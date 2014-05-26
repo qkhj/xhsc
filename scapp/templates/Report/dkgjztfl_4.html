@@ -30,8 +30,9 @@
 							<td>
 								<select name="loan_type">
 									<option value="0">---全部---</option>
-									<option value="2">小额贷</option>	
-									<option value="1">微贷</option>								
+									{%- for obj in loan_product %}
+										<option value="{{obj.id}}">{{obj.product_name}}</option>
+									{%- endfor %}							
 								</select>
 							</td>
 						</tr>								

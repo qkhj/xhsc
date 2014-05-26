@@ -57,11 +57,11 @@
 							<td>{{obj.individual_customer_no}}</td>
 							<td>{{obj.individual_customer_name}}</td>
 							{%- endif %}
-							{%- if obj.loan_type == '1' %}	
-								<td>微贷</td>
-							{%- else %}	
-								<td>小额贷</td>
-							{%- endif %}
+							{%- for pro in loan_product %}
+								{%- if obj.loan_type|int == pro.id %}
+								<td>{{pro.product_name}}</td>
+								{%- endif %}
+							{%- endfor %}
 							<td>{{obj.amount}}</td>	
 							<td>{{obj.create_date}}</td>
 							<td>{{obj.create_date}}</td>	
@@ -76,6 +76,11 @@
 				</table>
 			</div>
 			<div class="page-div">
+				{%- if loan_apply.pages %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Process/hkdj/hkdj_search/1')">|&lt;&lt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">|&lt;&lt;</span>
+				{%- endif %}
 				{%- if loan_apply.has_prev %}
 					<span style="CURSOR: pointer" onclick="submitForm('content','/Process/hkdj/hkdj_search/{{loan_apply.prev_num}}')">&lt;&lt;</span>
 				{%- else %}
@@ -87,6 +92,11 @@
 					<span style="CURSOR: pointer" onclick="submitForm('content','/Process/hkdj/hkdj_search/{{loan_apply.next_num}}')">&gt;&gt;</span>
 				{%- else %}
 					<span style="CURSOR: pointer">&gt;&gt;</span>
+				{%- endif %}
+				{%- if loan_apply.pages %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Process/hkdj/hkdj_search/{{loan_apply.pages}}')">&gt;&gt;|</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&gt;&gt;|</span>
 				{%- endif %}
 			</div>
 		</div><!--/row-fluid -->

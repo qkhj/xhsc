@@ -47,7 +47,7 @@
 							<td>{{obj.modify_date}}</td>
 							<td>{{obj.modify_user}}</td>										
 							<td>
-								<input type="button" class="btn btn-warning btn-mini" value="删除"/>
+								<input type="button" class="btn btn-warning btn-mini" value="删除" onclick="top.createForm('/Delete/SC_Other_Info/{{obj.id}}')"/>
 							</td>
 						</tr>	
 						{%- endfor %}										

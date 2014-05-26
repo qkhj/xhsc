@@ -30,7 +30,11 @@
 							<td class="table-label">客户名称</td>
 							<td>{{loan_apply.customer_name}}</td>
 							<td class="table-label">贷款类型</td>
-							<td>微贷款</td>
+							{%- for obj in loan_product %}
+								{%- if loan_apply.loan_type|int == obj.id %}
+								<td>{{obj.product_name}}</td>
+								{%- endif %}
+							{%- endfor %}
 						</tr>														
 					</table>
 				</div>														

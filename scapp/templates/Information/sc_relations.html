@@ -47,7 +47,7 @@
 							<td>{{obj.relation_type_name.type_name}}</td>
 							<td>{{obj.relation_describe}}</td>
 							<td>
-								<input type="button" class="btn btn-warning btn-mini" value="删除"/>
+								<input type="button" class="btn btn-warning btn-mini" value="删除" onclick="top.createForm('/Delete/SC_Relations/{{obj.id}}')"/>
 							</td>
 						</tr>	
 						{%- endfor %}									
@@ -78,11 +78,9 @@
 									<i class="icon-bookmark"></i><span class="titletip">客户搜索</span>
 									<div style="border:1px solid #94c1dc;">
 										<table class="table-list">
-											<tr>
-												<td class="table-label">客户编号</td>
-												<td><input type="text"/></td>	
-												<td class="table-label">客户名称</td>
-												<td><input type="text"/></td>	
+											<tr>	
+												<td class="table-label">客户经理名称</td>
+												<td><input type="text" onchange="search(this)"/></td>	
 											</tr>
 										</table>
 									</div>																		
@@ -103,7 +101,7 @@
 												<tr>
 													<td><input type="radio" name="xdy" onclick="get_name(this,'relation_name','relation_no');spryMaxLengthID('manager_name','manager_name_spay',11);"/></td>	
 													<td>{{obj.customer_no}}</td>
-													<td>{{obj.customer_name}}</td>									
+													<td name="search">{{obj.customer_name}}</td>									
 												</tr>	
 												{%- endfor %}										
 											</tbody>
