@@ -319,13 +319,68 @@
 				<tr>
 					<td class="table-label">毛利润/成本交叉检验
 						<input type="hidden" name="type_1" value="1">
-						<input type="hidden" name="name_1" value="毛利润/成本交叉检验">
+						<input type="hidden" name="name_1" value="毛利润/成本交叉检验"><br/>
+						<input type="button" name="" value="录入详细数据" class="btn btn-info" onclick="changeAction(this)">
 					</td>
-					<td colspan="6">
-						<span>
+					<td colspan="6">						
+						<div id="jcjy1">
 							<textarea name="value_1" onchange="spryMaxLength(this,2048)"></textarea>
 							<span class="errorInfo">字符数不得大于2048</span>
-						</span>
+						</div>						
+						<div style="display:none;" id="jcjy2">	
+							<input type="button" value="+" onclick="addTd2('tableAll','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd2('dqdcXed_jcjy')" class="btn btn-info btn-mini"/>	
+							<div class="divBorder">
+								<div id="tableAll">		
+									<table class="table-list">
+										<tr>
+											<th style="width:20%;">名称</th>
+											<th style="width:20%;">进价</th>
+											<th style="width:20%;">销售价</th>
+											<th style="width:20%;">占比</th>
+											<th style="width:20%;">毛利</th>
+										</tr>	
+									</table>
+									<table class="table-list" id="table0" rule="block">
+										<tr>
+											<td style="width:20%;"><input type="text" name="" value="加权毛利率" onchange="setName(this,0)"/></td>
+											<td style="width:20%;">
+												<input type="button" value="+" onclick="addTd('table0','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+												<input type="button" value="-" onclick="removeTd('table0','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>	
+											</td>
+											<td style="width:20%;"></td>
+											<td style="width:20%;"></td>
+											<td style="width:20%;"><input type="text" name="" readonly/></td>
+										</tr>
+										<tr>
+											<td><input type="text" name=""/></td>
+											<td><input type="text" name=""/></td>
+											<td><input type="text" name=""/></td>
+											<td><input type="text" name=""/></td>
+											<td><input type="text" name=""/></td>
+										</tr>																
+									</table>								
+								</div>	
+								<table class="table-list" id="tableHj">								
+									<tr>
+										<td style="width:20%;border-top:0;"><input type="text" name="Name_0" value="加权毛利率" readonly/></td>
+										<td style="width:20%;border-top:0;"></td>
+										<td style="width:20%;border-top:0;"></td>
+										<td style="width:20%;border-top:0;"><input type="text" name="" readonly/></td>
+										<td style="width:20%;border-top:0;"><input type="text" name="" readonly/></td>
+									</tr>														
+								</table>
+								<table class="table-list">								
+									<tr>
+										<td style="width:20%;border-top:0;text-align:center;font-weight:bold">总加权毛利率</td>
+										<td style="width:20%;border-top:0;"></td>
+										<td style="width:20%;border-top:0;"></td>
+										<td style="width:20%;border-top:0;"></td>
+										<td style="width:20%;border-top:0;"><input type="text" name="" readonly/></td>
+									</tr>														
+								</table>
+							</div>	
+						</div>	
 					</td>	
 				</tr>
 				<tr>
@@ -583,6 +638,88 @@
 			
 			$("input[name=value_14]").val(sum);
 			$("input[name=value_14]").click();
+		}
+		var i=0;
+		function changeAction(obj){//切换毛利润/成本交叉检验录入方式
+			if(i==0){
+				$(obj).val("录入文字描述");
+				$("#jcjy1").hide();
+				$("#jcjy2").show();
+				i=1;
+				doubleIframe("dqdcXed_jcjy");
+			}
+			else{
+				$(obj).val("录入详细数据");
+				$("#jcjy2").hide();
+				$("#jcjy1").show();
+				i=0;
+				doubleIframe("dqdcXed_jcjy");
+			}
+		}
+		function addTd(table,frameid){//添加行
+		    //毛利润/成本交叉检验 
+		        $("#"+table).append("<tr>"+
+										"<td><input type='text' name=''/></td>"+
+										"<td><input type='text' name=''/></td>"+
+										"<td><input type='text' name=''/></td>"+
+										"<td><input type='text' name=''/></td>"+
+										"<td><input type='text' name=''/></td>"+
+									"</tr>	");		  
+		    doubleIframe(frameid);
+		}
+		function addTd2(table,frameid){//添加块
+			var num=$("table[rule=block]").length//获取rule=block的所有table长度
+			var id="table"+num//动态设置id
+			var p=document.createElement("table");//创建一个table元素
+			p.style.width="100%"//设置table的宽度
+			p.innerHTML="<tr>"+//设置table内部HTML
+							"<td style='width:20%;'><input type='text' name='' value='加权毛利率' onchange='setName(this,"+num+")'/></td>"+
+							"<td style='width:20%;'>"+
+								"<input type='button' value='+' onclick=addTd('"+id+"','dqdcXed_jcjy') class='btn btn-info btn-mini'/>"+
+								"<input type='button' value='-' onclick=removeTd('"+id+"','dqdcXed_jcjy') class='btn btn-info btn-mini'/>	"+
+							"</td>"+
+							"<td style='width:20%;'></td>"+
+							"<td style='width:20%;'></td>"+
+							"<td style='width:20%;'><input type='text' name='' readonly/></td>"+
+						"</tr>"+
+						"<tr>"+
+							"<td><input type='text' name=''/></td>"+
+							"<td><input type='text' name=''/></td>"+
+							"<td><input type='text' name=''/></td>"+
+							"<td><input type='text' name=''/></td>"+
+							"<td><input type='text' name=''/></td>"+
+						"</tr>	";
+			p.id=id;//设置table的id
+			p.setAttribute("rule","block")//给table添加rule属性
+			document.getElementById(table).appendChild(p);//添加table到页面中
+			
+			$("#tableHj").append("<tr>"+//给tableHj添加一行
+										"<td><input type='text' name='Name_"+num+"' readonly/></td>"+
+										"<td></td>"+
+										"<td></td>"+
+										"<td><input type='text' name='' readonly/></td>"+
+										"<td><input type='text' name='' readonly/></td>"+
+									"</tr>	");
+		    doubleIframe(frameid);
+		}		
+		function removeTd2(frameid){  //表格删除行
+			var j=$("table[rule=block]").length-1//获取rule=block的所有table长度
+			var id="table"+j;//设置动态id
+			var tr= document.getElementById("tableHj").getElementsByTagName("tr");//获取tableHj的tr长度
+			if(max==0&&jegs==0&&num==0&&idCard==0){//当页面没有错误时
+				if(j>0){//至少保留一块
+					document.getElementById(id).parentNode.removeChild(document.getElementById(id));//删除最后一个块
+					document.getElementById("tableHj").deleteRow(tr.length-1);//删除tableHj最后一行
+					doubleIframe(frameid);
+				}
+			}
+			else
+				alert("页面中有错误，请修改后再进行删除操作！")
+		}
+		function setName(obj,count){//设置统计文本框值
+			var text=$(obj).val();
+			var name="Name_"+count;			
+			$("input[name="+name+"]").val(text);		
 		}
 	</script>
 </body>
