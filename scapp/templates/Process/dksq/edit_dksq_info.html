@@ -290,7 +290,7 @@
 						{%- for obj in loan_product %}
 							{%- if loan_apply.loan_type|int == obj.id %}
 								<span id="loan_amount_num">	
-									<input type="text" name="loan_amount_num" value="{{apply_info.loan_amount_num}}" onkeyup="setJe(this);" onclick="setJe(this)" maxlength="11" 
+									<input type="text" name="loan_amount_num" value="{{apply_info.loan_amount_num}}" onkeyup="$('#loan_amount_num_hj').html(hjje3(this,this.value))" onclick="$('#loan_amount_num_hj').html(hjje3(this,this.value))" maxlength="11" 
 										onchange="check(this,{{obj.min_amount|int}},{{obj.max_amount|int}})"/>
 									<span class="textfieldRequiredMsg">不能为空</span><br/>
 									<span id="loan_amount_num_hj" class="je">人民币</span>	
