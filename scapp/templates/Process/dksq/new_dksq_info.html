@@ -272,7 +272,7 @@
 					<td class="table-label">贷款金额（元）<font class="red">*</font></td>
 					<td>
 						<span id="loan_amount_num">	
-							<input type="text" name="loan_amount_num" onkeyup="setJe(this);" onclick="setJe(this);" maxlength="11" 
+							<input type="text" name="loan_amount_num" onkeyup="$('#loan_amount_num_hj').html(hjje3(this,this.value))" onclick="$('#loan_amount_num_hj').html(hjje3(this,this.value))" maxlength="11" 
 								onchange="check(this,{{loan_product[0].min_amount|int}},{{loan_product[0].max_amount|int}})"/>
 							<span class="textfieldRequiredMsg">必填</span><br/>
 							<span id="loan_amount_num_hj" class="je">人民币</span>	
@@ -722,6 +722,7 @@
 			$("input[name='loan_amount_num']").attr("onchange","check(this,"+min_amount+","+max_amount+")");
 			$("#loan_amount_num_errorInfo").html("请输入"+min_amount+"-"+max_amount+"的数") 
 		}
+		
 	</script>
 </body>
 </html>
