@@ -57,6 +57,7 @@
 							<th>客户类型</th>
 							<th>创建时间</th>	
 							<th>客户经理</th>
+							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody class="center">
@@ -72,7 +73,14 @@
 								<td>公司类</td>
 							{%- endif %}
 							<td>{{obj.create_date}}</td>
-							<td>{{manager_name}}</td>								
+							<td>{{manager_name}}</td>
+							<td>
+								{%- if obj.customer_type == "Individual" %}
+								<input type="button" class="btn btn-danger btn-mini" value="删除" onclick="iframe('Information/khxxgl/delete_khxxgl/Individual/{{obj.id}}')"/>
+								{%- else %}
+								<input type="button" class="btn btn-danger btn-mini" value="删除" onclick="iframe('Information/khxxgl/delete_khxxgl/Company/{{obj.id}}')"/>
+								{%- endif %}
+							</td>								
 						</tr>	
 						{%- endfor %}			
 					</tbody>

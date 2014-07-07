@@ -8,9 +8,9 @@
 	<meta name="author" content="Muhammad Usman">
 
 	<!-- The styles -->
-	<link href="/static/css/bootstrap.css" rel="stylesheet">
-	<link href="/static/css/datepicker.css" rel="stylesheet">
-	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="../../../static/css/bootstrap.css" rel="stylesheet">
+	<link href="../../../static/css/datepicker.css" rel="stylesheet">
+	<link href="../../../static/css/main.css" rel="stylesheet">
 	<style type="text/css">
 		input[type=text]{width:80%;padding:0;}
 		input.long{width:92%;}
@@ -29,6 +29,7 @@
 		{%- if profit_loss %}
 	<!--*****************************************资产负债表**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">损益表</span>
+		<input type="button" value="横向复制" class="btn btn-info" style="display:none;margin-top:0;" onclick="copy()"/>
 		<div class="divBorder">
 			<table class="table-list" id="yfzk">
 				<tr class="center">
@@ -73,7 +74,7 @@
 						</span>
 					</td>
 					<td>
-						<input type="text" name="month_1_1" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,1);average(this,1);total('month_1_1','month_1_2');$('input[name=items_name_3]').change();totalSum(2);totalAve(2);cut('month_1_2','month_1_4','month_1_5');totalSum(5);totalAve(5);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_1" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,1)" onblur="sum(this,1);average(this,1);total('month_1_1','month_1_2');$('input[name=items_name_3]').change();totalSum(2);totalAve(2);cut('month_1_2','month_1_4','month_1_5');totalSum(5);totalAve(5);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_1" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,1);average(this,1);total('month_2_1','month_2_2');$('input[name=items_name_3]').change();totalSum(2);totalAve(2);cut('month_2_2','month_2_4','month_2_5');totalSum(5);totalAve(5);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -343,10 +344,10 @@
 				{%- for i in range(4+count_1+count_3,5+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">工资
-						<input type="hidden" name="items_name_6" value="工资">
+						<input type="text" name="items_name_6" value="工资" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_6" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,6);average(this,6);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_6" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,6)" onblur="sum(this,6);average(this,6);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_6" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,6);average(this,6);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -392,10 +393,10 @@
 				{%- for i in range(5+count_1+count_3,6+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">经营性房屋租赁费
-						<input type="hidden" name="items_name_7" value="经营性房屋租赁费">
+						<input type="text" name="items_name_7" value="经营性房屋租赁费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_7" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,7);average(this,7);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_7" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,7)" onblur="sum(this,7);average(this,7);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_7" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,7);average(this,7);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -441,10 +442,10 @@
 				{%- for i in range(6+count_1+count_3,7+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">水费
-						<input type="hidden" name="items_name_8" value="水费">
+						<input type="text" name="items_name_8" value="水费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_8" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,8);average(this,8);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_8" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,8)" onblur="sum(this,8);average(this,8);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_8" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,8);average(this,8);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -490,10 +491,10 @@
 				{%- for i in range(7+count_1+count_3,8+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">电费
-						<input type="hidden" name="items_name_9" value="电费">
+						<input type="text" name="items_name_9" value="电费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_9" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,9);average(this,9);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_9" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,9)" onblur="sum(this,9);average(this,9);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_9" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,9);average(this,9);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -539,10 +540,10 @@
 				{%- for i in range(8+count_1+count_3,9+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">设备损耗
-						<input type="hidden" name="items_name_10" value="设备损耗">
+						<input type="text" name="items_name_10" value="设备损耗" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_10" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,10);average(this,10);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_10" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,10)" onblur="sum(this,10);average(this,10);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_10" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,10);average(this,10);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -588,10 +589,10 @@
 				{%- for i in range(9+count_1+count_3,10+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">伙食费
-						<input type="hidden" name="items_name_11" value="伙食费">
+						<input type="text" name="items_name_11" value="伙食费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_11" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,11);average(this,11);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_11" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,11)" onblur="sum(this,11);average(this,11);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_11" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,11);average(this,11);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -637,10 +638,10 @@
 				{%- for i in range(10+count_1+count_3,11+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">电话费
-						<input type="hidden" name="items_name_12" value="电话费">
+						<input type="text" name="items_name_12" value="电话费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_12" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,12);average(this,12);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_12" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,12)" onblur="sum(this,12);average(this,12);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_12" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,12);average(this,12);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -686,10 +687,10 @@
 				{%- for i in range(11+count_1+count_3,12+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">公关费
-						<input type="hidden" name="items_name_13" value="公关费">
+						<input type="text" name="items_name_13" value="公关费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_13" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,13);average(this,13);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_13" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,13)" onblur="sum(this,13);average(this,13);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_13" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,13);average(this,13);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -735,10 +736,10 @@
 				{%- for i in range(12+count_1+count_3,13+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">汽车维修费
-						<input type="hidden" name="items_name_14" value="汽车维修费">
+						<input type="text" name="items_name_14" value="汽车维修费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_14" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,14);average(this,14);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_14" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,14)" onblur="sum(this,14);average(this,14);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_14" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,14);average(this,14);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -784,10 +785,10 @@
 				{%- for i in range(13+count_1+count_3,14+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">机器维修费
-						<input type="hidden" name="items_name_15" value="机器维修费">
+						<input type="text" name="items_name_15" value="机器维修费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_15" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,15);average(this,15);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_15" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,15)" onblur="sum(this,15);average(this,15);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_15" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,15);average(this,15);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -833,10 +834,10 @@
 				{%- for i in range(14+count_1+count_3,15+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">广告费
-						<input type="hidden" name="items_name_16" value="广告费">
+						<input type="text" name="items_name_16" value="广告费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_16" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,16);average(this,16);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_16" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,16)" onblur="sum(this,16);average(this,16);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_16" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,16);average(this,16);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -882,10 +883,10 @@
 				{%- for i in range(15+count_1+count_3,16+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">运输油费
-						<input type="hidden" name="items_name_17" value="运输油费">
+						<input type="text" name="items_name_17" value="运输油费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_17" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,17);average(this,17);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_17" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,17)" onblur="sum(this,17);average(this,17);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_17" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,17);average(this,17);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -931,10 +932,10 @@
 				{%- for i in range(16+count_1+count_3,17+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">物业管理费
-						<input type="hidden" name="items_name_18" value="物业管理费">
+						<input type="text" name="items_name_18" value="物业管理费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_18" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,18);average(this,18);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_18" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,18)" onblur="sum(this,18);average(this,18);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_18" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,18);average(this,18);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -980,10 +981,10 @@
 				{%- for i in range(17+count_1+count_3,18+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">生产许可合格证
-						<input type="hidden" name="items_name_19" value="生产许可合格证">
+						<input type="text" name="items_name_19" value="生产许可合格证" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_19" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,19);average(this,19);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_19" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,19)" onblur="sum(this,19);average(this,19);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_19" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,19);average(this,19);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -1029,10 +1030,10 @@
 				{%- for i in range(18+count_1+count_3,19+count_1+count_3) %}
 				<tr class="center">
 					<td style="width:166px;">保险费
-						<input type="hidden" name="items_name_20" value="保险费">
+						<input type="text" name="items_name_20" value="保险费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_20" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,20);average(this,20);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_20" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,20)" onblur="sum(this,20);average(this,20);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_20" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,20);average(this,20);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -1094,7 +1095,7 @@
 						</span>
 					</td>
 					<td>
-						<input type="text" name="month_1_21" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,21);average(this,21);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_21" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,21)" onblur="sum(this,21);average(this,21);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_21" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,21);average(this,21);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -1144,10 +1145,10 @@
 				{%- for i in range(19+count_1+count_3+count_21,20+count_1+count_3+count_21) %}
 				<tr class="center">
 					<td style="width:166px;">税收
-						<input type="hidden" name="items_name_22" value="税收">
+						<input type="text" name="items_name_22" value="税收" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_22" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,22);average(this,22);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_22" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,22)" onblur="sum(this,22);average(this,22);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_22" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,22);average(this,22);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -1242,10 +1243,10 @@
 				{%- for i in range(21+count_1+count_3+count_21,22+count_1+count_3+count_21) %}	
 				<tr class="center">
 					<td style="width:166px;">分期还款（经营）(4)
-						<input type="hidden" name="items_name_24" value="分期还款（经营）(4)">
+						<input type="text" name="items_name_24" value="分期还款（经营）(4)" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_24" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,24);average(this,24);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_24" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,24)" onblur="sum(this,24);average(this,24);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_24" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,24);average(this,24);cut4('month_12_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -1346,10 +1347,10 @@
 				{%- for i in range(23+count_1+count_3+count_21,24+count_1+count_3+count_21) %}
 				<tr class="center">
 					<td style="width:166px;">家庭开支
-						<input type="hidden" name="items_name_26" value="家庭开支">
+						<input type="text" name="items_name_26" value="家庭开支" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_26" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,26);average(this,26);other(1);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_26" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,26)" onblur="sum(this,26);average(this,26);other(1);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_26" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,26);average(this,26);other(2);totalSum(30);totalAve(30);"/>
@@ -1395,10 +1396,10 @@
 				{%- for i in range(24+count_1+count_3+count_21,25+count_1+count_3+count_21) %}
 				<tr class="center">
 					<td style="width:166px;">分期付款(私人用途)
-						<input type="hidden" name="items_name_27" value="分期付款(私人用途)">
+						<input type="text" name="items_name_27" value="分期付款(私人用途)" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_27" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,27);average(this,27);other(1);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_27" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,27)" onblur="sum(this,27);average(this,27);other(1);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_27" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,27);average(this,27);other(2);totalSum(30);totalAve(30);"/>
@@ -1460,7 +1461,7 @@
 						</span>
 					</td>
 					<td>
-						<input type="text" name="month_1_28" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,28);average(this,28);other(1);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_28" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,28)" onblur="sum(this,28);average(this,28);other(1);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_28" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,28);average(this,28);other(2);totalSum(30);totalAve(30);"/>
@@ -1522,7 +1523,7 @@
 						</span>
 					</td>
 					<td>
-						<input type="text" name="month_1_29" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,29);average(this,29);other(1);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_29" value="{{profit_loss[i].month_1}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,29)" onblur="sum(this,29);average(this,29);other(1);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_29" value="{{profit_loss[i].month_2}}" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,29);average(this,29);other(2);totalSum(30);totalAve(30);"/>
@@ -1665,7 +1666,7 @@
 						</span>
 					</td>
 					<td>
-						<input type="text" name="month_1_1" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,1);average(this,1);total('month_1_1','month_1_2');$('input[name=items_name_3]').change();totalSum(2);totalAve(2);cut('month_1_2','month_1_4','month_1_5');totalSum(5);totalAve(5);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_1" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,1)" onblur="sum(this,1);average(this,1);total('month_1_1','month_1_2');$('input[name=items_name_3]').change();totalSum(2);totalAve(2);cut('month_1_2','month_1_4','month_1_5');totalSum(5);totalAve(5);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_1" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,1);average(this,1);total('month_2_1','month_2_2');$('input[name=items_name_3]').change();totalSum(2);totalAve(2);cut('month_2_2','month_2_4','month_2_5');totalSum(5);totalAve(5);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -1921,10 +1922,10 @@
 			<table class="table-list" id="ch">
 				<tr class="center">
 					<td style="width:166px;">工资
-						<input type="hidden" name="items_name_6" value="工资">
+						<input type="text" name="items_name_6" value="工资" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_6" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,6);average(this,6);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_6" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,6)" onblur="sum(this,6);average(this,6);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_6" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,6);average(this,6);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -1968,10 +1969,10 @@
 				</tr>		
 				<tr class="center">
 					<td style="width:166px;">经营性房屋租赁费
-						<input type="hidden" name="items_name_7" value="经营性房屋租赁费">
+						<input type="text" name="items_name_7" value="经营性房屋租赁费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_7" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,7);average(this,7);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_7" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,7)" onblur="sum(this,7);average(this,7);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_7" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,7);average(this,7);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2015,10 +2016,10 @@
 				</tr>	
 				<tr class="center">
 					<td style="width:166px;">水费
-						<input type="hidden" name="items_name_8" value="水费">
+						<input type="text" name="items_name_8" value="水费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_8" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,8);average(this,8);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_8" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,8)" onblur="sum(this,8);average(this,8);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_8" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,8);average(this,8);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2062,10 +2063,10 @@
 				</tr>	
 				<tr class="center">
 					<td style="width:166px;">电费
-						<input type="hidden" name="items_name_9" value="电费">
+						<input type="text" name="items_name_9" value="电费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_9" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,9);average(this,9);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_9" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,9)" onblur="sum(this,9);average(this,9);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_9" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,9);average(this,9);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2109,10 +2110,10 @@
 				</tr>	
 				<tr class="center">
 					<td style="width:166px;">设备损耗
-						<input type="hidden" name="items_name_10" value="设备损耗">
+						<input type="text" name="items_name_10" value="设备损耗" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_10" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,10);average(this,10);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_10" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,10)" onblur="sum(this,10);average(this,10);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_10" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,10);average(this,10);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2156,10 +2157,10 @@
 				</tr>	
 				<tr class="center">
 					<td style="width:166px;">伙食费
-						<input type="hidden" name="items_name_11" value="伙食费">
+						<input type="text" name="items_name_11" value="伙食费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_11" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,11);average(this,11);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_11" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,11)" onblur="sum(this,11);average(this,11);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_11" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,11);average(this,11);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2203,10 +2204,10 @@
 				</tr>	
 				<tr class="center">
 					<td style="width:166px;">电话费
-						<input type="hidden" name="items_name_12" value="电话费">
+						<input type="text" name="items_name_12" value="电话费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_12" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,12);average(this,12);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_12" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,12)" onblur="sum(this,12);average(this,12);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_12" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,12);average(this,12);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2250,10 +2251,10 @@
 				</tr>	
 				<tr class="center">
 					<td style="width:166px;">公关费
-						<input type="hidden" name="items_name_13" value="公关费">
+						<input type="text" name="items_name_13" value="公关费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_13" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,13);average(this,13);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_13" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,13)" onblur="sum(this,13);average(this,13);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_13" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,13);average(this,13);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2297,10 +2298,10 @@
 				</tr>	
 				<tr class="center">
 					<td style="width:166px;">汽车维修费
-						<input type="hidden" name="items_name_14" value="汽车维修费">
+						<input type="text" name="items_name_14" value="汽车维修费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_14" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,14);average(this,14);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_14" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,14)" onblur="sum(this,14);average(this,14);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_14" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,14);average(this,14);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2344,10 +2345,10 @@
 				</tr>
 				<tr class="center">
 					<td style="width:166px;">机器维修费
-						<input type="hidden" name="items_name_15" value="机器维修费">
+						<input type="text" name="items_name_15" value="机器维修费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_15" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,15);average(this,15);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_15" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,15)" onblur="sum(this,15);average(this,15);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_15" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,15);average(this,15);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2391,10 +2392,10 @@
 				</tr>
 				<tr class="center">
 					<td style="width:166px;">广告费
-						<input type="hidden" name="items_name_16" value="广告费">
+						<input type="text" name="items_name_16" value="广告费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_16" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,16);average(this,16);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_16" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,16)" onblur="sum(this,16);average(this,16);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_16" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,16);average(this,16);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2438,10 +2439,10 @@
 				</tr>
 				<tr class="center">
 					<td style="width:166px;">运输油费
-						<input type="hidden" name="items_name_17" value="运输油费">
+						<input type="text" name="items_name_17" value="运输油费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_17" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,17);average(this,17);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_17" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,17)" onblur="sum(this,17);average(this,17);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_17" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,17);average(this,17);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2485,10 +2486,10 @@
 				</tr>
 				<tr class="center">
 					<td style="width:166px;">物业管理费
-						<input type="hidden" name="items_name_18" value="物业管理费">
+						<input type="text" name="items_name_18" value="物业管理费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_18" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,18);average(this,18);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_18" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,18)" onblur="sum(this,18);average(this,18);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_18" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,18);average(this,18);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2532,10 +2533,10 @@
 				</tr>
 				<tr class="center">
 					<td style="width:166px;">生产许可合格证
-						<input type="hidden" name="items_name_19" value="生产许可合格证">
+						<input type="text" name="items_name_19" value="生产许可合格证" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_19" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,19);average(this,19);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_19" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,19)" onblur="sum(this,19);average(this,19);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_19" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,19);average(this,19);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2579,10 +2580,10 @@
 				</tr>
 				<tr class="center">
 					<td style="width:166px;">保险费
-						<input type="hidden" name="items_name_20" value="保险费">
+						<input type="text" name="items_name_20" value="保险费" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_20" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,20);average(this,20);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_20" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,20)" onblur="sum(this,20);average(this,20);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_20" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,20);average(this,20);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2641,7 +2642,7 @@
 						</span>
 					</td>
 					<td>
-						<input type="text" name="month_1_21" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,21);average(this,21);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_21" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,21)" onblur="sum(this,21);average(this,21);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_21" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,21);average(this,21);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2689,10 +2690,10 @@
 			<table class="table-list" id="yszk">
 				<tr class="center">
 					<td style="width:166px;">税收
-						<input type="hidden" name="items_name_22" value="税收">
+						<input type="text" name="items_name_22" value="税收" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_22" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,22);average(this,22);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_22" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,22)" onblur="sum(this,22);average(this,22);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_22" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,22);average(this,22);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2782,10 +2783,10 @@
 				</tr>				
 				<tr class="center">
 					<td style="width:166px;">分期还款（经营）(4)
-						<input type="hidden" name="items_name_24" value="分期还款（经营）(4)">
+						<input type="text" name="items_name_24" value="分期还款（经营）(4)" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_24" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,24);average(this,24);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_24" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,24)" onblur="sum(this,24);average(this,24);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_24" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,24);average(this,24);cut4('month_12_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);"/>
@@ -2883,10 +2884,10 @@
 			<table class="table-list">
 				<tr class="center">
 					<td style="width:166px;">家庭开支
-						<input type="hidden" name="items_name_26" value="家庭开支">
+						<input type="text" name="items_name_26" value="家庭开支" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_26" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,26);average(this,26);other(1);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_26" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,26)" onblur="sum(this,26);average(this,26);other(1);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_26" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,26);average(this,26);other(2);totalSum(30);totalAve(30);"/>
@@ -2930,10 +2931,10 @@
 				</tr>
 				<tr class="center">
 					<td style="width:166px;">分期付款(私人用途)
-						<input type="hidden" name="items_name_27" value="分期付款(私人用途)">
+						<input type="text" name="items_name_27" value="分期付款(私人用途)" style="display:none;">
 					</td>
 					<td>
-						<input type="text" name="month_1_27" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,27);average(this,27);other(1);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_27" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,27)" onblur="sum(this,27);average(this,27);other(1);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_27" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,27);average(this,27);other(2);totalSum(30);totalAve(30);"/>
@@ -2991,7 +2992,7 @@
 						</span>
 					</td>
 					<td>
-						<input type="text" name="month_1_28" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,28);average(this,28);other(1);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_28" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,28)" onblur="sum(this,28);average(this,28);other(1);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_28" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,28);average(this,28);other(2);totalSum(30);totalAve(30);"/>
@@ -3049,7 +3050,7 @@
 						</span>
 					</td>
 					<td>
-						<input type="text" name="month_1_29" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,29);average(this,29);other(1);totalSum(30);totalAve(30);"/>
+						<input type="text" name="month_1_29" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onfocus="setGlobal(this,29)" onblur="sum(this,29);average(this,29);other(1);totalSum(30);totalAve(30);"/>
 					</td>
 					<td>
 						<input type="text" name="month_2_29" onchange="value=value.replace(/[^0-9]/g,'')" maxlength="11" onblur="sum(this,29);average(this,29);other(2);totalSum(30);totalAve(30);"/>
@@ -3149,11 +3150,11 @@
 		
 	</form>
 
-	<script src="/static/js/jquery-1.7.2.min.js"></script>
-	<script src="/static/js/bootstrap.min.js"></script>
-	<script src="/static/js/bootstrap-datepicker.js"></script>
-	<script src="/static/js/script.js"></script>
-	<script src="/static/js/process.js"></script>
+	<script src="../../../static/js/jquery-1.7.2.min.js"></script>
+	<script src="../../../static/js/bootstrap.min.js"></script>
+	<script src="../../../static/js/bootstrap-datepicker.js"></script>
+	<script src="../../../static/js/script.js"></script>
+	<script src="../../../static/js/process.js"></script>
 	<script type="text/javascript">		
 		var max=0;
 		var jegs=0;
@@ -3343,6 +3344,42 @@
 			var Kbcb=sum*key
 			$(obj).parent().parent().parent().find("input[name=month_"+num+"_3]").val(Kbcb)
 			$(obj).parent().parent().parent().find("input[name=month_"+num+"_3]").click();
+		}
+		var Value="";
+		var Object=new Array();
+		var Num;
+		function setGlobal(obj,num){//设置全局变量
+			Value=$(obj).val();
+			Object=$(obj).parent().parent().find("input[type=text]");
+			Num=num
+			//alert(Value)
+			//alert(Object.length)
+		}
+		function copy(){//横向复制+计算
+			if(Num=="1"){//收入
+				for(k=1;k<13;k++){
+					Object[k].value=Value;
+					total('month_'+k+'_1','month_'+k+'_2');
+					cut4('month_'+k+'_2','month_'+k+'_4','month_'+k+'_23','month_'+k+'_24','month_'+k+'_25');
+				}
+				$(Object[12]).blur();
+			}
+			/*else if(Num=="21"){//固定支出-其他
+				for(k=1;k<13;k++){
+					Object[k].value=Value;
+					total3('month_'+k+'_');
+					cut4('month_'+k+'_2','month_'+k+'_4','month_'+k+'_23','month_'+k+'_24','month_'+k+'_25');
+				}
+				totalSum(23);totalAve(23);other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);
+			}*/
+			else{//Num=(6~20)固定支出
+				for(k=1;k<13;k++){
+					Object[k].value=Value;
+					$(Object[k]).blur();
+					//total3('month_'+k+'_');
+					//cut4('month_'+k+'_2','month_'+k+'_4','month_'+k+'_23','month_'+k+'_24','month_'+k+'_25');
+				}				
+			}
 		}
 	</script>
 </body>

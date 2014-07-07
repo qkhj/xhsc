@@ -21,8 +21,17 @@
 	</script>
 </head>
 
-<body onload="setInput()">	
-	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_dbdydcb/{{id}}" target="_parent">
+<body onload="setInput();setTimeOut();parent.parent.scroll(0,0);">	
+{%- with messages = get_flashed_messages(with_categories=true) %}
+		  	{%- if messages %}
+	    	{%- for category, message in messages %}
+	    	<div class="alert alert-{{category}}">
+	      		{{message}}
+	      	</div>
+	    	{%- endfor %}
+		  	{%- endif %}
+		{%- endwith %}
+	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_dbdydcb/{{id}}">
 	<!--*****************************************担保抵押调查表**************************************************-->
 		<!--*****************************************共同借款人**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">共同借款人</span>

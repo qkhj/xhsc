@@ -771,7 +771,7 @@ if(table=="dxzchj"){//大项支出合计
 									"</span>"+
 								"</td>"+
 								"<td>"+
-									"<input type='text' name='month_1_1' onchange='checkNUM(this)' maxlength='11' onblur=\"sum(this,1);average(this,1);total('month_1_1','month_1_2');$('input[name=items_name_3]').change();totalSum(2);totalAve(2);cut('month_1_2','month_1_4','month_1_5');totalSum(5);totalAve(5);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);\"/>"+
+									"<input type='text' name='month_1_1' onchange='checkNUM(this)' maxlength='11' onfocus='setGlobal(this,1)' onblur=\"sum(this,1);average(this,1);total('month_1_1','month_1_2');$('input[name=items_name_3]').change();totalSum(2);totalAve(2);cut('month_1_2','month_1_4','month_1_5');totalSum(5);totalAve(5);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);\"/>"+
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='month_2_1' onchange='checkNUM(this)'maxlength='11' onblur=\"sum(this,1);average(this,1);total('month_2_1','month_2_2');$('input[name=items_name_3]').change();totalSum(2);totalAve(2);cut('month_2_2','month_2_4','month_2_5');totalSum(5);totalAve(5);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);\"/>"+
@@ -909,7 +909,7 @@ if(table=="dxzchj"){//大项支出合计
 									"</span>"+
 								"</td>"+
 								"<td>"+
-									"<input type='text' name='month_1_21' onchange='checkNUM(this)'maxlength='11' onblur=\"sum(this,21);average(this,21);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);\"/>"+
+									"<input type='text' name='month_1_21' onchange='checkNUM(this)'maxlength='11' onfocus='setGlobal(this,21)' onblur=\"sum(this,21);average(this,21);total3('month_1_');totalSum(23);totalAve(23);cut4('month_1_2','month_1_4','month_1_23','month_1_24','month_1_25');other(1);totalSum(25);totalAve(25);totalSum(30);totalAve(30);\"/>"+
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='month_2_21' onchange='checkNUM(this)'maxlength='11' onblur=\"sum(this,21);average(this,21);total3('month_2_');totalSum(23);totalAve(23);cut4('month_2_2','month_2_4','month_2_23','month_2_24','month_2_25');other(2);totalSum(25);totalAve(25);totalSum(30);totalAve(30);\"/>"+
@@ -961,7 +961,7 @@ if(table=="dxzchj"){//大项支出合计
 									"</span>"+
 								"</td>"+
 								"<td>"+
-									"<input type='text' name='month_1_28' onchange='checkNUM(this)'maxlength='11' onblur=\"sum(this,28);average(this,28);other(1);totalSum(30);totalAve(30);\"/>"+
+									"<input type='text' name='month_1_28' onchange='checkNUM(this)'maxlength='11' onfocus='setGlobal(this,28)' onblur=\"sum(this,28);average(this,28);other(1);totalSum(30);totalAve(30);\"/>"+
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='month_2_28' onchange='checkNUM(this)'maxlength='11' onblur=\"sum(this,28);average(this,28);other(2);totalSum(30);totalAve(30);\"/>"+
@@ -1013,7 +1013,7 @@ if(table=="dxzchj"){//大项支出合计
 									"</span>"+
 								"</td>"+
 								"<td>"+
-									"<input type='text' name='month_1_29' onchange='checkNUM(this)'maxlength='11' onblur=\"sum(this,29);average(this,29);other(1);totalSum(30);totalAve(30);\"/>"+
+									"<input type='text' name='month_1_29' onchange='checkNUM(this)'maxlength='11' onfocus='setGlobal(this,29)' onblur=\"sum(this,29);average(this,29);other(1);totalSum(30);totalAve(30);\"/>"+
 								"</td>"+
 								"<td>"+
 									"<input type='text' name='month_2_29' onchange='checkNUM(this)'maxlength='11' onblur=\"sum(this,29);average(this,29);other(2);totalSum(30);totalAve(30);\"/>"+

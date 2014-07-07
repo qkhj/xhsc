@@ -14,6 +14,7 @@
 	<style type="text/css">
 		html{overflow-y:scroll;}  
 		#date{line-height:25px;font-size:12px;color:gray;margin-top:-30px;}
+		#text{background:rgba(0,0,0,0.5);width:100%;height:100%;position:fixed;top:0;z-index:1000000;display:none;}
 	</style>
 </head>
 
@@ -326,7 +327,11 @@
 						</li>
 					</ul>
 					{%- endif %}
-				</div><!--/.well -->					
+				</div><!--/.well -->	
+				<div style="position:absolut;margin-left:-186px;" id="jsq">
+					<img src="../static/img/calculator.png" style="z-index:10;width:170px;" onclick="$('#text').show();"/>
+					<img src="../static/img/calculator0.png" style="margin-left:-9px;z-index:0;width:30px;" onclick="setShow()" id="tip"/>
+				</div>
 			</div><!--/span-->
 <!--**************************************************content***********************************************-->
 			<div class="span10 pull-right">
@@ -357,8 +362,35 @@
 		<p class="pull-center">@ 2013 CardPay (Shanghai) Info Tech Co.,Ltd</p>
 		<span id="date" class="pull-right"></span>
 	</div>
+	<div id="text">	
+		<div style="width:40%;margin:0 auto;background:white;margin-top:150px;border-radius:5px;padding:20px;text-align:center;">
+			<span style="float:left;"><i class="icon-bookmark"></i><span class="titletip">计算器</span></span>
+			<img src="../static/img/close0.png" style="float:right;cursor:pointer;" onmouseover="$(this).attr('src','../static/img/close1.png')" onmouseout="$(this).attr('src','../static/img/close0.png')" onclick="$('#text').hide();"/><br/>
+			<hr/>
+			<font class="red">(请在英文输入状态下使用)</font><br/>
+			<textarea id="Cal_text" placeholder="请输入计算公式"></textarea> =
+			<input type="text" id="answer"/><br/>		
+			<input type="button" class="btn btn-danger" value="计算" onclick="Calculate()"/>
+		</div>
+	</div>
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>
+	<script src="/static/js/Calculate.js"></script>
+	<script type="text/javascript">
+		var i=0;
+		function setShow(){//控制计算器图片的显示和隐藏
+			if(i==0){
+				$('#jsq').animate({marginLeft:0},'slow');
+				$('#tip').attr('src','../static/img/calculator1.png');
+				i=1;
+			}
+			else{
+				$('#jsq').animate({marginLeft:-186},'slow');
+				$('#tip').attr('src','../static/img/calculator0.png');
+				i=0;
+			}
+		}
+	</script>
 </body>
 </html>
