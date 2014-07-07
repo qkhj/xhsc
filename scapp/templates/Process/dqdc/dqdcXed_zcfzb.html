@@ -19,8 +19,17 @@
 	</style>
 </head>
 
-<body onload="$('input[type=text]').click();">	
-	<form class="content" method="POST" action="/Process/dqdc/dqdcXed_zcfzb/{{loan_apply_id}}" target="_parent">
+<body onload="$('input[type=text]').click();setTimeOut();parent.parent.scroll(0,0);">	
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+		  	{%- if messages %}
+	    	{%- for category, message in messages %}
+	    	<div class="alert alert-{{category}}">
+	      		{{message}}
+	      	</div>
+	    	{%- endfor %}
+		  	{%- endif %}
+		{%- endwith %}
+	<form id="content" name="content" class="content" method="POST" action="/Process/dqdc/dqdcXed_zcfzb/{{loan_apply_id}}">
 	<!--*****************************************资产负债表**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">资产负债表</span>
 		{%- if balance_sheets %}
@@ -1270,7 +1279,6 @@
 		</div>	
 		{%- endif %}
 		<input type="submit" value="保存" class="btn btn-info"/>
-		
 		<!--<input type="button" value="另存为Pdf" class="btn btn-info" onclick="window.open('/Process/dqdc/dqdcXed_zcfzb_dy/{{loan_apply_id}}')"/>-->
 	</form>
 

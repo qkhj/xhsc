@@ -262,7 +262,7 @@ def edit_dqdcXed_jbqk(id):
                 riskanalysis_and_findings.income_ratio = request.form['income_ratio']
                 riskanalysis_and_findings.amount = request.form['amount']
                 riskanalysis_and_findings.deadline = request.form['deadline']
-                riskanalysis_and_findings.rates = request.form['income_ratio']
+                riskanalysis_and_findings.rates = request.form['rates']
                 riskanalysis_and_findings.monthly_repayment = request.form['monthly_repayment']
                 riskanalysis_and_findings.approve_reason = request.form['approve_reason']
             else:

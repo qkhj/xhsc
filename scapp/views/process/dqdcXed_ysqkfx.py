@@ -46,7 +46,7 @@ def dqdcXed_ysqkfx(loan_apply_id):
 			logger.exception('exception')
 			# 消息闪现
 			flash('保存失败','error')
-		return redirect('Process/dqdc/dqdc')
+		return redirect('Process/dqdc/dqdcXed_ysqkfx/%d' % loan_apply_id)
 
 # 打印损益情况分析
 @app.route('/Process/dqdc/dy_syb/<int:loan_apply_id>', methods=['GET'])

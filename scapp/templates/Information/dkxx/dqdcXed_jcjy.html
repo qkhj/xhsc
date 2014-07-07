@@ -45,14 +45,122 @@
 				<tr>
 					{%- for obj in cross_examination %}
 						{%- if obj.loan_type == 1 %}
-						<td class="table-label">{{obj.items_name}}</td>
+						<td class="table-label">{{obj.items_name}}
+							<input type="hidden" name="type_1" value="1">
+							<input type="hidden" name="name_1" value="{{obj.items_name}}">
+							{%- if profit_jcjy %}
+								<!-- <input type="button" value="录入文字描述" class="btn btn-info" onclick="changeAction(this)">
+								<input type="hidden" id="record_type" name="record_type" value="2">	 -->
+							{%- else %}
+								<!-- <input type="button" value="录入详细数据" class="btn btn-info" onclick="changeAction(this)">
+								<input type="hidden" id="record_type" name="record_type" value="1"> -->
+							{%- endif %}
+						</td>
 						<td colspan="6">
-							<span>
-								<input type="hidden" name="type_1" value="1">
-								<input type="hidden" name="name_1" value="{{obj.items_name}}">
+							{%- if profit_jcjy %}
+							<div id="jcjy1" style="display:none">
+							{%- else %}
+							<div id="jcjy1">
+							{%- endif %}
 								<textarea name="value_1" onchange="spryMaxLength(this,2048)">{{obj.content}}</textarea>
 								<span class="errorInfo">字符数不得大于2048</span>
-							</span>
+							</div>	
+							{%- if profit_jcjy %}
+							<div id="jcjy2">	
+							{%- else %}
+							<div style="display:none;" id="jcjy2">	
+							{%- endif %}
+								<!-- <input type="button" value="+" onclick="addTd2('tableAll','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+								<input type="button" value="-" onclick="removeTd2('dqdcXed_jcjy')" class="btn btn-info btn-mini"/>	 -->
+								<div class="divBorder">
+									<div id="tableAll">		
+										<table class="dayin">
+											<tr class="center">
+												<td style="width:140px;">名称</td>
+												<td style="width:140px;">进价</td>
+												<td style="width:140px;">销售价</td>
+												<td style="width:140px;">占比(%)</td>
+												<td style="width:140px;">毛利(%)</td>
+											</tr>	
+										</table>
+										{%- for i in range(maxIndex+1) %}
+											<table class="dayin" id="table{{i}}" rule="block" style="margin-top:0;">
+												{%- for obj in profit_jcjy %}
+												
+													{%- if obj.index == i %}
+														{%- if obj.type == 1 %}
+															<tr>
+																<td style="width:140px;border-top:0;">
+																	{{obj.name}}
+																	<!-- <input type="text" name="name" value="{{obj.name}}" onchange="setName(this,{{obj.index}})"/>
+																	<input type="hidden" name="type" value="{{obj.type}}" /> -->
+																</td>
+																<td style="width:140px;border-top:0;">
+																	<!-- <input type="button" value="+" onclick="addTd('table{{obj.index}}','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+																	<input type="button" value="-" onclick="removeTd('table{{obj.index}}','dqdcXed_jcjy');$(this).parent().parent().parent().find('input[name=price]').change();" class="btn btn-info btn-mini"/>	 -->
+																	<!-- <input type="hidden" name="bid"/>	 -->
+																</td>
+																<td style="width:140px;border-top:0;"><!-- <input type="hidden" name="price"/> --></td>
+																<td style="width:140px;border-top:0;"><!-- <input type="hidden" name="ratio"/> --></td>
+																<td style="width:140px;border-top:0;">{{obj.profit}}<!-- <input type="text" name="profit" value="{{obj.profit}}" readonly/> --></td>
+															</tr>
+														{%- endif %}
+													
+														{%- if obj.type == 2 %}
+															<tr>
+																<td style="width:140px;">
+																	{{obj.name}}
+																	<!-- <input type="text" name="name" value="{{obj.name}}"/>
+																	<input type="hidden" name="type" value="{{obj.type}}"/> -->
+																</td>
+																<td style="width:140px;">{{obj.bid}}<!-- <input type="text" name="bid" value="{{obj.bid}}" onchange="Maoli(this);Zmaoli(this,{{obj.index}})"/> --></td>
+																<td style="width:140px;">{{obj.price}}<!-- <input type="text" name="price" value="{{obj.price}}" onchange="Maoli(this);Zmaoli(this,{{obj.index}})"/> --></td>
+																<td style="width:140px;">{{obj.ratio}}<!-- <input type="text" name="ratio" value="{{obj.ratio}}" onchange="Zmaoli(this,{{obj.index}})"/><input type="hidden" name="zc"/> --></td>
+																<td style="width:140px;">{{obj.profit}}<!-- <input type="text" name="profit" value="{{obj.profit}}" readonly/> --></td>
+															</tr>
+														{%- endif %}
+														
+													{%- endif %}
+													
+												{%- endfor %}	
+											</table>
+										{%- endfor %}
+																	
+									</div>	
+									<table class="dayin" id="tableHj" style="margin-top:0;">		
+										{%- for obj in profit_jcjy %}
+											{%- if obj.type == 3 %}						
+											<tr>
+												<td style="width:140px;border-top:0;">
+													{{obj.name}}<!-- <input type="text" name="name" value="{{obj.name}}" readonly/>
+													<input type="hidden" name="type" value="{{obj.type}}"/> -->
+												</td>
+												<td style="width:140px;border-top:0;"><!-- <input type="hidden" name="bid"/> --></td>
+												<td style="width:140px;border-top:0;"><!-- <input type="hidden" name="price"/> --></td>
+												<td style="width:140px;border-top:0;">{{obj.ratio}}<!-- <input type="text" name="ratio" value="{{obj.ratio}}" onchange="ZJQmaoli(this)"/><input type="hidden" name="zcc"/> --></td>
+												<td style="width:140px;border-top:0;">{{obj.profit}}<!-- <input type="text" name="profit" value="{{obj.profit}}" readonly/> --></td>
+											</tr>
+											{%- endif %}
+										{%- endfor %}														
+									</table>
+									<table class="dayin" id="tableTotal" style="margin-top:0;">	
+										{%- for obj in profit_jcjy %}
+											{%- if obj.type == 4 %}							
+											<tr>
+												<td style="width:140px;text-align:center;border-top:0;font-weight:bold">{{obj.name}}
+													<!-- <input type="hidden" name="name" value="{{obj.name}}"/>
+													<input type="hidden" name="type" value="{{obj.type}}"/> -->
+												</td>
+												<td style="width:140px;border-top:0;"><!-- <input type="hidden" name="bid"/> --></td>
+												<td style="width:140px;border-top:0;"><!-- <input type="hidden" name="price"/> --></td>
+												<td style="width:140px;border-top:0;"><!-- <input type="hidden" name="ratio"/> --></td>
+												<td style="width:140px;border-top:0;">{{obj.profit}}<!-- <input type="text" name="profit" value="{{obj.profit}}" readonly/> --></td>
+											</tr>	
+											{%- endif %}
+										{%- endfor %}														
+									</table>
+								</div>	
+							</div>	
 						</td>	
 						</td>
 						{%- endif %}

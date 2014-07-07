@@ -26,6 +26,7 @@ from scapp.models import SC_User
 from scapp.models import SC_Org
 from scapp.models import SC_UserRole
 
+from scapp.models import SC_Loan_Apply
 from scapp.models import SC_Credentials_Type
 from scapp.models import SC_Regisiter_Type
 from scapp.models import SC_Relation_Type
@@ -173,6 +174,38 @@ def new_individual_customer(target_customer_id):
 
 		return render_template("Information/new_individual_customer.html",user=user,
 		    credentials_type=credentials_type,target_customer=target_customer)
+
+# 删除客户信息
+@app.route('/Information/khxxgl/delete_khxxgl/<type>/<int:id>', methods=['GET','POST'])
+def delete_khxxgl(type,id):
+    loan_apply = SC_Loan_Apply.query.filter_by(belong_customer_type=type,belong_customer_value=id).first()
+    if loan_apply is None:
+        try:
+            if type == "Individual":
+                SC_Individual_Customer.query.filter_by(id=id).delete()
+            else:
+                SC_Company_Customer.query.filter_by(id=id).delete()
+            
+            SC_Dealings.query.filter_by(belong_customer_type=type,belong_customer_value=id).delete()
+            SC_Relations.query.filter_by(belong_customer_type=type,belong_customer_value=id).delete()
+            SC_Manage_Info.query.filter_by(belong_customer_type=type,belong_customer_value=id).delete()
+            SC_Asset_Info.query.filter_by(belong_customer_type=type,belong_customer_value=id).delete()
+            SC_Financial_Affairs.query.filter_by(belong_customer_type=type,belong_customer_value=id).delete()
+            SC_Other_Info.query.filter_by(belong_customer_type=type,belong_customer_value=id).delete()
+            # 事务提交
+            db.session.commit()
+            # 消息闪现
+            flash('删除成功','success')
+        except:
+            # 回滚
+            db.session.rollback()
+            logger.exception('exception')
+            # 消息闪现
+            flash('删除失败','error')
+    else:
+        flash('该客户已提交贷款申请，无法删除','error')
+        
+    return redirect('Information/khxxgl')
 
 # 编辑客户--公司
 @app.route('/Information/edit_company/<int:id>', methods=['GET'])

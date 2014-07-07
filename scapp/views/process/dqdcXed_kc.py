@@ -42,7 +42,7 @@ def new_kc(loan_apply_id):
 		# 消息闪现
 		flash('保存失败','error')
 			
-	return redirect('Process/dqdc/dqdc')
+	return redirect('Process/dqdc/dqdcXed_kc/%d' % loan_apply_id)
 
 
 # 打印库存

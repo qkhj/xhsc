@@ -15,8 +15,17 @@
 	</style>
 </head>
 
-<body onload="sub();$('input[name]').click()">	
-	<form class="content" method="POST" action="/Process/dqdc/new_kc/{{loan_apply_id}}" target="_parent">
+<body onload="sub();$('input[name]').click();setTimeOut();parent.parent.scroll(0,0);">	
+{%- with messages = get_flashed_messages(with_categories=true) %}
+						  	{%- if messages %}
+					    	{%- for category, message in messages %}
+					    	<div class="alert alert-{{category}}">
+					      		{{message}}
+					      	</div>
+					    	{%- endfor %}
+						  	{%- endif %}
+						{%- endwith %}
+	<form class="content" method="POST" action="/Process/dqdc/new_kc/{{loan_apply_id}}">
 	<!--*****************************************存货**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">存货清单</span>
 		<input type="button" value="+" onclick="addTd('kcxx','dqdcXed_kc')" class="btn btn-info btn-mini" />
@@ -69,7 +78,7 @@
 				</tr>		
 			</table>
 		</div>
-		<input type="submit" value="提交" class="btn btn-info"/>
+		<input type="submit" value="保存" class="btn btn-info"/>
 		<!--
 		<input type="button" value="报表" class="btn btn-info" onclick="window.open('/report/print_stock/{{loan_apply_id}}')"/>
 		-->

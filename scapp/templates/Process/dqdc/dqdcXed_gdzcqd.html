@@ -17,7 +17,16 @@
 	</style>
 </head>
 
-<body onload="sub();datepicker();">	
+<body onload="sub();datepicker();setTimeOut();parent.parent.scroll(0,0);">	
+	{%- with messages = get_flashed_messages(with_categories=true) %}
+						  	{%- if messages %}
+					    	{%- for category, message in messages %}
+					    	<div class="alert alert-{{category}}">
+					      		{{message}}
+					      	</div>
+					    	{%- endfor %}
+						  	{%- endif %}
+						{%- endwith %}
 	<form class="content" method="post" action="/Process/dqdc/new_car">	
 	<div class="content">
 		<div class="tabbable">
@@ -158,7 +167,7 @@
 								</tr>		
 							</table>
 						</div>
-						<input type="submit" value="提交" class="btn btn-info"/>					
+						<input type="submit" value="保存" class="btn btn-info"/>					
 					</div>
 				</div><!--设备及器材详单-->		
 
@@ -226,7 +235,8 @@
 							</table>
 						</div>
 						<input name="hiddenId" type="hidden" value="{{id}}"/>
-						<input type="submit" value="提交" class="btn btn-info"/>
+						<input type="submit" value="保存" class="btn btn-info"/>
+						
 					</div>
 				</div><!--车辆详单-->						
 			</div><!-- tabContent -->

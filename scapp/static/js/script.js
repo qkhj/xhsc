@@ -872,18 +872,26 @@ function checkIdcard(obj) {
 function getLength(obj){
     var text="";
     text=obj.value;
-    if(text.length==11||text.length==12){
-        if($(obj).parent().find(".errorInfo").css("display")!="none"&&phone>0)
-            phone--;
-        $(obj).parent().find(".errorInfo").hide(); 
-    }
-    else{
-        if($(obj).parent().find(".errorInfo").css("display")=="none")                
-            phone++;             
-        $(obj).parent().find(".errorInfo").show();//显示改文本框所在span的className为errorInfo的错误信息
-        $("input[type=submit]").attr("disabled","disabled");//禁用提交按钮    
-    }
-    checkInput();
+	if(text!=""){
+		if(text.length==11||text.length==12){
+			if($(obj).parent().find(".errorInfo").css("display")!="none"&&phone>0)
+				phone--;
+			$(obj).parent().find(".errorInfo").hide(); 
+		}
+		else{
+			if($(obj).parent().find(".errorInfo").css("display")=="none")                
+				phone++;             
+			$(obj).parent().find(".errorInfo").show();//显示改文本框所在span的className为errorInfo的错误信息
+			$("input[type=submit]").attr("disabled","disabled");//禁用提交按钮    
+		}
+		
+	}
+	else{
+			if($(obj).parent().find(".errorInfo").css("display")!="none"&&phone>0)
+				phone--;
+			$(obj).parent().find(".errorInfo").hide(); 
+		}
+		checkInput();
 }
 
 //判断是否解除按钮禁用

@@ -41,22 +41,14 @@
 					</thead>
 					<tbody class="center">
 						{%- for obj in loan_apply.items %}	
-						<tr onclick="changeColor(this)">						
-							{%- if obj.loan_type == '1' %}
-								{%- if obj.company_customer_no %}
-								<td><a href="#" onclick="iframe('Process/dqdc/dqdc_wd/{{obj.company_customer_type}}/{{obj.company_customer_id}}/{{obj.loan_apply_id}}')">{{obj.loan_apply_id}}</a></td>
-								{%- else %}
-								<td><a href="#" onclick="iframe('Process/dqdc/dqdc_wd/{{obj.individual_customer_type}}/{{obj.individual_customer_id}}/{{obj.loan_apply_id}}')">{{obj.loan_apply_id}}</a></td>
-								{%- endif %}
-
-							{%- else %}	
+						<tr onclick="changeColor(this)">	
+							
 								{%- if obj.company_customer_no %}
 								<td><a href="#" onclick="iframe('Process/dqdc/dqdc_xed/{{obj.company_customer_type}}/{{obj.company_customer_id}}/{{obj.loan_apply_id}}')">{{obj.loan_apply_id}}</a></td>
 								{%- else %}
 								<td><a href="#" onclick="iframe('Process/dqdc/dqdc_xed/{{obj.individual_customer_type}}/{{obj.individual_customer_id}}/{{obj.loan_apply_id}}')">{{obj.loan_apply_id}}</a></td>
 								{%- endif %}
 							
-							{%- endif %}
 
 							{%- if obj.company_customer_no %}
 							<td>{{obj.company_customer_no}}</td>
