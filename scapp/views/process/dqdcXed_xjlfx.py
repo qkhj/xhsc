@@ -185,7 +185,7 @@ def edit_dqdcXed_xjlfx(id):
 		# 消息闪现
 		flash('保存失败','error')
 
-	return redirect('Process/dqdc/dqdc')
+	return redirect('Process/dqdc/dqdcXed_xjlfx/%d' % id)
 
 # 打印现金流分析
 @app.route('/Process/dqdc/dy_xjl/<int:id>', methods=['GET'])

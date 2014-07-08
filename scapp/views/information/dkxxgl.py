@@ -35,6 +35,7 @@ from scapp.config import PER_PAGE
 from scapp.models import View_Query_Loan
 
 from scapp.models import SC_Loan_Product
+from scapp.models.credit_data.sc_profit_jcjy import SC_Profit_Jcjy
 
 from scapp import app
 
@@ -210,8 +211,17 @@ def dkxx_dqdcXed_jcjy(loan_apply_id):
     cross_examination = SC_Cross_Examination.query.filter_by(loan_apply_id=loan_apply_id).order_by("id").all()
     count_3 = SC_Cross_Examination.query.filter_by(loan_apply_id=loan_apply_id,loan_type=3).count()
     balance_sheet = SC_Balance_Sheet.query.filter_by(loan_apply_id=loan_apply_id,loan_type=16).first()#type=16为资产负债表中的所有者权益
+    
+    #查询毛利润详细信息
+    profit_jcjy = SC_Profit_Jcjy.query.filter_by(loan_apply_id=loan_apply_id).order_by("id").all()
+    maxIndex = -1;
+    for obj in profit_jcjy:
+        if obj.index is not None and obj.index > maxIndex:
+            maxIndex = obj.index
+                
     return render_template("Information/dkxx/dqdcXed_jcjy.html",loan_apply_id=loan_apply_id,
-        cross_examination=cross_examination,count_3=count_3,balance_sheet=balance_sheet)
+        cross_examination=cross_examination,count_3=count_3,balance_sheet=balance_sheet,
+            profit_jcjy=profit_jcjy,maxIndex=maxIndex)
 
 # 贷款信息管理用——审批信息--调查表--小额贷款(损益情况分析)
 @app.route('/Information/dkxx/dqdcXed_ysqkfx/<int:loan_apply_id>', methods=['GET'])

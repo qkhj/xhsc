@@ -17,6 +17,8 @@ from scapp.models import SC_Industry
 from scapp.models import SC_Business_Type
 from scapp.models import SC_Loan_Purpose
 from scapp.models import SC_Target_Customer
+from scapp.models import SC_Individual_Customer
+from scapp.models import SC_Company_Customer
 
 from scapp.models import View_Get_Cus_Mgr
 
@@ -306,3 +308,28 @@ def edit_lfdj(id):
         loan_purpose = SC_Loan_Purpose.query.order_by("id").all()
         return render_template("Information/lfdj/edit_lfdj.html",target_customer=target_customer,
             industry=industry,business_type=business_type,loan_purpose=loan_purpose)
+        
+# 删除来访登记信息
+@app.route('/Information/lfdj/delete_lfdj/<int:id>', methods=['GET','POST'])
+def delete_lfdj(id):
+    individual_customer = SC_Individual_Customer.query.filter_by(customer_no=id).first()
+    company_customer = SC_Company_Customer.query.filter_by(customer_no=id).first()
+    if individual_customer is None and company_customer is None:
+        try:
+            SC_Target_Customer.query.filter_by(id=id).delete()
+            
+            # 事务提交
+            db.session.commit()
+            # 消息闪现
+            flash('删除成功','success')
+        except:
+            # 回滚
+            db.session.rollback()
+            logger.exception('exception')
+            # 消息闪现
+            flash('删除失败','error')
+    else:
+        flash('该信息已关联到客户信息表，无法删除','error')
+        
+    return redirect('Information/lfdj/lfdj')
+    

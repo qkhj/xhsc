@@ -43,7 +43,7 @@ def new_fdc(loan_apply_id):
 			# 消息闪现
 			flash('保存失败','error')
 
-		return redirect('Process/dqdc/dqdc')
+		return redirect('Process/dqdc/dqdcXed_gdzcqd/%d' % loan_apply_id)
 
 # 贷款调查——编辑小额贷款(固定资产清单-房地产)
 @app.route('/Process/dqdc/edit_fdc/<int:id>', methods=['GET','POST'])
@@ -75,7 +75,7 @@ def edit_fdc(id):
 			# 消息闪现
 			flash('保存失败','error')
 
-		return redirect('Process/dqdc/dqdc')
+		return redirect('Process/dqdc/dqdcXed_gdzcqd/%d' % id)
 
 # 贷款调查——新增小额贷款(固定资产清单-设备器材)
 @app.route('/Process/dqdc/new_equipment/<int:loan_apply_id>', methods=['GET','POST'])

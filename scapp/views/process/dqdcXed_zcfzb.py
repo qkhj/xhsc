@@ -59,8 +59,8 @@ def dqdcXed_zcfzb(loan_apply_id):
 			logger.exception('exception')
 			# 消息闪现
 			flash('保存失败','error')
-
-		return redirect('Process/dqdc/dqdc')
+			
+		return redirect('Process/dqdc/dqdcXed_zcfzb/%d' % loan_apply_id)
 
 @app.route('/Process/dqdc/dy_fcw/<int:loan_apply_id>', methods=['GET'])
 def dqdcXed_fcw_dy(loan_apply_id):
