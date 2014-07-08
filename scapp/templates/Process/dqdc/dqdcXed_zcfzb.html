@@ -19,7 +19,8 @@
 	</style>
 </head>
 
-<body onload="$('input[type=text]').click();setTimeOut();parent.parent.scroll(0,0);">	
+<body onload="$('input[type=text]').click();setTimeOut();parent.parent.scroll(0,0);">			
+	<form id="content" name="content" class="content" method="POST" action="/Process/dqdc/dqdcXed_zcfzb/{{loan_apply_id}}">
 		{%- with messages = get_flashed_messages(with_categories=true) %}
 		  	{%- if messages %}
 	    	{%- for category, message in messages %}
@@ -29,7 +30,6 @@
 	    	{%- endfor %}
 		  	{%- endif %}
 		{%- endwith %}
-	<form id="content" name="content" class="content" method="POST" action="/Process/dqdc/dqdcXed_zcfzb/{{loan_apply_id}}">
 	<!--*****************************************资产负债表**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">资产负债表</span>
 		{%- if balance_sheets %}

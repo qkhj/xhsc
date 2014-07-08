@@ -22,7 +22,8 @@
 </head>
 
 <body onload="setInput();setTimeOut();parent.parent.scroll(0,0);">	
-{%- with messages = get_flashed_messages(with_categories=true) %}
+	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_dbdydcb/{{id}}">
+		{%- with messages = get_flashed_messages(with_categories=true) %}
 		  	{%- if messages %}
 	    	{%- for category, message in messages %}
 	    	<div class="alert alert-{{category}}">
@@ -31,12 +32,11 @@
 	    	{%- endfor %}
 		  	{%- endif %}
 		{%- endwith %}
-	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_dbdydcb/{{id}}">
 	<!--*****************************************担保抵押调查表**************************************************-->
 		<!--*****************************************共同借款人**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">共同借款人</span>
-		<input type="button" value="+" onclick="addTd('gtjkr','dqdcXed_dbdydcb')" class="btn btn-info btn-mini" />
-		<input type="button" value="-" onclick="removeTd2('gtjkr','dqdcXed_dbdydcb')" class="btn btn-info btn-mini" />
+		<input type="button" value="+" onclick="addTd('gtjkr','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+		<input type="button" value="-" onclick="removeTd2('gtjkr','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
 		<div class="divBorder">
 			<table id="gtjkr" class="table-list">
 				<!-- <tr class="font-small">
@@ -168,8 +168,8 @@
 		
 	<!--*****************************************担保人**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">担保人</span>
-		<input type="button" value="+" onclick="addTd('dbr','dqdcXed_dbdydcb')" class="btn btn-info btn-mini" />
-		<input type="button" value="-" onclick="removeTd2('dbr','dqdcXed_dbdydcb')" class="btn btn-info btn-mini" />
+		<input type="button" value="+" onclick="addTd('dbr','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+		<input type="button" value="-" onclick="removeTd2('dbr','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
 		<div class="divBorder">
 			<table id="dbr" class="table-list">
 				
@@ -292,8 +292,8 @@
 		
 	<!--*****************************************抵押品信息**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">抵押品信息</span>		
-		<input type="button" value="+" onclick="addTd('jydyw','dqdcXed_dbdydcb')" class="btn btn-info btn-mini" />
-		<input type="button" value="-" onclick="removeTd('jydyw','dqdcXed_dbdydcb')" class="btn btn-info btn-mini" />
+		<input type="button" value="+" onclick="addTd('jydyw','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+		<input type="button" value="-" onclick="removeTd('jydyw','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
 		<div class="divBorder">
 			<table id="jydyw" class="table-list">
 				<tr>

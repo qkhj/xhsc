@@ -17,28 +17,28 @@
 		select{width:100px;}
 	</style>
 </head>
-<body onload="sub();datepicker();setTimeOut();parent.parent.scroll(0,0);">	
-{%- with messages = get_flashed_messages(with_categories=true) %}
-						  	{%- if messages %}
-					    	{%- for category, message in messages %}
-					    	<div class="alert alert-{{category}}">
-					      		{{message}}
-					      	</div>
-					    	{%- endfor %}
-						  	{%- endif %}
-						{%- endwith %}
+<body onload="sub();datepicker();setTimeOut();parent.parent.scroll(0,0);">
 	<form class="content" method="post" action="/Process/dqdc/new_zkqd">
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+			{%- if messages %}
+			{%- for category, message in messages %}
+			<div class="alert alert-{{category}}">
+				{{message}}
+			</div>
+			{%- endfor %}
+			{%- endif %}
+		{%- endwith %}
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#tab1" id="fdcxd" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane active');$('#tab2').attr('class','tab-pane');doubleIframe('dqdcXed_zkqd');">应付账款详单</a></li>
-				<li><a href="#tab2" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane');$('#tab2').attr('class','tab-pane active');doubleIframe('dqdcXed_zkqd');">应收账款详单</a></li>
+				<li class="active"><a href="#tab1" id="fdcxd" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane active');$('#tab2').attr('class','tab-pane');doubleIframe('dqdcXed_zcfzb');">应付账款详单</a></li>
+				<li><a href="#tab2" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane');$('#tab2').attr('class','tab-pane active');doubleIframe('dqdcXed_zcfzb');">应收账款详单</a></li>
 			</ul>						
 			<div class="tab-content">
 				<!--*********************************应付账款详单*******************************************-->
 				<div class="tab-pane active" id="tab1">
 					<i class="icon-bookmark"></i><span class="titletip">应付账款详单</span>		
-					<input type="button" value="+" onclick="addTd('yfzkxd','dqdcXed_zkqd')" class="btn btn-info btn-mini" />
-					<input type="button" value="-" onclick="removeTd('yfzkxd','dqdcXed_zkqd');sub()" class="btn btn-info btn-mini" />	
+					<input type="button" value="+" onclick="addTd('yfzkxd','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+					<input type="button" value="-" onclick="removeTd('yfzkxd','dqdcXed_zcfzb');sub()" class="btn btn-info btn-mini" />	
 					<div class="divBorder">	
 						<table class="table-list" cellspacing="10" id="yfzkxd">				
 							<tr>
@@ -109,8 +109,8 @@
 				<!--**************************************应收账款详单**************************************-->
 				<div class="tab-pane" id="tab2">
 					<i class="icon-bookmark"></i><span class="titletip">应收账款详单</span>		
-					<input type="button" value="+" onclick="addTd('yszkxd','dqdcXed_zkqd')" class="btn btn-info btn-mini" />
-					<input type="button" value="-" onclick="removeTd('yszkxd','dqdcXed_zkqd');sub()" class="btn btn-info btn-mini" />
+					<input type="button" value="+" onclick="addTd('yszkxd','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+					<input type="button" value="-" onclick="removeTd('yszkxd','dqdcXed_zcfzb');sub()" class="btn btn-info btn-mini" />
 							
 					<div class="divBorder">	
 						<table class="table-list" cellspacing="10" id="yszkxd">				

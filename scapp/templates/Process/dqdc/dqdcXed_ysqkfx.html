@@ -24,8 +24,9 @@
 	</script>
 </head>
 
-<body onload="$('.datepicker').datepicker();setTimeOut();parent.parent.scroll(0,0);">
-	{%- with messages = get_flashed_messages(with_categories=true) %}
+<body onload="$('.datepicker').datepicker();setTimeOut();parent.parent.scroll(0,0);">	
+	<form class="content" method="POST" action="/Process/dqdc/dqdcXed_ysqkfx/{{loan_apply_id}}">
+		{%- with messages = get_flashed_messages(with_categories=true) %}
 		  	{%- if messages %}
 	    	{%- for category, message in messages %}
 	    	<div class="alert alert-{{category}}">
@@ -34,7 +35,6 @@
 	    	{%- endfor %}
 		  	{%- endif %}
 		{%- endwith %}
-	<form class="content" method="POST" action="/Process/dqdc/dqdcXed_ysqkfx/{{loan_apply_id}}">
 		{%- if profit_loss %}
 	<!--*****************************************资产负债表**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">损益表</span>
@@ -74,8 +74,8 @@
 					<td style="width:166px;">
 						{%- if profit_loss[i].index == 0 %}
 						收入
-						<input type="button" value="+" onclick="addTd('sr','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('sr','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
+						<input type="button" value="+" onclick="addTd('sr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('sr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						{%- endif %}
 						<span>	
 							<input type="text" name="items_name_1" value="{{profit_loss[i].items_name}}" onchange="spryMaxLength(this,32)"/>
@@ -190,8 +190,8 @@
 					<td style="width:166px;">
 						{%- if profit_loss[i].index == 0 %}
 							可变成本
-							<input type="button" value="+" onclick="addTd('kbcb','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('kbcb','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
+							<input type="button" value="+" onclick="addTd('kbcb','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('kbcb','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						{%- endif %}
 						<span>	
 							<input type="text" name="items_name_3" value="{{profit_loss[i].items_name}}" onchange="check(this,0,1);kbcb(this,1);kbcb(this,2);kbcb(this,3);kbcb(this,4);kbcb(this,5);kbcb(this,6);kbcb(this,7);kbcb(this,8);kbcb(this,9);kbcb(this,10);kbcb(this,11);kbcb(this,12)"/><br/>
@@ -1095,8 +1095,8 @@
 						<span>	
 						{%- if profit_loss[i].index == 0 %}
 							其他
-							<input type="button" value="+" onclick="addTd('qtfy','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('qtfy','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
+							<input type="button" value="+" onclick="addTd('qtfy','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('qtfy','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						{%- endif %}
 							<input type="text" name="items_name_21"  value="{{profit_loss[i].items_name}}" onchange="spryMaxLength(this,32)" style="width:120px;"/>
 							<span class="errorInfo">字符数不得大于32</span>
@@ -1460,8 +1460,8 @@
 					<td style="width:166px;">
 						{%- if profit_loss[i].index == 0 %}
 						其他支出	
-						<input type="button" value="+" onclick="addTd('qtzc','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qtzc','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
+						<input type="button" value="+" onclick="addTd('qtzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qtzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						{%- endif %}
 						<span>	
 							<input type="text" name="items_name_28" value="{{profit_loss[i].items_name}}" onchange="spryMaxLength(this,32)"/>
@@ -1522,8 +1522,8 @@
 					<td style="width:166px;">
 						{%- if profit_loss[i].index == 0 %}
 						其他收入
-						<input type="button" value="+" onclick="addTd('qtsr','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qtsr','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
+						<input type="button" value="+" onclick="addTd('qtsr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qtsr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						{%- endif %}
 						<span>	
 							<input type="text" name="items_name_29" value="{{profit_loss[i].items_name}}" onchange="spryMaxLength(this,32)"/>
@@ -1667,8 +1667,8 @@
 				<tr class="center">
 					<td style="width:166px;">
 						收入
-						<input type="button" value="+" onclick="addTd('sr','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('sr','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
+						<input type="button" value="+" onclick="addTd('sr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('sr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						<span>	
 							<input type="text" name="items_name_1" onchange="spryMaxLength(this,32)"/>
 							<span class="errorInfo">字符数不得大于32</span>
@@ -1777,8 +1777,8 @@
 				<tr class="center">
 					<td style="width:166px;">
 						可变成本
-						<input type="button" value="+" onclick="addTd('kbcb','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('kbcb','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
+						<input type="button" value="+" onclick="addTd('kbcb','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('kbcb','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						<span>	
 							<input type="text" name="items_name_3" onchange="check(this,0,1);kbcb(this,1);kbcb(this,2);kbcb(this,3);kbcb(this,4);kbcb(this,5);kbcb(this,6);kbcb(this,7);kbcb(this,8);kbcb(this,9);kbcb(this,10);kbcb(this,11);kbcb(this,12)"/><br/>
 							<span class="errorInfo">请输入0-1之间的数</span>
@@ -2644,8 +2644,8 @@
 					<td style="width:166px;">
 						<span>	
 							其他
-							<input type="button" value="+" onclick="addTd('qtfy','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('qtfy','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
+							<input type="button" value="+" onclick="addTd('qtfy','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('qtfy','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 							<input type="text" name="items_name_21" onchange="spryMaxLength(this,32)" style="width:120px;"/>
 							<span class="errorInfo">字符数不得大于32</span>
 						</span>
@@ -2993,8 +2993,8 @@
 				<tr class="center">
 					<td style="width:166px;">
 						其他支出	
-						<input type="button" value="+" onclick="addTd('qtzc','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qtzc','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
+						<input type="button" value="+" onclick="addTd('qtzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qtzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						<span>	
 							<input type="text" name="items_name_28" onchange="spryMaxLength(this,32)"/>
 							<span class="errorInfo">字符数不得大于32</span>
@@ -3051,8 +3051,8 @@
 				<tr class="center">
 					<td style="width:166px;">
 						其他收入
-						<input type="button" value="+" onclick="addTd('qtsr','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qtsr','dqdcXed_ysqkfx')" class="btn btn-info btn-mini"/>
+						<input type="button" value="+" onclick="addTd('qtsr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qtsr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						<span>	
 							<input type="text" name="items_name_29" onchange="spryMaxLength(this,32)"/>
 							<span class="errorInfo">字符数不得大于32</span>
