@@ -17,23 +17,22 @@
 	</style>
 </head>
 
-<body onload="sub();datepicker();setTimeOut();parent.parent.scroll(0,0);">	
-	{%- with messages = get_flashed_messages(with_categories=true) %}
-						  	{%- if messages %}
-					    	{%- for category, message in messages %}
-					    	<div class="alert alert-{{category}}">
-					      		{{message}}
-					      	</div>
-					    	{%- endfor %}
-						  	{%- endif %}
-						{%- endwith %}
+<body onload="sub();datepicker();setTimeOut();parent.parent.scroll(0,0);">		
 	<form class="content" method="post" action="/Process/dqdc/new_car">	
-	<div class="content">
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+			{%- if messages %}
+			{%- for category, message in messages %}
+			<div class="alert alert-{{category}}">
+				{{message}}
+			</div>
+			{%- endfor %}
+			{%- endif %}
+		{%- endwith %}
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
-				<li class="active"><a href="#tab1" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane active');$('#tab2').attr('class','tab-pane');$('#tab3').attr('class','tab-pane');doubleIframe('dqdcXed_gdzcqd');">房地产详单</a></li>
-				<li><a href="#tab2" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane');$('#tab2').attr('class','tab-pane active');$('#tab3').attr('class','tab-pane');doubleIframe('dqdcXed_gdzcqd');">设备及器材详单</a></li>
-				<li><a href="#tab3" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane active');$('#tab2').attr('class','tab-pane');$('#tab3').attr('class','tab-pane active');doubleIframe('dqdcXed_gdzcqd');">车辆详单</a></li>
+				<li class="active"><a href="#tab1" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane active');$('#tab2').attr('class','tab-pane');$('#tab3').attr('class','tab-pane');doubleIframe('dqdcXed_zcfzb');">房地产详单</a></li>
+				<li><a href="#tab2" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane');$('#tab2').attr('class','tab-pane active');$('#tab3').attr('class','tab-pane');doubleIframe('dqdcXed_zcfzb');">设备及器材详单</a></li>
+				<li><a href="#tab3" data-toggle="tab" onclick="$('#tab1').attr('class','tab-pane active');$('#tab2').attr('class','tab-pane');$('#tab3').attr('class','tab-pane active');doubleIframe('dqdcXed_zcfzb');">车辆详单</a></li>
 			</ul>						
 			<div class="tab-content">
 				<!--房地产详单-->
@@ -41,8 +40,8 @@
 					<!--*****************************************房地产详单**************************************************-->
 					<div id="FDC">
 						<i class="icon-bookmark"></i><span class="titletip">房地产详单</span>
-						<input type="button" value="+" onclick="addTd('fdcxd','dqdcXed_gdzcqd')" class="btn btn-info btn-mini" />
-						<input type="button" value="-" onclick="removeTd('fdcxd','dqdcXed_gdzcqd');sub()" class="btn btn-info btn-mini" />
+						<input type="button" value="+" onclick="addTd('fdcxd','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+						<input type="button" value="-" onclick="removeTd('fdcxd','dqdcXed_zcfzb');sub()" class="btn btn-info btn-mini" />
 						<div class="divBorder">	
 							<table class="table-list" cellspacing="10" id="fdcxd">				
 								<tr>
@@ -100,7 +99,7 @@
 								</tr>		
 							</table>
 						</div>
-						<input type="submit" value="提交" class="btn btn-info"/>
+						
 					</div>
 				</div><!--/房地产详单-->
 
@@ -109,8 +108,8 @@
 					<!--*****************************************设备及器材详单**************************************************-->
 					<div id="SBXD">
 						<i class="icon-bookmark"></i><span class="titletip">设备及器材详单</span>
-						<input type="button" value="+" id="add2" onclick="addTd('sbjqcxd','dqdcXed_gdzcqd')" class="btn btn-info btn-mini" />
-						<input type="button" value="-" id="cut2" onclick="removeTd('sbjqcxd','dqdcXed_gdzcqd');sub()" class="btn btn-info btn-mini" />
+						<input type="button" value="+" id="add2" onclick="addTd('sbjqcxd','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+						<input type="button" value="-" id="cut2" onclick="removeTd('sbjqcxd','dqdcXed_zcfzb');sub()" class="btn btn-info btn-mini" />
 						<div class="divBorder">	
 							<table class="table-list" cellspacing="10" id="sbjqcxd">
 								<tr>
@@ -167,7 +166,7 @@
 								</tr>		
 							</table>
 						</div>
-						<input type="submit" value="保存" class="btn btn-info"/>					
+									
 					</div>
 				</div><!--设备及器材详单-->		
 
@@ -176,8 +175,8 @@
 					<!--*****************************************车辆详单**************************************************-->
 					<div id="CLXD"> 
 						<i class="icon-bookmark"></i><span class="titletip">车辆详单</span>
-						<input type="button" value="+" onclick="addTd('clxd','dqdcXed_gdzcqd')" class="btn btn-info btn-mini" />
-						<input type="button" value="-" onclick="removeTd('clxd','dqdcXed_gdzcqd');sub()" class="btn btn-info btn-mini" />
+						<input type="button" value="+" onclick="addTd('clxd','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+						<input type="button" value="-" onclick="removeTd('clxd','dqdcXed_zcfzb');sub()" class="btn btn-info btn-mini" />
 						<div class="divBorder">	
 							<table class="table-list" cellspacing="10" id="clxd">
 								<tr>
@@ -235,13 +234,13 @@
 							</table>
 						</div>
 						<input name="hiddenId" type="hidden" value="{{id}}"/>
-						<input type="submit" value="保存" class="btn btn-info"/>
 						
 					</div>
 				</div><!--车辆详单-->						
 			</div><!-- tabContent -->
 		</div>
-	</div>
+		<input type="submit" value="提交" class="btn btn-info"/>
+	</form>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>

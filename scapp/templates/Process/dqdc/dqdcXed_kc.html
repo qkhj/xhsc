@@ -16,20 +16,20 @@
 </head>
 
 <body onload="sub();$('input[name]').click();setTimeOut();parent.parent.scroll(0,0);">	
-{%- with messages = get_flashed_messages(with_categories=true) %}
-						  	{%- if messages %}
-					    	{%- for category, message in messages %}
-					    	<div class="alert alert-{{category}}">
-					      		{{message}}
-					      	</div>
-					    	{%- endfor %}
-						  	{%- endif %}
-						{%- endwith %}
 	<form class="content" method="POST" action="/Process/dqdc/new_kc/{{loan_apply_id}}">
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+			{%- if messages %}
+			{%- for category, message in messages %}
+			<div class="alert alert-{{category}}">
+				{{message}}
+			</div>
+			{%- endfor %}
+			{%- endif %}
+		{%- endwith %}
 	<!--*****************************************存货**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">存货清单</span>
-		<input type="button" value="+" onclick="addTd('kcxx','dqdcXed_kc')" class="btn btn-info btn-mini" />
-		<input type="button" value="-" onclick="removeTd('kcxx','dqdcXed_kc');sub()" class="btn btn-info btn-mini" />
+		<input type="button" value="+" onclick="addTd('kcxx','dqdcXed_zcfzb')" class="btn btn-info btn-mini" />
+		<input type="button" value="-" onclick="removeTd('kcxx','dqdcXed_zcfzb');sub()" class="btn btn-info btn-mini" />
 		<div class="divBorder">	
 			<table id="kcxx" class="table-list">
 				<tr class="font-small">
