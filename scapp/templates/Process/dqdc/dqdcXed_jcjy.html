@@ -816,7 +816,7 @@
 			var id="table"+num//动态设置id
 			var p=document.createElement("table");//创建一个table元素
 			p.style.width="100%"//设置table的宽度
-			p.innerHTML="<tr>"+//设置table内部HTML
+			string="<tr>"+//设置table内部HTML
 							"<td style='width:20%;'>"+
 								"<input type='text' name='name' value='加权毛利率' onchange='setName(this,"+num+")'/>"+
 								"<input type='hidden' name='type' value='1' />"+
@@ -840,6 +840,7 @@
 							"<td><input type='text' name='ratio' onchange='Zmaoli(this,"+num+")'/><input type='hidden' name='zc'/></td>"+
 							"<td><input type='text' name='profit' readonly/></td>"+
 						"</tr>	";
+			$(p).html(string);
 			p.id=id;//设置table的id
 			p.setAttribute("rule","block")//给table添加rule属性
 			document.getElementById(table).appendChild(p);//添加table到页面中
