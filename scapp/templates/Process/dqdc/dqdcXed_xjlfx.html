@@ -25,7 +25,8 @@
 </head>
 
 <body onload="set();setTimeOut();parent.parent.scroll(0,0);">	
-{%- with messages = get_flashed_messages(with_categories=true) %}
+	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_xjlfx/{{id}}">
+		{%- with messages = get_flashed_messages(with_categories=true) %}
 		  	{%- if messages %}
 	    	{%- for category, message in messages %}
 	    	<div class="alert alert-{{category}}">
@@ -34,7 +35,6 @@
 	    	{%- endfor %}
 		  	{%- endif %}
 		{%- endwith %}
-	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_xjlfx/{{id}}">
 	<!--*****************************************现金流分析**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">现金流分析</span>
 		<select name="" onchange="xjlfx(this)" disabled style="display:none"> 			
@@ -407,8 +407,8 @@
 							<tr class="center">
 								<td style="width:120px" class="table-label">
 									其他费用<br/>
-									<input type="button" value="+" onclick="addTd('qtfyx','dqdcXed_xjlfx')" class="btn btn-info btn-mini"/>
-									<input type="button" value="-" onclick="removeTd('qtfyx','dqdcXed_xjlfx')" class="btn btn-info btn-mini"/>
+									<input type="button" value="+" onclick="addTd('qtfyx','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('qtfyx','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 								</td>								
 								<td>
 									<table id="qtfyx" >
@@ -570,8 +570,8 @@
 							<tr class="center">
 								<td style="width:120px" class="table-label">
 									其他借款<br/>
-									<input type="button" value="+" onclick="addTd('qtjk','dqdcXed_xjlfx')" class="btn btn-info btn-mini"/>
-									<input type="button" value="-" onclick="removeTd('qtjk','dqdcXed_xjlfx')" class="btn btn-info btn-mini"/>
+									<input type="button" value="+" onclick="addTd('qtjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('qtjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 								</td>								
 								<td>
 									<table id="qtjk" >
@@ -625,8 +625,8 @@
 							<tr class="center">
 								<td style="width:120px" class="table-label">
 									偿还其他借款<br/>
-									<input type="button" value="+" onclick="addTd('chqtjk','dqdcXed_xjlfx')" class="btn btn-info btn-mini"/>
-									<input type="button" value="-" onclick="removeTd('chqtjk','dqdcXed_xjlfx')" class="btn btn-info btn-mini"/>
+									<input type="button" value="+" onclick="addTd('chqtjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('chqtjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 								</td>								
 								<td>
 									<table id="chqtjk" >
@@ -680,8 +680,8 @@
 							<tr class="center">
 								<td style="width:120px" class="table-label">
 									其他借款现金来源<br/>
-									<input type="button" value="+" onclick="addTd('qtjkxjly','dqdcXed_xjlfx')" class="btn btn-info btn-mini"/>
-									<input type="button" value="-" onclick="removeTd('qtjkxjly','dqdcXed_xjlfx')" class="btn btn-info btn-mini"/>
+									<input type="button" value="+" onclick="addTd('qtjkxjly','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('qtjkxjly','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 								</td>								
 								<td>
 									<table id="qtjkxjly" >

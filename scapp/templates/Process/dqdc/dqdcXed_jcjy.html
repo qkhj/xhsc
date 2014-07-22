@@ -25,8 +25,9 @@
 	</script>
 </head>
 
-<body onload="setInput();setTimeOut();parent.parent.scroll(0,0);"">	
-	{%- with messages = get_flashed_messages(with_categories=true) %}
+<body onload="setInput();setTimeOut();parent.parent.scroll(0,0);">		
+	<form id="content" class="content" method="POST" action="/Process/dqdc/dqdcXed_jcjy/{{loan_apply_id}}">
+		{%- with messages = get_flashed_messages(with_categories=true) %}
 		  	{%- if messages %}
 	    	{%- for category, message in messages %}
 	    	<div class="alert alert-{{category}}">
@@ -35,7 +36,6 @@
 	    	{%- endfor %}
 		  	{%- endif %}
 		{%- endwith %}
-	<form id="content" class="content" method="POST" action="/Process/dqdc/dqdcXed_jcjy/{{loan_apply_id}}">
 	<!--*****************************************交叉检验**************************************************-->
 		<i class="icon-bookmark"></i><span class="titletip">交叉检验</span>
 		{%- if cross_examination %}
@@ -84,8 +84,8 @@
 							{%- else %}
 							<div style="display:none;" id="jcjy2">	
 							{%- endif %}
-								<input type="button" value="+" onclick="addTd2('tableAll','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
-								<input type="button" value="-" onclick="removeTd2('dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+								<input type="button" value="+" onclick="addTd2('tableAll','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+								<input type="button" value="-" onclick="removeTd2('dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 								<div class="divBorder">
 									<div id="tableAll">		
 										<table class="table-list">
@@ -109,8 +109,8 @@
 																	<input type="hidden" name="type" value="{{obj.type}}" />
 																</td>
 																<td style="width:20%;">
-																	<input type="button" value="+" onclick="addTd3('table{{obj.index}}','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
-																	<input type="button" value="-" onclick="removeTd('table{{obj.index}}','dqdcXed_jcjy');$(this).parent().parent().parent().find('input[name=price]').change();" class="btn btn-info btn-mini"/>	
+																	<input type="button" value="+" onclick="addTd3('table{{obj.index}}','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+																	<input type="button" value="-" onclick="removeTd('table{{obj.index}}','dqdcXed_zcfzb');$(this).parent().parent().parent().find('input[name=price]').change();" class="btn btn-info btn-mini"/>	
 																	<input type="hidden" name="bid"/>
 																</td>
 																<td style="width:20%;"><input type="hidden" name="price"/> </td>
@@ -213,8 +213,8 @@
 						<td style="text-align:left">
 							{%- if obj.index == 0 %}
 							<input type="text" name="value_3" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
-							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 							{%- else %}
 							<input type="text" name="value_3" onkeyup="setJe(this);" onblur='hj(3);yyqy();qyce();qyjcjybl()' maxlength="11" onclick="setJe(this)" value="{{obj.content}}" />
 							{%- endif %}
@@ -233,8 +233,8 @@
 						<td>
 							{%- if cross_examination[cross_examination.index(obj)+count_3].index == 0 %}
 							<input type="text" name="value_4" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
-							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 							{%- else %}
 							<input type="text" name="value_4" onkeyup="setJe(this);" onblur='hj(4);yyqy();qyce();fxqjljsr();qyjcjybl()' maxlength="11" onclick="setJe(this)" value="{{cross_examination[cross_examination.index(obj)+count_3].content}}" />
 							{%- endif %}
@@ -263,8 +263,8 @@
 						<td>
 							{%- if obj.index == 0 %}
 							<input type="text" name="value_5" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
-							<input type="button" value="+" onclick="addTd('dxzchj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+							<input type="button" value="+" onclick="addTd('dxzchj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 							{%- else %}
 							<input type="text" name="value_5" onkeyup="setJe(this);" onblur='hj(5);yyqy();qyce();qyjcjybl()' maxlength="11" onclick="setJe(this)" value="{{obj.content}}" />
 							{%- endif %}
@@ -444,8 +444,8 @@
 							<span class="errorInfo">字符数不得大于2048</span>
 						</div>						
 						<div style="display:none;" id="jcjy2">	
-							<input type="button" value="+" onclick="addTd2('tableAll','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd2('dqdcXed_jcjy')" class="btn btn-info btn-mini"/>	
+							<input type="button" value="+" onclick="addTd2('tableAll','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd2('dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>	
 							<div class="divBorder">
 								<div id="tableAll">		
 									<table class="table-list">
@@ -464,8 +464,8 @@
 												<input type="hidden" name="type" value="1" />
 											</td>
 											<td style="width:20%;">
-												<input type="button" value="+" onclick="addTd3('table0','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
-												<input type="button" value="-" onclick="removeTd('table0','dqdcXed_jcjy');$(this).parent().parent().parent().find('input[name=price]').change();" class="btn btn-info btn-mini"/>	
+												<input type="button" value="+" onclick="addTd3('table0','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+												<input type="button" value="-" onclick="removeTd('table0','dqdcXed_zcfzb');$(this).parent().parent().parent().find('input[name=price]').change();" class="btn btn-info btn-mini"/>	
 												<input type="hidden" name="bid"/>	
 											</td>
 											<td style="width:20%;"><input type="hidden" name="price"/></td>
@@ -537,8 +537,8 @@
 					</td>
 					<td style="text-align:left">
 						<input type="text" name="value_3" onkeyup="setJe(this);" value="0" onclick="setJe(this)" readonly/>
-						<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+						<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -549,8 +549,8 @@
 					</td>
 					<td>
 						<input type="text" name="value_4" onkeyup="setJe(this);" value="0" onclick="setJe(this)" readonly/>
-						<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+						<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -567,8 +567,8 @@
 					</td>
 					<td>
 						<input type="text" name="value_5" onkeyup="setJe(this);" value="0" onclick="setJe(this)" readonly/>
-						<input type="button" value="+" onclick="addTd('dxzchj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_jcjy')" class="btn btn-info btn-mini"/>
+						<input type="button" value="+" onclick="addTd('dxzchj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -776,7 +776,7 @@
 				$("#jcjy1").hide();
 				$("#jcjy2").show();
 				i=1;
-				doubleIframe("dqdcXed_jcjy");
+				doubleIframe("dqdcXed_zcfzb");
 			}
 			else{
 				$(obj).val("录入详细数据");
@@ -784,7 +784,7 @@
 				$("#jcjy2").hide();
 				$("#jcjy1").show();
 				i=0;
-				doubleIframe("dqdcXed_jcjy");
+				doubleIframe("dqdcXed_zcfzb");
 			}
 		}
 		function addTd3(table,frameid){//添加行
@@ -816,14 +816,14 @@
 			var id="table"+num//动态设置id
 			var p=document.createElement("table");//创建一个table元素
 			p.style.width="100%"//设置table的宽度
-			p.innerHTML="<tr>"+//设置table内部HTML
+			string="<tr>"+//设置table内部HTML
 							"<td style='width:20%;'>"+
 								"<input type='text' name='name' value='加权毛利率' onchange='setName(this,"+num+")'/>"+
 								"<input type='hidden' name='type' value='1' />"+
 							"</td>"+
 							"<td style='width:20%;'>"+
-								"<input type='button' value='+' onclick=addTd3('"+id+"','dqdcXed_jcjy') class='btn btn-info btn-mini'/>"+
-								"<input type='button' value='-' onclick=\"removeTd('"+id+"','dqdcXed_jcjy');$(this).parent().parent().parent().find('input[name=price]').change();\" class='btn btn-info btn-mini'/>	"+
+								"<input type='button' value='+' onclick=addTd3('"+id+"','dqdcXed_zcfzb') class='btn btn-info btn-mini'/>"+
+								"<input type='button' value='-' onclick=\"removeTd('"+id+"','dqdcXed_zcfzb');$(this).parent().parent().parent().find('input[name=price]').change();\" class='btn btn-info btn-mini'/>	"+
 								"<input type='hidden' name='bid'/>"+
 							"</td>"+
 							"<td style='width:20%;'><input type='hidden' name='price'/></td>"+
@@ -840,6 +840,7 @@
 							"<td><input type='text' name='ratio' onchange='Zmaoli(this,"+num+")'/><input type='hidden' name='zc'/></td>"+
 							"<td><input type='text' name='profit' readonly/></td>"+
 						"</tr>	";
+			$(p).html(string);
 			p.id=id;//设置table的id
 			p.setAttribute("rule","block")//给table添加rule属性
 			document.getElementById(table).appendChild(p);//添加table到页面中
