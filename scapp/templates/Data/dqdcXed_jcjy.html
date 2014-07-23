@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">	
+	<!-- ************************验证样式************************-->
+	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">
+	<style type="text/css">	
+		input.btn-mini{width:20px;}	
+		textarea{width:80%;}	
+		.table-list .table-label{width:180px;}	
+	</style>
+	<script type="text/javascript">
+		function setInput(){
+			$('input[type=text]').click();
+		}
+	</script>
+</head>
+
+<body onload="setInput();setTimeOut();parent.parent.scroll(0,0);">		
+	<form id="content" class="content" method="POST" action="/Process/dqdc/dqdcXed_jcjy/{{loan_apply_id}}">
+		交叉
+		<input type="submit" value="保存" class="btn btn-info"/>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("initial_equity", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("profit_period", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("injection_period", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("pick_period", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("depreciation", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("appreciation", "none");
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("price", "none");
+		function hj(num){
+			var sum=0;
+			var length=$("input[name=value_"+num+"]").length;
+			for(i=1;i<length;i++){
+				var a=$("input[name=value_"+num+"]")[i].value;
+				if(a==""){a=0;}else{a=parseInt(a);}
+				sum+=a;
+			}
+			$("input[name=value_"+num+"]")[0].value=sum;
+			$("input[name=value_"+num+"]")[0].click();
+		}
+		function yyqy(){//应有权益=期初权益+分析期间收入-大项支出+其他收入+升值-折旧（计入资产负债表的）-表外资产
+			var sum=0;
+			var a3=$("input[name=value_3]")[0].value;//期初权益
+			var a4=$("input[name=value_4]")[0].value;//分析期间收入
+			var a5=$("input[name=value_5]")[0].value;//大项支出
+			var a6=$("input[name=value_6]").val();//其他收入
+			var a7=$("input[name=value_7]").val();//升值
+			var a8=$("input[name=value_8]").val();//折旧（计入资产负债表的）
+			var a9=$("input[name=value_9]").val();//表外资产
+			if(a3==""){a3=0;}else{a3=parseInt(a3);}
+			if(a4==""){a4=0;}else{a4=parseInt(a4);}
+			if(a5==""){a5=0;}else{a5=parseInt(a5);}
+			if(a6==""){a6=0;}else{a6=parseInt(a6);}
+			if(a7==""){a7=0;}else{a7=parseInt(a7);}
+			if(a8==""){a8=0;}else{a8=parseInt(a8);}
+			if(a9==""){a9=0;}else{a9=parseInt(a9);}
+			sum=a3+a4-a5+a6+a7-a8-a9;
+			$("input[name=value_10]").val(sum);
+			$("input[name=value_10]").click();
+		}
+		function qyce(){//权益差额=应有权益-实际权益
+			var sum=0;
+			var a1=$("input[name=value_10]").val();//应有权益
+			var a2=$("input[name=value_11]").val();//实际权益
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			sum=a1-a2;
+			$("input[name=value_12]").val(sum);
+			$("input[name=value_12]").click();
+		}
+		function fxqjljsr(){//分析期间累计收入=分析期间收入合计			
+			var a1=$("input[name=value_4]")[0].value;//分析期间收入合计			
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			$("input[name=value_13]").val(a1);
+			$("input[name=value_13]").click();
+		}
+		function qyjcjybl(){//权益交叉检验比率= 权益差额/分析期间累计收入
+			var sum=0;
+			var a1=$("input[name=value_12]").val();//权益差额
+			var a2=$("input[name=value_13]").val();//分析期间累计收入
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			if(a2==0){
+				sum=0
+			}
+			else{
+				sum=a1/a2*100;
+				sum=Math.round(sum*100)/100
+			}
+			
+			$("input[name=value_14]").val(sum);
+			$("input[name=value_14]").click();
+		}
+		var i=0;
+		function changeAction(obj){//切换毛利润/成本交叉检验录入方式
+			if(i==0){
+				$(obj).val("录入文字描述");
+				$("#record_type").val("2")
+				$("#jcjy1").hide();
+				$("#jcjy2").show();
+				i=1;
+				doubleIframe("dqdcXed_zcfzb");
+			}
+			else{
+				$(obj).val("录入详细数据");
+				$("#record_type").val("1")
+				$("#jcjy2").hide();
+				$("#jcjy1").show();
+				i=0;
+				doubleIframe("dqdcXed_zcfzb");
+			}
+		}
+		function addTd3(table,frameid){//添加行
+		    //毛利润/成本交叉检验 
+				var num=parseInt(table.slice(5))
+		        $("#"+table).append("<tr>"+
+										"<td><input type='text' name='name'/><input type='hidden' name='type' value='2'/></td>"+
+										"<td><input type='text' name='bid' onchange='Maoli(this);Zmaoli(this,"+num+")'/></td>"+
+										"<td><input type='text' name='price' onchange='Maoli(this);Zmaoli(this,"+num+")'/></td>"+
+										"<td><input type='text' name='ratio' onchange='Zmaoli(this,"+num+")'/><input type='hidden' name='zc'/></td>"+
+										"<td><input type='text' name='profit' readonly/></td>"+
+									"</tr>	");		  
+		    doubleIframe(frameid);
+		}
+		//表格删除行
+		function removeTd(table,frameid){   
+			if(max==0&&jegs==0&&num==0&&idCard==0){//判断页面中是否有错误，如果未判断直接删除可能导致提交按钮不可用
+				var tr= document.getElementById(table).getElementsByTagName("tr");
+				if(tr.length>2){//至少要保留一行
+					document.getElementById(table).deleteRow(tr.length-1);//删除最后一行
+			   }
+				doubleIframe(frameid);
+			}
+			else
+				alert("页面中有错误，请修改后再进行删除操作！")
+		}
+		function addTd2(table,frameid){//添加块
+			var num=$("table[rule=block]").length//获取rule=block的所有table长度
+			var id="table"+num//动态设置id
+			var p=document.createElement("table");//创建一个table元素
+			p.style.width="100%"//设置table的宽度
+			string="<tr>"+//设置table内部HTML
+							"<td style='width:20%;'>"+
+								"<input type='text' name='name' value='加权毛利率' onchange='setName(this,"+num+")'/>"+
+								"<input type='hidden' name='type' value='1' />"+
+							"</td>"+
+							"<td style='width:20%;'>"+
+								"<input type='button' value='+' onclick=addTd3('"+id+"','dqdcXed_zcfzb') class='btn btn-info btn-mini'/>"+
+								"<input type='button' value='-' onclick=\"removeTd('"+id+"','dqdcXed_zcfzb');$(this).parent().parent().parent().find('input[name=price]').change();\" class='btn btn-info btn-mini'/>	"+
+								"<input type='hidden' name='bid'/>"+
+							"</td>"+
+							"<td style='width:20%;'><input type='hidden' name='price'/></td>"+
+							"<td style='width:20%;'><input type='hidden' name='ratio'/></td>"+
+							"<td style='width:20%;'><input type='text' name='profit' readonly/></td>"+
+						"</tr>"+
+						"<tr>"+
+							"<td>"+
+								"<input type='text' name='name'/>"+
+								"<input type='hidden' name='type' value='2' />"+
+							"</td>"+
+							"<td><input type='text' name='bid' onchange='Maoli(this);Zmaoli(this,"+num+")'/></td>"+
+							"<td><input type='text' name='price' onchange='Maoli(this);Zmaoli(this,"+num+")'/></td>"+
+							"<td><input type='text' name='ratio' onchange='Zmaoli(this,"+num+")'/><input type='hidden' name='zc'/></td>"+
+							"<td><input type='text' name='profit' readonly/></td>"+
+						"</tr>	";
+			$(p).html(string);
+			p.id=id;//设置table的id
+			p.setAttribute("rule","block")//给table添加rule属性
+			document.getElementById(table).appendChild(p);//添加table到页面中
+			
+			$("#tableHj").append("<tr>"+//给tableHj添加一行
+										"<td>"+										
+											"<input type='text' name='name' readonly/>"+
+											"<input type='hidden' name='type' value='3' />"+
+										"</td>"+											
+										"<td><input type='hidden' name='bid'/></td>"+
+										"<td><input type='hidden' name='price'/></td>"+
+										"<td><input type='text' name='ratio' onchange='ZJQmaoli(this)'/><input type='hidden' name='zcc'/></td>"+
+										"<td><input type='text' name='profit' readonly/></td>"+
+									"</tr>	");
+			//$("#"+id).before("<p>XX</p>")
+		    doubleIframe(frameid);
+		}		
+		function removeTd2(frameid){  //表格删除行
+			var j=$("table[rule=block]").length-1//获取rule=block的所有table长度
+			var id="table"+j;//设置动态id
+			var tr= document.getElementById("tableHj").getElementsByTagName("tr");//获取tableHj的tr长度
+			if(max==0&&jegs==0&&num==0&&idCard==0){//当页面没有错误时
+				if(j>0){//至少保留一块
+					//alert(id)
+					document.getElementById(id).parentNode.removeChild(document.getElementById(id));//删除最后一个块
+					document.getElementById("tableHj").deleteRow(tr.length-1);//删除tableHj最后一行
+					$("#tableHj").find("input[name=ratio]").change();//计算总加权毛利率
+					doubleIframe(frameid);
+				}
+			}
+			else
+				alert("页面中有错误，请修改后再进行删除操作！")
+		}
+		function setName(obj,count){//设置统计文本框值
+			var text=$(obj).val();
+			var p=$("#tableHj").find("input[name=name]")	
+			p[count].value=text;		
+		}
+		function Maoli(obj){//计算单行毛利
+			var a1=$(obj).parent().parent().find("input[name=bid]").val();
+			var a2=$(obj).parent().parent().find("input[name=price]").val();			
+			if(a1!=""){a1=parseFloat(a1)}else{a1=0}
+			if(a2!=""){a2=parseFloat(a2)}else{a2=0}
+			var sum=parseFloat(1-a1/a2)
+			sum=sum*100
+			sum=sum.toFixed(2)			
+			$(obj).parent().parent().find("input[name=profit]").val(sum)
+		}
+		function Zmaoli(obj,count){//计算加权毛利率
+			var a1=$(obj).parent().parent().find("input[name=ratio]").val();
+			var a2=$(obj).parent().parent().find("input[name=profit]").val();
+			if(a1!=""){a1=parseFloat(a1)}else{a1=0}
+			if(a2!=""){a2=parseFloat(a2)}else{a2=0}
+			var sum=a1*a2
+			$(obj).parent().parent().find("input[name=zc]").val(sum);//暂存sum
+			var total=0;
+			$(obj).parent().parent().parent().find("input[name=zc]").each(function(){//获取计算出来的所有sum值
+				if(this.value!="")//不为空时累加
+					total+=parseFloat(this.value)
+			});
+			total=(total/100).toFixed(2)	
+			//$("#zmaoli_"+count).val(total);//给毛利率赋值
+			var q=$(obj).parent().parent().parent().find("input[name=profit]");
+			q[0].value=total;//给毛利率赋值
+			var p=$("#tableHj").find("input[name=profit]")	
+			p[count].value=total;//给tableHj里的毛利率赋值
+			$("#tableHj").find("input[name=ratio]").change();//计算总加权毛利率
+		}
+		function ZJQmaoli(obj){//计算总加权毛利率
+			var a1=$(obj).parent().parent().find("input[name=ratio]").val();
+			var a2=$(obj).parent().parent().find("input[name=profit]").val();
+			if(a1!=""){a1=parseFloat(a1)}else{a1=0}
+			if(a2!=""){a2=parseFloat(a2)}else{a2=0}
+			var sum=a1*a2
+			$(obj).parent().parent().find("input[name=zcc]").val(sum);
+			var total=0;
+			$(obj).parent().parent().parent().find("input[name=zcc]").each(function(){
+				if(this.value!="")
+					total+=parseFloat(this.value)
+			});
+			total=(total/100).toFixed(2)	
+			$("#tableTotal").contents().find("input[name=profit]").val(total);
+		}
+	</script>
+</body>
+</html>

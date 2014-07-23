@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<style type="text/css">
+		.add td{text-align:left;}
+		input.btn-mini{width:20px;}
+		textarea{width:80%;}
+		.table-list .table-label{width:180px;}
+		input[type=text]{width:120px;}
+	</style>
+</head>
+
+<body onload="$('input[type=text]').click();setTimeOut();parent.parent.scroll(0,0);">			
+	<form id="content" name="content" class="content" method="POST" action="/Process/dqdc/dqdcXed_zcfzb/{{loan_apply_id}}">
+		资产
+		<input type="submit" value="保存" class="btn btn-info"/>		
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">		
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		function hj(num){
+			var sum=0;
+			var length=$("input[name=value_"+num+"]").length;
+			for(i=1;i<length;i++){
+				var a=$("input[name=value_"+num+"]")[i].value;
+				if(a==""){a=0;}else{a=parseInt(a);}
+				sum+=a;
+			}
+			$("input[name=value_"+num+"]")[0].value=sum;
+			$("input[name=value_"+num+"]")[0].click();
+		}
+		function sum4(num1,num2,num3,num4,sumnum){
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			var a3=$("input[name=value_"+num3+"]")[0].value;
+			var a4=$("input[name=value_"+num4+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			if(a3==""){a3=0;}else{a3=parseInt(a3);}
+			if(a4==""){a4=0;}else{a4=parseInt(a4);}
+			sum=a1+a2+a3+a4;
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+			$("input[name=value_"+sumnum+"]")[0].click();
+		}
+		function sum3(num1,num2,num3,sumnum){
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			var a3=$("input[name=value_"+num3+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			if(a3==""){a3=0;}else{a3=parseInt(a3);}
+			sum=a1+a2+a3;
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+			$("input[name=value_"+sumnum+"]")[0].click();
+		}
+		function cut2(num1,num2,sumnum){
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			sum=a1-a2;
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+			$("input[name=value_"+sumnum+"]")[0].click();
+		}
+		function sum2(num1,num2,sumnum){
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			sum=a1+a2;
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+			$("input[name=value_"+sumnum+"]")[0].click();
+		}
+		function bl(num1,num2,sumnum){//比率
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			if(a2=="0"){
+				sum=0
+			}
+			else{
+				sum=a1/a2*100;
+				sum=Math.round(sum*100)/100
+			}
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+		}
+		function sdbl(num1,num2,num3,sumnum){//速动比率
+			var sum=0;
+			var a1=$("input[name=value_"+num1+"]")[0].value;
+			var a2=$("input[name=value_"+num2+"]")[0].value;
+			var a3=$("input[name=value_"+num3+"]")[0].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			if(a3==""){a3=0;}else{a3=parseInt(a3);}
+			if(a3=="0"){
+				sum=0;
+			}
+			else{
+				sum=(a1+a2)/a3*100;
+				sum=Math.round(sum*100)/100
+			}
+			$("input[name=value_"+sumnum+"]")[0].value=sum;
+
+		}
+	</script>
+</body>
+</html>

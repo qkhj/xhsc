@@ -135,6 +135,8 @@ import views.report.line
 import views.report.bar
 import views.report.pie
 
+import views.data.data
+
 import views.credit_data.cash_flow
 #import views.credit_data.sc_assets_acceptances
 #import views.credit_data.sc_assets_cash

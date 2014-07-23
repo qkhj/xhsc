@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<style type="text/css">	
+		input[type=text]{width:40px;padding:0;}	
+		input.btn-mini{width:20px;}
+		textarea{width:80%;}
+		.table-list .table-label{width:50px;padding:0;}
+		.insideTb td{width:60px;}	
+	</style>
+	<script type="text/javascript">
+		function set(){
+			$("input[id=last]").blur();			
+		}
+	</script>
+</head>
+
+<body onload="set();setTimeOut();parent.parent.scroll(0,0);">	
+	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_xjlfx/{{id}}">
+		现金	
+		<input type="submit" value="保存" class="btn btn-info"/>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		function sum(obj,name){
+			var sum=0;
+			//$(obj).parent().parent().find("span[name=sum]").html("1")
+			$(obj).parent().parent().find("input[name="+name+"]").each(
+				function(){
+					if(this.value=="")						
+						sum=sum;
+					else
+						sum=sum+parseInt(this.value);
+					//alert(parseInt(this.value))
+				}
+
+			);
+			$(obj).parent().parent().find("span[name=sum]").html(sum)
+			//求月均
+			var ave=parseInt(sum)/12
+			ave=Math.round(ave*100)/100
+			$(obj).parent().parent().find("span[name=ave]").html(ave);
+		}
+		function sumqt(obj,name,num){
+			var sum=0;
+			//$(obj).parent().parent().find("span[name=sum]").html("1")
+				for(i=0;i<13;i++){
+					var a=$(obj).parent().parent().find("input[name="+name+i+"]")[num].value;
+					//alert(a)
+					if(a=="")						
+						sum=sum;
+					else
+						sum=sum+parseInt(a);
+				}
+			//alert(sum);
+			$(obj).parent().parent().find("span[name=sum]").html(sum);
+			//求月均
+			var ave=parseInt(sum)/12
+			ave=Math.round(ave*100)/100
+			$(obj).parent().parent().find("span[name=ave]").html(ave);		
+		}
+		function add3(name1,name2,name3,sumname,num){
+			var sum=0;
+			var a=$("input[name="+name1+"]")[num].value;
+			var b=$("input[name="+name2+"]")[num].value;
+			var c=$("input[name="+name3+"]")[num].value;
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b);}
+			if(c==""){c=0;}
+			else{c=parseInt(c);}
+			sum=a+b+c;
+			$("input[name="+sumname+"]")[num].value=sum;
+			var hj=0;
+			for(i=0;i<$("input[name="+sumname+"]").length;i++){				
+				//alert(parseInt($("input[name="+sumname+"]")[i].value));
+				hj+=parseInt($("input[name="+sumname+"]")[i].value)
+				//alert(hj)
+			}
+			$("span[name="+sumname+"]").html(hj);
+			//求月均
+			var ave=parseInt(hj)/12
+			ave=Math.round(ave*100)/100
+			$("span[name="+sumname+"]").parent().parent().find("span[name=ave]").html(ave);
+		}
+		function add(name1,name2,sumname,num){
+			var sum=0;
+			var a=$("input[name="+name1+"]")[num].value;
+			var b=$("input[name="+name2+"]")[num].value;
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b);}	
+			sum=a+b;
+			$("input[name="+sumname+"]")[num].value=sum;
+			var hj=0;
+			for(i=0;i<$("input[name="+sumname+"]").length;i++){				
+				//alert(parseInt($("input[name="+sumname+"]")[i].value));
+				hj+=parseInt($("input[name="+sumname+"]")[i].value)
+				//alert(hj)
+			}
+			$("span[name="+sumname+"]").html(hj);
+			//求月均
+			var ave=parseInt(hj)/12
+			ave=Math.round(ave*100)/100
+			$("span[name="+sumname+"]").parent().parent().find("span[name=ave]").html(ave);
+		}
+		function cut(name1,name2,sumname,num){
+			var cut=0;
+			var a=$("input[name="+name1+"]")[num].value;
+			var b=$("input[name="+name2+"]")[num].value;
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b);}	
+			cut=a-b;
+			$("input[name="+sumname+"]")[num].value=cut;
+			var hj=0;
+			for(i=0;i<$("input[name="+sumname+"]").length;i++){				
+				//alert(parseInt($("input[name="+sumname+"]")[i].value));
+				hj+=parseInt($("input[name="+sumname+"]")[i].value)
+				//alert(hj)
+			}
+			$("span[name="+sumname+"]").html(hj);
+			//求月均
+			var ave=parseInt(hj)/12
+			ave=Math.round(ave*100)/100
+			$("span[name="+sumname+"]").parent().parent().find("span[name=ave]").html(ave);
+		}
+		function add2(name1,name2,name3,name4,sumname,num){
+			var sum=0;
+			var a=$("input[name="+name1+"]")[num].value;
+			var b=$("input[name="+name2+"]")[num].value;
+			var c=$("input[name="+name3+"]")[num].value;
+			var d=$("input[name="+name4+"]")[num].value;
+			if(a==""){a=0;}
+			else{a=parseInt(a);}
+			if(b==""){b=0;}
+			else{b=parseInt(b);}	
+			if(c==""){c=0;}
+			else{c=parseInt(c);}
+			if(d==""){d=0;}
+			else{d=parseInt(d);}
+			sum=a+b+c+d;
+			$("input[name="+sumname+"]")[num].value=sum;
+			var hj=0;
+			for(i=0;i<$("input[name="+sumname+"]").length;i++){				
+				//alert(parseInt($("input[name="+sumname+"]")[i].value));
+				hj+=parseInt($("input[name="+sumname+"]")[i].value)
+				//alert(hj)
+			}
+			$("span[name="+sumname+"]").html(hj);
+			//求月均
+			var ave=parseInt(hj)/12
+			ave=Math.round(ave*100)/100
+			$("span[name="+sumname+"]").parent().parent().find("span[name=ave]").html(ave);
+		}
+		function add9(name1,name2,name3,name4,name5,name6,name7,name8,tableName,sumname,num){
+	
+			var sum=0;
+			var a1=$("input[name="+name1+"]")[num].value;
+			var a2=$("input[name="+name2+"]")[num].value;
+			var a3=$("input[name="+name3+"]")[num].value;
+			var a4=$("input[name="+name4+"]")[num].value;
+			var a5=$("input[name="+name5+"]")[num].value;
+			var a6=$("input[name="+name6+"]")[num].value;
+			var a7=$("input[name="+name7+"]")[num].value;
+			var a8=$("input[name="+name8+"]")[num].value;
+			//var a9=$("input[name="+name9+"]")[num].value;		
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			if(a2==""){a2=0;}else{a2=parseInt(a2);}
+			if(a3==""){a3=0;}else{a3=parseInt(a3);}
+			if(a4==""){a4=0;}else{a4=parseInt(a4);}
+			if(a5==""){a5=0;}else{a5=parseInt(a5);}
+			if(a6==""){a6=0;}else{a6=parseInt(a6);}
+			if(a7==""){a7=0;}else{a7=parseInt(a7);}
+			if(a8==""){a8=0;}else{a8=parseInt(a8);}
+			sum=a1+a2+a3+a4+a5+a6+a7+a8;
+			
+			var sum1=0;
+			var length=$("#"+tableName+" input[name=month_"+num+"]").length
+			for(i=0;i<length;i++){
+				var a=$("#"+tableName+" input[name=month_"+num+"]")[i].value;
+				if(a==""){a=0;}else{a=parseInt(a);}
+				sum1+=a;
+			}
+			
+			$("input[name="+sumname+"]")[num].value=parseInt(sum)+parseInt(sum1);
+			var hj=0;
+			for(i=0;i<$("input[name="+sumname+"]").length;i++){				
+				//alert(parseInt($("input[name="+sumname+"]")[i].value));
+				hj+=parseInt($("input[name="+sumname+"]")[i].value)
+				//alert(hj)
+			}
+			$("span[name="+sumname+"]").html(hj);
+			//求月均
+			var ave=parseInt(hj)/12
+			ave=Math.round(ave*100)/100
+			$("span[name="+sumname+"]").parent().parent().find("span[name=ave]").html(ave);
+		}
+		function rzhd(name1,tableName1,name2,tableName2,sumname,num){
+			var sum=0;
+			var a1=$("input[name="+name1+"]")[num].value;
+			if(a1==""){a1=0;}else{a1=parseInt(a1);}
+			var sum1=0;
+			var length=$("#"+tableName1+" input[name=month_"+num+"]").length
+			for(i=0;i<length;i++){
+				var a2=$("#"+tableName1+" input[name=month_"+num+"]")[i].value;
+				if(a2==""){a2=0;}else{a2=parseInt(a2);}
+				sum1+=a2;
+			}
+			var b1=$("input[name="+name2+"]")[num].value;
+			if(b1==""){b1=0;}else{b1=parseInt(b1);}
+			var sum2=0;
+			var length=$("#"+tableName2+" input[name=month_"+num+"]").length
+			for(i=0;i<length;i++){
+				var b2=$("#"+tableName2+" input[name=month_"+num+"]")[i].value;
+				if(b2==""){b2=0;}else{b2=parseInt(b2);}
+				sum2+=b2;
+			}
+			sum=a1+sum1-b1-sum2
+			$("input[name="+sumname+"]")[num].value=sum;
+			var hj=0;
+			for(i=0;i<$("input[name="+sumname+"]").length;i++){				
+				//alert(parseInt($("input[name="+sumname+"]")[i].value));
+				hj+=parseInt($("input[name="+sumname+"]")[i].value)
+				//alert(hj)
+			}
+			$("span[name="+sumname+"]").html(hj);
+			//求月均
+			var ave=parseInt(hj)/12
+			ave=Math.round(ave*100)/100
+			$("span[name="+sumname+"]").parent().parent().find("span[name=ave]").html(ave);
+		}
+		function srxjl(tableName,name1,name2,sumname,num){
+			var sum=0;
+			var sum1=0;
+			var length=$("#"+tableName+" input[name=month_"+num+"]").length
+			for(i=0;i<length;i++){
+				var a=$("#"+tableName+" input[name=month_"+num+"]")[i].value;
+				if(a==""){a=0;}else{a=parseInt(a);}
+				sum1+=a;
+			}
+			var b=$("input[name="+name1+"]")[num].value;
+			if(b==""){b=0;}else{b=parseInt(b);}
+			var c=$("input[name="+name2+"]")[num].value;
+			if(c==""){c=0;}else{c=parseInt(c);}
+			sum=sum1-b-c;
+			$("input[name="+sumname+"]")[num].value=sum;
+			var hj=0;
+			for(i=0;i<$("input[name="+sumname+"]").length;i++){				
+				//alert(parseInt($("input[name="+sumname+"]")[i].value));
+				hj+=parseInt($("input[name="+sumname+"]")[i].value)
+				//alert(hj)
+			}
+			$("span[name="+sumname+"]").html(hj);
+			//求月均
+			var ave=parseInt(hj)/12
+			ave=Math.round(ave*100)/100
+			$("span[name="+sumname+"]").parent().parent().find("span[name=ave]").html(ave);
+		}
+		function zgdcb3(num){//固定成本小计（3）
+			add9('wage_labor','tax','transportation_costs','rent','maintenance_fees','utility_bills','advertising_fees','social_intercourse_fees','qtfyx','fixed_costs',num);//固定成本小计(3)
+			add('total_cash_outflow','fixed_costs','fkze',num);//付款总额(4)=(2)+(3)
+			cut('total_cash_flow','fkze','yyhdxj',num);//营业活动现金净流量(5)=(1)-(4)
+			add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',num);//累积现金(9)=(5)+(6)+(7)+(8)
+			add('early_cash','ljxj','qmxj',num);//期末现金(11)=(10)+(9)
+		}
+		function tzhdzxjl6(num){//投资活动总现金流(6)
+			cut('disposal_of_fixed_assets','fixed_asset_investment','investment_cash_flow',num);//投资活动总现金流(6)
+			add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',num);//累积现金(9)=(5)+(6)+(7)+(8)
+			add('early_cash','ljxj','qmxj',num);//期末现金(11)=(10)+(9)
+		}
+		function rzhdzxjl7(num){//融资活动总现金流
+			rzhd('bank_loans','qtjk','repayments_bank','chqtjk','financing_cash_flow',num);//融资活动总现金流（7）
+			add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',num);//累积现金(9)=(5)+(6)+(7)+(8)
+			add('early_cash','ljxj','qmxj',num);//期末现金(11)=(10)+(9)
+		}
+		function srxjlze8(num){
+			srxjl('qtjkxjly','household_expenditure','private_use','private_cash_flow',num)//私人现金流总额（8）
+			add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',num);//累积现金(9)=(5)+(6)+(7)+(8)
+			add('early_cash','ljxj','qmxj',num);//期末现金(11)=(10)+(9)
+		}
+	</script>
+</body>
+</html>
