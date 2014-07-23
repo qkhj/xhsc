@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<style type="text/css">
+		input.btn-mini{width:20px;margin-top:0px;}	
+		input[type=text]{width:120px;}
+	</style>
+</head>
+
+<body onload="sub();datepicker();setTimeOut();parent.parent.scroll(0,0);">		
+	<form class="content" method="post" action="/Process/dqdc/new_car">	
+		固定
+		<input type="submit" value="提交" class="btn btn-info"/>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">		
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		function sub(){
+			//var num=$(".tbData").length;			
+			//$("#sub1").text("总笔数："+num);
+			for(i=1;i<7;i++){
+				var sum=0;	
+				if($(".subData"+i).length==0){
+					if(i==1)
+						$("#sub"+i).html(0); 
+					else
+						$("#sub"+i).html(0+"（<span class='je'>"+hjje($("#sub"+i),0)+"</span>）"); 	
+				}					
+				else{
+					$.each($(".subData"+i),function(){ 
+						if(this.value=="")
+							sum=sum;
+						else
+							sum += parseFloat(this.value);
+						$("#sub"+i).html(sum+"（<span class='je'>"+hjje($("#sub"+i),sum)+"</span>）"); 	
+					}); 
+				}
+			}
+		}
+		function zjz(obj,name1,name2,sumname){
+			var sum=0;
+			var a=$(obj).parent().parent().find("input[name="+name1+"]").val();//
+			var b=$(obj).parent().parent().find("input[name="+name2+"]").val();//
+			if(a==""){a=0;}
+			else{a=parseFloat(a);}
+			if(b==""){b=0;}
+			else{b=parseFloat(b);}
+			sum=a*b;
+			$(obj).parent().parent().find("input[name="+sumname+"]").val(sum);//
+			$(obj).parent().parent().find("input[name="+sumname+"]").click();
+		}
+		function zjl(obj,name1,name2,sumname){
+			var sum=0;
+			var a=$(obj).parent().parent().find("input[name="+name1+"]").val();
+			var b=$(obj).parent().parent().find("input[name="+name2+"]").val();
+			if(a==""){a=0;}
+			else{a=parseFloat(a);}
+			if(b==""){b=0;}
+			else{b=parseFloat(b)/100;}
+			sum=a*b;
+			$(obj).parent().parent().find("input[name="+sumname+"]").val(sum);
+			$(obj).parent().parent().find("input[name="+sumname+"]").click();
+		}
+	</script>
+</form>
+</body>
+</html>

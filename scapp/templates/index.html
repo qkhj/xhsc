@@ -76,6 +76,11 @@
 							{%- endif %}
 							onclick="iframe('xtgl')"><a href="javascript:void(0);">系统管理</a></li>
 						{%- endif %}
+						<li
+							{%- if menu == "sjdr"%}
+								class="active"
+							{%- endif %}
+							onclick="iframe('sjdr')"><a href="javascript:void(0);">数据导入</a></li>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div><!--/.container-fluid -->
@@ -121,6 +126,8 @@
 							{%- elif menu == "xtgj"%}
 								hidden
 							{%- elif menu == "xtgl"%}
+								hidden
+							{%- elif menu == "sjdr"%}
 								hidden
 							{%- endif %}
 							" id="lcgl">
@@ -327,6 +334,19 @@
 						</li>
 					</ul>
 					{%- endif %}
+					<ul class="nav nav-list
+							{%- if menu != "sjdr"%}
+								hidden
+							{%- endif %}
+							" id="sjdr">
+						<li class="nav-header">数据导入</li>
+						<li onclick="leftmenu(this);changeiframe('Data/drbdsj_search')" id="drbdsj" class="active">
+							<a href="javascript:void(0);">导入本地数据</a>
+						</li>
+						<li onclick="leftmenu(this);changeiframe('Data/sjtb_search')" id="sjtb">
+							<a href="javascript:void(0);">数据同步</a>
+						</li>
+					</ul>
 				</div><!--/.well -->	
 				<div style="position:absolut;margin-left:-186px;" id="jsq">
 					<img src="../static/img/calculator.png" style="z-index:10;width:170px;" onclick="$('#text').show();"/>
@@ -352,6 +372,8 @@
 						src="System/ywcspz"
 					{%- elif menu == "tjbb" %}
 						src="Report/dkgjztfl"
+					{%- elif menu == "sjdr" %}
+						src="Data/drbdsj_search"	
 					{%- endif %}
 				width="100%;" id="content_frame" marginheight="0" marginwidth="0" height="100%" onload="resizeFrame('content_frame')"></iframe>
 			</div><!--/span-->

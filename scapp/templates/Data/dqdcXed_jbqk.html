@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<link href="/static/css/datepicker.css" rel="stylesheet">
+	<style type="text/css">
+		#jbTable .table-label{width:80px;}	
+		.sqxx .table-list .table-label{width:130px;}
+		textarea{width:80%;}
+		
+	</style>
+	<script type="text/javascript">
+		function setje(){
+			$('input[type=text]').click();
+			// $('input[name=gszczj]').click();
+			// $('input[name=loan_amount_num]').click();
+			// $('input[name=month_repayment]').click();
+			// $('input[name=loan_amount]').click();
+			// $('input[name=overage]').click();
+			// $('input[name=guarantee_amount]').click();
+
+			// $('input[name=appraisal]').click();
+			// $('input[name=mortgage]').click();
+			// $('input[name=amount_recommended]').click();
+			// $('input[name=monthly_repayment_amount]').click();
+			// $('input[name=amount]').click();
+			// $('input[name=monthly_repayment]').click();
+		}
+	</script>
+</head>
+
+<body onload="datepicker();setje()">	
+	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_jbqk/{{id}}" target="_parent">
+		基本	
+		<input type="submit" value="提交" class="btn btn-info"/>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/bootstrap-datepicker.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+	</script>
+</body>
+</html>
