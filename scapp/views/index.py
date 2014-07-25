@@ -115,6 +115,14 @@ def xtgl():
     role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
     return render_template("index.html",menu = 'xtgl',role=role)
 
+# 数据导入
+@app.route('/sjdr', methods=['GET'])
+@login_required
+def sjdr():
+    # privileges = SC_UserRole.query.filter_by(user_id=current_user.id).first().role.privileges
+    role = SC_UserRole.query.filter_by(user_id=current_user.id).first().role
+    return render_template("index.html",menu = 'sjdr',role=role)
+
 #客户经理绩效管理
 @app.route('/jxgl', methods=['GET'])
 @login_required
@@ -221,6 +229,4 @@ def testCRM():
         return render_template("testCRM.html")
     else:
         return render_template("testCRM.html")
-    
-    
-    
+

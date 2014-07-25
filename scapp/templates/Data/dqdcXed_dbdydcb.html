@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>	
+	<meta charset="utf-8">
+	<title>小微贷款业务管理系统</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+	<meta name="author" content="Muhammad Usman">
+
+	<!-- The styles -->
+	<link href="/static/css/bootstrap.css" rel="stylesheet">
+	<link href="/static/css/main.css" rel="stylesheet">
+	<style type="text/css">
+		input.btn-mini{width:20px;margin-top:0px;}
+		textarea{width:80%;}
+	</style>
+	<script type="text/javascript">
+		function setInput(){
+			$("input[type=text]").click();
+		}
+	</script>
+</head>
+
+<body onload="setInput();setTimeOut();parent.parent.scroll(0,0);">	
+	<form class="content" method="POST" action="/Process/dqdc/edit_dqdcXed_dbdydcb/{{id}}">
+		担保
+		<input type="submit" value="保存" class="btn btn-info"/>
+	</form>
+
+	<script src="/static/js/jquery-1.7.2.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/script.js"></script>
+	<script src="/static/js/process.js"></script>
+	<script type="text/javascript">
+		var max=0;
+		var jegs=0;
+		var num=0;
+		var idCard=0;
+		var phone=0;
+		//表格删除行
+		function removeTd2(table,frameid){ 
+			if(max==0&&jegs==0&&num==0&&idCard==0){//判断页面中是否有错误，如果未判断直接删除可能导致提交按钮不可用
+				var tr= document.getElementById(table).getElementsByTagName("tr");
+			    if(tr.length>1){//至少要保留一行
+			        document.getElementById(table).deleteRow(tr.length-1);//删除最后一行
+			        document.getElementById(table).deleteRow(tr.length-1);//删除倒数第二行
+			   }
+			    doubleIframe(frameid);
+			}
+		    else
+		    	alert("页面中有错误，请修改后再进行删除操作！")
+		}
+	</script>
+</body>
+</html>
