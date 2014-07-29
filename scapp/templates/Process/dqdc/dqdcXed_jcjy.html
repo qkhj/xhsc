@@ -214,7 +214,7 @@
 							{%- if obj.index == 0 %}
 							<input type="text" name="value_3" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb');$('input[name=value_3]').blur();$('input[name=value_4]').blur();" class="btn btn-info btn-mini"/>
 							{%- else %}
 							<input type="text" name="value_3" onkeyup="setJe(this);" onblur='hj(3);yyqy();qyce();qyjcjybl()' maxlength="11" onclick="setJe(this)" value="{{obj.content}}" />
 							{%- endif %}
@@ -234,7 +234,7 @@
 							{%- if cross_examination[cross_examination.index(obj)+count_3].index == 0 %}
 							<input type="text" name="value_4" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb');$('input[name=value_3]').blur();$('input[name=value_4]').blur();" class="btn btn-info btn-mini"/>
 							{%- else %}
 							<input type="text" name="value_4" onkeyup="setJe(this);" onblur='hj(4);yyqy();qyce();fxqjljsr();qyjcjybl()' maxlength="11" onclick="setJe(this)" value="{{cross_examination[cross_examination.index(obj)+count_3].content}}" />
 							{%- endif %}
@@ -264,7 +264,7 @@
 							{%- if obj.index == 0 %}
 							<input type="text" name="value_5" onkeyup="setJe(this);" maxlength="11" onclick="setJe(this)" value="{{obj.content}}" readonly/>
 							<input type="button" value="+" onclick="addTd('dxzchj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_zcfzb');$('input[name=value_5]').blur();" class="btn btn-info btn-mini"/>
 							{%- else %}
 							<input type="text" name="value_5" onkeyup="setJe(this);" onblur='hj(5);yyqy();qyce();qyjcjybl()' maxlength="11" onclick="setJe(this)" value="{{obj.content}}" />
 							{%- endif %}
@@ -538,7 +538,7 @@
 					<td style="text-align:left">
 						<input type="text" name="value_3" onkeyup="setJe(this);" value="0" onclick="setJe(this)" readonly/>
 						<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb');$('input[name=value_3]').blur();$('input[name=value_4]').blur();" class="btn btn-info btn-mini"/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -550,7 +550,7 @@
 					<td>
 						<input type="text" name="value_4" onkeyup="setJe(this);" value="0" onclick="setJe(this)" readonly/>
 						<input type="button" value="+" onclick="addTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qcqyhj','dqdcXed_zcfzb');$('input[name=value_3]').blur();$('input[name=value_4]').blur();" class="btn btn-info btn-mini"/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
@@ -568,7 +568,7 @@
 					<td>
 						<input type="text" name="value_5" onkeyup="setJe(this);" value="0" onclick="setJe(this)" readonly/>
 						<input type="button" value="+" onclick="addTd('dxzchj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('dxzchj','dqdcXed_zcfzb');$('input[name=value_5]').blur();" class="btn btn-info btn-mini"/>
 						<br/><span class="je">人民币</span>
 						<span class="errorInfo"></span>	
 					</td>
