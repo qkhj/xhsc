@@ -75,7 +75,7 @@
 						{%- if profit_loss[i].index == 0 %}
 						收入
 						<input type="button" value="+" onclick="addTd('sr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('sr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('sr','dqdcXed_zcfzb');recount(1)" class="btn btn-info btn-mini"/>
 						{%- endif %}
 						<span>	
 							<input type="text" name="items_name_1" value="{{profit_loss[i].items_name}}" onchange="spryMaxLength(this,32)"/>
@@ -191,7 +191,7 @@
 						{%- if profit_loss[i].index == 0 %}
 							可变成本
 							<input type="button" value="+" onclick="addTd('kbcb','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('kbcb','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('kbcb','dqdcXed_zcfzb');recount(3)" class="btn btn-info btn-mini"/>
 						{%- endif %}
 						<span>	
 							<input type="text" name="items_name_3" value="{{profit_loss[i].items_name}}" onchange="check(this,0,1);kbcb(this,1);kbcb(this,2);kbcb(this,3);kbcb(this,4);kbcb(this,5);kbcb(this,6);kbcb(this,7);kbcb(this,8);kbcb(this,9);kbcb(this,10);kbcb(this,11);kbcb(this,12)"/><br/>
@@ -1096,7 +1096,7 @@
 						{%- if profit_loss[i].index == 0 %}
 							其他
 							<input type="button" value="+" onclick="addTd('qtfy','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('qtfy','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('qtfy','dqdcXed_zcfzb');recount(21)" class="btn btn-info btn-mini"/>
 						{%- endif %}
 							<input type="text" name="items_name_21"  value="{{profit_loss[i].items_name}}" onchange="spryMaxLength(this,32)" style="width:120px;"/>
 							<span class="errorInfo">字符数不得大于32</span>
@@ -1461,7 +1461,7 @@
 						{%- if profit_loss[i].index == 0 %}
 						其他支出	
 						<input type="button" value="+" onclick="addTd('qtzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qtzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qtzc','dqdcXed_zcfzb');recount(28)" class="btn btn-info btn-mini"/>
 						{%- endif %}
 						<span>	
 							<input type="text" name="items_name_28" value="{{profit_loss[i].items_name}}" onchange="spryMaxLength(this,32)"/>
@@ -1523,7 +1523,7 @@
 						{%- if profit_loss[i].index == 0 %}
 						其他收入
 						<input type="button" value="+" onclick="addTd('qtsr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qtsr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qtsr','dqdcXed_zcfzb');recount(29)" class="btn btn-info btn-mini"/>
 						{%- endif %}
 						<span>	
 							<input type="text" name="items_name_29" value="{{profit_loss[i].items_name}}" onchange="spryMaxLength(this,32)"/>
@@ -1668,7 +1668,7 @@
 					<td style="width:166px;">
 						收入
 						<input type="button" value="+" onclick="addTd('sr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('sr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('sr','dqdcXed_zcfzb');recount(1)" class="btn btn-info btn-mini"/>
 						<span>	
 							<input type="text" name="items_name_1" onchange="spryMaxLength(this,32)"/>
 							<span class="errorInfo">字符数不得大于32</span>
@@ -1778,7 +1778,7 @@
 					<td style="width:166px;">
 						可变成本
 						<input type="button" value="+" onclick="addTd('kbcb','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('kbcb','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('kbcb','dqdcXed_zcfzb');recount(3)" class="btn btn-info btn-mini"/>
 						<span>	
 							<input type="text" name="items_name_3" onchange="check(this,0,1);kbcb(this,1);kbcb(this,2);kbcb(this,3);kbcb(this,4);kbcb(this,5);kbcb(this,6);kbcb(this,7);kbcb(this,8);kbcb(this,9);kbcb(this,10);kbcb(this,11);kbcb(this,12)"/><br/>
 							<span class="errorInfo">请输入0-1之间的数</span>
@@ -2645,7 +2645,7 @@
 						<span>	
 							其他
 							<input type="button" value="+" onclick="addTd('qtfy','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-							<input type="button" value="-" onclick="removeTd('qtfy','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+							<input type="button" value="-" onclick="removeTd('qtfy','dqdcXed_zcfzb');recount(21)" class="btn btn-info btn-mini"/>
 							<input type="text" name="items_name_21" onchange="spryMaxLength(this,32)" style="width:120px;"/>
 							<span class="errorInfo">字符数不得大于32</span>
 						</span>
@@ -2994,7 +2994,7 @@
 					<td style="width:166px;">
 						其他支出	
 						<input type="button" value="+" onclick="addTd('qtzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qtzc','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qtzc','dqdcXed_zcfzb');recount(28)" class="btn btn-info btn-mini"/>
 						<span>	
 							<input type="text" name="items_name_28" onchange="spryMaxLength(this,32)"/>
 							<span class="errorInfo">字符数不得大于32</span>
@@ -3052,7 +3052,7 @@
 					<td style="width:166px;">
 						其他收入
 						<input type="button" value="+" onclick="addTd('qtsr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-						<input type="button" value="-" onclick="removeTd('qtsr','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+						<input type="button" value="-" onclick="removeTd('qtsr','dqdcXed_zcfzb');recount(29)" class="btn btn-info btn-mini"/>
 						<span>	
 							<input type="text" name="items_name_29" onchange="spryMaxLength(this,32)"/>
 							<span class="errorInfo">字符数不得大于32</span>
@@ -3388,6 +3388,19 @@
 					//total3('month_'+k+'_');
 					//cut4('month_'+k+'_2','month_'+k+'_4','month_'+k+'_23','month_'+k+'_24','month_'+k+'_25');
 				}				
+			}
+		}
+		//按减号按钮是重新计算
+		function recount(num){
+			if(num==3){
+				for(h=1;h<13;h++){
+					$("input[name=month_"+h+"_"+num+"]").click();
+				}
+			}
+			else{
+				for(h=1;h<13;h++){
+					$("input[name=month_"+h+"_"+num+"]").blur();					
+				}
 			}
 		}
 	</script>
