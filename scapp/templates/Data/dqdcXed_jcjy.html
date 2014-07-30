@@ -26,9 +26,12 @@
 </head>
 
 <body onload="setInput();setTimeOut();parent.parent.scroll(0,0);">		
-	<form id="content" class="content" method="POST" action="/Process/dqdc/dqdcXed_jcjy/{{loan_apply_id}}">
-		交叉
-		<input type="submit" value="保存" class="btn btn-info"/>
+	<form id="content" name="content" class="content" method="POST" action="/Data/data_jcjy/{{loan_apply_id}}/{{localid}}" target="_parent">
+	<script type="text/javascript">
+	var content = '{{sc_cross_examination[3]}}'
+	document.write(unescape(content));
+	</script>
+		<input type="submit" value="保存" class="btn btn-info"/>		
 	</form>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>

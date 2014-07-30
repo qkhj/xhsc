@@ -13,68 +13,49 @@
 		
 </head>
 
-<body>	
+<body onload="setTimeOut();">	
 	<form id="content" method="POST" class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">数据导入</a>/<a href="#">导入本地数据</a>
 			<input type="hidden" name="customer_name">
 			<input type="hidden" name="loan_type" value="{{loan_type}}"> 
-		</div>		
+		</div>	
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+		  	{%- if messages %}
+	    	{%- for category, message in messages %}
+	    	<div class="alert alert-{{category}}">
+	      		{{message}}
+	      	</div>
+	    	{%- endfor %}
+		  	{%- endif %}
+		{%- endwith %}
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">贷款列表</span>
-			<!-- <div style="margin-bottom:5px;">
-				<input type="button" class="btn btn-info" value="导入数据" onclick="$('.display-div').show();"/>	
+			<div style="margin-bottom:5px;">
+				<input type="button" value="导入数据" class="btn btn-info" onclick="iframe('Data/drbdsj_import')" />	
 			</div>
-					 -->
 			<div style="border:1px solid #94c1dc;">				
 				<table class="table-list" cellspacing="10" id="uesr-list">
 					<thead>
-						<tr>				
-							<th>贷款编号</th>
-							<th>客户编号</th>
-							<th>客户名称</th>							
-							<th>贷款类型</th>
-							<th>申请金额</th>
-							<th>申请时间</th>
-							<th>操作</th>
+						<tr>			
+							<th>编号</th>		
+							<th>客户名称</th>	
 						</tr>
 					</thead>
 					<tbody class="center">
-						<tr>				
-							<td>01</td>
-							<td>001</td>
-							<td>王军忠</td>							
-							<td>车易贷</td>
-							<td>100000</td>
-							<td>2014-05-06</td>
-							<td>
-								<input type="button" class="btn btn-danger btn-mini" value="删除"/>
-							</td>
-						</tr>										
+					{%- if customers %}
+						{% for obj in customers %}
+						<tr>
+							<td>{{obj[0]}}</td>
+							<td><script type="text/javascript">
+							var temp = '{{obj[2]}}';
+							document.write(unescape(temp));
+							</script></td></tr>
+						{%- endfor %}
+					{%- endif %}										
 					</tbody>
 				</table>
 			</div>
-			<div class="page-div">
-				<span style="CURSOR: pointer">|&lt;&lt;</span>
-				<span style="CURSOR: pointer">&lt;&lt;</span>
-				&#160;第&#160;<font color="#0088cc">1</font>&#160;页&#160;
-				&#160;共&#160;<font color="#0088cc">1</font>&#160;页&#160;
-				<span style="CURSOR: pointer">&gt;&gt;</span>
-				<span style="CURSOR: pointer">&gt;&gt;|</span>
-			</div>
-			<!-- <div class="display-div" style="margin-top:-50px;width:500px;height:200px;margin-left:100px;" >
-				<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/><br/>
-				<i class="icon-bookmark"></i><span class="titletip">导入本地数据</span>
-				<div style="border:1px solid #94c1dc;">
-					<table class="table-list">
-						<tr>	
-							<td class="table-label">文件名</td>
-							<td><input type="file" name=""/></td>	
-						</tr>
-					</table>
-				</div>																		
-				<input type="button" class="btn btn-info" value="提交"/>					
-			</div> -->
 		</div><!--/row-fluid -->
 	</form><!--/content -->
 	

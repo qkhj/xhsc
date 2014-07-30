@@ -49,7 +49,8 @@ from scapp.models import SC_Loan_Product
 # 贷款申请
 @app.route('/Process/dksq/dksq', methods=['GET'])
 def Process_dksq():
-    return render_template("Process/dksq/dksq_search.html")
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Process/dksq/dksq_search.html",loan_product=loan_product)
 	
 # 贷款申请
 @app.route('/Process/dksq/dksq_search/<int:page>', methods=['GET','POST'])
@@ -69,7 +70,8 @@ def dksq_search(page):
         sql += " and (company_customer_name like '%"+customer_name+"%' or individual_customer_name like '%"+customer_name+"%')"
 
     loan_apply = View_Query_Loan.query.filter(sql).paginate(page, per_page = PER_PAGE)
-    return render_template("Process/dksq/dksq.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type)
+    loan_product = SC_Loan_Product.query.all()
+    return render_template("Process/dksq/dksq.html",loan_apply=loan_apply,customer_name=customer_name,loan_type=loan_type,loan_product=loan_product)
 
 # 跳转到新增贷款申请
 @app.route('/Process/dksq/goto_new_dksq/<belong_customer_type>/<int:page>', methods=['GET'])

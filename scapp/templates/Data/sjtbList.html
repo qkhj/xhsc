@@ -10,14 +10,28 @@
 	<!-- The styles -->
 	<link href="/static/css/bootstrap.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
-		
+	<script src="/static/js/script.js"></script>
+	<script type="text/javascript">
+	var selected_load_apply_id = 0;
+	function changesel(loan_apply_id){
+		selected_load_apply_id = loan_apply_id;
+	}
+	
+	function jump(localid){
+		iframe('Data/sjtb/'+selected_load_apply_id+'/'+localid);
+	}
+	</script>
 </head>
 
 <body>	
 	<form id="content" method="POST" class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">数据导入</a>/<a href="#">数据同步</a>
-			<input type="hidden" name="customer_name">
+			{%- if customer_name %}
+				<input type="hidden" name="customer_name" value="{{customer_name}}">
+			{%- else %}
+				<input type="hidden" name="customer_name">
+			{%- endif %}
 			<input type="hidden" name="loan_type" value="{{loan_type}}"> 
 		</div>		
 		<div class="row-fluid">
@@ -36,27 +50,99 @@
 						</tr>
 					</thead>
 					<tbody class="center">
-						<tr>				
-							<td>01</td>
-							<td>001</td>
-							<td>王军忠</td>							
-							<td>车易贷</td>
-							<td>100000</td>
-							<td>2014-05-06</td>
+						{%- for obj in loan_apply.items %}	
+						<tr onclick="changeColor(this)">												
+							{%- if obj.company_customer_no %}
+							<!-- <td><a href="#" onclick="iframe('Process/dksq/goto_edit_dksq/{{obj.company_customer_type}}/{{obj.company_customer_id}}/{{obj.loan_apply_id}}')">{{obj.loan_apply_id}}</a></td> -->
+							<td><a href="#">{{obj.loan_apply_id}}</a></td>
+							{%- else %}
+							<!-- <td><a href="#" onclick="iframe('Process/dksq/goto_edit_dksq/{{obj.individual_customer_type}}/{{obj.individual_customer_id}}/{{obj.loan_apply_id}}')">{{obj.loan_apply_id}}</a></td> -->
+							<td><a href="#">{{obj.loan_apply_id}}</a></td>
+							{%- endif %}
+
+							{%- if obj.company_customer_no %}
+							<td>{{obj.company_customer_no}}</td>
+							<td>{{obj.company_customer_name}}</td>
+							{%- else %}
+							<td>{{obj.individual_customer_no}}</td>
+							<td>{{obj.individual_customer_name}}</td>
+							{%- endif %}
+							{%- for pro in loan_product %}
+								{%- if obj.loan_type|int == pro.id %}
+								<td>{{pro.product_name}}</td>
+								{%- endif %}
+							{%- endfor %}
+							<td>{{obj.loan_amount}}</td>	
+							<td>{{obj.create_date}}</td>
 							<td>
-								<input type="button" value="同步" class="btn btn-info btn-mini" onclick="iframe('Data/sjtb')"/>
-							</td>
-						</tr>										
+								<input type="button" value="同步" class="btn btn-info btn-mini" onclick="changesel({{obj.loan_apply_id}});$('.display-div').show();"/>
+							</td>							
+						</tr>
+						{%- endfor %}
 					</tbody>
 				</table>
 			</div>
 			<div class="page-div">
-				<span style="CURSOR: pointer">|&lt;&lt;</span>
-				<span style="CURSOR: pointer">&lt;&lt;</span>
-				&#160;第&#160;<font color="#0088cc">1</font>&#160;页&#160;
-				&#160;共&#160;<font color="#0088cc">1</font>&#160;页&#160;
-				<span style="CURSOR: pointer">&gt;&gt;</span>
-				<span style="CURSOR: pointer">&gt;&gt;|</span>
+				{%- if loan_apply.pages %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Data/sjtbList/1')">|&lt;&lt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">|&lt;&lt;</span>
+				{%- endif %}
+				{%- if loan_apply.has_prev %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Data/sjtbList/{{loan_apply.prev_num}}')">&lt;&lt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&lt;&lt;</span>
+				{%- endif %}
+					&#160;第&#160;<font color="#0088cc">{{loan_apply.page}}</font>&#160;页&#160;
+					&#160;共&#160;<font color="#0088cc">{{loan_apply.pages}}</font>&#160;页&#160;
+				{%- if loan_apply.has_next %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Data/sjtbList/{{loan_apply.next_num}}')">&gt;&gt;</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&gt;&gt;</span>
+				{%- endif %}
+				{%- if loan_apply.pages %}
+					<span style="CURSOR: pointer" onclick="submitForm('content','/Data/sjtbList/{{loan_apply.pages}}')">&gt;&gt;|</span>
+				{%- else %}
+					<span style="CURSOR: pointer">&gt;&gt;|</span>
+				{%- endif %}
+			</div>
+			<div class="display-div" id="examiner_1_xdyss" style="top:150px">
+				<i class="icon-bookmark"></i><span class="titletip">本地数据搜索</span>
+				<div style="border:1px solid #94c1dc;">
+					<table class="table-list">
+						<tr>	
+							<td class="table-label">客户名称</td>
+							<td><input type="text" onchange="search(this)"/></td>	
+						</tr>
+					</table>
+				</div>																		
+				<input type="button" value="关闭" class="btn btn-info btn-mini pull-right" onclick="$('.display-div').hide();"/>
+				<input type="button" value="搜索" class="btn btn-info btn-mini pull-right" style="margin-right:10px;"/><br/>
+				<i class="icon-bookmark"></i><span class="titletip">客户列表</span>
+				<div style="border:1px solid #94c1dc;">
+					<table class="table-list">
+						<thead>
+							<tr>
+								<th>选择</th>	
+								<th>编号</th>												
+								<th>客户名称</th>												
+							</tr>
+						</thead>
+						<tbody class="center">
+							{%- if customers %}
+								{% for obj in customers %}
+								<tr>
+									<td><input type="radio" name="" onclick="jump('{{obj[0]}}')" /></td>
+									<td>{{obj[0]}}</td>
+									<td name="search"><script type="text/javascript">
+									var temp = '{{obj[2]}}';
+									document.write(unescape(temp));
+									</script></td></tr>
+								{%- endfor %}
+							{%- endif %}							
+						</tbody>
+					</table>
+				</div>
 			</div>
 			
 		</div><!--/row-fluid -->
@@ -64,6 +150,5 @@
 	
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
-	<script src="/static/js/script.js"></script>
 </body>
 </html>

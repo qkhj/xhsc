@@ -22,17 +22,30 @@
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">数据导入</a>/<a href="#">数据同步</a>
 		</div>		
+		{%- with messages = get_flashed_messages(with_categories=true) %}
+		  	{%- if messages %}
+	    	{%- for category, message in messages %}
+	    	<div class="alert alert-{{category}}">
+	      		{{message}}
+	      	</div>
+	    	{%- endfor %}
+		  	{%- endif %}
+		{%- endwith %}
 		<div class="row-fluid">			
 			<form>
 				<div style="border:1px solid #94c1dc;">
 					<table class="table-list">
 						<tr>
 							<td class="table-label">贷款编号</td>
-							<td width="120px">01</td>
+							<td width="120px">{{loan_apply.id}}</td>
 							<td class="table-label">客户名称</td>
-							<td>王军忠</td>
+							<td>{{loan_apply.customer_name}}</td>
 							<td class="table-label">贷款类型</td>
-							<td>车易贷</td>
+							{%- for obj in loan_product %}
+								{%- if loan_apply.loan_type|int == obj.id %}
+								<td>{{obj.product_name}}</td>
+								{%- endif %}
+							{%- endfor %}
 						</tr>														
 					</table>
 				</div>														
@@ -41,47 +54,47 @@
 			<ul id="tags" class="tags">				
 				<li class="selectTag">
 					<a onclick="selectTag('tagContent1',this);
-					$('#dqdcXed_zcfzb').attr('src','/Data/dqdcXed_zcfzb')" href="javascript:void(0)">资产负债表</a> 
+					$('#dqdcXed_zcfzb').attr('src','/Data/data_zcfzb/{{loan_apply.id}}/{{localid}}')" href="javascript:void(0)">资产负债表</a> 
 				</li>
 				<li>
 					<a onClick="selectTag('tagContent1',this);
-					$('#dqdcXed_zcfzb').attr('src','/Data/dqdcXed_jcjy')" href="javascript:void(0)">交叉检验</a>
+					$('#dqdcXed_zcfzb').attr('src','/Data/data_jcjy/{{loan_apply.id}}/{{localid}}')" href="javascript:void(0)">交叉检验</a>
 				</li>	
 				<li>
 					<a onClick="selectTag('tagContent1',this);
-					$('#dqdcXed_zcfzb').attr('src','/Data/dqdcXed_ysqkfx')" href="javascript:void(0)">损益情况分析</a>
+					$('#dqdcXed_zcfzb').attr('src','/Data/data_ysqkfx/{{loan_apply.id}}/{{localid}}')" href="javascript:void(0)">损益情况分析</a>
 				</li>
 				<li>
 					<a onClick="selectTag('tagContent1',this);
-					$('#dqdcXed_zcfzb').attr('src','/Data/dqdcXed_xjlfx')" href="javascript:void(0)">现金流分析</a>
+					$('#dqdcXed_zcfzb').attr('src','/Data/data_xjlfx/{{loan_apply.id}}/{{localid}}')" href="javascript:void(0)">现金流分析</a>
 				</li>
 				<li>
 					<a onClick="selectTag('tagContent1',this);
-					$('#dqdcXed_zcfzb').attr('src','/Data/dqdcXed_dbdydcb');
+					$('#dqdcXed_zcfzb').attr('src','/Data/data_dbdydcb/{{loan_apply.id}}/{{localid}}');
 					resizeFrame('dqdcXed_zcfzb');$('#content_frame',window.parent.document).height(1100);" href="javascript:void(0)">担保抵押调查表 </a>
 				</li>
 				<li>
 					<a onClick="selectTag('tagContent1',this);
-					$('#dqdcXed_zcfzb').attr('src','/Data/dqdcXed_gdzcqd');$('#content_frame',window.parent.document).height($('#tagContent6').height()+250);" href="javascript:void(0)">固定资产清单</a>
+					$('#dqdcXed_zcfzb').attr('src','/Data/data_gdzcqd/{{loan_apply.id}}/{{localid}}');" href="javascript:void(0)">固定资产清单</a>
 				</li>	
 				<li>
 					<a onClick="selectTag('tagContent1',this);
-					$('#dqdcXed_zcfzb').attr('src','/Data/dqdcXed_kc')" href="javascript:void(0)">库存 </a>
+					$('#dqdcXed_zcfzb').attr('src','/Data/data_kc/{{loan_apply.id}}/{{localid}}')" href="javascript:void(0)">库存 </a>
 				</li>
 				<li>
 					<a onClick="selectTag('tagContent1',this);
-					$('#dqdcXed_zcfzb').attr('src','/Data/dqdcXed_zkqd')" href="javascript:void(0)">账款清单</a>
+					$('#dqdcXed_zcfzb').attr('src','/Data/data_zkqd/{{loan_apply.id}}/{{localid}}')" href="javascript:void(0)">账款清单</a>
 				</li>	
-				<li> 
+				<!-- <li> 
 					<a onclick="selectTag('tagContent1',this);
 					$('#dqdcXed_zcfzb').attr('src','/Data/dqdcXed_jbqk')" href="javascript:void(0)">基本情况</a> 
-				</li>
+				</li> -->
 			</ul>
 			<!-- 一级content -->
 			<div id="tagContent" class="Content">
 <!-- ************************************************第二个标签的内容*************************************************** -->
 				<div class="tagContent selectTag" id="tagContent1">
-					<iframe frameborder="0" width="100%;" id="dqdcXed_zcfzb" src="/Data/dqdcXed_zcfzb" onload="$('#dqdcXed_zcfzb').height($('#dqdcXed_zcfzb').contents().find('.content').height()+40);Frame();"></iframe>
+					<iframe frameborder="0" width="100%;" id="dqdcXed_zcfzb" src="/Data/data_zcfzb/{{loan_apply.id}}/{{localid}}" onload="$('#dqdcXed_zcfzb').height($('#dqdcXed_zcfzb').contents().find('.content').height()+40);Frame();"></iframe>
 				</div><!-- /资产负债表 -->		
 			</div><!-- /tagContent -->	
 		</div><!--/row-fluid -->
