@@ -18,9 +18,12 @@
 </head>
 
 <body onload="sub();datepicker();setTimeOut();parent.parent.scroll(0,0);">		
-	<form class="content" method="post" action="/Process/dqdc/new_car">	
-		固定
-		<input type="submit" value="提交" class="btn btn-info"/>
+	<form id="content" name="content" class="content" method="POST" action="/Data/data_gdzcqd/{{loan_apply_id}}/{{localid}}" target="_parent">
+	<script type="text/javascript">
+	var content = '{{sc_gdzcqd[3]}}'
+	document.write(unescape(content));
+	</script>
+		<input type="submit" value="保存" class="btn btn-info"/>		
 	</form>
 
 	<script src="/static/js/jquery-1.7.2.min.js"></script>

@@ -10,26 +10,34 @@
 	<!-- The styles -->
 	<link href="/static/css/bootstrap.css" rel="stylesheet">
 	<link href="/static/css/main.css" rel="stylesheet">
-		
+	
+	<!-- ************************验证样式************************-->
+	<script src="/static/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+	<link href="/static/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css">	
 </head>
 
-<body onload="setTimeOut();">	
+<body>	
 	<div class="content">
 		<div class="well place">			
 			<i class="icon-home"></i><a href="#">数据导入</a>/<a href="#">导入本地数据</a>
 		</div>
 		<div class="row-fluid">
 			<i class="icon-bookmark"></i><span class="titletip">导入本地数据</span>
-			<form>
+			<form method="POST" enctype="multipart/form-data" action="/Data/import">
 				<div style="border:1px solid #94c1dc;">
 					<table class="table-list">
 						<tr>	
 							<td class="table-label">文件名</td>
-							<td><input type="file" name=""/></td>	
+							<td>
+								<span id="attachment">	
+									<input type="file" name="attachment"/>
+									<span class="textfieldRequiredMsg">不能为空</span>
+								</span>
+							</td>	
 						</tr>							
 					</table>
 				</div>
-				<input type="button" class="btn btn-info" value="确认" onclick="iframe('Data/drbdsj')"/><!-- 	
+				<input type="submit" class="btn btn-info" value="确认"/><!-- 	
 				<input type="button" class="btn btn-info" value="导入数据" onclick="$('.display-div').show();"/>
 
 				<div class="display-div" style="margin-top:-50px;width:500px;height:200px;margin-left:100px;" >
@@ -52,5 +60,8 @@
 	<script src="/static/js/jquery-1.7.2.min.js"></script>
 	<script src="/static/js/bootstrap.min.js"></script>
 	<script src="/static/js/script.js"></script>
+	<script type="text/javascript">
+		var sprytextfield1 = new Spry.Widget.ValidationTextField("attachment", "none");
+	</script>
 </body>
 </html>
