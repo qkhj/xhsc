@@ -408,7 +408,7 @@
 								<td style="width:120px" class="table-label">
 									其他费用<br/>
 									<input type="button" value="+" onclick="addTd('qtfyx','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-									<input type="button" value="-" onclick="removeTd('qtfyx','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('qtfyx','dqdcXed_zcfzb');recount(this)" class="btn btn-info btn-mini"/>
 								</td>								
 								<td>
 									<table id="qtfyx" >
@@ -571,7 +571,7 @@
 								<td style="width:120px" class="table-label">
 									其他借款<br/>
 									<input type="button" value="+" onclick="addTd('qtjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-									<input type="button" value="-" onclick="removeTd('qtjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('qtjk','dqdcXed_zcfzb');recount(this)" class="btn btn-info btn-mini"/>
 								</td>								
 								<td>
 									<table id="qtjk" >
@@ -626,7 +626,7 @@
 								<td style="width:120px" class="table-label">
 									偿还其他借款<br/>
 									<input type="button" value="+" onclick="addTd('chqtjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-									<input type="button" value="-" onclick="removeTd('chqtjk','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('chqtjk','dqdcXed_zcfzb');recount(this)" class="btn btn-info btn-mini"/>
 								</td>								
 								<td>
 									<table id="chqtjk" >
@@ -681,7 +681,7 @@
 								<td style="width:120px" class="table-label">
 									其他借款现金来源<br/>
 									<input type="button" value="+" onclick="addTd('qtjkxjly','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
-									<input type="button" value="-" onclick="removeTd('qtjkxjly','dqdcXed_zcfzb')" class="btn btn-info btn-mini"/>
+									<input type="button" value="-" onclick="removeTd('qtjkxjly','dqdcXed_zcfzb');recount(this)" class="btn btn-info btn-mini"/>
 								</td>								
 								<td>
 									<table id="qtjkxjly" >
@@ -1089,6 +1089,12 @@
 			srxjl('qtjkxjly','household_expenditure','private_use','private_cash_flow',num)//私人现金流总额（8）
 			add2('yyhdxj','investment_cash_flow','financing_cash_flow','private_cash_flow','ljxj',num);//累积现金(9)=(5)+(6)+(7)+(8)
 			add('early_cash','ljxj','qmxj',num);//期末现金(11)=(10)+(9)
+		}
+		//按减号按钮是重新计算
+		function recount(obj){			
+			for(h=1;h<13;h++){
+				$(obj).parent().parent().find("input[name=month_"+h+"]").blur();
+			}			
 		}
 	</script>
 </body>
