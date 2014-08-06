@@ -47,8 +47,8 @@ app.config.from_object('scapp.config.ProConfig') # mysql
 # 初始化数据库
 db = SQLAlchemy(app)
 
-from scapp.tools.loading_work import timing
-time = timing()
+#from scapp.tools.loading_work import timing
+#time = timing()
 
 # flask-login---start
 from scapp.models import SC_User
