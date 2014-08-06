@@ -31,6 +31,9 @@ PER_PAGE = 10  # 每页数量
 UPLOAD_FOLDER_REL = '/static/upload' #上传目录(相对路径)
 UPLOAD_FOLDER_ABS = os.path.join(_HERE,'static\\upload') #上传目录(绝对路径)
 
+LOCALDB_FOLDER_REL = '/static/localdb' #上传目录(相对路径)
+LOCALDB_FOLDER_ABS = os.path.join(_HERE,'static\\localdb') #上传目录(绝对路径)
+
 APPY_FOLDER_REL = '/static/appy' #模板目录(相对路径)
 APPY_FOLDER_ABS = os.path.join(_HERE,'static\\appy') #模板目录(绝对路径)
 unopath = 'C:\PROGRA~1\OPENOF~1\program'
