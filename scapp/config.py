@@ -23,7 +23,7 @@ logger.setLevel(logging.WARNING)
 
 _DBUSER = "root"  # 数据库用户名
 _DBPASS = "root"  # 数据库用户名密码
-_DBHOST = "127.0.0.1"  # 服务器
+_DBHOST = "32.235.32.135"  # 服务器
 _DBPORT = '3306' #服务器端口
 _DBNAME = "sc_schema"  # 数据库名称
 
@@ -65,6 +65,7 @@ ROLE_LEVEL_HTYY = 3 #后台运营
 #XIAOWEIZHIHANG_JGH =  '321281000' # 小微支行机构号
 #YUNYINGGANG_GH_GXJ = 'L025502' # 运营岗工号 葛旭娟
 #YUNYINGGANG_GH_NWB = 'L025503' # 运营岗工号 倪文彬
+WEBSERVICE_URL = 'http://32.235.32.155/xdxt.php'
 
 class Config(object):
     SECRET_KEY = '\xb5\xc8\xfb\x18\xba\xc7*\x03\xbe\x91{\xfd\xe0L\x9f\xe3\\\xb3\xb1P\xac\xab\x061'

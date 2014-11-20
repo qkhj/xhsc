@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #coding=utf-8
 import sys
-
+import thread
 reload(sys)  
 sys.setdefaultencoding('utf8')
 from config import unopath
@@ -47,8 +47,7 @@ app.config.from_object('scapp.config.ProConfig') # mysql
 # 初始化数据库
 db = SQLAlchemy(app)
 
-#from scapp.tools.loading_work import timing
-#time = timing()
+from scapp.tools.loading_work import timing
 
 # flask-login---start
 from scapp.models import SC_User
@@ -194,3 +193,5 @@ from scapp.models.repayment import sc_repayment_plan_detail #还款计划详细�
 from scapp.models.repayment import sc_penalty_interest #罚息信息
 
 from scapp.models.cust_mgr import sc_day_work #客户经理工时记录
+
+time = timing()
