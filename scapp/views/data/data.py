@@ -9,10 +9,13 @@ import urllib2
 
 from scapp.config import LOCALDB_FOLDER_REL
 from scapp.config import LOCALDB_FOLDER_ABS
+from scapp.config import LOCALEXCEL_FOLDER_REL
+from scapp.config import LOCALEXCEL_FOLDER_ABS
 from scapp.config import logger
 from scapp.config import PER_PAGE
 
 from scapp.models.data.sc_localdb import SC_LocalDB
+from scapp.models.data.sc_local_excel import SC_Local_Excel
 
 from scapp import db
 from scapp import app
@@ -26,6 +29,9 @@ from scapp.models import SC_Apply_Info
 from scapp.models import SC_Co_Borrower
 from scapp.models import SC_Guaranty
 from scapp.models import SC_Guarantees
+from scapp.models import SC_Approval_Decision
+from scapp.models.repayment.sc_repayment_plan import SC_Repayment_Plan
+from scapp.models.repayment.sc_repayment_plan_detail import SC_Repayment_plan_detail
 
 from scapp.models.credit_data.sc_balance_sheet import SC_Balance_Sheet
 from scapp.models.credit_data.sc_cross_examination import SC_Cross_Examination
@@ -45,6 +51,8 @@ from scapp.logic.total import Examine
 
 from scapp.config import PROCESS_STATUS_DKFKJH
 
+import record
+
 # 导入本地数据-贷款列表 
 @app.route('/Data/drbdsj', methods=['GET'])
 def drbdsj():
@@ -56,13 +64,13 @@ def drbdsj():
             cu.execute("select * from sc_customer")
             customers = cu.fetchall()  
             if customers:
-                flash('查询导入数据成功','success')
+                #flash('查询导入数据成功','success')
                 return render_template("Data/drbdsj.html",customers=customers)
             else:
-                flash('未查询到导入数据','error')
-            return render_template("Data/drbdsj.html")
+                #flash('未查询到导入数据','error')
+                return render_template("Data/drbdsj.html")
         else:
-            flash('未查询到导入数据','error')
+            #flash('未查询到导入数据','error')
             return render_template("Data/drbdsj.html")
     except:
         logger.exception('exception')
@@ -163,7 +171,6 @@ def data_zcfzb(loan_apply_id,localid):
             db.session.flush()
 
             for i in range(34):
-                print '111'
                 for j in range(len(request.form.getlist('type_%s' % i))):
                     SC_Balance_Sheet(loan_apply_id,i,request.form.getlist('name_%s' % i)[j],
                         j,request.form.getlist('value_%s' % i)[j]).add()
@@ -620,4 +627,136 @@ def data_zkqd(loan_apply_id,localid):
         #新增
         examine.addList(loan_apply_id,request)
         return redirect('Data/sjtb/%d/%d' % (loan_apply_id,localid))
+    
+# 导入excel
+@app.route('/Data/data_excel', methods=['GET'])
+def data_excel():
+    if request.method == 'GET':
+        localexcel = SC_Local_Excel.query.filter_by(user_id=current_user.id).all()
+        return render_template("Data/excel.html",localexcel=localexcel)
+    
+# 导入excel
+@app.route('/Data/excel_import', methods=['POST','GET'])
+def excel_import():
+    if request.method == 'POST':
+        try:
+            # 先获取上传文件
+            f = request.files['attachment']
+            fname = f.filename
+            if not os.path.exists(os.path.join(LOCALEXCEL_FOLDER_ABS,str(current_user.id))):
+                os.mkdir(os.path.join(LOCALEXCEL_FOLDER_ABS,str(current_user.id)))
+            f.save(os.path.join(LOCALEXCEL_FOLDER_ABS,'%d\\%s' % (current_user.id,fname)))
+            
+            SC_Local_Excel.query.filter_by(user_id=current_user.id).delete()
+            db.session.flush()
+            
+            SC_Local_Excel(current_user.id,fname).add()
+            
+            # 事务提交
+            db.session.commit()
+            # 消息闪现
+            flash('保存成功','success')
+        except:
+            # 回滚
+            db.session.rollback()
+            logger.exception('exception')
+            # 消息闪现
+            flash('保存失败','error')
+            
+        return redirect("Data/data_excel")
+    else:
+        return render_template("Data/excel_import.html")
+ 
+# 下载excel
+@app.route('/Data/download_excel/<int:id>', methods=['POST','GET'])
+def download_excel(id):
+    localexcel = SC_Local_Excel.query.filter_by(id=id).first()
+    fname = localexcel.attachment
+    #return send_from_directory(app.static_folder, 'upload/%d/%s' % (loan_apply_id,fname))
+    return redirect(url_for('static', filename='localexcel/'+ str(current_user.id) + '/' + fname), code=301)
+ 
+# 导入excel
+@app.route('/Data/goto_excel_import/<int:id>', methods=['POST','GET'])
+def goto_excel_import(id):
+    user = SC_User.query.order_by("id").all()
+    approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=-1).first()
+    repayment_plan_detail = SC_Repayment_plan_detail.query.filter_by(loan_apply_id=-1,change_record=1).order_by("id").all()
+    return render_template("Data/goto_excel_import.html",id=id,user=user,approval_decision=approval_decision,repayment_plan_detail=repayment_plan_detail)
+          
+# 导入excel
+@app.route('/Data/do_excel_import/<int:id>', methods=['POST','GET'])
+def do_excel_import(id):
+    try:
+        #A岗 B岗 运营岗
+        A_loan_officer = request.form['A_loan_officer']
+        B_loan_officer = request.form['B_loan_officer']
+        yunying_loan_officer = request.form['yunying_loan_officer']
+        
+        #贷审会
+        examiner_1 = request.form['examiner_1']
+        examiner_2 = request.form['examiner_2']
+        approver = request.form['approver']
+        
+        #读文件 存DB
+        localexcel = SC_Local_Excel.query.filter_by(id=id).first()
+        file = os.path.join(LOCALEXCEL_FOLDER_ABS,'%d\\%s' % (current_user.id,localexcel.attachment))
+        loan_apply_id = record.read_file(file,A_loan_officer,B_loan_officer,yunying_loan_officer,examiner_1,examiner_2,approver)
+        
+        #保存SC_Approval_Decision剩余信息
+        approval_decision = SC_Approval_Decision(loan_apply_id,None,1,
+                    request.form['amount'],request.form['deadline'],
+                    request.form['rates'],request.form['repayment_type'],5000,
+                    1,1,1,'','','')
+        approval_decision.add()
+        db.session.flush()
+        
+        #approval_decision = SC_Approval_Decision.query.filter_by(loan_apply_id=loan_apply_id).first()
+        approval_decision.loan_date = request.form['loan_date']
+        approval_decision.first_repayment_date = request.form['first_repayment_date']
+        #approval_decision.management_coats = request.form['management_coats']
+        #approval_decision.agency_coats = request.form['agency_coats']
+        approval_decision.contract_date = request.form['contract_date']
+        approval_decision.loan_account = request.form['loan_account']
+        #approval_decision.bank_customer_no = request.form['bank_customer_no']
+        approval_decision.loan_contract_number = request.form['loan_contract_number']
+        approval_decision.guarantee_contract_number = request.form['guarantee_contract_number']
+        approval_decision.collateral_contract_number = request.form['collateral_contract_number']
+        
+        #保存还款计划
+        repayment_plan_id = 0
+        repayment_plan = SC_Repayment_Plan(id,request.form['repayment_type'],request.form['amount'],
+                request.form['loan_date'],request.form['loan_date'],request.form['rates'],
+                request.form['deadline'])
+        repayment_plan.add()
+        db.session.flush()
+        repayment_plan.create_user=current_user.id
+        repayment_plan.create_date=datetime.datetime.now()
+        repayment_plan.modify_user=current_user.id
+        repayment_plan.modify_date=datetime.datetime.now()
+            
+        repayment_plan_id = repayment_plan.id
+    
+        #保存还款细则
+        SC_Repayment_plan_detail.query.filter_by(loan_apply_id=loan_apply_id,change_record=1).delete()
+        db.session.flush()
+        for i in range(1,int(request.form['deadline'])+1):
+            SC_Repayment_plan_detail(repayment_plan_id,id,None,request.form['rates'],
+                request.form['mybj%d' % i],request.form['mylx%d' % i],
+                request.form['mybx%d' % i],i,request.form['myrq%d' % i],None,1).add()
+        
+        #是否已同步
+        localexcel.is_sync = 1
+        
+        # 事务提交
+        db.session.commit()
+        # 消息闪现
+        flash('保存成功','success')
+    except:
+        # 回滚
+        db.session.rollback()
+        logger.exception('exception')
+        # 消息闪现
+        flash('保存失败','error')
+        
+    return redirect("Data/data_excel")
     
